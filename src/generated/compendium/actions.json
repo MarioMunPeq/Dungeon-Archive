@@ -1,0 +1,171 @@
+[
+  {
+    "id": "phb|attack",
+    "category": "action",
+    "name": "Attack",
+    "source": "PHB",
+    "actionType": "action",
+    "description": [
+      {
+        "type": "paragraph",
+        "text": "When you take the Attack action, you can make one melee attack against one creature within your reach. On a hit, you deal damage based on the weapon or unarmed strike used."
+      }
+    ]
+  },
+  {
+    "id": "phb|cast-a-spell",
+    "category": "action",
+    "name": "Cast a Spell",
+    "source": "PHB",
+    "actionType": "action",
+    "description": [
+      {
+        "type": "paragraph",
+        "text": "Some characters and monsters have the ability to cast spells. Casting a spell follows the rules in the Spellcasting section. The casting time determines when you take the action to cast the spell."
+      }
+    ]
+  },
+  {
+    "id": "phb|dash",
+    "category": "action",
+    "name": "Dash",
+    "source": "PHB",
+    "actionType": "action",
+    "description": [
+      {
+        "type": "paragraph",
+        "text": "When you take the Dash action, you gain extra movement for the current turn. The increase equals your speed, after applying any modifiers."
+      }
+    ]
+  },
+  {
+    "id": "phb|disengage",
+    "category": "action",
+    "name": "Disengage",
+    "source": "PHB",
+    "actionType": "action",
+    "description": [
+      {
+        "type": "paragraph",
+        "text": "If you take the Disengage action, your movement doesn't provoke opportunity attacks for the rest of the turn."
+      }
+    ]
+  },
+  {
+    "id": "phb|dodge",
+    "category": "action",
+    "name": "Dodge",
+    "source": "PHB",
+    "actionType": "action",
+    "description": [
+      {
+        "type": "paragraph",
+        "text": "When you take the Dodge action, you focus entirely on avoiding attacks. Until the start of your next turn, any attack roll made against you has disadvantage if you can see the attacker, and you make Dexterity saving throws with advantage."
+      }
+    ]
+  },
+  {
+    "id": "phb|help",
+    "category": "action",
+    "name": "Help",
+    "source": "PHB",
+    "actionType": "action",
+    "description": [
+      {
+        "type": "paragraph",
+        "text": "When you take the Help action, you can aid a friendly creature in attacking a creature within 5 feet of you. You impose disadvantage on the first attack roll made against the target by an attacker other than yourself."
+      }
+    ]
+  },
+  {
+    "id": "phb|hide",
+    "category": "action",
+    "name": "Hide",
+    "source": "PHB",
+    "actionType": "action",
+    "description": [
+      {
+        "type": "paragraph",
+        "text": "When you take the Hide action, you make a Dexterity (Stealth) check to conceal yourself from enemies. You gain advantage on the check if you are in light obscurement or heavily obscured."
+      }
+    ]
+  },
+  {
+    "id": "phb|ready",
+    "category": "action",
+    "name": "Ready",
+    "source": "PHB",
+    "actionType": "action",
+    "description": [
+      {
+        "type": "paragraph",
+        "text": "When you take the Ready action, you prepare an action to be used later. You specify a trigger and a response. When the trigger occurs, you can take up to one reaction to perform the response."
+      }
+    ]
+  },
+  {
+    "id": "phb|search",
+    "category": "action",
+    "name": "Search",
+    "source": "PHB",
+    "actionType": "action",
+    "description": [
+      {
+        "type": "paragraph",
+        "text": "When you take the Search action, you make a Wisdom (Perception) check or an Intelligence (Investigation) check to search for something specific. The DM determines the difficulty class and required check."
+      }
+    ]
+  },
+  {
+    "id": "phb|use-an-object",
+    "category": "action",
+    "name": "Use an Object",
+    "source": "PHB",
+    "actionType": "action",
+    "description": [
+      {
+        "type": "paragraph",
+        "text": "When you take the Use an Object action, you use a special object that requires your action for its use. This could be opening a door, using a thief's tools, or operating a mechanism."
+      }
+    ]
+  },
+  {
+    "id": "xphb|influence",
+    "category": "action",
+    "name": "Influence",
+    "source": "XPHB",
+    "actionType": "action",
+    "description": [
+      {
+        "type": "paragraph",
+        "text": "When you take the Influence action, you attempt to influence how an NPC feels about you. Make a Charisma check opposed by the NPC's Wisdom (Insight) check."
+      }
+    ]
+  },
+  {
+    "id": "xphb|study",
+    "category": "action",
+    "name": "Study",
+    "source": "XPHB",
+    "actionType": "action",
+    "description": [
+      {
+        "type": "paragraph",
+        "text": "When you take the Study action, you make an Intelligence check to recall or analyze information. The DC depends on what you're trying to learn."
+      }
+    ]
+  },
+  {
+    "id": "xphb|utilize",
+    "category": "action",
+    "name": "Utilize",
+    "source": "XPHB",
+    "actionType": "action",
+    "description": [
+      {
+        "type": "paragraph",
+        "text": "When you take the Utilize action, you interact with a simple object or environmental feature that doesn't require an ability check."
+      }
+    ]
+  }
+]

@@ -39,4 +39,10 @@ export default tseslint.config(
     },
   },
   prettierConfig,
+  {
+    files: ["scripts/**/*.ts"],
+    rules: {
+      "no-console": "off",
+    },
+  },
 );

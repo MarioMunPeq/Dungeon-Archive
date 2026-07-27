@@ -5,7 +5,6 @@ export interface Entity {
   readonly id: string;
   readonly category: EntityCategory;
   readonly name: string;
-  readonly searchText: string;
 }
 
 export interface SearchResult {

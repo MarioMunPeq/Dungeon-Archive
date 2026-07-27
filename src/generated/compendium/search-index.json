@@ -1,0 +1,6647 @@
+[
+  {
+    "id": "phb|acid-splash",
+    "name": "Acid Splash",
+    "category": "spell"
+  },
+  {
+    "id": "phb|aid",
+    "name": "Aid",
+    "category": "spell"
+  },
+  {
+    "id": "phb|alarm",
+    "name": "Alarm",
+    "category": "spell"
+  },
+  {
+    "id": "phb|alter-self",
+    "name": "Alter Self",
+    "category": "spell"
+  },
+  {
+    "id": "phb|animal-friendship",
+    "name": "Animal Friendship",
+    "category": "spell"
+  },
+  {
+    "id": "phb|animal-messenger",
+    "name": "Animal Messenger",
+    "category": "spell"
+  },
+  {
+    "id": "phb|animal-shapes",
+    "name": "Animal Shapes",
+    "category": "spell"
+  },
+  {
+    "id": "phb|animate-dead",
+    "name": "Animate Dead",
+    "category": "spell"
+  },
+  {
+    "id": "phb|animate-objects",
+    "name": "Animate Objects",
+    "category": "spell"
+  },
+  {
+    "id": "phb|antilife-shell",
+    "name": "Antilife Shell",
+    "category": "spell"
+  },
+  {
+    "id": "phb|antimagic-field",
+    "name": "Antimagic Field",
+    "category": "spell"
+  },
+  {
+    "id": "phb|antipathy-sympathy",
+    "name": "Antipathy/Sympathy",
+    "category": "spell"
+  },
+  {
+    "id": "phb|arcane-eye",
+    "name": "Arcane Eye",
+    "category": "spell"
+  },
+  {
+    "id": "phb|arcane-gate",
+    "name": "Arcane Gate",
+    "category": "spell"
+  },
+  {
+    "id": "phb|arcane-lock",
+    "name": "Arcane Lock",
+    "category": "spell"
+  },
+  {
+    "id": "phb|armor-of-agathys",
+    "name": "Armor of Agathys",
+    "category": "spell"
+  },
+  {
+    "id": "phb|arms-of-hadar",
+    "name": "Arms of Hadar",
+    "category": "spell"
+  },
+  {
+    "id": "phb|astral-projection",
+    "name": "Astral Projection",
+    "category": "spell"
+  },
+  {
+    "id": "phb|augury",
+    "name": "Augury",
+    "category": "spell"
+  },
+  {
+    "id": "phb|aura-of-life",
+    "name": "Aura of Life",
+    "category": "spell"
+  },
+  {
+    "id": "phb|aura-of-purity",
+    "name": "Aura of Purity",
+    "category": "spell"
+  },
+  {
+    "id": "phb|aura-of-vitality",
+    "name": "Aura of Vitality",
+    "category": "spell"
+  },
+  {
+    "id": "phb|awaken",
+    "name": "Awaken",
+    "category": "spell"
+  },
+  {
+    "id": "phb|bane",
+    "name": "Bane",
+    "category": "spell"
+  },
+  {
+    "id": "phb|banishing-smite",
+    "name": "Banishing Smite",
+    "category": "spell"
+  },
+  {
+    "id": "phb|banishment",
+    "name": "Banishment",
+    "category": "spell"
+  },
+  {
+    "id": "phb|barkskin",
+    "name": "Barkskin",
+    "category": "spell"
+  },
+  {
+    "id": "phb|beacon-of-hope",
+    "name": "Beacon of Hope",
+    "category": "spell"
+  },
+  {
+    "id": "phb|beast-sense",
+    "name": "Beast Sense",
+    "category": "spell"
+  },
+  {
+    "id": "phb|bestow-curse",
+    "name": "Bestow Curse",
+    "category": "spell"
+  },
+  {
+    "id": "phb|bigby-s-hand",
+    "name": "Bigby's Hand",
+    "category": "spell"
+  },
+  {
+    "id": "phb|blade-barrier",
+    "name": "Blade Barrier",
+    "category": "spell"
+  },
+  {
+    "id": "phb|blade-ward",
+    "name": "Blade Ward",
+    "category": "spell"
+  },
+  {
+    "id": "phb|bless",
+    "name": "Bless",
+    "category": "spell"
+  },
+  {
+    "id": "phb|blight",
+    "name": "Blight",
+    "category": "spell"
+  },
+  {
+    "id": "phb|blinding-smite",
+    "name": "Blinding Smite",
+    "category": "spell"
+  },
+  {
+    "id": "phb|blindness-deafness",
+    "name": "Blindness/Deafness",
+    "category": "spell"
+  },
+  {
+    "id": "phb|blink",
+    "name": "Blink",
+    "category": "spell"
+  },
+  {
+    "id": "phb|blur",
+    "name": "Blur",
+    "category": "spell"
+  },
+  {
+    "id": "phb|branding-smite",
+    "name": "Branding Smite",
+    "category": "spell"
+  },
+  {
+    "id": "phb|burning-hands",
+    "name": "Burning Hands",
+    "category": "spell"
+  },
+  {
+    "id": "phb|call-lightning",
+    "name": "Call Lightning",
+    "category": "spell"
+  },
+  {
+    "id": "phb|calm-emotions",
+    "name": "Calm Emotions",
+    "category": "spell"
+  },
+  {
+    "id": "phb|chain-lightning",
+    "name": "Chain Lightning",
+    "category": "spell"
+  },
+  {
+    "id": "phb|charm-person",
+    "name": "Charm Person",
+    "category": "spell"
+  },
+  {
+    "id": "phb|chill-touch",
+    "name": "Chill Touch",
+    "category": "spell"
+  },
+  {
+    "id": "phb|chromatic-orb",
+    "name": "Chromatic Orb",
+    "category": "spell"
+  },
+  {
+    "id": "phb|circle-of-death",
+    "name": "Circle of Death",
+    "category": "spell"
+  },
+  {
+    "id": "phb|circle-of-power",
+    "name": "Circle of Power",
+    "category": "spell"
+  },
+  {
+    "id": "phb|clairvoyance",
+    "name": "Clairvoyance",
+    "category": "spell"
+  },
+  {
+    "id": "phb|clone",
+    "name": "Clone",
+    "category": "spell"
+  },
+  {
+    "id": "phb|cloud-of-daggers",
+    "name": "Cloud of Daggers",
+    "category": "spell"
+  },
+  {
+    "id": "phb|cloudkill",
+    "name": "Cloudkill",
+    "category": "spell"
+  },
+  {
+    "id": "phb|color-spray",
+    "name": "Color Spray",
+    "category": "spell"
+  },
+  {
+    "id": "phb|command",
+    "name": "Command",
+    "category": "spell"
+  },
+  {
+    "id": "phb|commune",
+    "name": "Commune",
+    "category": "spell"
+  },
+  {
+    "id": "phb|commune-with-nature",
+    "name": "Commune with Nature",
+    "category": "spell"
+  },
+  {
+    "id": "phb|compelled-duel",
+    "name": "Compelled Duel",
+    "category": "spell"
+  },
+  {
+    "id": "phb|comprehend-languages",
+    "name": "Comprehend Languages",
+    "category": "spell"
+  },
+  {
+    "id": "phb|compulsion",
+    "name": "Compulsion",
+    "category": "spell"
+  },
+  {
+    "id": "phb|cone-of-cold",
+    "name": "Cone of Cold",
+    "category": "spell"
+  },
+  {
+    "id": "phb|confusion",
+    "name": "Confusion",
+    "category": "spell"
+  },
+  {
+    "id": "phb|conjure-animals",
+    "name": "Conjure Animals",
+    "category": "spell"
+  },
+  {
+    "id": "phb|conjure-barrage",
+    "name": "Conjure Barrage",
+    "category": "spell"
+  },
+  {
+    "id": "phb|conjure-celestial",
+    "name": "Conjure Celestial",
+    "category": "spell"
+  },
+  {
+    "id": "phb|conjure-elemental",
+    "name": "Conjure Elemental",
+    "category": "spell"
+  },
+  {
+    "id": "phb|conjure-fey",
+    "name": "Conjure Fey",
+    "category": "spell"
+  },
+  {
+    "id": "phb|conjure-minor-elementals",
+    "name": "Conjure Minor Elementals",
+    "category": "spell"
+  },
+  {
+    "id": "phb|conjure-volley",
+    "name": "Conjure Volley",
+    "category": "spell"
+  },
+  {
+    "id": "phb|conjure-woodland-beings",
+    "name": "Conjure Woodland Beings",
+    "category": "spell"
+  },
+  {
+    "id": "phb|contact-other-plane",
+    "name": "Contact Other Plane",
+    "category": "spell"
+  },
+  {
+    "id": "phb|contagion",
+    "name": "Contagion",
+    "category": "spell"
+  },
+  {
+    "id": "phb|contingency",
+    "name": "Contingency",
+    "category": "spell"
+  },
+  {
+    "id": "phb|continual-flame",
+    "name": "Continual Flame",
+    "category": "spell"
+  },
+  {
+    "id": "phb|control-water",
+    "name": "Control Water",
+    "category": "spell"
+  },
+  {
+    "id": "phb|control-weather",
+    "name": "Control Weather",
+    "category": "spell"
+  },
+  {
+    "id": "phb|cordon-of-arrows",
+    "name": "Cordon of Arrows",
+    "category": "spell"
+  },
+  {
+    "id": "phb|counterspell",
+    "name": "Counterspell",
+    "category": "spell"
+  },
+  {
+    "id": "phb|create-food-and-water",
+    "name": "Create Food and Water",
+    "category": "spell"
+  },
+  {
+    "id": "phb|create-or-destroy-water",
+    "name": "Create or Destroy Water",
+    "category": "spell"
+  },
+  {
+    "id": "phb|create-undead",
+    "name": "Create Undead",
+    "category": "spell"
+  },
+  {
+    "id": "phb|creation",
+    "name": "Creation",
+    "category": "spell"
+  },
+  {
+    "id": "phb|crown-of-madness",
+    "name": "Crown of Madness",
+    "category": "spell"
+  },
+  {
+    "id": "phb|crusader-s-mantle",
+    "name": "Crusader's Mantle",
+    "category": "spell"
+  },
+  {
+    "id": "phb|cure-wounds",
+    "name": "Cure Wounds",
+    "category": "spell"
+  },
+  {
+    "id": "phb|dancing-lights",
+    "name": "Dancing Lights",
+    "category": "spell"
+  },
+  {
+    "id": "phb|darkness",
+    "name": "Darkness",
+    "category": "spell"
+  },
+  {
+    "id": "phb|darkvision",
+    "name": "Darkvision",
+    "category": "spell"
+  },
+  {
+    "id": "phb|daylight",
+    "name": "Daylight",
+    "category": "spell"
+  },
+  {
+    "id": "phb|death-ward",
+    "name": "Death Ward",
+    "category": "spell"
+  },
+  {
+    "id": "phb|delayed-blast-fireball",
+    "name": "Delayed Blast Fireball",
+    "category": "spell"
+  },
+  {
+    "id": "phb|demiplane",
+    "name": "Demiplane",
+    "category": "spell"
+  },
+  {
+    "id": "phb|destructive-wave",
+    "name": "Destructive Wave",
+    "category": "spell"
+  },
+  {
+    "id": "phb|detect-evil-and-good",
+    "name": "Detect Evil and Good",
+    "category": "spell"
+  },
+  {
+    "id": "phb|detect-magic",
+    "name": "Detect Magic",
+    "category": "spell"
+  },
+  {
+    "id": "phb|detect-poison-and-disease",
+    "name": "Detect Poison and Disease",
+    "category": "spell"
+  },
+  {
+    "id": "phb|detect-thoughts",
+    "name": "Detect Thoughts",
+    "category": "spell"
+  },
+  {
+    "id": "phb|dimension-door",
+    "name": "Dimension Door",
+    "category": "spell"
+  },
+  {
+    "id": "phb|disguise-self",
+    "name": "Disguise Self",
+    "category": "spell"
+  },
+  {
+    "id": "phb|disintegrate",
+    "name": "Disintegrate",
+    "category": "spell"
+  },
+  {
+    "id": "phb|dispel-evil-and-good",
+    "name": "Dispel Evil and Good",
+    "category": "spell"
+  },
+  {
+    "id": "phb|dispel-magic",
+    "name": "Dispel Magic",
+    "category": "spell"
+  },
+  {
+    "id": "phb|dissonant-whispers",
+    "name": "Dissonant Whispers",
+    "category": "spell"
+  },
+  {
+    "id": "phb|divination",
+    "name": "Divination",
+    "category": "spell"
+  },
+  {
+    "id": "phb|divine-favor",
+    "name": "Divine Favor",
+    "category": "spell"
+  },
+  {
+    "id": "phb|divine-word",
+    "name": "Divine Word",
+    "category": "spell"
+  },
+  {
+    "id": "phb|dominate-beast",
+    "name": "Dominate Beast",
+    "category": "spell"
+  },
+  {
+    "id": "phb|dominate-monster",
+    "name": "Dominate Monster",
+    "category": "spell"
+  },
+  {
+    "id": "phb|dominate-person",
+    "name": "Dominate Person",
+    "category": "spell"
+  },
+  {
+    "id": "phb|drawmij-s-instant-summons",
+    "name": "Drawmij's Instant Summons",
+    "category": "spell"
+  },
+  {
+    "id": "phb|dream",
+    "name": "Dream",
+    "category": "spell"
+  },
+  {
+    "id": "phb|druidcraft",
+    "name": "Druidcraft",
+    "category": "spell"
+  },
+  {
+    "id": "phb|earthquake",
+    "name": "Earthquake",
+    "category": "spell"
+  },
+  {
+    "id": "phb|eldritch-blast",
+    "name": "Eldritch Blast",
+    "category": "spell"
+  },
+  {
+    "id": "phb|elemental-weapon",
+    "name": "Elemental Weapon",
+    "category": "spell"
+  },
+  {
+    "id": "phb|enhance-ability",
+    "name": "Enhance Ability",
+    "category": "spell"
+  },
+  {
+    "id": "phb|enlarge-reduce",
+    "name": "Enlarge/Reduce",
+    "category": "spell"
+  },
+  {
+    "id": "phb|ensnaring-strike",
+    "name": "Ensnaring Strike",
+    "category": "spell"
+  },
+  {
+    "id": "phb|entangle",
+    "name": "Entangle",
+    "category": "spell"
+  },
+  {
+    "id": "phb|enthrall",
+    "name": "Enthrall",
+    "category": "spell"
+  },
+  {
+    "id": "phb|etherealness",
+    "name": "Etherealness",
+    "category": "spell"
+  },
+  {
+    "id": "phb|evard-s-black-tentacles",
+    "name": "Evard's Black Tentacles",
+    "category": "spell"
+  },
+  {
+    "id": "phb|expeditious-retreat",
+    "name": "Expeditious Retreat",
+    "category": "spell"
+  },
+  {
+    "id": "phb|eyebite",
+    "name": "Eyebite",
+    "category": "spell"
+  },
+  {
+    "id": "phb|fabricate",
+    "name": "Fabricate",
+    "category": "spell"
+  },
+  {
+    "id": "phb|faerie-fire",
+    "name": "Faerie Fire",
+    "category": "spell"
+  },
+  {
+    "id": "phb|false-life",
+    "name": "False Life",
+    "category": "spell"
+  },
+  {
+    "id": "phb|fear",
+    "name": "Fear",
+    "category": "spell"
+  },
+  {
+    "id": "phb|feather-fall",
+    "name": "Feather Fall",
+    "category": "spell"
+  },
+  {
+    "id": "phb|feeblemind",
+    "name": "Feeblemind",
+    "category": "spell"
+  },
+  {
+    "id": "phb|feign-death",
+    "name": "Feign Death",
+    "category": "spell"
+  },
+  {
+    "id": "phb|find-familiar",
+    "name": "Find Familiar",
+    "category": "spell"
+  },
+  {
+    "id": "phb|find-steed",
+    "name": "Find Steed",
+    "category": "spell"
+  },
+  {
+    "id": "phb|find-the-path",
+    "name": "Find the Path",
+    "category": "spell"
+  },
+  {
+    "id": "phb|find-traps",
+    "name": "Find Traps",
+    "category": "spell"
+  },
+  {
+    "id": "phb|finger-of-death",
+    "name": "Finger of Death",
+    "category": "spell"
+  },
+  {
+    "id": "phb|fire-bolt",
+    "name": "Fire Bolt",
+    "category": "spell"
+  },
+  {
+    "id": "phb|fire-shield",
+    "name": "Fire Shield",
+    "category": "spell"
+  },
+  {
+    "id": "phb|fire-storm",
+    "name": "Fire Storm",
+    "category": "spell"
+  },
+  {
+    "id": "phb|fireball",
+    "name": "Fireball",
+    "category": "spell"
+  },
+  {
+    "id": "phb|flame-blade",
+    "name": "Flame Blade",
+    "category": "spell"
+  },
+  {
+    "id": "phb|flame-strike",
+    "name": "Flame Strike",
+    "category": "spell"
+  },
+  {
+    "id": "phb|flaming-sphere",
+    "name": "Flaming Sphere",
+    "category": "spell"
+  },
+  {
+    "id": "phb|flesh-to-stone",
+    "name": "Flesh to Stone",
+    "category": "spell"
+  },
+  {
+    "id": "phb|fly",
+    "name": "Fly",
+    "category": "spell"
+  },
+  {
+    "id": "phb|fog-cloud",
+    "name": "Fog Cloud",
+    "category": "spell"
+  },
+  {
+    "id": "phb|forbiddance",
+    "name": "Forbiddance",
+    "category": "spell"
+  },
+  {
+    "id": "phb|forcecage",
+    "name": "Forcecage",
+    "category": "spell"
+  },
+  {
+    "id": "phb|foresight",
+    "name": "Foresight",
+    "category": "spell"
+  },
+  {
+    "id": "phb|freedom-of-movement",
+    "name": "Freedom of Movement",
+    "category": "spell"
+  },
+  {
+    "id": "phb|friends",
+    "name": "Friends",
+    "category": "spell"
+  },
+  {
+    "id": "phb|gaseous-form",
+    "name": "Gaseous Form",
+    "category": "spell"
+  },
+  {
+    "id": "phb|gate",
+    "name": "Gate",
+    "category": "spell"
+  },
+  {
+    "id": "phb|geas",
+    "name": "Geas",
+    "category": "spell"
+  },
+  {
+    "id": "phb|gentle-repose",
+    "name": "Gentle Repose",
+    "category": "spell"
+  },
+  {
+    "id": "phb|giant-insect",
+    "name": "Giant Insect",
+    "category": "spell"
+  },
+  {
+    "id": "phb|glibness",
+    "name": "Glibness",
+    "category": "spell"
+  },
+  {
+    "id": "phb|globe-of-invulnerability",
+    "name": "Globe of Invulnerability",
+    "category": "spell"
+  },
+  {
+    "id": "phb|glyph-of-warding",
+    "name": "Glyph of Warding",
+    "category": "spell"
+  },
+  {
+    "id": "phb|goodberry",
+    "name": "Goodberry",
+    "category": "spell"
+  },
+  {
+    "id": "phb|grasping-vine",
+    "name": "Grasping Vine",
+    "category": "spell"
+  },
+  {
+    "id": "phb|grease",
+    "name": "Grease",
+    "category": "spell"
+  },
+  {
+    "id": "phb|greater-invisibility",
+    "name": "Greater Invisibility",
+    "category": "spell"
+  },
+  {
+    "id": "phb|greater-restoration",
+    "name": "Greater Restoration",
+    "category": "spell"
+  },
+  {
+    "id": "phb|guardian-of-faith",
+    "name": "Guardian of Faith",
+    "category": "spell"
+  },
+  {
+    "id": "phb|guards-and-wards",
+    "name": "Guards and Wards",
+    "category": "spell"
+  },
+  {
+    "id": "phb|guidance",
+    "name": "Guidance",
+    "category": "spell"
+  },
+  {
+    "id": "phb|guiding-bolt",
+    "name": "Guiding Bolt",
+    "category": "spell"
+  },
+  {
+    "id": "phb|gust-of-wind",
+    "name": "Gust of Wind",
+    "category": "spell"
+  },
+  {
+    "id": "phb|hail-of-thorns",
+    "name": "Hail of Thorns",
+    "category": "spell"
+  },
+  {
+    "id": "phb|hallow",
+    "name": "Hallow",
+    "category": "spell"
+  },
+  {
+    "id": "phb|hallucinatory-terrain",
+    "name": "Hallucinatory Terrain",
+    "category": "spell"
+  },
+  {
+    "id": "phb|harm",
+    "name": "Harm",
+    "category": "spell"
+  },
+  {
+    "id": "phb|haste",
+    "name": "Haste",
+    "category": "spell"
+  },
+  {
+    "id": "phb|heal",
+    "name": "Heal",
+    "category": "spell"
+  },
+  {
+    "id": "phb|healing-word",
+    "name": "Healing Word",
+    "category": "spell"
+  },
+  {
+    "id": "phb|heat-metal",
+    "name": "Heat Metal",
+    "category": "spell"
+  },
+  {
+    "id": "phb|hellish-rebuke",
+    "name": "Hellish Rebuke",
+    "category": "spell"
+  },
+  {
+    "id": "phb|heroes-feast",
+    "name": "Heroes' Feast",
+    "category": "spell"
+  },
+  {
+    "id": "phb|heroism",
+    "name": "Heroism",
+    "category": "spell"
+  },
+  {
+    "id": "phb|hex",
+    "name": "Hex",
+    "category": "spell"
+  },
+  {
+    "id": "phb|hold-monster",
+    "name": "Hold Monster",
+    "category": "spell"
+  },
+  {
+    "id": "phb|hold-person",
+    "name": "Hold Person",
+    "category": "spell"
+  },
+  {
+    "id": "phb|holy-aura",
+    "name": "Holy Aura",
+    "category": "spell"
+  },
+  {
+    "id": "phb|hunger-of-hadar",
+    "name": "Hunger of Hadar",
+    "category": "spell"
+  },
+  {
+    "id": "phb|hunter-s-mark",
+    "name": "Hunter's Mark",
+    "category": "spell"
+  },
+  {
+    "id": "phb|hypnotic-pattern",
+    "name": "Hypnotic Pattern",
+    "category": "spell"
+  },
+  {
+    "id": "phb|ice-storm",
+    "name": "Ice Storm",
+    "category": "spell"
+  },
+  {
+    "id": "phb|identify",
+    "name": "Identify",
+    "category": "spell"
+  },
+  {
+    "id": "phb|illusory-script",
+    "name": "Illusory Script",
+    "category": "spell"
+  },
+  {
+    "id": "phb|imprisonment",
+    "name": "Imprisonment",
+    "category": "spell"
+  },
+  {
+    "id": "phb|incendiary-cloud",
+    "name": "Incendiary Cloud",
+    "category": "spell"
+  },
+  {
+    "id": "phb|inflict-wounds",
+    "name": "Inflict Wounds",
+    "category": "spell"
+  },
+  {
+    "id": "phb|insect-plague",
+    "name": "Insect Plague",
+    "category": "spell"
+  },
+  {
+    "id": "phb|invisibility",
+    "name": "Invisibility",
+    "category": "spell"
+  },
+  {
+    "id": "phb|jump",
+    "name": "Jump",
+    "category": "spell"
+  },
+  {
+    "id": "phb|knock",
+    "name": "Knock",
+    "category": "spell"
+  },
+  {
+    "id": "phb|legend-lore",
+    "name": "Legend Lore",
+    "category": "spell"
+  },
+  {
+    "id": "phb|leomund-s-secret-chest",
+    "name": "Leomund's Secret Chest",
+    "category": "spell"
+  },
+  {
+    "id": "phb|leomund-s-tiny-hut",
+    "name": "Leomund's Tiny Hut",
+    "category": "spell"
+  },
+  {
+    "id": "phb|lesser-restoration",
+    "name": "Lesser Restoration",
+    "category": "spell"
+  },
+  {
+    "id": "phb|levitate",
+    "name": "Levitate",
+    "category": "spell"
+  },
+  {
+    "id": "phb|light",
+    "name": "Light",
+    "category": "spell"
+  },
+  {
+    "id": "phb|lightning-arrow",
+    "name": "Lightning Arrow",
+    "category": "spell"
+  },
+  {
+    "id": "phb|lightning-bolt",
+    "name": "Lightning Bolt",
+    "category": "spell"
+  },
+  {
+    "id": "phb|locate-animals-or-plants",
+    "name": "Locate Animals or Plants",
+    "category": "spell"
+  },
+  {
+    "id": "phb|locate-creature",
+    "name": "Locate Creature",
+    "category": "spell"
+  },
+  {
+    "id": "phb|locate-object",
+    "name": "Locate Object",
+    "category": "spell"
+  },
+  {
+    "id": "phb|longstrider",
+    "name": "Longstrider",
+    "category": "spell"
+  },
+  {
+    "id": "phb|mage-armor",
+    "name": "Mage Armor",
+    "category": "spell"
+  },
+  {
+    "id": "phb|mage-hand",
+    "name": "Mage Hand",
+    "category": "spell"
+  },
+  {
+    "id": "phb|magic-circle",
+    "name": "Magic Circle",
+    "category": "spell"
+  },
+  {
+    "id": "phb|magic-jar",
+    "name": "Magic Jar",
+    "category": "spell"
+  },
+  {
+    "id": "phb|magic-missile",
+    "name": "Magic Missile",
+    "category": "spell"
+  },
+  {
+    "id": "phb|magic-mouth",
+    "name": "Magic Mouth",
+    "category": "spell"
+  },
+  {
+    "id": "phb|magic-weapon",
+    "name": "Magic Weapon",
+    "category": "spell"
+  },
+  {
+    "id": "phb|major-image",
+    "name": "Major Image",
+    "category": "spell"
+  },
+  {
+    "id": "phb|mass-cure-wounds",
+    "name": "Mass Cure Wounds",
+    "category": "spell"
+  },
+  {
+    "id": "phb|mass-heal",
+    "name": "Mass Heal",
+    "category": "spell"
+  },
+  {
+    "id": "phb|mass-healing-word",
+    "name": "Mass Healing Word",
+    "category": "spell"
+  },
+  {
+    "id": "phb|mass-suggestion",
+    "name": "Mass Suggestion",
+    "category": "spell"
+  },
+  {
+    "id": "phb|maze",
+    "name": "Maze",
+    "category": "spell"
+  },
+  {
+    "id": "phb|meld-into-stone",
+    "name": "Meld into Stone",
+    "category": "spell"
+  },
+  {
+    "id": "phb|melf-s-acid-arrow",
+    "name": "Melf's Acid Arrow",
+    "category": "spell"
+  },
+  {
+    "id": "phb|mending",
+    "name": "Mending",
+    "category": "spell"
+  },
+  {
+    "id": "phb|message",
+    "name": "Message",
+    "category": "spell"
+  },
+  {
+    "id": "phb|meteor-swarm",
+    "name": "Meteor Swarm",
+    "category": "spell"
+  },
+  {
+    "id": "phb|mind-blank",
+    "name": "Mind Blank",
+    "category": "spell"
+  },
+  {
+    "id": "phb|minor-illusion",
+    "name": "Minor Illusion",
+    "category": "spell"
+  },
+  {
+    "id": "phb|mirage-arcane",
+    "name": "Mirage Arcane",
+    "category": "spell"
+  },
+  {
+    "id": "phb|mirror-image",
+    "name": "Mirror Image",
+    "category": "spell"
+  },
+  {
+    "id": "phb|mislead",
+    "name": "Mislead",
+    "category": "spell"
+  },
+  {
+    "id": "phb|misty-step",
+    "name": "Misty Step",
+    "category": "spell"
+  },
+  {
+    "id": "phb|modify-memory",
+    "name": "Modify Memory",
+    "category": "spell"
+  },
+  {
+    "id": "phb|moonbeam",
+    "name": "Moonbeam",
+    "category": "spell"
+  },
+  {
+    "id": "phb|mordenkainen-s-faithful-hound",
+    "name": "Mordenkainen's Faithful Hound",
+    "category": "spell"
+  },
+  {
+    "id": "phb|mordenkainen-s-magnificent-mansion",
+    "name": "Mordenkainen's Magnificent Mansion",
+    "category": "spell"
+  },
+  {
+    "id": "phb|mordenkainen-s-private-sanctum",
+    "name": "Mordenkainen's Private Sanctum",
+    "category": "spell"
+  },
+  {
+    "id": "phb|mordenkainen-s-sword",
+    "name": "Mordenkainen's Sword",
+    "category": "spell"
+  },
+  {
+    "id": "phb|move-earth",
+    "name": "Move Earth",
+    "category": "spell"
+  },
+  {
+    "id": "phb|nondetection",
+    "name": "Nondetection",
+    "category": "spell"
+  },
+  {
+    "id": "phb|nystul-s-magic-aura",
+    "name": "Nystul's Magic Aura",
+    "category": "spell"
+  },
+  {
+    "id": "phb|otiluke-s-freezing-sphere",
+    "name": "Otiluke's Freezing Sphere",
+    "category": "spell"
+  },
+  {
+    "id": "phb|otiluke-s-resilient-sphere",
+    "name": "Otiluke's Resilient Sphere",
+    "category": "spell"
+  },
+  {
+    "id": "phb|otto-s-irresistible-dance",
+    "name": "Otto's Irresistible Dance",
+    "category": "spell"
+  },
+  {
+    "id": "phb|pass-without-trace",
+    "name": "Pass without Trace",
+    "category": "spell"
+  },
+  {
+    "id": "phb|passwall",
+    "name": "Passwall",
+    "category": "spell"
+  },
+  {
+    "id": "phb|phantasmal-force",
+    "name": "Phantasmal Force",
+    "category": "spell"
+  },
+  {
+    "id": "phb|phantasmal-killer",
+    "name": "Phantasmal Killer",
+    "category": "spell"
+  },
+  {
+    "id": "phb|phantom-steed",
+    "name": "Phantom Steed",
+    "category": "spell"
+  },
+  {
+    "id": "phb|planar-ally",
+    "name": "Planar Ally",
+    "category": "spell"
+  },
+  {
+    "id": "phb|planar-binding",
+    "name": "Planar Binding",
+    "category": "spell"
+  },
+  {
+    "id": "phb|plane-shift",
+    "name": "Plane Shift",
+    "category": "spell"
+  },
+  {
+    "id": "phb|plant-growth",
+    "name": "Plant Growth",
+    "category": "spell"
+  },
+  {
+    "id": "phb|poison-spray",
+    "name": "Poison Spray",
+    "category": "spell"
+  },
+  {
+    "id": "phb|polymorph",
+    "name": "Polymorph",
+    "category": "spell"
+  },
+  {
+    "id": "phb|power-word-heal",
+    "name": "Power Word Heal",
+    "category": "spell"
+  },
+  {
+    "id": "phb|power-word-kill",
+    "name": "Power Word Kill",
+    "category": "spell"
+  },
+  {
+    "id": "phb|power-word-stun",
+    "name": "Power Word Stun",
+    "category": "spell"
+  },
+  {
+    "id": "phb|prayer-of-healing",
+    "name": "Prayer of Healing",
+    "category": "spell"
+  },
+  {
+    "id": "phb|prestidigitation",
+    "name": "Prestidigitation",
+    "category": "spell"
+  },
+  {
+    "id": "phb|prismatic-spray",
+    "name": "Prismatic Spray",
+    "category": "spell"
+  },
+  {
+    "id": "phb|prismatic-wall",
+    "name": "Prismatic Wall",
+    "category": "spell"
+  },
+  {
+    "id": "phb|produce-flame",
+    "name": "Produce Flame",
+    "category": "spell"
+  },
+  {
+    "id": "phb|programmed-illusion",
+    "name": "Programmed Illusion",
+    "category": "spell"
+  },
+  {
+    "id": "phb|project-image",
+    "name": "Project Image",
+    "category": "spell"
+  },
+  {
+    "id": "phb|protection-from-energy",
+    "name": "Protection from Energy",
+    "category": "spell"
+  },
+  {
+    "id": "phb|protection-from-evil-and-good",
+    "name": "Protection from Evil and Good",
+    "category": "spell"
+  },
+  {
+    "id": "phb|protection-from-poison",
+    "name": "Protection from Poison",
+    "category": "spell"
+  },
+  {
+    "id": "phb|purify-food-and-drink",
+    "name": "Purify Food and Drink",
+    "category": "spell"
+  },
+  {
+    "id": "phb|raise-dead",
+    "name": "Raise Dead",
+    "category": "spell"
+  },
+  {
+    "id": "phb|rary-s-telepathic-bond",
+    "name": "Rary's Telepathic Bond",
+    "category": "spell"
+  },
+  {
+    "id": "phb|ray-of-enfeeblement",
+    "name": "Ray of Enfeeblement",
+    "category": "spell"
+  },
+  {
+    "id": "phb|ray-of-frost",
+    "name": "Ray of Frost",
+    "category": "spell"
+  },
+  {
+    "id": "phb|ray-of-sickness",
+    "name": "Ray of Sickness",
+    "category": "spell"
+  },
+  {
+    "id": "phb|regenerate",
+    "name": "Regenerate",
+    "category": "spell"
+  },
+  {
+    "id": "phb|reincarnate",
+    "name": "Reincarnate",
+    "category": "spell"
+  },
+  {
+    "id": "phb|remove-curse",
+    "name": "Remove Curse",
+    "category": "spell"
+  },
+  {
+    "id": "phb|resistance",
+    "name": "Resistance",
+    "category": "spell"
+  },
+  {
+    "id": "phb|resurrection",
+    "name": "Resurrection",
+    "category": "spell"
+  },
+  {
+    "id": "phb|reverse-gravity",
+    "name": "Reverse Gravity",
+    "category": "spell"
+  },
+  {
+    "id": "phb|revivify",
+    "name": "Revivify",
+    "category": "spell"
+  },
+  {
+    "id": "phb|rope-trick",
+    "name": "Rope Trick",
+    "category": "spell"
+  },
+  {
+    "id": "phb|sacred-flame",
+    "name": "Sacred Flame",
+    "category": "spell"
+  },
+  {
+    "id": "phb|sanctuary",
+    "name": "Sanctuary",
+    "category": "spell"
+  },
+  {
+    "id": "phb|scorching-ray",
+    "name": "Scorching Ray",
+    "category": "spell"
+  },
+  {
+    "id": "phb|scrying",
+    "name": "Scrying",
+    "category": "spell"
+  },
+  {
+    "id": "phb|searing-smite",
+    "name": "Searing Smite",
+    "category": "spell"
+  },
+  {
+    "id": "phb|see-invisibility",
+    "name": "See Invisibility",
+    "category": "spell"
+  },
+  {
+    "id": "phb|seeming",
+    "name": "Seeming",
+    "category": "spell"
+  },
+  {
+    "id": "phb|sending",
+    "name": "Sending",
+    "category": "spell"
+  },
+  {
+    "id": "phb|sequester",
+    "name": "Sequester",
+    "category": "spell"
+  },
+  {
+    "id": "phb|shapechange",
+    "name": "Shapechange",
+    "category": "spell"
+  },
+  {
+    "id": "phb|shatter",
+    "name": "Shatter",
+    "category": "spell"
+  },
+  {
+    "id": "phb|shield",
+    "name": "Shield",
+    "category": "spell"
+  },
+  {
+    "id": "phb|shield-of-faith",
+    "name": "Shield of Faith",
+    "category": "spell"
+  },
+  {
+    "id": "phb|shillelagh",
+    "name": "Shillelagh",
+    "category": "spell"
+  },
+  {
+    "id": "phb|shocking-grasp",
+    "name": "Shocking Grasp",
+    "category": "spell"
+  },
+  {
+    "id": "phb|silence",
+    "name": "Silence",
+    "category": "spell"
+  },
+  {
+    "id": "phb|silent-image",
+    "name": "Silent Image",
+    "category": "spell"
+  },
+  {
+    "id": "phb|simulacrum",
+    "name": "Simulacrum",
+    "category": "spell"
+  },
+  {
+    "id": "phb|sleep",
+    "name": "Sleep",
+    "category": "spell"
+  },
+  {
+    "id": "phb|sleet-storm",
+    "name": "Sleet Storm",
+    "category": "spell"
+  },
+  {
+    "id": "phb|slow",
+    "name": "Slow",
+    "category": "spell"
+  },
+  {
+    "id": "phb|spare-the-dying",
+    "name": "Spare the Dying",
+    "category": "spell"
+  },
+  {
+    "id": "phb|speak-with-animals",
+    "name": "Speak with Animals",
+    "category": "spell"
+  },
+  {
+    "id": "phb|speak-with-dead",
+    "name": "Speak with Dead",
+    "category": "spell"
+  },
+  {
+    "id": "phb|speak-with-plants",
+    "name": "Speak with Plants",
+    "category": "spell"
+  },
+  {
+    "id": "phb|spider-climb",
+    "name": "Spider Climb",
+    "category": "spell"
+  },
+  {
+    "id": "phb|spike-growth",
+    "name": "Spike Growth",
+    "category": "spell"
+  },
+  {
+    "id": "phb|spirit-guardians",
+    "name": "Spirit Guardians",
+    "category": "spell"
+  },
+  {
+    "id": "phb|spiritual-weapon",
+    "name": "Spiritual Weapon",
+    "category": "spell"
+  },
+  {
+    "id": "phb|staggering-smite",
+    "name": "Staggering Smite",
+    "category": "spell"
+  },
+  {
+    "id": "phb|stinking-cloud",
+    "name": "Stinking Cloud",
+    "category": "spell"
+  },
+  {
+    "id": "phb|stone-shape",
+    "name": "Stone Shape",
+    "category": "spell"
+  },
+  {
+    "id": "phb|stoneskin",
+    "name": "Stoneskin",
+    "category": "spell"
+  },
+  {
+    "id": "phb|storm-of-vengeance",
+    "name": "Storm of Vengeance",
+    "category": "spell"
+  },
+  {
+    "id": "phb|suggestion",
+    "name": "Suggestion",
+    "category": "spell"
+  },
+  {
+    "id": "phb|sunbeam",
+    "name": "Sunbeam",
+    "category": "spell"
+  },
+  {
+    "id": "phb|sunburst",
+    "name": "Sunburst",
+    "category": "spell"
+  },
+  {
+    "id": "phb|swift-quiver",
+    "name": "Swift Quiver",
+    "category": "spell"
+  },
+  {
+    "id": "phb|symbol",
+    "name": "Symbol",
+    "category": "spell"
+  },
+  {
+    "id": "phb|tasha-s-hideous-laughter",
+    "name": "Tasha's Hideous Laughter",
+    "category": "spell"
+  },
+  {
+    "id": "phb|telekinesis",
+    "name": "Telekinesis",
+    "category": "spell"
+  },
+  {
+    "id": "phb|telepathy",
+    "name": "Telepathy",
+    "category": "spell"
+  },
+  {
+    "id": "phb|teleport",
+    "name": "Teleport",
+    "category": "spell"
+  },
+  {
+    "id": "phb|teleportation-circle",
+    "name": "Teleportation Circle",
+    "category": "spell"
+  },
+  {
+    "id": "phb|tenser-s-floating-disk",
+    "name": "Tenser's Floating Disk",
+    "category": "spell"
+  },
+  {
+    "id": "phb|thaumaturgy",
+    "name": "Thaumaturgy",
+    "category": "spell"
+  },
+  {
+    "id": "phb|thorn-whip",
+    "name": "Thorn Whip",
+    "category": "spell"
+  },
+  {
+    "id": "phb|thunderous-smite",
+    "name": "Thunderous Smite",
+    "category": "spell"
+  },
+  {
+    "id": "phb|thunderwave",
+    "name": "Thunderwave",
+    "category": "spell"
+  },
+  {
+    "id": "phb|time-stop",
+    "name": "Time Stop",
+    "category": "spell"
+  },
+  {
+    "id": "phb|tongues",
+    "name": "Tongues",
+    "category": "spell"
+  },
+  {
+    "id": "phb|transport-via-plants",
+    "name": "Transport via Plants",
+    "category": "spell"
+  },
+  {
+    "id": "phb|tree-stride",
+    "name": "Tree Stride",
+    "category": "spell"
+  },
+  {
+    "id": "phb|true-polymorph",
+    "name": "True Polymorph",
+    "category": "spell"
+  },
+  {
+    "id": "phb|true-resurrection",
+    "name": "True Resurrection",
+    "category": "spell"
+  },
+  {
+    "id": "phb|true-seeing",
+    "name": "True Seeing",
+    "category": "spell"
+  },
+  {
+    "id": "phb|true-strike",
+    "name": "True Strike",
+    "category": "spell"
+  },
+  {
+    "id": "phb|tsunami",
+    "name": "Tsunami",
+    "category": "spell"
+  },
+  {
+    "id": "phb|unseen-servant",
+    "name": "Unseen Servant",
+    "category": "spell"
+  },
+  {
+    "id": "phb|vampiric-touch",
+    "name": "Vampiric Touch",
+    "category": "spell"
+  },
+  {
+    "id": "phb|vicious-mockery",
+    "name": "Vicious Mockery",
+    "category": "spell"
+  },
+  {
+    "id": "phb|wall-of-fire",
+    "name": "Wall of Fire",
+    "category": "spell"
+  },
+  {
+    "id": "phb|wall-of-force",
+    "name": "Wall of Force",
+    "category": "spell"
+  },
+  {
+    "id": "phb|wall-of-ice",
+    "name": "Wall of Ice",
+    "category": "spell"
+  },
+  {
+    "id": "phb|wall-of-stone",
+    "name": "Wall of Stone",
+    "category": "spell"
+  },
+  {
+    "id": "phb|wall-of-thorns",
+    "name": "Wall of Thorns",
+    "category": "spell"
+  },
+  {
+    "id": "phb|warding-bond",
+    "name": "Warding Bond",
+    "category": "spell"
+  },
+  {
+    "id": "phb|water-breathing",
+    "name": "Water Breathing",
+    "category": "spell"
+  },
+  {
+    "id": "phb|water-walk",
+    "name": "Water Walk",
+    "category": "spell"
+  },
+  {
+    "id": "phb|web",
+    "name": "Web",
+    "category": "spell"
+  },
+  {
+    "id": "phb|weird",
+    "name": "Weird",
+    "category": "spell"
+  },
+  {
+    "id": "phb|wind-walk",
+    "name": "Wind Walk",
+    "category": "spell"
+  },
+  {
+    "id": "phb|wind-wall",
+    "name": "Wind Wall",
+    "category": "spell"
+  },
+  {
+    "id": "phb|wish",
+    "name": "Wish",
+    "category": "spell"
+  },
+  {
+    "id": "phb|witch-bolt",
+    "name": "Witch Bolt",
+    "category": "spell"
+  },
+  {
+    "id": "phb|word-of-recall",
+    "name": "Word of Recall",
+    "category": "spell"
+  },
+  {
+    "id": "phb|wrathful-smite",
+    "name": "Wrathful Smite",
+    "category": "spell"
+  },
+  {
+    "id": "phb|zone-of-truth",
+    "name": "Zone of Truth",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|acid-splash",
+    "name": "Acid Splash",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|aid",
+    "name": "Aid",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|alarm",
+    "name": "Alarm",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|alter-self",
+    "name": "Alter Self",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|animal-friendship",
+    "name": "Animal Friendship",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|animal-messenger",
+    "name": "Animal Messenger",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|animal-shapes",
+    "name": "Animal Shapes",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|animate-dead",
+    "name": "Animate Dead",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|animate-objects",
+    "name": "Animate Objects",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|antilife-shell",
+    "name": "Antilife Shell",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|antimagic-field",
+    "name": "Antimagic Field",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|antipathy-sympathy",
+    "name": "Antipathy/Sympathy",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|arcane-eye",
+    "name": "Arcane Eye",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|arcane-gate",
+    "name": "Arcane Gate",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|arcane-lock",
+    "name": "Arcane Lock",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|arcane-vigor",
+    "name": "Arcane Vigor",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|armor-of-agathys",
+    "name": "Armor of Agathys",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|arms-of-hadar",
+    "name": "Arms of Hadar",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|astral-projection",
+    "name": "Astral Projection",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|augury",
+    "name": "Augury",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|aura-of-life",
+    "name": "Aura of Life",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|aura-of-purity",
+    "name": "Aura of Purity",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|aura-of-vitality",
+    "name": "Aura of Vitality",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|awaken",
+    "name": "Awaken",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|bane",
+    "name": "Bane",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|banishing-smite",
+    "name": "Banishing Smite",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|banishment",
+    "name": "Banishment",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|barkskin",
+    "name": "Barkskin",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|beacon-of-hope",
+    "name": "Beacon of Hope",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|beast-sense",
+    "name": "Beast Sense",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|befuddlement",
+    "name": "Befuddlement",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|bestow-curse",
+    "name": "Bestow Curse",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|bigby-s-hand",
+    "name": "Bigby's Hand",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|blade-barrier",
+    "name": "Blade Barrier",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|blade-ward",
+    "name": "Blade Ward",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|bless",
+    "name": "Bless",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|blight",
+    "name": "Blight",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|blinding-smite",
+    "name": "Blinding Smite",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|blindness-deafness",
+    "name": "Blindness/Deafness",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|blink",
+    "name": "Blink",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|blur",
+    "name": "Blur",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|burning-hands",
+    "name": "Burning Hands",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|call-lightning",
+    "name": "Call Lightning",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|calm-emotions",
+    "name": "Calm Emotions",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|chain-lightning",
+    "name": "Chain Lightning",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|charm-monster",
+    "name": "Charm Monster",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|charm-person",
+    "name": "Charm Person",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|chill-touch",
+    "name": "Chill Touch",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|chromatic-orb",
+    "name": "Chromatic Orb",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|circle-of-death",
+    "name": "Circle of Death",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|circle-of-power",
+    "name": "Circle of Power",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|clairvoyance",
+    "name": "Clairvoyance",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|clone",
+    "name": "Clone",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|cloud-of-daggers",
+    "name": "Cloud of Daggers",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|cloudkill",
+    "name": "Cloudkill",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|color-spray",
+    "name": "Color Spray",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|command",
+    "name": "Command",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|commune",
+    "name": "Commune",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|commune-with-nature",
+    "name": "Commune with Nature",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|compelled-duel",
+    "name": "Compelled Duel",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|comprehend-languages",
+    "name": "Comprehend Languages",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|compulsion",
+    "name": "Compulsion",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|cone-of-cold",
+    "name": "Cone of Cold",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|confusion",
+    "name": "Confusion",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|conjure-animals",
+    "name": "Conjure Animals",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|conjure-barrage",
+    "name": "Conjure Barrage",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|conjure-celestial",
+    "name": "Conjure Celestial",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|conjure-elemental",
+    "name": "Conjure Elemental",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|conjure-fey",
+    "name": "Conjure Fey",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|conjure-minor-elementals",
+    "name": "Conjure Minor Elementals",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|conjure-volley",
+    "name": "Conjure Volley",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|conjure-woodland-beings",
+    "name": "Conjure Woodland Beings",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|contact-other-plane",
+    "name": "Contact Other Plane",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|contagion",
+    "name": "Contagion",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|contingency",
+    "name": "Contingency",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|continual-flame",
+    "name": "Continual Flame",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|control-water",
+    "name": "Control Water",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|control-weather",
+    "name": "Control Weather",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|cordon-of-arrows",
+    "name": "Cordon of Arrows",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|counterspell",
+    "name": "Counterspell",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|create-food-and-water",
+    "name": "Create Food and Water",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|create-or-destroy-water",
+    "name": "Create or Destroy Water",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|create-undead",
+    "name": "Create Undead",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|creation",
+    "name": "Creation",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|crown-of-madness",
+    "name": "Crown of Madness",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|crusader-s-mantle",
+    "name": "Crusader's Mantle",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|cure-wounds",
+    "name": "Cure Wounds",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|dancing-lights",
+    "name": "Dancing Lights",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|darkness",
+    "name": "Darkness",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|darkvision",
+    "name": "Darkvision",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|daylight",
+    "name": "Daylight",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|death-ward",
+    "name": "Death Ward",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|delayed-blast-fireball",
+    "name": "Delayed Blast Fireball",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|demiplane",
+    "name": "Demiplane",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|destructive-wave",
+    "name": "Destructive Wave",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|detect-evil-and-good",
+    "name": "Detect Evil and Good",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|detect-magic",
+    "name": "Detect Magic",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|detect-poison-and-disease",
+    "name": "Detect Poison and Disease",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|detect-thoughts",
+    "name": "Detect Thoughts",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|dimension-door",
+    "name": "Dimension Door",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|disguise-self",
+    "name": "Disguise Self",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|disintegrate",
+    "name": "Disintegrate",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|dispel-evil-and-good",
+    "name": "Dispel Evil and Good",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|dispel-magic",
+    "name": "Dispel Magic",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|dissonant-whispers",
+    "name": "Dissonant Whispers",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|divination",
+    "name": "Divination",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|divine-favor",
+    "name": "Divine Favor",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|divine-smite",
+    "name": "Divine Smite",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|divine-word",
+    "name": "Divine Word",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|dominate-beast",
+    "name": "Dominate Beast",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|dominate-monster",
+    "name": "Dominate Monster",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|dominate-person",
+    "name": "Dominate Person",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|dragon-s-breath",
+    "name": "Dragon's Breath",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|drawmij-s-instant-summons",
+    "name": "Drawmij's Instant Summons",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|dream",
+    "name": "Dream",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|druidcraft",
+    "name": "Druidcraft",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|earthquake",
+    "name": "Earthquake",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|eldritch-blast",
+    "name": "Eldritch Blast",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|elemental-weapon",
+    "name": "Elemental Weapon",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|elementalism",
+    "name": "Elementalism",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|enhance-ability",
+    "name": "Enhance Ability",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|enlarge-reduce",
+    "name": "Enlarge/Reduce",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|ensnaring-strike",
+    "name": "Ensnaring Strike",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|entangle",
+    "name": "Entangle",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|enthrall",
+    "name": "Enthrall",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|etherealness",
+    "name": "Etherealness",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|evard-s-black-tentacles",
+    "name": "Evard's Black Tentacles",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|expeditious-retreat",
+    "name": "Expeditious Retreat",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|eyebite",
+    "name": "Eyebite",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|fabricate",
+    "name": "Fabricate",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|faerie-fire",
+    "name": "Faerie Fire",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|false-life",
+    "name": "False Life",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|fear",
+    "name": "Fear",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|feather-fall",
+    "name": "Feather Fall",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|feign-death",
+    "name": "Feign Death",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|find-familiar",
+    "name": "Find Familiar",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|find-steed",
+    "name": "Find Steed",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|find-the-path",
+    "name": "Find the Path",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|find-traps",
+    "name": "Find Traps",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|finger-of-death",
+    "name": "Finger of Death",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|fire-bolt",
+    "name": "Fire Bolt",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|fire-shield",
+    "name": "Fire Shield",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|fire-storm",
+    "name": "Fire Storm",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|fireball",
+    "name": "Fireball",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|flame-blade",
+    "name": "Flame Blade",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|flame-strike",
+    "name": "Flame Strike",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|flaming-sphere",
+    "name": "Flaming Sphere",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|flesh-to-stone",
+    "name": "Flesh to Stone",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|fly",
+    "name": "Fly",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|fog-cloud",
+    "name": "Fog Cloud",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|forbiddance",
+    "name": "Forbiddance",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|forcecage",
+    "name": "Forcecage",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|foresight",
+    "name": "Foresight",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|fount-of-moonlight",
+    "name": "Fount of Moonlight",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|freedom-of-movement",
+    "name": "Freedom of Movement",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|friends",
+    "name": "Friends",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|gaseous-form",
+    "name": "Gaseous Form",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|gate",
+    "name": "Gate",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|geas",
+    "name": "Geas",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|gentle-repose",
+    "name": "Gentle Repose",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|giant-insect",
+    "name": "Giant Insect",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|glibness",
+    "name": "Glibness",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|globe-of-invulnerability",
+    "name": "Globe of Invulnerability",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|glyph-of-warding",
+    "name": "Glyph of Warding",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|goodberry",
+    "name": "Goodberry",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|grasping-vine",
+    "name": "Grasping Vine",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|grease",
+    "name": "Grease",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|greater-invisibility",
+    "name": "Greater Invisibility",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|greater-restoration",
+    "name": "Greater Restoration",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|guardian-of-faith",
+    "name": "Guardian of Faith",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|guards-and-wards",
+    "name": "Guards and Wards",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|guidance",
+    "name": "Guidance",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|guiding-bolt",
+    "name": "Guiding Bolt",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|gust-of-wind",
+    "name": "Gust of Wind",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|hail-of-thorns",
+    "name": "Hail of Thorns",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|hallow",
+    "name": "Hallow",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|hallucinatory-terrain",
+    "name": "Hallucinatory Terrain",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|harm",
+    "name": "Harm",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|haste",
+    "name": "Haste",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|heal",
+    "name": "Heal",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|healing-word",
+    "name": "Healing Word",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|heat-metal",
+    "name": "Heat Metal",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|hellish-rebuke",
+    "name": "Hellish Rebuke",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|heroes-feast",
+    "name": "Heroes' Feast",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|heroism",
+    "name": "Heroism",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|hex",
+    "name": "Hex",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|hold-monster",
+    "name": "Hold Monster",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|hold-person",
+    "name": "Hold Person",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|holy-aura",
+    "name": "Holy Aura",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|hunger-of-hadar",
+    "name": "Hunger of Hadar",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|hunter-s-mark",
+    "name": "Hunter's Mark",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|hypnotic-pattern",
+    "name": "Hypnotic Pattern",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|ice-knife",
+    "name": "Ice Knife",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|ice-storm",
+    "name": "Ice Storm",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|identify",
+    "name": "Identify",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|illusory-script",
+    "name": "Illusory Script",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|imprisonment",
+    "name": "Imprisonment",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|incendiary-cloud",
+    "name": "Incendiary Cloud",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|inflict-wounds",
+    "name": "Inflict Wounds",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|insect-plague",
+    "name": "Insect Plague",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|invisibility",
+    "name": "Invisibility",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|jallarzi-s-storm-of-radiance",
+    "name": "Jallarzi's Storm of Radiance",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|jump",
+    "name": "Jump",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|knock",
+    "name": "Knock",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|legend-lore",
+    "name": "Legend Lore",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|leomund-s-secret-chest",
+    "name": "Leomund's Secret Chest",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|leomund-s-tiny-hut",
+    "name": "Leomund's Tiny Hut",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|lesser-restoration",
+    "name": "Lesser Restoration",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|levitate",
+    "name": "Levitate",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|light",
+    "name": "Light",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|lightning-arrow",
+    "name": "Lightning Arrow",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|lightning-bolt",
+    "name": "Lightning Bolt",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|locate-animals-or-plants",
+    "name": "Locate Animals or Plants",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|locate-creature",
+    "name": "Locate Creature",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|locate-object",
+    "name": "Locate Object",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|longstrider",
+    "name": "Longstrider",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|mage-armor",
+    "name": "Mage Armor",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|mage-hand",
+    "name": "Mage Hand",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|magic-circle",
+    "name": "Magic Circle",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|magic-jar",
+    "name": "Magic Jar",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|magic-missile",
+    "name": "Magic Missile",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|magic-mouth",
+    "name": "Magic Mouth",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|magic-weapon",
+    "name": "Magic Weapon",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|major-image",
+    "name": "Major Image",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|mass-cure-wounds",
+    "name": "Mass Cure Wounds",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|mass-heal",
+    "name": "Mass Heal",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|mass-healing-word",
+    "name": "Mass Healing Word",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|mass-suggestion",
+    "name": "Mass Suggestion",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|maze",
+    "name": "Maze",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|meld-into-stone",
+    "name": "Meld into Stone",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|melf-s-acid-arrow",
+    "name": "Melf's Acid Arrow",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|mending",
+    "name": "Mending",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|message",
+    "name": "Message",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|meteor-swarm",
+    "name": "Meteor Swarm",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|mind-blank",
+    "name": "Mind Blank",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|mind-sliver",
+    "name": "Mind Sliver",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|mind-spike",
+    "name": "Mind Spike",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|minor-illusion",
+    "name": "Minor Illusion",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|mirage-arcane",
+    "name": "Mirage Arcane",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|mirror-image",
+    "name": "Mirror Image",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|mislead",
+    "name": "Mislead",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|misty-step",
+    "name": "Misty Step",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|modify-memory",
+    "name": "Modify Memory",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|moonbeam",
+    "name": "Moonbeam",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|mordenkainen-s-faithful-hound",
+    "name": "Mordenkainen's Faithful Hound",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|mordenkainen-s-magnificent-mansion",
+    "name": "Mordenkainen's Magnificent Mansion",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|mordenkainen-s-private-sanctum",
+    "name": "Mordenkainen's Private Sanctum",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|mordenkainen-s-sword",
+    "name": "Mordenkainen's Sword",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|move-earth",
+    "name": "Move Earth",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|nondetection",
+    "name": "Nondetection",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|nystul-s-magic-aura",
+    "name": "Nystul's Magic Aura",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|otiluke-s-freezing-sphere",
+    "name": "Otiluke's Freezing Sphere",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|otiluke-s-resilient-sphere",
+    "name": "Otiluke's Resilient Sphere",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|otto-s-irresistible-dance",
+    "name": "Otto's Irresistible Dance",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|pass-without-trace",
+    "name": "Pass without Trace",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|passwall",
+    "name": "Passwall",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|phantasmal-force",
+    "name": "Phantasmal Force",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|phantasmal-killer",
+    "name": "Phantasmal Killer",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|phantom-steed",
+    "name": "Phantom Steed",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|planar-ally",
+    "name": "Planar Ally",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|planar-binding",
+    "name": "Planar Binding",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|plane-shift",
+    "name": "Plane Shift",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|plant-growth",
+    "name": "Plant Growth",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|poison-spray",
+    "name": "Poison Spray",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|polymorph",
+    "name": "Polymorph",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|power-word-fortify",
+    "name": "Power Word Fortify",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|power-word-heal",
+    "name": "Power Word Heal",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|power-word-kill",
+    "name": "Power Word Kill",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|power-word-stun",
+    "name": "Power Word Stun",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|prayer-of-healing",
+    "name": "Prayer of Healing",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|prestidigitation",
+    "name": "Prestidigitation",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|prismatic-spray",
+    "name": "Prismatic Spray",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|prismatic-wall",
+    "name": "Prismatic Wall",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|produce-flame",
+    "name": "Produce Flame",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|programmed-illusion",
+    "name": "Programmed Illusion",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|project-image",
+    "name": "Project Image",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|protection-from-energy",
+    "name": "Protection from Energy",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|protection-from-evil-and-good",
+    "name": "Protection from Evil and Good",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|protection-from-poison",
+    "name": "Protection from Poison",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|purify-food-and-drink",
+    "name": "Purify Food and Drink",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|raise-dead",
+    "name": "Raise Dead",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|rary-s-telepathic-bond",
+    "name": "Rary's Telepathic Bond",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|ray-of-enfeeblement",
+    "name": "Ray of Enfeeblement",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|ray-of-frost",
+    "name": "Ray of Frost",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|ray-of-sickness",
+    "name": "Ray of Sickness",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|regenerate",
+    "name": "Regenerate",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|reincarnate",
+    "name": "Reincarnate",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|remove-curse",
+    "name": "Remove Curse",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|resistance",
+    "name": "Resistance",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|resurrection",
+    "name": "Resurrection",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|reverse-gravity",
+    "name": "Reverse Gravity",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|revivify",
+    "name": "Revivify",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|rope-trick",
+    "name": "Rope Trick",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|sacred-flame",
+    "name": "Sacred Flame",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|sanctuary",
+    "name": "Sanctuary",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|scorching-ray",
+    "name": "Scorching Ray",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|scrying",
+    "name": "Scrying",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|searing-smite",
+    "name": "Searing Smite",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|see-invisibility",
+    "name": "See Invisibility",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|seeming",
+    "name": "Seeming",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|sending",
+    "name": "Sending",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|sequester",
+    "name": "Sequester",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|shapechange",
+    "name": "Shapechange",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|shatter",
+    "name": "Shatter",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|shield",
+    "name": "Shield",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|shield-of-faith",
+    "name": "Shield of Faith",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|shillelagh",
+    "name": "Shillelagh",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|shining-smite",
+    "name": "Shining Smite",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|shocking-grasp",
+    "name": "Shocking Grasp",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|silence",
+    "name": "Silence",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|silent-image",
+    "name": "Silent Image",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|simulacrum",
+    "name": "Simulacrum",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|sleep",
+    "name": "Sleep",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|sleet-storm",
+    "name": "Sleet Storm",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|slow",
+    "name": "Slow",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|sorcerous-burst",
+    "name": "Sorcerous Burst",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|spare-the-dying",
+    "name": "Spare the Dying",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|speak-with-animals",
+    "name": "Speak with Animals",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|speak-with-dead",
+    "name": "Speak with Dead",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|speak-with-plants",
+    "name": "Speak with Plants",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|spider-climb",
+    "name": "Spider Climb",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|spike-growth",
+    "name": "Spike Growth",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|spirit-guardians",
+    "name": "Spirit Guardians",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|spiritual-weapon",
+    "name": "Spiritual Weapon",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|staggering-smite",
+    "name": "Staggering Smite",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|starry-wisp",
+    "name": "Starry Wisp",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|steel-wind-strike",
+    "name": "Steel Wind Strike",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|stinking-cloud",
+    "name": "Stinking Cloud",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|stone-shape",
+    "name": "Stone Shape",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|stoneskin",
+    "name": "Stoneskin",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|storm-of-vengeance",
+    "name": "Storm of Vengeance",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|suggestion",
+    "name": "Suggestion",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|summon-aberration",
+    "name": "Summon Aberration",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|summon-beast",
+    "name": "Summon Beast",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|summon-celestial",
+    "name": "Summon Celestial",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|summon-construct",
+    "name": "Summon Construct",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|summon-dragon",
+    "name": "Summon Dragon",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|summon-elemental",
+    "name": "Summon Elemental",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|summon-fey",
+    "name": "Summon Fey",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|summon-fiend",
+    "name": "Summon Fiend",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|summon-undead",
+    "name": "Summon Undead",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|sunbeam",
+    "name": "Sunbeam",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|sunburst",
+    "name": "Sunburst",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|swift-quiver",
+    "name": "Swift Quiver",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|symbol",
+    "name": "Symbol",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|synaptic-static",
+    "name": "Synaptic Static",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|tasha-s-bubbling-cauldron",
+    "name": "Tasha's Bubbling Cauldron",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|tasha-s-hideous-laughter",
+    "name": "Tasha's Hideous Laughter",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|telekinesis",
+    "name": "Telekinesis",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|telepathy",
+    "name": "Telepathy",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|teleport",
+    "name": "Teleport",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|teleportation-circle",
+    "name": "Teleportation Circle",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|tenser-s-floating-disk",
+    "name": "Tenser's Floating Disk",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|thaumaturgy",
+    "name": "Thaumaturgy",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|thorn-whip",
+    "name": "Thorn Whip",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|thunderclap",
+    "name": "Thunderclap",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|thunderous-smite",
+    "name": "Thunderous Smite",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|thunderwave",
+    "name": "Thunderwave",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|time-stop",
+    "name": "Time Stop",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|toll-the-dead",
+    "name": "Toll the Dead",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|tongues",
+    "name": "Tongues",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|transport-via-plants",
+    "name": "Transport via Plants",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|tree-stride",
+    "name": "Tree Stride",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|true-polymorph",
+    "name": "True Polymorph",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|true-resurrection",
+    "name": "True Resurrection",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|true-seeing",
+    "name": "True Seeing",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|true-strike",
+    "name": "True Strike",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|tsunami",
+    "name": "Tsunami",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|unseen-servant",
+    "name": "Unseen Servant",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|vampiric-touch",
+    "name": "Vampiric Touch",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|vicious-mockery",
+    "name": "Vicious Mockery",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|vitriolic-sphere",
+    "name": "Vitriolic Sphere",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|wall-of-fire",
+    "name": "Wall of Fire",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|wall-of-force",
+    "name": "Wall of Force",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|wall-of-ice",
+    "name": "Wall of Ice",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|wall-of-stone",
+    "name": "Wall of Stone",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|wall-of-thorns",
+    "name": "Wall of Thorns",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|warding-bond",
+    "name": "Warding Bond",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|water-breathing",
+    "name": "Water Breathing",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|water-walk",
+    "name": "Water Walk",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|web",
+    "name": "Web",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|weird",
+    "name": "Weird",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|wind-walk",
+    "name": "Wind Walk",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|wind-wall",
+    "name": "Wind Wall",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|wish",
+    "name": "Wish",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|witch-bolt",
+    "name": "Witch Bolt",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|word-of-radiance",
+    "name": "Word of Radiance",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|word-of-recall",
+    "name": "Word of Recall",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|wrathful-smite",
+    "name": "Wrathful Smite",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|yolande-s-regal-presence",
+    "name": "Yolande's Regal Presence",
+    "category": "spell"
+  },
+  {
+    "id": "xphb|zone-of-truth",
+    "name": "Zone of Truth",
+    "category": "spell"
+  },
+  {
+    "id": "tce|blade-of-disaster",
+    "name": "Blade of Disaster",
+    "category": "spell"
+  },
+  {
+    "id": "tce|booming-blade",
+    "name": "Booming Blade",
+    "category": "spell"
+  },
+  {
+    "id": "tce|dream-of-the-blue-veil",
+    "name": "Dream of the Blue Veil",
+    "category": "spell"
+  },
+  {
+    "id": "tce|green-flame-blade",
+    "name": "Green-Flame Blade",
+    "category": "spell"
+  },
+  {
+    "id": "tce|intellect-fortress",
+    "name": "Intellect Fortress",
+    "category": "spell"
+  },
+  {
+    "id": "tce|lightning-lure",
+    "name": "Lightning Lure",
+    "category": "spell"
+  },
+  {
+    "id": "tce|mind-sliver",
+    "name": "Mind Sliver",
+    "category": "spell"
+  },
+  {
+    "id": "tce|spirit-shroud",
+    "name": "Spirit Shroud",
+    "category": "spell"
+  },
+  {
+    "id": "tce|summon-aberration",
+    "name": "Summon Aberration",
+    "category": "spell"
+  },
+  {
+    "id": "tce|summon-beast",
+    "name": "Summon Beast",
+    "category": "spell"
+  },
+  {
+    "id": "tce|summon-celestial",
+    "name": "Summon Celestial",
+    "category": "spell"
+  },
+  {
+    "id": "tce|summon-construct",
+    "name": "Summon Construct",
+    "category": "spell"
+  },
+  {
+    "id": "tce|summon-elemental",
+    "name": "Summon Elemental",
+    "category": "spell"
+  },
+  {
+    "id": "tce|summon-fey",
+    "name": "Summon Fey",
+    "category": "spell"
+  },
+  {
+    "id": "tce|summon-fiend",
+    "name": "Summon Fiend",
+    "category": "spell"
+  },
+  {
+    "id": "tce|summon-shadowspawn",
+    "name": "Summon Shadowspawn",
+    "category": "spell"
+  },
+  {
+    "id": "tce|summon-undead",
+    "name": "Summon Undead",
+    "category": "spell"
+  },
+  {
+    "id": "tce|sword-burst",
+    "name": "Sword Burst",
+    "category": "spell"
+  },
+  {
+    "id": "tce|tasha-s-caustic-brew",
+    "name": "Tasha's Caustic Brew",
+    "category": "spell"
+  },
+  {
+    "id": "tce|tasha-s-mind-whip",
+    "name": "Tasha's Mind Whip",
+    "category": "spell"
+  },
+  {
+    "id": "tce|tasha-s-otherworldly-guise",
+    "name": "Tasha's Otherworldly Guise",
+    "category": "spell"
+  },
+  {
+    "id": "xge|abi-dalzim-s-horrid-wilting",
+    "name": "Abi-Dalzim's Horrid Wilting",
+    "category": "spell"
+  },
+  {
+    "id": "xge|absorb-elements",
+    "name": "Absorb Elements",
+    "category": "spell"
+  },
+  {
+    "id": "xge|aganazzar-s-scorcher",
+    "name": "Aganazzar's Scorcher",
+    "category": "spell"
+  },
+  {
+    "id": "xge|beast-bond",
+    "name": "Beast Bond",
+    "category": "spell"
+  },
+  {
+    "id": "xge|bones-of-the-earth",
+    "name": "Bones of the Earth",
+    "category": "spell"
+  },
+  {
+    "id": "xge|catapult",
+    "name": "Catapult",
+    "category": "spell"
+  },
+  {
+    "id": "xge|catnap",
+    "name": "Catnap",
+    "category": "spell"
+  },
+  {
+    "id": "xge|cause-fear",
+    "name": "Cause Fear",
+    "category": "spell"
+  },
+  {
+    "id": "xge|ceremony",
+    "name": "Ceremony",
+    "category": "spell"
+  },
+  {
+    "id": "xge|chaos-bolt",
+    "name": "Chaos Bolt",
+    "category": "spell"
+  },
+  {
+    "id": "xge|charm-monster",
+    "name": "Charm Monster",
+    "category": "spell"
+  },
+  {
+    "id": "xge|control-flames",
+    "name": "Control Flames",
+    "category": "spell"
+  },
+  {
+    "id": "xge|control-winds",
+    "name": "Control Winds",
+    "category": "spell"
+  },
+  {
+    "id": "xge|create-bonfire",
+    "name": "Create Bonfire",
+    "category": "spell"
+  },
+  {
+    "id": "xge|create-homunculus",
+    "name": "Create Homunculus",
+    "category": "spell"
+  },
+  {
+    "id": "xge|crown-of-stars",
+    "name": "Crown of Stars",
+    "category": "spell"
+  },
+  {
+    "id": "xge|danse-macabre",
+    "name": "Danse Macabre",
+    "category": "spell"
+  },
+  {
+    "id": "xge|dawn",
+    "name": "Dawn",
+    "category": "spell"
+  },
+  {
+    "id": "xge|dragon-s-breath",
+    "name": "Dragon's Breath",
+    "category": "spell"
+  },
+  {
+    "id": "xge|druid-grove",
+    "name": "Druid Grove",
+    "category": "spell"
+  },
+  {
+    "id": "xge|dust-devil",
+    "name": "Dust Devil",
+    "category": "spell"
+  },
+  {
+    "id": "xge|earth-tremor",
+    "name": "Earth Tremor",
+    "category": "spell"
+  },
+  {
+    "id": "xge|earthbind",
+    "name": "Earthbind",
+    "category": "spell"
+  },
+  {
+    "id": "xge|elemental-bane",
+    "name": "Elemental Bane",
+    "category": "spell"
+  },
+  {
+    "id": "xge|enemies-abound",
+    "name": "Enemies Abound",
+    "category": "spell"
+  },
+  {
+    "id": "xge|enervation",
+    "name": "Enervation",
+    "category": "spell"
+  },
+  {
+    "id": "xge|erupting-earth",
+    "name": "Erupting Earth",
+    "category": "spell"
+  },
+  {
+    "id": "xge|far-step",
+    "name": "Far Step",
+    "category": "spell"
+  },
+  {
+    "id": "xge|find-greater-steed",
+    "name": "Find Greater Steed",
+    "category": "spell"
+  },
+  {
+    "id": "xge|flame-arrows",
+    "name": "Flame Arrows",
+    "category": "spell"
+  },
+  {
+    "id": "xge|frostbite",
+    "name": "Frostbite",
+    "category": "spell"
+  },
+  {
+    "id": "xge|guardian-of-nature",
+    "name": "Guardian of Nature",
+    "category": "spell"
+  },
+  {
+    "id": "xge|gust",
+    "name": "Gust",
+    "category": "spell"
+  },
+  {
+    "id": "xge|healing-spirit",
+    "name": "Healing Spirit",
+    "category": "spell"
+  },
+  {
+    "id": "xge|holy-weapon",
+    "name": "Holy Weapon",
+    "category": "spell"
+  },
+  {
+    "id": "xge|ice-knife",
+    "name": "Ice Knife",
+    "category": "spell"
+  },
+  {
+    "id": "xge|illusory-dragon",
+    "name": "Illusory Dragon",
+    "category": "spell"
+  },
+  {
+    "id": "xge|immolation",
+    "name": "Immolation",
+    "category": "spell"
+  },
+  {
+    "id": "xge|infernal-calling",
+    "name": "Infernal Calling",
+    "category": "spell"
+  },
+  {
+    "id": "xge|infestation",
+    "name": "Infestation",
+    "category": "spell"
+  },
+  {
+    "id": "xge|investiture-of-flame",
+    "name": "Investiture of Flame",
+    "category": "spell"
+  },
+  {
+    "id": "xge|investiture-of-ice",
+    "name": "Investiture of Ice",
+    "category": "spell"
+  },
+  {
+    "id": "xge|investiture-of-stone",
+    "name": "Investiture of Stone",
+    "category": "spell"
+  },
+  {
+    "id": "xge|investiture-of-wind",
+    "name": "Investiture of Wind",
+    "category": "spell"
+  },
+  {
+    "id": "xge|invulnerability",
+    "name": "Invulnerability",
+    "category": "spell"
+  },
+  {
+    "id": "xge|life-transference",
+    "name": "Life Transference",
+    "category": "spell"
+  },
+  {
+    "id": "xge|maddening-darkness",
+    "name": "Maddening Darkness",
+    "category": "spell"
+  },
+  {
+    "id": "xge|maelstrom",
+    "name": "Maelstrom",
+    "category": "spell"
+  },
+  {
+    "id": "xge|magic-stone",
+    "name": "Magic Stone",
+    "category": "spell"
+  },
+  {
+    "id": "xge|mass-polymorph",
+    "name": "Mass Polymorph",
+    "category": "spell"
+  },
+  {
+    "id": "xge|maximilian-s-earthen-grasp",
+    "name": "Maximilian's Earthen Grasp",
+    "category": "spell"
+  },
+  {
+    "id": "xge|melf-s-minute-meteors",
+    "name": "Melf's Minute Meteors",
+    "category": "spell"
+  },
+  {
+    "id": "xge|mental-prison",
+    "name": "Mental Prison",
+    "category": "spell"
+  },
+  {
+    "id": "xge|mighty-fortress",
+    "name": "Mighty Fortress",
+    "category": "spell"
+  },
+  {
+    "id": "xge|mind-spike",
+    "name": "Mind Spike",
+    "category": "spell"
+  },
+  {
+    "id": "xge|mold-earth",
+    "name": "Mold Earth",
+    "category": "spell"
+  },
+  {
+    "id": "xge|negative-energy-flood",
+    "name": "Negative Energy Flood",
+    "category": "spell"
+  },
+  {
+    "id": "xge|power-word-pain",
+    "name": "Power Word Pain",
+    "category": "spell"
+  },
+  {
+    "id": "xge|primal-savagery",
+    "name": "Primal Savagery",
+    "category": "spell"
+  },
+  {
+    "id": "xge|primordial-ward",
+    "name": "Primordial Ward",
+    "category": "spell"
+  },
+  {
+    "id": "xge|psychic-scream",
+    "name": "Psychic Scream",
+    "category": "spell"
+  },
+  {
+    "id": "xge|pyrotechnics",
+    "name": "Pyrotechnics",
+    "category": "spell"
+  },
+  {
+    "id": "xge|scatter",
+    "name": "Scatter",
+    "category": "spell"
+  },
+  {
+    "id": "xge|shadow-blade",
+    "name": "Shadow Blade",
+    "category": "spell"
+  },
+  {
+    "id": "xge|shadow-of-moil",
+    "name": "Shadow of Moil",
+    "category": "spell"
+  },
+  {
+    "id": "xge|shape-water",
+    "name": "Shape Water",
+    "category": "spell"
+  },
+  {
+    "id": "xge|sickening-radiance",
+    "name": "Sickening Radiance",
+    "category": "spell"
+  },
+  {
+    "id": "xge|skill-empowerment",
+    "name": "Skill Empowerment",
+    "category": "spell"
+  },
+  {
+    "id": "xge|skywrite",
+    "name": "Skywrite",
+    "category": "spell"
+  },
+  {
+    "id": "xge|snare",
+    "name": "Snare",
+    "category": "spell"
+  },
+  {
+    "id": "xge|snilloc-s-snowball-swarm",
+    "name": "Snilloc's Snowball Swarm",
+    "category": "spell"
+  },
+  {
+    "id": "xge|soul-cage",
+    "name": "Soul Cage",
+    "category": "spell"
+  },
+  {
+    "id": "xge|steel-wind-strike",
+    "name": "Steel Wind Strike",
+    "category": "spell"
+  },
+  {
+    "id": "xge|storm-sphere",
+    "name": "Storm Sphere",
+    "category": "spell"
+  },
+  {
+    "id": "xge|summon-greater-demon",
+    "name": "Summon Greater Demon",
+    "category": "spell"
+  },
+  {
+    "id": "xge|summon-lesser-demons",
+    "name": "Summon Lesser Demons",
+    "category": "spell"
+  },
+  {
+    "id": "xge|synaptic-static",
+    "name": "Synaptic Static",
+    "category": "spell"
+  },
+  {
+    "id": "xge|temple-of-the-gods",
+    "name": "Temple of the Gods",
+    "category": "spell"
+  },
+  {
+    "id": "xge|tenser-s-transformation",
+    "name": "Tenser's Transformation",
+    "category": "spell"
+  },
+  {
+    "id": "xge|thunder-step",
+    "name": "Thunder Step",
+    "category": "spell"
+  },
+  {
+    "id": "xge|thunderclap",
+    "name": "Thunderclap",
+    "category": "spell"
+  },
+  {
+    "id": "xge|tidal-wave",
+    "name": "Tidal Wave",
+    "category": "spell"
+  },
+  {
+    "id": "xge|tiny-servant",
+    "name": "Tiny Servant",
+    "category": "spell"
+  },
+  {
+    "id": "xge|toll-the-dead",
+    "name": "Toll the Dead",
+    "category": "spell"
+  },
+  {
+    "id": "xge|transmute-rock",
+    "name": "Transmute Rock",
+    "category": "spell"
+  },
+  {
+    "id": "xge|vitriolic-sphere",
+    "name": "Vitriolic Sphere",
+    "category": "spell"
+  },
+  {
+    "id": "xge|wall-of-light",
+    "name": "Wall of Light",
+    "category": "spell"
+  },
+  {
+    "id": "xge|wall-of-sand",
+    "name": "Wall of Sand",
+    "category": "spell"
+  },
+  {
+    "id": "xge|wall-of-water",
+    "name": "Wall of Water",
+    "category": "spell"
+  },
+  {
+    "id": "xge|warding-wind",
+    "name": "Warding Wind",
+    "category": "spell"
+  },
+  {
+    "id": "xge|watery-sphere",
+    "name": "Watery Sphere",
+    "category": "spell"
+  },
+  {
+    "id": "xge|whirlwind",
+    "name": "Whirlwind",
+    "category": "spell"
+  },
+  {
+    "id": "xge|word-of-radiance",
+    "name": "Word of Radiance",
+    "category": "spell"
+  },
+  {
+    "id": "xge|wrath-of-nature",
+    "name": "Wrath of Nature",
+    "category": "spell"
+  },
+  {
+    "id": "xge|zephyr-strike",
+    "name": "Zephyr Strike",
+    "category": "spell"
+  },
+  {
+    "id": "phb|blinded",
+    "name": "Blinded",
+    "category": "condition"
+  },
+  {
+    "id": "xphb|blinded",
+    "name": "Blinded",
+    "category": "condition"
+  },
+  {
+    "id": "phb|charmed",
+    "name": "Charmed",
+    "category": "condition"
+  },
+  {
+    "id": "xphb|charmed",
+    "name": "Charmed",
+    "category": "condition"
+  },
+  {
+    "id": "phb|deafened",
+    "name": "Deafened",
+    "category": "condition"
+  },
+  {
+    "id": "xphb|deafened",
+    "name": "Deafened",
+    "category": "condition"
+  },
+  {
+    "id": "phb|exhaustion",
+    "name": "Exhaustion",
+    "category": "condition"
+  },
+  {
+    "id": "xphb|exhaustion",
+    "name": "Exhaustion",
+    "category": "condition"
+  },
+  {
+    "id": "phb|frightened",
+    "name": "Frightened",
+    "category": "condition"
+  },
+  {
+    "id": "xphb|frightened",
+    "name": "Frightened",
+    "category": "condition"
+  },
+  {
+    "id": "phb|grappled",
+    "name": "Grappled",
+    "category": "condition"
+  },
+  {
+    "id": "xphb|grappled",
+    "name": "Grappled",
+    "category": "condition"
+  },
+  {
+    "id": "phb|incapacitated",
+    "name": "Incapacitated",
+    "category": "condition"
+  },
+  {
+    "id": "xphb|incapacitated",
+    "name": "Incapacitated",
+    "category": "condition"
+  },
+  {
+    "id": "phb|invisible",
+    "name": "Invisible",
+    "category": "condition"
+  },
+  {
+    "id": "xphb|invisible",
+    "name": "Invisible",
+    "category": "condition"
+  },
+  {
+    "id": "phb|paralyzed",
+    "name": "Paralyzed",
+    "category": "condition"
+  },
+  {
+    "id": "xphb|paralyzed",
+    "name": "Paralyzed",
+    "category": "condition"
+  },
+  {
+    "id": "phb|petrified",
+    "name": "Petrified",
+    "category": "condition"
+  },
+  {
+    "id": "xphb|petrified",
+    "name": "Petrified",
+    "category": "condition"
+  },
+  {
+    "id": "phb|poisoned",
+    "name": "Poisoned",
+    "category": "condition"
+  },
+  {
+    "id": "xphb|poisoned",
+    "name": "Poisoned",
+    "category": "condition"
+  },
+  {
+    "id": "phb|prone",
+    "name": "Prone",
+    "category": "condition"
+  },
+  {
+    "id": "xphb|prone",
+    "name": "Prone",
+    "category": "condition"
+  },
+  {
+    "id": "phb|restrained",
+    "name": "Restrained",
+    "category": "condition"
+  },
+  {
+    "id": "xphb|restrained",
+    "name": "Restrained",
+    "category": "condition"
+  },
+  {
+    "id": "phb|stunned",
+    "name": "Stunned",
+    "category": "condition"
+  },
+  {
+    "id": "xphb|stunned",
+    "name": "Stunned",
+    "category": "condition"
+  },
+  {
+    "id": "phb|unconscious",
+    "name": "Unconscious",
+    "category": "condition"
+  },
+  {
+    "id": "xphb|unconscious",
+    "name": "Unconscious",
+    "category": "condition"
+  },
+  {
+    "id": "tce|1-all-purpose-tool",
+    "name": "+1 All-Purpose Tool",
+    "category": "equipment"
+  },
+  {
+    "id": "tce|1-amulet-of-the-devout",
+    "name": "+1 Amulet of the Devout",
+    "category": "equipment"
+  },
+  {
+    "id": "tce|1-arcane-grimoire",
+    "name": "+1 Arcane Grimoire",
+    "category": "equipment"
+  },
+  {
+    "id": "tce|1-bloodwell-vial",
+    "name": "+1 Bloodwell Vial",
+    "category": "equipment"
+  },
+  {
+    "id": "tce|1-moon-sickle",
+    "name": "+1 Moon Sickle",
+    "category": "equipment"
+  },
+  {
+    "id": "tce|1-rhythm-maker-s-drum",
+    "name": "+1 Rhythm-Maker's Drum",
+    "category": "equipment"
+  },
+  {
+    "id": "tce|2-all-purpose-tool",
+    "name": "+2 All-Purpose Tool",
+    "category": "equipment"
+  },
+  {
+    "id": "tce|2-amulet-of-the-devout",
+    "name": "+2 Amulet of the Devout",
+    "category": "equipment"
+  },
+  {
+    "id": "tce|2-arcane-grimoire",
+    "name": "+2 Arcane Grimoire",
+    "category": "equipment"
+  },
+  {
+    "id": "tce|2-bloodwell-vial",
+    "name": "+2 Bloodwell Vial",
+    "category": "equipment"
+  },
+  {
+    "id": "tce|2-moon-sickle",
+    "name": "+2 Moon Sickle",
+    "category": "equipment"
+  },
+  {
+    "id": "tce|2-rhythm-maker-s-drum",
+    "name": "+2 Rhythm-Maker's Drum",
+    "category": "equipment"
+  },
+  {
+    "id": "tce|3-all-purpose-tool",
+    "name": "+3 All-Purpose Tool",
+    "category": "equipment"
+  },
+  {
+    "id": "tce|3-amulet-of-the-devout",
+    "name": "+3 Amulet of the Devout",
+    "category": "equipment"
+  },
+  {
+    "id": "tce|3-arcane-grimoire",
+    "name": "+3 Arcane Grimoire",
+    "category": "equipment"
+  },
+  {
+    "id": "tce|3-bloodwell-vial",
+    "name": "+3 Bloodwell Vial",
+    "category": "equipment"
+  },
+  {
+    "id": "tce|3-moon-sickle",
+    "name": "+3 Moon Sickle",
+    "category": "equipment"
+  },
+  {
+    "id": "tce|3-rhythm-maker-s-drum",
+    "name": "+3 Rhythm-Maker's Drum",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|abacus",
+    "name": "Abacus",
+    "category": "equipment"
+  },
+  {
+    "id": "xphb|acid",
+    "name": "Acid",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|acid-vial",
+    "name": "Acid (vial)",
+    "category": "equipment"
+  },
+  {
+    "id": "tce|acid-absorbing-tattoo",
+    "name": "Acid Absorbing Tattoo",
+    "category": "equipment"
+  },
+  {
+    "id": "xphb|airship",
+    "name": "Airship",
+    "category": "equipment"
+  },
+  {
+    "id": "tce|alchemical-compendium",
+    "name": "Alchemical Compendium",
+    "category": "equipment"
+  },
+  {
+    "id": "xphb|alchemist-s-fire",
+    "name": "Alchemist's Fire",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|alchemist-s-fire-flask",
+    "name": "Alchemist's Fire (flask)",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|ale-gallon",
+    "name": "Ale (gallon)",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|ale-mug",
+    "name": "Ale (mug)",
+    "category": "equipment"
+  },
+  {
+    "id": "xphb|ale-mug",
+    "name": "Ale (mug)",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|amulet",
+    "name": "Amulet",
+    "category": "equipment"
+  },
+  {
+    "id": "xphb|amulet",
+    "name": "Amulet",
+    "category": "equipment"
+  },
+  {
+    "id": "xphb|antitoxin",
+    "name": "Antitoxin",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|antitoxin-vial",
+    "name": "Antitoxin (vial)",
+    "category": "equipment"
+  },
+  {
+    "id": "tce|astral-shard",
+    "name": "Astral Shard",
+    "category": "equipment"
+  },
+  {
+    "id": "tce|astromancy-archive",
+    "name": "Astromancy Archive",
+    "category": "equipment"
+  },
+  {
+    "id": "tce|atlas-of-endless-horizons",
+    "name": "Atlas of Endless Horizons",
+    "category": "equipment"
+  },
+  {
+    "id": "tce|baba-yaga-s-mortar-and-pestle",
+    "name": "Baba Yaga's Mortar and Pestle",
+    "category": "equipment"
+  },
+  {
+    "id": "tce|baba-yaga-s-pestle",
+    "name": "Baba Yaga's Pestle",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|backpack",
+    "name": "Backpack",
+    "category": "equipment"
+  },
+  {
+    "id": "xphb|backpack",
+    "name": "Backpack",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|ball-bearing",
+    "name": "Ball Bearing",
+    "category": "equipment"
+  },
+  {
+    "id": "xphb|ball-bearings",
+    "name": "Ball Bearings",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|ball-bearings-bag-of-1-000",
+    "name": "Ball Bearings (bag of 1,000)",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|barrel",
+    "name": "Barrel",
+    "category": "equipment"
+  },
+  {
+    "id": "xphb|barrel",
+    "name": "Barrel",
+    "category": "equipment"
+  },
+  {
+    "id": "tce|barrier-tattoo-large",
+    "name": "Barrier Tattoo (Large)",
+    "category": "equipment"
+  },
+  {
+    "id": "tce|barrier-tattoo-medium",
+    "name": "Barrier Tattoo (Medium)",
+    "category": "equipment"
+  },
+  {
+    "id": "tce|barrier-tattoo-small",
+    "name": "Barrier Tattoo (Small)",
+    "category": "equipment"
+  },
+  {
+    "id": "xphb|basic-poison",
+    "name": "Basic Poison",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|basic-poison-vial",
+    "name": "Basic Poison (vial)",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|basket",
+    "name": "Basket",
+    "category": "equipment"
+  },
+  {
+    "id": "xphb|basket",
+    "name": "Basket",
+    "category": "equipment"
+  },
+  {
+    "id": "xge|bead-of-nourishment",
+    "name": "Bead of Nourishment",
+    "category": "equipment"
+  },
+  {
+    "id": "xge|bead-of-refreshment",
+    "name": "Bead of Refreshment",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|bedroll",
+    "name": "Bedroll",
+    "category": "equipment"
+  },
+  {
+    "id": "xphb|bedroll",
+    "name": "Bedroll",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|bell",
+    "name": "Bell",
+    "category": "equipment"
+  },
+  {
+    "id": "xphb|bell",
+    "name": "Bell",
+    "category": "equipment"
+  },
+  {
+    "id": "tce|bell-branch",
+    "name": "Bell Branch",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|bit-and-bridle",
+    "name": "Bit and bridle",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|blanket",
+    "name": "Blanket",
+    "category": "equipment"
+  },
+  {
+    "id": "xphb|blanket",
+    "name": "Blanket",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|block-and-tackle",
+    "name": "Block and Tackle",
+    "category": "equipment"
+  },
+  {
+    "id": "xphb|block-and-tackle",
+    "name": "Block and Tackle",
+    "category": "equipment"
+  },
+  {
+    "id": "tce|blood-fury-tattoo",
+    "name": "Blood Fury Tattoo",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|book",
+    "name": "Book",
+    "category": "equipment"
+  },
+  {
+    "id": "xphb|book",
+    "name": "Book",
+    "category": "equipment"
+  },
+  {
+    "id": "xge|boots-of-false-tracks",
+    "name": "Boots of False Tracks",
+    "category": "equipment"
+  },
+  {
+    "id": "xphb|bread-loaf",
+    "name": "Bread (loaf)",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|bucket",
+    "name": "Bucket",
+    "category": "equipment"
+  },
+  {
+    "id": "xphb|bucket",
+    "name": "Bucket",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|bullseye-lantern",
+    "name": "Bullseye Lantern",
+    "category": "equipment"
+  },
+  {
+    "id": "xphb|bullseye-lantern",
+    "name": "Bullseye Lantern",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|burglar-s-pack",
+    "name": "Burglar's Pack",
+    "category": "equipment"
+  },
+  {
+    "id": "xphb|burglar-s-pack",
+    "name": "Burglar's Pack",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|caltrop",
+    "name": "Caltrop",
+    "category": "equipment"
+  },
+  {
+    "id": "xphb|caltrops",
+    "name": "Caltrops",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|caltrops-bag-of-20",
+    "name": "Caltrops (bag of 20)",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|camel",
+    "name": "Camel",
+    "category": "equipment"
+  },
+  {
+    "id": "xphb|camel",
+    "name": "Camel",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|candle",
+    "name": "Candle",
+    "category": "equipment"
+  },
+  {
+    "id": "xphb|candle",
+    "name": "Candle",
+    "category": "equipment"
+  },
+  {
+    "id": "xge|candle-of-the-deep",
+    "name": "Candle of the Deep",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|canvas-1-sq-yd",
+    "name": "Canvas (1 sq. yd.)",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|carriage",
+    "name": "Carriage",
+    "category": "equipment"
+  },
+  {
+    "id": "xphb|carriage",
+    "name": "Carriage",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|cart",
+    "name": "Cart",
+    "category": "equipment"
+  },
+  {
+    "id": "xphb|cart",
+    "name": "Cart",
+    "category": "equipment"
+  },
+  {
+    "id": "tce|cauldron-of-rebirth",
+    "name": "Cauldron of Rebirth",
+    "category": "equipment"
+  },
+  {
+    "id": "xphb|chain",
+    "name": "Chain",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|chain-10-feet",
+    "name": "Chain (10 feet)",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|chalk-1-piece",
+    "name": "Chalk (1 piece)",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|chariot",
+    "name": "Chariot",
+    "category": "equipment"
+  },
+  {
+    "id": "xphb|chariot",
+    "name": "Chariot",
+    "category": "equipment"
+  },
+  {
+    "id": "xge|charlatan-s-die",
+    "name": "Charlatan's Die",
+    "category": "equipment"
+  },
+  {
+    "id": "xphb|cheese-wedge",
+    "name": "Cheese (wedge)",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|chest",
+    "name": "Chest",
+    "category": "equipment"
+  },
+  {
+    "id": "xphb|chest",
+    "name": "Chest",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|chicken",
+    "name": "Chicken",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|chunk-of-meat",
+    "name": "Chunk of Meat",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|cinnamon",
+    "name": "Cinnamon",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|climber-s-kit",
+    "name": "Climber's Kit",
+    "category": "equipment"
+  },
+  {
+    "id": "xphb|climber-s-kit",
+    "name": "Climber's Kit",
+    "category": "equipment"
+  },
+  {
+    "id": "xge|cloak-of-billowing",
+    "name": "Cloak of Billowing",
+    "category": "equipment"
+  },
+  {
+    "id": "xge|cloak-of-many-fashions",
+    "name": "Cloak of Many Fashions",
+    "category": "equipment"
+  },
+  {
+    "id": "xge|clockwork-amulet",
+    "name": "Clockwork Amulet",
+    "category": "equipment"
+  },
+  {
+    "id": "xge|clothes-of-mending",
+    "name": "Clothes of Mending",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|cloves",
+    "name": "Cloves",
+    "category": "equipment"
+  },
+  {
+    "id": "tce|coiling-grasp-tattoo",
+    "name": "Coiling Grasp Tattoo",
+    "category": "equipment"
+  },
+  {
+    "id": "tce|cold-absorbing-tattoo",
+    "name": "Cold Absorbing Tattoo",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|common-clothes",
+    "name": "Common Clothes",
+    "category": "equipment"
+  },
+  {
+    "id": "xphb|common-wine-bottle",
+    "name": "Common Wine (bottle)",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|common-wine-pitcher",
+    "name": "Common Wine (pitcher)",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|component-pouch",
+    "name": "Component Pouch",
+    "category": "equipment"
+  },
+  {
+    "id": "xphb|component-pouch",
+    "name": "Component Pouch",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|copper",
+    "name": "Copper",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|copper-cp",
+    "name": "Copper (cp)",
+    "category": "equipment"
+  },
+  {
+    "id": "xphb|costume",
+    "name": "Costume",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|costume-clothes",
+    "name": "Costume Clothes",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|cotton-cloth-1-sq-yd",
+    "name": "Cotton Cloth (1 sq. yd.)",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|cow",
+    "name": "Cow",
+    "category": "equipment"
+  },
+  {
+    "id": "tce|crook-of-rao",
+    "name": "Crook of Rao",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|crossbow-bolt-case",
+    "name": "Crossbow Bolt Case",
+    "category": "equipment"
+  },
+  {
+    "id": "xphb|crossbow-bolt-case",
+    "name": "Crossbow Bolt Case",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|crowbar",
+    "name": "Crowbar",
+    "category": "equipment"
+  },
+  {
+    "id": "xphb|crowbar",
+    "name": "Crowbar",
+    "category": "equipment"
+  },
+  {
+    "id": "tce|crystalline-chronicle",
+    "name": "Crystalline Chronicle",
+    "category": "equipment"
+  },
+  {
+    "id": "xge|dark-shard-amulet",
+    "name": "Dark Shard Amulet",
+    "category": "equipment"
+  },
+  {
+    "id": "tce|demonomicon-of-iggwilv",
+    "name": "Demonomicon of Iggwilv",
+    "category": "equipment"
+  },
+  {
+    "id": "tce|devotee-s-censer",
+    "name": "Devotee's Censer",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|dice-set",
+    "name": "Dice Set",
+    "category": "equipment"
+  },
+  {
+    "id": "xphb|dice-set",
+    "name": "Dice Set",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|diplomat-s-pack",
+    "name": "Diplomat's Pack",
+    "category": "equipment"
+  },
+  {
+    "id": "xphb|diplomat-s-pack",
+    "name": "Diplomat's Pack",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|disguise-kit",
+    "name": "Disguise Kit",
+    "category": "equipment"
+  },
+  {
+    "id": "xphb|disguise-kit",
+    "name": "Disguise Kit",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|donkey",
+    "name": "Donkey",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|draft-horse",
+    "name": "Draft Horse",
+    "category": "equipment"
+  },
+  {
+    "id": "xphb|draft-horse",
+    "name": "Draft Horse",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|dragonchess-set",
+    "name": "Dragonchess Set",
+    "category": "equipment"
+  },
+  {
+    "id": "xphb|dragonchess-set",
+    "name": "Dragonchess Set",
+    "category": "equipment"
+  },
+  {
+    "id": "xge|dread-helm",
+    "name": "Dread Helm",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|dungeoneer-s-pack",
+    "name": "Dungeoneer's Pack",
+    "category": "equipment"
+  },
+  {
+    "id": "xphb|dungeoneer-s-pack",
+    "name": "Dungeoneer's Pack",
+    "category": "equipment"
+  },
+  {
+    "id": "tce|duplicitous-manuscript",
+    "name": "Duplicitous Manuscript",
+    "category": "equipment"
+  },
+  {
+    "id": "xge|ear-horn-of-hearing",
+    "name": "Ear Horn of Hearing",
+    "category": "equipment"
+  },
+  {
+    "id": "tce|eldritch-claw-tattoo",
+    "name": "Eldritch Claw Tattoo",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|electrum-ep",
+    "name": "Electrum (ep)",
+    "category": "equipment"
+  },
+  {
+    "id": "tce|elemental-essence-shard",
+    "name": "Elemental Essence Shard",
+    "category": "equipment"
+  },
+  {
+    "id": "tce|elemental-essence-shard-air",
+    "name": "Elemental Essence Shard (Air)",
+    "category": "equipment"
+  },
+  {
+    "id": "tce|elemental-essence-shard-earth",
+    "name": "Elemental Essence Shard (Earth)",
+    "category": "equipment"
+  },
+  {
+    "id": "tce|elemental-essence-shard-fire",
+    "name": "Elemental Essence Shard (Fire)",
+    "category": "equipment"
+  },
+  {
+    "id": "tce|elemental-essence-shard-water",
+    "name": "Elemental Essence Shard (Water)",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|elephant",
+    "name": "Elephant",
+    "category": "equipment"
+  },
+  {
+    "id": "xphb|elephant",
+    "name": "Elephant",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|emblem",
+    "name": "Emblem",
+    "category": "equipment"
+  },
+  {
+    "id": "xphb|emblem",
+    "name": "Emblem",
+    "category": "equipment"
+  },
+  {
+    "id": "xge|enduring-spellbook",
+    "name": "Enduring Spellbook",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|entertainer-s-pack",
+    "name": "Entertainer's Pack",
+    "category": "equipment"
+  },
+  {
+    "id": "xphb|entertainer-s-pack",
+    "name": "Entertainer's Pack",
+    "category": "equipment"
+  },
+  {
+    "id": "xge|ersatz-eye",
+    "name": "Ersatz Eye",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|exotic-saddle",
+    "name": "Exotic Saddle",
+    "category": "equipment"
+  },
+  {
+    "id": "xphb|exotic-saddle",
+    "name": "Exotic Saddle",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|explorer-s-pack",
+    "name": "Explorer's Pack",
+    "category": "equipment"
+  },
+  {
+    "id": "xphb|explorer-s-pack",
+    "name": "Explorer's Pack",
+    "category": "equipment"
+  },
+  {
+    "id": "tce|far-realm-shard",
+    "name": "Far Realm Shard",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|feed-per-day",
+    "name": "Feed (per day)",
+    "category": "equipment"
+  },
+  {
+    "id": "xphb|feed-per-day",
+    "name": "Feed (per day)",
+    "category": "equipment"
+  },
+  {
+    "id": "tce|feywild-shard",
+    "name": "Feywild Shard",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|fine-clothes",
+    "name": "Fine Clothes",
+    "category": "equipment"
+  },
+  {
+    "id": "xphb|fine-clothes",
+    "name": "Fine Clothes",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|fine-wine-bottle",
+    "name": "Fine Wine (bottle)",
+    "category": "equipment"
+  },
+  {
+    "id": "xphb|fine-wine-bottle",
+    "name": "Fine Wine (bottle)",
+    "category": "equipment"
+  },
+  {
+    "id": "tce|fire-absorbing-tattoo",
+    "name": "Fire Absorbing Tattoo",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|fishing-tackle",
+    "name": "Fishing Tackle",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|flask",
+    "name": "Flask",
+    "category": "equipment"
+  },
+  {
+    "id": "xphb|flask",
+    "name": "Flask",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|flour",
+    "name": "Flour",
+    "category": "equipment"
+  },
+  {
+    "id": "tce|force-absorbing-tattoo",
+    "name": "Force Absorbing Tattoo",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|forgery-kit",
+    "name": "Forgery Kit",
+    "category": "equipment"
+  },
+  {
+    "id": "xphb|forgery-kit",
+    "name": "Forgery Kit",
+    "category": "equipment"
+  },
+  {
+    "id": "tce|fulminating-treatise",
+    "name": "Fulminating Treatise",
+    "category": "equipment"
+  },
+  {
+    "id": "xphb|galley",
+    "name": "Galley",
+    "category": "equipment"
+  },
+  {
+    "id": "tce|ghost-step-tattoo",
+    "name": "Ghost Step Tattoo",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|ginger",
+    "name": "Ginger",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|glass-bottle",
+    "name": "Glass Bottle",
+    "category": "equipment"
+  },
+  {
+    "id": "xphb|glass-bottle",
+    "name": "Glass Bottle",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|goat",
+    "name": "Goat",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|gold",
+    "name": "Gold",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|gold-gp",
+    "name": "Gold (gp)",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|grappling-hook",
+    "name": "Grappling Hook",
+    "category": "equipment"
+  },
+  {
+    "id": "xphb|grappling-hook",
+    "name": "Grappling Hook",
+    "category": "equipment"
+  },
+  {
+    "id": "tce|guardian-emblem",
+    "name": "Guardian Emblem",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|hammer",
+    "name": "Hammer",
+    "category": "equipment"
+  },
+  {
+    "id": "xge|hat-of-vermin",
+    "name": "Hat of Vermin",
+    "category": "equipment"
+  },
+  {
+    "id": "xge|hat-of-wizardry",
+    "name": "Hat of Wizardry",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|healer-s-kit",
+    "name": "Healer's Kit",
+    "category": "equipment"
+  },
+  {
+    "id": "xphb|healer-s-kit",
+    "name": "Healer's Kit",
+    "category": "equipment"
+  },
+  {
+    "id": "tce|heart-weaver-s-primer",
+    "name": "Heart Weaver's Primer",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|hempen-rope-50-feet",
+    "name": "Hempen Rope (50 feet)",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|herbalism-kit",
+    "name": "Herbalism Kit",
+    "category": "equipment"
+  },
+  {
+    "id": "xphb|herbalism-kit",
+    "name": "Herbalism Kit",
+    "category": "equipment"
+  },
+  {
+    "id": "xge|heward-s-handy-spice-pouch",
+    "name": "Heward's Handy Spice Pouch",
+    "category": "equipment"
+  },
+  {
+    "id": "xphb|holy-water",
+    "name": "Holy Water",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|holy-water-flask",
+    "name": "Holy Water (flask)",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|hooded-lantern",
+    "name": "Hooded Lantern",
+    "category": "equipment"
+  },
+  {
+    "id": "xphb|hooded-lantern",
+    "name": "Hooded Lantern",
+    "category": "equipment"
+  },
+  {
+    "id": "xge|horn-of-silent-alarm",
+    "name": "Horn of Silent Alarm",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|hourglass",
+    "name": "Hourglass",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|hunk-of-cheese",
+    "name": "Hunk of Cheese",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|hunting-trap",
+    "name": "Hunting Trap",
+    "category": "equipment"
+  },
+  {
+    "id": "xphb|hunting-trap",
+    "name": "Hunting Trap",
+    "category": "equipment"
+  },
+  {
+    "id": "tce|illuminator-s-tattoo",
+    "name": "Illuminator's Tattoo",
+    "category": "equipment"
+  },
+  {
+    "id": "xphb|ink",
+    "name": "Ink",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|ink-1-ounce-bottle",
+    "name": "Ink (1-ounce bottle)",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|ink-pen",
+    "name": "Ink Pen",
+    "category": "equipment"
+  },
+  {
+    "id": "xphb|ink-pen",
+    "name": "Ink Pen",
+    "category": "equipment"
+  },
+  {
+    "id": "xge|instrument-of-illusions",
+    "name": "Instrument of Illusions",
+    "category": "equipment"
+  },
+  {
+    "id": "xge|instrument-of-scribing",
+    "name": "Instrument of Scribing",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|iron",
+    "name": "Iron",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|iron-pot",
+    "name": "Iron Pot",
+    "category": "equipment"
+  },
+  {
+    "id": "xphb|iron-pot",
+    "name": "Iron Pot",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|iron-spike",
+    "name": "Iron Spike",
+    "category": "equipment"
+  },
+  {
+    "id": "xphb|iron-spike",
+    "name": "Iron Spike",
+    "category": "equipment"
+  },
+  {
+    "id": "xphb|iron-spikes",
+    "name": "Iron Spikes",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|iron-spikes-10",
+    "name": "Iron Spikes (10)",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|jug",
+    "name": "Jug",
+    "category": "equipment"
+  },
+  {
+    "id": "xphb|jug",
+    "name": "Jug",
+    "category": "equipment"
+  },
+  {
+    "id": "xphb|keelboat",
+    "name": "Keelboat",
+    "category": "equipment"
+  },
+  {
+    "id": "xphb|ladder",
+    "name": "Ladder",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|ladder-10-foot",
+    "name": "Ladder (10-foot)",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|lamp",
+    "name": "Lamp",
+    "category": "equipment"
+  },
+  {
+    "id": "xphb|lamp",
+    "name": "Lamp",
+    "category": "equipment"
+  },
+  {
+    "id": "tce|libram-of-souls-and-flesh",
+    "name": "Libram of Souls and Flesh",
+    "category": "equipment"
+  },
+  {
+    "id": "tce|lifewell-tattoo",
+    "name": "Lifewell Tattoo",
+    "category": "equipment"
+  },
+  {
+    "id": "tce|lightning-absorbing-tattoo",
+    "name": "Lightning Absorbing Tattoo",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|linen-1-sq-yd",
+    "name": "Linen (1 sq. yd.)",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|loaf-of-bread",
+    "name": "Loaf of Bread",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|lock",
+    "name": "Lock",
+    "category": "equipment"
+  },
+  {
+    "id": "xphb|lock",
+    "name": "Lock",
+    "category": "equipment"
+  },
+  {
+    "id": "xge|lock-of-trickery",
+    "name": "Lock of Trickery",
+    "category": "equipment"
+  },
+  {
+    "id": "xphb|longship",
+    "name": "Longship",
+    "category": "equipment"
+  },
+  {
+    "id": "tce|luba-s-tarokka-of-souls",
+    "name": "Luba's Tarokka of Souls",
+    "category": "equipment"
+  },
+  {
+    "id": "tce|lyre-of-building",
+    "name": "Lyre of Building",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|magnifying-glass",
+    "name": "Magnifying Glass",
+    "category": "equipment"
+  },
+  {
+    "id": "xphb|magnifying-glass",
+    "name": "Magnifying Glass",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|manacles",
+    "name": "Manacles",
+    "category": "equipment"
+  },
+  {
+    "id": "xphb|manacles",
+    "name": "Manacles",
+    "category": "equipment"
+  },
+  {
+    "id": "xphb|map",
+    "name": "Map",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|map-or-scroll-case",
+    "name": "Map or Scroll Case",
+    "category": "equipment"
+  },
+  {
+    "id": "xphb|map-or-scroll-case",
+    "name": "Map or Scroll Case",
+    "category": "equipment"
+  },
+  {
+    "id": "tce|masquerade-tattoo",
+    "name": "Masquerade Tattoo",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|mastiff",
+    "name": "Mastiff",
+    "category": "equipment"
+  },
+  {
+    "id": "xphb|mastiff",
+    "name": "Mastiff",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|merchant-s-scale",
+    "name": "Merchant's Scale",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|mess-kit",
+    "name": "Mess Kit",
+    "category": "equipment"
+  },
+  {
+    "id": "tce|mighty-servant-of-leuk-o",
+    "name": "Mighty Servant of Leuk-o",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|military-saddle",
+    "name": "Military Saddle",
+    "category": "equipment"
+  },
+  {
+    "id": "xphb|military-saddle",
+    "name": "Military Saddle",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|miner-s-pick",
+    "name": "Miner's Pick",
+    "category": "equipment"
+  },
+  {
+    "id": "xphb|mirror",
+    "name": "Mirror",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|mule",
+    "name": "Mule",
+    "category": "equipment"
+  },
+  {
+    "id": "xphb|mule",
+    "name": "Mule",
+    "category": "equipment"
+  },
+  {
+    "id": "xge|mystery-key",
+    "name": "Mystery Key",
+    "category": "equipment"
+  },
+  {
+    "id": "tce|nature-s-mantle",
+    "name": "Nature's Mantle",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|navigator-s-tools",
+    "name": "Navigator's Tools",
+    "category": "equipment"
+  },
+  {
+    "id": "xphb|navigator-s-tools",
+    "name": "Navigator's Tools",
+    "category": "equipment"
+  },
+  {
+    "id": "tce|necrotic-absorbing-tattoo",
+    "name": "Necrotic Absorbing Tattoo",
+    "category": "equipment"
+  },
+  {
+    "id": "xphb|net",
+    "name": "Net",
+    "category": "equipment"
+  },
+  {
+    "id": "xphb|oil",
+    "name": "Oil",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|oil-flask",
+    "name": "Oil (flask)",
+    "category": "equipment"
+  },
+  {
+    "id": "xge|orb-of-direction",
+    "name": "Orb of Direction",
+    "category": "equipment"
+  },
+  {
+    "id": "xge|orb-of-time",
+    "name": "Orb of Time",
+    "category": "equipment"
+  },
+  {
+    "id": "tce|outer-essence-shard",
+    "name": "Outer Essence Shard",
+    "category": "equipment"
+  },
+  {
+    "id": "tce|outer-essence-shard-chaotic",
+    "name": "Outer Essence Shard (Chaotic)",
+    "category": "equipment"
+  },
+  {
+    "id": "tce|outer-essence-shard-evil",
+    "name": "Outer Essence Shard (Evil)",
+    "category": "equipment"
+  },
+  {
+    "id": "tce|outer-essence-shard-good",
+    "name": "Outer Essence Shard (Good)",
+    "category": "equipment"
+  },
+  {
+    "id": "tce|outer-essence-shard-lawful",
+    "name": "Outer Essence Shard (Lawful)",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|ox",
+    "name": "Ox",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|pack-saddle",
+    "name": "Pack Saddle",
+    "category": "equipment"
+  },
+  {
+    "id": "xphb|paper",
+    "name": "Paper",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|paper-one-sheet",
+    "name": "Paper (one sheet)",
+    "category": "equipment"
+  },
+  {
+    "id": "xphb|parchment",
+    "name": "Parchment",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|parchment-one-sheet",
+    "name": "Parchment (one sheet)",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|pepper",
+    "name": "Pepper",
+    "category": "equipment"
+  },
+  {
+    "id": "xphb|perfume",
+    "name": "Perfume",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|perfume-vial",
+    "name": "Perfume (vial)",
+    "category": "equipment"
+  },
+  {
+    "id": "xge|perfume-of-bewitching",
+    "name": "Perfume of Bewitching",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|pig",
+    "name": "Pig",
+    "category": "equipment"
+  },
+  {
+    "id": "xge|pipe-of-smoke-monsters",
+    "name": "Pipe of Smoke Monsters",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|pitcher",
+    "name": "Pitcher",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|piton",
+    "name": "Piton",
+    "category": "equipment"
+  },
+  {
+    "id": "tce|planecaller-s-codex",
+    "name": "Planecaller's Codex",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|platinum",
+    "name": "Platinum",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|platinum-pp",
+    "name": "Platinum (pp)",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|playing-card-set",
+    "name": "Playing Card Set",
+    "category": "equipment"
+  },
+  {
+    "id": "xphb|playing-cards",
+    "name": "Playing Cards",
+    "category": "equipment"
+  },
+  {
+    "id": "tce|poison-absorbing-tattoo",
+    "name": "Poison Absorbing Tattoo",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|poisoner-s-kit",
+    "name": "Poisoner's Kit",
+    "category": "equipment"
+  },
+  {
+    "id": "xphb|poisoner-s-kit",
+    "name": "Poisoner's Kit",
+    "category": "equipment"
+  },
+  {
+    "id": "xphb|pole",
+    "name": "Pole",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|pole-10-foot",
+    "name": "Pole (10-foot)",
+    "category": "equipment"
+  },
+  {
+    "id": "xge|pole-of-angling",
+    "name": "Pole of Angling",
+    "category": "equipment"
+  },
+  {
+    "id": "xge|pole-of-collapsing",
+    "name": "Pole of Collapsing",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|pony",
+    "name": "Pony",
+    "category": "equipment"
+  },
+  {
+    "id": "xphb|pony",
+    "name": "Pony",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|portable-ram",
+    "name": "Portable Ram",
+    "category": "equipment"
+  },
+  {
+    "id": "xphb|portable-ram",
+    "name": "Portable Ram",
+    "category": "equipment"
+  },
+  {
+    "id": "xge|pot-of-awakening",
+    "name": "Pot of Awakening",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|pouch",
+    "name": "Pouch",
+    "category": "equipment"
+  },
+  {
+    "id": "xphb|pouch",
+    "name": "Pouch",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|priest-s-pack",
+    "name": "Priest's Pack",
+    "category": "equipment"
+  },
+  {
+    "id": "xphb|priest-s-pack",
+    "name": "Priest's Pack",
+    "category": "equipment"
+  },
+  {
+    "id": "tce|prosthetic-limb",
+    "name": "Prosthetic Limb",
+    "category": "equipment"
+  },
+  {
+    "id": "tce|protective-verses",
+    "name": "Protective Verses",
+    "category": "equipment"
+  },
+  {
+    "id": "tce|psychic-absorbing-tattoo",
+    "name": "Psychic Absorbing Tattoo",
+    "category": "equipment"
+  },
+  {
+    "id": "xphb|psychic-blade",
+    "name": "Psychic Blade",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|quiver",
+    "name": "Quiver",
+    "category": "equipment"
+  },
+  {
+    "id": "xphb|quiver",
+    "name": "Quiver",
+    "category": "equipment"
+  },
+  {
+    "id": "tce|radiant-absorbing-tattoo",
+    "name": "Radiant Absorbing Tattoo",
+    "category": "equipment"
+  },
+  {
+    "id": "xphb|rations",
+    "name": "Rations",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|rations-1-day",
+    "name": "Rations (1 day)",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|reliquary",
+    "name": "Reliquary",
+    "category": "equipment"
+  },
+  {
+    "id": "xphb|reliquary",
+    "name": "Reliquary",
+    "category": "equipment"
+  },
+  {
+    "id": "tce|reveler-s-concertina",
+    "name": "Reveler's Concertina",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|riding-horse",
+    "name": "Riding Horse",
+    "category": "equipment"
+  },
+  {
+    "id": "xphb|riding-horse",
+    "name": "Riding Horse",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|riding-saddle",
+    "name": "Riding Saddle",
+    "category": "equipment"
+  },
+  {
+    "id": "xphb|riding-saddle",
+    "name": "Riding Saddle",
+    "category": "equipment"
+  },
+  {
+    "id": "xphb|robe",
+    "name": "Robe",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|robes",
+    "name": "Robes",
+    "category": "equipment"
+  },
+  {
+    "id": "xphb|rope",
+    "name": "Rope",
+    "category": "equipment"
+  },
+  {
+    "id": "xge|rope-of-mending",
+    "name": "Rope of Mending",
+    "category": "equipment"
+  },
+  {
+    "id": "xphb|rowboat",
+    "name": "Rowboat",
+    "category": "equipment"
+  },
+  {
+    "id": "xge|ruby-of-the-war-mage",
+    "name": "Ruby of the War Mage",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|sack",
+    "name": "Sack",
+    "category": "equipment"
+  },
+  {
+    "id": "xphb|sack",
+    "name": "Sack",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|saddlebags",
+    "name": "Saddlebags",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|saffron",
+    "name": "Saffron",
+    "category": "equipment"
+  },
+  {
+    "id": "xphb|sailing-ship",
+    "name": "Sailing Ship",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|salt",
+    "name": "Salt",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|scholar-s-pack",
+    "name": "Scholar's Pack",
+    "category": "equipment"
+  },
+  {
+    "id": "xphb|scholar-s-pack",
+    "name": "Scholar's Pack",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|sealing-wax",
+    "name": "Sealing Wax",
+    "category": "equipment"
+  },
+  {
+    "id": "tce|shadowfell-brand-tattoo",
+    "name": "Shadowfell Brand Tattoo",
+    "category": "equipment"
+  },
+  {
+    "id": "tce|shadowfell-shard",
+    "name": "Shadowfell Shard",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|sheep",
+    "name": "Sheep",
+    "category": "equipment"
+  },
+  {
+    "id": "xge|shield-of-expression",
+    "name": "Shield of Expression",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|shovel",
+    "name": "Shovel",
+    "category": "equipment"
+  },
+  {
+    "id": "xphb|shovel",
+    "name": "Shovel",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|signal-whistle",
+    "name": "Signal Whistle",
+    "category": "equipment"
+  },
+  {
+    "id": "xphb|signal-whistle",
+    "name": "Signal Whistle",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|signet-ring",
+    "name": "Signet Ring",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|silk-1-sq-yd",
+    "name": "Silk (1 sq. yd.)",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|silk-rope-50-feet",
+    "name": "Silk Rope (50 feet)",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|silver",
+    "name": "Silver",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|silver-sp",
+    "name": "Silver (sp)",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|sled",
+    "name": "Sled",
+    "category": "equipment"
+  },
+  {
+    "id": "xphb|sled",
+    "name": "Sled",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|sledgehammer",
+    "name": "Sledgehammer",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|soap",
+    "name": "Soap",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|spellbook",
+    "name": "Spellbook",
+    "category": "equipment"
+  },
+  {
+    "id": "tce|spellwrought-tattoo-1st-level",
+    "name": "Spellwrought Tattoo (1st Level)",
+    "category": "equipment"
+  },
+  {
+    "id": "tce|spellwrought-tattoo-2nd-level",
+    "name": "Spellwrought Tattoo (2nd Level)",
+    "category": "equipment"
+  },
+  {
+    "id": "tce|spellwrought-tattoo-3rd-level",
+    "name": "Spellwrought Tattoo (3rd Level)",
+    "category": "equipment"
+  },
+  {
+    "id": "tce|spellwrought-tattoo-4th-level",
+    "name": "Spellwrought Tattoo (4th Level)",
+    "category": "equipment"
+  },
+  {
+    "id": "tce|spellwrought-tattoo-5th-level",
+    "name": "Spellwrought Tattoo (5th Level)",
+    "category": "equipment"
+  },
+  {
+    "id": "tce|spellwrought-tattoo-cantrip",
+    "name": "Spellwrought Tattoo (Cantrip)",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|sprig-of-mistletoe",
+    "name": "Sprig of Mistletoe",
+    "category": "equipment"
+  },
+  {
+    "id": "xphb|sprig-of-mistletoe",
+    "name": "Sprig of Mistletoe",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|spyglass",
+    "name": "Spyglass",
+    "category": "equipment"
+  },
+  {
+    "id": "xphb|spyglass",
+    "name": "Spyglass",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|stabling-per-day",
+    "name": "Stabling (per day)",
+    "category": "equipment"
+  },
+  {
+    "id": "xphb|stabling-per-day",
+    "name": "Stabling (per day)",
+    "category": "equipment"
+  },
+  {
+    "id": "xge|staff-of-adornment",
+    "name": "Staff of Adornment",
+    "category": "equipment"
+  },
+  {
+    "id": "xge|staff-of-birdcalls",
+    "name": "Staff of Birdcalls",
+    "category": "equipment"
+  },
+  {
+    "id": "xge|staff-of-flowers",
+    "name": "Staff of Flowers",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|steel-mirror",
+    "name": "Steel Mirror",
+    "category": "equipment"
+  },
+  {
+    "id": "xphb|string",
+    "name": "String",
+    "category": "equipment"
+  },
+  {
+    "id": "xge|talking-doll",
+    "name": "Talking Doll",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|tankard",
+    "name": "Tankard",
+    "category": "equipment"
+  },
+  {
+    "id": "xge|tankard-of-sobriety",
+    "name": "Tankard of Sobriety",
+    "category": "equipment"
+  },
+  {
+    "id": "tce|teeth-of-dahlver-nar",
+    "name": "Teeth of Dahlver-Nar",
+    "category": "equipment"
+  },
+  {
+    "id": "xphb|tent",
+    "name": "Tent",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|thieves-tools",
+    "name": "Thieves' Tools",
+    "category": "equipment"
+  },
+  {
+    "id": "xphb|thieves-tools",
+    "name": "Thieves' Tools",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|three-dragon-ante-set",
+    "name": "Three-Dragon Ante Set",
+    "category": "equipment"
+  },
+  {
+    "id": "xphb|three-dragon-ante-set",
+    "name": "Three-Dragon Ante Set",
+    "category": "equipment"
+  },
+  {
+    "id": "tce|thunder-absorbing-tattoo",
+    "name": "Thunder Absorbing Tattoo",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|tinderbox",
+    "name": "Tinderbox",
+    "category": "equipment"
+  },
+  {
+    "id": "xphb|tinderbox",
+    "name": "Tinderbox",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|torch",
+    "name": "Torch",
+    "category": "equipment"
+  },
+  {
+    "id": "xphb|torch",
+    "name": "Torch",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|totem",
+    "name": "Totem",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|traveler-s-clothes",
+    "name": "Traveler's Clothes",
+    "category": "equipment"
+  },
+  {
+    "id": "xphb|traveler-s-clothes",
+    "name": "Traveler's Clothes",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|trinket",
+    "name": "Trinket",
+    "category": "equipment"
+  },
+  {
+    "id": "xphb|trinket",
+    "name": "Trinket",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|two-person-tent",
+    "name": "Two-Person Tent",
+    "category": "equipment"
+  },
+  {
+    "id": "xge|unbreakable-arrow",
+    "name": "Unbreakable Arrow",
+    "category": "equipment"
+  },
+  {
+    "id": "xge|veteran-s-cane",
+    "name": "Veteran's Cane",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|vial",
+    "name": "Vial",
+    "category": "equipment"
+  },
+  {
+    "id": "xphb|vial",
+    "name": "Vial",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|wagon",
+    "name": "Wagon",
+    "category": "equipment"
+  },
+  {
+    "id": "xphb|wagon",
+    "name": "Wagon",
+    "category": "equipment"
+  },
+  {
+    "id": "xge|wand-of-conducting",
+    "name": "Wand of Conducting",
+    "category": "equipment"
+  },
+  {
+    "id": "xge|wand-of-pyrotechnics",
+    "name": "Wand of Pyrotechnics",
+    "category": "equipment"
+  },
+  {
+    "id": "xge|wand-of-scowls",
+    "name": "Wand of Scowls",
+    "category": "equipment"
+  },
+  {
+    "id": "xge|wand-of-smiles",
+    "name": "Wand of Smiles",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|warhorse",
+    "name": "Warhorse",
+    "category": "equipment"
+  },
+  {
+    "id": "xphb|warhorse",
+    "name": "Warhorse",
+    "category": "equipment"
+  },
+  {
+    "id": "xphb|warship",
+    "name": "Warship",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|waterskin",
+    "name": "Waterskin",
+    "category": "equipment"
+  },
+  {
+    "id": "xphb|waterskin",
+    "name": "Waterskin",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|wheat",
+    "name": "Wheat",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|whetstone",
+    "name": "Whetstone",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|yew-wand",
+    "name": "Yew Wand",
+    "category": "equipment"
+  },
+  {
+    "id": "xphb|yew-wand",
+    "name": "Yew Wand",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|attack",
+    "name": "Attack",
+    "category": "action"
+  },
+  {
+    "id": "phb|cast-a-spell",
+    "name": "Cast a Spell",
+    "category": "action"
+  },
+  {
+    "id": "phb|dash",
+    "name": "Dash",
+    "category": "action"
+  },
+  {
+    "id": "phb|disengage",
+    "name": "Disengage",
+    "category": "action"
+  },
+  {
+    "id": "phb|dodge",
+    "name": "Dodge",
+    "category": "action"
+  },
+  {
+    "id": "phb|help",
+    "name": "Help",
+    "category": "action"
+  },
+  {
+    "id": "phb|hide",
+    "name": "Hide",
+    "category": "action"
+  },
+  {
+    "id": "phb|ready",
+    "name": "Ready",
+    "category": "action"
+  },
+  {
+    "id": "phb|search",
+    "name": "Search",
+    "category": "action"
+  },
+  {
+    "id": "phb|use-an-object",
+    "name": "Use an Object",
+    "category": "action"
+  },
+  {
+    "id": "xphb|influence",
+    "name": "Influence",
+    "category": "action"
+  },
+  {
+    "id": "xphb|study",
+    "name": "Study",
+    "category": "action"
+  },
+  {
+    "id": "xphb|utilize",
+    "name": "Utilize",
+    "category": "action"
+  }
+]

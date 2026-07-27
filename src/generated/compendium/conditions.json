@@ -1,0 +1,655 @@
+[
+  {
+    "id": "phb|blinded",
+    "category": "condition",
+    "name": "Blinded",
+    "source": "PHB",
+    "description": [
+      {
+        "type": "list",
+        "items": [
+          "A blinded creature can't see and automatically fails any ability check that requires sight.",
+          "Attack rolls against the creature have advantage, and the creature's attack rolls have disadvantage."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "xphb|blinded",
+    "category": "condition",
+    "name": "Blinded",
+    "source": "XPHB",
+    "description": [
+      {
+        "type": "paragraph",
+        "text": "While you have the Blinded condition, you experience the following effects."
+      },
+      {
+        "type": "paragraph",
+        "text": "You can't see and automatically fail any ability check that requires sight."
+      },
+      {
+        "type": "paragraph",
+        "text": "Attack rolls against you have Advantage, and your attack rolls have Disadvantage."
+      }
+    ]
+  },
+  {
+    "id": "phb|charmed",
+    "category": "condition",
+    "name": "Charmed",
+    "source": "PHB",
+    "description": [
+      {
+        "type": "list",
+        "items": [
+          "A charmed creature can't attack the charmer or target the charmer with harmful abilities or magical effects.",
+          "The charmer has advantage on any ability check to interact socially with the creature."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "xphb|charmed",
+    "category": "condition",
+    "name": "Charmed",
+    "source": "XPHB",
+    "description": [
+      {
+        "type": "paragraph",
+        "text": "While you have the Charmed condition, you experience the following effects."
+      },
+      {
+        "type": "paragraph",
+        "text": "You can't attack the charmer or target the charmer with damaging abilities or Magical Effect."
+      },
+      {
+        "type": "paragraph",
+        "text": "The charmer has Advantage on any ability check to interact with you socially."
+      }
+    ]
+  },
+  {
+    "id": "phb|deafened",
+    "category": "condition",
+    "name": "Deafened",
+    "source": "PHB",
+    "description": [
+      {
+        "type": "list",
+        "items": [
+          "A deafened creature can't hear and automatically fails any ability check that requires hearing."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "xphb|deafened",
+    "category": "condition",
+    "name": "Deafened",
+    "source": "XPHB",
+    "description": [
+      {
+        "type": "paragraph",
+        "text": "While you have the Deafened condition, you experience the following effect."
+      },
+      {
+        "type": "paragraph",
+        "text": "You can't hear and automatically fail any ability check that requires hearing."
+      }
+    ]
+  },
+  {
+    "id": "phb|exhaustion",
+    "category": "condition",
+    "name": "Exhaustion",
+    "source": "PHB",
+    "description": [
+      {
+        "type": "paragraph",
+        "text": "Some special abilities and environmental hazards, such as starvation and the long-term effects of freezing or scorching temperatures, can lead to a special condition called exhaustion. Exhaustion is measured in six levels. An effect can give a creature one or more levels of exhaustion, as specified in the effect's description."
+      },
+      {
+        "type": "table",
+        "headers": [
+          "Level",
+          "Effect"
+        ],
+        "rows": [
+          [
+            "1",
+            "Disadvantage on ability checks"
+          ],
+          [
+            "2",
+            "Speed halved"
+          ],
+          [
+            "3",
+            "Disadvantage on attack rolls and saving throws"
+          ],
+          [
+            "4",
+            "Hit point maximum halved"
+          ],
+          [
+            "5",
+            "Speed reduced to 0"
+          ],
+          [
+            "6",
+            "Death"
+          ]
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": "If an already exhausted creature suffers another effect that causes exhaustion, its current level of exhaustion increases by the amount specified in the effect's description."
+      },
+      {
+        "type": "paragraph",
+        "text": "A creature suffers the effect of its current level of exhaustion as well as all lower levels. For example, a creature suffering level 2 exhaustion has its speed halved and has disadvantage on ability checks."
+      },
+      {
+        "type": "paragraph",
+        "text": "An effect that removes exhaustion reduces its level as specified in the effect's description, with all exhaustion effects ending if a creature's exhaustion level is reduced below 1."
+      },
+      {
+        "type": "paragraph",
+        "text": "Finishing a long rest reduces a creature's exhaustion level by 1, provided that the creature has also ingested some food and drink. Also, being raised from the dead reduces a creature's exhaustion level by 1."
+      }
+    ]
+  },
+  {
+    "id": "xphb|exhaustion",
+    "category": "condition",
+    "name": "Exhaustion",
+    "source": "XPHB",
+    "description": [
+      {
+        "type": "paragraph",
+        "text": "While you have the Exhaustion condition, you experience the following effects."
+      },
+      {
+        "type": "paragraph",
+        "text": "This condition is cumulative. Each time you receive it, you gain 1 Exhaustion level. You die if your Exhaustion level is 6."
+      },
+      {
+        "type": "paragraph",
+        "text": "When you make a D20 Test, the roll is reduced by 2 times your Exhaustion level."
+      },
+      {
+        "type": "paragraph",
+        "text": "Your Speed is reduced by a number of feet equal to 5 times your Exhaustion level."
+      },
+      {
+        "type": "paragraph",
+        "text": "Finishing a Long Rest removes 1 of your Exhaustion levels. When your Exhaustion level reaches 0, the condition ends."
+      }
+    ]
+  },
+  {
+    "id": "phb|frightened",
+    "category": "condition",
+    "name": "Frightened",
+    "source": "PHB",
+    "description": [
+      {
+        "type": "list",
+        "items": [
+          "A frightened creature has disadvantage on ability checks and attack rolls while the source of its fear is within line of sight.",
+          "The creature can't willingly move closer to the source of its fear."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "xphb|frightened",
+    "category": "condition",
+    "name": "Frightened",
+    "source": "XPHB",
+    "description": [
+      {
+        "type": "paragraph",
+        "text": "While you have the Frightened condition, you experience the following effects."
+      },
+      {
+        "type": "paragraph",
+        "text": "You have Disadvantage on ability checks and attack rolls while the source of fear is within line of sight."
+      },
+      {
+        "type": "paragraph",
+        "text": "You can't willingly move closer to the source of fear."
+      }
+    ]
+  },
+  {
+    "id": "phb|grappled",
+    "category": "condition",
+    "name": "Grappled",
+    "source": "PHB",
+    "description": [
+      {
+        "type": "list",
+        "items": [
+          "A grappled creature's speed becomes 0, and it can't benefit from any bonus to its speed.",
+          "The condition ends if the grappler is incapacitated.",
+          "The condition also ends if an effect removes the grappled creature from the reach of the grappler or grappling effect, such as when a creature is hurled away by the thunderwave spell."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "xphb|grappled",
+    "category": "condition",
+    "name": "Grappled",
+    "source": "XPHB",
+    "description": [
+      {
+        "type": "paragraph",
+        "text": "While you have the Grappled condition, you experience the following effects."
+      },
+      {
+        "type": "paragraph",
+        "text": "Your Speed is 0 and can't increase."
+      },
+      {
+        "type": "paragraph",
+        "text": "You have Disadvantage on attack rolls against any target other than the grappler."
+      },
+      {
+        "type": "paragraph",
+        "text": "The grappler can drag or carry you when it moves, but every foot of movement costs it 1 extra foot unless you are Tiny or two or more sizes smaller than it."
+      }
+    ]
+  },
+  {
+    "id": "phb|incapacitated",
+    "category": "condition",
+    "name": "Incapacitated",
+    "source": "PHB",
+    "description": [
+      {
+        "type": "list",
+        "items": [
+          "An incapacitated creature can't take actions or reactions."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "xphb|incapacitated",
+    "category": "condition",
+    "name": "Incapacitated",
+    "source": "XPHB",
+    "description": [
+      {
+        "type": "paragraph",
+        "text": "While you have the Incapacitated condition, you experience the following effects."
+      },
+      {
+        "type": "paragraph",
+        "text": "You can't take any Action, Bonus Action, or Reaction."
+      },
+      {
+        "type": "paragraph",
+        "text": "Your Concentration is broken."
+      },
+      {
+        "type": "paragraph",
+        "text": "You can't speak."
+      },
+      {
+        "type": "paragraph",
+        "text": "If you're Incapacitated when you roll Initiative, you have Disadvantage on the roll."
+      }
+    ]
+  },
+  {
+    "id": "phb|invisible",
+    "category": "condition",
+    "name": "Invisible",
+    "source": "PHB",
+    "description": [
+      {
+        "type": "list",
+        "items": [
+          "An invisible creature is impossible to see without the aid of magic or a special sense. For the purpose of hiding, the creature is heavily obscured. The creature's location can be detected by any noise it makes or any tracks it leaves.",
+          "Attack rolls against the creature have disadvantage, and the creature's attack rolls have advantage."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "xphb|invisible",
+    "category": "condition",
+    "name": "Invisible",
+    "source": "XPHB",
+    "description": [
+      {
+        "type": "paragraph",
+        "text": "While you have the Invisible condition, you experience the following effects."
+      },
+      {
+        "type": "paragraph",
+        "text": "If you're Invisible when you roll Initiative, you have Advantage on the roll."
+      },
+      {
+        "type": "paragraph",
+        "text": "You aren't affected by any effect that requires its target to be seen unless the effect's creator can somehow see you. Any equipment you are wearing or carrying is also concealed."
+      },
+      {
+        "type": "paragraph",
+        "text": "Attack rolls against you have Disadvantage, and your attack rolls have Advantage. If a creature can somehow see you, you don't gain this benefit against that creature."
+      }
+    ]
+  },
+  {
+    "id": "phb|paralyzed",
+    "category": "condition",
+    "name": "Paralyzed",
+    "source": "PHB",
+    "description": [
+      {
+        "type": "list",
+        "items": [
+          "A paralyzed creature is incapacitated and can't move or speak.",
+          "The creature automatically fails Strength and Dexterity saving throws.",
+          "Attack rolls against the creature have advantage.",
+          "Any attack that hits the creature is a critical hit if the attacker is within 5 feet of the creature."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "xphb|paralyzed",
+    "category": "condition",
+    "name": "Paralyzed",
+    "source": "XPHB",
+    "description": [
+      {
+        "type": "paragraph",
+        "text": "While you have the Paralyzed condition, you experience the following effects."
+      },
+      {
+        "type": "paragraph",
+        "text": "You have the Incapacitated condition."
+      },
+      {
+        "type": "paragraph",
+        "text": "Your Speed is 0 and can't increase."
+      },
+      {
+        "type": "paragraph",
+        "text": "You automatically fail Strength and Dexterity Saving Throw."
+      },
+      {
+        "type": "paragraph",
+        "text": "Attack rolls against you have Advantage."
+      },
+      {
+        "type": "paragraph",
+        "text": "Any attack roll that hits you is a Critical Hit if the attacker is within 5 feet of you."
+      }
+    ]
+  },
+  {
+    "id": "phb|petrified",
+    "category": "condition",
+    "name": "Petrified",
+    "source": "PHB",
+    "description": [
+      {
+        "type": "list",
+        "items": [
+          "A petrified creature is transformed, along with any nonmagical object it is wearing or carrying, into a solid inanimate substance (usually stone). Its weight increases by a factor of ten, and it ceases aging.",
+          "The creature is incapacitated, can't move or speak, and is unaware of its surroundings.",
+          "Attack rolls against the creature have advantage.",
+          "The creature automatically fails Strength and Dexterity saving throws.",
+          "The creature has resistance to all damage.",
+          "The creature is immune to poison and disease, although a poison or disease already in its system is suspended, not neutralized."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "xphb|petrified",
+    "category": "condition",
+    "name": "Petrified",
+    "source": "XPHB",
+    "description": [
+      {
+        "type": "paragraph",
+        "text": "While you have the Petrified condition, you experience the following effects."
+      },
+      {
+        "type": "paragraph",
+        "text": "You are transformed, along with any nonmagical objects you are wearing and carrying, into a solid inanimate substance (usually stone). Your weight increases by a factor of ten, and you cease aging."
+      },
+      {
+        "type": "paragraph",
+        "text": "You have the Incapacitated condition."
+      },
+      {
+        "type": "paragraph",
+        "text": "Your Speed is 0 and can't increase."
+      },
+      {
+        "type": "paragraph",
+        "text": "Attack rolls against you have Advantage."
+      },
+      {
+        "type": "paragraph",
+        "text": "You automatically fail Strength and Dexterity Saving Throw."
+      },
+      {
+        "type": "paragraph",
+        "text": "You have Resistance to all damage."
+      },
+      {
+        "type": "paragraph",
+        "text": "You have Immunity to the Poisoned condition."
+      }
+    ]
+  },
+  {
+    "id": "phb|poisoned",
+    "category": "condition",
+    "name": "Poisoned",
+    "source": "PHB",
+    "description": [
+      {
+        "type": "list",
+        "items": [
+          "A poisoned creature has disadvantage on attack rolls and ability checks."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "xphb|poisoned",
+    "category": "condition",
+    "name": "Poisoned",
+    "source": "XPHB",
+    "description": [
+      {
+        "type": "paragraph",
+        "text": "While you have the Poisoned condition, you experience the following effect."
+      },
+      {
+        "type": "paragraph",
+        "text": "You have Disadvantage on attack rolls and ability checks."
+      }
+    ]
+  },
+  {
+    "id": "phb|prone",
+    "category": "condition",
+    "name": "Prone",
+    "source": "PHB",
+    "description": [
+      {
+        "type": "list",
+        "items": [
+          "A prone creature's only movement option is to crawl, unless it stands up and thereby ends the condition.",
+          "The creature has disadvantage on attack rolls.",
+          "An attack roll against the creature has advantage if the attacker is within 5 feet of the creature. Otherwise, the attack roll has disadvantage."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "xphb|prone",
+    "category": "condition",
+    "name": "Prone",
+    "source": "XPHB",
+    "description": [
+      {
+        "type": "paragraph",
+        "text": "While you have the Prone condition, you experience the following effects."
+      },
+      {
+        "type": "paragraph",
+        "text": "Your only movement options are to Crawling or to spend an amount of movement equal to half your Speed (round down) to right yourself and thereby end the condition. If your Speed is 0, you can't right yourself."
+      },
+      {
+        "type": "paragraph",
+        "text": "You have Disadvantage on attack rolls. An attack roll against you has Advantage if the attacker is within 5 feet of you. Otherwise, that attack roll has Disadvantage."
+      }
+    ]
+  },
+  {
+    "id": "phb|restrained",
+    "category": "condition",
+    "name": "Restrained",
+    "source": "PHB",
+    "description": [
+      {
+        "type": "list",
+        "items": [
+          "A restrained creature's speed becomes 0, and it can't benefit from any bonus to its speed.",
+          "Attack rolls against the creature have advantage, and the creature's attack rolls have disadvantage.",
+          "The creature has disadvantage on Dexterity saving throws."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "xphb|restrained",
+    "category": "condition",
+    "name": "Restrained",
+    "source": "XPHB",
+    "description": [
+      {
+        "type": "paragraph",
+        "text": "While you have the Restrained condition, you experience the following effects."
+      },
+      {
+        "type": "paragraph",
+        "text": "Your Speed is 0 and can't increase."
+      },
+      {
+        "type": "paragraph",
+        "text": "Attack rolls against you have Advantage, and your attack rolls have Disadvantage."
+      },
+      {
+        "type": "paragraph",
+        "text": "You have Disadvantage on Dexterity Saving Throw."
+      }
+    ]
+  },
+  {
+    "id": "phb|stunned",
+    "category": "condition",
+    "name": "Stunned",
+    "source": "PHB",
+    "description": [
+      {
+        "type": "list",
+        "items": [
+          "A stunned creature is incapacitated, can't move, and can speak only falteringly.",
+          "The creature automatically fails Strength and Dexterity saving throws.",
+          "Attack rolls against the creature have advantage."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "xphb|stunned",
+    "category": "condition",
+    "name": "Stunned",
+    "source": "XPHB",
+    "description": [
+      {
+        "type": "paragraph",
+        "text": "While you have the Stunned condition, you experience the following effects."
+      },
+      {
+        "type": "paragraph",
+        "text": "You have the Incapacitated condition."
+      },
+      {
+        "type": "paragraph",
+        "text": "You automatically fail Strength and Dexterity Saving Throw."
+      },
+      {
+        "type": "paragraph",
+        "text": "Attack rolls against you have Advantage."
+      }
+    ]
+  },
+  {
+    "id": "phb|unconscious",
+    "category": "condition",
+    "name": "Unconscious",
+    "source": "PHB",
+    "description": [
+      {
+        "type": "list",
+        "items": [
+          "An unconscious creature is incapacitated, can't move or speak, and is unaware of its surroundings.",
+          "The creature drops whatever it's holding and falls prone.",
+          "The creature automatically fails Strength and Dexterity saving throws.",
+          "Attack rolls against the creature have advantage.",
+          "Any attack that hits the creature is a critical hit if the attacker is within 5 feet of the creature."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "xphb|unconscious",
+    "category": "condition",
+    "name": "Unconscious",
+    "source": "XPHB",
+    "description": [
+      {
+        "type": "paragraph",
+        "text": "While you have the Unconscious condition, you experience the following effects."
+      },
+      {
+        "type": "paragraph",
+        "text": "You have the Incapacitated and Prone conditions, and you drop whatever you're holding. When this condition ends, you remain Prone."
+      },
+      {
+        "type": "paragraph",
+        "text": "Your Speed is 0 and can't increase."
+      },
+      {
+        "type": "paragraph",
+        "text": "Attack rolls against you have Advantage."
+      },
+      {
+        "type": "paragraph",
+        "text": "You automatically fail Strength and Dexterity Saving Throw."
+      },
+      {
+        "type": "paragraph",
+        "text": "Any attack roll that hits you is a Critical Hit if the attacker is within 5 feet of you."
+      },
+      {
+        "type": "paragraph",
+        "text": "You're unaware of your surroundings."
+      }
+    ]
+  }
+]

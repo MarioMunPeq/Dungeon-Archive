@@ -1,0 +1,9 @@
+{
+  "version": "phase-2.1",
+  "counts": {
+    "spells": 868,
+    "conditions": 30,
+    "equipment": 418,
+    "actions": 13
+  }
+}
