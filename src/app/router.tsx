@@ -4,6 +4,7 @@ import { SearchPage } from "@/features/search/search-page";
 import { AdventurePage } from "@/features/adventure/adventure-page";
 import { PartyPage } from "@/features/party/party-page";
 import { DebugContentPage } from "@/features/debug/debug-content-page";
+import { DebugSpellPage } from "@/features/debug/debug-spell-page";
 import { NotFoundPage } from "@/features/not-found-page";
 
 export function AppRouter() {
@@ -14,6 +15,7 @@ export function AppRouter() {
       <Route path="/adventure" element={<AdventurePage />} />
       <Route path="/party" element={<PartyPage />} />
       <Route path="/debug/content" element={<DebugContentPage />} />
+      <Route path="/debug/spell" element={<DebugSpellPage />} />
       <Route path="*" element={<NotFoundPage />} />
     </Routes>
   );
