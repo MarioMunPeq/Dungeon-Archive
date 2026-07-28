@@ -1,6 +1,3 @@
-// Private — 5etools JSON shapes
-// NEVER import outside adapter boundary
-
 export interface Raw5eTimeEntry {
   readonly number: number;
   readonly unit: string;
@@ -107,6 +104,36 @@ export interface Raw5eAction {
   readonly time?: readonly Raw5eTimeEntry[];
 }
 
+export interface Raw5eMonster {
+  readonly name: string;
+  readonly source: string;
+  readonly page?: number;
+  readonly size: readonly string[];
+  readonly type: string;
+  readonly alignment: readonly string[];
+  readonly ac: ReadonlyArray<
+    { readonly ac: number; readonly from?: readonly string[] } | { readonly special: string }
+  >;
+  readonly hp: { readonly average?: number; readonly formula?: string; readonly special?: string };
+  readonly speed: Record<string, unknown>;
+  readonly str: number;
+  readonly dex: number;
+  readonly con: number;
+  readonly int: number;
+  readonly wis: number;
+  readonly cha: number;
+  readonly cr?: string | { readonly cr: string };
+  readonly trait?: readonly Raw5eEntry[];
+  readonly action?: readonly Raw5eEntry[];
+  readonly reaction?: readonly Raw5eEntry[];
+  readonly legendary?: readonly Raw5eEntry[];
+  readonly entries?: readonly (string | Raw5eEntry)[];
+  readonly actions?: readonly Raw5eEntry[];
+  readonly reactions?: readonly Raw5eEntry[];
+  readonly legendaryActions?: readonly Raw5eEntry[];
+  readonly [key: string]: unknown;
+}
+
 export interface Raw5eSpellFile {
   readonly spell: readonly Raw5eSpell[];
 }
@@ -122,4 +149,8 @@ export interface Raw5eItemFile {
 
 export interface Raw5eActionFile {
   readonly action: readonly Raw5eAction[];
+}
+
+export interface Raw5eMonsterFile {
+  readonly monster: readonly Raw5eMonster[];
 }

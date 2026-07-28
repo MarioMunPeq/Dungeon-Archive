@@ -13,6 +13,7 @@ export function categoryLabel(category: string): string {
     condition: "Conditions",
     equipment: "Equipment",
     action: "Actions",
+    monster: "Monsters",
   };
   return labels[category] ?? category;
 }
@@ -23,6 +24,7 @@ export function categoryLabelSingular(category: string): string {
     condition: "Condition",
     equipment: "Equipment",
     action: "Action",
+    monster: "Monster",
   };
   return labels[category] ?? category;
 }

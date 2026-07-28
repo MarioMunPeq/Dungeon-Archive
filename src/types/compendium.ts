@@ -1,6 +1,6 @@
 import type { ContentBlock } from "./content-block";
 
-export type EntityCategory = "spell" | "condition" | "equipment" | "action";
+export type EntityCategory = "spell" | "condition" | "equipment" | "action" | "monster";
 
 export type CompendiumCategory = EntityCategory;
 
@@ -49,6 +49,30 @@ export interface Equipment extends CompendiumEntry {
 export interface Action extends CompendiumEntry {
   readonly category: "action";
   readonly actionType: string;
+  readonly description: readonly ContentBlock[];
+}
+
+export interface Monster extends CompendiumEntry {
+  readonly category: "monster";
+  readonly size: string;
+  readonly monsterType: string;
+  readonly alignment: readonly string[];
+  readonly challengeRating: string;
+  readonly armorClass: string;
+  readonly hitPoints: string;
+  readonly speed: string;
+  readonly abilities: {
+    readonly str: number;
+    readonly dex: number;
+    readonly con: number;
+    readonly int: number;
+    readonly wis: number;
+    readonly cha: number;
+  };
+  readonly traits: readonly ContentBlock[];
+  readonly actions: readonly ContentBlock[];
+  readonly reactions: readonly ContentBlock[];
+  readonly legendaryActions: readonly ContentBlock[];
   readonly description: readonly ContentBlock[];
 }
 

@@ -1,4 +1,11 @@
-import type { Spell, Condition, Equipment, Action, SearchIndexEntry } from "@/types/compendium";
+import type {
+  Spell,
+  Condition,
+  Equipment,
+  Action,
+  Monster,
+  SearchIndexEntry,
+} from "@/types/compendium";
 import type { CompendiumState } from "./types";
 import { buildRegistry } from "./registry/entity-registry";
 
@@ -7,10 +14,12 @@ export let state: CompendiumState = {
   conditions: new Map(),
   equipment: new Map(),
   actions: new Map(),
+  monsters: new Map(),
   spellList: [],
   conditionList: [],
   equipmentList: [],
   actionList: [],
+  monsterList: [],
   initialized: false,
 };
 
@@ -25,11 +34,12 @@ function toMap<T extends { id: string }>(items: readonly T[]): Map<string, T> {
 export async function loadCompendium(): Promise<void> {
   if (state.initialized) return;
 
-  const [spells, conditions, equipment, actions, searchIndex] = await Promise.all([
+  const [spells, conditions, equipment, actions, monsters, searchIndex] = await Promise.all([
     import("../generated/compendium/spells.json"),
     import("../generated/compendium/conditions.json"),
     import("../generated/compendium/equipment.json"),
     import("../generated/compendium/actions.json"),
+    import("../generated/compendium/monsters.json"),
     import("../generated/compendium/search-index.json"),
   ]);
 
@@ -37,20 +47,23 @@ export async function loadCompendium(): Promise<void> {
   const conditionList = Object.freeze(conditions.default as Condition[]);
   const equipmentList = Object.freeze(equipment.default as Equipment[]);
   const actionList = Object.freeze(actions.default as Action[]);
+  const monsterList = Object.freeze(monsters.default as Monster[]);
 
   state = {
     spells: toMap(spellList),
     conditions: toMap(conditionList),
     equipment: toMap(equipmentList),
     actions: toMap(actionList),
+    monsters: toMap(monsterList),
     spellList,
     conditionList,
     equipmentList,
     actionList,
+    monsterList,
     initialized: true,
   };
 
-  buildRegistry([...spellList, ...conditionList, ...equipmentList, ...actionList]);
+  buildRegistry([...spellList, ...conditionList, ...equipmentList, ...actionList, ...monsterList]);
 
   setSearchIndex(searchIndex.default as SearchIndexEntry[]);
 }

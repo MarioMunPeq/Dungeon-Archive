@@ -9,6 +9,9 @@ const SOURCE_MAP: Record<string, SourceInfo> = {
   PHB: { code: "PHB", name: "Player's Handbook", edition: "2014" },
   TCE: { code: "TCE", name: "Tasha's Cauldron of Everything", edition: "2020" },
   XGE: { code: "XGE", name: "Xanathar's Guide to Everything", edition: "2017" },
+  MM: { code: "MM", name: "Monster Manual", edition: "2014" },
+  XMM: { code: "XMM", name: "Monster Manual", edition: "2025" },
+  MPMM: { code: "MPMM", name: "Mordenkainen's Monsters of the Multiverse", edition: "2022" },
 };
 
 const SOURCE_DISPLAY: Record<string, string> = {
@@ -16,6 +19,9 @@ const SOURCE_DISPLAY: Record<string, string> = {
   PHB: "PHB",
   TCE: "TCE",
   XGE: "XGE",
+  MM: "MM",
+  XMM: "MM25",
+  MPMM: "MPMM",
 };
 
 export function getSourceInfo(source: string): SourceInfo | null {

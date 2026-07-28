@@ -6048,6 +6048,12 @@
     "category": "equipment"
   },
   {
+    "id": "xmm|command-amulet",
+    "canonicalId": "equipment.command-amulet",
+    "name": "Command Amulet",
+    "category": "equipment"
+  },
+  {
     "id": "phb|common-clothes",
     "canonicalId": "equipment.common-clothes",
     "name": "Common Clothes",
@@ -6546,6 +6552,12 @@
     "category": "equipment"
   },
   {
+    "id": "mm|hag-eye",
+    "canonicalId": "equipment.hag-eye",
+    "name": "Hag Eye",
+    "category": "equipment"
+  },
+  {
     "id": "phb|hammer",
     "canonicalId": "equipment.hammer",
     "name": "Hammer",
@@ -6579,6 +6591,12 @@
     "id": "tce|heart-weaver-s-primer",
     "canonicalId": "equipment.heart-weavers-primer",
     "name": "Heart Weaver's Primer",
+    "category": "equipment"
+  },
+  {
+    "id": "mm|heartstone",
+    "canonicalId": "equipment.heartstone",
+    "name": "Heartstone",
     "category": "equipment"
   },
   {
@@ -6897,6 +6915,12 @@
     "id": "tce|masquerade-tattoo",
     "canonicalId": "equipment.masquerade-tattoo",
     "name": "Masquerade Tattoo",
+    "category": "equipment"
+  },
+  {
+    "id": "mm|master-s-amulet",
+    "canonicalId": "equipment.masters-amulet",
+    "name": "Master's Amulet",
     "category": "equipment"
   },
   {
@@ -7554,6 +7578,12 @@
     "category": "equipment"
   },
   {
+    "id": "mm|soul-bag",
+    "canonicalId": "equipment.soul-bag",
+    "name": "Soul Bag",
+    "category": "equipment"
+  },
+  {
     "id": "phb|spellbook",
     "canonicalId": "equipment.spellbook",
     "name": "Spellbook",
@@ -7972,5 +8002,7493 @@
     "canonicalId": "action.utilize",
     "name": "Utilize",
     "category": "action"
+  },
+  {
+    "id": "mm|aarakocra",
+    "canonicalId": "monster.aarakocra",
+    "name": "Aarakocra",
+    "category": "monster"
+  },
+  {
+    "id": "mm|aboleth",
+    "canonicalId": "monster.aboleth",
+    "name": "Aboleth",
+    "category": "monster"
+  },
+  {
+    "id": "mm|abominable-yeti",
+    "canonicalId": "monster.abominable-yeti",
+    "name": "Abominable Yeti",
+    "category": "monster"
+  },
+  {
+    "id": "mm|acolyte",
+    "canonicalId": "monster.acolyte",
+    "name": "Acolyte",
+    "category": "monster"
+  },
+  {
+    "id": "mm|adult-black-dragon",
+    "canonicalId": "monster.adult-black-dragon",
+    "name": "Adult Black Dragon",
+    "category": "monster"
+  },
+  {
+    "id": "mm|adult-blue-dracolich",
+    "canonicalId": "monster.adult-blue-dracolich",
+    "name": "Adult Blue Dracolich",
+    "category": "monster"
+  },
+  {
+    "id": "mm|adult-blue-dragon",
+    "canonicalId": "monster.adult-blue-dragon",
+    "name": "Adult Blue Dragon",
+    "category": "monster"
+  },
+  {
+    "id": "mm|adult-brass-dragon",
+    "canonicalId": "monster.adult-brass-dragon",
+    "name": "Adult Brass Dragon",
+    "category": "monster"
+  },
+  {
+    "id": "mm|adult-bronze-dragon",
+    "canonicalId": "monster.adult-bronze-dragon",
+    "name": "Adult Bronze Dragon",
+    "category": "monster"
+  },
+  {
+    "id": "mm|adult-copper-dragon",
+    "canonicalId": "monster.adult-copper-dragon",
+    "name": "Adult Copper Dragon",
+    "category": "monster"
+  },
+  {
+    "id": "mm|adult-gold-dragon",
+    "canonicalId": "monster.adult-gold-dragon",
+    "name": "Adult Gold Dragon",
+    "category": "monster"
+  },
+  {
+    "id": "mm|adult-green-dragon",
+    "canonicalId": "monster.adult-green-dragon",
+    "name": "Adult Green Dragon",
+    "category": "monster"
+  },
+  {
+    "id": "mm|adult-red-dragon",
+    "canonicalId": "monster.adult-red-dragon",
+    "name": "Adult Red Dragon",
+    "category": "monster"
+  },
+  {
+    "id": "mm|adult-silver-dragon",
+    "canonicalId": "monster.adult-silver-dragon",
+    "name": "Adult Silver Dragon",
+    "category": "monster"
+  },
+  {
+    "id": "mm|adult-white-dragon",
+    "canonicalId": "monster.adult-white-dragon",
+    "name": "Adult White Dragon",
+    "category": "monster"
+  },
+  {
+    "id": "mm|air-elemental",
+    "canonicalId": "monster.air-elemental",
+    "name": "Air Elemental",
+    "category": "monster"
+  },
+  {
+    "id": "mm|allosaurus",
+    "canonicalId": "monster.allosaurus",
+    "name": "Allosaurus",
+    "category": "monster"
+  },
+  {
+    "id": "mm|ancient-black-dragon",
+    "canonicalId": "monster.ancient-black-dragon",
+    "name": "Ancient Black Dragon",
+    "category": "monster"
+  },
+  {
+    "id": "mm|ancient-blue-dragon",
+    "canonicalId": "monster.ancient-blue-dragon",
+    "name": "Ancient Blue Dragon",
+    "category": "monster"
+  },
+  {
+    "id": "mm|ancient-brass-dragon",
+    "canonicalId": "monster.ancient-brass-dragon",
+    "name": "Ancient Brass Dragon",
+    "category": "monster"
+  },
+  {
+    "id": "mm|ancient-bronze-dragon",
+    "canonicalId": "monster.ancient-bronze-dragon",
+    "name": "Ancient Bronze Dragon",
+    "category": "monster"
+  },
+  {
+    "id": "mm|ancient-copper-dragon",
+    "canonicalId": "monster.ancient-copper-dragon",
+    "name": "Ancient Copper Dragon",
+    "category": "monster"
+  },
+  {
+    "id": "mm|ancient-gold-dragon",
+    "canonicalId": "monster.ancient-gold-dragon",
+    "name": "Ancient Gold Dragon",
+    "category": "monster"
+  },
+  {
+    "id": "mm|ancient-green-dragon",
+    "canonicalId": "monster.ancient-green-dragon",
+    "name": "Ancient Green Dragon",
+    "category": "monster"
+  },
+  {
+    "id": "mm|ancient-red-dragon",
+    "canonicalId": "monster.ancient-red-dragon",
+    "name": "Ancient Red Dragon",
+    "category": "monster"
+  },
+  {
+    "id": "mm|ancient-silver-dragon",
+    "canonicalId": "monster.ancient-silver-dragon",
+    "name": "Ancient Silver Dragon",
+    "category": "monster"
+  },
+  {
+    "id": "mm|ancient-white-dragon",
+    "canonicalId": "monster.ancient-white-dragon",
+    "name": "Ancient White Dragon",
+    "category": "monster"
+  },
+  {
+    "id": "mm|androsphinx",
+    "canonicalId": "monster.androsphinx",
+    "name": "Androsphinx",
+    "category": "monster"
+  },
+  {
+    "id": "mm|animated-armor",
+    "canonicalId": "monster.animated-armor",
+    "name": "Animated Armor",
+    "category": "monster"
+  },
+  {
+    "id": "mm|ankheg",
+    "canonicalId": "monster.ankheg",
+    "name": "Ankheg",
+    "category": "monster"
+  },
+  {
+    "id": "mm|ankylosaurus",
+    "canonicalId": "monster.ankylosaurus",
+    "name": "Ankylosaurus",
+    "category": "monster"
+  },
+  {
+    "id": "mm|ape",
+    "canonicalId": "monster.ape",
+    "name": "Ape",
+    "category": "monster"
+  },
+  {
+    "id": "mm|arcanaloth",
+    "canonicalId": "monster.arcanaloth",
+    "name": "Arcanaloth",
+    "category": "monster"
+  },
+  {
+    "id": "mm|archmage",
+    "canonicalId": "monster.archmage",
+    "name": "Archmage",
+    "category": "monster"
+  },
+  {
+    "id": "mm|assassin",
+    "canonicalId": "monster.assassin",
+    "name": "Assassin",
+    "category": "monster"
+  },
+  {
+    "id": "mm|awakened-shrub",
+    "canonicalId": "monster.awakened-shrub",
+    "name": "Awakened Shrub",
+    "category": "monster"
+  },
+  {
+    "id": "mm|awakened-tree",
+    "canonicalId": "monster.awakened-tree",
+    "name": "Awakened Tree",
+    "category": "monster"
+  },
+  {
+    "id": "mm|axe-beak",
+    "canonicalId": "monster.axe-beak",
+    "name": "Axe Beak",
+    "category": "monster"
+  },
+  {
+    "id": "mm|azer",
+    "canonicalId": "monster.azer",
+    "name": "Azer",
+    "category": "monster"
+  },
+  {
+    "id": "mm|baboon",
+    "canonicalId": "monster.baboon",
+    "name": "Baboon",
+    "category": "monster"
+  },
+  {
+    "id": "mm|badger",
+    "canonicalId": "monster.badger",
+    "name": "Badger",
+    "category": "monster"
+  },
+  {
+    "id": "mm|balor",
+    "canonicalId": "monster.balor",
+    "name": "Balor",
+    "category": "monster"
+  },
+  {
+    "id": "mm|bandit",
+    "canonicalId": "monster.bandit",
+    "name": "Bandit",
+    "category": "monster"
+  },
+  {
+    "id": "mm|bandit-captain",
+    "canonicalId": "monster.bandit-captain",
+    "name": "Bandit Captain",
+    "category": "monster"
+  },
+  {
+    "id": "mm|banshee",
+    "canonicalId": "monster.banshee",
+    "name": "Banshee",
+    "category": "monster"
+  },
+  {
+    "id": "mm|barbed-devil",
+    "canonicalId": "monster.barbed-devil",
+    "name": "Barbed Devil",
+    "category": "monster"
+  },
+  {
+    "id": "mm|barlgura",
+    "canonicalId": "monster.barlgura",
+    "name": "Barlgura",
+    "category": "monster"
+  },
+  {
+    "id": "mm|basilisk",
+    "canonicalId": "monster.basilisk",
+    "name": "Basilisk",
+    "category": "monster"
+  },
+  {
+    "id": "mm|bat",
+    "canonicalId": "monster.bat",
+    "name": "Bat",
+    "category": "monster"
+  },
+  {
+    "id": "mm|bearded-devil",
+    "canonicalId": "monster.bearded-devil",
+    "name": "Bearded Devil",
+    "category": "monster"
+  },
+  {
+    "id": "mm|behir",
+    "canonicalId": "monster.behir",
+    "name": "Behir",
+    "category": "monster"
+  },
+  {
+    "id": "mm|beholder",
+    "canonicalId": "monster.beholder",
+    "name": "Beholder",
+    "category": "monster"
+  },
+  {
+    "id": "mm|beholder-zombie",
+    "canonicalId": "monster.beholder-zombie",
+    "name": "Beholder Zombie",
+    "category": "monster"
+  },
+  {
+    "id": "mm|berserker",
+    "canonicalId": "monster.berserker",
+    "name": "Berserker",
+    "category": "monster"
+  },
+  {
+    "id": "mm|black-bear",
+    "canonicalId": "monster.black-bear",
+    "name": "Black Bear",
+    "category": "monster"
+  },
+  {
+    "id": "mm|black-dragon-wyrmling",
+    "canonicalId": "monster.black-dragon-wyrmling",
+    "name": "Black Dragon Wyrmling",
+    "category": "monster"
+  },
+  {
+    "id": "mm|black-pudding",
+    "canonicalId": "monster.black-pudding",
+    "name": "Black Pudding",
+    "category": "monster"
+  },
+  {
+    "id": "mm|blink-dog",
+    "canonicalId": "monster.blink-dog",
+    "name": "Blink Dog",
+    "category": "monster"
+  },
+  {
+    "id": "mm|blood-hawk",
+    "canonicalId": "monster.blood-hawk",
+    "name": "Blood Hawk",
+    "category": "monster"
+  },
+  {
+    "id": "mm|blue-dragon-wyrmling",
+    "canonicalId": "monster.blue-dragon-wyrmling",
+    "name": "Blue Dragon Wyrmling",
+    "category": "monster"
+  },
+  {
+    "id": "mm|blue-slaad",
+    "canonicalId": "monster.blue-slaad",
+    "name": "Blue Slaad",
+    "category": "monster"
+  },
+  {
+    "id": "mm|boar",
+    "canonicalId": "monster.boar",
+    "name": "Boar",
+    "category": "monster"
+  },
+  {
+    "id": "mm|bone-devil",
+    "canonicalId": "monster.bone-devil",
+    "name": "Bone Devil",
+    "category": "monster"
+  },
+  {
+    "id": "mm|bone-naga-guardian",
+    "canonicalId": "monster.bone-naga-guardian",
+    "name": "Bone Naga (Guardian)",
+    "category": "monster"
+  },
+  {
+    "id": "mm|bone-naga-spirit",
+    "canonicalId": "monster.bone-naga-spirit",
+    "name": "Bone Naga (Spirit)",
+    "category": "monster"
+  },
+  {
+    "id": "mm|brass-dragon-wyrmling",
+    "canonicalId": "monster.brass-dragon-wyrmling",
+    "name": "Brass Dragon Wyrmling",
+    "category": "monster"
+  },
+  {
+    "id": "mm|bronze-dragon-wyrmling",
+    "canonicalId": "monster.bronze-dragon-wyrmling",
+    "name": "Bronze Dragon Wyrmling",
+    "category": "monster"
+  },
+  {
+    "id": "mm|brown-bear",
+    "canonicalId": "monster.brown-bear",
+    "name": "Brown Bear",
+    "category": "monster"
+  },
+  {
+    "id": "mm|bugbear",
+    "canonicalId": "monster.bugbear",
+    "name": "Bugbear",
+    "category": "monster"
+  },
+  {
+    "id": "mm|bugbear-chief",
+    "canonicalId": "monster.bugbear-chief",
+    "name": "Bugbear Chief",
+    "category": "monster"
+  },
+  {
+    "id": "mm|bulette",
+    "canonicalId": "monster.bulette",
+    "name": "Bulette",
+    "category": "monster"
+  },
+  {
+    "id": "mm|bullywug",
+    "canonicalId": "monster.bullywug",
+    "name": "Bullywug",
+    "category": "monster"
+  },
+  {
+    "id": "mm|cambion",
+    "canonicalId": "monster.cambion",
+    "name": "Cambion",
+    "category": "monster"
+  },
+  {
+    "id": "mm|camel",
+    "canonicalId": "monster.camel",
+    "name": "Camel",
+    "category": "monster"
+  },
+  {
+    "id": "mm|carrion-crawler",
+    "canonicalId": "monster.carrion-crawler",
+    "name": "Carrion Crawler",
+    "category": "monster"
+  },
+  {
+    "id": "mm|cat",
+    "canonicalId": "monster.cat",
+    "name": "Cat",
+    "category": "monster"
+  },
+  {
+    "id": "mm|cave-bear",
+    "canonicalId": "monster.cave-bear",
+    "name": "Cave Bear",
+    "category": "monster"
+  },
+  {
+    "id": "mm|centaur",
+    "canonicalId": "monster.centaur",
+    "name": "Centaur",
+    "category": "monster"
+  },
+  {
+    "id": "mm|chain-devil",
+    "canonicalId": "monster.chain-devil",
+    "name": "Chain Devil",
+    "category": "monster"
+  },
+  {
+    "id": "mm|chasme",
+    "canonicalId": "monster.chasme",
+    "name": "Chasme",
+    "category": "monster"
+  },
+  {
+    "id": "mm|chimera",
+    "canonicalId": "monster.chimera",
+    "name": "Chimera",
+    "category": "monster"
+  },
+  {
+    "id": "mm|chuul",
+    "canonicalId": "monster.chuul",
+    "name": "Chuul",
+    "category": "monster"
+  },
+  {
+    "id": "mm|clay-golem",
+    "canonicalId": "monster.clay-golem",
+    "name": "Clay Golem",
+    "category": "monster"
+  },
+  {
+    "id": "mm|cloaker",
+    "canonicalId": "monster.cloaker",
+    "name": "Cloaker",
+    "category": "monster"
+  },
+  {
+    "id": "mm|cloud-giant",
+    "canonicalId": "monster.cloud-giant",
+    "name": "Cloud Giant",
+    "category": "monster"
+  },
+  {
+    "id": "mm|cockatrice",
+    "canonicalId": "monster.cockatrice",
+    "name": "Cockatrice",
+    "category": "monster"
+  },
+  {
+    "id": "mm|commoner",
+    "canonicalId": "monster.commoner",
+    "name": "Commoner",
+    "category": "monster"
+  },
+  {
+    "id": "mm|constrictor-snake",
+    "canonicalId": "monster.constrictor-snake",
+    "name": "Constrictor Snake",
+    "category": "monster"
+  },
+  {
+    "id": "mm|copper-dragon-wyrmling",
+    "canonicalId": "monster.copper-dragon-wyrmling",
+    "name": "Copper Dragon Wyrmling",
+    "category": "monster"
+  },
+  {
+    "id": "mm|couatl",
+    "canonicalId": "monster.couatl",
+    "name": "Couatl",
+    "category": "monster"
+  },
+  {
+    "id": "mm|crab",
+    "canonicalId": "monster.crab",
+    "name": "Crab",
+    "category": "monster"
+  },
+  {
+    "id": "mm|crawling-claw",
+    "canonicalId": "monster.crawling-claw",
+    "name": "Crawling Claw",
+    "category": "monster"
+  },
+  {
+    "id": "mm|crocodile",
+    "canonicalId": "monster.crocodile",
+    "name": "Crocodile",
+    "category": "monster"
+  },
+  {
+    "id": "mm|cult-fanatic",
+    "canonicalId": "monster.cult-fanatic",
+    "name": "Cult Fanatic",
+    "category": "monster"
+  },
+  {
+    "id": "mm|cultist",
+    "canonicalId": "monster.cultist",
+    "name": "Cultist",
+    "category": "monster"
+  },
+  {
+    "id": "mm|cyclops",
+    "canonicalId": "monster.cyclops",
+    "name": "Cyclops",
+    "category": "monster"
+  },
+  {
+    "id": "mm|dao",
+    "canonicalId": "monster.dao",
+    "name": "Dao",
+    "category": "monster"
+  },
+  {
+    "id": "mm|darkmantle",
+    "canonicalId": "monster.darkmantle",
+    "name": "Darkmantle",
+    "category": "monster"
+  },
+  {
+    "id": "mm|death-dog",
+    "canonicalId": "monster.death-dog",
+    "name": "Death Dog",
+    "category": "monster"
+  },
+  {
+    "id": "mm|death-knight",
+    "canonicalId": "monster.death-knight",
+    "name": "Death Knight",
+    "category": "monster"
+  },
+  {
+    "id": "mm|death-slaad",
+    "canonicalId": "monster.death-slaad",
+    "name": "Death Slaad",
+    "category": "monster"
+  },
+  {
+    "id": "mm|death-tyrant",
+    "canonicalId": "monster.death-tyrant",
+    "name": "Death Tyrant",
+    "category": "monster"
+  },
+  {
+    "id": "mm|deep-gnome-svirfneblin",
+    "canonicalId": "monster.deep-gnome-svirfneblin",
+    "name": "Deep Gnome (Svirfneblin)",
+    "category": "monster"
+  },
+  {
+    "id": "mm|deer",
+    "canonicalId": "monster.deer",
+    "name": "Deer",
+    "category": "monster"
+  },
+  {
+    "id": "mm|demilich",
+    "canonicalId": "monster.demilich",
+    "name": "Demilich",
+    "category": "monster"
+  },
+  {
+    "id": "mm|deva",
+    "canonicalId": "monster.deva",
+    "name": "Deva",
+    "category": "monster"
+  },
+  {
+    "id": "mm|dire-wolf",
+    "canonicalId": "monster.dire-wolf",
+    "name": "Dire Wolf",
+    "category": "monster"
+  },
+  {
+    "id": "mm|displacer-beast",
+    "canonicalId": "monster.displacer-beast",
+    "name": "Displacer Beast",
+    "category": "monster"
+  },
+  {
+    "id": "mm|djinni",
+    "canonicalId": "monster.djinni",
+    "name": "Djinni",
+    "category": "monster"
+  },
+  {
+    "id": "mm|doppelganger",
+    "canonicalId": "monster.doppelganger",
+    "name": "Doppelganger",
+    "category": "monster"
+  },
+  {
+    "id": "mm|draft-horse",
+    "canonicalId": "monster.draft-horse",
+    "name": "Draft Horse",
+    "category": "monster"
+  },
+  {
+    "id": "mm|dragon-turtle",
+    "canonicalId": "monster.dragon-turtle",
+    "name": "Dragon Turtle",
+    "category": "monster"
+  },
+  {
+    "id": "mm|dretch",
+    "canonicalId": "monster.dretch",
+    "name": "Dretch",
+    "category": "monster"
+  },
+  {
+    "id": "mm|drider",
+    "canonicalId": "monster.drider",
+    "name": "Drider",
+    "category": "monster"
+  },
+  {
+    "id": "mm|drow",
+    "canonicalId": "monster.drow",
+    "name": "Drow",
+    "category": "monster"
+  },
+  {
+    "id": "mm|drow-elite-warrior",
+    "canonicalId": "monster.drow-elite-warrior",
+    "name": "Drow Elite Warrior",
+    "category": "monster"
+  },
+  {
+    "id": "mm|drow-mage",
+    "canonicalId": "monster.drow-mage",
+    "name": "Drow Mage",
+    "category": "monster"
+  },
+  {
+    "id": "mm|drow-priestess-of-lolth",
+    "canonicalId": "monster.drow-priestess-of-lolth",
+    "name": "Drow Priestess of Lolth",
+    "category": "monster"
+  },
+  {
+    "id": "mm|druid",
+    "canonicalId": "monster.druid",
+    "name": "Druid",
+    "category": "monster"
+  },
+  {
+    "id": "mm|dryad",
+    "canonicalId": "monster.dryad",
+    "name": "Dryad",
+    "category": "monster"
+  },
+  {
+    "id": "mm|duergar",
+    "canonicalId": "monster.duergar",
+    "name": "Duergar",
+    "category": "monster"
+  },
+  {
+    "id": "mm|duodrone",
+    "canonicalId": "monster.duodrone",
+    "name": "Duodrone",
+    "category": "monster"
+  },
+  {
+    "id": "mm|dust-mephit",
+    "canonicalId": "monster.dust-mephit",
+    "name": "Dust Mephit",
+    "category": "monster"
+  },
+  {
+    "id": "mm|eagle",
+    "canonicalId": "monster.eagle",
+    "name": "Eagle",
+    "category": "monster"
+  },
+  {
+    "id": "mm|earth-elemental",
+    "canonicalId": "monster.earth-elemental",
+    "name": "Earth Elemental",
+    "category": "monster"
+  },
+  {
+    "id": "mm|efreeti",
+    "canonicalId": "monster.efreeti",
+    "name": "Efreeti",
+    "category": "monster"
+  },
+  {
+    "id": "mm|elephant",
+    "canonicalId": "monster.elephant",
+    "name": "Elephant",
+    "category": "monster"
+  },
+  {
+    "id": "mm|elk",
+    "canonicalId": "monster.elk",
+    "name": "Elk",
+    "category": "monster"
+  },
+  {
+    "id": "mm|empyrean",
+    "canonicalId": "monster.empyrean",
+    "name": "Empyrean",
+    "category": "monster"
+  },
+  {
+    "id": "mm|erinyes",
+    "canonicalId": "monster.erinyes",
+    "name": "Erinyes",
+    "category": "monster"
+  },
+  {
+    "id": "mm|ettercap",
+    "canonicalId": "monster.ettercap",
+    "name": "Ettercap",
+    "category": "monster"
+  },
+  {
+    "id": "mm|ettin",
+    "canonicalId": "monster.ettin",
+    "name": "Ettin",
+    "category": "monster"
+  },
+  {
+    "id": "mm|faerie-dragon-blue",
+    "canonicalId": "monster.faerie-dragon-blue",
+    "name": "Faerie Dragon (Blue)",
+    "category": "monster"
+  },
+  {
+    "id": "mm|faerie-dragon-green",
+    "canonicalId": "monster.faerie-dragon-green",
+    "name": "Faerie Dragon (Green)",
+    "category": "monster"
+  },
+  {
+    "id": "mm|faerie-dragon-indigo",
+    "canonicalId": "monster.faerie-dragon-indigo",
+    "name": "Faerie Dragon (Indigo)",
+    "category": "monster"
+  },
+  {
+    "id": "mm|faerie-dragon-orange",
+    "canonicalId": "monster.faerie-dragon-orange",
+    "name": "Faerie Dragon (Orange)",
+    "category": "monster"
+  },
+  {
+    "id": "mm|faerie-dragon-red",
+    "canonicalId": "monster.faerie-dragon-red",
+    "name": "Faerie Dragon (Red)",
+    "category": "monster"
+  },
+  {
+    "id": "mm|faerie-dragon-violet",
+    "canonicalId": "monster.faerie-dragon-violet",
+    "name": "Faerie Dragon (Violet)",
+    "category": "monster"
+  },
+  {
+    "id": "mm|faerie-dragon-yellow",
+    "canonicalId": "monster.faerie-dragon-yellow",
+    "name": "Faerie Dragon (Yellow)",
+    "category": "monster"
+  },
+  {
+    "id": "mm|fire-elemental",
+    "canonicalId": "monster.fire-elemental",
+    "name": "Fire Elemental",
+    "category": "monster"
+  },
+  {
+    "id": "mm|fire-giant",
+    "canonicalId": "monster.fire-giant",
+    "name": "Fire Giant",
+    "category": "monster"
+  },
+  {
+    "id": "mm|fire-snake",
+    "canonicalId": "monster.fire-snake",
+    "name": "Fire Snake",
+    "category": "monster"
+  },
+  {
+    "id": "mm|flameskull",
+    "canonicalId": "monster.flameskull",
+    "name": "Flameskull",
+    "category": "monster"
+  },
+  {
+    "id": "mm|flesh-golem",
+    "canonicalId": "monster.flesh-golem",
+    "name": "Flesh Golem",
+    "category": "monster"
+  },
+  {
+    "id": "mm|flumph",
+    "canonicalId": "monster.flumph",
+    "name": "Flumph",
+    "category": "monster"
+  },
+  {
+    "id": "mm|flying-snake",
+    "canonicalId": "monster.flying-snake",
+    "name": "Flying Snake",
+    "category": "monster"
+  },
+  {
+    "id": "mm|flying-sword",
+    "canonicalId": "monster.flying-sword",
+    "name": "Flying Sword",
+    "category": "monster"
+  },
+  {
+    "id": "mm|fomorian",
+    "canonicalId": "monster.fomorian",
+    "name": "Fomorian",
+    "category": "monster"
+  },
+  {
+    "id": "mm|frog",
+    "canonicalId": "monster.frog",
+    "name": "Frog",
+    "category": "monster"
+  },
+  {
+    "id": "mm|frost-giant",
+    "canonicalId": "monster.frost-giant",
+    "name": "Frost Giant",
+    "category": "monster"
+  },
+  {
+    "id": "mm|galeb-duhr",
+    "canonicalId": "monster.galeb-duhr",
+    "name": "Galeb Duhr",
+    "category": "monster"
+  },
+  {
+    "id": "mm|gargoyle",
+    "canonicalId": "monster.gargoyle",
+    "name": "Gargoyle",
+    "category": "monster"
+  },
+  {
+    "id": "mm|gas-spore",
+    "canonicalId": "monster.gas-spore",
+    "name": "Gas Spore",
+    "category": "monster"
+  },
+  {
+    "id": "mm|gelatinous-cube",
+    "canonicalId": "monster.gelatinous-cube",
+    "name": "Gelatinous Cube",
+    "category": "monster"
+  },
+  {
+    "id": "mm|ghast",
+    "canonicalId": "monster.ghast",
+    "name": "Ghast",
+    "category": "monster"
+  },
+  {
+    "id": "mm|ghost",
+    "canonicalId": "monster.ghost",
+    "name": "Ghost",
+    "category": "monster"
+  },
+  {
+    "id": "mm|ghoul",
+    "canonicalId": "monster.ghoul",
+    "name": "Ghoul",
+    "category": "monster"
+  },
+  {
+    "id": "mm|giant-ape",
+    "canonicalId": "monster.giant-ape",
+    "name": "Giant Ape",
+    "category": "monster"
+  },
+  {
+    "id": "mm|giant-badger",
+    "canonicalId": "monster.giant-badger",
+    "name": "Giant Badger",
+    "category": "monster"
+  },
+  {
+    "id": "mm|giant-bat",
+    "canonicalId": "monster.giant-bat",
+    "name": "Giant Bat",
+    "category": "monster"
+  },
+  {
+    "id": "mm|giant-boar",
+    "canonicalId": "monster.giant-boar",
+    "name": "Giant Boar",
+    "category": "monster"
+  },
+  {
+    "id": "mm|giant-centipede",
+    "canonicalId": "monster.giant-centipede",
+    "name": "Giant Centipede",
+    "category": "monster"
+  },
+  {
+    "id": "mm|giant-constrictor-snake",
+    "canonicalId": "monster.giant-constrictor-snake",
+    "name": "Giant Constrictor Snake",
+    "category": "monster"
+  },
+  {
+    "id": "mm|giant-crab",
+    "canonicalId": "monster.giant-crab",
+    "name": "Giant Crab",
+    "category": "monster"
+  },
+  {
+    "id": "mm|giant-crocodile",
+    "canonicalId": "monster.giant-crocodile",
+    "name": "Giant Crocodile",
+    "category": "monster"
+  },
+  {
+    "id": "mm|giant-eagle",
+    "canonicalId": "monster.giant-eagle",
+    "name": "Giant Eagle",
+    "category": "monster"
+  },
+  {
+    "id": "mm|giant-elk",
+    "canonicalId": "monster.giant-elk",
+    "name": "Giant Elk",
+    "category": "monster"
+  },
+  {
+    "id": "mm|giant-fire-beetle",
+    "canonicalId": "monster.giant-fire-beetle",
+    "name": "Giant Fire Beetle",
+    "category": "monster"
+  },
+  {
+    "id": "mm|giant-frog",
+    "canonicalId": "monster.giant-frog",
+    "name": "Giant Frog",
+    "category": "monster"
+  },
+  {
+    "id": "mm|giant-goat",
+    "canonicalId": "monster.giant-goat",
+    "name": "Giant Goat",
+    "category": "monster"
+  },
+  {
+    "id": "mm|giant-hyena",
+    "canonicalId": "monster.giant-hyena",
+    "name": "Giant Hyena",
+    "category": "monster"
+  },
+  {
+    "id": "mm|giant-lizard",
+    "canonicalId": "monster.giant-lizard",
+    "name": "Giant Lizard",
+    "category": "monster"
+  },
+  {
+    "id": "mm|giant-octopus",
+    "canonicalId": "monster.giant-octopus",
+    "name": "Giant Octopus",
+    "category": "monster"
+  },
+  {
+    "id": "mm|giant-owl",
+    "canonicalId": "monster.giant-owl",
+    "name": "Giant Owl",
+    "category": "monster"
+  },
+  {
+    "id": "mm|giant-poisonous-snake",
+    "canonicalId": "monster.giant-poisonous-snake",
+    "name": "Giant Poisonous Snake",
+    "category": "monster"
+  },
+  {
+    "id": "mm|giant-rat",
+    "canonicalId": "monster.giant-rat",
+    "name": "Giant Rat",
+    "category": "monster"
+  },
+  {
+    "id": "mm|giant-scorpion",
+    "canonicalId": "monster.giant-scorpion",
+    "name": "Giant Scorpion",
+    "category": "monster"
+  },
+  {
+    "id": "mm|giant-sea-horse",
+    "canonicalId": "monster.giant-sea-horse",
+    "name": "Giant Sea Horse",
+    "category": "monster"
+  },
+  {
+    "id": "mm|giant-shark",
+    "canonicalId": "monster.giant-shark",
+    "name": "Giant Shark",
+    "category": "monster"
+  },
+  {
+    "id": "mm|giant-spider",
+    "canonicalId": "monster.giant-spider",
+    "name": "Giant Spider",
+    "category": "monster"
+  },
+  {
+    "id": "mm|giant-toad",
+    "canonicalId": "monster.giant-toad",
+    "name": "Giant Toad",
+    "category": "monster"
+  },
+  {
+    "id": "mm|giant-vulture",
+    "canonicalId": "monster.giant-vulture",
+    "name": "Giant Vulture",
+    "category": "monster"
+  },
+  {
+    "id": "mm|giant-wasp",
+    "canonicalId": "monster.giant-wasp",
+    "name": "Giant Wasp",
+    "category": "monster"
+  },
+  {
+    "id": "mm|giant-weasel",
+    "canonicalId": "monster.giant-weasel",
+    "name": "Giant Weasel",
+    "category": "monster"
+  },
+  {
+    "id": "mm|giant-wolf-spider",
+    "canonicalId": "monster.giant-wolf-spider",
+    "name": "Giant Wolf Spider",
+    "category": "monster"
+  },
+  {
+    "id": "mm|gibbering-mouther",
+    "canonicalId": "monster.gibbering-mouther",
+    "name": "Gibbering Mouther",
+    "category": "monster"
+  },
+  {
+    "id": "mm|githyanki-knight",
+    "canonicalId": "monster.githyanki-knight",
+    "name": "Githyanki Knight",
+    "category": "monster"
+  },
+  {
+    "id": "mm|githyanki-warrior",
+    "canonicalId": "monster.githyanki-warrior",
+    "name": "Githyanki Warrior",
+    "category": "monster"
+  },
+  {
+    "id": "mm|githzerai-monk",
+    "canonicalId": "monster.githzerai-monk",
+    "name": "Githzerai Monk",
+    "category": "monster"
+  },
+  {
+    "id": "mm|githzerai-zerth",
+    "canonicalId": "monster.githzerai-zerth",
+    "name": "Githzerai Zerth",
+    "category": "monster"
+  },
+  {
+    "id": "mm|glabrezu",
+    "canonicalId": "monster.glabrezu",
+    "name": "Glabrezu",
+    "category": "monster"
+  },
+  {
+    "id": "mm|gladiator",
+    "canonicalId": "monster.gladiator",
+    "name": "Gladiator",
+    "category": "monster"
+  },
+  {
+    "id": "mm|gnoll",
+    "canonicalId": "monster.gnoll",
+    "name": "Gnoll",
+    "category": "monster"
+  },
+  {
+    "id": "mm|gnoll-fang-of-yeenoghu",
+    "canonicalId": "monster.gnoll-fang-of-yeenoghu",
+    "name": "Gnoll Fang of Yeenoghu",
+    "category": "monster"
+  },
+  {
+    "id": "mm|gnoll-pack-lord",
+    "canonicalId": "monster.gnoll-pack-lord",
+    "name": "Gnoll Pack Lord",
+    "category": "monster"
+  },
+  {
+    "id": "mm|goat",
+    "canonicalId": "monster.goat",
+    "name": "Goat",
+    "category": "monster"
+  },
+  {
+    "id": "mm|goblin",
+    "canonicalId": "monster.goblin",
+    "name": "Goblin",
+    "category": "monster"
+  },
+  {
+    "id": "mm|goblin-boss",
+    "canonicalId": "monster.goblin-boss",
+    "name": "Goblin Boss",
+    "category": "monster"
+  },
+  {
+    "id": "mm|gold-dragon-wyrmling",
+    "canonicalId": "monster.gold-dragon-wyrmling",
+    "name": "Gold Dragon Wyrmling",
+    "category": "monster"
+  },
+  {
+    "id": "mm|gorgon",
+    "canonicalId": "monster.gorgon",
+    "name": "Gorgon",
+    "category": "monster"
+  },
+  {
+    "id": "mm|goristro",
+    "canonicalId": "monster.goristro",
+    "name": "Goristro",
+    "category": "monster"
+  },
+  {
+    "id": "mm|gray-ooze",
+    "canonicalId": "monster.gray-ooze",
+    "name": "Gray Ooze",
+    "category": "monster"
+  },
+  {
+    "id": "mm|gray-slaad",
+    "canonicalId": "monster.gray-slaad",
+    "name": "Gray Slaad",
+    "category": "monster"
+  },
+  {
+    "id": "mm|green-dragon-wyrmling",
+    "canonicalId": "monster.green-dragon-wyrmling",
+    "name": "Green Dragon Wyrmling",
+    "category": "monster"
+  },
+  {
+    "id": "mm|green-hag",
+    "canonicalId": "monster.green-hag",
+    "name": "Green Hag",
+    "category": "monster"
+  },
+  {
+    "id": "mm|green-slaad",
+    "canonicalId": "monster.green-slaad",
+    "name": "Green Slaad",
+    "category": "monster"
+  },
+  {
+    "id": "mm|grell",
+    "canonicalId": "monster.grell",
+    "name": "Grell",
+    "category": "monster"
+  },
+  {
+    "id": "mm|grick",
+    "canonicalId": "monster.grick",
+    "name": "Grick",
+    "category": "monster"
+  },
+  {
+    "id": "mm|grick-alpha",
+    "canonicalId": "monster.grick-alpha",
+    "name": "Grick Alpha",
+    "category": "monster"
+  },
+  {
+    "id": "mm|griffon",
+    "canonicalId": "monster.griffon",
+    "name": "Griffon",
+    "category": "monster"
+  },
+  {
+    "id": "mm|grimlock",
+    "canonicalId": "monster.grimlock",
+    "name": "Grimlock",
+    "category": "monster"
+  },
+  {
+    "id": "mm|guard",
+    "canonicalId": "monster.guard",
+    "name": "Guard",
+    "category": "monster"
+  },
+  {
+    "id": "mm|guardian-naga",
+    "canonicalId": "monster.guardian-naga",
+    "name": "Guardian Naga",
+    "category": "monster"
+  },
+  {
+    "id": "mm|gynosphinx",
+    "canonicalId": "monster.gynosphinx",
+    "name": "Gynosphinx",
+    "category": "monster"
+  },
+  {
+    "id": "mm|half-ogre-ogrillon",
+    "canonicalId": "monster.half-ogre-ogrillon",
+    "name": "Half-Ogre (Ogrillon)",
+    "category": "monster"
+  },
+  {
+    "id": "mm|half-red-dragon-veteran",
+    "canonicalId": "monster.half-red-dragon-veteran",
+    "name": "Half-Red Dragon Veteran",
+    "category": "monster"
+  },
+  {
+    "id": "mm|harpy",
+    "canonicalId": "monster.harpy",
+    "name": "Harpy",
+    "category": "monster"
+  },
+  {
+    "id": "mm|hawk",
+    "canonicalId": "monster.hawk",
+    "name": "Hawk",
+    "category": "monster"
+  },
+  {
+    "id": "mm|hell-hound",
+    "canonicalId": "monster.hell-hound",
+    "name": "Hell Hound",
+    "category": "monster"
+  },
+  {
+    "id": "mm|helmed-horror",
+    "canonicalId": "monster.helmed-horror",
+    "name": "Helmed Horror",
+    "category": "monster"
+  },
+  {
+    "id": "mm|hezrou",
+    "canonicalId": "monster.hezrou",
+    "name": "Hezrou",
+    "category": "monster"
+  },
+  {
+    "id": "mm|hill-giant",
+    "canonicalId": "monster.hill-giant",
+    "name": "Hill Giant",
+    "category": "monster"
+  },
+  {
+    "id": "mm|hippogriff",
+    "canonicalId": "monster.hippogriff",
+    "name": "Hippogriff",
+    "category": "monster"
+  },
+  {
+    "id": "mm|hobgoblin",
+    "canonicalId": "monster.hobgoblin",
+    "name": "Hobgoblin",
+    "category": "monster"
+  },
+  {
+    "id": "mm|hobgoblin-captain",
+    "canonicalId": "monster.hobgoblin-captain",
+    "name": "Hobgoblin Captain",
+    "category": "monster"
+  },
+  {
+    "id": "mm|hobgoblin-warlord",
+    "canonicalId": "monster.hobgoblin-warlord",
+    "name": "Hobgoblin Warlord",
+    "category": "monster"
+  },
+  {
+    "id": "mm|homunculus",
+    "canonicalId": "monster.homunculus",
+    "name": "Homunculus",
+    "category": "monster"
+  },
+  {
+    "id": "mm|hook-horror",
+    "canonicalId": "monster.hook-horror",
+    "name": "Hook Horror",
+    "category": "monster"
+  },
+  {
+    "id": "mm|horned-devil",
+    "canonicalId": "monster.horned-devil",
+    "name": "Horned Devil",
+    "category": "monster"
+  },
+  {
+    "id": "mm|hunter-shark",
+    "canonicalId": "monster.hunter-shark",
+    "name": "Hunter Shark",
+    "category": "monster"
+  },
+  {
+    "id": "mm|hydra",
+    "canonicalId": "monster.hydra",
+    "name": "Hydra",
+    "category": "monster"
+  },
+  {
+    "id": "mm|hyena",
+    "canonicalId": "monster.hyena",
+    "name": "Hyena",
+    "category": "monster"
+  },
+  {
+    "id": "mm|ice-devil",
+    "canonicalId": "monster.ice-devil",
+    "name": "Ice Devil",
+    "category": "monster"
+  },
+  {
+    "id": "mm|ice-mephit",
+    "canonicalId": "monster.ice-mephit",
+    "name": "Ice Mephit",
+    "category": "monster"
+  },
+  {
+    "id": "mm|imp",
+    "canonicalId": "monster.imp",
+    "name": "Imp",
+    "category": "monster"
+  },
+  {
+    "id": "mm|incubus",
+    "canonicalId": "monster.incubus",
+    "name": "Incubus",
+    "category": "monster"
+  },
+  {
+    "id": "mm|intellect-devourer",
+    "canonicalId": "monster.intellect-devourer",
+    "name": "Intellect Devourer",
+    "category": "monster"
+  },
+  {
+    "id": "mm|invisible-stalker",
+    "canonicalId": "monster.invisible-stalker",
+    "name": "Invisible Stalker",
+    "category": "monster"
+  },
+  {
+    "id": "mm|iron-golem",
+    "canonicalId": "monster.iron-golem",
+    "name": "Iron Golem",
+    "category": "monster"
+  },
+  {
+    "id": "mm|jackal",
+    "canonicalId": "monster.jackal",
+    "name": "Jackal",
+    "category": "monster"
+  },
+  {
+    "id": "mm|jackalwere",
+    "canonicalId": "monster.jackalwere",
+    "name": "Jackalwere",
+    "category": "monster"
+  },
+  {
+    "id": "mm|kenku",
+    "canonicalId": "monster.kenku",
+    "name": "Kenku",
+    "category": "monster"
+  },
+  {
+    "id": "mm|killer-whale",
+    "canonicalId": "monster.killer-whale",
+    "name": "Killer Whale",
+    "category": "monster"
+  },
+  {
+    "id": "mm|knight",
+    "canonicalId": "monster.knight",
+    "name": "Knight",
+    "category": "monster"
+  },
+  {
+    "id": "mm|kobold",
+    "canonicalId": "monster.kobold",
+    "name": "Kobold",
+    "category": "monster"
+  },
+  {
+    "id": "mm|kraken",
+    "canonicalId": "monster.kraken",
+    "name": "Kraken",
+    "category": "monster"
+  },
+  {
+    "id": "mm|kuo-toa",
+    "canonicalId": "monster.kuo-toa",
+    "name": "Kuo-toa",
+    "category": "monster"
+  },
+  {
+    "id": "mm|kuo-toa-archpriest",
+    "canonicalId": "monster.kuo-toa-archpriest",
+    "name": "Kuo-toa Archpriest",
+    "category": "monster"
+  },
+  {
+    "id": "mm|kuo-toa-monitor",
+    "canonicalId": "monster.kuo-toa-monitor",
+    "name": "Kuo-toa Monitor",
+    "category": "monster"
+  },
+  {
+    "id": "mm|kuo-toa-whip",
+    "canonicalId": "monster.kuo-toa-whip",
+    "name": "Kuo-toa Whip",
+    "category": "monster"
+  },
+  {
+    "id": "mm|lamia",
+    "canonicalId": "monster.lamia",
+    "name": "Lamia",
+    "category": "monster"
+  },
+  {
+    "id": "mm|lemure",
+    "canonicalId": "monster.lemure",
+    "name": "Lemure",
+    "category": "monster"
+  },
+  {
+    "id": "mm|lich",
+    "canonicalId": "monster.lich",
+    "name": "Lich",
+    "category": "monster"
+  },
+  {
+    "id": "mm|lion",
+    "canonicalId": "monster.lion",
+    "name": "Lion",
+    "category": "monster"
+  },
+  {
+    "id": "mm|lizard",
+    "canonicalId": "monster.lizard",
+    "name": "Lizard",
+    "category": "monster"
+  },
+  {
+    "id": "mm|lizard-king",
+    "canonicalId": "monster.lizard-king",
+    "name": "Lizard King",
+    "category": "monster"
+  },
+  {
+    "id": "mm|lizard-queen",
+    "canonicalId": "monster.lizard-queen",
+    "name": "Lizard Queen",
+    "category": "monster"
+  },
+  {
+    "id": "mm|lizardfolk",
+    "canonicalId": "monster.lizardfolk",
+    "name": "Lizardfolk",
+    "category": "monster"
+  },
+  {
+    "id": "mm|lizardfolk-shaman",
+    "canonicalId": "monster.lizardfolk-shaman",
+    "name": "Lizardfolk Shaman",
+    "category": "monster"
+  },
+  {
+    "id": "mm|mage",
+    "canonicalId": "monster.mage",
+    "name": "Mage",
+    "category": "monster"
+  },
+  {
+    "id": "mm|magma-mephit",
+    "canonicalId": "monster.magma-mephit",
+    "name": "Magma Mephit",
+    "category": "monster"
+  },
+  {
+    "id": "mm|magmin",
+    "canonicalId": "monster.magmin",
+    "name": "Magmin",
+    "category": "monster"
+  },
+  {
+    "id": "mm|mammoth",
+    "canonicalId": "monster.mammoth",
+    "name": "Mammoth",
+    "category": "monster"
+  },
+  {
+    "id": "mm|manes",
+    "canonicalId": "monster.manes",
+    "name": "Manes",
+    "category": "monster"
+  },
+  {
+    "id": "mm|manticore",
+    "canonicalId": "monster.manticore",
+    "name": "Manticore",
+    "category": "monster"
+  },
+  {
+    "id": "mm|marid",
+    "canonicalId": "monster.marid",
+    "name": "Marid",
+    "category": "monster"
+  },
+  {
+    "id": "mm|marilith",
+    "canonicalId": "monster.marilith",
+    "name": "Marilith",
+    "category": "monster"
+  },
+  {
+    "id": "mm|mastiff",
+    "canonicalId": "monster.mastiff",
+    "name": "Mastiff",
+    "category": "monster"
+  },
+  {
+    "id": "mm|medusa",
+    "canonicalId": "monster.medusa",
+    "name": "Medusa",
+    "category": "monster"
+  },
+  {
+    "id": "mm|merfolk",
+    "canonicalId": "monster.merfolk",
+    "name": "Merfolk",
+    "category": "monster"
+  },
+  {
+    "id": "mm|merrow",
+    "canonicalId": "monster.merrow",
+    "name": "Merrow",
+    "category": "monster"
+  },
+  {
+    "id": "mm|mezzoloth",
+    "canonicalId": "monster.mezzoloth",
+    "name": "Mezzoloth",
+    "category": "monster"
+  },
+  {
+    "id": "mm|mimic",
+    "canonicalId": "monster.mimic",
+    "name": "Mimic",
+    "category": "monster"
+  },
+  {
+    "id": "mm|mind-flayer",
+    "canonicalId": "monster.mind-flayer",
+    "name": "Mind Flayer",
+    "category": "monster"
+  },
+  {
+    "id": "mm|mind-flayer-arcanist",
+    "canonicalId": "monster.mind-flayer-arcanist",
+    "name": "Mind Flayer Arcanist",
+    "category": "monster"
+  },
+  {
+    "id": "mm|minotaur",
+    "canonicalId": "monster.minotaur",
+    "name": "Minotaur",
+    "category": "monster"
+  },
+  {
+    "id": "mm|minotaur-skeleton",
+    "canonicalId": "monster.minotaur-skeleton",
+    "name": "Minotaur Skeleton",
+    "category": "monster"
+  },
+  {
+    "id": "mm|monodrone",
+    "canonicalId": "monster.monodrone",
+    "name": "Monodrone",
+    "category": "monster"
+  },
+  {
+    "id": "mm|mud-mephit",
+    "canonicalId": "monster.mud-mephit",
+    "name": "Mud Mephit",
+    "category": "monster"
+  },
+  {
+    "id": "mm|mule",
+    "canonicalId": "monster.mule",
+    "name": "Mule",
+    "category": "monster"
+  },
+  {
+    "id": "mm|mummy",
+    "canonicalId": "monster.mummy",
+    "name": "Mummy",
+    "category": "monster"
+  },
+  {
+    "id": "mm|mummy-lord",
+    "canonicalId": "monster.mummy-lord",
+    "name": "Mummy Lord",
+    "category": "monster"
+  },
+  {
+    "id": "mm|myconid-adult",
+    "canonicalId": "monster.myconid-adult",
+    "name": "Myconid Adult",
+    "category": "monster"
+  },
+  {
+    "id": "mm|myconid-sovereign",
+    "canonicalId": "monster.myconid-sovereign",
+    "name": "Myconid Sovereign",
+    "category": "monster"
+  },
+  {
+    "id": "mm|myconid-sprout",
+    "canonicalId": "monster.myconid-sprout",
+    "name": "Myconid Sprout",
+    "category": "monster"
+  },
+  {
+    "id": "mm|nalfeshnee",
+    "canonicalId": "monster.nalfeshnee",
+    "name": "Nalfeshnee",
+    "category": "monster"
+  },
+  {
+    "id": "mm|needle-blight",
+    "canonicalId": "monster.needle-blight",
+    "name": "Needle Blight",
+    "category": "monster"
+  },
+  {
+    "id": "mm|night-hag",
+    "canonicalId": "monster.night-hag",
+    "name": "Night Hag",
+    "category": "monster"
+  },
+  {
+    "id": "mm|nightmare",
+    "canonicalId": "monster.nightmare",
+    "name": "Nightmare",
+    "category": "monster"
+  },
+  {
+    "id": "mm|noble",
+    "canonicalId": "monster.noble",
+    "name": "Noble",
+    "category": "monster"
+  },
+  {
+    "id": "mm|nothic",
+    "canonicalId": "monster.nothic",
+    "name": "Nothic",
+    "category": "monster"
+  },
+  {
+    "id": "mm|nycaloth",
+    "canonicalId": "monster.nycaloth",
+    "name": "Nycaloth",
+    "category": "monster"
+  },
+  {
+    "id": "mm|ochre-jelly",
+    "canonicalId": "monster.ochre-jelly",
+    "name": "Ochre Jelly",
+    "category": "monster"
+  },
+  {
+    "id": "mm|octopus",
+    "canonicalId": "monster.octopus",
+    "name": "Octopus",
+    "category": "monster"
+  },
+  {
+    "id": "mm|ogre",
+    "canonicalId": "monster.ogre",
+    "name": "Ogre",
+    "category": "monster"
+  },
+  {
+    "id": "mm|ogre-zombie",
+    "canonicalId": "monster.ogre-zombie",
+    "name": "Ogre Zombie",
+    "category": "monster"
+  },
+  {
+    "id": "mm|oni",
+    "canonicalId": "monster.oni",
+    "name": "Oni",
+    "category": "monster"
+  },
+  {
+    "id": "mm|orc",
+    "canonicalId": "monster.orc",
+    "name": "Orc",
+    "category": "monster"
+  },
+  {
+    "id": "mm|orc-eye-of-gruumsh",
+    "canonicalId": "monster.orc-eye-of-gruumsh",
+    "name": "Orc Eye of Gruumsh",
+    "category": "monster"
+  },
+  {
+    "id": "mm|orc-war-chief",
+    "canonicalId": "monster.orc-war-chief",
+    "name": "Orc War Chief",
+    "category": "monster"
+  },
+  {
+    "id": "mm|orog",
+    "canonicalId": "monster.orog",
+    "name": "Orog",
+    "category": "monster"
+  },
+  {
+    "id": "mm|otyugh",
+    "canonicalId": "monster.otyugh",
+    "name": "Otyugh",
+    "category": "monster"
+  },
+  {
+    "id": "mm|owl",
+    "canonicalId": "monster.owl",
+    "name": "Owl",
+    "category": "monster"
+  },
+  {
+    "id": "mm|owlbear",
+    "canonicalId": "monster.owlbear",
+    "name": "Owlbear",
+    "category": "monster"
+  },
+  {
+    "id": "mm|panther",
+    "canonicalId": "monster.panther",
+    "name": "Panther",
+    "category": "monster"
+  },
+  {
+    "id": "mm|pegasus",
+    "canonicalId": "monster.pegasus",
+    "name": "Pegasus",
+    "category": "monster"
+  },
+  {
+    "id": "mm|pentadrone",
+    "canonicalId": "monster.pentadrone",
+    "name": "Pentadrone",
+    "category": "monster"
+  },
+  {
+    "id": "mm|peryton",
+    "canonicalId": "monster.peryton",
+    "name": "Peryton",
+    "category": "monster"
+  },
+  {
+    "id": "mm|phase-spider",
+    "canonicalId": "monster.phase-spider",
+    "name": "Phase Spider",
+    "category": "monster"
+  },
+  {
+    "id": "mm|piercer",
+    "canonicalId": "monster.piercer",
+    "name": "Piercer",
+    "category": "monster"
+  },
+  {
+    "id": "mm|pit-fiend",
+    "canonicalId": "monster.pit-fiend",
+    "name": "Pit Fiend",
+    "category": "monster"
+  },
+  {
+    "id": "mm|pixie",
+    "canonicalId": "monster.pixie",
+    "name": "Pixie",
+    "category": "monster"
+  },
+  {
+    "id": "mm|planetar",
+    "canonicalId": "monster.planetar",
+    "name": "Planetar",
+    "category": "monster"
+  },
+  {
+    "id": "mm|plesiosaurus",
+    "canonicalId": "monster.plesiosaurus",
+    "name": "Plesiosaurus",
+    "category": "monster"
+  },
+  {
+    "id": "mm|poisonous-snake",
+    "canonicalId": "monster.poisonous-snake",
+    "name": "Poisonous Snake",
+    "category": "monster"
+  },
+  {
+    "id": "mm|polar-bear",
+    "canonicalId": "monster.polar-bear",
+    "name": "Polar Bear",
+    "category": "monster"
+  },
+  {
+    "id": "mm|poltergeist",
+    "canonicalId": "monster.poltergeist",
+    "name": "Poltergeist",
+    "category": "monster"
+  },
+  {
+    "id": "mm|pony",
+    "canonicalId": "monster.pony",
+    "name": "Pony",
+    "category": "monster"
+  },
+  {
+    "id": "mm|priest",
+    "canonicalId": "monster.priest",
+    "name": "Priest",
+    "category": "monster"
+  },
+  {
+    "id": "mm|pseudodragon",
+    "canonicalId": "monster.pseudodragon",
+    "name": "Pseudodragon",
+    "category": "monster"
+  },
+  {
+    "id": "mm|pteranodon",
+    "canonicalId": "monster.pteranodon",
+    "name": "Pteranodon",
+    "category": "monster"
+  },
+  {
+    "id": "mm|purple-worm",
+    "canonicalId": "monster.purple-worm",
+    "name": "Purple Worm",
+    "category": "monster"
+  },
+  {
+    "id": "mm|quadrone",
+    "canonicalId": "monster.quadrone",
+    "name": "Quadrone",
+    "category": "monster"
+  },
+  {
+    "id": "mm|quaggoth",
+    "canonicalId": "monster.quaggoth",
+    "name": "Quaggoth",
+    "category": "monster"
+  },
+  {
+    "id": "mm|quaggoth-spore-servant",
+    "canonicalId": "monster.quaggoth-spore-servant",
+    "name": "Quaggoth Spore Servant",
+    "category": "monster"
+  },
+  {
+    "id": "mm|quaggoth-thonot",
+    "canonicalId": "monster.quaggoth-thonot",
+    "name": "Quaggoth Thonot",
+    "category": "monster"
+  },
+  {
+    "id": "mm|quasit",
+    "canonicalId": "monster.quasit",
+    "name": "Quasit",
+    "category": "monster"
+  },
+  {
+    "id": "mm|quipper",
+    "canonicalId": "monster.quipper",
+    "name": "Quipper",
+    "category": "monster"
+  },
+  {
+    "id": "mm|rakshasa",
+    "canonicalId": "monster.rakshasa",
+    "name": "Rakshasa",
+    "category": "monster"
+  },
+  {
+    "id": "mm|rat",
+    "canonicalId": "monster.rat",
+    "name": "Rat",
+    "category": "monster"
+  },
+  {
+    "id": "mm|raven",
+    "canonicalId": "monster.raven",
+    "name": "Raven",
+    "category": "monster"
+  },
+  {
+    "id": "mm|red-dragon-wyrmling",
+    "canonicalId": "monster.red-dragon-wyrmling",
+    "name": "Red Dragon Wyrmling",
+    "category": "monster"
+  },
+  {
+    "id": "mm|red-slaad",
+    "canonicalId": "monster.red-slaad",
+    "name": "Red Slaad",
+    "category": "monster"
+  },
+  {
+    "id": "mm|reef-shark",
+    "canonicalId": "monster.reef-shark",
+    "name": "Reef Shark",
+    "category": "monster"
+  },
+  {
+    "id": "mm|remorhaz",
+    "canonicalId": "monster.remorhaz",
+    "name": "Remorhaz",
+    "category": "monster"
+  },
+  {
+    "id": "mm|revenant",
+    "canonicalId": "monster.revenant",
+    "name": "Revenant",
+    "category": "monster"
+  },
+  {
+    "id": "mm|rhinoceros",
+    "canonicalId": "monster.rhinoceros",
+    "name": "Rhinoceros",
+    "category": "monster"
+  },
+  {
+    "id": "mm|riding-horse",
+    "canonicalId": "monster.riding-horse",
+    "name": "Riding Horse",
+    "category": "monster"
+  },
+  {
+    "id": "mm|roc",
+    "canonicalId": "monster.roc",
+    "name": "Roc",
+    "category": "monster"
+  },
+  {
+    "id": "mm|roper",
+    "canonicalId": "monster.roper",
+    "name": "Roper",
+    "category": "monster"
+  },
+  {
+    "id": "mm|rug-of-smothering",
+    "canonicalId": "monster.rug-of-smothering",
+    "name": "Rug of Smothering",
+    "category": "monster"
+  },
+  {
+    "id": "mm|rust-monster",
+    "canonicalId": "monster.rust-monster",
+    "name": "Rust Monster",
+    "category": "monster"
+  },
+  {
+    "id": "mm|saber-toothed-tiger",
+    "canonicalId": "monster.saber-toothed-tiger",
+    "name": "Saber-Toothed Tiger",
+    "category": "monster"
+  },
+  {
+    "id": "mm|sahuagin",
+    "canonicalId": "monster.sahuagin",
+    "name": "Sahuagin",
+    "category": "monster"
+  },
+  {
+    "id": "mm|sahuagin-baron",
+    "canonicalId": "monster.sahuagin-baron",
+    "name": "Sahuagin Baron",
+    "category": "monster"
+  },
+  {
+    "id": "mm|sahuagin-priestess",
+    "canonicalId": "monster.sahuagin-priestess",
+    "name": "Sahuagin Priestess",
+    "category": "monster"
+  },
+  {
+    "id": "mm|salamander",
+    "canonicalId": "monster.salamander",
+    "name": "Salamander",
+    "category": "monster"
+  },
+  {
+    "id": "mm|satyr",
+    "canonicalId": "monster.satyr",
+    "name": "Satyr",
+    "category": "monster"
+  },
+  {
+    "id": "mm|scarecrow",
+    "canonicalId": "monster.scarecrow",
+    "name": "Scarecrow",
+    "category": "monster"
+  },
+  {
+    "id": "mm|scorpion",
+    "canonicalId": "monster.scorpion",
+    "name": "Scorpion",
+    "category": "monster"
+  },
+  {
+    "id": "mm|scout",
+    "canonicalId": "monster.scout",
+    "name": "Scout",
+    "category": "monster"
+  },
+  {
+    "id": "mm|sea-hag",
+    "canonicalId": "monster.sea-hag",
+    "name": "Sea Hag",
+    "category": "monster"
+  },
+  {
+    "id": "mm|sea-horse",
+    "canonicalId": "monster.sea-horse",
+    "name": "Sea Horse",
+    "category": "monster"
+  },
+  {
+    "id": "mm|shadow",
+    "canonicalId": "monster.shadow",
+    "name": "Shadow",
+    "category": "monster"
+  },
+  {
+    "id": "mm|shadow-demon",
+    "canonicalId": "monster.shadow-demon",
+    "name": "Shadow Demon",
+    "category": "monster"
+  },
+  {
+    "id": "mm|shambling-mound",
+    "canonicalId": "monster.shambling-mound",
+    "name": "Shambling Mound",
+    "category": "monster"
+  },
+  {
+    "id": "mm|shield-guardian",
+    "canonicalId": "monster.shield-guardian",
+    "name": "Shield Guardian",
+    "category": "monster"
+  },
+  {
+    "id": "mm|shrieker",
+    "canonicalId": "monster.shrieker",
+    "name": "Shrieker",
+    "category": "monster"
+  },
+  {
+    "id": "mm|silver-dragon-wyrmling",
+    "canonicalId": "monster.silver-dragon-wyrmling",
+    "name": "Silver Dragon Wyrmling",
+    "category": "monster"
+  },
+  {
+    "id": "mm|skeleton",
+    "canonicalId": "monster.skeleton",
+    "name": "Skeleton",
+    "category": "monster"
+  },
+  {
+    "id": "mm|slaad-tadpole",
+    "canonicalId": "monster.slaad-tadpole",
+    "name": "Slaad Tadpole",
+    "category": "monster"
+  },
+  {
+    "id": "mm|smoke-mephit",
+    "canonicalId": "monster.smoke-mephit",
+    "name": "Smoke Mephit",
+    "category": "monster"
+  },
+  {
+    "id": "mm|solar",
+    "canonicalId": "monster.solar",
+    "name": "Solar",
+    "category": "monster"
+  },
+  {
+    "id": "mm|spectator",
+    "canonicalId": "monster.spectator",
+    "name": "Spectator",
+    "category": "monster"
+  },
+  {
+    "id": "mm|specter",
+    "canonicalId": "monster.specter",
+    "name": "Specter",
+    "category": "monster"
+  },
+  {
+    "id": "mm|spider",
+    "canonicalId": "monster.spider",
+    "name": "Spider",
+    "category": "monster"
+  },
+  {
+    "id": "mm|spined-devil",
+    "canonicalId": "monster.spined-devil",
+    "name": "Spined Devil",
+    "category": "monster"
+  },
+  {
+    "id": "mm|spirit-naga",
+    "canonicalId": "monster.spirit-naga",
+    "name": "Spirit Naga",
+    "category": "monster"
+  },
+  {
+    "id": "mm|sprite",
+    "canonicalId": "monster.sprite",
+    "name": "Sprite",
+    "category": "monster"
+  },
+  {
+    "id": "mm|spy",
+    "canonicalId": "monster.spy",
+    "name": "Spy",
+    "category": "monster"
+  },
+  {
+    "id": "mm|steam-mephit",
+    "canonicalId": "monster.steam-mephit",
+    "name": "Steam Mephit",
+    "category": "monster"
+  },
+  {
+    "id": "mm|stirge",
+    "canonicalId": "monster.stirge",
+    "name": "Stirge",
+    "category": "monster"
+  },
+  {
+    "id": "mm|stone-giant",
+    "canonicalId": "monster.stone-giant",
+    "name": "Stone Giant",
+    "category": "monster"
+  },
+  {
+    "id": "mm|stone-golem",
+    "canonicalId": "monster.stone-golem",
+    "name": "Stone Golem",
+    "category": "monster"
+  },
+  {
+    "id": "mm|storm-giant",
+    "canonicalId": "monster.storm-giant",
+    "name": "Storm Giant",
+    "category": "monster"
+  },
+  {
+    "id": "mm|succubus",
+    "canonicalId": "monster.succubus",
+    "name": "Succubus",
+    "category": "monster"
+  },
+  {
+    "id": "mm|swarm-of-bats",
+    "canonicalId": "monster.swarm-of-bats",
+    "name": "Swarm of Bats",
+    "category": "monster"
+  },
+  {
+    "id": "mm|swarm-of-beetles",
+    "canonicalId": "monster.swarm-of-beetles",
+    "name": "Swarm of Beetles",
+    "category": "monster"
+  },
+  {
+    "id": "mm|swarm-of-centipedes",
+    "canonicalId": "monster.swarm-of-centipedes",
+    "name": "Swarm of Centipedes",
+    "category": "monster"
+  },
+  {
+    "id": "mm|swarm-of-insects",
+    "canonicalId": "monster.swarm-of-insects",
+    "name": "Swarm of Insects",
+    "category": "monster"
+  },
+  {
+    "id": "mm|swarm-of-poisonous-snakes",
+    "canonicalId": "monster.swarm-of-poisonous-snakes",
+    "name": "Swarm of Poisonous Snakes",
+    "category": "monster"
+  },
+  {
+    "id": "mm|swarm-of-quippers",
+    "canonicalId": "monster.swarm-of-quippers",
+    "name": "Swarm of Quippers",
+    "category": "monster"
+  },
+  {
+    "id": "mm|swarm-of-rats",
+    "canonicalId": "monster.swarm-of-rats",
+    "name": "Swarm of Rats",
+    "category": "monster"
+  },
+  {
+    "id": "mm|swarm-of-ravens",
+    "canonicalId": "monster.swarm-of-ravens",
+    "name": "Swarm of Ravens",
+    "category": "monster"
+  },
+  {
+    "id": "mm|swarm-of-spiders",
+    "canonicalId": "monster.swarm-of-spiders",
+    "name": "Swarm of Spiders",
+    "category": "monster"
+  },
+  {
+    "id": "mm|swarm-of-wasps",
+    "canonicalId": "monster.swarm-of-wasps",
+    "name": "Swarm of Wasps",
+    "category": "monster"
+  },
+  {
+    "id": "mm|tarrasque",
+    "canonicalId": "monster.tarrasque",
+    "name": "Tarrasque",
+    "category": "monster"
+  },
+  {
+    "id": "mm|thri-kreen",
+    "canonicalId": "monster.thri-kreen",
+    "name": "Thri-kreen",
+    "category": "monster"
+  },
+  {
+    "id": "mm|thug",
+    "canonicalId": "monster.thug",
+    "name": "Thug",
+    "category": "monster"
+  },
+  {
+    "id": "mm|tiger",
+    "canonicalId": "monster.tiger",
+    "name": "Tiger",
+    "category": "monster"
+  },
+  {
+    "id": "mm|treant",
+    "canonicalId": "monster.treant",
+    "name": "Treant",
+    "category": "monster"
+  },
+  {
+    "id": "mm|tribal-warrior",
+    "canonicalId": "monster.tribal-warrior",
+    "name": "Tribal Warrior",
+    "category": "monster"
+  },
+  {
+    "id": "mm|triceratops",
+    "canonicalId": "monster.triceratops",
+    "name": "Triceratops",
+    "category": "monster"
+  },
+  {
+    "id": "mm|tridrone",
+    "canonicalId": "monster.tridrone",
+    "name": "Tridrone",
+    "category": "monster"
+  },
+  {
+    "id": "mm|troglodyte",
+    "canonicalId": "monster.troglodyte",
+    "name": "Troglodyte",
+    "category": "monster"
+  },
+  {
+    "id": "mm|troll",
+    "canonicalId": "monster.troll",
+    "name": "Troll",
+    "category": "monster"
+  },
+  {
+    "id": "mm|twig-blight",
+    "canonicalId": "monster.twig-blight",
+    "name": "Twig Blight",
+    "category": "monster"
+  },
+  {
+    "id": "mm|tyrannosaurus-rex",
+    "canonicalId": "monster.tyrannosaurus-rex",
+    "name": "Tyrannosaurus Rex",
+    "category": "monster"
+  },
+  {
+    "id": "mm|ultroloth",
+    "canonicalId": "monster.ultroloth",
+    "name": "Ultroloth",
+    "category": "monster"
+  },
+  {
+    "id": "mm|umber-hulk",
+    "canonicalId": "monster.umber-hulk",
+    "name": "Umber Hulk",
+    "category": "monster"
+  },
+  {
+    "id": "mm|unicorn",
+    "canonicalId": "monster.unicorn",
+    "name": "Unicorn",
+    "category": "monster"
+  },
+  {
+    "id": "mm|vampire",
+    "canonicalId": "monster.vampire",
+    "name": "Vampire",
+    "category": "monster"
+  },
+  {
+    "id": "mm|vampire-spawn",
+    "canonicalId": "monster.vampire-spawn",
+    "name": "Vampire Spawn",
+    "category": "monster"
+  },
+  {
+    "id": "mm|vampire-spellcaster",
+    "canonicalId": "monster.vampire-spellcaster",
+    "name": "Vampire Spellcaster",
+    "category": "monster"
+  },
+  {
+    "id": "mm|vampire-warrior",
+    "canonicalId": "monster.vampire-warrior",
+    "name": "Vampire Warrior",
+    "category": "monster"
+  },
+  {
+    "id": "mm|veteran",
+    "canonicalId": "monster.veteran",
+    "name": "Veteran",
+    "category": "monster"
+  },
+  {
+    "id": "mm|vine-blight",
+    "canonicalId": "monster.vine-blight",
+    "name": "Vine Blight",
+    "category": "monster"
+  },
+  {
+    "id": "mm|violet-fungus",
+    "canonicalId": "monster.violet-fungus",
+    "name": "Violet Fungus",
+    "category": "monster"
+  },
+  {
+    "id": "mm|vrock",
+    "canonicalId": "monster.vrock",
+    "name": "Vrock",
+    "category": "monster"
+  },
+  {
+    "id": "mm|vulture",
+    "canonicalId": "monster.vulture",
+    "name": "Vulture",
+    "category": "monster"
+  },
+  {
+    "id": "mm|warhorse",
+    "canonicalId": "monster.warhorse",
+    "name": "Warhorse",
+    "category": "monster"
+  },
+  {
+    "id": "mm|warhorse-skeleton",
+    "canonicalId": "monster.warhorse-skeleton",
+    "name": "Warhorse Skeleton",
+    "category": "monster"
+  },
+  {
+    "id": "mm|water-elemental",
+    "canonicalId": "monster.water-elemental",
+    "name": "Water Elemental",
+    "category": "monster"
+  },
+  {
+    "id": "mm|water-weird",
+    "canonicalId": "monster.water-weird",
+    "name": "Water Weird",
+    "category": "monster"
+  },
+  {
+    "id": "mm|weasel",
+    "canonicalId": "monster.weasel",
+    "name": "Weasel",
+    "category": "monster"
+  },
+  {
+    "id": "mm|werebear",
+    "canonicalId": "monster.werebear",
+    "name": "Werebear",
+    "category": "monster"
+  },
+  {
+    "id": "mm|wereboar",
+    "canonicalId": "monster.wereboar",
+    "name": "Wereboar",
+    "category": "monster"
+  },
+  {
+    "id": "mm|wererat",
+    "canonicalId": "monster.wererat",
+    "name": "Wererat",
+    "category": "monster"
+  },
+  {
+    "id": "mm|weretiger",
+    "canonicalId": "monster.weretiger",
+    "name": "Weretiger",
+    "category": "monster"
+  },
+  {
+    "id": "mm|werewolf",
+    "canonicalId": "monster.werewolf",
+    "name": "Werewolf",
+    "category": "monster"
+  },
+  {
+    "id": "mm|white-dragon-wyrmling",
+    "canonicalId": "monster.white-dragon-wyrmling",
+    "name": "White Dragon Wyrmling",
+    "category": "monster"
+  },
+  {
+    "id": "mm|wight",
+    "canonicalId": "monster.wight",
+    "name": "Wight",
+    "category": "monster"
+  },
+  {
+    "id": "mm|will-o-wisp",
+    "canonicalId": "monster.will-o-wisp",
+    "name": "Will-o'-Wisp",
+    "category": "monster"
+  },
+  {
+    "id": "mm|winged-kobold",
+    "canonicalId": "monster.winged-kobold",
+    "name": "Winged Kobold",
+    "category": "monster"
+  },
+  {
+    "id": "mm|winter-wolf",
+    "canonicalId": "monster.winter-wolf",
+    "name": "Winter Wolf",
+    "category": "monster"
+  },
+  {
+    "id": "mm|wolf",
+    "canonicalId": "monster.wolf",
+    "name": "Wolf",
+    "category": "monster"
+  },
+  {
+    "id": "mm|worg",
+    "canonicalId": "monster.worg",
+    "name": "Worg",
+    "category": "monster"
+  },
+  {
+    "id": "mm|wraith",
+    "canonicalId": "monster.wraith",
+    "name": "Wraith",
+    "category": "monster"
+  },
+  {
+    "id": "mm|wyvern",
+    "canonicalId": "monster.wyvern",
+    "name": "Wyvern",
+    "category": "monster"
+  },
+  {
+    "id": "mm|xorn",
+    "canonicalId": "monster.xorn",
+    "name": "Xorn",
+    "category": "monster"
+  },
+  {
+    "id": "mm|yeti",
+    "canonicalId": "monster.yeti",
+    "name": "Yeti",
+    "category": "monster"
+  },
+  {
+    "id": "mm|yochlol",
+    "canonicalId": "monster.yochlol",
+    "name": "Yochlol",
+    "category": "monster"
+  },
+  {
+    "id": "mm|young-black-dragon",
+    "canonicalId": "monster.young-black-dragon",
+    "name": "Young Black Dragon",
+    "category": "monster"
+  },
+  {
+    "id": "mm|young-blue-dragon",
+    "canonicalId": "monster.young-blue-dragon",
+    "name": "Young Blue Dragon",
+    "category": "monster"
+  },
+  {
+    "id": "mm|young-brass-dragon",
+    "canonicalId": "monster.young-brass-dragon",
+    "name": "Young Brass Dragon",
+    "category": "monster"
+  },
+  {
+    "id": "mm|young-bronze-dragon",
+    "canonicalId": "monster.young-bronze-dragon",
+    "name": "Young Bronze Dragon",
+    "category": "monster"
+  },
+  {
+    "id": "mm|young-copper-dragon",
+    "canonicalId": "monster.young-copper-dragon",
+    "name": "Young Copper Dragon",
+    "category": "monster"
+  },
+  {
+    "id": "mm|young-gold-dragon",
+    "canonicalId": "monster.young-gold-dragon",
+    "name": "Young Gold Dragon",
+    "category": "monster"
+  },
+  {
+    "id": "mm|young-green-dragon",
+    "canonicalId": "monster.young-green-dragon",
+    "name": "Young Green Dragon",
+    "category": "monster"
+  },
+  {
+    "id": "mm|young-red-dragon",
+    "canonicalId": "monster.young-red-dragon",
+    "name": "Young Red Dragon",
+    "category": "monster"
+  },
+  {
+    "id": "mm|young-red-shadow-dragon",
+    "canonicalId": "monster.young-red-shadow-dragon",
+    "name": "Young Red Shadow Dragon",
+    "category": "monster"
+  },
+  {
+    "id": "mm|young-remorhaz",
+    "canonicalId": "monster.young-remorhaz",
+    "name": "Young Remorhaz",
+    "category": "monster"
+  },
+  {
+    "id": "mm|young-silver-dragon",
+    "canonicalId": "monster.young-silver-dragon",
+    "name": "Young Silver Dragon",
+    "category": "monster"
+  },
+  {
+    "id": "mm|young-white-dragon",
+    "canonicalId": "monster.young-white-dragon",
+    "name": "Young White Dragon",
+    "category": "monster"
+  },
+  {
+    "id": "mm|yuan-ti-abomination",
+    "canonicalId": "monster.yuan-ti-abomination",
+    "name": "Yuan-ti Abomination",
+    "category": "monster"
+  },
+  {
+    "id": "mm|yuan-ti-malison-type-1",
+    "canonicalId": "monster.yuan-ti-malison-type-1",
+    "name": "Yuan-ti Malison (Type 1)",
+    "category": "monster"
+  },
+  {
+    "id": "mm|yuan-ti-malison-type-2",
+    "canonicalId": "monster.yuan-ti-malison-type-2",
+    "name": "Yuan-ti Malison (Type 2)",
+    "category": "monster"
+  },
+  {
+    "id": "mm|yuan-ti-malison-type-3",
+    "canonicalId": "monster.yuan-ti-malison-type-3",
+    "name": "Yuan-ti Malison (Type 3)",
+    "category": "monster"
+  },
+  {
+    "id": "mm|yuan-ti-pureblood",
+    "canonicalId": "monster.yuan-ti-pureblood",
+    "name": "Yuan-ti Pureblood",
+    "category": "monster"
+  },
+  {
+    "id": "mm|zombie",
+    "canonicalId": "monster.zombie",
+    "name": "Zombie",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|aarakocra-aeromancer",
+    "canonicalId": "monster.aarakocra-aeromancer",
+    "name": "Aarakocra Aeromancer",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|aarakocra-skirmisher",
+    "canonicalId": "monster.aarakocra-skirmisher",
+    "name": "Aarakocra Skirmisher",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|aberrant-cultist",
+    "canonicalId": "monster.aberrant-cultist",
+    "name": "Aberrant Cultist",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|aboleth",
+    "canonicalId": "monster.aboleth",
+    "name": "Aboleth",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|abominable-yeti",
+    "canonicalId": "monster.abominable-yeti",
+    "name": "Abominable Yeti",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|adult-black-dragon",
+    "canonicalId": "monster.adult-black-dragon",
+    "name": "Adult Black Dragon",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|adult-blue-dragon",
+    "canonicalId": "monster.adult-blue-dragon",
+    "name": "Adult Blue Dragon",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|adult-brass-dragon",
+    "canonicalId": "monster.adult-brass-dragon",
+    "name": "Adult Brass Dragon",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|adult-bronze-dragon",
+    "canonicalId": "monster.adult-bronze-dragon",
+    "name": "Adult Bronze Dragon",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|adult-copper-dragon",
+    "canonicalId": "monster.adult-copper-dragon",
+    "name": "Adult Copper Dragon",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|adult-gold-dragon",
+    "canonicalId": "monster.adult-gold-dragon",
+    "name": "Adult Gold Dragon",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|adult-green-dragon",
+    "canonicalId": "monster.adult-green-dragon",
+    "name": "Adult Green Dragon",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|adult-red-dragon",
+    "canonicalId": "monster.adult-red-dragon",
+    "name": "Adult Red Dragon",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|adult-silver-dragon",
+    "canonicalId": "monster.adult-silver-dragon",
+    "name": "Adult Silver Dragon",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|adult-white-dragon",
+    "canonicalId": "monster.adult-white-dragon",
+    "name": "Adult White Dragon",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|air-elemental",
+    "canonicalId": "monster.air-elemental",
+    "name": "Air Elemental",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|allosaurus",
+    "canonicalId": "monster.allosaurus",
+    "name": "Allosaurus",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|ancient-black-dragon",
+    "canonicalId": "monster.ancient-black-dragon",
+    "name": "Ancient Black Dragon",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|ancient-blue-dragon",
+    "canonicalId": "monster.ancient-blue-dragon",
+    "name": "Ancient Blue Dragon",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|ancient-brass-dragon",
+    "canonicalId": "monster.ancient-brass-dragon",
+    "name": "Ancient Brass Dragon",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|ancient-bronze-dragon",
+    "canonicalId": "monster.ancient-bronze-dragon",
+    "name": "Ancient Bronze Dragon",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|ancient-copper-dragon",
+    "canonicalId": "monster.ancient-copper-dragon",
+    "name": "Ancient Copper Dragon",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|ancient-gold-dragon",
+    "canonicalId": "monster.ancient-gold-dragon",
+    "name": "Ancient Gold Dragon",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|ancient-green-dragon",
+    "canonicalId": "monster.ancient-green-dragon",
+    "name": "Ancient Green Dragon",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|ancient-red-dragon",
+    "canonicalId": "monster.ancient-red-dragon",
+    "name": "Ancient Red Dragon",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|ancient-silver-dragon",
+    "canonicalId": "monster.ancient-silver-dragon",
+    "name": "Ancient Silver Dragon",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|ancient-white-dragon",
+    "canonicalId": "monster.ancient-white-dragon",
+    "name": "Ancient White Dragon",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|animal-lord",
+    "canonicalId": "monster.animal-lord",
+    "name": "Animal Lord",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|animated-armor",
+    "canonicalId": "monster.animated-armor",
+    "name": "Animated Armor",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|animated-broom",
+    "canonicalId": "monster.animated-broom",
+    "name": "Animated Broom",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|animated-flying-sword",
+    "canonicalId": "monster.animated-flying-sword",
+    "name": "Animated Flying Sword",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|animated-rug-of-smothering",
+    "canonicalId": "monster.animated-rug-of-smothering",
+    "name": "Animated Rug of Smothering",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|ankheg",
+    "canonicalId": "monster.ankheg",
+    "name": "Ankheg",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|ankylosaurus",
+    "canonicalId": "monster.ankylosaurus",
+    "name": "Ankylosaurus",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|ape",
+    "canonicalId": "monster.ape",
+    "name": "Ape",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|arcanaloth",
+    "canonicalId": "monster.arcanaloth",
+    "name": "Arcanaloth",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|arch-hag",
+    "canonicalId": "monster.arch-hag",
+    "name": "Arch-hag",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|archelon",
+    "canonicalId": "monster.archelon",
+    "name": "Archelon",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|archmage",
+    "canonicalId": "monster.archmage",
+    "name": "Archmage",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|archpriest",
+    "canonicalId": "monster.archpriest",
+    "name": "Archpriest",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|assassin",
+    "canonicalId": "monster.assassin",
+    "name": "Assassin",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|awakened-shrub",
+    "canonicalId": "monster.awakened-shrub",
+    "name": "Awakened Shrub",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|awakened-tree",
+    "canonicalId": "monster.awakened-tree",
+    "name": "Awakened Tree",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|axe-beak",
+    "canonicalId": "monster.axe-beak",
+    "name": "Axe Beak",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|azer-pyromancer",
+    "canonicalId": "monster.azer-pyromancer",
+    "name": "Azer Pyromancer",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|azer-sentinel",
+    "canonicalId": "monster.azer-sentinel",
+    "name": "Azer Sentinel",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|baboon",
+    "canonicalId": "monster.baboon",
+    "name": "Baboon",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|badger",
+    "canonicalId": "monster.badger",
+    "name": "Badger",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|balor",
+    "canonicalId": "monster.balor",
+    "name": "Balor",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|bandit",
+    "canonicalId": "monster.bandit",
+    "name": "Bandit",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|bandit-captain",
+    "canonicalId": "monster.bandit-captain",
+    "name": "Bandit Captain",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|bandit-crime-lord",
+    "canonicalId": "monster.bandit-crime-lord",
+    "name": "Bandit Crime Lord",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|bandit-deceiver",
+    "canonicalId": "monster.bandit-deceiver",
+    "name": "Bandit Deceiver",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|banshee",
+    "canonicalId": "monster.banshee",
+    "name": "Banshee",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|barbed-devil",
+    "canonicalId": "monster.barbed-devil",
+    "name": "Barbed Devil",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|barlgura",
+    "canonicalId": "monster.barlgura",
+    "name": "Barlgura",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|basilisk",
+    "canonicalId": "monster.basilisk",
+    "name": "Basilisk",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|bat",
+    "canonicalId": "monster.bat",
+    "name": "Bat",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|bearded-devil",
+    "canonicalId": "monster.bearded-devil",
+    "name": "Bearded Devil",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|behir",
+    "canonicalId": "monster.behir",
+    "name": "Behir",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|beholder",
+    "canonicalId": "monster.beholder",
+    "name": "Beholder",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|beholder-zombie",
+    "canonicalId": "monster.beholder-zombie",
+    "name": "Beholder Zombie",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|berserker",
+    "canonicalId": "monster.berserker",
+    "name": "Berserker",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|berserker-commander",
+    "canonicalId": "monster.berserker-commander",
+    "name": "Berserker Commander",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|black-bear",
+    "canonicalId": "monster.black-bear",
+    "name": "Black Bear",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|black-dragon-wyrmling",
+    "canonicalId": "monster.black-dragon-wyrmling",
+    "name": "Black Dragon Wyrmling",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|black-pudding",
+    "canonicalId": "monster.black-pudding",
+    "name": "Black Pudding",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|blink-dog",
+    "canonicalId": "monster.blink-dog",
+    "name": "Blink Dog",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|blob-of-annihilation",
+    "canonicalId": "monster.blob-of-annihilation",
+    "name": "Blob of Annihilation",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|blood-hawk",
+    "canonicalId": "monster.blood-hawk",
+    "name": "Blood Hawk",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|blue-dragon-wyrmling",
+    "canonicalId": "monster.blue-dragon-wyrmling",
+    "name": "Blue Dragon Wyrmling",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|blue-slaad",
+    "canonicalId": "monster.blue-slaad",
+    "name": "Blue Slaad",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|boar",
+    "canonicalId": "monster.boar",
+    "name": "Boar",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|bone-devil",
+    "canonicalId": "monster.bone-devil",
+    "name": "Bone Devil",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|bone-naga",
+    "canonicalId": "monster.bone-naga",
+    "name": "Bone Naga",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|brass-dragon-wyrmling",
+    "canonicalId": "monster.brass-dragon-wyrmling",
+    "name": "Brass Dragon Wyrmling",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|brazen-gorgon",
+    "canonicalId": "monster.brazen-gorgon",
+    "name": "Brazen Gorgon",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|bronze-dragon-wyrmling",
+    "canonicalId": "monster.bronze-dragon-wyrmling",
+    "name": "Bronze Dragon Wyrmling",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|brown-bear",
+    "canonicalId": "monster.brown-bear",
+    "name": "Brown Bear",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|bugbear-stalker",
+    "canonicalId": "monster.bugbear-stalker",
+    "name": "Bugbear Stalker",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|bugbear-warrior",
+    "canonicalId": "monster.bugbear-warrior",
+    "name": "Bugbear Warrior",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|bulette",
+    "canonicalId": "monster.bulette",
+    "name": "Bulette",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|bulette-pup",
+    "canonicalId": "monster.bulette-pup",
+    "name": "Bulette Pup",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|bullywug-bog-sage",
+    "canonicalId": "monster.bullywug-bog-sage",
+    "name": "Bullywug Bog Sage",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|bullywug-warrior",
+    "canonicalId": "monster.bullywug-warrior",
+    "name": "Bullywug Warrior",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|cambion",
+    "canonicalId": "monster.cambion",
+    "name": "Cambion",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|camel",
+    "canonicalId": "monster.camel",
+    "name": "Camel",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|carrion-crawler",
+    "canonicalId": "monster.carrion-crawler",
+    "name": "Carrion Crawler",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|cat",
+    "canonicalId": "monster.cat",
+    "name": "Cat",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|centaur-trooper",
+    "canonicalId": "monster.centaur-trooper",
+    "name": "Centaur Trooper",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|centaur-warden",
+    "canonicalId": "monster.centaur-warden",
+    "name": "Centaur Warden",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|chain-devil",
+    "canonicalId": "monster.chain-devil",
+    "name": "Chain Devil",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|chasme",
+    "canonicalId": "monster.chasme",
+    "name": "Chasme",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|chimera",
+    "canonicalId": "monster.chimera",
+    "name": "Chimera",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|chuul",
+    "canonicalId": "monster.chuul",
+    "name": "Chuul",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|clay-golem",
+    "canonicalId": "monster.clay-golem",
+    "name": "Clay Golem",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|cloaker",
+    "canonicalId": "monster.cloaker",
+    "name": "Cloaker",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|cloud-giant",
+    "canonicalId": "monster.cloud-giant",
+    "name": "Cloud Giant",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|cockatrice",
+    "canonicalId": "monster.cockatrice",
+    "name": "Cockatrice",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|cockatrice-regent",
+    "canonicalId": "monster.cockatrice-regent",
+    "name": "Cockatrice Regent",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|colossus",
+    "canonicalId": "monster.colossus",
+    "name": "Colossus",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|commoner",
+    "canonicalId": "monster.commoner",
+    "name": "Commoner",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|constrictor-snake",
+    "canonicalId": "monster.constrictor-snake",
+    "name": "Constrictor Snake",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|copper-dragon-wyrmling",
+    "canonicalId": "monster.copper-dragon-wyrmling",
+    "name": "Copper Dragon Wyrmling",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|couatl",
+    "canonicalId": "monster.couatl",
+    "name": "Couatl",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|crab",
+    "canonicalId": "monster.crab",
+    "name": "Crab",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|crawling-claw",
+    "canonicalId": "monster.crawling-claw",
+    "name": "Crawling Claw",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|crocodile",
+    "canonicalId": "monster.crocodile",
+    "name": "Crocodile",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|cultist",
+    "canonicalId": "monster.cultist",
+    "name": "Cultist",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|cultist-fanatic",
+    "canonicalId": "monster.cultist-fanatic",
+    "name": "Cultist Fanatic",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|cultist-hierophant",
+    "canonicalId": "monster.cultist-hierophant",
+    "name": "Cultist Hierophant",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|cyclops-oracle",
+    "canonicalId": "monster.cyclops-oracle",
+    "name": "Cyclops Oracle",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|cyclops-sentry",
+    "canonicalId": "monster.cyclops-sentry",
+    "name": "Cyclops Sentry",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|dao",
+    "canonicalId": "monster.dao",
+    "name": "Dao",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|darkmantle",
+    "canonicalId": "monster.darkmantle",
+    "name": "Darkmantle",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|death-cultist",
+    "canonicalId": "monster.death-cultist",
+    "name": "Death Cultist",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|death-dog",
+    "canonicalId": "monster.death-dog",
+    "name": "Death Dog",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|death-knight",
+    "canonicalId": "monster.death-knight",
+    "name": "Death Knight",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|death-knight-aspirant",
+    "canonicalId": "monster.death-knight-aspirant",
+    "name": "Death Knight Aspirant",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|death-slaad",
+    "canonicalId": "monster.death-slaad",
+    "name": "Death Slaad",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|death-tyrant",
+    "canonicalId": "monster.death-tyrant",
+    "name": "Death Tyrant",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|deer",
+    "canonicalId": "monster.deer",
+    "name": "Deer",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|demilich",
+    "canonicalId": "monster.demilich",
+    "name": "Demilich",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|deva",
+    "canonicalId": "monster.deva",
+    "name": "Deva",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|dire-wolf",
+    "canonicalId": "monster.dire-wolf",
+    "name": "Dire Wolf",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|dire-worg",
+    "canonicalId": "monster.dire-worg",
+    "name": "Dire Worg",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|displacer-beast",
+    "canonicalId": "monster.displacer-beast",
+    "name": "Displacer Beast",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|djinni",
+    "canonicalId": "monster.djinni",
+    "name": "Djinni",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|doppelganger",
+    "canonicalId": "monster.doppelganger",
+    "name": "Doppelganger",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|dracolich",
+    "canonicalId": "monster.dracolich",
+    "name": "Dracolich",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|draft-horse",
+    "canonicalId": "monster.draft-horse",
+    "name": "Draft Horse",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|dragon-turtle",
+    "canonicalId": "monster.dragon-turtle",
+    "name": "Dragon Turtle",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|dretch",
+    "canonicalId": "monster.dretch",
+    "name": "Dretch",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|drider",
+    "canonicalId": "monster.drider",
+    "name": "Drider",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|druid",
+    "canonicalId": "monster.druid",
+    "name": "Druid",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|dryad",
+    "canonicalId": "monster.dryad",
+    "name": "Dryad",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|dust-mephit",
+    "canonicalId": "monster.dust-mephit",
+    "name": "Dust Mephit",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|eagle",
+    "canonicalId": "monster.eagle",
+    "name": "Eagle",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|earth-elemental",
+    "canonicalId": "monster.earth-elemental",
+    "name": "Earth Elemental",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|efreeti",
+    "canonicalId": "monster.efreeti",
+    "name": "Efreeti",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|elemental-cataclysm",
+    "canonicalId": "monster.elemental-cataclysm",
+    "name": "Elemental Cataclysm",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|elemental-cultist",
+    "canonicalId": "monster.elemental-cultist",
+    "name": "Elemental Cultist",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|elephant",
+    "canonicalId": "monster.elephant",
+    "name": "Elephant",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|elk",
+    "canonicalId": "monster.elk",
+    "name": "Elk",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|empyrean",
+    "canonicalId": "monster.empyrean",
+    "name": "Empyrean",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|empyrean-iota",
+    "canonicalId": "monster.empyrean-iota",
+    "name": "Empyrean Iota",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|erinyes",
+    "canonicalId": "monster.erinyes",
+    "name": "Erinyes",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|ettercap",
+    "canonicalId": "monster.ettercap",
+    "name": "Ettercap",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|ettin",
+    "canonicalId": "monster.ettin",
+    "name": "Ettin",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|faerie-dragon-adult",
+    "canonicalId": "monster.faerie-dragon-adult",
+    "name": "Faerie Dragon Adult",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|faerie-dragon-youth",
+    "canonicalId": "monster.faerie-dragon-youth",
+    "name": "Faerie Dragon Youth",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|fiend-cultist",
+    "canonicalId": "monster.fiend-cultist",
+    "name": "Fiend Cultist",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|fire-elemental",
+    "canonicalId": "monster.fire-elemental",
+    "name": "Fire Elemental",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|fire-giant",
+    "canonicalId": "monster.fire-giant",
+    "name": "Fire Giant",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|flameskull",
+    "canonicalId": "monster.flameskull",
+    "name": "Flameskull",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|flaming-skeleton",
+    "canonicalId": "monster.flaming-skeleton",
+    "name": "Flaming Skeleton",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|flesh-golem",
+    "canonicalId": "monster.flesh-golem",
+    "name": "Flesh Golem",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|flumph",
+    "canonicalId": "monster.flumph",
+    "name": "Flumph",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|flying-snake",
+    "canonicalId": "monster.flying-snake",
+    "name": "Flying Snake",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|fomorian",
+    "canonicalId": "monster.fomorian",
+    "name": "Fomorian",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|frog",
+    "canonicalId": "monster.frog",
+    "name": "Frog",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|frost-giant",
+    "canonicalId": "monster.frost-giant",
+    "name": "Frost Giant",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|galeb-duhr",
+    "canonicalId": "monster.galeb-duhr",
+    "name": "Galeb Duhr",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|gargoyle",
+    "canonicalId": "monster.gargoyle",
+    "name": "Gargoyle",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|gas-spore-fungus",
+    "canonicalId": "monster.gas-spore-fungus",
+    "name": "Gas Spore Fungus",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|gelatinous-cube",
+    "canonicalId": "monster.gelatinous-cube",
+    "name": "Gelatinous Cube",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|ghast",
+    "canonicalId": "monster.ghast",
+    "name": "Ghast",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|ghast-gravecaller",
+    "canonicalId": "monster.ghast-gravecaller",
+    "name": "Ghast Gravecaller",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|ghost",
+    "canonicalId": "monster.ghost",
+    "name": "Ghost",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|ghoul",
+    "canonicalId": "monster.ghoul",
+    "name": "Ghoul",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|giant-ape",
+    "canonicalId": "monster.giant-ape",
+    "name": "Giant Ape",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|giant-axe-beak",
+    "canonicalId": "monster.giant-axe-beak",
+    "name": "Giant Axe Beak",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|giant-badger",
+    "canonicalId": "monster.giant-badger",
+    "name": "Giant Badger",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|giant-bat",
+    "canonicalId": "monster.giant-bat",
+    "name": "Giant Bat",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|giant-boar",
+    "canonicalId": "monster.giant-boar",
+    "name": "Giant Boar",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|giant-centipede",
+    "canonicalId": "monster.giant-centipede",
+    "name": "Giant Centipede",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|giant-constrictor-snake",
+    "canonicalId": "monster.giant-constrictor-snake",
+    "name": "Giant Constrictor Snake",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|giant-crab",
+    "canonicalId": "monster.giant-crab",
+    "name": "Giant Crab",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|giant-crocodile",
+    "canonicalId": "monster.giant-crocodile",
+    "name": "Giant Crocodile",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|giant-eagle",
+    "canonicalId": "monster.giant-eagle",
+    "name": "Giant Eagle",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|giant-elk",
+    "canonicalId": "monster.giant-elk",
+    "name": "Giant Elk",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|giant-fire-beetle",
+    "canonicalId": "monster.giant-fire-beetle",
+    "name": "Giant Fire Beetle",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|giant-frog",
+    "canonicalId": "monster.giant-frog",
+    "name": "Giant Frog",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|giant-goat",
+    "canonicalId": "monster.giant-goat",
+    "name": "Giant Goat",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|giant-hyena",
+    "canonicalId": "monster.giant-hyena",
+    "name": "Giant Hyena",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|giant-lizard",
+    "canonicalId": "monster.giant-lizard",
+    "name": "Giant Lizard",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|giant-octopus",
+    "canonicalId": "monster.giant-octopus",
+    "name": "Giant Octopus",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|giant-owl",
+    "canonicalId": "monster.giant-owl",
+    "name": "Giant Owl",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|giant-rat",
+    "canonicalId": "monster.giant-rat",
+    "name": "Giant Rat",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|giant-scorpion",
+    "canonicalId": "monster.giant-scorpion",
+    "name": "Giant Scorpion",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|giant-seahorse",
+    "canonicalId": "monster.giant-seahorse",
+    "name": "Giant Seahorse",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|giant-shark",
+    "canonicalId": "monster.giant-shark",
+    "name": "Giant Shark",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|giant-spider",
+    "canonicalId": "monster.giant-spider",
+    "name": "Giant Spider",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|giant-squid",
+    "canonicalId": "monster.giant-squid",
+    "name": "Giant Squid",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|giant-toad",
+    "canonicalId": "monster.giant-toad",
+    "name": "Giant Toad",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|giant-venomous-snake",
+    "canonicalId": "monster.giant-venomous-snake",
+    "name": "Giant Venomous Snake",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|giant-vulture",
+    "canonicalId": "monster.giant-vulture",
+    "name": "Giant Vulture",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|giant-wasp",
+    "canonicalId": "monster.giant-wasp",
+    "name": "Giant Wasp",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|giant-weasel",
+    "canonicalId": "monster.giant-weasel",
+    "name": "Giant Weasel",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|giant-wolf-spider",
+    "canonicalId": "monster.giant-wolf-spider",
+    "name": "Giant Wolf Spider",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|gibbering-mouther",
+    "canonicalId": "monster.gibbering-mouther",
+    "name": "Gibbering Mouther",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|githyanki-dracomancer",
+    "canonicalId": "monster.githyanki-dracomancer",
+    "name": "Githyanki Dracomancer",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|githyanki-knight",
+    "canonicalId": "monster.githyanki-knight",
+    "name": "Githyanki Knight",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|githyanki-warrior",
+    "canonicalId": "monster.githyanki-warrior",
+    "name": "Githyanki Warrior",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|githzerai-monk",
+    "canonicalId": "monster.githzerai-monk",
+    "name": "Githzerai Monk",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|githzerai-psion",
+    "canonicalId": "monster.githzerai-psion",
+    "name": "Githzerai Psion",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|githzerai-zerth",
+    "canonicalId": "monster.githzerai-zerth",
+    "name": "Githzerai Zerth",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|glabrezu",
+    "canonicalId": "monster.glabrezu",
+    "name": "Glabrezu",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|gladiator",
+    "canonicalId": "monster.gladiator",
+    "name": "Gladiator",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|gnoll-demoniac",
+    "canonicalId": "monster.gnoll-demoniac",
+    "name": "Gnoll Demoniac",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|gnoll-fang-of-yeenoghu",
+    "canonicalId": "monster.gnoll-fang-of-yeenoghu",
+    "name": "Gnoll Fang of Yeenoghu",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|gnoll-pack-lord",
+    "canonicalId": "monster.gnoll-pack-lord",
+    "name": "Gnoll Pack Lord",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|gnoll-warrior",
+    "canonicalId": "monster.gnoll-warrior",
+    "name": "Gnoll Warrior",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|goat",
+    "canonicalId": "monster.goat",
+    "name": "Goat",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|goblin-boss",
+    "canonicalId": "monster.goblin-boss",
+    "name": "Goblin Boss",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|goblin-hexer",
+    "canonicalId": "monster.goblin-hexer",
+    "name": "Goblin Hexer",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|goblin-minion",
+    "canonicalId": "monster.goblin-minion",
+    "name": "Goblin Minion",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|goblin-warrior",
+    "canonicalId": "monster.goblin-warrior",
+    "name": "Goblin Warrior",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|gold-dragon-wyrmling",
+    "canonicalId": "monster.gold-dragon-wyrmling",
+    "name": "Gold Dragon Wyrmling",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|gorgon",
+    "canonicalId": "monster.gorgon",
+    "name": "Gorgon",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|goristro",
+    "canonicalId": "monster.goristro",
+    "name": "Goristro",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|graveyard-revenant",
+    "canonicalId": "monster.graveyard-revenant",
+    "name": "Graveyard Revenant",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|gray-ooze",
+    "canonicalId": "monster.gray-ooze",
+    "name": "Gray Ooze",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|gray-slaad",
+    "canonicalId": "monster.gray-slaad",
+    "name": "Gray Slaad",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|green-dragon-wyrmling",
+    "canonicalId": "monster.green-dragon-wyrmling",
+    "name": "Green Dragon Wyrmling",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|green-hag",
+    "canonicalId": "monster.green-hag",
+    "name": "Green Hag",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|green-slaad",
+    "canonicalId": "monster.green-slaad",
+    "name": "Green Slaad",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|grell",
+    "canonicalId": "monster.grell",
+    "name": "Grell",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|grick",
+    "canonicalId": "monster.grick",
+    "name": "Grick",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|grick-ancient",
+    "canonicalId": "monster.grick-ancient",
+    "name": "Grick Ancient",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|griffon",
+    "canonicalId": "monster.griffon",
+    "name": "Griffon",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|grimlock",
+    "canonicalId": "monster.grimlock",
+    "name": "Grimlock",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|guard",
+    "canonicalId": "monster.guard",
+    "name": "Guard",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|guard-captain",
+    "canonicalId": "monster.guard-captain",
+    "name": "Guard Captain",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|guardian-naga",
+    "canonicalId": "monster.guardian-naga",
+    "name": "Guardian Naga",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|gulthias-blight",
+    "canonicalId": "monster.gulthias-blight",
+    "name": "Gulthias Blight",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|half-dragon",
+    "canonicalId": "monster.half-dragon",
+    "name": "Half-Dragon",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|harpy",
+    "canonicalId": "monster.harpy",
+    "name": "Harpy",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|haunting-revenant",
+    "canonicalId": "monster.haunting-revenant",
+    "name": "Haunting Revenant",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|hawk",
+    "canonicalId": "monster.hawk",
+    "name": "Hawk",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|hell-hound",
+    "canonicalId": "monster.hell-hound",
+    "name": "Hell Hound",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|helmed-horror",
+    "canonicalId": "monster.helmed-horror",
+    "name": "Helmed Horror",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|hezrou",
+    "canonicalId": "monster.hezrou",
+    "name": "Hezrou",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|hill-giant",
+    "canonicalId": "monster.hill-giant",
+    "name": "Hill Giant",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|hippogriff",
+    "canonicalId": "monster.hippogriff",
+    "name": "Hippogriff",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|hippopotamus",
+    "canonicalId": "monster.hippopotamus",
+    "name": "Hippopotamus",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|hobgoblin-captain",
+    "canonicalId": "monster.hobgoblin-captain",
+    "name": "Hobgoblin Captain",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|hobgoblin-warlord",
+    "canonicalId": "monster.hobgoblin-warlord",
+    "name": "Hobgoblin Warlord",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|hobgoblin-warrior",
+    "canonicalId": "monster.hobgoblin-warrior",
+    "name": "Hobgoblin Warrior",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|homunculus",
+    "canonicalId": "monster.homunculus",
+    "name": "Homunculus",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|hook-horror",
+    "canonicalId": "monster.hook-horror",
+    "name": "Hook Horror",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|horned-devil",
+    "canonicalId": "monster.horned-devil",
+    "name": "Horned Devil",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|hunter-shark",
+    "canonicalId": "monster.hunter-shark",
+    "name": "Hunter Shark",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|hydra",
+    "canonicalId": "monster.hydra",
+    "name": "Hydra",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|hyena",
+    "canonicalId": "monster.hyena",
+    "name": "Hyena",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|ice-devil",
+    "canonicalId": "monster.ice-devil",
+    "name": "Ice Devil",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|ice-mephit",
+    "canonicalId": "monster.ice-mephit",
+    "name": "Ice Mephit",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|imp",
+    "canonicalId": "monster.imp",
+    "name": "Imp",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|incubus",
+    "canonicalId": "monster.incubus",
+    "name": "Incubus",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|intellect-devourer",
+    "canonicalId": "monster.intellect-devourer",
+    "name": "Intellect Devourer",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|invisible-stalker",
+    "canonicalId": "monster.invisible-stalker",
+    "name": "Invisible Stalker",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|iron-golem",
+    "canonicalId": "monster.iron-golem",
+    "name": "Iron Golem",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|jackal",
+    "canonicalId": "monster.jackal",
+    "name": "Jackal",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|jackalwere",
+    "canonicalId": "monster.jackalwere",
+    "name": "Jackalwere",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|juvenile-shadow-dragon",
+    "canonicalId": "monster.juvenile-shadow-dragon",
+    "name": "Juvenile Shadow Dragon",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|kenku",
+    "canonicalId": "monster.kenku",
+    "name": "Kenku",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|killer-whale",
+    "canonicalId": "monster.killer-whale",
+    "name": "Killer Whale",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|knight",
+    "canonicalId": "monster.knight",
+    "name": "Knight",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|kobold-warrior",
+    "canonicalId": "monster.kobold-warrior",
+    "name": "Kobold Warrior",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|kraken",
+    "canonicalId": "monster.kraken",
+    "name": "Kraken",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|kuo-toa",
+    "canonicalId": "monster.kuo-toa",
+    "name": "Kuo-toa",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|kuo-toa-archpriest",
+    "canonicalId": "monster.kuo-toa-archpriest",
+    "name": "Kuo-toa Archpriest",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|kuo-toa-monitor",
+    "canonicalId": "monster.kuo-toa-monitor",
+    "name": "Kuo-toa Monitor",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|kuo-toa-whip",
+    "canonicalId": "monster.kuo-toa-whip",
+    "name": "Kuo-toa Whip",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|lacedon-ghoul",
+    "canonicalId": "monster.lacedon-ghoul",
+    "name": "Lacedon Ghoul",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|lamia",
+    "canonicalId": "monster.lamia",
+    "name": "Lamia",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|larva",
+    "canonicalId": "monster.larva",
+    "name": "Larva",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|lemure",
+    "canonicalId": "monster.lemure",
+    "name": "Lemure",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|lich",
+    "canonicalId": "monster.lich",
+    "name": "Lich",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|lion",
+    "canonicalId": "monster.lion",
+    "name": "Lion",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|lizard",
+    "canonicalId": "monster.lizard",
+    "name": "Lizard",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|lizardfolk-geomancer",
+    "canonicalId": "monster.lizardfolk-geomancer",
+    "name": "Lizardfolk Geomancer",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|lizardfolk-sovereign",
+    "canonicalId": "monster.lizardfolk-sovereign",
+    "name": "Lizardfolk Sovereign",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|mage",
+    "canonicalId": "monster.mage",
+    "name": "Mage",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|mage-apprentice",
+    "canonicalId": "monster.mage-apprentice",
+    "name": "Mage Apprentice",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|magma-mephit",
+    "canonicalId": "monster.magma-mephit",
+    "name": "Magma Mephit",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|magmin",
+    "canonicalId": "monster.magmin",
+    "name": "Magmin",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|mammoth",
+    "canonicalId": "monster.mammoth",
+    "name": "Mammoth",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|manes",
+    "canonicalId": "monster.manes",
+    "name": "Manes",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|manes-vaporspawn",
+    "canonicalId": "monster.manes-vaporspawn",
+    "name": "Manes Vaporspawn",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|manticore",
+    "canonicalId": "monster.manticore",
+    "name": "Manticore",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|marid",
+    "canonicalId": "monster.marid",
+    "name": "Marid",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|marilith",
+    "canonicalId": "monster.marilith",
+    "name": "Marilith",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|mastiff",
+    "canonicalId": "monster.mastiff",
+    "name": "Mastiff",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|medusa",
+    "canonicalId": "monster.medusa",
+    "name": "Medusa",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|merfolk-skirmisher",
+    "canonicalId": "monster.merfolk-skirmisher",
+    "name": "Merfolk Skirmisher",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|merfolk-wavebender",
+    "canonicalId": "monster.merfolk-wavebender",
+    "name": "Merfolk Wavebender",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|merrow",
+    "canonicalId": "monster.merrow",
+    "name": "Merrow",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|mezzoloth",
+    "canonicalId": "monster.mezzoloth",
+    "name": "Mezzoloth",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|mimic",
+    "canonicalId": "monster.mimic",
+    "name": "Mimic",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|mind-flayer",
+    "canonicalId": "monster.mind-flayer",
+    "name": "Mind Flayer",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|mind-flayer-arcanist",
+    "canonicalId": "monster.mind-flayer-arcanist",
+    "name": "Mind Flayer Arcanist",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|minotaur-of-baphomet",
+    "canonicalId": "monster.minotaur-of-baphomet",
+    "name": "Minotaur of Baphomet",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|minotaur-skeleton",
+    "canonicalId": "monster.minotaur-skeleton",
+    "name": "Minotaur Skeleton",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|modron-duodrone",
+    "canonicalId": "monster.modron-duodrone",
+    "name": "Modron Duodrone",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|modron-monodrone",
+    "canonicalId": "monster.modron-monodrone",
+    "name": "Modron Monodrone",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|modron-pentadrone",
+    "canonicalId": "monster.modron-pentadrone",
+    "name": "Modron Pentadrone",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|modron-quadrone",
+    "canonicalId": "monster.modron-quadrone",
+    "name": "Modron Quadrone",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|modron-tridrone",
+    "canonicalId": "monster.modron-tridrone",
+    "name": "Modron Tridrone",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|mud-mephit",
+    "canonicalId": "monster.mud-mephit",
+    "name": "Mud Mephit",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|mule",
+    "canonicalId": "monster.mule",
+    "name": "Mule",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|mummy",
+    "canonicalId": "monster.mummy",
+    "name": "Mummy",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|mummy-lord",
+    "canonicalId": "monster.mummy-lord",
+    "name": "Mummy Lord",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|myconid-adult",
+    "canonicalId": "monster.myconid-adult",
+    "name": "Myconid Adult",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|myconid-sovereign",
+    "canonicalId": "monster.myconid-sovereign",
+    "name": "Myconid Sovereign",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|myconid-spore-servant",
+    "canonicalId": "monster.myconid-spore-servant",
+    "name": "Myconid Spore Servant",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|myconid-sprout",
+    "canonicalId": "monster.myconid-sprout",
+    "name": "Myconid Sprout",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|nalfeshnee",
+    "canonicalId": "monster.nalfeshnee",
+    "name": "Nalfeshnee",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|needle-blight",
+    "canonicalId": "monster.needle-blight",
+    "name": "Needle Blight",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|night-hag",
+    "canonicalId": "monster.night-hag",
+    "name": "Night Hag",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|nightmare",
+    "canonicalId": "monster.nightmare",
+    "name": "Nightmare",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|noble",
+    "canonicalId": "monster.noble",
+    "name": "Noble",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|noble-prodigy",
+    "canonicalId": "monster.noble-prodigy",
+    "name": "Noble Prodigy",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|nothic",
+    "canonicalId": "monster.nothic",
+    "name": "Nothic",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|nycaloth",
+    "canonicalId": "monster.nycaloth",
+    "name": "Nycaloth",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|ochre-jelly",
+    "canonicalId": "monster.ochre-jelly",
+    "name": "Ochre Jelly",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|octopus",
+    "canonicalId": "monster.octopus",
+    "name": "Octopus",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|ogre",
+    "canonicalId": "monster.ogre",
+    "name": "Ogre",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|ogre-zombie",
+    "canonicalId": "monster.ogre-zombie",
+    "name": "Ogre Zombie",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|ogrillon-ogre",
+    "canonicalId": "monster.ogrillon-ogre",
+    "name": "Ogrillon Ogre",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|oni",
+    "canonicalId": "monster.oni",
+    "name": "Oni",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|otyugh",
+    "canonicalId": "monster.otyugh",
+    "name": "Otyugh",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|owl",
+    "canonicalId": "monster.owl",
+    "name": "Owl",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|owlbear",
+    "canonicalId": "monster.owlbear",
+    "name": "Owlbear",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|panther",
+    "canonicalId": "monster.panther",
+    "name": "Panther",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|pegasus",
+    "canonicalId": "monster.pegasus",
+    "name": "Pegasus",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|performer",
+    "canonicalId": "monster.performer",
+    "name": "Performer",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|performer-legend",
+    "canonicalId": "monster.performer-legend",
+    "name": "Performer Legend",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|performer-maestro",
+    "canonicalId": "monster.performer-maestro",
+    "name": "Performer Maestro",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|peryton",
+    "canonicalId": "monster.peryton",
+    "name": "Peryton",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|phase-spider",
+    "canonicalId": "monster.phase-spider",
+    "name": "Phase Spider",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|piercer",
+    "canonicalId": "monster.piercer",
+    "name": "Piercer",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|piranha",
+    "canonicalId": "monster.piranha",
+    "name": "Piranha",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|pirate",
+    "canonicalId": "monster.pirate",
+    "name": "Pirate",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|pirate-admiral",
+    "canonicalId": "monster.pirate-admiral",
+    "name": "Pirate Admiral",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|pirate-captain",
+    "canonicalId": "monster.pirate-captain",
+    "name": "Pirate Captain",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|pit-fiend",
+    "canonicalId": "monster.pit-fiend",
+    "name": "Pit Fiend",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|pixie",
+    "canonicalId": "monster.pixie",
+    "name": "Pixie",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|pixie-wonderbringer",
+    "canonicalId": "monster.pixie-wonderbringer",
+    "name": "Pixie Wonderbringer",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|planetar",
+    "canonicalId": "monster.planetar",
+    "name": "Planetar",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|plesiosaurus",
+    "canonicalId": "monster.plesiosaurus",
+    "name": "Plesiosaurus",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|polar-bear",
+    "canonicalId": "monster.polar-bear",
+    "name": "Polar Bear",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|poltergeist",
+    "canonicalId": "monster.poltergeist",
+    "name": "Poltergeist",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|pony",
+    "canonicalId": "monster.pony",
+    "name": "Pony",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|priest",
+    "canonicalId": "monster.priest",
+    "name": "Priest",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|priest-acolyte",
+    "canonicalId": "monster.priest-acolyte",
+    "name": "Priest Acolyte",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|primeval-owlbear",
+    "canonicalId": "monster.primeval-owlbear",
+    "name": "Primeval Owlbear",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|pseudodragon",
+    "canonicalId": "monster.pseudodragon",
+    "name": "Pseudodragon",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|psychic-gray-ooze",
+    "canonicalId": "monster.psychic-gray-ooze",
+    "name": "Psychic Gray Ooze",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|pteranodon",
+    "canonicalId": "monster.pteranodon",
+    "name": "Pteranodon",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|purple-worm",
+    "canonicalId": "monster.purple-worm",
+    "name": "Purple Worm",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|quaggoth",
+    "canonicalId": "monster.quaggoth",
+    "name": "Quaggoth",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|quaggoth-thonot",
+    "canonicalId": "monster.quaggoth-thonot",
+    "name": "Quaggoth Thonot",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|quasit",
+    "canonicalId": "monster.quasit",
+    "name": "Quasit",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|questing-knight",
+    "canonicalId": "monster.questing-knight",
+    "name": "Questing Knight",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|rakshasa",
+    "canonicalId": "monster.rakshasa",
+    "name": "Rakshasa",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|rat",
+    "canonicalId": "monster.rat",
+    "name": "Rat",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|raven",
+    "canonicalId": "monster.raven",
+    "name": "Raven",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|red-dragon-wyrmling",
+    "canonicalId": "monster.red-dragon-wyrmling",
+    "name": "Red Dragon Wyrmling",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|red-slaad",
+    "canonicalId": "monster.red-slaad",
+    "name": "Red Slaad",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|reef-shark",
+    "canonicalId": "monster.reef-shark",
+    "name": "Reef Shark",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|remorhaz",
+    "canonicalId": "monster.remorhaz",
+    "name": "Remorhaz",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|revenant",
+    "canonicalId": "monster.revenant",
+    "name": "Revenant",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|rhinoceros",
+    "canonicalId": "monster.rhinoceros",
+    "name": "Rhinoceros",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|riding-horse",
+    "canonicalId": "monster.riding-horse",
+    "name": "Riding Horse",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|roc",
+    "canonicalId": "monster.roc",
+    "name": "Roc",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|roper",
+    "canonicalId": "monster.roper",
+    "name": "Roper",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|rust-monster",
+    "canonicalId": "monster.rust-monster",
+    "name": "Rust Monster",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|saber-toothed-tiger",
+    "canonicalId": "monster.saber-toothed-tiger",
+    "name": "Saber-Toothed Tiger",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|sahuagin-baron",
+    "canonicalId": "monster.sahuagin-baron",
+    "name": "Sahuagin Baron",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|sahuagin-priest",
+    "canonicalId": "monster.sahuagin-priest",
+    "name": "Sahuagin Priest",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|sahuagin-warrior",
+    "canonicalId": "monster.sahuagin-warrior",
+    "name": "Sahuagin Warrior",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|salamander",
+    "canonicalId": "monster.salamander",
+    "name": "Salamander",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|salamander-fire-snake",
+    "canonicalId": "monster.salamander-fire-snake",
+    "name": "Salamander Fire Snake",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|salamander-inferno-master",
+    "canonicalId": "monster.salamander-inferno-master",
+    "name": "Salamander Inferno Master",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|satyr",
+    "canonicalId": "monster.satyr",
+    "name": "Satyr",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|satyr-revelmaster",
+    "canonicalId": "monster.satyr-revelmaster",
+    "name": "Satyr Revelmaster",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|scarecrow",
+    "canonicalId": "monster.scarecrow",
+    "name": "Scarecrow",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|scorpion",
+    "canonicalId": "monster.scorpion",
+    "name": "Scorpion",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|scout",
+    "canonicalId": "monster.scout",
+    "name": "Scout",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|scout-captain",
+    "canonicalId": "monster.scout-captain",
+    "name": "Scout Captain",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|sea-hag",
+    "canonicalId": "monster.sea-hag",
+    "name": "Sea Hag",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|seahorse",
+    "canonicalId": "monster.seahorse",
+    "name": "Seahorse",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|shadow",
+    "canonicalId": "monster.shadow",
+    "name": "Shadow",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|shadow-demon",
+    "canonicalId": "monster.shadow-demon",
+    "name": "Shadow Demon",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|shadow-dragon",
+    "canonicalId": "monster.shadow-dragon",
+    "name": "Shadow Dragon",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|shambling-mound",
+    "canonicalId": "monster.shambling-mound",
+    "name": "Shambling Mound",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|shield-guardian",
+    "canonicalId": "monster.shield-guardian",
+    "name": "Shield Guardian",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|shrieker-fungus",
+    "canonicalId": "monster.shrieker-fungus",
+    "name": "Shrieker Fungus",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|silver-dragon-wyrmling",
+    "canonicalId": "monster.silver-dragon-wyrmling",
+    "name": "Silver Dragon Wyrmling",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|skeleton",
+    "canonicalId": "monster.skeleton",
+    "name": "Skeleton",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|slaad-tadpole",
+    "canonicalId": "monster.slaad-tadpole",
+    "name": "Slaad Tadpole",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|smoke-mephit",
+    "canonicalId": "monster.smoke-mephit",
+    "name": "Smoke Mephit",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|solar",
+    "canonicalId": "monster.solar",
+    "name": "Solar",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|spectator",
+    "canonicalId": "monster.spectator",
+    "name": "Spectator",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|specter",
+    "canonicalId": "monster.specter",
+    "name": "Specter",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|sphinx-of-lore",
+    "canonicalId": "monster.sphinx-of-lore",
+    "name": "Sphinx of Lore",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|sphinx-of-secrets",
+    "canonicalId": "monster.sphinx-of-secrets",
+    "name": "Sphinx of Secrets",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|sphinx-of-valor",
+    "canonicalId": "monster.sphinx-of-valor",
+    "name": "Sphinx of Valor",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|sphinx-of-wonder",
+    "canonicalId": "monster.sphinx-of-wonder",
+    "name": "Sphinx of Wonder",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|spider",
+    "canonicalId": "monster.spider",
+    "name": "Spider",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|spined-devil",
+    "canonicalId": "monster.spined-devil",
+    "name": "Spined Devil",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|spirit-naga",
+    "canonicalId": "monster.spirit-naga",
+    "name": "Spirit Naga",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|sprite",
+    "canonicalId": "monster.sprite",
+    "name": "Sprite",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|spy",
+    "canonicalId": "monster.spy",
+    "name": "Spy",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|spy-master",
+    "canonicalId": "monster.spy-master",
+    "name": "Spy Master",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|steam-mephit",
+    "canonicalId": "monster.steam-mephit",
+    "name": "Steam Mephit",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|stirge",
+    "canonicalId": "monster.stirge",
+    "name": "Stirge",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|stone-giant",
+    "canonicalId": "monster.stone-giant",
+    "name": "Stone Giant",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|stone-golem",
+    "canonicalId": "monster.stone-golem",
+    "name": "Stone Golem",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|storm-giant",
+    "canonicalId": "monster.storm-giant",
+    "name": "Storm Giant",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|succubus",
+    "canonicalId": "monster.succubus",
+    "name": "Succubus",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|swarm-of-bats",
+    "canonicalId": "monster.swarm-of-bats",
+    "name": "Swarm of Bats",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|swarm-of-crawling-claws",
+    "canonicalId": "monster.swarm-of-crawling-claws",
+    "name": "Swarm of Crawling Claws",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|swarm-of-dretches",
+    "canonicalId": "monster.swarm-of-dretches",
+    "name": "Swarm of Dretches",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|swarm-of-insects",
+    "canonicalId": "monster.swarm-of-insects",
+    "name": "Swarm of Insects",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|swarm-of-larvae",
+    "canonicalId": "monster.swarm-of-larvae",
+    "name": "Swarm of Larvae",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|swarm-of-lemures",
+    "canonicalId": "monster.swarm-of-lemures",
+    "name": "Swarm of Lemures",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|swarm-of-piranhas",
+    "canonicalId": "monster.swarm-of-piranhas",
+    "name": "Swarm of Piranhas",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|swarm-of-rats",
+    "canonicalId": "monster.swarm-of-rats",
+    "name": "Swarm of Rats",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|swarm-of-ravens",
+    "canonicalId": "monster.swarm-of-ravens",
+    "name": "Swarm of Ravens",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|swarm-of-stirges",
+    "canonicalId": "monster.swarm-of-stirges",
+    "name": "Swarm of Stirges",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|swarm-of-venomous-snakes",
+    "canonicalId": "monster.swarm-of-venomous-snakes",
+    "name": "Swarm of Venomous Snakes",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|tarrasque",
+    "canonicalId": "monster.tarrasque",
+    "name": "Tarrasque",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|thri-kreen-marauder",
+    "canonicalId": "monster.thri-kreen-marauder",
+    "name": "Thri-kreen Marauder",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|thri-kreen-psion",
+    "canonicalId": "monster.thri-kreen-psion",
+    "name": "Thri-kreen Psion",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|tiger",
+    "canonicalId": "monster.tiger",
+    "name": "Tiger",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|tough",
+    "canonicalId": "monster.tough",
+    "name": "Tough",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|tough-boss",
+    "canonicalId": "monster.tough-boss",
+    "name": "Tough Boss",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|treant",
+    "canonicalId": "monster.treant",
+    "name": "Treant",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|tree-blight",
+    "canonicalId": "monster.tree-blight",
+    "name": "Tree Blight",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|triceratops",
+    "canonicalId": "monster.triceratops",
+    "name": "Triceratops",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|troglodyte",
+    "canonicalId": "monster.troglodyte",
+    "name": "Troglodyte",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|troll",
+    "canonicalId": "monster.troll",
+    "name": "Troll",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|troll-limb",
+    "canonicalId": "monster.troll-limb",
+    "name": "Troll Limb",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|twig-blight",
+    "canonicalId": "monster.twig-blight",
+    "name": "Twig Blight",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|tyrannosaurus-rex",
+    "canonicalId": "monster.tyrannosaurus-rex",
+    "name": "Tyrannosaurus Rex",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|ultroloth",
+    "canonicalId": "monster.ultroloth",
+    "name": "Ultroloth",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|umber-hulk",
+    "canonicalId": "monster.umber-hulk",
+    "name": "Umber Hulk",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|unicorn",
+    "canonicalId": "monster.unicorn",
+    "name": "Unicorn",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|vampire",
+    "canonicalId": "monster.vampire",
+    "name": "Vampire",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|vampire-familiar",
+    "canonicalId": "monster.vampire-familiar",
+    "name": "Vampire Familiar",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|vampire-nightbringer",
+    "canonicalId": "monster.vampire-nightbringer",
+    "name": "Vampire Nightbringer",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|vampire-spawn",
+    "canonicalId": "monster.vampire-spawn",
+    "name": "Vampire Spawn",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|vampire-umbral-lord",
+    "canonicalId": "monster.vampire-umbral-lord",
+    "name": "Vampire Umbral Lord",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|venomous-snake",
+    "canonicalId": "monster.venomous-snake",
+    "name": "Venomous Snake",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|vine-blight",
+    "canonicalId": "monster.vine-blight",
+    "name": "Vine Blight",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|violet-fungus",
+    "canonicalId": "monster.violet-fungus",
+    "name": "Violet Fungus",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|violet-fungus-necrohulk",
+    "canonicalId": "monster.violet-fungus-necrohulk",
+    "name": "Violet Fungus Necrohulk",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|vrock",
+    "canonicalId": "monster.vrock",
+    "name": "Vrock",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|vulture",
+    "canonicalId": "monster.vulture",
+    "name": "Vulture",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|warhorse",
+    "canonicalId": "monster.warhorse",
+    "name": "Warhorse",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|warhorse-skeleton",
+    "canonicalId": "monster.warhorse-skeleton",
+    "name": "Warhorse Skeleton",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|warrior-commander",
+    "canonicalId": "monster.warrior-commander",
+    "name": "Warrior Commander",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|warrior-infantry",
+    "canonicalId": "monster.warrior-infantry",
+    "name": "Warrior Infantry",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|warrior-veteran",
+    "canonicalId": "monster.warrior-veteran",
+    "name": "Warrior Veteran",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|water-elemental",
+    "canonicalId": "monster.water-elemental",
+    "name": "Water Elemental",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|water-weird",
+    "canonicalId": "monster.water-weird",
+    "name": "Water Weird",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|weasel",
+    "canonicalId": "monster.weasel",
+    "name": "Weasel",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|werebear",
+    "canonicalId": "monster.werebear",
+    "name": "Werebear",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|wereboar",
+    "canonicalId": "monster.wereboar",
+    "name": "Wereboar",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|wererat",
+    "canonicalId": "monster.wererat",
+    "name": "Wererat",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|weretiger",
+    "canonicalId": "monster.weretiger",
+    "name": "Weretiger",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|werewolf",
+    "canonicalId": "monster.werewolf",
+    "name": "Werewolf",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|white-dragon-wyrmling",
+    "canonicalId": "monster.white-dragon-wyrmling",
+    "name": "White Dragon Wyrmling",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|wight",
+    "canonicalId": "monster.wight",
+    "name": "Wight",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|will-o-wisp",
+    "canonicalId": "monster.will-o-wisp",
+    "name": "Will-o'-Wisp",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|winged-kobold",
+    "canonicalId": "monster.winged-kobold",
+    "name": "Winged Kobold",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|winter-wolf",
+    "canonicalId": "monster.winter-wolf",
+    "name": "Winter Wolf",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|wolf",
+    "canonicalId": "monster.wolf",
+    "name": "Wolf",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|worg",
+    "canonicalId": "monster.worg",
+    "name": "Worg",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|wraith",
+    "canonicalId": "monster.wraith",
+    "name": "Wraith",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|wyvern",
+    "canonicalId": "monster.wyvern",
+    "name": "Wyvern",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|xorn",
+    "canonicalId": "monster.xorn",
+    "name": "Xorn",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|yeti",
+    "canonicalId": "monster.yeti",
+    "name": "Yeti",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|yochlol",
+    "canonicalId": "monster.yochlol",
+    "name": "Yochlol",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|young-black-dragon",
+    "canonicalId": "monster.young-black-dragon",
+    "name": "Young Black Dragon",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|young-blue-dragon",
+    "canonicalId": "monster.young-blue-dragon",
+    "name": "Young Blue Dragon",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|young-brass-dragon",
+    "canonicalId": "monster.young-brass-dragon",
+    "name": "Young Brass Dragon",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|young-bronze-dragon",
+    "canonicalId": "monster.young-bronze-dragon",
+    "name": "Young Bronze Dragon",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|young-copper-dragon",
+    "canonicalId": "monster.young-copper-dragon",
+    "name": "Young Copper Dragon",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|young-gold-dragon",
+    "canonicalId": "monster.young-gold-dragon",
+    "name": "Young Gold Dragon",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|young-green-dragon",
+    "canonicalId": "monster.young-green-dragon",
+    "name": "Young Green Dragon",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|young-red-dragon",
+    "canonicalId": "monster.young-red-dragon",
+    "name": "Young Red Dragon",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|young-remorhaz",
+    "canonicalId": "monster.young-remorhaz",
+    "name": "Young Remorhaz",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|young-silver-dragon",
+    "canonicalId": "monster.young-silver-dragon",
+    "name": "Young Silver Dragon",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|young-white-dragon",
+    "canonicalId": "monster.young-white-dragon",
+    "name": "Young White Dragon",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|yuan-ti-abomination",
+    "canonicalId": "monster.yuan-ti-abomination",
+    "name": "Yuan-ti Abomination",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|yuan-ti-infiltrator",
+    "canonicalId": "monster.yuan-ti-infiltrator",
+    "name": "Yuan-ti Infiltrator",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|yuan-ti-malison-type-1",
+    "canonicalId": "monster.yuan-ti-malison-type-1",
+    "name": "Yuan-ti Malison (Type 1)",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|yuan-ti-malison-type-2",
+    "canonicalId": "monster.yuan-ti-malison-type-2",
+    "name": "Yuan-ti Malison (Type 2)",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|yuan-ti-malison-type-3",
+    "canonicalId": "monster.yuan-ti-malison-type-3",
+    "name": "Yuan-ti Malison (Type 3)",
+    "category": "monster"
+  },
+  {
+    "id": "xmm|zombie",
+    "canonicalId": "monster.zombie",
+    "name": "Zombie",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|abjurer-wizard",
+    "canonicalId": "monster.abjurer-wizard",
+    "name": "Abjurer Wizard",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|adult-kruthik",
+    "canonicalId": "monster.adult-kruthik",
+    "name": "Adult Kruthik",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|adult-oblex",
+    "canonicalId": "monster.adult-oblex",
+    "name": "Adult Oblex",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|air-elemental-myrmidon",
+    "canonicalId": "monster.air-elemental-myrmidon",
+    "name": "Air Elemental Myrmidon",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|alhoon",
+    "canonicalId": "monster.alhoon",
+    "name": "Alhoon",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|alkilith",
+    "canonicalId": "monster.alkilith",
+    "name": "Alkilith",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|allip",
+    "canonicalId": "monster.allip",
+    "name": "Allip",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|amnizu",
+    "canonicalId": "monster.amnizu",
+    "name": "Amnizu",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|angry-sorrowsworn",
+    "canonicalId": "monster.angry-sorrowsworn",
+    "name": "Angry Sorrowsworn",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|annis-hag",
+    "canonicalId": "monster.annis-hag",
+    "name": "Annis Hag",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|apprentice-wizard",
+    "canonicalId": "monster.apprentice-wizard",
+    "name": "Apprentice Wizard",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|archdruid",
+    "canonicalId": "monster.archdruid",
+    "name": "Archdruid",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|archer",
+    "canonicalId": "monster.archer",
+    "name": "Archer",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|armanite",
+    "canonicalId": "monster.armanite",
+    "name": "Armanite",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|astral-dreadnought",
+    "canonicalId": "monster.astral-dreadnought",
+    "name": "Astral Dreadnought",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|aurochs",
+    "canonicalId": "monster.aurochs",
+    "name": "Aurochs",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|autumn-eladrin",
+    "canonicalId": "monster.autumn-eladrin",
+    "name": "Autumn Eladrin",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|babau",
+    "canonicalId": "monster.babau",
+    "name": "Babau",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|bael",
+    "canonicalId": "monster.bael",
+    "name": "Bael",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|balhannoth",
+    "canonicalId": "monster.balhannoth",
+    "name": "Balhannoth",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|banderhobb",
+    "canonicalId": "monster.banderhobb",
+    "name": "Banderhobb",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|baphomet",
+    "canonicalId": "monster.baphomet",
+    "name": "Baphomet",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|bard",
+    "canonicalId": "monster.bard",
+    "name": "Bard",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|barghest",
+    "canonicalId": "monster.barghest",
+    "name": "Barghest",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|berbalang",
+    "canonicalId": "monster.berbalang",
+    "name": "Berbalang",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|bheur-hag",
+    "canonicalId": "monster.bheur-hag",
+    "name": "Bheur Hag",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|black-abishai",
+    "canonicalId": "monster.black-abishai",
+    "name": "Black Abishai",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|blackguard",
+    "canonicalId": "monster.blackguard",
+    "name": "Blackguard",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|blue-abishai",
+    "canonicalId": "monster.blue-abishai",
+    "name": "Blue Abishai",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|bodak",
+    "canonicalId": "monster.bodak",
+    "name": "Bodak",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|boggle",
+    "canonicalId": "monster.boggle",
+    "name": "Boggle",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|boneclaw",
+    "canonicalId": "monster.boneclaw",
+    "name": "Boneclaw",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|brontosaurus",
+    "canonicalId": "monster.brontosaurus",
+    "name": "Brontosaurus",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|bulezau",
+    "canonicalId": "monster.bulezau",
+    "name": "Bulezau",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|cadaver-collector",
+    "canonicalId": "monster.cadaver-collector",
+    "name": "Cadaver Collector",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|canoloth",
+    "canonicalId": "monster.canoloth",
+    "name": "Canoloth",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|catoblepas",
+    "canonicalId": "monster.catoblepas",
+    "name": "Catoblepas",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|cave-fisher",
+    "canonicalId": "monster.cave-fisher",
+    "name": "Cave Fisher",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|champion",
+    "canonicalId": "monster.champion",
+    "name": "Champion",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|chitine",
+    "canonicalId": "monster.chitine",
+    "name": "Chitine",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|choker",
+    "canonicalId": "monster.choker",
+    "name": "Choker",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|choldrith",
+    "canonicalId": "monster.choldrith",
+    "name": "Choldrith",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|clockwork-bronze-scout",
+    "canonicalId": "monster.clockwork-bronze-scout",
+    "name": "Clockwork Bronze Scout",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|clockwork-iron-cobra",
+    "canonicalId": "monster.clockwork-iron-cobra",
+    "name": "Clockwork Iron Cobra",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|clockwork-oaken-bolter",
+    "canonicalId": "monster.clockwork-oaken-bolter",
+    "name": "Clockwork Oaken Bolter",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|clockwork-stone-defender",
+    "canonicalId": "monster.clockwork-stone-defender",
+    "name": "Clockwork Stone Defender",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|cloud-giant-smiling-one",
+    "canonicalId": "monster.cloud-giant-smiling-one",
+    "name": "Cloud Giant Smiling One",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|conjurer-wizard",
+    "canonicalId": "monster.conjurer-wizard",
+    "name": "Conjurer Wizard",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|corpse-flower",
+    "canonicalId": "monster.corpse-flower",
+    "name": "Corpse Flower",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|cranium-rat",
+    "canonicalId": "monster.cranium-rat",
+    "name": "Cranium Rat",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|darkling",
+    "canonicalId": "monster.darkling",
+    "name": "Darkling",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|darkling-elder",
+    "canonicalId": "monster.darkling-elder",
+    "name": "Darkling Elder",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|death-kiss",
+    "canonicalId": "monster.death-kiss",
+    "name": "Death Kiss",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|deathlock",
+    "canonicalId": "monster.deathlock",
+    "name": "Deathlock",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|deathlock-mastermind",
+    "canonicalId": "monster.deathlock-mastermind",
+    "name": "Deathlock Mastermind",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|deathlock-wight",
+    "canonicalId": "monster.deathlock-wight",
+    "name": "Deathlock Wight",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|deep-roth",
+    "canonicalId": "monster.deep-rothe",
+    "name": "Deep Rothé",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|deep-scion",
+    "canonicalId": "monster.deep-scion",
+    "name": "Deep Scion",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|deinonychus",
+    "canonicalId": "monster.deinonychus",
+    "name": "Deinonychus",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|demogorgon",
+    "canonicalId": "monster.demogorgon",
+    "name": "Demogorgon",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|derro",
+    "canonicalId": "monster.derro",
+    "name": "Derro",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|derro-savant",
+    "canonicalId": "monster.derro-savant",
+    "name": "Derro Savant",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|devourer",
+    "canonicalId": "monster.devourer",
+    "name": "Devourer",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|dhergoloth",
+    "canonicalId": "monster.dhergoloth",
+    "name": "Dhergoloth",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|dimetrodon",
+    "canonicalId": "monster.dimetrodon",
+    "name": "Dimetrodon",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|dire-troll",
+    "canonicalId": "monster.dire-troll",
+    "name": "Dire Troll",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|diviner-wizard",
+    "canonicalId": "monster.diviner-wizard",
+    "name": "Diviner Wizard",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|dolphin",
+    "canonicalId": "monster.dolphin",
+    "name": "Dolphin",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|dolphin-delighter",
+    "canonicalId": "monster.dolphin-delighter",
+    "name": "Dolphin Delighter",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|draegloth",
+    "canonicalId": "monster.draegloth",
+    "name": "Draegloth",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|drow-arachnomancer",
+    "canonicalId": "monster.drow-arachnomancer",
+    "name": "Drow Arachnomancer",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|drow-favored-consort",
+    "canonicalId": "monster.drow-favored-consort",
+    "name": "Drow Favored Consort",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|drow-house-captain",
+    "canonicalId": "monster.drow-house-captain",
+    "name": "Drow House Captain",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|drow-inquisitor",
+    "canonicalId": "monster.drow-inquisitor",
+    "name": "Drow Inquisitor",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|drow-matron-mother",
+    "canonicalId": "monster.drow-matron-mother",
+    "name": "Drow Matron Mother",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|drow-shadowblade",
+    "canonicalId": "monster.drow-shadowblade",
+    "name": "Drow Shadowblade",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|duergar-despot",
+    "canonicalId": "monster.duergar-despot",
+    "name": "Duergar Despot",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|duergar-hammerer",
+    "canonicalId": "monster.duergar-hammerer",
+    "name": "Duergar Hammerer",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|duergar-kavalrachni",
+    "canonicalId": "monster.duergar-kavalrachni",
+    "name": "Duergar Kavalrachni",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|duergar-mind-master",
+    "canonicalId": "monster.duergar-mind-master",
+    "name": "Duergar Mind Master",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|duergar-screamer",
+    "canonicalId": "monster.duergar-screamer",
+    "name": "Duergar Screamer",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|duergar-soulblade",
+    "canonicalId": "monster.duergar-soulblade",
+    "name": "Duergar Soulblade",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|duergar-stone-guard",
+    "canonicalId": "monster.duergar-stone-guard",
+    "name": "Duergar Stone Guard",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|duergar-warlord",
+    "canonicalId": "monster.duergar-warlord",
+    "name": "Duergar Warlord",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|duergar-xarrorn",
+    "canonicalId": "monster.duergar-xarrorn",
+    "name": "Duergar Xarrorn",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|dybbuk",
+    "canonicalId": "monster.dybbuk",
+    "name": "Dybbuk",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|earth-elemental-myrmidon",
+    "canonicalId": "monster.earth-elemental-myrmidon",
+    "name": "Earth Elemental Myrmidon",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|eidolon",
+    "canonicalId": "monster.eidolon",
+    "name": "Eidolon",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|elder-brain",
+    "canonicalId": "monster.elder-brain",
+    "name": "Elder Brain",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|elder-oblex",
+    "canonicalId": "monster.elder-oblex",
+    "name": "Elder Oblex",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|elder-tempest",
+    "canonicalId": "monster.elder-tempest",
+    "name": "Elder Tempest",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|enchanter-wizard",
+    "canonicalId": "monster.enchanter-wizard",
+    "name": "Enchanter Wizard",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|evoker-wizard",
+    "canonicalId": "monster.evoker-wizard",
+    "name": "Evoker Wizard",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|female-steeder",
+    "canonicalId": "monster.female-steeder",
+    "name": "Female Steeder",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|fire-elemental-myrmidon",
+    "canonicalId": "monster.fire-elemental-myrmidon",
+    "name": "Fire Elemental Myrmidon",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|fire-giant-dreadnought",
+    "canonicalId": "monster.fire-giant-dreadnought",
+    "name": "Fire Giant Dreadnought",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|firenewt-warlock-of-imix",
+    "canonicalId": "monster.firenewt-warlock-of-imix",
+    "name": "Firenewt Warlock of Imix",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|firenewt-warrior",
+    "canonicalId": "monster.firenewt-warrior",
+    "name": "Firenewt Warrior",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|flail-snail",
+    "canonicalId": "monster.flail-snail",
+    "name": "Flail Snail",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|flind",
+    "canonicalId": "monster.flind",
+    "name": "Flind",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|fraz-urb-luu",
+    "canonicalId": "monster.fraz-urbluu",
+    "name": "Fraz-Urb'luu",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|froghemoth",
+    "canonicalId": "monster.froghemoth",
+    "name": "Froghemoth",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|frost-giant-everlasting-one",
+    "canonicalId": "monster.frost-giant-everlasting-one",
+    "name": "Frost Giant Everlasting One",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|frost-salamander",
+    "canonicalId": "monster.frost-salamander",
+    "name": "Frost Salamander",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|gauth",
+    "canonicalId": "monster.gauth",
+    "name": "Gauth",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|gazer",
+    "canonicalId": "monster.gazer",
+    "name": "Gazer",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|geryon",
+    "canonicalId": "monster.geryon",
+    "name": "Geryon",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|giant-strider",
+    "canonicalId": "monster.giant-strider",
+    "name": "Giant Strider",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|giff",
+    "canonicalId": "monster.giff",
+    "name": "Giff",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|girallon",
+    "canonicalId": "monster.girallon",
+    "name": "Girallon",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|githyanki-gish",
+    "canonicalId": "monster.githyanki-gish",
+    "name": "Githyanki Gish",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|githyanki-kith-rak",
+    "canonicalId": "monster.githyanki-kithrak",
+    "name": "Githyanki Kith'rak",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|githyanki-supreme-commander",
+    "canonicalId": "monster.githyanki-supreme-commander",
+    "name": "Githyanki Supreme Commander",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|githzerai-anarch",
+    "canonicalId": "monster.githzerai-anarch",
+    "name": "Githzerai Anarch",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|githzerai-enlightened",
+    "canonicalId": "monster.githzerai-enlightened",
+    "name": "Githzerai Enlightened",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|gnoll-flesh-gnawer",
+    "canonicalId": "monster.gnoll-flesh-gnawer",
+    "name": "Gnoll Flesh Gnawer",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|gnoll-hunter",
+    "canonicalId": "monster.gnoll-hunter",
+    "name": "Gnoll Hunter",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|gnoll-witherling",
+    "canonicalId": "monster.gnoll-witherling",
+    "name": "Gnoll Witherling",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|gray-render",
+    "canonicalId": "monster.gray-render",
+    "name": "Gray Render",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|graz-zt",
+    "canonicalId": "monster.grazzt",
+    "name": "Graz'zt",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|green-abishai",
+    "canonicalId": "monster.green-abishai",
+    "name": "Green Abishai",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|grung",
+    "canonicalId": "monster.grung",
+    "name": "Grung",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|grung-elite-warrior",
+    "canonicalId": "monster.grung-elite-warrior",
+    "name": "Grung Elite Warrior",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|grung-wildling",
+    "canonicalId": "monster.grung-wildling",
+    "name": "Grung Wildling",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|guard-drake",
+    "canonicalId": "monster.guard-drake",
+    "name": "Guard Drake",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|hadrosaurus",
+    "canonicalId": "monster.hadrosaurus",
+    "name": "Hadrosaurus",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|hellfire-engine",
+    "canonicalId": "monster.hellfire-engine",
+    "name": "Hellfire Engine",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|hobgoblin-devastator",
+    "canonicalId": "monster.hobgoblin-devastator",
+    "name": "Hobgoblin Devastator",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|hobgoblin-iron-shadow",
+    "canonicalId": "monster.hobgoblin-iron-shadow",
+    "name": "Hobgoblin Iron Shadow",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|howler",
+    "canonicalId": "monster.howler",
+    "name": "Howler",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|hungry-sorrowsworn",
+    "canonicalId": "monster.hungry-sorrowsworn",
+    "name": "Hungry Sorrowsworn",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|hutijin",
+    "canonicalId": "monster.hutijin",
+    "name": "Hutijin",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|hydroloth",
+    "canonicalId": "monster.hydroloth",
+    "name": "Hydroloth",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|illusionist-wizard",
+    "canonicalId": "monster.illusionist-wizard",
+    "name": "Illusionist Wizard",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|juiblex",
+    "canonicalId": "monster.juiblex",
+    "name": "Juiblex",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|ki-rin",
+    "canonicalId": "monster.ki-rin",
+    "name": "Ki-rin",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|kobold-dragonshield",
+    "canonicalId": "monster.kobold-dragonshield",
+    "name": "Kobold Dragonshield",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|kobold-inventor",
+    "canonicalId": "monster.kobold-inventor",
+    "name": "Kobold Inventor",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|kobold-scale-sorcerer",
+    "canonicalId": "monster.kobold-scale-sorcerer",
+    "name": "Kobold Scale Sorcerer",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|korred",
+    "canonicalId": "monster.korred",
+    "name": "Korred",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|kraken-priest",
+    "canonicalId": "monster.kraken-priest",
+    "name": "Kraken Priest",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|kruthik-hive-lord",
+    "canonicalId": "monster.kruthik-hive-lord",
+    "name": "Kruthik Hive Lord",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|leucrotta",
+    "canonicalId": "monster.leucrotta",
+    "name": "Leucrotta",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|leviathan",
+    "canonicalId": "monster.leviathan",
+    "name": "Leviathan",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|lonely-sorrowsworn",
+    "canonicalId": "monster.lonely-sorrowsworn",
+    "name": "Lonely Sorrowsworn",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|lost-sorrowsworn",
+    "canonicalId": "monster.lost-sorrowsworn",
+    "name": "Lost Sorrowsworn",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|male-steeder",
+    "canonicalId": "monster.male-steeder",
+    "name": "Male Steeder",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|martial-arts-adept",
+    "canonicalId": "monster.martial-arts-adept",
+    "name": "Martial Arts Adept",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|marut",
+    "canonicalId": "monster.marut",
+    "name": "Marut",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|master-thief",
+    "canonicalId": "monster.master-thief",
+    "name": "Master Thief",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|maurezhi",
+    "canonicalId": "monster.maurezhi",
+    "name": "Maurezhi",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|maw-demon",
+    "canonicalId": "monster.maw-demon",
+    "name": "Maw Demon",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|meazel",
+    "canonicalId": "monster.meazel",
+    "name": "Meazel",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|meenlock",
+    "canonicalId": "monster.meenlock",
+    "name": "Meenlock",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|merregon",
+    "canonicalId": "monster.merregon",
+    "name": "Merregon",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|merrenoloth",
+    "canonicalId": "monster.merrenoloth",
+    "name": "Merrenoloth",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|mindwitness",
+    "canonicalId": "monster.mindwitness",
+    "name": "Mindwitness",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|moloch",
+    "canonicalId": "monster.moloch",
+    "name": "Moloch",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|molydeus",
+    "canonicalId": "monster.molydeus",
+    "name": "Molydeus",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|morkoth",
+    "canonicalId": "monster.morkoth",
+    "name": "Morkoth",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|mouth-of-grolantor",
+    "canonicalId": "monster.mouth-of-grolantor",
+    "name": "Mouth of Grolantor",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|nabassu",
+    "canonicalId": "monster.nabassu",
+    "name": "Nabassu",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|nagpa",
+    "canonicalId": "monster.nagpa",
+    "name": "Nagpa",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|narzugon",
+    "canonicalId": "monster.narzugon",
+    "name": "Narzugon",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|necromancer-wizard",
+    "canonicalId": "monster.necromancer-wizard",
+    "name": "Necromancer Wizard",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|neogi",
+    "canonicalId": "monster.neogi",
+    "name": "Neogi",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|neogi-hatchling",
+    "canonicalId": "monster.neogi-hatchling",
+    "name": "Neogi Hatchling",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|neogi-master",
+    "canonicalId": "monster.neogi-master",
+    "name": "Neogi Master",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|neothelid",
+    "canonicalId": "monster.neothelid",
+    "name": "Neothelid",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|nightwalker",
+    "canonicalId": "monster.nightwalker",
+    "name": "Nightwalker",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|nilbog",
+    "canonicalId": "monster.nilbog",
+    "name": "Nilbog",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|nupperibo",
+    "canonicalId": "monster.nupperibo",
+    "name": "Nupperibo",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|oblex-spawn",
+    "canonicalId": "monster.oblex-spawn",
+    "name": "Oblex Spawn",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|ogre-battering-ram",
+    "canonicalId": "monster.ogre-battering-ram",
+    "name": "Ogre Battering Ram",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|ogre-bolt-launcher",
+    "canonicalId": "monster.ogre-bolt-launcher",
+    "name": "Ogre Bolt Launcher",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|ogre-chain-brute",
+    "canonicalId": "monster.ogre-chain-brute",
+    "name": "Ogre Chain Brute",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|ogre-howdah",
+    "canonicalId": "monster.ogre-howdah",
+    "name": "Ogre Howdah",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|oinoloth",
+    "canonicalId": "monster.oinoloth",
+    "name": "Oinoloth",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|orcus",
+    "canonicalId": "monster.orcus",
+    "name": "Orcus",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|orthon",
+    "canonicalId": "monster.orthon",
+    "name": "Orthon",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|ox",
+    "canonicalId": "monster.ox",
+    "name": "Ox",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|phoenix",
+    "canonicalId": "monster.phoenix",
+    "name": "Phoenix",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|quetzalcoatlus",
+    "canonicalId": "monster.quetzalcoatlus",
+    "name": "Quetzalcoatlus",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|quickling",
+    "canonicalId": "monster.quickling",
+    "name": "Quickling",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|red-abishai",
+    "canonicalId": "monster.red-abishai",
+    "name": "Red Abishai",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|redcap",
+    "canonicalId": "monster.redcap",
+    "name": "Redcap",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|retriever",
+    "canonicalId": "monster.retriever",
+    "name": "Retriever",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|rot-troll",
+    "canonicalId": "monster.rot-troll",
+    "name": "Rot Troll",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|rutterkin",
+    "canonicalId": "monster.rutterkin",
+    "name": "Rutterkin",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|sacred-statue",
+    "canonicalId": "monster.sacred-statue",
+    "name": "Sacred Statue",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|sea-spawn",
+    "canonicalId": "monster.sea-spawn",
+    "name": "Sea Spawn",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|shadar-kai-gloom-weaver",
+    "canonicalId": "monster.shadar-kai-gloom-weaver",
+    "name": "Shadar-kai Gloom Weaver",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|shadar-kai-shadow-dancer",
+    "canonicalId": "monster.shadar-kai-shadow-dancer",
+    "name": "Shadar-kai Shadow Dancer",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|shadar-kai-soul-monger",
+    "canonicalId": "monster.shadar-kai-soul-monger",
+    "name": "Shadar-kai Soul Monger",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|shadow-mastiff",
+    "canonicalId": "monster.shadow-mastiff",
+    "name": "Shadow Mastiff",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|shadow-mastiff-alpha",
+    "canonicalId": "monster.shadow-mastiff-alpha",
+    "name": "Shadow Mastiff Alpha",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|shoosuva",
+    "canonicalId": "monster.shoosuva",
+    "name": "Shoosuva",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|sibriex",
+    "canonicalId": "monster.sibriex",
+    "name": "Sibriex",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|skulk",
+    "canonicalId": "monster.skulk",
+    "name": "Skulk",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|skull-lord",
+    "canonicalId": "monster.skull-lord",
+    "name": "Skull Lord",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|slithering-tracker",
+    "canonicalId": "monster.slithering-tracker",
+    "name": "Slithering Tracker",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|spawn-of-kyuss",
+    "canonicalId": "monster.spawn-of-kyuss",
+    "name": "Spawn of Kyuss",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|spirit-troll",
+    "canonicalId": "monster.spirit-troll",
+    "name": "Spirit Troll",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|spring-eladrin",
+    "canonicalId": "monster.spring-eladrin",
+    "name": "Spring Eladrin",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|star-spawn-grue",
+    "canonicalId": "monster.star-spawn-grue",
+    "name": "Star Spawn Grue",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|star-spawn-hulk",
+    "canonicalId": "monster.star-spawn-hulk",
+    "name": "Star Spawn Hulk",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|star-spawn-larva-mage",
+    "canonicalId": "monster.star-spawn-larva-mage",
+    "name": "Star Spawn Larva Mage",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|star-spawn-mangler",
+    "canonicalId": "monster.star-spawn-mangler",
+    "name": "Star Spawn Mangler",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|star-spawn-seer",
+    "canonicalId": "monster.star-spawn-seer",
+    "name": "Star Spawn Seer",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|steel-predator",
+    "canonicalId": "monster.steel-predator",
+    "name": "Steel Predator",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|stegosaurus",
+    "canonicalId": "monster.stegosaurus",
+    "name": "Stegosaurus",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|stench-kow",
+    "canonicalId": "monster.stench-kow",
+    "name": "Stench Kow",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|stone-cursed",
+    "canonicalId": "monster.stone-cursed",
+    "name": "Stone Cursed",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|stone-giant-dreamwalker",
+    "canonicalId": "monster.stone-giant-dreamwalker",
+    "name": "Stone Giant Dreamwalker",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|storm-giant-quintessent",
+    "canonicalId": "monster.storm-giant-quintessent",
+    "name": "Storm Giant Quintessent",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|summer-eladrin",
+    "canonicalId": "monster.summer-eladrin",
+    "name": "Summer Eladrin",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|swarm-of-cranium-rats",
+    "canonicalId": "monster.swarm-of-cranium-rats",
+    "name": "Swarm of Cranium Rats",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|swarm-of-rot-grubs",
+    "canonicalId": "monster.swarm-of-rot-grubs",
+    "name": "Swarm of Rot Grubs",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|swashbuckler",
+    "canonicalId": "monster.swashbuckler",
+    "name": "Swashbuckler",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|sword-wraith-commander",
+    "canonicalId": "monster.sword-wraith-commander",
+    "name": "Sword Wraith Commander",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|sword-wraith-warrior",
+    "canonicalId": "monster.sword-wraith-warrior",
+    "name": "Sword Wraith Warrior",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|tanarukk",
+    "canonicalId": "monster.tanarukk",
+    "name": "Tanarukk",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|thorny-vegepygmy",
+    "canonicalId": "monster.thorny-vegepygmy",
+    "name": "Thorny Vegepygmy",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|titivilus",
+    "canonicalId": "monster.titivilus",
+    "name": "Titivilus",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|tlincalli",
+    "canonicalId": "monster.tlincalli",
+    "name": "Tlincalli",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|tortle",
+    "canonicalId": "monster.tortle",
+    "name": "Tortle",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|tortle-druid",
+    "canonicalId": "monster.tortle-druid",
+    "name": "Tortle Druid",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|transmuter-wizard",
+    "canonicalId": "monster.transmuter-wizard",
+    "name": "Transmuter Wizard",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|trapper",
+    "canonicalId": "monster.trapper",
+    "name": "Trapper",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|ulitharid",
+    "canonicalId": "monster.ulitharid",
+    "name": "Ulitharid",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|vampiric-mist",
+    "canonicalId": "monster.vampiric-mist",
+    "name": "Vampiric Mist",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|vargouille",
+    "canonicalId": "monster.vargouille",
+    "name": "Vargouille",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|vegepygmy",
+    "canonicalId": "monster.vegepygmy",
+    "name": "Vegepygmy",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|vegepygmy-chief",
+    "canonicalId": "monster.vegepygmy-chief",
+    "name": "Vegepygmy Chief",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|velociraptor",
+    "canonicalId": "monster.velociraptor",
+    "name": "Velociraptor",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|venom-troll",
+    "canonicalId": "monster.venom-troll",
+    "name": "Venom Troll",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|war-priest",
+    "canonicalId": "monster.war-priest",
+    "name": "War Priest",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|warlock-of-the-archfey",
+    "canonicalId": "monster.warlock-of-the-archfey",
+    "name": "Warlock of the Archfey",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|warlock-of-the-fiend",
+    "canonicalId": "monster.warlock-of-the-fiend",
+    "name": "Warlock of the Fiend",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|warlock-of-the-great-old-one",
+    "canonicalId": "monster.warlock-of-the-great-old-one",
+    "name": "Warlock of the Great Old One",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|warlord",
+    "canonicalId": "monster.warlord",
+    "name": "Warlord",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|wastrilith",
+    "canonicalId": "monster.wastrilith",
+    "name": "Wastrilith",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|water-elemental-myrmidon",
+    "canonicalId": "monster.water-elemental-myrmidon",
+    "name": "Water Elemental Myrmidon",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|white-abishai",
+    "canonicalId": "monster.white-abishai",
+    "name": "White Abishai",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|winter-eladrin",
+    "canonicalId": "monster.winter-eladrin",
+    "name": "Winter Eladrin",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|wood-woad",
+    "canonicalId": "monster.wood-woad",
+    "name": "Wood Woad",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|wretched-sorrowsworn",
+    "canonicalId": "monster.wretched-sorrowsworn",
+    "name": "Wretched Sorrowsworn",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|xvart",
+    "canonicalId": "monster.xvart",
+    "name": "Xvart",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|xvart-warlock-of-raxivort",
+    "canonicalId": "monster.xvart-warlock-of-raxivort",
+    "name": "Xvart Warlock of Raxivort",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|yagnoloth",
+    "canonicalId": "monster.yagnoloth",
+    "name": "Yagnoloth",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|yeenoghu",
+    "canonicalId": "monster.yeenoghu",
+    "name": "Yeenoghu",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|yeth-hound",
+    "canonicalId": "monster.yeth-hound",
+    "name": "Yeth Hound",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|young-kruthik",
+    "canonicalId": "monster.young-kruthik",
+    "name": "Young Kruthik",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|yuan-ti-anathema",
+    "canonicalId": "monster.yuan-ti-anathema",
+    "name": "Yuan-ti Anathema",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|yuan-ti-broodguard",
+    "canonicalId": "monster.yuan-ti-broodguard",
+    "name": "Yuan-ti Broodguard",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|yuan-ti-mind-whisperer",
+    "canonicalId": "monster.yuan-ti-mind-whisperer",
+    "name": "Yuan-ti Mind Whisperer",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|yuan-ti-nightmare-speaker",
+    "canonicalId": "monster.yuan-ti-nightmare-speaker",
+    "name": "Yuan-ti Nightmare Speaker",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|yuan-ti-pit-master",
+    "canonicalId": "monster.yuan-ti-pit-master",
+    "name": "Yuan-ti Pit Master",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|zaratan",
+    "canonicalId": "monster.zaratan",
+    "name": "Zaratan",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|zariel",
+    "canonicalId": "monster.zariel",
+    "name": "Zariel",
+    "category": "monster"
+  },
+  {
+    "id": "mpmm|zuggtmoy",
+    "canonicalId": "monster.zuggtmoy",
+    "name": "Zuggtmoy",
+    "category": "monster"
+  },
+  {
+    "id": "tce|aberrant-spirit",
+    "canonicalId": "monster.aberrant-spirit",
+    "name": "Aberrant Spirit",
+    "category": "monster"
+  },
+  {
+    "id": "tce|beast-of-the-land",
+    "canonicalId": "monster.beast-of-the-land",
+    "name": "Beast of the Land",
+    "category": "monster"
+  },
+  {
+    "id": "tce|beast-of-the-sea",
+    "canonicalId": "monster.beast-of-the-sea",
+    "name": "Beast of the Sea",
+    "category": "monster"
+  },
+  {
+    "id": "tce|beast-of-the-sky",
+    "canonicalId": "monster.beast-of-the-sky",
+    "name": "Beast of the Sky",
+    "category": "monster"
+  },
+  {
+    "id": "tce|bestial-spirit",
+    "canonicalId": "monster.bestial-spirit",
+    "name": "Bestial Spirit",
+    "category": "monster"
+  },
+  {
+    "id": "tce|celestial-spirit",
+    "canonicalId": "monster.celestial-spirit",
+    "name": "Celestial Spirit",
+    "category": "monster"
+  },
+  {
+    "id": "tce|construct-spirit",
+    "canonicalId": "monster.construct-spirit",
+    "name": "Construct Spirit",
+    "category": "monster"
+  },
+  {
+    "id": "tce|dancing-item",
+    "canonicalId": "monster.dancing-item",
+    "name": "Dancing Item",
+    "category": "monster"
+  },
+  {
+    "id": "tce|elemental-spirit",
+    "canonicalId": "monster.elemental-spirit",
+    "name": "Elemental Spirit",
+    "category": "monster"
+  },
+  {
+    "id": "tce|fey-spirit",
+    "canonicalId": "monster.fey-spirit",
+    "name": "Fey Spirit",
+    "category": "monster"
+  },
+  {
+    "id": "tce|fiendish-spirit",
+    "canonicalId": "monster.fiendish-spirit",
+    "name": "Fiendish Spirit",
+    "category": "monster"
+  },
+  {
+    "id": "tce|homunculus-servant",
+    "canonicalId": "monster.homunculus-servant",
+    "name": "Homunculus Servant",
+    "category": "monster"
+  },
+  {
+    "id": "tce|juvenile-mimic",
+    "canonicalId": "monster.juvenile-mimic",
+    "name": "Juvenile Mimic",
+    "category": "monster"
+  },
+  {
+    "id": "tce|mighty-servant-of-leuk-o",
+    "canonicalId": "monster.mighty-servant-of-leuk-o",
+    "name": "Mighty Servant of Leuk-o",
+    "category": "monster"
+  },
+  {
+    "id": "tce|shadow-spirit",
+    "canonicalId": "monster.shadow-spirit",
+    "name": "Shadow Spirit",
+    "category": "monster"
+  },
+  {
+    "id": "tce|steel-defender",
+    "canonicalId": "monster.steel-defender",
+    "name": "Steel Defender",
+    "category": "monster"
+  },
+  {
+    "id": "tce|undead-spirit",
+    "canonicalId": "monster.undead-spirit",
+    "name": "Undead Spirit",
+    "category": "monster"
+  },
+  {
+    "id": "tce|wildfire-spirit",
+    "canonicalId": "monster.wildfire-spirit",
+    "name": "Wildfire Spirit",
+    "category": "monster"
+  },
+  {
+    "id": "xge|tiny-servant",
+    "canonicalId": "monster.tiny-servant",
+    "name": "Tiny Servant",
+    "category": "monster"
+  },
+  {
+    "id": "xphb|aberrant-spirit",
+    "canonicalId": "monster.aberrant-spirit",
+    "name": "Aberrant Spirit",
+    "category": "monster"
+  },
+  {
+    "id": "xphb|animated-object",
+    "canonicalId": "monster.animated-object",
+    "name": "Animated Object",
+    "category": "monster"
+  },
+  {
+    "id": "xphb|beast-of-the-land",
+    "canonicalId": "monster.beast-of-the-land",
+    "name": "Beast of the Land",
+    "category": "monster"
+  },
+  {
+    "id": "xphb|beast-of-the-sea",
+    "canonicalId": "monster.beast-of-the-sea",
+    "name": "Beast of the Sea",
+    "category": "monster"
+  },
+  {
+    "id": "xphb|beast-of-the-sky",
+    "canonicalId": "monster.beast-of-the-sky",
+    "name": "Beast of the Sky",
+    "category": "monster"
+  },
+  {
+    "id": "xphb|bestial-spirit",
+    "canonicalId": "monster.bestial-spirit",
+    "name": "Bestial Spirit",
+    "category": "monster"
+  },
+  {
+    "id": "xphb|celestial-spirit",
+    "canonicalId": "monster.celestial-spirit",
+    "name": "Celestial Spirit",
+    "category": "monster"
+  },
+  {
+    "id": "xphb|construct-spirit",
+    "canonicalId": "monster.construct-spirit",
+    "name": "Construct Spirit",
+    "category": "monster"
+  },
+  {
+    "id": "xphb|draconic-spirit",
+    "canonicalId": "monster.draconic-spirit",
+    "name": "Draconic Spirit",
+    "category": "monster"
+  },
+  {
+    "id": "xphb|elemental-spirit",
+    "canonicalId": "monster.elemental-spirit",
+    "name": "Elemental Spirit",
+    "category": "monster"
+  },
+  {
+    "id": "xphb|fey-spirit",
+    "canonicalId": "monster.fey-spirit",
+    "name": "Fey Spirit",
+    "category": "monster"
+  },
+  {
+    "id": "xphb|fiendish-spirit",
+    "canonicalId": "monster.fiendish-spirit",
+    "name": "Fiendish Spirit",
+    "category": "monster"
+  },
+  {
+    "id": "xphb|giant-insect",
+    "canonicalId": "monster.giant-insect",
+    "name": "Giant Insect",
+    "category": "monster"
+  },
+  {
+    "id": "xphb|otherworldly-steed",
+    "canonicalId": "monster.otherworldly-steed",
+    "name": "Otherworldly Steed",
+    "category": "monster"
+  },
+  {
+    "id": "xphb|undead-spirit",
+    "canonicalId": "monster.undead-spirit",
+    "name": "Undead Spirit",
+    "category": "monster"
   }
 ]

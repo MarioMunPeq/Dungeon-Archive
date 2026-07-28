@@ -87,7 +87,9 @@
     "weight": "2 lb",
     "damage": "1d4",
     "damageType": "S",
-    "properties": ["Light"],
+    "properties": [
+      "Light"
+    ],
     "description": [
       {
         "type": "paragraph",
@@ -206,7 +208,9 @@
     "weight": "2 lb",
     "damage": "1d4",
     "damageType": "S",
-    "properties": ["Light"],
+    "properties": [
+      "Light"
+    ],
     "description": [
       {
         "type": "paragraph",
@@ -325,7 +329,9 @@
     "weight": "2 lb",
     "damage": "1d4",
     "damageType": "S",
-    "properties": ["Light"],
+    "properties": [
+      "Light"
+    ],
     "description": [
       {
         "type": "paragraph",
@@ -727,7 +733,9 @@
     "weight": "4 lb",
     "damage": "1d6",
     "damageType": "B",
-    "properties": ["Versatile"],
+    "properties": [
+      "Versatile"
+    ],
     "description": [
       {
         "type": "paragraph",
@@ -1853,6 +1861,25 @@
     ]
   },
   {
+    "id": "xmm|command-amulet",
+    "canonicalId": "equipment.command-amulet",
+    "category": "equipment",
+    "name": "Command Amulet",
+    "source": "XMM",
+    "type": "OTH",
+    "weight": "1 lb",
+    "description": [
+      {
+        "type": "paragraph",
+        "text": "Each Shield Guardian is magically bound to an amulet. While the guardian and its amulet are on the same plane of existence, the amulet's wearer can telepathically call the guardian to travel to it, and the guardian knows the distance and direction to the amulet. If the guardian is within 60 feet of the amulet's wearer, half of any damage the wearer takes (round up) is transferred to the guardian."
+      },
+      {
+        "type": "paragraph",
+        "text": "A shield guardian's command amulet might be passed down through a magic-using society or family for generations."
+      }
+    ]
+  },
+  {
     "id": "phb|common-clothes",
     "canonicalId": "equipment.common-clothes",
     "category": "equipment",
@@ -2051,19 +2078,43 @@
       },
       {
         "type": "table",
-        "headers": ["d100", "Effect"],
+        "headers": [
+          "d100",
+          "Effect"
+        ],
         "rows": [
-          ["1-25", "A portal to a random plane opens. The portal closes after 5 minutes."],
-          ["26-45", "2d4 imp and 2d4 quasit appear."],
-          ["46-60", "1d8 succubus/incubus appear."],
-          ["61-70", "1d10 barbed devil and 1d10 vrock appear."],
-          ["71-80", "1 arcanaloth, 1 night hag, and 1 rakshasa appear."],
-          ["81-85", "1 ice devil and 1 marilith appear."],
+          [
+            "1-25",
+            "A portal to a random plane opens. The portal closes after 5 minutes."
+          ],
+          [
+            "26-45",
+            "2d4 imp and 2d4 quasit appear."
+          ],
+          [
+            "46-60",
+            "1d8 succubus/incubus appear."
+          ],
+          [
+            "61-70",
+            "1d10 barbed devil and 1d10 vrock appear."
+          ],
+          [
+            "71-80",
+            "1 arcanaloth, 1 night hag, and 1 rakshasa appear."
+          ],
+          [
+            "81-85",
+            "1 ice devil and 1 marilith appear."
+          ],
           [
             "86-90",
             "1 balor and 1 pit fiend appear. At the DM's discretion, a portal opens into the presence of an archdevil or demon lord instead, then closes after 5 minutes."
           ],
-          ["91-00", "Iggwilv's Curse (see the Iggwilv's Curse property)."]
+          [
+            "91-00",
+            "Iggwilv's Curse (see the Iggwilv's Curse property)."
+          ]
         ]
       },
       {
@@ -2370,7 +2421,11 @@
     "description": [
       {
         "type": "list",
-        "items": ["Ability: Charisma", "Utilize: Apply makeup (DC 10)", "Craft: Costume"]
+        "items": [
+          "Ability: Charisma",
+          "Utilize: Apply makeup (DC 10)",
+          "Craft: Costume"
+        ]
       }
     ]
   },
@@ -2626,12 +2681,32 @@
       },
       {
         "type": "table",
-        "headers": ["d4", "Element", "Shard"],
+        "headers": [
+          "d4",
+          "Element",
+          "Shard"
+        ],
         "rows": [
-          ["1", "Air", "Elemental Essence Shard (Air)"],
-          ["2", "Earth", "Elemental Essence Shard (Earth)"],
-          ["3", "Fire", "Elemental Essence Shard (Fire)"],
-          ["4", "Water", "Elemental Essence Shard (Water)"]
+          [
+            "1",
+            "Air",
+            "Elemental Essence Shard (Air)"
+          ],
+          [
+            "2",
+            "Earth",
+            "Elemental Essence Shard (Earth)"
+          ],
+          [
+            "3",
+            "Fire",
+            "Elemental Essence Shard (Fire)"
+          ],
+          [
+            "4",
+            "Water",
+            "Elemental Essence Shard (Water)"
+          ]
         ]
       }
     ]
@@ -3379,6 +3454,24 @@
     ]
   },
   {
+    "id": "mm|hag-eye",
+    "canonicalId": "equipment.hag-eye",
+    "category": "equipment",
+    "name": "Hag Eye",
+    "source": "MM",
+    "type": "OTH",
+    "description": [
+      {
+        "type": "paragraph",
+        "text": "A hag coven can craft a magic item called a hag eye, which is made from a real eye coated in varnish and often fitted to a pendant or other wearable item. The hag eye is usually entrusted to a minion for safekeeping and transport. A hag in the coven can take an action to see what the hag eye sees if the hag eye is on the same plane of existence. A hag eye has AC 10, 1 hit point, and darkvision with a radius of 60 feet. If it is destroyed, each coven member takes 3d10 psychic damage and is blinded for 24 hours."
+      },
+      {
+        "type": "paragraph",
+        "text": "A hag coven can have only one hag eye at a time, and creating a new one requires all three members of the coven to perform a ritual. The ritual takes 1 hour, and the hags can't perform it while blinded. During the ritual, if the hags take any action other than performing the ritual, they must start over."
+      }
+    ]
+  },
+  {
     "id": "phb|hammer",
     "canonicalId": "equipment.hammer",
     "category": "equipment",
@@ -3483,6 +3576,20 @@
           "If you spend 1 minute studying the book, you can expend 1 charge to replace one of your prepared wizard spells with a different spell in the book. The new spell must be of the enchantment school.",
           "When you cast an enchantment spell, you can expend 1 charge to impose disadvantage on the first saving throw one target makes against the spell."
         ]
+      }
+    ]
+  },
+  {
+    "id": "mm|heartstone",
+    "canonicalId": "equipment.heartstone",
+    "category": "equipment",
+    "name": "Heartstone",
+    "source": "MM",
+    "type": "OTH",
+    "description": [
+      {
+        "type": "paragraph",
+        "text": "This lustrous black gem allows a night hag to become ethereal while it is in her possession. The touch of a heartstone also cures any disease. Crafting a heartstone takes 30 days."
       }
     ]
   },
@@ -4212,23 +4319,87 @@
       },
       {
         "type": "table",
-        "headers": ["d100", "Card", "Soul"],
+        "headers": [
+          "d100",
+          "Card",
+          "Soul"
+        ],
         "rows": [
-          ["1", "Artifact", "Flameskull"],
-          ["2", "Beast", "Wraith"],
-          ["3", "Broken", "Banshee"],
-          ["4", "Darklord", "Vampire"],
-          ["5", "Donjon", "Mummy"],
-          ["6", "Executioner", "Death knight"],
-          ["7", "Ghost", "Ghost"],
-          ["8", "Horseman", "Mummy lord"],
-          ["9", "Innocent", "Ghost"],
-          ["10", "Marionette", "Mummy"],
-          ["11", "Mists", "Wraith"],
-          ["12", "Raven", "Vampire spawn"],
-          ["13", "Seer", "Vampire"],
-          ["14", "Tempter", "Vampire spawn"],
-          ["15-100", "—", "—"]
+          [
+            "1",
+            "Artifact",
+            "Flameskull"
+          ],
+          [
+            "2",
+            "Beast",
+            "Wraith"
+          ],
+          [
+            "3",
+            "Broken",
+            "Banshee"
+          ],
+          [
+            "4",
+            "Darklord",
+            "Vampire"
+          ],
+          [
+            "5",
+            "Donjon",
+            "Mummy"
+          ],
+          [
+            "6",
+            "Executioner",
+            "Death knight"
+          ],
+          [
+            "7",
+            "Ghost",
+            "Ghost"
+          ],
+          [
+            "8",
+            "Horseman",
+            "Mummy lord"
+          ],
+          [
+            "9",
+            "Innocent",
+            "Ghost"
+          ],
+          [
+            "10",
+            "Marionette",
+            "Mummy"
+          ],
+          [
+            "11",
+            "Mists",
+            "Wraith"
+          ],
+          [
+            "12",
+            "Raven",
+            "Vampire spawn"
+          ],
+          [
+            "13",
+            "Seer",
+            "Vampire"
+          ],
+          [
+            "14",
+            "Tempter",
+            "Vampire spawn"
+          ],
+          [
+            "15-100",
+            "—",
+            "—"
+          ]
         ]
       },
       {
@@ -4416,6 +4587,28 @@
       {
         "type": "paragraph",
         "text": "As an action, you can use the tattoo to cast the disguise self spell (DC 13 to discern the disguise). Once the spell is cast from the tattoo, it can't be cast from the tattoo again until the next dawn."
+      }
+    ]
+  },
+  {
+    "id": "mm|master-s-amulet",
+    "canonicalId": "equipment.masters-amulet",
+    "category": "equipment",
+    "name": "Master's Amulet",
+    "source": "MM",
+    "type": "OTH",
+    "description": [
+      {
+        "type": "paragraph",
+        "text": "Every shield guardian has an amulet magically linked to it. A shield guardian can have only one corresponding amulet, and if that amulet is destroyed, the shield guardian is incapacitated until a replacement amulet is created. A shield guardian's amulet is subject to direct attack if it isn't being worn or carried. It has AC 10, 10 hit points, and immunity to poison and psychic damage. Crafting an amulet requires 1 week and costs 1,000 gp in components."
+      },
+      {
+        "type": "paragraph",
+        "text": "A shield guardian's solitary focus is to protect the amulet's wearer. The amulet's wearer can command the guardian to attack its enemies or to guard the wielder against attack. If an attack threatens to injure the wearer, the construct can magically absorb the blow into its own body, even at a distance."
+      },
+      {
+        "type": "paragraph",
+        "text": "A spellcaster can store a single spell within a shield guardian, which can then cast the spell on command or under specific conditions. Many a wizard has been rendered helpless by enemies, only to surprise those foes when its shield guardian unleashes potent magical power."
       }
     ]
   },
@@ -4824,12 +5017,32 @@
       },
       {
         "type": "table",
-        "headers": ["d4", "Property", "Shard"],
+        "headers": [
+          "d4",
+          "Property",
+          "Shard"
+        ],
         "rows": [
-          ["1", "Lawful", "Outer Essence Shard (Lawful)"],
-          ["2", "Chaotic", "Outer Essence Shard (Chaotic)"],
-          ["3", "Good", "Outer Essence Shard (Good)"],
-          ["4", "Evil", "Outer Essence Shard (Evil)"]
+          [
+            "1",
+            "Lawful",
+            "Outer Essence Shard (Lawful)"
+          ],
+          [
+            "2",
+            "Chaotic",
+            "Outer Essence Shard (Chaotic)"
+          ],
+          [
+            "3",
+            "Good",
+            "Outer Essence Shard (Good)"
+          ],
+          [
+            "4",
+            "Evil",
+            "Outer Essence Shard (Evil)"
+          ]
         ]
       }
     ]
@@ -5528,7 +5741,10 @@
     "type": "Melee Weapon",
     "damage": "1d6",
     "damageType": "Y",
-    "properties": ["F|XPHB", "T|XPHB"],
+    "properties": [
+      "F|XPHB",
+      "T|XPHB"
+    ],
     "description": []
   },
   {
@@ -6170,6 +6386,20 @@
     "description": []
   },
   {
+    "id": "mm|soul-bag",
+    "canonicalId": "equipment.soul-bag",
+    "category": "equipment",
+    "name": "Soul Bag",
+    "source": "MM",
+    "type": "OTH",
+    "description": [
+      {
+        "type": "paragraph",
+        "text": "When an evil humanoid dies as a result of a night hag's Nightmare Haunting, the hag catches the soul in this black sack made of stitched flesh. A soul bag can hold only one evil soul at a time, and only the night hag who crafted the bag can catch a soul with it. Crafting a soul bag takes 7 days and a humanoid sacrifice (whose flesh is used to make the bag)."
+      }
+    ]
+  },
+  {
     "id": "phb|spellbook",
     "canonicalId": "equipment.spellbook",
     "category": "equipment",
@@ -6375,7 +6605,9 @@
     "weight": "4 lb",
     "damage": "1d6",
     "damageType": "B",
-    "properties": ["Versatile"],
+    "properties": [
+      "Versatile"
+    ],
     "description": [
       {
         "type": "paragraph",
@@ -6393,7 +6625,9 @@
     "weight": "4 lb",
     "damage": "1d6",
     "damageType": "B",
-    "properties": ["Versatile"],
+    "properties": [
+      "Versatile"
+    ],
     "description": [
       {
         "type": "paragraph",
@@ -6415,7 +6649,9 @@
     "weight": "4 lb",
     "damage": "1d6",
     "damageType": "B",
-    "properties": ["Versatile"],
+    "properties": [
+      "Versatile"
+    ],
     "description": [
       {
         "type": "paragraph",
@@ -6519,7 +6755,12 @@
       },
       {
         "type": "table",
-        "headers": ["d20", "Tale and Tooth", "Creatures Summoned", "Implanted Effect"],
+        "headers": [
+          "d20",
+          "Tale and Tooth",
+          "Creatures Summoned",
+          "Implanted Effect"
+        ],
         "rows": [
           [
             "1",
@@ -6705,7 +6946,10 @@
     "description": [
       {
         "type": "list",
-        "items": ["Ability: Dexterity", "Utilize: Pick a lock (DC 15), or disarm a trap (DC 15)"]
+        "items": [
+          "Ability: Dexterity",
+          "Utilize: Pick a lock (DC 15), or disarm a trap (DC 15)"
+        ]
       }
     ]
   },
@@ -6866,14 +7110,35 @@
       },
       {
         "type": "table",
-        "headers": ["d100", "Trinket"],
+        "headers": [
+          "d100",
+          "Trinket"
+        ],
         "rows": [
-          ["01", "A mummified goblin hand"],
-          ["02", "A piece of crystal that faintly glows in the moonlight"],
-          ["03", "A gold coin minted in an unknown land"],
-          ["04", "A diary written in a language you don't know"],
-          ["05", "A brass ring that never tarnishes"],
-          ["06", "An old chess piece made from glass"],
+          [
+            "01",
+            "A mummified goblin hand"
+          ],
+          [
+            "02",
+            "A piece of crystal that faintly glows in the moonlight"
+          ],
+          [
+            "03",
+            "A gold coin minted in an unknown land"
+          ],
+          [
+            "04",
+            "A diary written in a language you don't know"
+          ],
+          [
+            "05",
+            "A brass ring that never tarnishes"
+          ],
+          [
+            "06",
+            "An old chess piece made from glass"
+          ],
           [
             "07",
             "A pair of knucklebone dice, each with a skull symbol on the side that would normally show six pips"
@@ -6882,125 +7147,374 @@
             "08",
             "A small idol depicting a nightmarish creature that gives you unsettling dreams when you sleep near it"
           ],
-          ["09", "A rope necklace from which dangles four mummified elf fingers"],
-          ["10", "The deed for a parcel of land in a realm unknown to you"],
-          ["11", "A 1-ounce block made from an unknown material"],
-          ["12", "A small cloth doll skewered with needles"],
-          ["13", "A tooth from an unknown beast"],
-          ["14", "An enormous scale, perhaps from a dragon"],
-          ["15", "A bright green feather"],
-          ["16", "An old divination card bearing your likeness"],
-          ["17", "A glass orb filled with moving smoke"],
-          ["18", "A 1-pound egg with a bright red shell"],
-          ["19", "A pipe that blows bubbles"],
-          ["20", "A glass jar containing a weird bit of flesh floating in pickling fluid"],
+          [
+            "09",
+            "A rope necklace from which dangles four mummified elf fingers"
+          ],
+          [
+            "10",
+            "The deed for a parcel of land in a realm unknown to you"
+          ],
+          [
+            "11",
+            "A 1-ounce block made from an unknown material"
+          ],
+          [
+            "12",
+            "A small cloth doll skewered with needles"
+          ],
+          [
+            "13",
+            "A tooth from an unknown beast"
+          ],
+          [
+            "14",
+            "An enormous scale, perhaps from a dragon"
+          ],
+          [
+            "15",
+            "A bright green feather"
+          ],
+          [
+            "16",
+            "An old divination card bearing your likeness"
+          ],
+          [
+            "17",
+            "A glass orb filled with moving smoke"
+          ],
+          [
+            "18",
+            "A 1-pound egg with a bright red shell"
+          ],
+          [
+            "19",
+            "A pipe that blows bubbles"
+          ],
+          [
+            "20",
+            "A glass jar containing a weird bit of flesh floating in pickling fluid"
+          ],
           [
             "21",
             "A tiny gnome-crafted music box that plays a song you dimly remember from your childhood"
           ],
-          ["22", "A small wooden statuette of a smug halfling"],
-          ["23", "A brass orb etched with strange runes"],
-          ["24", "A multicolored stone disk"],
-          ["25", "A tiny silver icon of a raven"],
-          ["26", "A bag containing forty-seven humanoid teeth, one of which is rotten"],
-          ["27", "A shard of obsidian that always feels warm to the touch"],
-          ["28", "A dragon's bony talon hanging from a plain leather necklace"],
-          ["29", "A pair of old socks"],
+          [
+            "22",
+            "A small wooden statuette of a smug halfling"
+          ],
+          [
+            "23",
+            "A brass orb etched with strange runes"
+          ],
+          [
+            "24",
+            "A multicolored stone disk"
+          ],
+          [
+            "25",
+            "A tiny silver icon of a raven"
+          ],
+          [
+            "26",
+            "A bag containing forty-seven humanoid teeth, one of which is rotten"
+          ],
+          [
+            "27",
+            "A shard of obsidian that always feels warm to the touch"
+          ],
+          [
+            "28",
+            "A dragon's bony talon hanging from a plain leather necklace"
+          ],
+          [
+            "29",
+            "A pair of old socks"
+          ],
           [
             "30",
             "A blank book whose pages refuse to hold ink, chalk, graphite, or any other substance or marking"
           ],
-          ["31", "A silver badge in the shape of a five-pointed star"],
-          ["32", "A knife that belonged to a relative"],
-          ["33", "A glass vial filled with nail clippings"],
+          [
+            "31",
+            "A silver badge in the shape of a five-pointed star"
+          ],
+          [
+            "32",
+            "A knife that belonged to a relative"
+          ],
+          [
+            "33",
+            "A glass vial filled with nail clippings"
+          ],
           [
             "34",
             "A rectangular metal device with two tiny metal cups on one end that throws sparks when wet"
           ],
-          ["35", "A white, sequined glove sized for a human"],
-          ["36", "A vest with one hundred tiny pockets"],
-          ["37", "A small, weightless stone block"],
-          ["38", "A tiny sketch portrait of a goblin"],
-          ["39", "An empty glass vial that smells of perfume when opened"],
-          ["40", "A gemstone that looks like a lump of coal when examined by anyone but you"],
-          ["41", "A scrap of cloth from an old banner"],
-          ["42", "A rank insignia from a lost legionnaire"],
-          ["43", "A tiny silver bell without a clapper"],
-          ["44", "A mechanical canary inside a gnomish lamp"],
-          ["45", "A tiny chest carved to look like it has numerous feet on the bottom"],
-          ["46", "A dead sprite inside a clear glass bottle"],
+          [
+            "35",
+            "A white, sequined glove sized for a human"
+          ],
+          [
+            "36",
+            "A vest with one hundred tiny pockets"
+          ],
+          [
+            "37",
+            "A small, weightless stone block"
+          ],
+          [
+            "38",
+            "A tiny sketch portrait of a goblin"
+          ],
+          [
+            "39",
+            "An empty glass vial that smells of perfume when opened"
+          ],
+          [
+            "40",
+            "A gemstone that looks like a lump of coal when examined by anyone but you"
+          ],
+          [
+            "41",
+            "A scrap of cloth from an old banner"
+          ],
+          [
+            "42",
+            "A rank insignia from a lost legionnaire"
+          ],
+          [
+            "43",
+            "A tiny silver bell without a clapper"
+          ],
+          [
+            "44",
+            "A mechanical canary inside a gnomish lamp"
+          ],
+          [
+            "45",
+            "A tiny chest carved to look like it has numerous feet on the bottom"
+          ],
+          [
+            "46",
+            "A dead sprite inside a clear glass bottle"
+          ],
           [
             "47",
             "A metal can that has no opening but sounds as if it is filled with liquid, sand, spiders, or broken glass (your choice)"
           ],
-          ["48", "A glass orb filled with water, in which swims a clockwork goldfish"],
-          ["49", "A silver spoon with an 'M' engraved on the handle"],
-          ["50", "A whistle made from gold-colored wood"],
-          ["51", "A dead scarab beetle the size of your hand"],
-          ["52", "Two toy soldiers, one with a missing head"],
-          ["53", "A small box filled with different-sized buttons"],
-          ["54", "A candle that can't be lit"],
-          ["55", "A tiny cage with no door"],
-          ["56", "An old key"],
-          ["57", "An indecipherable treasure map"],
-          ["58", "A hilt from a broken sword"],
-          ["59", "A rabbit's foot"],
-          ["60", "A glass eye"],
-          ["61", "A cameo carved in the likeness of a hideous person"],
-          ["62", "A silver skull the size of a coin"],
-          ["63", "An alabaster mask"],
-          ["64", "A pyramid of sticky black incense that smells very bad"],
-          ["65", "A nightcap that, when worn, gives you pleasant dreams"],
-          ["66", "A single caltrop made from bone"],
-          ["67", "A gold monocle frame without the lens"],
-          ["68", "A 1-inch cube, each side painted a different color"],
-          ["69", "A crystal knob from a door"],
-          ["70", "A small packet filled with pink dust"],
+          [
+            "48",
+            "A glass orb filled with water, in which swims a clockwork goldfish"
+          ],
+          [
+            "49",
+            "A silver spoon with an 'M' engraved on the handle"
+          ],
+          [
+            "50",
+            "A whistle made from gold-colored wood"
+          ],
+          [
+            "51",
+            "A dead scarab beetle the size of your hand"
+          ],
+          [
+            "52",
+            "Two toy soldiers, one with a missing head"
+          ],
+          [
+            "53",
+            "A small box filled with different-sized buttons"
+          ],
+          [
+            "54",
+            "A candle that can't be lit"
+          ],
+          [
+            "55",
+            "A tiny cage with no door"
+          ],
+          [
+            "56",
+            "An old key"
+          ],
+          [
+            "57",
+            "An indecipherable treasure map"
+          ],
+          [
+            "58",
+            "A hilt from a broken sword"
+          ],
+          [
+            "59",
+            "A rabbit's foot"
+          ],
+          [
+            "60",
+            "A glass eye"
+          ],
+          [
+            "61",
+            "A cameo carved in the likeness of a hideous person"
+          ],
+          [
+            "62",
+            "A silver skull the size of a coin"
+          ],
+          [
+            "63",
+            "An alabaster mask"
+          ],
+          [
+            "64",
+            "A pyramid of sticky black incense that smells very bad"
+          ],
+          [
+            "65",
+            "A nightcap that, when worn, gives you pleasant dreams"
+          ],
+          [
+            "66",
+            "A single caltrop made from bone"
+          ],
+          [
+            "67",
+            "A gold monocle frame without the lens"
+          ],
+          [
+            "68",
+            "A 1-inch cube, each side painted a different color"
+          ],
+          [
+            "69",
+            "A crystal knob from a door"
+          ],
+          [
+            "70",
+            "A small packet filled with pink dust"
+          ],
           [
             "71",
             "A fragment of a beautiful song, written as musical notes on two pieces of parchment"
           ],
-          ["72", "A silver teardrop earring made from a real teardrop"],
-          ["73", "The shell of an egg painted with scenes of human misery in disturbing detail"],
-          ["74", "A fan that, when unfolded, shows a sleeping cat"],
-          ["75", "A set of bone pipes"],
-          ["76", "A four-leaf clover pressed inside a book discussing manners and etiquette"],
-          ["77", "A sheet of parchment upon which is drawn a complex mechanical contraption"],
-          ["78", "An ornate scabbard that fits no blade you have found so far"],
-          ["79", "An invitation to a party where a murder happened"],
-          ["80", "A bronze pentacle with an etching of a rat's head in its center"],
-          ["81", "A purple handkerchief embroidered with the name of a powerful archmage"],
-          ["82", "Half of a floorplan for a temple, castle, or some other structure"],
-          ["83", "A bit of folded cloth that, when unfolded, turns into a stylish cap"],
-          ["84", "A receipt of deposit at a bank in a far-flung city"],
-          ["85", "A diary with seven missing pages"],
+          [
+            "72",
+            "A silver teardrop earring made from a real teardrop"
+          ],
+          [
+            "73",
+            "The shell of an egg painted with scenes of human misery in disturbing detail"
+          ],
+          [
+            "74",
+            "A fan that, when unfolded, shows a sleeping cat"
+          ],
+          [
+            "75",
+            "A set of bone pipes"
+          ],
+          [
+            "76",
+            "A four-leaf clover pressed inside a book discussing manners and etiquette"
+          ],
+          [
+            "77",
+            "A sheet of parchment upon which is drawn a complex mechanical contraption"
+          ],
+          [
+            "78",
+            "An ornate scabbard that fits no blade you have found so far"
+          ],
+          [
+            "79",
+            "An invitation to a party where a murder happened"
+          ],
+          [
+            "80",
+            "A bronze pentacle with an etching of a rat's head in its center"
+          ],
+          [
+            "81",
+            "A purple handkerchief embroidered with the name of a powerful archmage"
+          ],
+          [
+            "82",
+            "Half of a floorplan for a temple, castle, or some other structure"
+          ],
+          [
+            "83",
+            "A bit of folded cloth that, when unfolded, turns into a stylish cap"
+          ],
+          [
+            "84",
+            "A receipt of deposit at a bank in a far-flung city"
+          ],
+          [
+            "85",
+            "A diary with seven missing pages"
+          ],
           [
             "86",
             "An empty silver snuffbox bearing an inscription on the surface that says \"dreams\""
           ],
-          ["87", "An iron holy symbol devoted to an unknown god"],
+          [
+            "87",
+            "An iron holy symbol devoted to an unknown god"
+          ],
           [
             "88",
             "A book that tells the story of a legendary hero's rise and fall, with the last chapter missing"
           ],
-          ["89", "A vial of dragon blood"],
-          ["90", "An ancient arrow of elven design"],
-          ["91", "A needle that never bends"],
-          ["92", "An ornate brooch of dwarven design"],
+          [
+            "89",
+            "A vial of dragon blood"
+          ],
+          [
+            "90",
+            "An ancient arrow of elven design"
+          ],
+          [
+            "91",
+            "A needle that never bends"
+          ],
+          [
+            "92",
+            "An ornate brooch of dwarven design"
+          ],
           [
             "93",
             "An empty wine bottle bearing a pretty label that says, \"The Wizard of Wines Winery, Red Dragon Crush, 331422-W\""
           ],
-          ["94", "A mosaic tile with a multicolored, glazed surface"],
-          ["95", "A petrified mouse"],
-          ["96", "A black pirate flag adorned with a dragon's skull and crossbones"],
-          ["97", "A tiny mechanical crab or spider that moves about when it's not being observed"],
-          ["98", "A glass jar containing lard with a label that reads, \"Griffon Grease\""],
+          [
+            "94",
+            "A mosaic tile with a multicolored, glazed surface"
+          ],
+          [
+            "95",
+            "A petrified mouse"
+          ],
+          [
+            "96",
+            "A black pirate flag adorned with a dragon's skull and crossbones"
+          ],
+          [
+            "97",
+            "A tiny mechanical crab or spider that moves about when it's not being observed"
+          ],
+          [
+            "98",
+            "A glass jar containing lard with a label that reads, \"Griffon Grease\""
+          ],
           [
             "99",
             "A wooden box with a ceramic bottom that holds a living worm with a head on each end of its body"
           ],
-          ["100", "A metal urn containing the ashes of a hero"]
+          [
+            "100",
+            "A metal urn containing the ashes of a hero"
+          ]
         ]
       }
     ]
@@ -7019,14 +7533,35 @@
       },
       {
         "type": "table",
-        "headers": ["1d100", "Trinket"],
+        "headers": [
+          "1d100",
+          "Trinket"
+        ],
         "rows": [
-          ["01", "A mummified goblin hand"],
-          ["02", "A crystal that faintly glows in moonlight"],
-          ["03", "A gold coin minted in an unknown land"],
-          ["04", "A diary written in a language you don't know"],
-          ["05", "A brass ring that never tarnishes"],
-          ["06", "An old chess piece made from glass"],
+          [
+            "01",
+            "A mummified goblin hand"
+          ],
+          [
+            "02",
+            "A crystal that faintly glows in moonlight"
+          ],
+          [
+            "03",
+            "A gold coin minted in an unknown land"
+          ],
+          [
+            "04",
+            "A diary written in a language you don't know"
+          ],
+          [
+            "05",
+            "A brass ring that never tarnishes"
+          ],
+          [
+            "06",
+            "An old chess piece made from glass"
+          ],
           [
             "07",
             "A pair of knucklebone dice, each with a skull symbol on the side that would normally show six pips"
@@ -7035,119 +7570,374 @@
             "08",
             "A small idol depicting a nightmarish creature that gives you unsettling dreams when you sleep near it"
           ],
-          ["09", "A lock of someone's hair"],
-          ["10", "The deed for a parcel of land in a realm unknown to you"],
-          ["11", "A 1-ounce block made from an unknown material"],
-          ["12", "A small cloth doll skewered with needles"],
-          ["13", "A tooth from an unknown beast"],
-          ["14", "An enormous scale, perhaps from a dragon"],
-          ["15", "A bright-green feather"],
-          ["16", "An old divination card bearing your likeness"],
-          ["17", "A glass orb filled with moving smoke"],
-          ["18", "A 1-pound egg with a bright-red shell"],
-          ["19", "A pipe that blows bubbles"],
-          ["20", "A glass jar containing a bit of flesh floating in pickling fluid"],
+          [
+            "09",
+            "A lock of someone's hair"
+          ],
+          [
+            "10",
+            "The deed for a parcel of land in a realm unknown to you"
+          ],
+          [
+            "11",
+            "A 1-ounce block made from an unknown material"
+          ],
+          [
+            "12",
+            "A small cloth doll skewered with needles"
+          ],
+          [
+            "13",
+            "A tooth from an unknown beast"
+          ],
+          [
+            "14",
+            "An enormous scale, perhaps from a dragon"
+          ],
+          [
+            "15",
+            "A bright-green feather"
+          ],
+          [
+            "16",
+            "An old divination card bearing your likeness"
+          ],
+          [
+            "17",
+            "A glass orb filled with moving smoke"
+          ],
+          [
+            "18",
+            "A 1-pound egg with a bright-red shell"
+          ],
+          [
+            "19",
+            "A pipe that blows bubbles"
+          ],
+          [
+            "20",
+            "A glass jar containing a bit of flesh floating in pickling fluid"
+          ],
           [
             "21",
             "A gnome-crafted music box that plays a song you dimly remember from your childhood"
           ],
-          ["22", "A wooden statuette of a smug halfling"],
-          ["23", "A brass orb etched with strange runes"],
-          ["24", "A multicolored stone disk"],
-          ["25", "A silver icon of a raven"],
-          ["26", "A bag containing forty-seven teeth, one of which is rotten"],
-          ["27", "A shard of obsidian that always feels warm to the touch"],
-          ["28", "A dragon's talon strung on a leather necklace"],
-          ["29", "A pair of old socks"],
+          [
+            "22",
+            "A wooden statuette of a smug halfling"
+          ],
+          [
+            "23",
+            "A brass orb etched with strange runes"
+          ],
+          [
+            "24",
+            "A multicolored stone disk"
+          ],
+          [
+            "25",
+            "A silver icon of a raven"
+          ],
+          [
+            "26",
+            "A bag containing forty-seven teeth, one of which is rotten"
+          ],
+          [
+            "27",
+            "A shard of obsidian that always feels warm to the touch"
+          ],
+          [
+            "28",
+            "A dragon's talon strung on a leather necklace"
+          ],
+          [
+            "29",
+            "A pair of old socks"
+          ],
           [
             "30",
             "A blank book whose pages refuse to hold ink, chalk, graphite, or any other marking"
           ],
-          ["31", "A silver badge that is a five-pointed star"],
-          ["32", "A knife that belonged to a relative"],
-          ["33", "A glass vial filled with nail clippings"],
+          [
+            "31",
+            "A silver badge that is a five-pointed star"
+          ],
+          [
+            "32",
+            "A knife that belonged to a relative"
+          ],
+          [
+            "33",
+            "A glass vial filled with nail clippings"
+          ],
           [
             "34",
             "A rectangular metal device with two tiny metal cups on one end that throws sparks when wet"
           ],
-          ["35", "A white, sequined glove sized for a human"],
-          ["36", "A vest with one hundred tiny pockets"],
-          ["37", "A weightless stone"],
-          ["38", "A sketch of a goblin"],
-          ["39", "An empty glass vial that smells of perfume"],
-          ["40", "A gemstone that looks like a lump of coal when examined by anyone but you"],
-          ["41", "A scrap of cloth from an old banner"],
-          ["42", "A rank insignia from a lost legionnaire"],
-          ["43", "A silver bell without a clapper"],
-          ["44", "A mechanical canary inside a lamp"],
-          ["45", "A miniature chest carved to look like it has numerous feet on the bottom"],
-          ["46", "A dead sprite inside a clear glass bottle"],
+          [
+            "35",
+            "A white, sequined glove sized for a human"
+          ],
+          [
+            "36",
+            "A vest with one hundred tiny pockets"
+          ],
+          [
+            "37",
+            "A weightless stone"
+          ],
+          [
+            "38",
+            "A sketch of a goblin"
+          ],
+          [
+            "39",
+            "An empty glass vial that smells of perfume"
+          ],
+          [
+            "40",
+            "A gemstone that looks like a lump of coal when examined by anyone but you"
+          ],
+          [
+            "41",
+            "A scrap of cloth from an old banner"
+          ],
+          [
+            "42",
+            "A rank insignia from a lost legionnaire"
+          ],
+          [
+            "43",
+            "A silver bell without a clapper"
+          ],
+          [
+            "44",
+            "A mechanical canary inside a lamp"
+          ],
+          [
+            "45",
+            "A miniature chest carved to look like it has numerous feet on the bottom"
+          ],
+          [
+            "46",
+            "A dead sprite inside a clear glass bottle"
+          ],
           [
             "47",
             "A metal can that has no opening but sounds as if it is filled with liquid, sand, spiders, or broken glass (your choice)"
           ],
-          ["48", "A glass orb filled with water, in which swims a clockwork goldfish"],
-          ["49", "A silver spoon with an M engraved on the handle"],
-          ["50", "A whistle made from gold-colored wood"],
-          ["51", "A dead scarab beetle the size of your hand"],
-          ["52", "Two toy soldiers, one missing a head"],
-          ["53", "A small box filled with different-sized buttons"],
-          ["54", "A candle that can't be lit"],
-          ["55", "A miniature cage with no door"],
-          ["56", "An old key"],
-          ["57", "An indecipherable treasure map"],
-          ["58", "A hilt from a broken sword"],
-          ["59", "A rabbit's foot"],
-          ["60", "A glass eye"],
-          ["61", "A cameo of a hideous person"],
-          ["62", "A silver skull the size of a coin"],
-          ["63", "An alabaster mask"],
-          ["64", "A cone of sticky black incense that stinks"],
-          ["65", "A nightcap that gives you pleasant dreams when you wear it"],
-          ["66", "A single caltrop made from bone"],
-          ["67", "A gold monocle frame without the lens"],
-          ["68", "A 1-inch cube, each side a different color"],
-          ["69", "A crystal doorknob"],
-          ["70", "A packet filled with pink dust"],
+          [
+            "48",
+            "A glass orb filled with water, in which swims a clockwork goldfish"
+          ],
+          [
+            "49",
+            "A silver spoon with an M engraved on the handle"
+          ],
+          [
+            "50",
+            "A whistle made from gold-colored wood"
+          ],
+          [
+            "51",
+            "A dead scarab beetle the size of your hand"
+          ],
+          [
+            "52",
+            "Two toy soldiers, one missing a head"
+          ],
+          [
+            "53",
+            "A small box filled with different-sized buttons"
+          ],
+          [
+            "54",
+            "A candle that can't be lit"
+          ],
+          [
+            "55",
+            "A miniature cage with no door"
+          ],
+          [
+            "56",
+            "An old key"
+          ],
+          [
+            "57",
+            "An indecipherable treasure map"
+          ],
+          [
+            "58",
+            "A hilt from a broken sword"
+          ],
+          [
+            "59",
+            "A rabbit's foot"
+          ],
+          [
+            "60",
+            "A glass eye"
+          ],
+          [
+            "61",
+            "A cameo of a hideous person"
+          ],
+          [
+            "62",
+            "A silver skull the size of a coin"
+          ],
+          [
+            "63",
+            "An alabaster mask"
+          ],
+          [
+            "64",
+            "A cone of sticky black incense that stinks"
+          ],
+          [
+            "65",
+            "A nightcap that gives you pleasant dreams when you wear it"
+          ],
+          [
+            "66",
+            "A single caltrop made from bone"
+          ],
+          [
+            "67",
+            "A gold monocle frame without the lens"
+          ],
+          [
+            "68",
+            "A 1-inch cube, each side a different color"
+          ],
+          [
+            "69",
+            "A crystal doorknob"
+          ],
+          [
+            "70",
+            "A packet filled with pink dust"
+          ],
           [
             "71",
             "A fragment of a beautiful song, written as musical notes on two pieces of parchment"
           ],
-          ["72", "A silver teardrop earring containing a real teardrop"],
-          ["73", "An eggshell painted with scenes of misery in disturbing detail"],
-          ["74", "A fan that, when unfolded, shows a sleepy cat"],
-          ["75", "A set of bone pipes"],
-          ["76", "A four-leaf clover pressed inside a book discussing manners and etiquette"],
-          ["77", "A sheet of parchment upon which is drawn a mechanical contraption"],
-          ["78", "An ornate scabbard that fits no blade you have found"],
-          ["79", "An invitation to a party where a murder happened"],
-          ["80", "A bronze pentacle with an etching of a rat's head in its center"],
-          ["81", "A purple handkerchief embroidered with the name of an archmage"],
-          ["82", "Half a floor plan for a temple, a castle, or another structure"],
-          ["83", "A bit of folded cloth that, when unfolded, turns into a stylish cap"],
-          ["84", "A receipt of deposit at a bank in a far-off city"],
-          ["85", "A diary with seven missing pages"],
-          ["86", "An empty silver snuffbox bearing the inscription \"dreams\" on its lid"],
-          ["87", "An iron holy symbol devoted to an unknown god"],
-          ["88", "A book about a legendary hero's rise and fall, with the last chapter missing"],
-          ["89", "A vial of dragon blood"],
-          ["90", "An ancient arrow of elven design"],
-          ["91", "A needle that never bends"],
-          ["92", "An ornate brooch of dwarven design"],
+          [
+            "72",
+            "A silver teardrop earring containing a real teardrop"
+          ],
+          [
+            "73",
+            "An eggshell painted with scenes of misery in disturbing detail"
+          ],
+          [
+            "74",
+            "A fan that, when unfolded, shows a sleepy cat"
+          ],
+          [
+            "75",
+            "A set of bone pipes"
+          ],
+          [
+            "76",
+            "A four-leaf clover pressed inside a book discussing manners and etiquette"
+          ],
+          [
+            "77",
+            "A sheet of parchment upon which is drawn a mechanical contraption"
+          ],
+          [
+            "78",
+            "An ornate scabbard that fits no blade you have found"
+          ],
+          [
+            "79",
+            "An invitation to a party where a murder happened"
+          ],
+          [
+            "80",
+            "A bronze pentacle with an etching of a rat's head in its center"
+          ],
+          [
+            "81",
+            "A purple handkerchief embroidered with the name of an archmage"
+          ],
+          [
+            "82",
+            "Half a floor plan for a temple, a castle, or another structure"
+          ],
+          [
+            "83",
+            "A bit of folded cloth that, when unfolded, turns into a stylish cap"
+          ],
+          [
+            "84",
+            "A receipt of deposit at a bank in a far-off city"
+          ],
+          [
+            "85",
+            "A diary with seven missing pages"
+          ],
+          [
+            "86",
+            "An empty silver snuffbox bearing the inscription \"dreams\" on its lid"
+          ],
+          [
+            "87",
+            "An iron holy symbol devoted to an unknown god"
+          ],
+          [
+            "88",
+            "A book about a legendary hero's rise and fall, with the last chapter missing"
+          ],
+          [
+            "89",
+            "A vial of dragon blood"
+          ],
+          [
+            "90",
+            "An ancient arrow of elven design"
+          ],
+          [
+            "91",
+            "A needle that never bends"
+          ],
+          [
+            "92",
+            "An ornate brooch of dwarven design"
+          ],
           [
             "93",
             "An empty wine bottle bearing a pretty label that says, \"The Wizard of Wines Winery, Red Dragon Crush, 331422-W\""
           ],
-          ["94", "A mosaic tile with a multicolored, glazed surface"],
-          ["95", "A petrified mouse"],
-          ["96", "A black pirate flag adorned with a dragon's skull and crossbones"],
-          ["97", "A tiny mechanical crab or spider that moves about when it's not being observed"],
-          ["98", "A glass jar containing lard with a label that reads, \"Griffon Grease\""],
+          [
+            "94",
+            "A mosaic tile with a multicolored, glazed surface"
+          ],
+          [
+            "95",
+            "A petrified mouse"
+          ],
+          [
+            "96",
+            "A black pirate flag adorned with a dragon's skull and crossbones"
+          ],
+          [
+            "97",
+            "A tiny mechanical crab or spider that moves about when it's not being observed"
+          ],
+          [
+            "98",
+            "A glass jar containing lard with a label that reads, \"Griffon Grease\""
+          ],
           [
             "99",
             "A wooden box with a ceramic bottom that holds a living worm with a head on each end of its body"
           ],
-          ["00", "A metal urn containing the ashes of a hero"]
+          [
+            "00",
+            "A metal urn containing the ashes of a hero"
+          ]
         ]
       }
     ]

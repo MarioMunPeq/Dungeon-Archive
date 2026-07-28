@@ -5,6 +5,9 @@ const SOURCE_PRIORITY: Record<string, number> = {
   PHB: 2,
   TCE: 3,
   XGE: 4,
+  XMM: 5,
+  MPMM: 6,
+  MM: 7,
 };
 
 export function sourcePriority(source: string): number {

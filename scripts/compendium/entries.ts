@@ -6,6 +6,7 @@
 //   - { type: "list" }  → list (items may be strings or { type: "item", name, entries })
 //   - { type: "table" } → table (cells may be strings or { type: "cell", roll })
 //   - { type: "entries" } → recursive
+//   - { name, entries } → header + recursive (named entry section)
 //   - unknown objects   → ignored
 
 import type { ContentBlock } from "../../src/types/content-block";
@@ -117,6 +118,14 @@ export function processEntries(entries: readonly unknown[]): ContentBlock[] {
     }
 
     if (obj.type === "entries" && Array.isArray(obj.entries)) {
+      const innerBlocks = processEntries(obj.entries);
+      blocks.push(...innerBlocks);
+      continue;
+    }
+
+    // Named entry section: { name: "...", entries: [...] } (e.g., monster traits)
+    if (typeof obj.name === "string" && obj.name && Array.isArray(obj.entries)) {
+      blocks.push({ type: "header", text: obj.name, level: 3 });
       const innerBlocks = processEntries(obj.entries);
       blocks.push(...innerBlocks);
       continue;

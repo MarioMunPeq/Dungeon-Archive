@@ -4,6 +4,7 @@ import type { CompendiumEntry } from "../../src/types/compendium";
 import type { Raw5eSpell } from "../../src/adapter/5etools-raw-types";
 import type { Raw5eCondition } from "../../src/adapter/5etools-raw-types";
 import type { Raw5eItem } from "../../src/adapter/5etools-raw-types";
+import type { Raw5eMonster } from "../../src/adapter/5etools-raw-types";
 import { transformSpells } from "./categories/spell/transform";
 import { validateSpells } from "./categories/spell/validate";
 import { transformConditions } from "./categories/condition/transform";
@@ -12,6 +13,8 @@ import { transformEquipment } from "./categories/equipment/transform";
 import { validateEquipment } from "./categories/equipment/validate";
 import { transformActions } from "./categories/action/transform";
 import { validateActions } from "./categories/action/validate";
+import { transformMonsters } from "./categories/monster/transform";
+import { validateMonsters } from "./categories/monster/validate";
 import { generateSearchIndex } from "./generate-index";
 
 const ROOT = join(import.meta.dirname, "..", "..");
@@ -79,6 +82,21 @@ const CATEGORIES: readonly CategoryConfig[] = [
     transform: () => transformActions(),
     validate: validateActions as (entities: CompendiumEntry[]) => ValidationError[],
     outputPath: "actions.json",
+  },
+  {
+    name: "monsters",
+    sourcePaths: [
+      "bestiary/bestiary-mm.json",
+      "bestiary/bestiary-xmm.json",
+      "bestiary/bestiary-mpmm.json",
+      "bestiary/bestiary-tce.json",
+      "bestiary/bestiary-xge.json",
+      "bestiary/bestiary-xphb.json",
+    ],
+    dataKey: "monster",
+    transform: (data) => transformMonsters(data as Raw5eMonster[]),
+    validate: validateMonsters as (entities: CompendiumEntry[]) => ValidationError[],
+    outputPath: "monsters.json",
   },
 ];
 

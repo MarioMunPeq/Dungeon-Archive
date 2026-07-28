@@ -3,7 +3,8 @@
   "counts": {
     "spells": 868,
     "conditions": 30,
-    "equipment": 418,
-    "actions": 13
+    "equipment": 423,
+    "actions": 13,
+    "monsters": 1248
   }
 }

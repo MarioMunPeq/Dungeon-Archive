@@ -1,7 +1,12 @@
 import { strictEqual, ok } from "node:assert";
 import { getSourceInfo, formatSource, formatEdition } from "../../src/compendium/source";
 import { referenceToUrl, referenceLabel } from "../../src/compendium/reference";
-import { slugFromCanonicalId, canonicalIdFromSlug, categoryLabel, categoryLabelSingular } from "../../src/compendium/slug";
+import {
+  slugFromCanonicalId,
+  canonicalIdFromSlug,
+  categoryLabel,
+  categoryLabelSingular,
+} from "../../src/compendium/slug";
 
 function test(description: string, fn: () => void): void {
   try {
@@ -111,4 +116,6 @@ test("categoryLabel fallback for unknown", () => {
   strictEqual(categoryLabel("unknown"), "unknown");
 });
 
-console.log("\n\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\n");
+console.log(
+  "\n\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\n",
+);

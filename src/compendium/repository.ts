@@ -1,4 +1,11 @@
-import type { Spell, Condition, Equipment, Action, EntityCategory } from "@/types/compendium";
+import type {
+  Spell,
+  Condition,
+  Equipment,
+  Action,
+  Monster,
+  EntityCategory,
+} from "@/types/compendium";
 import type { CategoryMap, CategoryKey } from "./types";
 import { state } from "./loader";
 
@@ -12,6 +19,8 @@ function resolveMap(category: EntityCategory): Map<string, CategoryMap[CategoryK
       return state.equipment;
     case "action":
       return state.actions;
+    case "monster":
+      return state.monsters;
   }
 }
 
@@ -29,6 +38,10 @@ export function getEquipment(id: string): Equipment | null {
 
 export function getAction(id: string): Action | null {
   return state.actions.get(id) ?? null;
+}
+
+export function getMonster(id: string): Monster | null {
+  return state.monsters.get(id) ?? null;
 }
 
 export function getEntity(category: EntityCategory, id: string): CategoryMap[CategoryKey] | null {
@@ -51,6 +64,10 @@ export function getEquipmentList(): readonly Equipment[] {
 
 export function getActions(): readonly Action[] {
   return state.actionList;
+}
+
+export function getMonsters(): readonly Monster[] {
+  return state.monsterList;
 }
 
 export function getCategoryCount(category: EntityCategory): number {
