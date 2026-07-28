@@ -6,6 +6,7 @@ export type CompendiumCategory = EntityCategory;
 
 export interface CompendiumEntry {
   readonly id: string;
+  readonly canonicalId: string;
   readonly category: EntityCategory;
   readonly name: string;
   readonly source: string;
@@ -53,6 +54,12 @@ export interface Action extends CompendiumEntry {
 
 export interface SearchIndexEntry {
   readonly id: string;
+  readonly canonicalId: string;
   readonly name: string;
   readonly category: EntityCategory;
+}
+
+export interface EntityVersion {
+  readonly id: string;
+  readonly source: string;
 }

@@ -1,6 +1,7 @@
 import type { Equipment } from "../../../../src/types/compendium";
 import type { Raw5eItem } from "../../../../src/adapter/5etools-raw-types";
 import { generateId } from "../../id";
+import { createCanonicalId } from "../../identity";
 import { isAllowedSource } from "../../allowed-sources";
 import { processEntries } from "../../entries";
 
@@ -69,6 +70,7 @@ export function transformEquipment(raw: readonly Raw5eItem[]): Equipment[] {
     .filter((i) => isAllowedSource(i.source))
     .map((i) => ({
       id: generateId(i.source, i.name),
+      canonicalId: createCanonicalId("equipment", i.name),
       category: "equipment" as const,
       name: i.name,
       source: i.source,

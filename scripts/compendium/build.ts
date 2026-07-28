@@ -46,7 +46,10 @@ const CATEGORIES: readonly CategoryConfig[] = [
     transform: (data) => {
       const lookupPath = join(EXTERNAL_DIR, "generated", "gendata-spell-source-lookup.json");
       const classLookup = existsSync(lookupPath)
-        ? (readFileJson(lookupPath) as Record<string, Record<string, { class?: Record<string, Record<string, true>> }>>)
+        ? (readFileJson(lookupPath) as Record<
+            string,
+            Record<string, { class?: Record<string, Record<string, true>> }>
+          >)
         : undefined;
       return transformSpells(data as Raw5eSpell[], classLookup);
     },

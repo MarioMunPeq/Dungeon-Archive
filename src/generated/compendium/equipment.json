@@ -1,6 +1,7 @@
 [
   {
     "id": "tce|1-all-purpose-tool",
+    "canonicalId": "equipment.1-all-purpose-tool",
     "category": "equipment",
     "name": "+1 All-Purpose Tool",
     "source": "TCE",
@@ -22,6 +23,7 @@
   },
   {
     "id": "tce|1-amulet-of-the-devout",
+    "canonicalId": "equipment.1-amulet-of-the-devout",
     "category": "equipment",
     "name": "+1 Amulet of the Devout",
     "source": "TCE",
@@ -40,6 +42,7 @@
   },
   {
     "id": "tce|1-arcane-grimoire",
+    "canonicalId": "equipment.1-arcane-grimoire",
     "category": "equipment",
     "name": "+1 Arcane Grimoire",
     "source": "TCE",
@@ -58,6 +61,7 @@
   },
   {
     "id": "tce|1-bloodwell-vial",
+    "canonicalId": "equipment.1-bloodwell-vial",
     "category": "equipment",
     "name": "+1 Bloodwell Vial",
     "source": "TCE",
@@ -75,6 +79,7 @@
   },
   {
     "id": "tce|1-moon-sickle",
+    "canonicalId": "equipment.1-moon-sickle",
     "category": "equipment",
     "name": "+1 Moon Sickle",
     "source": "TCE",
@@ -96,6 +101,7 @@
   },
   {
     "id": "tce|1-rhythm-maker-s-drum",
+    "canonicalId": "equipment.1-rhythm-makers-drum",
     "category": "equipment",
     "name": "+1 Rhythm-Maker's Drum",
     "source": "TCE",
@@ -114,6 +120,7 @@
   },
   {
     "id": "tce|2-all-purpose-tool",
+    "canonicalId": "equipment.2-all-purpose-tool",
     "category": "equipment",
     "name": "+2 All-Purpose Tool",
     "source": "TCE",
@@ -135,6 +142,7 @@
   },
   {
     "id": "tce|2-amulet-of-the-devout",
+    "canonicalId": "equipment.2-amulet-of-the-devout",
     "category": "equipment",
     "name": "+2 Amulet of the Devout",
     "source": "TCE",
@@ -153,6 +161,7 @@
   },
   {
     "id": "tce|2-arcane-grimoire",
+    "canonicalId": "equipment.2-arcane-grimoire",
     "category": "equipment",
     "name": "+2 Arcane Grimoire",
     "source": "TCE",
@@ -171,6 +180,7 @@
   },
   {
     "id": "tce|2-bloodwell-vial",
+    "canonicalId": "equipment.2-bloodwell-vial",
     "category": "equipment",
     "name": "+2 Bloodwell Vial",
     "source": "TCE",
@@ -188,6 +198,7 @@
   },
   {
     "id": "tce|2-moon-sickle",
+    "canonicalId": "equipment.2-moon-sickle",
     "category": "equipment",
     "name": "+2 Moon Sickle",
     "source": "TCE",
@@ -209,6 +220,7 @@
   },
   {
     "id": "tce|2-rhythm-maker-s-drum",
+    "canonicalId": "equipment.2-rhythm-makers-drum",
     "category": "equipment",
     "name": "+2 Rhythm-Maker's Drum",
     "source": "TCE",
@@ -227,6 +239,7 @@
   },
   {
     "id": "tce|3-all-purpose-tool",
+    "canonicalId": "equipment.3-all-purpose-tool",
     "category": "equipment",
     "name": "+3 All-Purpose Tool",
     "source": "TCE",
@@ -248,6 +261,7 @@
   },
   {
     "id": "tce|3-amulet-of-the-devout",
+    "canonicalId": "equipment.3-amulet-of-the-devout",
     "category": "equipment",
     "name": "+3 Amulet of the Devout",
     "source": "TCE",
@@ -266,6 +280,7 @@
   },
   {
     "id": "tce|3-arcane-grimoire",
+    "canonicalId": "equipment.3-arcane-grimoire",
     "category": "equipment",
     "name": "+3 Arcane Grimoire",
     "source": "TCE",
@@ -284,6 +299,7 @@
   },
   {
     "id": "tce|3-bloodwell-vial",
+    "canonicalId": "equipment.3-bloodwell-vial",
     "category": "equipment",
     "name": "+3 Bloodwell Vial",
     "source": "TCE",
@@ -301,6 +317,7 @@
   },
   {
     "id": "tce|3-moon-sickle",
+    "canonicalId": "equipment.3-moon-sickle",
     "category": "equipment",
     "name": "+3 Moon Sickle",
     "source": "TCE",
@@ -322,6 +339,7 @@
   },
   {
     "id": "tce|3-rhythm-maker-s-drum",
+    "canonicalId": "equipment.3-rhythm-makers-drum",
     "category": "equipment",
     "name": "+3 Rhythm-Maker's Drum",
     "source": "TCE",
@@ -340,6 +358,7 @@
   },
   {
     "id": "phb|abacus",
+    "canonicalId": "equipment.abacus",
     "category": "equipment",
     "name": "Abacus",
     "source": "PHB",
@@ -350,6 +369,7 @@
   },
   {
     "id": "xphb|acid",
+    "canonicalId": "equipment.acid",
     "category": "equipment",
     "name": "Acid",
     "source": "XPHB",
@@ -365,6 +385,7 @@
   },
   {
     "id": "phb|acid-vial",
+    "canonicalId": "equipment.acid-vial",
     "category": "equipment",
     "name": "Acid (vial)",
     "source": "PHB",
@@ -380,6 +401,7 @@
   },
   {
     "id": "tce|acid-absorbing-tattoo",
+    "canonicalId": "equipment.acid-absorbing-tattoo",
     "category": "equipment",
     "name": "Acid Absorbing Tattoo",
     "source": "TCE",
@@ -393,6 +415,7 @@
   },
   {
     "id": "xphb|airship",
+    "canonicalId": "equipment.airship",
     "category": "equipment",
     "name": "Airship",
     "source": "XPHB",
@@ -402,6 +425,7 @@
   },
   {
     "id": "tce|alchemical-compendium",
+    "canonicalId": "equipment.alchemical-compendium",
     "category": "equipment",
     "name": "Alchemical Compendium",
     "source": "TCE",
@@ -431,6 +455,7 @@
   },
   {
     "id": "xphb|alchemist-s-fire",
+    "canonicalId": "equipment.alchemists-fire",
     "category": "equipment",
     "name": "Alchemist's Fire",
     "source": "XPHB",
@@ -446,6 +471,7 @@
   },
   {
     "id": "phb|alchemist-s-fire-flask",
+    "canonicalId": "equipment.alchemists-fire-flask",
     "category": "equipment",
     "name": "Alchemist's Fire (flask)",
     "source": "PHB",
@@ -461,6 +487,7 @@
   },
   {
     "id": "phb|ale-gallon",
+    "canonicalId": "equipment.ale-gallon",
     "category": "equipment",
     "name": "Ale (gallon)",
     "source": "PHB",
@@ -470,6 +497,7 @@
   },
   {
     "id": "phb|ale-mug",
+    "canonicalId": "equipment.ale-mug",
     "category": "equipment",
     "name": "Ale (mug)",
     "source": "PHB",
@@ -479,6 +507,7 @@
   },
   {
     "id": "xphb|ale-mug",
+    "canonicalId": "equipment.ale-mug",
     "category": "equipment",
     "name": "Ale (mug)",
     "source": "XPHB",
@@ -488,6 +517,7 @@
   },
   {
     "id": "phb|amulet",
+    "canonicalId": "equipment.amulet",
     "category": "equipment",
     "name": "Amulet",
     "source": "PHB",
@@ -498,6 +528,7 @@
   },
   {
     "id": "xphb|amulet",
+    "canonicalId": "equipment.amulet",
     "category": "equipment",
     "name": "Amulet",
     "source": "XPHB",
@@ -513,6 +544,7 @@
   },
   {
     "id": "xphb|antitoxin",
+    "canonicalId": "equipment.antitoxin",
     "category": "equipment",
     "name": "Antitoxin",
     "source": "XPHB",
@@ -527,6 +559,7 @@
   },
   {
     "id": "phb|antitoxin-vial",
+    "canonicalId": "equipment.antitoxin-vial",
     "category": "equipment",
     "name": "Antitoxin (vial)",
     "source": "PHB",
@@ -541,6 +574,7 @@
   },
   {
     "id": "tce|astral-shard",
+    "canonicalId": "equipment.astral-shard",
     "category": "equipment",
     "name": "Astral Shard",
     "source": "TCE",
@@ -559,6 +593,7 @@
   },
   {
     "id": "tce|astromancy-archive",
+    "canonicalId": "equipment.astromancy-archive",
     "category": "equipment",
     "name": "Astromancy Archive",
     "source": "TCE",
@@ -588,6 +623,7 @@
   },
   {
     "id": "tce|atlas-of-endless-horizons",
+    "canonicalId": "equipment.atlas-of-endless-horizons",
     "category": "equipment",
     "name": "Atlas of Endless Horizons",
     "source": "TCE",
@@ -617,6 +653,7 @@
   },
   {
     "id": "tce|baba-yaga-s-mortar-and-pestle",
+    "canonicalId": "equipment.baba-yagas-mortar-and-pestle",
     "category": "equipment",
     "name": "Baba Yaga's Mortar and Pestle",
     "source": "TCE",
@@ -682,6 +719,7 @@
   },
   {
     "id": "tce|baba-yaga-s-pestle",
+    "canonicalId": "equipment.baba-yagas-pestle",
     "category": "equipment",
     "name": "Baba Yaga's Pestle",
     "source": "TCE",
@@ -703,6 +741,7 @@
   },
   {
     "id": "phb|backpack",
+    "canonicalId": "equipment.backpack",
     "category": "equipment",
     "name": "Backpack",
     "source": "PHB",
@@ -718,6 +757,7 @@
   },
   {
     "id": "xphb|backpack",
+    "canonicalId": "equipment.backpack",
     "category": "equipment",
     "name": "Backpack",
     "source": "XPHB",
@@ -733,6 +773,7 @@
   },
   {
     "id": "phb|ball-bearing",
+    "canonicalId": "equipment.ball-bearing",
     "category": "equipment",
     "name": "Ball Bearing",
     "source": "PHB",
@@ -748,6 +789,7 @@
   },
   {
     "id": "xphb|ball-bearings",
+    "canonicalId": "equipment.ball-bearings",
     "category": "equipment",
     "name": "Ball Bearings",
     "source": "XPHB",
@@ -763,6 +805,7 @@
   },
   {
     "id": "phb|ball-bearings-bag-of-1-000",
+    "canonicalId": "equipment.ball-bearings-bag-of-1-000",
     "category": "equipment",
     "name": "Ball Bearings (bag of 1,000)",
     "source": "PHB",
@@ -778,6 +821,7 @@
   },
   {
     "id": "phb|barrel",
+    "canonicalId": "equipment.barrel",
     "category": "equipment",
     "name": "Barrel",
     "source": "PHB",
@@ -793,6 +837,7 @@
   },
   {
     "id": "xphb|barrel",
+    "canonicalId": "equipment.barrel",
     "category": "equipment",
     "name": "Barrel",
     "source": "XPHB",
@@ -808,6 +853,7 @@
   },
   {
     "id": "tce|barrier-tattoo-large",
+    "canonicalId": "equipment.barrier-tattoo-large",
     "category": "equipment",
     "name": "Barrier Tattoo (Large)",
     "source": "TCE",
@@ -833,6 +879,7 @@
   },
   {
     "id": "tce|barrier-tattoo-medium",
+    "canonicalId": "equipment.barrier-tattoo-medium",
     "category": "equipment",
     "name": "Barrier Tattoo (Medium)",
     "source": "TCE",
@@ -858,6 +905,7 @@
   },
   {
     "id": "tce|barrier-tattoo-small",
+    "canonicalId": "equipment.barrier-tattoo-small",
     "category": "equipment",
     "name": "Barrier Tattoo (Small)",
     "source": "TCE",
@@ -883,6 +931,7 @@
   },
   {
     "id": "xphb|basic-poison",
+    "canonicalId": "equipment.basic-poison",
     "category": "equipment",
     "name": "Basic Poison",
     "source": "XPHB",
@@ -897,6 +946,7 @@
   },
   {
     "id": "phb|basic-poison-vial",
+    "canonicalId": "equipment.basic-poison-vial",
     "category": "equipment",
     "name": "Basic Poison (vial)",
     "source": "PHB",
@@ -911,6 +961,7 @@
   },
   {
     "id": "phb|basket",
+    "canonicalId": "equipment.basket",
     "category": "equipment",
     "name": "Basket",
     "source": "PHB",
@@ -926,6 +977,7 @@
   },
   {
     "id": "xphb|basket",
+    "canonicalId": "equipment.basket",
     "category": "equipment",
     "name": "Basket",
     "source": "XPHB",
@@ -941,6 +993,7 @@
   },
   {
     "id": "xge|bead-of-nourishment",
+    "canonicalId": "equipment.bead-of-nourishment",
     "category": "equipment",
     "name": "Bead of Nourishment",
     "source": "XGE",
@@ -954,6 +1007,7 @@
   },
   {
     "id": "xge|bead-of-refreshment",
+    "canonicalId": "equipment.bead-of-refreshment",
     "category": "equipment",
     "name": "Bead of Refreshment",
     "source": "XGE",
@@ -967,6 +1021,7 @@
   },
   {
     "id": "phb|bedroll",
+    "canonicalId": "equipment.bedroll",
     "category": "equipment",
     "name": "Bedroll",
     "source": "PHB",
@@ -977,6 +1032,7 @@
   },
   {
     "id": "xphb|bedroll",
+    "canonicalId": "equipment.bedroll",
     "category": "equipment",
     "name": "Bedroll",
     "source": "XPHB",
@@ -992,6 +1048,7 @@
   },
   {
     "id": "phb|bell",
+    "canonicalId": "equipment.bell",
     "category": "equipment",
     "name": "Bell",
     "source": "PHB",
@@ -1001,6 +1058,7 @@
   },
   {
     "id": "xphb|bell",
+    "canonicalId": "equipment.bell",
     "category": "equipment",
     "name": "Bell",
     "source": "XPHB",
@@ -1015,6 +1073,7 @@
   },
   {
     "id": "tce|bell-branch",
+    "canonicalId": "equipment.bell-branch",
     "category": "equipment",
     "name": "Bell Branch",
     "source": "TCE",
@@ -1039,6 +1098,7 @@
   },
   {
     "id": "phb|bit-and-bridle",
+    "canonicalId": "equipment.bit-and-bridle",
     "category": "equipment",
     "name": "Bit and bridle",
     "source": "PHB",
@@ -1049,6 +1109,7 @@
   },
   {
     "id": "phb|blanket",
+    "canonicalId": "equipment.blanket",
     "category": "equipment",
     "name": "Blanket",
     "source": "PHB",
@@ -1059,6 +1120,7 @@
   },
   {
     "id": "xphb|blanket",
+    "canonicalId": "equipment.blanket",
     "category": "equipment",
     "name": "Blanket",
     "source": "XPHB",
@@ -1074,6 +1136,7 @@
   },
   {
     "id": "phb|block-and-tackle",
+    "canonicalId": "equipment.block-and-tackle",
     "category": "equipment",
     "name": "Block and Tackle",
     "source": "PHB",
@@ -1089,6 +1152,7 @@
   },
   {
     "id": "xphb|block-and-tackle",
+    "canonicalId": "equipment.block-and-tackle",
     "category": "equipment",
     "name": "Block and Tackle",
     "source": "XPHB",
@@ -1104,6 +1168,7 @@
   },
   {
     "id": "tce|blood-fury-tattoo",
+    "canonicalId": "equipment.blood-fury-tattoo",
     "category": "equipment",
     "name": "Blood Fury Tattoo",
     "source": "TCE",
@@ -1136,6 +1201,7 @@
   },
   {
     "id": "phb|book",
+    "canonicalId": "equipment.book",
     "category": "equipment",
     "name": "Book",
     "source": "PHB",
@@ -1151,6 +1217,7 @@
   },
   {
     "id": "xphb|book",
+    "canonicalId": "equipment.book",
     "category": "equipment",
     "name": "Book",
     "source": "XPHB",
@@ -1166,6 +1233,7 @@
   },
   {
     "id": "xge|boots-of-false-tracks",
+    "canonicalId": "equipment.boots-of-false-tracks",
     "category": "equipment",
     "name": "Boots of False Tracks",
     "source": "XGE",
@@ -1179,6 +1247,7 @@
   },
   {
     "id": "xphb|bread-loaf",
+    "canonicalId": "equipment.bread-loaf",
     "category": "equipment",
     "name": "Bread (loaf)",
     "source": "XPHB",
@@ -1188,6 +1257,7 @@
   },
   {
     "id": "phb|bucket",
+    "canonicalId": "equipment.bucket",
     "category": "equipment",
     "name": "Bucket",
     "source": "PHB",
@@ -1203,6 +1273,7 @@
   },
   {
     "id": "xphb|bucket",
+    "canonicalId": "equipment.bucket",
     "category": "equipment",
     "name": "Bucket",
     "source": "XPHB",
@@ -1218,6 +1289,7 @@
   },
   {
     "id": "phb|bullseye-lantern",
+    "canonicalId": "equipment.bullseye-lantern",
     "category": "equipment",
     "name": "Bullseye Lantern",
     "source": "PHB",
@@ -1233,6 +1305,7 @@
   },
   {
     "id": "xphb|bullseye-lantern",
+    "canonicalId": "equipment.bullseye-lantern",
     "category": "equipment",
     "name": "Bullseye Lantern",
     "source": "XPHB",
@@ -1248,6 +1321,7 @@
   },
   {
     "id": "phb|burglar-s-pack",
+    "canonicalId": "equipment.burglars-pack",
     "category": "equipment",
     "name": "Burglar's Pack",
     "source": "PHB",
@@ -1282,6 +1356,7 @@
   },
   {
     "id": "xphb|burglar-s-pack",
+    "canonicalId": "equipment.burglars-pack",
     "category": "equipment",
     "name": "Burglar's Pack",
     "source": "XPHB",
@@ -1297,6 +1372,7 @@
   },
   {
     "id": "phb|caltrop",
+    "canonicalId": "equipment.caltrop",
     "category": "equipment",
     "name": "Caltrop",
     "source": "PHB",
@@ -1312,6 +1388,7 @@
   },
   {
     "id": "xphb|caltrops",
+    "canonicalId": "equipment.caltrops",
     "category": "equipment",
     "name": "Caltrops",
     "source": "XPHB",
@@ -1327,6 +1404,7 @@
   },
   {
     "id": "phb|caltrops-bag-of-20",
+    "canonicalId": "equipment.caltrops-bag-of-20",
     "category": "equipment",
     "name": "Caltrops (bag of 20)",
     "source": "PHB",
@@ -1342,6 +1420,7 @@
   },
   {
     "id": "phb|camel",
+    "canonicalId": "equipment.camel",
     "category": "equipment",
     "name": "Camel",
     "source": "PHB",
@@ -1351,6 +1430,7 @@
   },
   {
     "id": "xphb|camel",
+    "canonicalId": "equipment.camel",
     "category": "equipment",
     "name": "Camel",
     "source": "XPHB",
@@ -1360,6 +1440,7 @@
   },
   {
     "id": "phb|candle",
+    "canonicalId": "equipment.candle",
     "category": "equipment",
     "name": "Candle",
     "source": "PHB",
@@ -1374,6 +1455,7 @@
   },
   {
     "id": "xphb|candle",
+    "canonicalId": "equipment.candle",
     "category": "equipment",
     "name": "Candle",
     "source": "XPHB",
@@ -1388,6 +1470,7 @@
   },
   {
     "id": "xge|candle-of-the-deep",
+    "canonicalId": "equipment.candle-of-the-deep",
     "category": "equipment",
     "name": "Candle of the Deep",
     "source": "XGE",
@@ -1401,6 +1484,7 @@
   },
   {
     "id": "phb|canvas-1-sq-yd",
+    "canonicalId": "equipment.canvas-1-sq-yd",
     "category": "equipment",
     "name": "Canvas (1 sq. yd.)",
     "source": "PHB",
@@ -1410,6 +1494,7 @@
   },
   {
     "id": "phb|carriage",
+    "canonicalId": "equipment.carriage",
     "category": "equipment",
     "name": "Carriage",
     "source": "PHB",
@@ -1420,6 +1505,7 @@
   },
   {
     "id": "xphb|carriage",
+    "canonicalId": "equipment.carriage",
     "category": "equipment",
     "name": "Carriage",
     "source": "XPHB",
@@ -1430,6 +1516,7 @@
   },
   {
     "id": "phb|cart",
+    "canonicalId": "equipment.cart",
     "category": "equipment",
     "name": "Cart",
     "source": "PHB",
@@ -1440,6 +1527,7 @@
   },
   {
     "id": "xphb|cart",
+    "canonicalId": "equipment.cart",
     "category": "equipment",
     "name": "Cart",
     "source": "XPHB",
@@ -1450,6 +1538,7 @@
   },
   {
     "id": "tce|cauldron-of-rebirth",
+    "canonicalId": "equipment.cauldron-of-rebirth",
     "category": "equipment",
     "name": "Cauldron of Rebirth",
     "source": "TCE",
@@ -1471,6 +1560,7 @@
   },
   {
     "id": "xphb|chain",
+    "canonicalId": "equipment.chain",
     "category": "equipment",
     "name": "Chain",
     "source": "XPHB",
@@ -1486,6 +1576,7 @@
   },
   {
     "id": "phb|chain-10-feet",
+    "canonicalId": "equipment.chain-10-feet",
     "category": "equipment",
     "name": "Chain (10 feet)",
     "source": "PHB",
@@ -1501,6 +1592,7 @@
   },
   {
     "id": "phb|chalk-1-piece",
+    "canonicalId": "equipment.chalk-1-piece",
     "category": "equipment",
     "name": "Chalk (1 piece)",
     "source": "PHB",
@@ -1510,6 +1602,7 @@
   },
   {
     "id": "phb|chariot",
+    "canonicalId": "equipment.chariot",
     "category": "equipment",
     "name": "Chariot",
     "source": "PHB",
@@ -1520,6 +1613,7 @@
   },
   {
     "id": "xphb|chariot",
+    "canonicalId": "equipment.chariot",
     "category": "equipment",
     "name": "Chariot",
     "source": "XPHB",
@@ -1530,6 +1624,7 @@
   },
   {
     "id": "xge|charlatan-s-die",
+    "canonicalId": "equipment.charlatans-die",
     "category": "equipment",
     "name": "Charlatan's Die",
     "source": "XGE",
@@ -1543,6 +1638,7 @@
   },
   {
     "id": "xphb|cheese-wedge",
+    "canonicalId": "equipment.cheese-wedge",
     "category": "equipment",
     "name": "Cheese (wedge)",
     "source": "XPHB",
@@ -1552,6 +1648,7 @@
   },
   {
     "id": "phb|chest",
+    "canonicalId": "equipment.chest",
     "category": "equipment",
     "name": "Chest",
     "source": "PHB",
@@ -1567,6 +1664,7 @@
   },
   {
     "id": "xphb|chest",
+    "canonicalId": "equipment.chest",
     "category": "equipment",
     "name": "Chest",
     "source": "XPHB",
@@ -1582,6 +1680,7 @@
   },
   {
     "id": "phb|chicken",
+    "canonicalId": "equipment.chicken",
     "category": "equipment",
     "name": "Chicken",
     "source": "PHB",
@@ -1591,6 +1690,7 @@
   },
   {
     "id": "phb|chunk-of-meat",
+    "canonicalId": "equipment.chunk-of-meat",
     "category": "equipment",
     "name": "Chunk of Meat",
     "source": "PHB",
@@ -1600,6 +1700,7 @@
   },
   {
     "id": "phb|cinnamon",
+    "canonicalId": "equipment.cinnamon",
     "category": "equipment",
     "name": "Cinnamon",
     "source": "PHB",
@@ -1610,6 +1711,7 @@
   },
   {
     "id": "phb|climber-s-kit",
+    "canonicalId": "equipment.climbers-kit",
     "category": "equipment",
     "name": "Climber's Kit",
     "source": "PHB",
@@ -1625,6 +1727,7 @@
   },
   {
     "id": "xphb|climber-s-kit",
+    "canonicalId": "equipment.climbers-kit",
     "category": "equipment",
     "name": "Climber's Kit",
     "source": "XPHB",
@@ -1640,6 +1743,7 @@
   },
   {
     "id": "xge|cloak-of-billowing",
+    "canonicalId": "equipment.cloak-of-billowing",
     "category": "equipment",
     "name": "Cloak of Billowing",
     "source": "XGE",
@@ -1653,6 +1757,7 @@
   },
   {
     "id": "xge|cloak-of-many-fashions",
+    "canonicalId": "equipment.cloak-of-many-fashions",
     "category": "equipment",
     "name": "Cloak of Many Fashions",
     "source": "XGE",
@@ -1666,6 +1771,7 @@
   },
   {
     "id": "xge|clockwork-amulet",
+    "canonicalId": "equipment.clockwork-amulet",
     "category": "equipment",
     "name": "Clockwork Amulet",
     "source": "XGE",
@@ -1683,6 +1789,7 @@
   },
   {
     "id": "xge|clothes-of-mending",
+    "canonicalId": "equipment.clothes-of-mending",
     "category": "equipment",
     "name": "Clothes of Mending",
     "source": "XGE",
@@ -1696,6 +1803,7 @@
   },
   {
     "id": "phb|cloves",
+    "canonicalId": "equipment.cloves",
     "category": "equipment",
     "name": "Cloves",
     "source": "PHB",
@@ -1706,6 +1814,7 @@
   },
   {
     "id": "tce|coiling-grasp-tattoo",
+    "canonicalId": "equipment.coiling-grasp-tattoo",
     "category": "equipment",
     "name": "Coiling Grasp Tattoo",
     "source": "TCE",
@@ -1731,6 +1840,7 @@
   },
   {
     "id": "tce|cold-absorbing-tattoo",
+    "canonicalId": "equipment.cold-absorbing-tattoo",
     "category": "equipment",
     "name": "Cold Absorbing Tattoo",
     "source": "TCE",
@@ -1744,6 +1854,7 @@
   },
   {
     "id": "phb|common-clothes",
+    "canonicalId": "equipment.common-clothes",
     "category": "equipment",
     "name": "Common Clothes",
     "source": "PHB",
@@ -1754,6 +1865,7 @@
   },
   {
     "id": "xphb|common-wine-bottle",
+    "canonicalId": "equipment.common-wine-bottle",
     "category": "equipment",
     "name": "Common Wine (bottle)",
     "source": "XPHB",
@@ -1763,6 +1875,7 @@
   },
   {
     "id": "phb|common-wine-pitcher",
+    "canonicalId": "equipment.common-wine-pitcher",
     "category": "equipment",
     "name": "Common Wine (pitcher)",
     "source": "PHB",
@@ -1772,6 +1885,7 @@
   },
   {
     "id": "phb|component-pouch",
+    "canonicalId": "equipment.component-pouch",
     "category": "equipment",
     "name": "Component Pouch",
     "source": "PHB",
@@ -1787,6 +1901,7 @@
   },
   {
     "id": "xphb|component-pouch",
+    "canonicalId": "equipment.component-pouch",
     "category": "equipment",
     "name": "Component Pouch",
     "source": "XPHB",
@@ -1802,6 +1917,7 @@
   },
   {
     "id": "phb|copper",
+    "canonicalId": "equipment.copper",
     "category": "equipment",
     "name": "Copper",
     "source": "PHB",
@@ -1812,6 +1928,7 @@
   },
   {
     "id": "phb|copper-cp",
+    "canonicalId": "equipment.copper-cp",
     "category": "equipment",
     "name": "Copper (cp)",
     "source": "PHB",
@@ -1847,6 +1964,7 @@
   },
   {
     "id": "xphb|costume",
+    "canonicalId": "equipment.costume",
     "category": "equipment",
     "name": "Costume",
     "source": "XPHB",
@@ -1862,6 +1980,7 @@
   },
   {
     "id": "phb|costume-clothes",
+    "canonicalId": "equipment.costume-clothes",
     "category": "equipment",
     "name": "Costume Clothes",
     "source": "PHB",
@@ -1872,6 +1991,7 @@
   },
   {
     "id": "phb|cotton-cloth-1-sq-yd",
+    "canonicalId": "equipment.cotton-cloth-1-sq-yd",
     "category": "equipment",
     "name": "Cotton Cloth (1 sq. yd.)",
     "source": "PHB",
@@ -1881,6 +2001,7 @@
   },
   {
     "id": "phb|cow",
+    "canonicalId": "equipment.cow",
     "category": "equipment",
     "name": "Cow",
     "source": "PHB",
@@ -1890,6 +2011,7 @@
   },
   {
     "id": "tce|crook-of-rao",
+    "canonicalId": "equipment.crook-of-rao",
     "category": "equipment",
     "name": "Crook of Rao",
     "source": "TCE",
@@ -1952,6 +2074,7 @@
   },
   {
     "id": "phb|crossbow-bolt-case",
+    "canonicalId": "equipment.crossbow-bolt-case",
     "category": "equipment",
     "name": "Crossbow Bolt Case",
     "source": "PHB",
@@ -1967,6 +2090,7 @@
   },
   {
     "id": "xphb|crossbow-bolt-case",
+    "canonicalId": "equipment.crossbow-bolt-case",
     "category": "equipment",
     "name": "Crossbow Bolt Case",
     "source": "XPHB",
@@ -1982,6 +2106,7 @@
   },
   {
     "id": "phb|crowbar",
+    "canonicalId": "equipment.crowbar",
     "category": "equipment",
     "name": "Crowbar",
     "source": "PHB",
@@ -1997,6 +2122,7 @@
   },
   {
     "id": "xphb|crowbar",
+    "canonicalId": "equipment.crowbar",
     "category": "equipment",
     "name": "Crowbar",
     "source": "XPHB",
@@ -2012,6 +2138,7 @@
   },
   {
     "id": "tce|crystalline-chronicle",
+    "canonicalId": "equipment.crystalline-chronicle",
     "category": "equipment",
     "name": "Crystalline Chronicle",
     "source": "TCE",
@@ -2041,6 +2168,7 @@
   },
   {
     "id": "xge|dark-shard-amulet",
+    "canonicalId": "equipment.dark-shard-amulet",
     "category": "equipment",
     "name": "Dark Shard Amulet",
     "source": "XGE",
@@ -2061,6 +2189,7 @@
   },
   {
     "id": "tce|demonomicon-of-iggwilv",
+    "canonicalId": "equipment.demonomicon-of-iggwilv",
     "category": "equipment",
     "name": "Demonomicon of Iggwilv",
     "source": "TCE",
@@ -2118,6 +2247,7 @@
   },
   {
     "id": "tce|devotee-s-censer",
+    "canonicalId": "equipment.devotees-censer",
     "category": "equipment",
     "name": "Devotee's Censer",
     "source": "TCE",
@@ -2138,6 +2268,7 @@
   },
   {
     "id": "phb|dice-set",
+    "canonicalId": "equipment.dice-set",
     "category": "equipment",
     "name": "Dice Set",
     "source": "PHB",
@@ -2147,6 +2278,7 @@
   },
   {
     "id": "xphb|dice-set",
+    "canonicalId": "equipment.dice-set",
     "category": "equipment",
     "name": "Dice Set",
     "source": "XPHB",
@@ -2164,6 +2296,7 @@
   },
   {
     "id": "phb|diplomat-s-pack",
+    "canonicalId": "equipment.diplomats-pack",
     "category": "equipment",
     "name": "Diplomat's Pack",
     "source": "PHB",
@@ -2195,6 +2328,7 @@
   },
   {
     "id": "xphb|diplomat-s-pack",
+    "canonicalId": "equipment.diplomats-pack",
     "category": "equipment",
     "name": "Diplomat's Pack",
     "source": "XPHB",
@@ -2210,6 +2344,7 @@
   },
   {
     "id": "phb|disguise-kit",
+    "canonicalId": "equipment.disguise-kit",
     "category": "equipment",
     "name": "Disguise Kit",
     "source": "PHB",
@@ -2225,6 +2360,7 @@
   },
   {
     "id": "xphb|disguise-kit",
+    "canonicalId": "equipment.disguise-kit",
     "category": "equipment",
     "name": "Disguise Kit",
     "source": "XPHB",
@@ -2240,6 +2376,7 @@
   },
   {
     "id": "phb|donkey",
+    "canonicalId": "equipment.donkey",
     "category": "equipment",
     "name": "Donkey",
     "source": "PHB",
@@ -2249,6 +2386,7 @@
   },
   {
     "id": "phb|draft-horse",
+    "canonicalId": "equipment.draft-horse",
     "category": "equipment",
     "name": "Draft Horse",
     "source": "PHB",
@@ -2258,6 +2396,7 @@
   },
   {
     "id": "xphb|draft-horse",
+    "canonicalId": "equipment.draft-horse",
     "category": "equipment",
     "name": "Draft Horse",
     "source": "XPHB",
@@ -2267,6 +2406,7 @@
   },
   {
     "id": "phb|dragonchess-set",
+    "canonicalId": "equipment.dragonchess-set",
     "category": "equipment",
     "name": "Dragonchess Set",
     "source": "PHB",
@@ -2277,6 +2417,7 @@
   },
   {
     "id": "xphb|dragonchess-set",
+    "canonicalId": "equipment.dragonchess-set",
     "category": "equipment",
     "name": "Dragonchess Set",
     "source": "XPHB",
@@ -2294,6 +2435,7 @@
   },
   {
     "id": "xge|dread-helm",
+    "canonicalId": "equipment.dread-helm",
     "category": "equipment",
     "name": "Dread Helm",
     "source": "XGE",
@@ -2307,6 +2449,7 @@
   },
   {
     "id": "phb|dungeoneer-s-pack",
+    "canonicalId": "equipment.dungeoneers-pack",
     "category": "equipment",
     "name": "Dungeoneer's Pack",
     "source": "PHB",
@@ -2336,6 +2479,7 @@
   },
   {
     "id": "xphb|dungeoneer-s-pack",
+    "canonicalId": "equipment.dungeoneers-pack",
     "category": "equipment",
     "name": "Dungeoneer's Pack",
     "source": "XPHB",
@@ -2351,6 +2495,7 @@
   },
   {
     "id": "tce|duplicitous-manuscript",
+    "canonicalId": "equipment.duplicitous-manuscript",
     "category": "equipment",
     "name": "Duplicitous Manuscript",
     "source": "TCE",
@@ -2384,6 +2529,7 @@
   },
   {
     "id": "xge|ear-horn-of-hearing",
+    "canonicalId": "equipment.ear-horn-of-hearing",
     "category": "equipment",
     "name": "Ear Horn of Hearing",
     "source": "XGE",
@@ -2397,6 +2543,7 @@
   },
   {
     "id": "tce|eldritch-claw-tattoo",
+    "canonicalId": "equipment.eldritch-claw-tattoo",
     "category": "equipment",
     "name": "Eldritch Claw Tattoo",
     "source": "TCE",
@@ -2426,6 +2573,7 @@
   },
   {
     "id": "phb|electrum-ep",
+    "canonicalId": "equipment.electrum-ep",
     "category": "equipment",
     "name": "Electrum (ep)",
     "source": "PHB",
@@ -2461,6 +2609,7 @@
   },
   {
     "id": "tce|elemental-essence-shard",
+    "canonicalId": "equipment.elemental-essence-shard",
     "category": "equipment",
     "name": "Elemental Essence Shard",
     "source": "TCE",
@@ -2489,6 +2638,7 @@
   },
   {
     "id": "tce|elemental-essence-shard-air",
+    "canonicalId": "equipment.elemental-essence-shard-air",
     "category": "equipment",
     "name": "Elemental Essence Shard (Air)",
     "source": "TCE",
@@ -2511,6 +2661,7 @@
   },
   {
     "id": "tce|elemental-essence-shard-earth",
+    "canonicalId": "equipment.elemental-essence-shard-earth",
     "category": "equipment",
     "name": "Elemental Essence Shard (Earth)",
     "source": "TCE",
@@ -2533,6 +2684,7 @@
   },
   {
     "id": "tce|elemental-essence-shard-fire",
+    "canonicalId": "equipment.elemental-essence-shard-fire",
     "category": "equipment",
     "name": "Elemental Essence Shard (Fire)",
     "source": "TCE",
@@ -2555,6 +2707,7 @@
   },
   {
     "id": "tce|elemental-essence-shard-water",
+    "canonicalId": "equipment.elemental-essence-shard-water",
     "category": "equipment",
     "name": "Elemental Essence Shard (Water)",
     "source": "TCE",
@@ -2577,6 +2730,7 @@
   },
   {
     "id": "phb|elephant",
+    "canonicalId": "equipment.elephant",
     "category": "equipment",
     "name": "Elephant",
     "source": "PHB",
@@ -2586,6 +2740,7 @@
   },
   {
     "id": "xphb|elephant",
+    "canonicalId": "equipment.elephant",
     "category": "equipment",
     "name": "Elephant",
     "source": "XPHB",
@@ -2595,6 +2750,7 @@
   },
   {
     "id": "phb|emblem",
+    "canonicalId": "equipment.emblem",
     "category": "equipment",
     "name": "Emblem",
     "source": "PHB",
@@ -2604,6 +2760,7 @@
   },
   {
     "id": "xphb|emblem",
+    "canonicalId": "equipment.emblem",
     "category": "equipment",
     "name": "Emblem",
     "source": "XPHB",
@@ -2618,6 +2775,7 @@
   },
   {
     "id": "xge|enduring-spellbook",
+    "canonicalId": "equipment.enduring-spellbook",
     "category": "equipment",
     "name": "Enduring Spellbook",
     "source": "XGE",
@@ -2631,6 +2789,7 @@
   },
   {
     "id": "phb|entertainer-s-pack",
+    "canonicalId": "equipment.entertainers-pack",
     "category": "equipment",
     "name": "Entertainer's Pack",
     "source": "PHB",
@@ -2658,6 +2817,7 @@
   },
   {
     "id": "xphb|entertainer-s-pack",
+    "canonicalId": "equipment.entertainers-pack",
     "category": "equipment",
     "name": "Entertainer's Pack",
     "source": "XPHB",
@@ -2673,6 +2833,7 @@
   },
   {
     "id": "xge|ersatz-eye",
+    "canonicalId": "equipment.ersatz-eye",
     "category": "equipment",
     "name": "Ersatz Eye",
     "source": "XGE",
@@ -2686,6 +2847,7 @@
   },
   {
     "id": "phb|exotic-saddle",
+    "canonicalId": "equipment.exotic-saddle",
     "category": "equipment",
     "name": "Exotic Saddle",
     "source": "PHB",
@@ -2701,6 +2863,7 @@
   },
   {
     "id": "xphb|exotic-saddle",
+    "canonicalId": "equipment.exotic-saddle",
     "category": "equipment",
     "name": "Exotic Saddle",
     "source": "XPHB",
@@ -2716,6 +2879,7 @@
   },
   {
     "id": "phb|explorer-s-pack",
+    "canonicalId": "equipment.explorers-pack",
     "category": "equipment",
     "name": "Explorer's Pack",
     "source": "PHB",
@@ -2744,6 +2908,7 @@
   },
   {
     "id": "xphb|explorer-s-pack",
+    "canonicalId": "equipment.explorers-pack",
     "category": "equipment",
     "name": "Explorer's Pack",
     "source": "XPHB",
@@ -2759,6 +2924,7 @@
   },
   {
     "id": "tce|far-realm-shard",
+    "canonicalId": "equipment.far-realm-shard",
     "category": "equipment",
     "name": "Far Realm Shard",
     "source": "TCE",
@@ -2777,6 +2943,7 @@
   },
   {
     "id": "phb|feed-per-day",
+    "canonicalId": "equipment.feed-per-day",
     "category": "equipment",
     "name": "Feed (per day)",
     "source": "PHB",
@@ -2787,6 +2954,7 @@
   },
   {
     "id": "xphb|feed-per-day",
+    "canonicalId": "equipment.feed-per-day",
     "category": "equipment",
     "name": "Feed (per day)",
     "source": "XPHB",
@@ -2797,6 +2965,7 @@
   },
   {
     "id": "tce|feywild-shard",
+    "canonicalId": "equipment.feywild-shard",
     "category": "equipment",
     "name": "Feywild Shard",
     "source": "TCE",
@@ -2819,6 +2988,7 @@
   },
   {
     "id": "phb|fine-clothes",
+    "canonicalId": "equipment.fine-clothes",
     "category": "equipment",
     "name": "Fine Clothes",
     "source": "PHB",
@@ -2829,6 +2999,7 @@
   },
   {
     "id": "xphb|fine-clothes",
+    "canonicalId": "equipment.fine-clothes",
     "category": "equipment",
     "name": "Fine Clothes",
     "source": "XPHB",
@@ -2844,6 +3015,7 @@
   },
   {
     "id": "phb|fine-wine-bottle",
+    "canonicalId": "equipment.fine-wine-bottle",
     "category": "equipment",
     "name": "Fine Wine (bottle)",
     "source": "PHB",
@@ -2853,6 +3025,7 @@
   },
   {
     "id": "xphb|fine-wine-bottle",
+    "canonicalId": "equipment.fine-wine-bottle",
     "category": "equipment",
     "name": "Fine Wine (bottle)",
     "source": "XPHB",
@@ -2862,6 +3035,7 @@
   },
   {
     "id": "tce|fire-absorbing-tattoo",
+    "canonicalId": "equipment.fire-absorbing-tattoo",
     "category": "equipment",
     "name": "Fire Absorbing Tattoo",
     "source": "TCE",
@@ -2875,6 +3049,7 @@
   },
   {
     "id": "phb|fishing-tackle",
+    "canonicalId": "equipment.fishing-tackle",
     "category": "equipment",
     "name": "Fishing Tackle",
     "source": "PHB",
@@ -2890,6 +3065,7 @@
   },
   {
     "id": "phb|flask",
+    "canonicalId": "equipment.flask",
     "category": "equipment",
     "name": "Flask",
     "source": "PHB",
@@ -2905,6 +3081,7 @@
   },
   {
     "id": "xphb|flask",
+    "canonicalId": "equipment.flask",
     "category": "equipment",
     "name": "Flask",
     "source": "XPHB",
@@ -2920,6 +3097,7 @@
   },
   {
     "id": "phb|flour",
+    "canonicalId": "equipment.flour",
     "category": "equipment",
     "name": "Flour",
     "source": "PHB",
@@ -2930,6 +3108,7 @@
   },
   {
     "id": "tce|force-absorbing-tattoo",
+    "canonicalId": "equipment.force-absorbing-tattoo",
     "category": "equipment",
     "name": "Force Absorbing Tattoo",
     "source": "TCE",
@@ -2943,6 +3122,7 @@
   },
   {
     "id": "phb|forgery-kit",
+    "canonicalId": "equipment.forgery-kit",
     "category": "equipment",
     "name": "Forgery Kit",
     "source": "PHB",
@@ -2958,6 +3138,7 @@
   },
   {
     "id": "xphb|forgery-kit",
+    "canonicalId": "equipment.forgery-kit",
     "category": "equipment",
     "name": "Forgery Kit",
     "source": "XPHB",
@@ -2976,6 +3157,7 @@
   },
   {
     "id": "tce|fulminating-treatise",
+    "canonicalId": "equipment.fulminating-treatise",
     "category": "equipment",
     "name": "Fulminating Treatise",
     "source": "TCE",
@@ -3005,6 +3187,7 @@
   },
   {
     "id": "xphb|galley",
+    "canonicalId": "equipment.galley",
     "category": "equipment",
     "name": "Galley",
     "source": "XPHB",
@@ -3014,6 +3197,7 @@
   },
   {
     "id": "tce|ghost-step-tattoo",
+    "canonicalId": "equipment.ghost-step-tattoo",
     "category": "equipment",
     "name": "Ghost Step Tattoo",
     "source": "TCE",
@@ -3047,6 +3231,7 @@
   },
   {
     "id": "phb|ginger",
+    "canonicalId": "equipment.ginger",
     "category": "equipment",
     "name": "Ginger",
     "source": "PHB",
@@ -3057,6 +3242,7 @@
   },
   {
     "id": "phb|glass-bottle",
+    "canonicalId": "equipment.glass-bottle",
     "category": "equipment",
     "name": "Glass Bottle",
     "source": "PHB",
@@ -3072,6 +3258,7 @@
   },
   {
     "id": "xphb|glass-bottle",
+    "canonicalId": "equipment.glass-bottle",
     "category": "equipment",
     "name": "Glass Bottle",
     "source": "XPHB",
@@ -3087,6 +3274,7 @@
   },
   {
     "id": "phb|goat",
+    "canonicalId": "equipment.goat",
     "category": "equipment",
     "name": "Goat",
     "source": "PHB",
@@ -3096,6 +3284,7 @@
   },
   {
     "id": "phb|gold",
+    "canonicalId": "equipment.gold",
     "category": "equipment",
     "name": "Gold",
     "source": "PHB",
@@ -3106,6 +3295,7 @@
   },
   {
     "id": "phb|gold-gp",
+    "canonicalId": "equipment.gold-gp",
     "category": "equipment",
     "name": "Gold (gp)",
     "source": "PHB",
@@ -3141,6 +3331,7 @@
   },
   {
     "id": "phb|grappling-hook",
+    "canonicalId": "equipment.grappling-hook",
     "category": "equipment",
     "name": "Grappling Hook",
     "source": "PHB",
@@ -3151,6 +3342,7 @@
   },
   {
     "id": "xphb|grappling-hook",
+    "canonicalId": "equipment.grappling-hook",
     "category": "equipment",
     "name": "Grappling Hook",
     "source": "XPHB",
@@ -3166,6 +3358,7 @@
   },
   {
     "id": "tce|guardian-emblem",
+    "canonicalId": "equipment.guardian-emblem",
     "category": "equipment",
     "name": "Guardian Emblem",
     "source": "TCE",
@@ -3187,6 +3380,7 @@
   },
   {
     "id": "phb|hammer",
+    "canonicalId": "equipment.hammer",
     "category": "equipment",
     "name": "Hammer",
     "source": "PHB",
@@ -3197,6 +3391,7 @@
   },
   {
     "id": "xge|hat-of-vermin",
+    "canonicalId": "equipment.hat-of-vermin",
     "category": "equipment",
     "name": "Hat of Vermin",
     "source": "XGE",
@@ -3210,6 +3405,7 @@
   },
   {
     "id": "xge|hat-of-wizardry",
+    "canonicalId": "equipment.hat-of-wizardry",
     "category": "equipment",
     "name": "Hat of Wizardry",
     "source": "XGE",
@@ -3230,6 +3426,7 @@
   },
   {
     "id": "phb|healer-s-kit",
+    "canonicalId": "equipment.healers-kit",
     "category": "equipment",
     "name": "Healer's Kit",
     "source": "PHB",
@@ -3245,6 +3442,7 @@
   },
   {
     "id": "xphb|healer-s-kit",
+    "canonicalId": "equipment.healers-kit",
     "category": "equipment",
     "name": "Healer's Kit",
     "source": "XPHB",
@@ -3260,6 +3458,7 @@
   },
   {
     "id": "tce|heart-weaver-s-primer",
+    "canonicalId": "equipment.heart-weavers-primer",
     "category": "equipment",
     "name": "Heart Weaver's Primer",
     "source": "TCE",
@@ -3289,6 +3488,7 @@
   },
   {
     "id": "phb|hempen-rope-50-feet",
+    "canonicalId": "equipment.hempen-rope-50-feet",
     "category": "equipment",
     "name": "Hempen Rope (50 feet)",
     "source": "PHB",
@@ -3304,6 +3504,7 @@
   },
   {
     "id": "phb|herbalism-kit",
+    "canonicalId": "equipment.herbalism-kit",
     "category": "equipment",
     "name": "Herbalism Kit",
     "source": "PHB",
@@ -3319,6 +3520,7 @@
   },
   {
     "id": "xphb|herbalism-kit",
+    "canonicalId": "equipment.herbalism-kit",
     "category": "equipment",
     "name": "Herbalism Kit",
     "source": "XPHB",
@@ -3338,6 +3540,7 @@
   },
   {
     "id": "xge|heward-s-handy-spice-pouch",
+    "canonicalId": "equipment.hewards-handy-spice-pouch",
     "category": "equipment",
     "name": "Heward's Handy Spice Pouch",
     "source": "XGE",
@@ -3351,6 +3554,7 @@
   },
   {
     "id": "xphb|holy-water",
+    "canonicalId": "equipment.holy-water",
     "category": "equipment",
     "name": "Holy Water",
     "source": "XPHB",
@@ -3366,6 +3570,7 @@
   },
   {
     "id": "phb|holy-water-flask",
+    "canonicalId": "equipment.holy-water-flask",
     "category": "equipment",
     "name": "Holy Water (flask)",
     "source": "PHB",
@@ -3385,6 +3590,7 @@
   },
   {
     "id": "phb|hooded-lantern",
+    "canonicalId": "equipment.hooded-lantern",
     "category": "equipment",
     "name": "Hooded Lantern",
     "source": "PHB",
@@ -3400,6 +3606,7 @@
   },
   {
     "id": "xphb|hooded-lantern",
+    "canonicalId": "equipment.hooded-lantern",
     "category": "equipment",
     "name": "Hooded Lantern",
     "source": "XPHB",
@@ -3415,6 +3622,7 @@
   },
   {
     "id": "xge|horn-of-silent-alarm",
+    "canonicalId": "equipment.horn-of-silent-alarm",
     "category": "equipment",
     "name": "Horn of Silent Alarm",
     "source": "XGE",
@@ -3428,6 +3636,7 @@
   },
   {
     "id": "phb|hourglass",
+    "canonicalId": "equipment.hourglass",
     "category": "equipment",
     "name": "Hourglass",
     "source": "PHB",
@@ -3438,6 +3647,7 @@
   },
   {
     "id": "phb|hunk-of-cheese",
+    "canonicalId": "equipment.hunk-of-cheese",
     "category": "equipment",
     "name": "Hunk of Cheese",
     "source": "PHB",
@@ -3447,6 +3657,7 @@
   },
   {
     "id": "phb|hunting-trap",
+    "canonicalId": "equipment.hunting-trap",
     "category": "equipment",
     "name": "Hunting Trap",
     "source": "PHB",
@@ -3462,6 +3673,7 @@
   },
   {
     "id": "xphb|hunting-trap",
+    "canonicalId": "equipment.hunting-trap",
     "category": "equipment",
     "name": "Hunting Trap",
     "source": "XPHB",
@@ -3477,6 +3689,7 @@
   },
   {
     "id": "tce|illuminator-s-tattoo",
+    "canonicalId": "equipment.illuminators-tattoo",
     "category": "equipment",
     "name": "Illuminator's Tattoo",
     "source": "TCE",
@@ -3506,6 +3719,7 @@
   },
   {
     "id": "xphb|ink",
+    "canonicalId": "equipment.ink",
     "category": "equipment",
     "name": "Ink",
     "source": "XPHB",
@@ -3520,6 +3734,7 @@
   },
   {
     "id": "phb|ink-1-ounce-bottle",
+    "canonicalId": "equipment.ink-1-ounce-bottle",
     "category": "equipment",
     "name": "Ink (1-ounce bottle)",
     "source": "PHB",
@@ -3529,6 +3744,7 @@
   },
   {
     "id": "phb|ink-pen",
+    "canonicalId": "equipment.ink-pen",
     "category": "equipment",
     "name": "Ink Pen",
     "source": "PHB",
@@ -3538,6 +3754,7 @@
   },
   {
     "id": "xphb|ink-pen",
+    "canonicalId": "equipment.ink-pen",
     "category": "equipment",
     "name": "Ink Pen",
     "source": "XPHB",
@@ -3552,6 +3769,7 @@
   },
   {
     "id": "xge|instrument-of-illusions",
+    "canonicalId": "equipment.instrument-of-illusions",
     "category": "equipment",
     "name": "Instrument of Illusions",
     "source": "XGE",
@@ -3565,6 +3783,7 @@
   },
   {
     "id": "xge|instrument-of-scribing",
+    "canonicalId": "equipment.instrument-of-scribing",
     "category": "equipment",
     "name": "Instrument of Scribing",
     "source": "XGE",
@@ -3582,6 +3801,7 @@
   },
   {
     "id": "phb|iron",
+    "canonicalId": "equipment.iron",
     "category": "equipment",
     "name": "Iron",
     "source": "PHB",
@@ -3592,6 +3812,7 @@
   },
   {
     "id": "phb|iron-pot",
+    "canonicalId": "equipment.iron-pot",
     "category": "equipment",
     "name": "Iron Pot",
     "source": "PHB",
@@ -3607,6 +3828,7 @@
   },
   {
     "id": "xphb|iron-pot",
+    "canonicalId": "equipment.iron-pot",
     "category": "equipment",
     "name": "Iron Pot",
     "source": "XPHB",
@@ -3622,6 +3844,7 @@
   },
   {
     "id": "phb|iron-spike",
+    "canonicalId": "equipment.iron-spike",
     "category": "equipment",
     "name": "Iron Spike",
     "source": "PHB",
@@ -3632,6 +3855,7 @@
   },
   {
     "id": "xphb|iron-spike",
+    "canonicalId": "equipment.iron-spike",
     "category": "equipment",
     "name": "Iron Spike",
     "source": "XPHB",
@@ -3647,6 +3871,7 @@
   },
   {
     "id": "xphb|iron-spikes",
+    "canonicalId": "equipment.iron-spikes",
     "category": "equipment",
     "name": "Iron Spikes",
     "source": "XPHB",
@@ -3662,6 +3887,7 @@
   },
   {
     "id": "phb|iron-spikes-10",
+    "canonicalId": "equipment.iron-spikes-10",
     "category": "equipment",
     "name": "Iron Spikes (10)",
     "source": "PHB",
@@ -3672,6 +3898,7 @@
   },
   {
     "id": "phb|jug",
+    "canonicalId": "equipment.jug",
     "category": "equipment",
     "name": "Jug",
     "source": "PHB",
@@ -3687,6 +3914,7 @@
   },
   {
     "id": "xphb|jug",
+    "canonicalId": "equipment.jug",
     "category": "equipment",
     "name": "Jug",
     "source": "XPHB",
@@ -3702,6 +3930,7 @@
   },
   {
     "id": "xphb|keelboat",
+    "canonicalId": "equipment.keelboat",
     "category": "equipment",
     "name": "Keelboat",
     "source": "XPHB",
@@ -3711,6 +3940,7 @@
   },
   {
     "id": "xphb|ladder",
+    "canonicalId": "equipment.ladder",
     "category": "equipment",
     "name": "Ladder",
     "source": "XPHB",
@@ -3726,6 +3956,7 @@
   },
   {
     "id": "phb|ladder-10-foot",
+    "canonicalId": "equipment.ladder-10-foot",
     "category": "equipment",
     "name": "Ladder (10-foot)",
     "source": "PHB",
@@ -3741,6 +3972,7 @@
   },
   {
     "id": "phb|lamp",
+    "canonicalId": "equipment.lamp",
     "category": "equipment",
     "name": "Lamp",
     "source": "PHB",
@@ -3756,6 +3988,7 @@
   },
   {
     "id": "xphb|lamp",
+    "canonicalId": "equipment.lamp",
     "category": "equipment",
     "name": "Lamp",
     "source": "XPHB",
@@ -3771,6 +4004,7 @@
   },
   {
     "id": "tce|libram-of-souls-and-flesh",
+    "canonicalId": "equipment.libram-of-souls-and-flesh",
     "category": "equipment",
     "name": "Libram of Souls and Flesh",
     "source": "TCE",
@@ -3800,6 +4034,7 @@
   },
   {
     "id": "tce|lifewell-tattoo",
+    "canonicalId": "equipment.lifewell-tattoo",
     "category": "equipment",
     "name": "Lifewell Tattoo",
     "source": "TCE",
@@ -3829,6 +4064,7 @@
   },
   {
     "id": "tce|lightning-absorbing-tattoo",
+    "canonicalId": "equipment.lightning-absorbing-tattoo",
     "category": "equipment",
     "name": "Lightning Absorbing Tattoo",
     "source": "TCE",
@@ -3842,6 +4078,7 @@
   },
   {
     "id": "phb|linen-1-sq-yd",
+    "canonicalId": "equipment.linen-1-sq-yd",
     "category": "equipment",
     "name": "Linen (1 sq. yd.)",
     "source": "PHB",
@@ -3851,6 +4088,7 @@
   },
   {
     "id": "phb|loaf-of-bread",
+    "canonicalId": "equipment.loaf-of-bread",
     "category": "equipment",
     "name": "Loaf of Bread",
     "source": "PHB",
@@ -3860,6 +4098,7 @@
   },
   {
     "id": "phb|lock",
+    "canonicalId": "equipment.lock",
     "category": "equipment",
     "name": "Lock",
     "source": "PHB",
@@ -3875,6 +4114,7 @@
   },
   {
     "id": "xphb|lock",
+    "canonicalId": "equipment.lock",
     "category": "equipment",
     "name": "Lock",
     "source": "XPHB",
@@ -3890,6 +4130,7 @@
   },
   {
     "id": "xge|lock-of-trickery",
+    "canonicalId": "equipment.lock-of-trickery",
     "category": "equipment",
     "name": "Lock of Trickery",
     "source": "XGE",
@@ -3903,6 +4144,7 @@
   },
   {
     "id": "xphb|longship",
+    "canonicalId": "equipment.longship",
     "category": "equipment",
     "name": "Longship",
     "source": "XPHB",
@@ -3912,6 +4154,7 @@
   },
   {
     "id": "tce|luba-s-tarokka-of-souls",
+    "canonicalId": "equipment.lubas-tarokka-of-souls",
     "category": "equipment",
     "name": "Luba's Tarokka of Souls",
     "source": "TCE",
@@ -4016,6 +4259,7 @@
   },
   {
     "id": "tce|lyre-of-building",
+    "canonicalId": "equipment.lyre-of-building",
     "category": "equipment",
     "name": "Lyre of Building",
     "source": "TCE",
@@ -4034,6 +4278,7 @@
   },
   {
     "id": "phb|magnifying-glass",
+    "canonicalId": "equipment.magnifying-glass",
     "category": "equipment",
     "name": "Magnifying Glass",
     "source": "PHB",
@@ -4048,6 +4293,7 @@
   },
   {
     "id": "xphb|magnifying-glass",
+    "canonicalId": "equipment.magnifying-glass",
     "category": "equipment",
     "name": "Magnifying Glass",
     "source": "XPHB",
@@ -4062,6 +4308,7 @@
   },
   {
     "id": "phb|manacles",
+    "canonicalId": "equipment.manacles",
     "category": "equipment",
     "name": "Manacles",
     "source": "PHB",
@@ -4077,6 +4324,7 @@
   },
   {
     "id": "xphb|manacles",
+    "canonicalId": "equipment.manacles",
     "category": "equipment",
     "name": "Manacles",
     "source": "XPHB",
@@ -4096,6 +4344,7 @@
   },
   {
     "id": "xphb|map",
+    "canonicalId": "equipment.map",
     "category": "equipment",
     "name": "Map",
     "source": "XPHB",
@@ -4110,6 +4359,7 @@
   },
   {
     "id": "phb|map-or-scroll-case",
+    "canonicalId": "equipment.map-or-scroll-case",
     "category": "equipment",
     "name": "Map or Scroll Case",
     "source": "PHB",
@@ -4125,6 +4375,7 @@
   },
   {
     "id": "xphb|map-or-scroll-case",
+    "canonicalId": "equipment.map-or-scroll-case",
     "category": "equipment",
     "name": "Map or Scroll Case",
     "source": "XPHB",
@@ -4140,6 +4391,7 @@
   },
   {
     "id": "tce|masquerade-tattoo",
+    "canonicalId": "equipment.masquerade-tattoo",
     "category": "equipment",
     "name": "Masquerade Tattoo",
     "source": "TCE",
@@ -4169,6 +4421,7 @@
   },
   {
     "id": "phb|mastiff",
+    "canonicalId": "equipment.mastiff",
     "category": "equipment",
     "name": "Mastiff",
     "source": "PHB",
@@ -4178,6 +4431,7 @@
   },
   {
     "id": "xphb|mastiff",
+    "canonicalId": "equipment.mastiff",
     "category": "equipment",
     "name": "Mastiff",
     "source": "XPHB",
@@ -4187,6 +4441,7 @@
   },
   {
     "id": "phb|merchant-s-scale",
+    "canonicalId": "equipment.merchants-scale",
     "category": "equipment",
     "name": "Merchant's Scale",
     "source": "PHB",
@@ -4202,6 +4457,7 @@
   },
   {
     "id": "phb|mess-kit",
+    "canonicalId": "equipment.mess-kit",
     "category": "equipment",
     "name": "Mess Kit",
     "source": "PHB",
@@ -4217,6 +4473,7 @@
   },
   {
     "id": "tce|mighty-servant-of-leuk-o",
+    "canonicalId": "equipment.mighty-servant-of-leuk-o",
     "category": "equipment",
     "name": "Mighty Servant of Leuk-o",
     "source": "TCE",
@@ -4295,6 +4552,7 @@
   },
   {
     "id": "phb|military-saddle",
+    "canonicalId": "equipment.military-saddle",
     "category": "equipment",
     "name": "Military Saddle",
     "source": "PHB",
@@ -4310,6 +4568,7 @@
   },
   {
     "id": "xphb|military-saddle",
+    "canonicalId": "equipment.military-saddle",
     "category": "equipment",
     "name": "Military Saddle",
     "source": "XPHB",
@@ -4325,6 +4584,7 @@
   },
   {
     "id": "phb|miner-s-pick",
+    "canonicalId": "equipment.miners-pick",
     "category": "equipment",
     "name": "Miner's Pick",
     "source": "PHB",
@@ -4335,6 +4595,7 @@
   },
   {
     "id": "xphb|mirror",
+    "canonicalId": "equipment.mirror",
     "category": "equipment",
     "name": "Mirror",
     "source": "XPHB",
@@ -4350,6 +4611,7 @@
   },
   {
     "id": "phb|mule",
+    "canonicalId": "equipment.mule",
     "category": "equipment",
     "name": "Mule",
     "source": "PHB",
@@ -4359,6 +4621,7 @@
   },
   {
     "id": "xphb|mule",
+    "canonicalId": "equipment.mule",
     "category": "equipment",
     "name": "Mule",
     "source": "XPHB",
@@ -4368,6 +4631,7 @@
   },
   {
     "id": "xge|mystery-key",
+    "canonicalId": "equipment.mystery-key",
     "category": "equipment",
     "name": "Mystery Key",
     "source": "XGE",
@@ -4381,6 +4645,7 @@
   },
   {
     "id": "tce|nature-s-mantle",
+    "canonicalId": "equipment.natures-mantle",
     "category": "equipment",
     "name": "Nature's Mantle",
     "source": "TCE",
@@ -4399,6 +4664,7 @@
   },
   {
     "id": "phb|navigator-s-tools",
+    "canonicalId": "equipment.navigators-tools",
     "category": "equipment",
     "name": "Navigator's Tools",
     "source": "PHB",
@@ -4414,6 +4680,7 @@
   },
   {
     "id": "xphb|navigator-s-tools",
+    "canonicalId": "equipment.navigators-tools",
     "category": "equipment",
     "name": "Navigator's Tools",
     "source": "XPHB",
@@ -4432,6 +4699,7 @@
   },
   {
     "id": "tce|necrotic-absorbing-tattoo",
+    "canonicalId": "equipment.necrotic-absorbing-tattoo",
     "category": "equipment",
     "name": "Necrotic Absorbing Tattoo",
     "source": "TCE",
@@ -4445,6 +4713,7 @@
   },
   {
     "id": "xphb|net",
+    "canonicalId": "equipment.net",
     "category": "equipment",
     "name": "Net",
     "source": "XPHB",
@@ -4464,6 +4733,7 @@
   },
   {
     "id": "xphb|oil",
+    "canonicalId": "equipment.oil",
     "category": "equipment",
     "name": "Oil",
     "source": "XPHB",
@@ -4491,6 +4761,7 @@
   },
   {
     "id": "phb|oil-flask",
+    "canonicalId": "equipment.oil-flask",
     "category": "equipment",
     "name": "Oil (flask)",
     "source": "PHB",
@@ -4506,6 +4777,7 @@
   },
   {
     "id": "xge|orb-of-direction",
+    "canonicalId": "equipment.orb-of-direction",
     "category": "equipment",
     "name": "Orb of Direction",
     "source": "XGE",
@@ -4520,6 +4792,7 @@
   },
   {
     "id": "xge|orb-of-time",
+    "canonicalId": "equipment.orb-of-time",
     "category": "equipment",
     "name": "Orb of Time",
     "source": "XGE",
@@ -4534,6 +4807,7 @@
   },
   {
     "id": "tce|outer-essence-shard",
+    "canonicalId": "equipment.outer-essence-shard",
     "category": "equipment",
     "name": "Outer Essence Shard",
     "source": "TCE",
@@ -4562,6 +4836,7 @@
   },
   {
     "id": "tce|outer-essence-shard-chaotic",
+    "canonicalId": "equipment.outer-essence-shard-chaotic",
     "category": "equipment",
     "name": "Outer Essence Shard (Chaotic)",
     "source": "TCE",
@@ -4584,6 +4859,7 @@
   },
   {
     "id": "tce|outer-essence-shard-evil",
+    "canonicalId": "equipment.outer-essence-shard-evil",
     "category": "equipment",
     "name": "Outer Essence Shard (Evil)",
     "source": "TCE",
@@ -4606,6 +4882,7 @@
   },
   {
     "id": "tce|outer-essence-shard-good",
+    "canonicalId": "equipment.outer-essence-shard-good",
     "category": "equipment",
     "name": "Outer Essence Shard (Good)",
     "source": "TCE",
@@ -4628,6 +4905,7 @@
   },
   {
     "id": "tce|outer-essence-shard-lawful",
+    "canonicalId": "equipment.outer-essence-shard-lawful",
     "category": "equipment",
     "name": "Outer Essence Shard (Lawful)",
     "source": "TCE",
@@ -4650,6 +4928,7 @@
   },
   {
     "id": "phb|ox",
+    "canonicalId": "equipment.ox",
     "category": "equipment",
     "name": "Ox",
     "source": "PHB",
@@ -4659,6 +4938,7 @@
   },
   {
     "id": "phb|pack-saddle",
+    "canonicalId": "equipment.pack-saddle",
     "category": "equipment",
     "name": "Pack Saddle",
     "source": "PHB",
@@ -4669,6 +4949,7 @@
   },
   {
     "id": "xphb|paper",
+    "canonicalId": "equipment.paper",
     "category": "equipment",
     "name": "Paper",
     "source": "XPHB",
@@ -4683,6 +4964,7 @@
   },
   {
     "id": "phb|paper-one-sheet",
+    "canonicalId": "equipment.paper-one-sheet",
     "category": "equipment",
     "name": "Paper (one sheet)",
     "source": "PHB",
@@ -4692,6 +4974,7 @@
   },
   {
     "id": "xphb|parchment",
+    "canonicalId": "equipment.parchment",
     "category": "equipment",
     "name": "Parchment",
     "source": "XPHB",
@@ -4706,6 +4989,7 @@
   },
   {
     "id": "phb|parchment-one-sheet",
+    "canonicalId": "equipment.parchment-one-sheet",
     "category": "equipment",
     "name": "Parchment (one sheet)",
     "source": "PHB",
@@ -4715,6 +4999,7 @@
   },
   {
     "id": "phb|pepper",
+    "canonicalId": "equipment.pepper",
     "category": "equipment",
     "name": "Pepper",
     "source": "PHB",
@@ -4725,6 +5010,7 @@
   },
   {
     "id": "xphb|perfume",
+    "canonicalId": "equipment.perfume",
     "category": "equipment",
     "name": "Perfume",
     "source": "XPHB",
@@ -4739,6 +5025,7 @@
   },
   {
     "id": "phb|perfume-vial",
+    "canonicalId": "equipment.perfume-vial",
     "category": "equipment",
     "name": "Perfume (vial)",
     "source": "PHB",
@@ -4748,6 +5035,7 @@
   },
   {
     "id": "xge|perfume-of-bewitching",
+    "canonicalId": "equipment.perfume-of-bewitching",
     "category": "equipment",
     "name": "Perfume of Bewitching",
     "source": "XGE",
@@ -4761,6 +5049,7 @@
   },
   {
     "id": "phb|pig",
+    "canonicalId": "equipment.pig",
     "category": "equipment",
     "name": "Pig",
     "source": "PHB",
@@ -4770,6 +5059,7 @@
   },
   {
     "id": "xge|pipe-of-smoke-monsters",
+    "canonicalId": "equipment.pipe-of-smoke-monsters",
     "category": "equipment",
     "name": "Pipe of Smoke Monsters",
     "source": "XGE",
@@ -4783,6 +5073,7 @@
   },
   {
     "id": "phb|pitcher",
+    "canonicalId": "equipment.pitcher",
     "category": "equipment",
     "name": "Pitcher",
     "source": "PHB",
@@ -4798,6 +5089,7 @@
   },
   {
     "id": "phb|piton",
+    "canonicalId": "equipment.piton",
     "category": "equipment",
     "name": "Piton",
     "source": "PHB",
@@ -4808,6 +5100,7 @@
   },
   {
     "id": "tce|planecaller-s-codex",
+    "canonicalId": "equipment.planecallers-codex",
     "category": "equipment",
     "name": "Planecaller's Codex",
     "source": "TCE",
@@ -4837,6 +5130,7 @@
   },
   {
     "id": "phb|platinum",
+    "canonicalId": "equipment.platinum",
     "category": "equipment",
     "name": "Platinum",
     "source": "PHB",
@@ -4847,6 +5141,7 @@
   },
   {
     "id": "phb|platinum-pp",
+    "canonicalId": "equipment.platinum-pp",
     "category": "equipment",
     "name": "Platinum (pp)",
     "source": "PHB",
@@ -4882,6 +5177,7 @@
   },
   {
     "id": "phb|playing-card-set",
+    "canonicalId": "equipment.playing-card-set",
     "category": "equipment",
     "name": "Playing Card Set",
     "source": "PHB",
@@ -4891,6 +5187,7 @@
   },
   {
     "id": "xphb|playing-cards",
+    "canonicalId": "equipment.playing-cards",
     "category": "equipment",
     "name": "Playing Cards",
     "source": "XPHB",
@@ -4908,6 +5205,7 @@
   },
   {
     "id": "tce|poison-absorbing-tattoo",
+    "canonicalId": "equipment.poison-absorbing-tattoo",
     "category": "equipment",
     "name": "Poison Absorbing Tattoo",
     "source": "TCE",
@@ -4921,6 +5219,7 @@
   },
   {
     "id": "phb|poisoner-s-kit",
+    "canonicalId": "equipment.poisoners-kit",
     "category": "equipment",
     "name": "Poisoner's Kit",
     "source": "PHB",
@@ -4940,6 +5239,7 @@
   },
   {
     "id": "xphb|poisoner-s-kit",
+    "canonicalId": "equipment.poisoners-kit",
     "category": "equipment",
     "name": "Poisoner's Kit",
     "source": "XPHB",
@@ -4959,6 +5259,7 @@
   },
   {
     "id": "xphb|pole",
+    "canonicalId": "equipment.pole",
     "category": "equipment",
     "name": "Pole",
     "source": "XPHB",
@@ -4974,6 +5275,7 @@
   },
   {
     "id": "phb|pole-10-foot",
+    "canonicalId": "equipment.pole-10-foot",
     "category": "equipment",
     "name": "Pole (10-foot)",
     "source": "PHB",
@@ -4984,6 +5286,7 @@
   },
   {
     "id": "xge|pole-of-angling",
+    "canonicalId": "equipment.pole-of-angling",
     "category": "equipment",
     "name": "Pole of Angling",
     "source": "XGE",
@@ -4997,6 +5300,7 @@
   },
   {
     "id": "xge|pole-of-collapsing",
+    "canonicalId": "equipment.pole-of-collapsing",
     "category": "equipment",
     "name": "Pole of Collapsing",
     "source": "XGE",
@@ -5010,6 +5314,7 @@
   },
   {
     "id": "phb|pony",
+    "canonicalId": "equipment.pony",
     "category": "equipment",
     "name": "Pony",
     "source": "PHB",
@@ -5019,6 +5324,7 @@
   },
   {
     "id": "xphb|pony",
+    "canonicalId": "equipment.pony",
     "category": "equipment",
     "name": "Pony",
     "source": "XPHB",
@@ -5028,6 +5334,7 @@
   },
   {
     "id": "phb|portable-ram",
+    "canonicalId": "equipment.portable-ram",
     "category": "equipment",
     "name": "Portable Ram",
     "source": "PHB",
@@ -5043,6 +5350,7 @@
   },
   {
     "id": "xphb|portable-ram",
+    "canonicalId": "equipment.portable-ram",
     "category": "equipment",
     "name": "Portable Ram",
     "source": "XPHB",
@@ -5058,6 +5366,7 @@
   },
   {
     "id": "xge|pot-of-awakening",
+    "canonicalId": "equipment.pot-of-awakening",
     "category": "equipment",
     "name": "Pot of Awakening",
     "source": "XGE",
@@ -5075,6 +5384,7 @@
   },
   {
     "id": "phb|pouch",
+    "canonicalId": "equipment.pouch",
     "category": "equipment",
     "name": "Pouch",
     "source": "PHB",
@@ -5090,6 +5400,7 @@
   },
   {
     "id": "xphb|pouch",
+    "canonicalId": "equipment.pouch",
     "category": "equipment",
     "name": "Pouch",
     "source": "XPHB",
@@ -5105,6 +5416,7 @@
   },
   {
     "id": "phb|priest-s-pack",
+    "canonicalId": "equipment.priests-pack",
     "category": "equipment",
     "name": "Priest's Pack",
     "source": "PHB",
@@ -5135,6 +5447,7 @@
   },
   {
     "id": "xphb|priest-s-pack",
+    "canonicalId": "equipment.priests-pack",
     "category": "equipment",
     "name": "Priest's Pack",
     "source": "XPHB",
@@ -5150,6 +5463,7 @@
   },
   {
     "id": "tce|prosthetic-limb",
+    "canonicalId": "equipment.prosthetic-limb",
     "category": "equipment",
     "name": "Prosthetic Limb",
     "source": "TCE",
@@ -5163,6 +5477,7 @@
   },
   {
     "id": "tce|protective-verses",
+    "canonicalId": "equipment.protective-verses",
     "category": "equipment",
     "name": "Protective Verses",
     "source": "TCE",
@@ -5192,6 +5507,7 @@
   },
   {
     "id": "tce|psychic-absorbing-tattoo",
+    "canonicalId": "equipment.psychic-absorbing-tattoo",
     "category": "equipment",
     "name": "Psychic Absorbing Tattoo",
     "source": "TCE",
@@ -5205,6 +5521,7 @@
   },
   {
     "id": "xphb|psychic-blade",
+    "canonicalId": "equipment.psychic-blade",
     "category": "equipment",
     "name": "Psychic Blade",
     "source": "XPHB",
@@ -5216,6 +5533,7 @@
   },
   {
     "id": "phb|quiver",
+    "canonicalId": "equipment.quiver",
     "category": "equipment",
     "name": "Quiver",
     "source": "PHB",
@@ -5231,6 +5549,7 @@
   },
   {
     "id": "xphb|quiver",
+    "canonicalId": "equipment.quiver",
     "category": "equipment",
     "name": "Quiver",
     "source": "XPHB",
@@ -5246,6 +5565,7 @@
   },
   {
     "id": "tce|radiant-absorbing-tattoo",
+    "canonicalId": "equipment.radiant-absorbing-tattoo",
     "category": "equipment",
     "name": "Radiant Absorbing Tattoo",
     "source": "TCE",
@@ -5259,6 +5579,7 @@
   },
   {
     "id": "xphb|rations",
+    "canonicalId": "equipment.rations",
     "category": "equipment",
     "name": "Rations",
     "source": "XPHB",
@@ -5274,6 +5595,7 @@
   },
   {
     "id": "phb|rations-1-day",
+    "canonicalId": "equipment.rations-1-day",
     "category": "equipment",
     "name": "Rations (1 day)",
     "source": "PHB",
@@ -5289,6 +5611,7 @@
   },
   {
     "id": "phb|reliquary",
+    "canonicalId": "equipment.reliquary",
     "category": "equipment",
     "name": "Reliquary",
     "source": "PHB",
@@ -5299,6 +5622,7 @@
   },
   {
     "id": "xphb|reliquary",
+    "canonicalId": "equipment.reliquary",
     "category": "equipment",
     "name": "Reliquary",
     "source": "XPHB",
@@ -5314,6 +5638,7 @@
   },
   {
     "id": "tce|reveler-s-concertina",
+    "canonicalId": "equipment.revelers-concertina",
     "category": "equipment",
     "name": "Reveler's Concertina",
     "source": "TCE",
@@ -5331,6 +5656,7 @@
   },
   {
     "id": "phb|riding-horse",
+    "canonicalId": "equipment.riding-horse",
     "category": "equipment",
     "name": "Riding Horse",
     "source": "PHB",
@@ -5340,6 +5666,7 @@
   },
   {
     "id": "xphb|riding-horse",
+    "canonicalId": "equipment.riding-horse",
     "category": "equipment",
     "name": "Riding Horse",
     "source": "XPHB",
@@ -5349,6 +5676,7 @@
   },
   {
     "id": "phb|riding-saddle",
+    "canonicalId": "equipment.riding-saddle",
     "category": "equipment",
     "name": "Riding Saddle",
     "source": "PHB",
@@ -5359,6 +5687,7 @@
   },
   {
     "id": "xphb|riding-saddle",
+    "canonicalId": "equipment.riding-saddle",
     "category": "equipment",
     "name": "Riding Saddle",
     "source": "XPHB",
@@ -5374,6 +5703,7 @@
   },
   {
     "id": "xphb|robe",
+    "canonicalId": "equipment.robe",
     "category": "equipment",
     "name": "Robe",
     "source": "XPHB",
@@ -5389,6 +5719,7 @@
   },
   {
     "id": "phb|robes",
+    "canonicalId": "equipment.robes",
     "category": "equipment",
     "name": "Robes",
     "source": "PHB",
@@ -5399,6 +5730,7 @@
   },
   {
     "id": "xphb|rope",
+    "canonicalId": "equipment.rope",
     "category": "equipment",
     "name": "Rope",
     "source": "XPHB",
@@ -5418,6 +5750,7 @@
   },
   {
     "id": "xge|rope-of-mending",
+    "canonicalId": "equipment.rope-of-mending",
     "category": "equipment",
     "name": "Rope of Mending",
     "source": "XGE",
@@ -5431,6 +5764,7 @@
   },
   {
     "id": "xphb|rowboat",
+    "canonicalId": "equipment.rowboat",
     "category": "equipment",
     "name": "Rowboat",
     "source": "XPHB",
@@ -5441,6 +5775,7 @@
   },
   {
     "id": "xge|ruby-of-the-war-mage",
+    "canonicalId": "equipment.ruby-of-the-war-mage",
     "category": "equipment",
     "name": "Ruby of the War Mage",
     "source": "XGE",
@@ -5454,6 +5789,7 @@
   },
   {
     "id": "phb|sack",
+    "canonicalId": "equipment.sack",
     "category": "equipment",
     "name": "Sack",
     "source": "PHB",
@@ -5469,6 +5805,7 @@
   },
   {
     "id": "xphb|sack",
+    "canonicalId": "equipment.sack",
     "category": "equipment",
     "name": "Sack",
     "source": "XPHB",
@@ -5484,6 +5821,7 @@
   },
   {
     "id": "phb|saddlebags",
+    "canonicalId": "equipment.saddlebags",
     "category": "equipment",
     "name": "Saddlebags",
     "source": "PHB",
@@ -5494,6 +5832,7 @@
   },
   {
     "id": "phb|saffron",
+    "canonicalId": "equipment.saffron",
     "category": "equipment",
     "name": "Saffron",
     "source": "PHB",
@@ -5504,6 +5843,7 @@
   },
   {
     "id": "xphb|sailing-ship",
+    "canonicalId": "equipment.sailing-ship",
     "category": "equipment",
     "name": "Sailing Ship",
     "source": "XPHB",
@@ -5513,6 +5853,7 @@
   },
   {
     "id": "phb|salt",
+    "canonicalId": "equipment.salt",
     "category": "equipment",
     "name": "Salt",
     "source": "PHB",
@@ -5523,6 +5864,7 @@
   },
   {
     "id": "phb|scholar-s-pack",
+    "canonicalId": "equipment.scholars-pack",
     "category": "equipment",
     "name": "Scholar's Pack",
     "source": "PHB",
@@ -5550,6 +5892,7 @@
   },
   {
     "id": "xphb|scholar-s-pack",
+    "canonicalId": "equipment.scholars-pack",
     "category": "equipment",
     "name": "Scholar's Pack",
     "source": "XPHB",
@@ -5565,6 +5908,7 @@
   },
   {
     "id": "phb|sealing-wax",
+    "canonicalId": "equipment.sealing-wax",
     "category": "equipment",
     "name": "Sealing Wax",
     "source": "PHB",
@@ -5574,6 +5918,7 @@
   },
   {
     "id": "tce|shadowfell-brand-tattoo",
+    "canonicalId": "equipment.shadowfell-brand-tattoo",
     "category": "equipment",
     "name": "Shadowfell Brand Tattoo",
     "source": "TCE",
@@ -5603,6 +5948,7 @@
   },
   {
     "id": "tce|shadowfell-shard",
+    "canonicalId": "equipment.shadowfell-shard",
     "category": "equipment",
     "name": "Shadowfell Shard",
     "source": "TCE",
@@ -5621,6 +5967,7 @@
   },
   {
     "id": "phb|sheep",
+    "canonicalId": "equipment.sheep",
     "category": "equipment",
     "name": "Sheep",
     "source": "PHB",
@@ -5630,6 +5977,7 @@
   },
   {
     "id": "xge|shield-of-expression",
+    "canonicalId": "equipment.shield-of-expression",
     "category": "equipment",
     "name": "Shield of Expression",
     "source": "XGE",
@@ -5645,6 +5993,7 @@
   },
   {
     "id": "phb|shovel",
+    "canonicalId": "equipment.shovel",
     "category": "equipment",
     "name": "Shovel",
     "source": "PHB",
@@ -5655,6 +6004,7 @@
   },
   {
     "id": "xphb|shovel",
+    "canonicalId": "equipment.shovel",
     "category": "equipment",
     "name": "Shovel",
     "source": "XPHB",
@@ -5670,6 +6020,7 @@
   },
   {
     "id": "phb|signal-whistle",
+    "canonicalId": "equipment.signal-whistle",
     "category": "equipment",
     "name": "Signal Whistle",
     "source": "PHB",
@@ -5679,6 +6030,7 @@
   },
   {
     "id": "xphb|signal-whistle",
+    "canonicalId": "equipment.signal-whistle",
     "category": "equipment",
     "name": "Signal Whistle",
     "source": "XPHB",
@@ -5693,6 +6045,7 @@
   },
   {
     "id": "phb|signet-ring",
+    "canonicalId": "equipment.signet-ring",
     "category": "equipment",
     "name": "Signet Ring",
     "source": "PHB",
@@ -5702,6 +6055,7 @@
   },
   {
     "id": "phb|silk-1-sq-yd",
+    "canonicalId": "equipment.silk-1-sq-yd",
     "category": "equipment",
     "name": "Silk (1 sq. yd.)",
     "source": "PHB",
@@ -5711,6 +6065,7 @@
   },
   {
     "id": "phb|silk-rope-50-feet",
+    "canonicalId": "equipment.silk-rope-50-feet",
     "category": "equipment",
     "name": "Silk Rope (50 feet)",
     "source": "PHB",
@@ -5726,6 +6081,7 @@
   },
   {
     "id": "phb|silver",
+    "canonicalId": "equipment.silver",
     "category": "equipment",
     "name": "Silver",
     "source": "PHB",
@@ -5736,6 +6092,7 @@
   },
   {
     "id": "phb|silver-sp",
+    "canonicalId": "equipment.silver-sp",
     "category": "equipment",
     "name": "Silver (sp)",
     "source": "PHB",
@@ -5771,6 +6128,7 @@
   },
   {
     "id": "phb|sled",
+    "canonicalId": "equipment.sled",
     "category": "equipment",
     "name": "Sled",
     "source": "PHB",
@@ -5781,6 +6139,7 @@
   },
   {
     "id": "xphb|sled",
+    "canonicalId": "equipment.sled",
     "category": "equipment",
     "name": "Sled",
     "source": "XPHB",
@@ -5791,6 +6150,7 @@
   },
   {
     "id": "phb|sledgehammer",
+    "canonicalId": "equipment.sledgehammer",
     "category": "equipment",
     "name": "Sledgehammer",
     "source": "PHB",
@@ -5801,6 +6161,7 @@
   },
   {
     "id": "phb|soap",
+    "canonicalId": "equipment.soap",
     "category": "equipment",
     "name": "Soap",
     "source": "PHB",
@@ -5810,6 +6171,7 @@
   },
   {
     "id": "phb|spellbook",
+    "canonicalId": "equipment.spellbook",
     "category": "equipment",
     "name": "Spellbook",
     "source": "PHB",
@@ -5825,6 +6187,7 @@
   },
   {
     "id": "tce|spellwrought-tattoo-1st-level",
+    "canonicalId": "equipment.spellwrought-tattoo-1st-level",
     "category": "equipment",
     "name": "Spellwrought Tattoo (1st Level)",
     "source": "TCE",
@@ -5842,6 +6205,7 @@
   },
   {
     "id": "tce|spellwrought-tattoo-2nd-level",
+    "canonicalId": "equipment.spellwrought-tattoo-2nd-level",
     "category": "equipment",
     "name": "Spellwrought Tattoo (2nd Level)",
     "source": "TCE",
@@ -5859,6 +6223,7 @@
   },
   {
     "id": "tce|spellwrought-tattoo-3rd-level",
+    "canonicalId": "equipment.spellwrought-tattoo-3rd-level",
     "category": "equipment",
     "name": "Spellwrought Tattoo (3rd Level)",
     "source": "TCE",
@@ -5876,6 +6241,7 @@
   },
   {
     "id": "tce|spellwrought-tattoo-4th-level",
+    "canonicalId": "equipment.spellwrought-tattoo-4th-level",
     "category": "equipment",
     "name": "Spellwrought Tattoo (4th Level)",
     "source": "TCE",
@@ -5893,6 +6259,7 @@
   },
   {
     "id": "tce|spellwrought-tattoo-5th-level",
+    "canonicalId": "equipment.spellwrought-tattoo-5th-level",
     "category": "equipment",
     "name": "Spellwrought Tattoo (5th Level)",
     "source": "TCE",
@@ -5910,6 +6277,7 @@
   },
   {
     "id": "tce|spellwrought-tattoo-cantrip",
+    "canonicalId": "equipment.spellwrought-tattoo-cantrip",
     "category": "equipment",
     "name": "Spellwrought Tattoo (Cantrip)",
     "source": "TCE",
@@ -5927,6 +6295,7 @@
   },
   {
     "id": "phb|sprig-of-mistletoe",
+    "canonicalId": "equipment.sprig-of-mistletoe",
     "category": "equipment",
     "name": "Sprig of Mistletoe",
     "source": "PHB",
@@ -5936,6 +6305,7 @@
   },
   {
     "id": "xphb|sprig-of-mistletoe",
+    "canonicalId": "equipment.sprig-of-mistletoe",
     "category": "equipment",
     "name": "Sprig of Mistletoe",
     "source": "XPHB",
@@ -5945,6 +6315,7 @@
   },
   {
     "id": "phb|spyglass",
+    "canonicalId": "equipment.spyglass",
     "category": "equipment",
     "name": "Spyglass",
     "source": "PHB",
@@ -5960,6 +6331,7 @@
   },
   {
     "id": "xphb|spyglass",
+    "canonicalId": "equipment.spyglass",
     "category": "equipment",
     "name": "Spyglass",
     "source": "XPHB",
@@ -5975,6 +6347,7 @@
   },
   {
     "id": "phb|stabling-per-day",
+    "canonicalId": "equipment.stabling-per-day",
     "category": "equipment",
     "name": "Stabling (per day)",
     "source": "PHB",
@@ -5984,6 +6357,7 @@
   },
   {
     "id": "xphb|stabling-per-day",
+    "canonicalId": "equipment.stabling-per-day",
     "category": "equipment",
     "name": "Stabling (per day)",
     "source": "XPHB",
@@ -5993,6 +6367,7 @@
   },
   {
     "id": "xge|staff-of-adornment",
+    "canonicalId": "equipment.staff-of-adornment",
     "category": "equipment",
     "name": "Staff of Adornment",
     "source": "XGE",
@@ -6010,6 +6385,7 @@
   },
   {
     "id": "xge|staff-of-birdcalls",
+    "canonicalId": "equipment.staff-of-birdcalls",
     "category": "equipment",
     "name": "Staff of Birdcalls",
     "source": "XGE",
@@ -6031,6 +6407,7 @@
   },
   {
     "id": "xge|staff-of-flowers",
+    "canonicalId": "equipment.staff-of-flowers",
     "category": "equipment",
     "name": "Staff of Flowers",
     "source": "XGE",
@@ -6048,6 +6425,7 @@
   },
   {
     "id": "phb|steel-mirror",
+    "canonicalId": "equipment.steel-mirror",
     "category": "equipment",
     "name": "Steel Mirror",
     "source": "PHB",
@@ -6058,6 +6436,7 @@
   },
   {
     "id": "xphb|string",
+    "canonicalId": "equipment.string",
     "category": "equipment",
     "name": "String",
     "source": "XPHB",
@@ -6072,6 +6451,7 @@
   },
   {
     "id": "xge|talking-doll",
+    "canonicalId": "equipment.talking-doll",
     "category": "equipment",
     "name": "Talking Doll",
     "source": "XGE",
@@ -6085,6 +6465,7 @@
   },
   {
     "id": "phb|tankard",
+    "canonicalId": "equipment.tankard",
     "category": "equipment",
     "name": "Tankard",
     "source": "PHB",
@@ -6100,6 +6481,7 @@
   },
   {
     "id": "xge|tankard-of-sobriety",
+    "canonicalId": "equipment.tankard-of-sobriety",
     "category": "equipment",
     "name": "Tankard of Sobriety",
     "source": "XGE",
@@ -6113,6 +6495,7 @@
   },
   {
     "id": "tce|teeth-of-dahlver-nar",
+    "canonicalId": "equipment.teeth-of-dahlver-nar",
     "category": "equipment",
     "name": "Teeth of Dahlver-Nar",
     "source": "TCE",
@@ -6280,6 +6663,7 @@
   },
   {
     "id": "xphb|tent",
+    "canonicalId": "equipment.tent",
     "category": "equipment",
     "name": "Tent",
     "source": "XPHB",
@@ -6295,6 +6679,7 @@
   },
   {
     "id": "phb|thieves-tools",
+    "canonicalId": "equipment.thieves-tools",
     "category": "equipment",
     "name": "Thieves' Tools",
     "source": "PHB",
@@ -6310,6 +6695,7 @@
   },
   {
     "id": "xphb|thieves-tools",
+    "canonicalId": "equipment.thieves-tools",
     "category": "equipment",
     "name": "Thieves' Tools",
     "source": "XPHB",
@@ -6325,6 +6711,7 @@
   },
   {
     "id": "phb|three-dragon-ante-set",
+    "canonicalId": "equipment.three-dragon-ante-set",
     "category": "equipment",
     "name": "Three-Dragon Ante Set",
     "source": "PHB",
@@ -6334,6 +6721,7 @@
   },
   {
     "id": "xphb|three-dragon-ante-set",
+    "canonicalId": "equipment.three-dragon-ante-set",
     "category": "equipment",
     "name": "Three-Dragon Ante Set",
     "source": "XPHB",
@@ -6351,6 +6739,7 @@
   },
   {
     "id": "tce|thunder-absorbing-tattoo",
+    "canonicalId": "equipment.thunder-absorbing-tattoo",
     "category": "equipment",
     "name": "Thunder Absorbing Tattoo",
     "source": "TCE",
@@ -6364,6 +6753,7 @@
   },
   {
     "id": "phb|tinderbox",
+    "canonicalId": "equipment.tinderbox",
     "category": "equipment",
     "name": "Tinderbox",
     "source": "PHB",
@@ -6379,6 +6769,7 @@
   },
   {
     "id": "xphb|tinderbox",
+    "canonicalId": "equipment.tinderbox",
     "category": "equipment",
     "name": "Tinderbox",
     "source": "XPHB",
@@ -6394,6 +6785,7 @@
   },
   {
     "id": "phb|torch",
+    "canonicalId": "equipment.torch",
     "category": "equipment",
     "name": "Torch",
     "source": "PHB",
@@ -6409,6 +6801,7 @@
   },
   {
     "id": "xphb|torch",
+    "canonicalId": "equipment.torch",
     "category": "equipment",
     "name": "Torch",
     "source": "XPHB",
@@ -6424,6 +6817,7 @@
   },
   {
     "id": "phb|totem",
+    "canonicalId": "equipment.totem",
     "category": "equipment",
     "name": "Totem",
     "source": "PHB",
@@ -6433,6 +6827,7 @@
   },
   {
     "id": "phb|traveler-s-clothes",
+    "canonicalId": "equipment.travelers-clothes",
     "category": "equipment",
     "name": "Traveler's Clothes",
     "source": "PHB",
@@ -6443,6 +6838,7 @@
   },
   {
     "id": "xphb|traveler-s-clothes",
+    "canonicalId": "equipment.travelers-clothes",
     "category": "equipment",
     "name": "Traveler's Clothes",
     "source": "XPHB",
@@ -6458,6 +6854,7 @@
   },
   {
     "id": "phb|trinket",
+    "canonicalId": "equipment.trinket",
     "category": "equipment",
     "name": "Trinket",
     "source": "PHB",
@@ -6610,6 +7007,7 @@
   },
   {
     "id": "xphb|trinket",
+    "canonicalId": "equipment.trinket",
     "category": "equipment",
     "name": "Trinket",
     "source": "XPHB",
@@ -6756,6 +7154,7 @@
   },
   {
     "id": "phb|two-person-tent",
+    "canonicalId": "equipment.two-person-tent",
     "category": "equipment",
     "name": "Two-Person Tent",
     "source": "PHB",
@@ -6771,6 +7170,7 @@
   },
   {
     "id": "xge|unbreakable-arrow",
+    "canonicalId": "equipment.unbreakable-arrow",
     "category": "equipment",
     "name": "Unbreakable Arrow",
     "source": "XGE",
@@ -6784,6 +7184,7 @@
   },
   {
     "id": "xge|veteran-s-cane",
+    "canonicalId": "equipment.veterans-cane",
     "category": "equipment",
     "name": "Veteran's Cane",
     "source": "XGE",
@@ -6797,6 +7198,7 @@
   },
   {
     "id": "phb|vial",
+    "canonicalId": "equipment.vial",
     "category": "equipment",
     "name": "Vial",
     "source": "PHB",
@@ -6811,6 +7213,7 @@
   },
   {
     "id": "xphb|vial",
+    "canonicalId": "equipment.vial",
     "category": "equipment",
     "name": "Vial",
     "source": "XPHB",
@@ -6825,6 +7228,7 @@
   },
   {
     "id": "phb|wagon",
+    "canonicalId": "equipment.wagon",
     "category": "equipment",
     "name": "Wagon",
     "source": "PHB",
@@ -6835,6 +7239,7 @@
   },
   {
     "id": "xphb|wagon",
+    "canonicalId": "equipment.wagon",
     "category": "equipment",
     "name": "Wagon",
     "source": "XPHB",
@@ -6845,6 +7250,7 @@
   },
   {
     "id": "xge|wand-of-conducting",
+    "canonicalId": "equipment.wand-of-conducting",
     "category": "equipment",
     "name": "Wand of Conducting",
     "source": "XGE",
@@ -6863,6 +7269,7 @@
   },
   {
     "id": "xge|wand-of-pyrotechnics",
+    "canonicalId": "equipment.wand-of-pyrotechnics",
     "category": "equipment",
     "name": "Wand of Pyrotechnics",
     "source": "XGE",
@@ -6881,6 +7288,7 @@
   },
   {
     "id": "xge|wand-of-scowls",
+    "canonicalId": "equipment.wand-of-scowls",
     "category": "equipment",
     "name": "Wand of Scowls",
     "source": "XGE",
@@ -6899,6 +7307,7 @@
   },
   {
     "id": "xge|wand-of-smiles",
+    "canonicalId": "equipment.wand-of-smiles",
     "category": "equipment",
     "name": "Wand of Smiles",
     "source": "XGE",
@@ -6917,6 +7326,7 @@
   },
   {
     "id": "phb|warhorse",
+    "canonicalId": "equipment.warhorse",
     "category": "equipment",
     "name": "Warhorse",
     "source": "PHB",
@@ -6926,6 +7336,7 @@
   },
   {
     "id": "xphb|warhorse",
+    "canonicalId": "equipment.warhorse",
     "category": "equipment",
     "name": "Warhorse",
     "source": "XPHB",
@@ -6935,6 +7346,7 @@
   },
   {
     "id": "xphb|warship",
+    "canonicalId": "equipment.warship",
     "category": "equipment",
     "name": "Warship",
     "source": "XPHB",
@@ -6944,6 +7356,7 @@
   },
   {
     "id": "phb|waterskin",
+    "canonicalId": "equipment.waterskin",
     "category": "equipment",
     "name": "Waterskin",
     "source": "PHB",
@@ -6959,6 +7372,7 @@
   },
   {
     "id": "xphb|waterskin",
+    "canonicalId": "equipment.waterskin",
     "category": "equipment",
     "name": "Waterskin",
     "source": "XPHB",
@@ -6974,6 +7388,7 @@
   },
   {
     "id": "phb|wheat",
+    "canonicalId": "equipment.wheat",
     "category": "equipment",
     "name": "Wheat",
     "source": "PHB",
@@ -6984,6 +7399,7 @@
   },
   {
     "id": "phb|whetstone",
+    "canonicalId": "equipment.whetstone",
     "category": "equipment",
     "name": "Whetstone",
     "source": "PHB",
@@ -6994,6 +7410,7 @@
   },
   {
     "id": "phb|yew-wand",
+    "canonicalId": "equipment.yew-wand",
     "category": "equipment",
     "name": "Yew Wand",
     "source": "PHB",
@@ -7004,6 +7421,7 @@
   },
   {
     "id": "xphb|yew-wand",
+    "canonicalId": "equipment.yew-wand",
     "category": "equipment",
     "name": "Yew Wand",
     "source": "XPHB",

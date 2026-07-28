@@ -9,10 +9,13 @@
     "preview": "vite preview",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
-    "format": "prettier --write \"src/**/*.{ts,tsx,css,json}\"",
-    "format:check": "prettier --check \"src/**/*.{ts,tsx,css,json}\"",
+    "format": "prettier --write \"src/**/*.{ts,tsx,css,json}\" \"scripts/**/*.{ts,tsx}\"",
+    "format:check": "prettier --check \"src/**/*.{ts,tsx,css,json}\" \"scripts/**/*.{ts,tsx}\"",
     "typecheck": "tsc --noEmit -p tsconfig.app.json && tsc --noEmit -p tsconfig.scripts.json",
-    "build:compendium": "tsx scripts/compendium/build.ts"
+    "build:compendium": "tsx scripts/compendium/build.ts",
+    "test:identity": "tsx scripts/tests/identity.test.ts",
+    "test:grouping": "tsx scripts/tests/grouping.test.ts",
+    "test": "npm run test:identity && npm run test:grouping"
   },
   "dependencies": {
     "@tanstack/react-query": "^5.84.0",

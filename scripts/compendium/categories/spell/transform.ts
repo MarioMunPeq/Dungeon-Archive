@@ -1,11 +1,14 @@
 import type { Spell } from "../../../../src/types/compendium";
 import type { Raw5eSpell } from "../../../../src/adapter/5etools-raw-types";
 import { generateId } from "../../id";
+import { createCanonicalId } from "../../identity";
 import { isAllowedSource, ALLOWED_SOURCES } from "../../allowed-sources";
 import { processEntries } from "../../entries";
 import { normalizeText } from "../../normalizer/index";
 
-function formatCastingTime(time: readonly { readonly number: number; readonly unit: string }[]): string {
+function formatCastingTime(
+  time: readonly { readonly number: number; readonly unit: string }[],
+): string {
   const parts = time.map((t) => {
     const num = t.number === 1 ? "" : `${t.number} `;
     return `${num}${t.unit}`;
@@ -13,7 +16,14 @@ function formatCastingTime(time: readonly { readonly number: number; readonly un
   return parts.join(" plus ");
 }
 
-function formatRange(range: string | { readonly type: string; readonly distance?: { readonly type: string; readonly amount?: number } }): string {
+function formatRange(
+  range:
+    | string
+    | {
+        readonly type: string;
+        readonly distance?: { readonly type: string; readonly amount?: number };
+      },
+): string {
   if (typeof range === "string") return range;
   if (!range.distance) return range.type === "special" ? "Special" : range.type;
   const d = range.distance;
@@ -23,7 +33,11 @@ function formatRange(range: string | { readonly type: string; readonly distance?
   return d.type;
 }
 
-function formatComponents(components: { readonly v?: boolean; readonly s?: boolean; readonly m?: string | { readonly text: string } }): string[] {
+function formatComponents(components: {
+  readonly v?: boolean;
+  readonly s?: boolean;
+  readonly m?: string | { readonly text: string };
+}): string[] {
   const result: string[] = [];
   if (components.v) result.push("V");
   if (components.s) result.push("S");
@@ -34,7 +48,14 @@ function formatComponents(components: { readonly v?: boolean; readonly s?: boole
   return result;
 }
 
-function formatDuration(duration: readonly { readonly type: string; readonly concentration?: boolean; readonly duration?: { readonly type: string; readonly amount?: number }; readonly ends?: readonly string[] }[]): string {
+function formatDuration(
+  duration: readonly {
+    readonly type: string;
+    readonly concentration?: boolean;
+    readonly duration?: { readonly type: string; readonly amount?: number };
+    readonly ends?: readonly string[];
+  }[],
+): string {
   const d = duration[0];
   if (!d) return "Instantaneous";
   if (d.type === "instant") return "Instantaneous";
@@ -53,10 +74,7 @@ function formatDuration(duration: readonly { readonly type: string; readonly con
 
 type ClassLookup = Record<string, Record<string, { class?: Record<string, Record<string, true>> }>>;
 
-function extractClasses(
-  spell: Raw5eSpell,
-  classLookup: ClassLookup | undefined,
-): string[] {
+function extractClasses(spell: Raw5eSpell, classLookup: ClassLookup | undefined): string[] {
   if (!classLookup) return [];
 
   const spellNameLower = spell.name.toLowerCase();
@@ -84,6 +102,7 @@ export function transformSpells(raw: readonly Raw5eSpell[], classLookup?: ClassL
     .filter((s) => isAllowedSource(s.source))
     .map((s) => ({
       id: generateId(s.source, s.name),
+      canonicalId: createCanonicalId("spell", s.name),
       category: "spell" as const,
       name: s.name,
       source: s.source,

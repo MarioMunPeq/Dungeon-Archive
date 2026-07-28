@@ -1,6 +1,7 @@
 [
   {
     "id": "phb|blinded",
+    "canonicalId": "condition.blinded",
     "category": "condition",
     "name": "Blinded",
     "source": "PHB",
@@ -16,6 +17,7 @@
   },
   {
     "id": "xphb|blinded",
+    "canonicalId": "condition.blinded",
     "category": "condition",
     "name": "Blinded",
     "source": "XPHB",
@@ -36,6 +38,7 @@
   },
   {
     "id": "phb|charmed",
+    "canonicalId": "condition.charmed",
     "category": "condition",
     "name": "Charmed",
     "source": "PHB",
@@ -51,6 +54,7 @@
   },
   {
     "id": "xphb|charmed",
+    "canonicalId": "condition.charmed",
     "category": "condition",
     "name": "Charmed",
     "source": "XPHB",
@@ -71,6 +75,7 @@
   },
   {
     "id": "phb|deafened",
+    "canonicalId": "condition.deafened",
     "category": "condition",
     "name": "Deafened",
     "source": "PHB",
@@ -85,6 +90,7 @@
   },
   {
     "id": "xphb|deafened",
+    "canonicalId": "condition.deafened",
     "category": "condition",
     "name": "Deafened",
     "source": "XPHB",
@@ -101,6 +107,7 @@
   },
   {
     "id": "phb|exhaustion",
+    "canonicalId": "condition.exhaustion",
     "category": "condition",
     "name": "Exhaustion",
     "source": "PHB",
@@ -141,6 +148,7 @@
   },
   {
     "id": "xphb|exhaustion",
+    "canonicalId": "condition.exhaustion",
     "category": "condition",
     "name": "Exhaustion",
     "source": "XPHB",
@@ -169,6 +177,7 @@
   },
   {
     "id": "phb|frightened",
+    "canonicalId": "condition.frightened",
     "category": "condition",
     "name": "Frightened",
     "source": "PHB",
@@ -184,6 +193,7 @@
   },
   {
     "id": "xphb|frightened",
+    "canonicalId": "condition.frightened",
     "category": "condition",
     "name": "Frightened",
     "source": "XPHB",
@@ -204,6 +214,7 @@
   },
   {
     "id": "phb|grappled",
+    "canonicalId": "condition.grappled",
     "category": "condition",
     "name": "Grappled",
     "source": "PHB",
@@ -220,6 +231,7 @@
   },
   {
     "id": "xphb|grappled",
+    "canonicalId": "condition.grappled",
     "category": "condition",
     "name": "Grappled",
     "source": "XPHB",
@@ -244,6 +256,7 @@
   },
   {
     "id": "phb|incapacitated",
+    "canonicalId": "condition.incapacitated",
     "category": "condition",
     "name": "Incapacitated",
     "source": "PHB",
@@ -256,6 +269,7 @@
   },
   {
     "id": "xphb|incapacitated",
+    "canonicalId": "condition.incapacitated",
     "category": "condition",
     "name": "Incapacitated",
     "source": "XPHB",
@@ -284,6 +298,7 @@
   },
   {
     "id": "phb|invisible",
+    "canonicalId": "condition.invisible",
     "category": "condition",
     "name": "Invisible",
     "source": "PHB",
@@ -299,6 +314,7 @@
   },
   {
     "id": "xphb|invisible",
+    "canonicalId": "condition.invisible",
     "category": "condition",
     "name": "Invisible",
     "source": "XPHB",
@@ -323,6 +339,7 @@
   },
   {
     "id": "phb|paralyzed",
+    "canonicalId": "condition.paralyzed",
     "category": "condition",
     "name": "Paralyzed",
     "source": "PHB",
@@ -340,6 +357,7 @@
   },
   {
     "id": "xphb|paralyzed",
+    "canonicalId": "condition.paralyzed",
     "category": "condition",
     "name": "Paralyzed",
     "source": "XPHB",
@@ -372,6 +390,7 @@
   },
   {
     "id": "phb|petrified",
+    "canonicalId": "condition.petrified",
     "category": "condition",
     "name": "Petrified",
     "source": "PHB",
@@ -391,6 +410,7 @@
   },
   {
     "id": "xphb|petrified",
+    "canonicalId": "condition.petrified",
     "category": "condition",
     "name": "Petrified",
     "source": "XPHB",
@@ -431,6 +451,7 @@
   },
   {
     "id": "phb|poisoned",
+    "canonicalId": "condition.poisoned",
     "category": "condition",
     "name": "Poisoned",
     "source": "PHB",
@@ -443,6 +464,7 @@
   },
   {
     "id": "xphb|poisoned",
+    "canonicalId": "condition.poisoned",
     "category": "condition",
     "name": "Poisoned",
     "source": "XPHB",
@@ -459,6 +481,7 @@
   },
   {
     "id": "phb|prone",
+    "canonicalId": "condition.prone",
     "category": "condition",
     "name": "Prone",
     "source": "PHB",
@@ -475,6 +498,7 @@
   },
   {
     "id": "xphb|prone",
+    "canonicalId": "condition.prone",
     "category": "condition",
     "name": "Prone",
     "source": "XPHB",
@@ -495,6 +519,7 @@
   },
   {
     "id": "phb|restrained",
+    "canonicalId": "condition.restrained",
     "category": "condition",
     "name": "Restrained",
     "source": "PHB",
@@ -511,6 +536,7 @@
   },
   {
     "id": "xphb|restrained",
+    "canonicalId": "condition.restrained",
     "category": "condition",
     "name": "Restrained",
     "source": "XPHB",
@@ -535,6 +561,7 @@
   },
   {
     "id": "phb|stunned",
+    "canonicalId": "condition.stunned",
     "category": "condition",
     "name": "Stunned",
     "source": "PHB",
@@ -551,6 +578,7 @@
   },
   {
     "id": "xphb|stunned",
+    "canonicalId": "condition.stunned",
     "category": "condition",
     "name": "Stunned",
     "source": "XPHB",
@@ -575,6 +603,7 @@
   },
   {
     "id": "phb|unconscious",
+    "canonicalId": "condition.unconscious",
     "category": "condition",
     "name": "Unconscious",
     "source": "PHB",
@@ -593,6 +622,7 @@
   },
   {
     "id": "xphb|unconscious",
+    "canonicalId": "condition.unconscious",
     "category": "condition",
     "name": "Unconscious",
     "source": "XPHB",

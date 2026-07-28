@@ -1,6 +1,7 @@
 [
   {
     "id": "phb|acid-splash",
+    "canonicalId": "spell.acid-splash",
     "category": "spell",
     "name": "Acid Splash",
     "source": "PHB",
@@ -26,6 +27,7 @@
   },
   {
     "id": "phb|aid",
+    "canonicalId": "spell.aid",
     "category": "spell",
     "name": "Aid",
     "source": "PHB",
@@ -53,6 +55,7 @@
   },
   {
     "id": "phb|alarm",
+    "canonicalId": "spell.alarm",
     "category": "spell",
     "name": "Alarm",
     "source": "PHB",
@@ -82,6 +85,7 @@
   },
   {
     "id": "phb|alter-self",
+    "canonicalId": "spell.alter-self",
     "category": "spell",
     "name": "Alter Self",
     "source": "PHB",
@@ -115,6 +119,7 @@
   },
   {
     "id": "phb|animal-friendship",
+    "canonicalId": "spell.animal-friendship",
     "category": "spell",
     "name": "Animal Friendship",
     "source": "PHB",
@@ -142,6 +147,7 @@
   },
   {
     "id": "phb|animal-messenger",
+    "canonicalId": "spell.animal-messenger",
     "category": "spell",
     "name": "Animal Messenger",
     "source": "PHB",
@@ -173,6 +179,7 @@
   },
   {
     "id": "phb|animal-shapes",
+    "canonicalId": "spell.animal-shapes",
     "category": "spell",
     "name": "Animal Shapes",
     "source": "PHB",
@@ -202,6 +209,7 @@
   },
   {
     "id": "phb|animate-dead",
+    "canonicalId": "spell.animate-dead",
     "category": "spell",
     "name": "Animate Dead",
     "source": "PHB",
@@ -237,6 +245,7 @@
   },
   {
     "id": "phb|animate-objects",
+    "canonicalId": "spell.animate-objects",
     "category": "spell",
     "name": "Animate Objects",
     "source": "PHB",
@@ -322,6 +331,7 @@
   },
   {
     "id": "phb|antilife-shell",
+    "canonicalId": "spell.antilife-shell",
     "category": "spell",
     "name": "Antilife Shell",
     "source": "PHB",
@@ -351,6 +361,7 @@
   },
   {
     "id": "phb|antimagic-field",
+    "canonicalId": "spell.antimagic-field",
     "category": "spell",
     "name": "Antimagic Field",
     "source": "PHB",
@@ -408,6 +419,7 @@
   },
   {
     "id": "phb|antipathy-sympathy",
+    "canonicalId": "spell.antipathy-sympathy",
     "category": "spell",
     "name": "Antipathy/Sympathy",
     "source": "PHB",
@@ -453,6 +465,7 @@
   },
   {
     "id": "phb|arcane-eye",
+    "canonicalId": "spell.arcane-eye",
     "category": "spell",
     "name": "Arcane Eye",
     "source": "PHB",
@@ -482,6 +495,7 @@
   },
   {
     "id": "phb|arcane-gate",
+    "canonicalId": "spell.arcane-gate",
     "category": "spell",
     "name": "Arcane Gate",
     "source": "PHB",
@@ -511,6 +525,7 @@
   },
   {
     "id": "phb|arcane-lock",
+    "canonicalId": "spell.arcane-lock",
     "category": "spell",
     "name": "Arcane Lock",
     "source": "PHB",
@@ -536,6 +551,7 @@
   },
   {
     "id": "phb|armor-of-agathys",
+    "canonicalId": "spell.armor-of-agathys",
     "category": "spell",
     "name": "Armor of Agathys",
     "source": "PHB",
@@ -563,6 +579,7 @@
   },
   {
     "id": "phb|arms-of-hadar",
+    "canonicalId": "spell.arms-of-hadar",
     "category": "spell",
     "name": "Arms of Hadar",
     "source": "PHB",
@@ -590,6 +607,7 @@
   },
   {
     "id": "phb|astral-projection",
+    "canonicalId": "spell.astral-projection",
     "category": "spell",
     "name": "Astral Projection",
     "source": "PHB",
@@ -635,6 +653,7 @@
   },
   {
     "id": "phb|augury",
+    "canonicalId": "spell.augury",
     "category": "spell",
     "name": "Augury",
     "source": "PHB",
@@ -677,6 +696,7 @@
   },
   {
     "id": "phb|aura-of-life",
+    "canonicalId": "spell.aura-of-life",
     "category": "spell",
     "name": "Aura of Life",
     "source": "PHB",
@@ -698,6 +718,7 @@
   },
   {
     "id": "phb|aura-of-purity",
+    "canonicalId": "spell.aura-of-purity",
     "category": "spell",
     "name": "Aura of Purity",
     "source": "PHB",
@@ -719,6 +740,7 @@
   },
   {
     "id": "phb|aura-of-vitality",
+    "canonicalId": "spell.aura-of-vitality",
     "category": "spell",
     "name": "Aura of Vitality",
     "source": "PHB",
@@ -740,6 +762,7 @@
   },
   {
     "id": "phb|awaken",
+    "canonicalId": "spell.awaken",
     "category": "spell",
     "name": "Awaken",
     "source": "PHB",
@@ -765,6 +788,7 @@
   },
   {
     "id": "phb|bane",
+    "canonicalId": "spell.bane",
     "category": "spell",
     "name": "Bane",
     "source": "PHB",
@@ -792,6 +816,7 @@
   },
   {
     "id": "phb|banishing-smite",
+    "canonicalId": "spell.banishing-smite",
     "category": "spell",
     "name": "Banishing Smite",
     "source": "PHB",
@@ -813,6 +838,7 @@
   },
   {
     "id": "phb|banishment",
+    "canonicalId": "spell.banishment",
     "category": "spell",
     "name": "Banishment",
     "source": "PHB",
@@ -848,6 +874,7 @@
   },
   {
     "id": "phb|barkskin",
+    "canonicalId": "spell.barkskin",
     "category": "spell",
     "name": "Barkskin",
     "source": "PHB",
@@ -869,6 +896,7 @@
   },
   {
     "id": "phb|beacon-of-hope",
+    "canonicalId": "spell.beacon-of-hope",
     "category": "spell",
     "name": "Beacon of Hope",
     "source": "PHB",
@@ -890,6 +918,7 @@
   },
   {
     "id": "phb|beast-sense",
+    "canonicalId": "spell.beast-sense",
     "category": "spell",
     "name": "Beast Sense",
     "source": "PHB",
@@ -911,6 +940,7 @@
   },
   {
     "id": "phb|bestow-curse",
+    "canonicalId": "spell.bestow-curse",
     "category": "spell",
     "name": "Bestow Curse",
     "source": "PHB",
@@ -951,6 +981,7 @@
   },
   {
     "id": "phb|bigby-s-hand",
+    "canonicalId": "spell.bigbys-hand",
     "category": "spell",
     "name": "Bigby's Hand",
     "source": "PHB",
@@ -1002,6 +1033,7 @@
   },
   {
     "id": "phb|blade-barrier",
+    "canonicalId": "spell.blade-barrier",
     "category": "spell",
     "name": "Blade Barrier",
     "source": "PHB",
@@ -1027,6 +1059,7 @@
   },
   {
     "id": "phb|blade-ward",
+    "canonicalId": "spell.blade-ward",
     "category": "spell",
     "name": "Blade Ward",
     "source": "PHB",
@@ -1048,6 +1081,7 @@
   },
   {
     "id": "phb|bless",
+    "canonicalId": "spell.bless",
     "category": "spell",
     "name": "Bless",
     "source": "PHB",
@@ -1075,6 +1109,7 @@
   },
   {
     "id": "phb|blight",
+    "canonicalId": "spell.blight",
     "category": "spell",
     "name": "Blight",
     "source": "PHB",
@@ -1110,6 +1145,7 @@
   },
   {
     "id": "phb|blinding-smite",
+    "canonicalId": "spell.blinding-smite",
     "category": "spell",
     "name": "Blinding Smite",
     "source": "PHB",
@@ -1135,6 +1171,7 @@
   },
   {
     "id": "phb|blindness-deafness",
+    "canonicalId": "spell.blindness-deafness",
     "category": "spell",
     "name": "Blindness/Deafness",
     "source": "PHB",
@@ -1162,6 +1199,7 @@
   },
   {
     "id": "phb|blink",
+    "canonicalId": "spell.blink",
     "category": "spell",
     "name": "Blink",
     "source": "PHB",
@@ -1187,6 +1225,7 @@
   },
   {
     "id": "phb|blur",
+    "canonicalId": "spell.blur",
     "category": "spell",
     "name": "Blur",
     "source": "PHB",
@@ -1208,6 +1247,7 @@
   },
   {
     "id": "phb|branding-smite",
+    "canonicalId": "spell.branding-smite",
     "category": "spell",
     "name": "Branding Smite",
     "source": "PHB",
@@ -1235,6 +1275,7 @@
   },
   {
     "id": "phb|burning-hands",
+    "canonicalId": "spell.burning-hands",
     "category": "spell",
     "name": "Burning Hands",
     "source": "PHB",
@@ -1266,6 +1307,7 @@
   },
   {
     "id": "phb|call-lightning",
+    "canonicalId": "spell.call-lightning",
     "category": "spell",
     "name": "Call Lightning",
     "source": "PHB",
@@ -1301,6 +1343,7 @@
   },
   {
     "id": "phb|calm-emotions",
+    "canonicalId": "spell.calm-emotions",
     "category": "spell",
     "name": "Calm Emotions",
     "source": "PHB",
@@ -1330,6 +1373,7 @@
   },
   {
     "id": "phb|chain-lightning",
+    "canonicalId": "spell.chain-lightning",
     "category": "spell",
     "name": "Chain Lightning",
     "source": "PHB",
@@ -1365,6 +1409,7 @@
   },
   {
     "id": "phb|charm-person",
+    "canonicalId": "spell.charm-person",
     "category": "spell",
     "name": "Charm Person",
     "source": "PHB",
@@ -1392,6 +1437,7 @@
   },
   {
     "id": "phb|chill-touch",
+    "canonicalId": "spell.chill-touch",
     "category": "spell",
     "name": "Chill Touch",
     "source": "PHB",
@@ -1421,6 +1467,7 @@
   },
   {
     "id": "phb|chromatic-orb",
+    "canonicalId": "spell.chromatic-orb",
     "category": "spell",
     "name": "Chromatic Orb",
     "source": "PHB",
@@ -1448,6 +1495,7 @@
   },
   {
     "id": "phb|circle-of-death",
+    "canonicalId": "spell.circle-of-death",
     "category": "spell",
     "name": "Circle of Death",
     "source": "PHB",
@@ -1475,6 +1523,7 @@
   },
   {
     "id": "phb|circle-of-power",
+    "canonicalId": "spell.circle-of-power",
     "category": "spell",
     "name": "Circle of Power",
     "source": "PHB",
@@ -1496,6 +1545,7 @@
   },
   {
     "id": "phb|clairvoyance",
+    "canonicalId": "spell.clairvoyance",
     "category": "spell",
     "name": "Clairvoyance",
     "source": "PHB",
@@ -1529,6 +1579,7 @@
   },
   {
     "id": "phb|clone",
+    "canonicalId": "spell.clone",
     "category": "spell",
     "name": "Clone",
     "source": "PHB",
@@ -1558,6 +1609,7 @@
   },
   {
     "id": "phb|cloud-of-daggers",
+    "canonicalId": "spell.cloud-of-daggers",
     "category": "spell",
     "name": "Cloud of Daggers",
     "source": "PHB",
@@ -1585,6 +1637,7 @@
   },
   {
     "id": "phb|cloudkill",
+    "canonicalId": "spell.cloudkill",
     "category": "spell",
     "name": "Cloudkill",
     "source": "PHB",
@@ -1620,6 +1673,7 @@
   },
   {
     "id": "phb|color-spray",
+    "canonicalId": "spell.color-spray",
     "category": "spell",
     "name": "Color Spray",
     "source": "PHB",
@@ -1651,6 +1705,7 @@
   },
   {
     "id": "phb|command",
+    "canonicalId": "spell.command",
     "category": "spell",
     "name": "Command",
     "source": "PHB",
@@ -1702,6 +1757,7 @@
   },
   {
     "id": "phb|commune",
+    "canonicalId": "spell.commune",
     "category": "spell",
     "name": "Commune",
     "source": "PHB",
@@ -1731,6 +1787,7 @@
   },
   {
     "id": "phb|commune-with-nature",
+    "canonicalId": "spell.commune-with-nature",
     "category": "spell",
     "name": "Commune with Nature",
     "source": "PHB",
@@ -1770,6 +1827,7 @@
   },
   {
     "id": "phb|compelled-duel",
+    "canonicalId": "spell.compelled-duel",
     "category": "spell",
     "name": "Compelled Duel",
     "source": "PHB",
@@ -1795,6 +1853,7 @@
   },
   {
     "id": "phb|comprehend-languages",
+    "canonicalId": "spell.comprehend-languages",
     "category": "spell",
     "name": "Comprehend Languages",
     "source": "PHB",
@@ -1820,6 +1879,7 @@
   },
   {
     "id": "phb|compulsion",
+    "canonicalId": "spell.compulsion",
     "category": "spell",
     "name": "Compulsion",
     "source": "PHB",
@@ -1845,6 +1905,7 @@
   },
   {
     "id": "phb|cone-of-cold",
+    "canonicalId": "spell.cone-of-cold",
     "category": "spell",
     "name": "Cone of Cold",
     "source": "PHB",
@@ -1876,6 +1937,7 @@
   },
   {
     "id": "phb|confusion",
+    "canonicalId": "spell.confusion",
     "category": "spell",
     "name": "Confusion",
     "source": "PHB",
@@ -1927,6 +1989,7 @@
   },
   {
     "id": "phb|conjure-animals",
+    "canonicalId": "spell.conjure-animals",
     "category": "spell",
     "name": "Conjure Animals",
     "source": "PHB",
@@ -1975,6 +2038,7 @@
   },
   {
     "id": "phb|conjure-barrage",
+    "canonicalId": "spell.conjure-barrage",
     "category": "spell",
     "name": "Conjure Barrage",
     "source": "PHB",
@@ -1996,6 +2060,7 @@
   },
   {
     "id": "phb|conjure-celestial",
+    "canonicalId": "spell.conjure-celestial",
     "category": "spell",
     "name": "Conjure Celestial",
     "source": "PHB",
@@ -2031,6 +2096,7 @@
   },
   {
     "id": "phb|conjure-elemental",
+    "canonicalId": "spell.conjure-elemental",
     "category": "spell",
     "name": "Conjure Elemental",
     "source": "PHB",
@@ -2074,6 +2140,7 @@
   },
   {
     "id": "phb|conjure-fey",
+    "canonicalId": "spell.conjure-fey",
     "category": "spell",
     "name": "Conjure Fey",
     "source": "PHB",
@@ -2113,6 +2180,7 @@
   },
   {
     "id": "phb|conjure-minor-elementals",
+    "canonicalId": "spell.conjure-minor-elementals",
     "category": "spell",
     "name": "Conjure Minor Elementals",
     "source": "PHB",
@@ -2161,6 +2229,7 @@
   },
   {
     "id": "phb|conjure-volley",
+    "canonicalId": "spell.conjure-volley",
     "category": "spell",
     "name": "Conjure Volley",
     "source": "PHB",
@@ -2182,6 +2251,7 @@
   },
   {
     "id": "phb|conjure-woodland-beings",
+    "canonicalId": "spell.conjure-woodland-beings",
     "category": "spell",
     "name": "Conjure Woodland Beings",
     "source": "PHB",
@@ -2230,6 +2300,7 @@
   },
   {
     "id": "phb|contact-other-plane",
+    "canonicalId": "spell.contact-other-plane",
     "category": "spell",
     "name": "Contact Other Plane",
     "source": "PHB",
@@ -2255,6 +2326,7 @@
   },
   {
     "id": "phb|contagion",
+    "canonicalId": "spell.contagion",
     "category": "spell",
     "name": "Contagion",
     "source": "PHB",
@@ -2308,6 +2380,7 @@
   },
   {
     "id": "phb|contingency",
+    "canonicalId": "spell.contingency",
     "category": "spell",
     "name": "Contingency",
     "source": "PHB",
@@ -2341,6 +2414,7 @@
   },
   {
     "id": "phb|continual-flame",
+    "canonicalId": "spell.continual-flame",
     "category": "spell",
     "name": "Continual Flame",
     "source": "PHB",
@@ -2362,6 +2436,7 @@
   },
   {
     "id": "phb|control-water",
+    "canonicalId": "spell.control-water",
     "category": "spell",
     "name": "Control Water",
     "source": "PHB",
@@ -2415,6 +2490,7 @@
   },
   {
     "id": "phb|control-weather",
+    "canonicalId": "spell.control-weather",
     "category": "spell",
     "name": "Control Weather",
     "source": "PHB",
@@ -2478,6 +2554,7 @@
   },
   {
     "id": "phb|cordon-of-arrows",
+    "canonicalId": "spell.cordon-of-arrows",
     "category": "spell",
     "name": "Cordon of Arrows",
     "source": "PHB",
@@ -2509,6 +2586,7 @@
   },
   {
     "id": "phb|counterspell",
+    "canonicalId": "spell.counterspell",
     "category": "spell",
     "name": "Counterspell",
     "source": "PHB",
@@ -2536,6 +2614,7 @@
   },
   {
     "id": "phb|create-food-and-water",
+    "canonicalId": "spell.create-food-and-water",
     "category": "spell",
     "name": "Create Food and Water",
     "source": "PHB",
@@ -2557,6 +2636,7 @@
   },
   {
     "id": "phb|create-or-destroy-water",
+    "canonicalId": "spell.create-or-destroy-water",
     "category": "spell",
     "name": "Create or Destroy Water",
     "source": "PHB",
@@ -2596,6 +2676,7 @@
   },
   {
     "id": "phb|create-undead",
+    "canonicalId": "spell.create-undead",
     "category": "spell",
     "name": "Create Undead",
     "source": "PHB",
@@ -2635,6 +2716,7 @@
   },
   {
     "id": "phb|creation",
+    "canonicalId": "spell.creation",
     "category": "spell",
     "name": "Creation",
     "source": "PHB",
@@ -2685,6 +2767,7 @@
   },
   {
     "id": "phb|crown-of-madness",
+    "canonicalId": "spell.crown-of-madness",
     "category": "spell",
     "name": "Crown of Madness",
     "source": "PHB",
@@ -2714,6 +2797,7 @@
   },
   {
     "id": "phb|crusader-s-mantle",
+    "canonicalId": "spell.crusaders-mantle",
     "category": "spell",
     "name": "Crusader's Mantle",
     "source": "PHB",
@@ -2735,6 +2819,7 @@
   },
   {
     "id": "phb|cure-wounds",
+    "canonicalId": "spell.cure-wounds",
     "category": "spell",
     "name": "Cure Wounds",
     "source": "PHB",
@@ -2762,6 +2847,7 @@
   },
   {
     "id": "phb|dancing-lights",
+    "canonicalId": "spell.dancing-lights",
     "category": "spell",
     "name": "Dancing Lights",
     "source": "PHB",
@@ -2787,6 +2873,7 @@
   },
   {
     "id": "phb|darkness",
+    "canonicalId": "spell.darkness",
     "category": "spell",
     "name": "Darkness",
     "source": "PHB",
@@ -2816,6 +2903,7 @@
   },
   {
     "id": "phb|darkvision",
+    "canonicalId": "spell.darkvision",
     "category": "spell",
     "name": "Darkvision",
     "source": "PHB",
@@ -2837,6 +2925,7 @@
   },
   {
     "id": "phb|daylight",
+    "canonicalId": "spell.daylight",
     "category": "spell",
     "name": "Daylight",
     "source": "PHB",
@@ -2866,6 +2955,7 @@
   },
   {
     "id": "phb|death-ward",
+    "canonicalId": "spell.death-ward",
     "category": "spell",
     "name": "Death Ward",
     "source": "PHB",
@@ -2895,6 +2985,7 @@
   },
   {
     "id": "phb|delayed-blast-fireball",
+    "canonicalId": "spell.delayed-blast-fireball",
     "category": "spell",
     "name": "Delayed Blast Fireball",
     "source": "PHB",
@@ -2934,6 +3025,7 @@
   },
   {
     "id": "phb|demiplane",
+    "canonicalId": "spell.demiplane",
     "category": "spell",
     "name": "Demiplane",
     "source": "PHB",
@@ -2959,6 +3051,7 @@
   },
   {
     "id": "phb|destructive-wave",
+    "canonicalId": "spell.destructive-wave",
     "category": "spell",
     "name": "Destructive Wave",
     "source": "PHB",
@@ -2980,6 +3073,7 @@
   },
   {
     "id": "phb|detect-evil-and-good",
+    "canonicalId": "spell.detect-evil-and-good",
     "category": "spell",
     "name": "Detect Evil and Good",
     "source": "PHB",
@@ -3005,6 +3099,7 @@
   },
   {
     "id": "phb|detect-magic",
+    "canonicalId": "spell.detect-magic",
     "category": "spell",
     "name": "Detect Magic",
     "source": "PHB",
@@ -3040,6 +3135,7 @@
   },
   {
     "id": "phb|detect-poison-and-disease",
+    "canonicalId": "spell.detect-poison-and-disease",
     "category": "spell",
     "name": "Detect Poison and Disease",
     "source": "PHB",
@@ -3065,6 +3161,7 @@
   },
   {
     "id": "phb|detect-thoughts",
+    "canonicalId": "spell.detect-thoughts",
     "category": "spell",
     "name": "Detect Thoughts",
     "source": "PHB",
@@ -3102,6 +3199,7 @@
   },
   {
     "id": "phb|dimension-door",
+    "canonicalId": "spell.dimension-door",
     "category": "spell",
     "name": "Dimension Door",
     "source": "PHB",
@@ -3131,6 +3229,7 @@
   },
   {
     "id": "phb|disguise-self",
+    "canonicalId": "spell.disguise-self",
     "category": "spell",
     "name": "Disguise Self",
     "source": "PHB",
@@ -3160,6 +3259,7 @@
   },
   {
     "id": "phb|disintegrate",
+    "canonicalId": "spell.disintegrate",
     "category": "spell",
     "name": "Disintegrate",
     "source": "PHB",
@@ -3199,6 +3299,7 @@
   },
   {
     "id": "phb|dispel-evil-and-good",
+    "canonicalId": "spell.dispel-evil-and-good",
     "category": "spell",
     "name": "Dispel Evil and Good",
     "source": "PHB",
@@ -3232,6 +3333,7 @@
   },
   {
     "id": "phb|dispel-magic",
+    "canonicalId": "spell.dispel-magic",
     "category": "spell",
     "name": "Dispel Magic",
     "source": "PHB",
@@ -3269,6 +3371,7 @@
   },
   {
     "id": "phb|dissonant-whispers",
+    "canonicalId": "spell.dissonant-whispers",
     "category": "spell",
     "name": "Dissonant Whispers",
     "source": "PHB",
@@ -3296,6 +3399,7 @@
   },
   {
     "id": "phb|divination",
+    "canonicalId": "spell.divination",
     "category": "spell",
     "name": "Divination",
     "source": "PHB",
@@ -3329,6 +3433,7 @@
   },
   {
     "id": "phb|divine-favor",
+    "canonicalId": "spell.divine-favor",
     "category": "spell",
     "name": "Divine Favor",
     "source": "PHB",
@@ -3350,6 +3455,7 @@
   },
   {
     "id": "phb|divine-word",
+    "canonicalId": "spell.divine-word",
     "category": "spell",
     "name": "Divine Word",
     "source": "PHB",
@@ -3384,6 +3490,7 @@
   },
   {
     "id": "phb|dominate-beast",
+    "canonicalId": "spell.dominate-beast",
     "category": "spell",
     "name": "Dominate Beast",
     "source": "PHB",
@@ -3423,6 +3530,7 @@
   },
   {
     "id": "phb|dominate-monster",
+    "canonicalId": "spell.dominate-monster",
     "category": "spell",
     "name": "Dominate Monster",
     "source": "PHB",
@@ -3462,6 +3570,7 @@
   },
   {
     "id": "phb|dominate-person",
+    "canonicalId": "spell.dominate-person",
     "category": "spell",
     "name": "Dominate Person",
     "source": "PHB",
@@ -3501,6 +3610,7 @@
   },
   {
     "id": "phb|drawmij-s-instant-summons",
+    "canonicalId": "spell.drawmijs-instant-summons",
     "category": "spell",
     "name": "Drawmij's Instant Summons",
     "source": "PHB",
@@ -3534,6 +3644,7 @@
   },
   {
     "id": "phb|dream",
+    "canonicalId": "spell.dream",
     "category": "spell",
     "name": "Dream",
     "source": "PHB",
@@ -3571,6 +3682,7 @@
   },
   {
     "id": "phb|druidcraft",
+    "canonicalId": "spell.druidcraft",
     "category": "spell",
     "name": "Druidcraft",
     "source": "PHB",
@@ -3601,6 +3713,7 @@
   },
   {
     "id": "phb|earthquake",
+    "canonicalId": "spell.earthquake",
     "category": "spell",
     "name": "Earthquake",
     "source": "PHB",
@@ -3646,6 +3759,7 @@
   },
   {
     "id": "phb|eldritch-blast",
+    "canonicalId": "spell.eldritch-blast",
     "category": "spell",
     "name": "Eldritch Blast",
     "source": "PHB",
@@ -3671,6 +3785,7 @@
   },
   {
     "id": "phb|elemental-weapon",
+    "canonicalId": "spell.elemental-weapon",
     "category": "spell",
     "name": "Elemental Weapon",
     "source": "PHB",
@@ -3698,6 +3813,7 @@
   },
   {
     "id": "phb|enhance-ability",
+    "canonicalId": "spell.enhance-ability",
     "category": "spell",
     "name": "Enhance Ability",
     "source": "PHB",
@@ -3749,6 +3865,7 @@
   },
   {
     "id": "phb|enlarge-reduce",
+    "canonicalId": "spell.enlarge-reduce",
     "category": "spell",
     "name": "Enlarge/Reduce",
     "source": "PHB",
@@ -3782,6 +3899,7 @@
   },
   {
     "id": "phb|ensnaring-strike",
+    "canonicalId": "spell.ensnaring-strike",
     "category": "spell",
     "name": "Ensnaring Strike",
     "source": "PHB",
@@ -3813,6 +3931,7 @@
   },
   {
     "id": "phb|entangle",
+    "canonicalId": "spell.entangle",
     "category": "spell",
     "name": "Entangle",
     "source": "PHB",
@@ -3842,6 +3961,7 @@
   },
   {
     "id": "phb|enthrall",
+    "canonicalId": "spell.enthrall",
     "category": "spell",
     "name": "Enthrall",
     "source": "PHB",
@@ -3863,6 +3983,7 @@
   },
   {
     "id": "phb|etherealness",
+    "canonicalId": "spell.etherealness",
     "category": "spell",
     "name": "Etherealness",
     "source": "PHB",
@@ -3906,6 +4027,7 @@
   },
   {
     "id": "phb|evard-s-black-tentacles",
+    "canonicalId": "spell.evards-black-tentacles",
     "category": "spell",
     "name": "Evard's Black Tentacles",
     "source": "PHB",
@@ -3935,6 +4057,7 @@
   },
   {
     "id": "phb|expeditious-retreat",
+    "canonicalId": "spell.expeditious-retreat",
     "category": "spell",
     "name": "Expeditious Retreat",
     "source": "PHB",
@@ -3956,6 +4079,7 @@
   },
   {
     "id": "phb|eyebite",
+    "canonicalId": "spell.eyebite",
     "category": "spell",
     "name": "Eyebite",
     "source": "PHB",
@@ -3989,6 +4113,7 @@
   },
   {
     "id": "phb|fabricate",
+    "canonicalId": "spell.fabricate",
     "category": "spell",
     "name": "Fabricate",
     "source": "PHB",
@@ -4018,6 +4143,7 @@
   },
   {
     "id": "phb|faerie-fire",
+    "canonicalId": "spell.faerie-fire",
     "category": "spell",
     "name": "Faerie Fire",
     "source": "PHB",
@@ -4043,6 +4169,7 @@
   },
   {
     "id": "phb|false-life",
+    "canonicalId": "spell.false-life",
     "category": "spell",
     "name": "False Life",
     "source": "PHB",
@@ -4070,6 +4197,7 @@
   },
   {
     "id": "phb|fear",
+    "canonicalId": "spell.fear",
     "category": "spell",
     "name": "Fear",
     "source": "PHB",
@@ -4095,6 +4223,7 @@
   },
   {
     "id": "phb|feather-fall",
+    "canonicalId": "spell.feather-fall",
     "category": "spell",
     "name": "Feather Fall",
     "source": "PHB",
@@ -4116,6 +4245,7 @@
   },
   {
     "id": "phb|feeblemind",
+    "canonicalId": "spell.feeblemind",
     "category": "spell",
     "name": "Feeblemind",
     "source": "PHB",
@@ -4149,6 +4279,7 @@
   },
   {
     "id": "phb|feign-death",
+    "canonicalId": "spell.feign-death",
     "category": "spell",
     "name": "Feign Death",
     "source": "PHB",
@@ -4174,6 +4305,7 @@
   },
   {
     "id": "phb|find-familiar",
+    "canonicalId": "spell.find-familiar",
     "category": "spell",
     "name": "Find Familiar",
     "source": "PHB",
@@ -4223,6 +4355,7 @@
   },
   {
     "id": "phb|find-steed",
+    "canonicalId": "spell.find-steed",
     "category": "spell",
     "name": "Find Steed",
     "source": "PHB",
@@ -4260,6 +4393,7 @@
   },
   {
     "id": "phb|find-the-path",
+    "canonicalId": "spell.find-the-path",
     "category": "spell",
     "name": "Find the Path",
     "source": "PHB",
@@ -4289,6 +4423,7 @@
   },
   {
     "id": "phb|find-traps",
+    "canonicalId": "spell.find-traps",
     "category": "spell",
     "name": "Find Traps",
     "source": "PHB",
@@ -4314,6 +4449,7 @@
   },
   {
     "id": "phb|finger-of-death",
+    "canonicalId": "spell.finger-of-death",
     "category": "spell",
     "name": "Finger of Death",
     "source": "PHB",
@@ -4339,6 +4475,7 @@
   },
   {
     "id": "phb|fire-bolt",
+    "canonicalId": "spell.fire-bolt",
     "category": "spell",
     "name": "Fire Bolt",
     "source": "PHB",
@@ -4364,6 +4501,7 @@
   },
   {
     "id": "phb|fire-shield",
+    "canonicalId": "spell.fire-shield",
     "category": "spell",
     "name": "Fire Shield",
     "source": "PHB",
@@ -4393,6 +4531,7 @@
   },
   {
     "id": "phb|fire-storm",
+    "canonicalId": "spell.fire-storm",
     "category": "spell",
     "name": "Fire Storm",
     "source": "PHB",
@@ -4418,6 +4557,7 @@
   },
   {
     "id": "phb|fireball",
+    "canonicalId": "spell.fireball",
     "category": "spell",
     "name": "Fireball",
     "source": "PHB",
@@ -4449,6 +4589,7 @@
   },
   {
     "id": "phb|flame-blade",
+    "canonicalId": "spell.flame-blade",
     "category": "spell",
     "name": "Flame Blade",
     "source": "PHB",
@@ -4484,6 +4625,7 @@
   },
   {
     "id": "phb|flame-strike",
+    "canonicalId": "spell.flame-strike",
     "category": "spell",
     "name": "Flame Strike",
     "source": "PHB",
@@ -4511,6 +4653,7 @@
   },
   {
     "id": "phb|flaming-sphere",
+    "canonicalId": "spell.flaming-sphere",
     "category": "spell",
     "name": "Flaming Sphere",
     "source": "PHB",
@@ -4550,6 +4693,7 @@
   },
   {
     "id": "phb|flesh-to-stone",
+    "canonicalId": "spell.flesh-to-stone",
     "category": "spell",
     "name": "Flesh to Stone",
     "source": "PHB",
@@ -4583,6 +4727,7 @@
   },
   {
     "id": "phb|fly",
+    "canonicalId": "spell.fly",
     "category": "spell",
     "name": "Fly",
     "source": "PHB",
@@ -4610,6 +4755,7 @@
   },
   {
     "id": "phb|fog-cloud",
+    "canonicalId": "spell.fog-cloud",
     "category": "spell",
     "name": "Fog Cloud",
     "source": "PHB",
@@ -4637,6 +4783,7 @@
   },
   {
     "id": "phb|forbiddance",
+    "canonicalId": "spell.forbiddance",
     "category": "spell",
     "name": "Forbiddance",
     "source": "PHB",
@@ -4674,6 +4821,7 @@
   },
   {
     "id": "phb|forcecage",
+    "canonicalId": "spell.forcecage",
     "category": "spell",
     "name": "Forcecage",
     "source": "PHB",
@@ -4715,6 +4863,7 @@
   },
   {
     "id": "phb|foresight",
+    "canonicalId": "spell.foresight",
     "category": "spell",
     "name": "Foresight",
     "source": "PHB",
@@ -4740,6 +4889,7 @@
   },
   {
     "id": "phb|freedom-of-movement",
+    "canonicalId": "spell.freedom-of-movement",
     "category": "spell",
     "name": "Freedom of Movement",
     "source": "PHB",
@@ -4765,6 +4915,7 @@
   },
   {
     "id": "phb|friends",
+    "canonicalId": "spell.friends",
     "category": "spell",
     "name": "Friends",
     "source": "PHB",
@@ -4786,6 +4937,7 @@
   },
   {
     "id": "phb|gaseous-form",
+    "canonicalId": "spell.gaseous-form",
     "category": "spell",
     "name": "Gaseous Form",
     "source": "PHB",
@@ -4815,6 +4967,7 @@
   },
   {
     "id": "phb|gate",
+    "canonicalId": "spell.gate",
     "category": "spell",
     "name": "Gate",
     "source": "PHB",
@@ -4848,6 +5001,7 @@
   },
   {
     "id": "phb|geas",
+    "canonicalId": "spell.geas",
     "category": "spell",
     "name": "Geas",
     "source": "PHB",
@@ -4883,6 +5037,7 @@
   },
   {
     "id": "phb|gentle-repose",
+    "canonicalId": "spell.gentle-repose",
     "category": "spell",
     "name": "Gentle Repose",
     "source": "PHB",
@@ -4912,6 +5067,7 @@
   },
   {
     "id": "phb|giant-insect",
+    "canonicalId": "spell.giant-insect",
     "category": "spell",
     "name": "Giant Insect",
     "source": "PHB",
@@ -4945,6 +5101,7 @@
   },
   {
     "id": "phb|glibness",
+    "canonicalId": "spell.glibness",
     "category": "spell",
     "name": "Glibness",
     "source": "PHB",
@@ -4966,6 +5123,7 @@
   },
   {
     "id": "phb|globe-of-invulnerability",
+    "canonicalId": "spell.globe-of-invulnerability",
     "category": "spell",
     "name": "Globe of Invulnerability",
     "source": "PHB",
@@ -4997,6 +5155,7 @@
   },
   {
     "id": "phb|glyph-of-warding",
+    "canonicalId": "spell.glyph-of-warding",
     "category": "spell",
     "name": "Glyph of Warding",
     "source": "PHB",
@@ -5052,6 +5211,7 @@
   },
   {
     "id": "phb|goodberry",
+    "canonicalId": "spell.goodberry",
     "category": "spell",
     "name": "Goodberry",
     "source": "PHB",
@@ -5077,6 +5237,7 @@
   },
   {
     "id": "phb|grasping-vine",
+    "canonicalId": "spell.grasping-vine",
     "category": "spell",
     "name": "Grasping Vine",
     "source": "PHB",
@@ -5102,6 +5263,7 @@
   },
   {
     "id": "phb|grease",
+    "canonicalId": "spell.grease",
     "category": "spell",
     "name": "Grease",
     "source": "PHB",
@@ -5127,6 +5289,7 @@
   },
   {
     "id": "phb|greater-invisibility",
+    "canonicalId": "spell.greater-invisibility",
     "category": "spell",
     "name": "Greater Invisibility",
     "source": "PHB",
@@ -5148,6 +5311,7 @@
   },
   {
     "id": "phb|greater-restoration",
+    "canonicalId": "spell.greater-restoration",
     "category": "spell",
     "name": "Greater Restoration",
     "source": "PHB",
@@ -5178,6 +5342,7 @@
   },
   {
     "id": "phb|guardian-of-faith",
+    "canonicalId": "spell.guardian-of-faith",
     "category": "spell",
     "name": "Guardian of Faith",
     "source": "PHB",
@@ -5203,6 +5368,7 @@
   },
   {
     "id": "phb|guards-and-wards",
+    "canonicalId": "spell.guards-and-wards",
     "category": "spell",
     "name": "Guards and Wards",
     "source": "PHB",
@@ -5270,6 +5436,7 @@
   },
   {
     "id": "phb|guidance",
+    "canonicalId": "spell.guidance",
     "category": "spell",
     "name": "Guidance",
     "source": "PHB",
@@ -5291,6 +5458,7 @@
   },
   {
     "id": "phb|guiding-bolt",
+    "canonicalId": "spell.guiding-bolt",
     "category": "spell",
     "name": "Guiding Bolt",
     "source": "PHB",
@@ -5318,6 +5486,7 @@
   },
   {
     "id": "phb|gust-of-wind",
+    "canonicalId": "spell.gust-of-wind",
     "category": "spell",
     "name": "Gust of Wind",
     "source": "PHB",
@@ -5351,6 +5520,7 @@
   },
   {
     "id": "phb|hail-of-thorns",
+    "canonicalId": "spell.hail-of-thorns",
     "category": "spell",
     "name": "Hail of Thorns",
     "source": "PHB",
@@ -5378,6 +5548,7 @@
   },
   {
     "id": "phb|hallow",
+    "canonicalId": "spell.hallow",
     "category": "spell",
     "name": "Hallow",
     "source": "PHB",
@@ -5451,6 +5622,7 @@
   },
   {
     "id": "phb|hallucinatory-terrain",
+    "canonicalId": "spell.hallucinatory-terrain",
     "category": "spell",
     "name": "Hallucinatory Terrain",
     "source": "PHB",
@@ -5476,6 +5648,7 @@
   },
   {
     "id": "phb|harm",
+    "canonicalId": "spell.harm",
     "category": "spell",
     "name": "Harm",
     "source": "PHB",
@@ -5497,6 +5670,7 @@
   },
   {
     "id": "phb|haste",
+    "canonicalId": "spell.haste",
     "category": "spell",
     "name": "Haste",
     "source": "PHB",
@@ -5522,6 +5696,7 @@
   },
   {
     "id": "phb|heal",
+    "canonicalId": "spell.heal",
     "category": "spell",
     "name": "Heal",
     "source": "PHB",
@@ -5549,6 +5724,7 @@
   },
   {
     "id": "phb|healing-word",
+    "canonicalId": "spell.healing-word",
     "category": "spell",
     "name": "Healing Word",
     "source": "PHB",
@@ -5576,6 +5752,7 @@
   },
   {
     "id": "phb|heat-metal",
+    "canonicalId": "spell.heat-metal",
     "category": "spell",
     "name": "Heat Metal",
     "source": "PHB",
@@ -5607,6 +5784,7 @@
   },
   {
     "id": "phb|hellish-rebuke",
+    "canonicalId": "spell.hellish-rebuke",
     "category": "spell",
     "name": "Hellish Rebuke",
     "source": "PHB",
@@ -5634,6 +5812,7 @@
   },
   {
     "id": "phb|heroes-feast",
+    "canonicalId": "spell.heroes-feast",
     "category": "spell",
     "name": "Heroes' Feast",
     "source": "PHB",
@@ -5663,6 +5842,7 @@
   },
   {
     "id": "phb|heroism",
+    "canonicalId": "spell.heroism",
     "category": "spell",
     "name": "Heroism",
     "source": "PHB",
@@ -5690,6 +5870,7 @@
   },
   {
     "id": "phb|hex",
+    "canonicalId": "spell.hex",
     "category": "spell",
     "name": "Hex",
     "source": "PHB",
@@ -5725,6 +5906,7 @@
   },
   {
     "id": "phb|hold-monster",
+    "canonicalId": "spell.hold-monster",
     "category": "spell",
     "name": "Hold Monster",
     "source": "PHB",
@@ -5752,6 +5934,7 @@
   },
   {
     "id": "phb|hold-person",
+    "canonicalId": "spell.hold-person",
     "category": "spell",
     "name": "Hold Person",
     "source": "PHB",
@@ -5779,6 +5962,7 @@
   },
   {
     "id": "phb|holy-aura",
+    "canonicalId": "spell.holy-aura",
     "category": "spell",
     "name": "Holy Aura",
     "source": "PHB",
@@ -5804,6 +5988,7 @@
   },
   {
     "id": "phb|hunger-of-hadar",
+    "canonicalId": "spell.hunger-of-hadar",
     "category": "spell",
     "name": "Hunger of Hadar",
     "source": "PHB",
@@ -5829,6 +6014,7 @@
   },
   {
     "id": "phb|hunter-s-mark",
+    "canonicalId": "spell.hunters-mark",
     "category": "spell",
     "name": "Hunter's Mark",
     "source": "PHB",
@@ -5856,6 +6042,7 @@
   },
   {
     "id": "phb|hypnotic-pattern",
+    "canonicalId": "spell.hypnotic-pattern",
     "category": "spell",
     "name": "Hypnotic Pattern",
     "source": "PHB",
@@ -5884,6 +6071,7 @@
   },
   {
     "id": "phb|ice-storm",
+    "canonicalId": "spell.ice-storm",
     "category": "spell",
     "name": "Ice Storm",
     "source": "PHB",
@@ -5915,6 +6103,7 @@
   },
   {
     "id": "phb|identify",
+    "canonicalId": "spell.identify",
     "category": "spell",
     "name": "Identify",
     "source": "PHB",
@@ -5940,6 +6129,7 @@
   },
   {
     "id": "phb|illusory-script",
+    "canonicalId": "spell.illusory-script",
     "category": "spell",
     "name": "Illusory Script",
     "source": "PHB",
@@ -5973,6 +6163,7 @@
   },
   {
     "id": "phb|imprisonment",
+    "canonicalId": "spell.imprisonment",
     "category": "spell",
     "name": "Imprisonment",
     "source": "PHB",
@@ -6054,6 +6245,7 @@
   },
   {
     "id": "phb|incendiary-cloud",
+    "canonicalId": "spell.incendiary-cloud",
     "category": "spell",
     "name": "Incendiary Cloud",
     "source": "PHB",
@@ -6083,6 +6275,7 @@
   },
   {
     "id": "phb|inflict-wounds",
+    "canonicalId": "spell.inflict-wounds",
     "category": "spell",
     "name": "Inflict Wounds",
     "source": "PHB",
@@ -6110,6 +6303,7 @@
   },
   {
     "id": "phb|insect-plague",
+    "canonicalId": "spell.insect-plague",
     "category": "spell",
     "name": "Insect Plague",
     "source": "PHB",
@@ -6145,6 +6339,7 @@
   },
   {
     "id": "phb|invisibility",
+    "canonicalId": "spell.invisibility",
     "category": "spell",
     "name": "Invisibility",
     "source": "PHB",
@@ -6172,6 +6367,7 @@
   },
   {
     "id": "phb|jump",
+    "canonicalId": "spell.jump",
     "category": "spell",
     "name": "Jump",
     "source": "PHB",
@@ -6193,6 +6389,7 @@
   },
   {
     "id": "phb|knock",
+    "canonicalId": "spell.knock",
     "category": "spell",
     "name": "Knock",
     "source": "PHB",
@@ -6226,6 +6423,7 @@
   },
   {
     "id": "phb|legend-lore",
+    "canonicalId": "spell.legend-lore",
     "category": "spell",
     "name": "Legend Lore",
     "source": "PHB",
@@ -6255,6 +6453,7 @@
   },
   {
     "id": "phb|leomund-s-secret-chest",
+    "canonicalId": "spell.leomunds-secret-chest",
     "category": "spell",
     "name": "Leomund's Secret Chest",
     "source": "PHB",
@@ -6288,6 +6487,7 @@
   },
   {
     "id": "phb|leomund-s-tiny-hut",
+    "canonicalId": "spell.leomunds-tiny-hut",
     "category": "spell",
     "name": "Leomund's Tiny Hut",
     "source": "PHB",
@@ -6317,6 +6517,7 @@
   },
   {
     "id": "phb|lesser-restoration",
+    "canonicalId": "spell.lesser-restoration",
     "category": "spell",
     "name": "Lesser Restoration",
     "source": "PHB",
@@ -6338,6 +6539,7 @@
   },
   {
     "id": "phb|levitate",
+    "canonicalId": "spell.levitate",
     "category": "spell",
     "name": "Levitate",
     "source": "PHB",
@@ -6371,6 +6573,7 @@
   },
   {
     "id": "phb|light",
+    "canonicalId": "spell.light",
     "category": "spell",
     "name": "Light",
     "source": "PHB",
@@ -6396,6 +6599,7 @@
   },
   {
     "id": "phb|lightning-arrow",
+    "canonicalId": "spell.lightning-arrow",
     "category": "spell",
     "name": "Lightning Arrow",
     "source": "PHB",
@@ -6431,6 +6635,7 @@
   },
   {
     "id": "phb|lightning-bolt",
+    "canonicalId": "spell.lightning-bolt",
     "category": "spell",
     "name": "Lightning Bolt",
     "source": "PHB",
@@ -6462,6 +6667,7 @@
   },
   {
     "id": "phb|locate-animals-or-plants",
+    "canonicalId": "spell.locate-animals-or-plants",
     "category": "spell",
     "name": "Locate Animals or Plants",
     "source": "PHB",
@@ -6483,6 +6689,7 @@
   },
   {
     "id": "phb|locate-creature",
+    "canonicalId": "spell.locate-creature",
     "category": "spell",
     "name": "Locate Creature",
     "source": "PHB",
@@ -6512,6 +6719,7 @@
   },
   {
     "id": "phb|locate-object",
+    "canonicalId": "spell.locate-object",
     "category": "spell",
     "name": "Locate Object",
     "source": "PHB",
@@ -6541,6 +6749,7 @@
   },
   {
     "id": "phb|longstrider",
+    "canonicalId": "spell.longstrider",
     "category": "spell",
     "name": "Longstrider",
     "source": "PHB",
@@ -6568,6 +6777,7 @@
   },
   {
     "id": "phb|mage-armor",
+    "canonicalId": "spell.mage-armor",
     "category": "spell",
     "name": "Mage Armor",
     "source": "PHB",
@@ -6589,6 +6799,7 @@
   },
   {
     "id": "phb|mage-hand",
+    "canonicalId": "spell.mage-hand",
     "category": "spell",
     "name": "Mage Hand",
     "source": "PHB",
@@ -6618,6 +6829,7 @@
   },
   {
     "id": "phb|magic-circle",
+    "canonicalId": "spell.magic-circle",
     "category": "spell",
     "name": "Magic Circle",
     "source": "PHB",
@@ -6665,6 +6877,7 @@
   },
   {
     "id": "phb|magic-jar",
+    "canonicalId": "spell.magic-jar",
     "category": "spell",
     "name": "Magic Jar",
     "source": "PHB",
@@ -6714,6 +6927,7 @@
   },
   {
     "id": "phb|magic-missile",
+    "canonicalId": "spell.magic-missile",
     "category": "spell",
     "name": "Magic Missile",
     "source": "PHB",
@@ -6741,6 +6955,7 @@
   },
   {
     "id": "phb|magic-mouth",
+    "canonicalId": "spell.magic-mouth",
     "category": "spell",
     "name": "Magic Mouth",
     "source": "PHB",
@@ -6774,6 +6989,7 @@
   },
   {
     "id": "phb|magic-weapon",
+    "canonicalId": "spell.magic-weapon",
     "category": "spell",
     "name": "Magic Weapon",
     "source": "PHB",
@@ -6801,6 +7017,7 @@
   },
   {
     "id": "phb|major-image",
+    "canonicalId": "spell.major-image",
     "category": "spell",
     "name": "Major Image",
     "source": "PHB",
@@ -6836,6 +7053,7 @@
   },
   {
     "id": "phb|mass-cure-wounds",
+    "canonicalId": "spell.mass-cure-wounds",
     "category": "spell",
     "name": "Mass Cure Wounds",
     "source": "PHB",
@@ -6863,6 +7081,7 @@
   },
   {
     "id": "phb|mass-heal",
+    "canonicalId": "spell.mass-heal",
     "category": "spell",
     "name": "Mass Heal",
     "source": "PHB",
@@ -6884,6 +7103,7 @@
   },
   {
     "id": "phb|mass-healing-word",
+    "canonicalId": "spell.mass-healing-word",
     "category": "spell",
     "name": "Mass Healing Word",
     "source": "PHB",
@@ -6911,6 +7131,7 @@
   },
   {
     "id": "phb|mass-suggestion",
+    "canonicalId": "spell.mass-suggestion",
     "category": "spell",
     "name": "Mass Suggestion",
     "source": "PHB",
@@ -6953,6 +7174,7 @@
   },
   {
     "id": "phb|maze",
+    "canonicalId": "spell.maze",
     "category": "spell",
     "name": "Maze",
     "source": "PHB",
@@ -6982,6 +7204,7 @@
   },
   {
     "id": "phb|meld-into-stone",
+    "canonicalId": "spell.meld-into-stone",
     "category": "spell",
     "name": "Meld into Stone",
     "source": "PHB",
@@ -7011,6 +7234,7 @@
   },
   {
     "id": "phb|melf-s-acid-arrow",
+    "canonicalId": "spell.melfs-acid-arrow",
     "category": "spell",
     "name": "Melf's Acid Arrow",
     "source": "PHB",
@@ -7038,6 +7262,7 @@
   },
   {
     "id": "phb|mending",
+    "canonicalId": "spell.mending",
     "category": "spell",
     "name": "Mending",
     "source": "PHB",
@@ -7063,6 +7288,7 @@
   },
   {
     "id": "phb|message",
+    "canonicalId": "spell.message",
     "category": "spell",
     "name": "Message",
     "source": "PHB",
@@ -7088,6 +7314,7 @@
   },
   {
     "id": "phb|meteor-swarm",
+    "canonicalId": "spell.meteor-swarm",
     "category": "spell",
     "name": "Meteor Swarm",
     "source": "PHB",
@@ -7113,6 +7340,7 @@
   },
   {
     "id": "phb|mind-blank",
+    "canonicalId": "spell.mind-blank",
     "category": "spell",
     "name": "Mind Blank",
     "source": "PHB",
@@ -7134,6 +7362,7 @@
   },
   {
     "id": "phb|minor-illusion",
+    "canonicalId": "spell.minor-illusion",
     "category": "spell",
     "name": "Minor Illusion",
     "source": "PHB",
@@ -7167,6 +7396,7 @@
   },
   {
     "id": "phb|mirage-arcane",
+    "canonicalId": "spell.mirage-arcane",
     "category": "spell",
     "name": "Mirage Arcane",
     "source": "PHB",
@@ -7200,6 +7430,7 @@
   },
   {
     "id": "phb|mirror-image",
+    "canonicalId": "spell.mirror-image",
     "category": "spell",
     "name": "Mirror Image",
     "source": "PHB",
@@ -7237,6 +7468,7 @@
   },
   {
     "id": "phb|mislead",
+    "canonicalId": "spell.mislead",
     "category": "spell",
     "name": "Mislead",
     "source": "PHB",
@@ -7266,6 +7498,7 @@
   },
   {
     "id": "phb|misty-step",
+    "canonicalId": "spell.misty-step",
     "category": "spell",
     "name": "Misty Step",
     "source": "PHB",
@@ -7287,6 +7520,7 @@
   },
   {
     "id": "phb|modify-memory",
+    "canonicalId": "spell.modify-memory",
     "category": "spell",
     "name": "Modify Memory",
     "source": "PHB",
@@ -7330,6 +7564,7 @@
   },
   {
     "id": "phb|moonbeam",
+    "canonicalId": "spell.moonbeam",
     "category": "spell",
     "name": "Moonbeam",
     "source": "PHB",
@@ -7373,6 +7608,7 @@
   },
   {
     "id": "phb|mordenkainen-s-faithful-hound",
+    "canonicalId": "spell.mordenkainens-faithful-hound",
     "category": "spell",
     "name": "Mordenkainen's Faithful Hound",
     "source": "PHB",
@@ -7402,6 +7638,7 @@
   },
   {
     "id": "phb|mordenkainen-s-magnificent-mansion",
+    "canonicalId": "spell.mordenkainens-magnificent-mansion",
     "category": "spell",
     "name": "Mordenkainen's Magnificent Mansion",
     "source": "PHB",
@@ -7435,6 +7672,7 @@
   },
   {
     "id": "phb|mordenkainen-s-private-sanctum",
+    "canonicalId": "spell.mordenkainens-private-sanctum",
     "category": "spell",
     "name": "Mordenkainen's Private Sanctum",
     "source": "PHB",
@@ -7485,6 +7723,7 @@
   },
   {
     "id": "phb|mordenkainen-s-sword",
+    "canonicalId": "spell.mordenkainens-sword",
     "category": "spell",
     "name": "Mordenkainen's Sword",
     "source": "PHB",
@@ -7514,6 +7753,7 @@
   },
   {
     "id": "phb|move-earth",
+    "canonicalId": "spell.move-earth",
     "category": "spell",
     "name": "Move Earth",
     "source": "PHB",
@@ -7555,6 +7795,7 @@
   },
   {
     "id": "phb|nondetection",
+    "canonicalId": "spell.nondetection",
     "category": "spell",
     "name": "Nondetection",
     "source": "PHB",
@@ -7580,6 +7821,7 @@
   },
   {
     "id": "phb|nystul-s-magic-aura",
+    "canonicalId": "spell.nystuls-magic-aura",
     "category": "spell",
     "name": "Nystul's Magic Aura",
     "source": "PHB",
@@ -7613,6 +7855,7 @@
   },
   {
     "id": "phb|otiluke-s-freezing-sphere",
+    "canonicalId": "spell.otilukes-freezing-sphere",
     "category": "spell",
     "name": "Otiluke's Freezing Sphere",
     "source": "PHB",
@@ -7648,6 +7891,7 @@
   },
   {
     "id": "phb|otiluke-s-resilient-sphere",
+    "canonicalId": "spell.otilukes-resilient-sphere",
     "category": "spell",
     "name": "Otiluke's Resilient Sphere",
     "source": "PHB",
@@ -7685,6 +7929,7 @@
   },
   {
     "id": "phb|otto-s-irresistible-dance",
+    "canonicalId": "spell.ottos-irresistible-dance",
     "category": "spell",
     "name": "Otto's Irresistible Dance",
     "source": "PHB",
@@ -7710,6 +7955,7 @@
   },
   {
     "id": "phb|pass-without-trace",
+    "canonicalId": "spell.pass-without-trace",
     "category": "spell",
     "name": "Pass without Trace",
     "source": "PHB",
@@ -7731,6 +7977,7 @@
   },
   {
     "id": "phb|passwall",
+    "canonicalId": "spell.passwall",
     "category": "spell",
     "name": "Passwall",
     "source": "PHB",
@@ -7756,6 +8003,7 @@
   },
   {
     "id": "phb|phantasmal-force",
+    "canonicalId": "spell.phantasmal-force",
     "category": "spell",
     "name": "Phantasmal Force",
     "source": "PHB",
@@ -7793,6 +8041,7 @@
   },
   {
     "id": "phb|phantasmal-killer",
+    "canonicalId": "spell.phantasmal-killer",
     "category": "spell",
     "name": "Phantasmal Killer",
     "source": "PHB",
@@ -7820,6 +8069,7 @@
   },
   {
     "id": "phb|phantom-steed",
+    "canonicalId": "spell.phantom-steed",
     "category": "spell",
     "name": "Phantom Steed",
     "source": "PHB",
@@ -7845,6 +8095,7 @@
   },
   {
     "id": "phb|planar-ally",
+    "canonicalId": "spell.planar-ally",
     "category": "spell",
     "name": "Planar Ally",
     "source": "PHB",
@@ -7886,6 +8137,7 @@
   },
   {
     "id": "phb|planar-binding",
+    "canonicalId": "spell.planar-binding",
     "category": "spell",
     "name": "Planar Binding",
     "source": "PHB",
@@ -7917,6 +8169,7 @@
   },
   {
     "id": "phb|plane-shift",
+    "canonicalId": "spell.plane-shift",
     "category": "spell",
     "name": "Plane Shift",
     "source": "PHB",
@@ -7950,6 +8203,7 @@
   },
   {
     "id": "phb|plant-growth",
+    "canonicalId": "spell.plant-growth",
     "category": "spell",
     "name": "Plant Growth",
     "source": "PHB",
@@ -7983,6 +8237,7 @@
   },
   {
     "id": "phb|poison-spray",
+    "canonicalId": "spell.poison-spray",
     "category": "spell",
     "name": "Poison Spray",
     "source": "PHB",
@@ -8008,6 +8263,7 @@
   },
   {
     "id": "phb|polymorph",
+    "canonicalId": "spell.polymorph",
     "category": "spell",
     "name": "Polymorph",
     "source": "PHB",
@@ -8045,6 +8301,7 @@
   },
   {
     "id": "phb|power-word-heal",
+    "canonicalId": "spell.power-word-heal",
     "category": "spell",
     "name": "Power Word Heal",
     "source": "PHB",
@@ -8066,6 +8323,7 @@
   },
   {
     "id": "phb|power-word-kill",
+    "canonicalId": "spell.power-word-kill",
     "category": "spell",
     "name": "Power Word Kill",
     "source": "PHB",
@@ -8087,6 +8345,7 @@
   },
   {
     "id": "phb|power-word-stun",
+    "canonicalId": "spell.power-word-stun",
     "category": "spell",
     "name": "Power Word Stun",
     "source": "PHB",
@@ -8112,6 +8371,7 @@
   },
   {
     "id": "phb|prayer-of-healing",
+    "canonicalId": "spell.prayer-of-healing",
     "category": "spell",
     "name": "Prayer of Healing",
     "source": "PHB",
@@ -8139,6 +8399,7 @@
   },
   {
     "id": "phb|prestidigitation",
+    "canonicalId": "spell.prestidigitation",
     "category": "spell",
     "name": "Prestidigitation",
     "source": "PHB",
@@ -8175,6 +8436,7 @@
   },
   {
     "id": "phb|prismatic-spray",
+    "canonicalId": "spell.prismatic-spray",
     "category": "spell",
     "name": "Prismatic Spray",
     "source": "PHB",
@@ -8228,6 +8490,7 @@
   },
   {
     "id": "phb|prismatic-wall",
+    "canonicalId": "spell.prismatic-wall",
     "category": "spell",
     "name": "Prismatic Wall",
     "source": "PHB",
@@ -8293,6 +8556,7 @@
   },
   {
     "id": "phb|produce-flame",
+    "canonicalId": "spell.produce-flame",
     "category": "spell",
     "name": "Produce Flame",
     "source": "PHB",
@@ -8322,6 +8586,7 @@
   },
   {
     "id": "phb|programmed-illusion",
+    "canonicalId": "spell.programmed-illusion",
     "category": "spell",
     "name": "Programmed Illusion",
     "source": "PHB",
@@ -8355,6 +8620,7 @@
   },
   {
     "id": "phb|project-image",
+    "canonicalId": "spell.project-image",
     "category": "spell",
     "name": "Project Image",
     "source": "PHB",
@@ -8388,6 +8654,7 @@
   },
   {
     "id": "phb|protection-from-energy",
+    "canonicalId": "spell.protection-from-energy",
     "category": "spell",
     "name": "Protection from Energy",
     "source": "PHB",
@@ -8409,6 +8676,7 @@
   },
   {
     "id": "phb|protection-from-evil-and-good",
+    "canonicalId": "spell.protection-from-evil-and-good",
     "category": "spell",
     "name": "Protection from Evil and Good",
     "source": "PHB",
@@ -8438,6 +8706,7 @@
   },
   {
     "id": "phb|protection-from-poison",
+    "canonicalId": "spell.protection-from-poison",
     "category": "spell",
     "name": "Protection from Poison",
     "source": "PHB",
@@ -8463,6 +8732,7 @@
   },
   {
     "id": "phb|purify-food-and-drink",
+    "canonicalId": "spell.purify-food-and-drink",
     "category": "spell",
     "name": "Purify Food and Drink",
     "source": "PHB",
@@ -8484,6 +8754,7 @@
   },
   {
     "id": "phb|raise-dead",
+    "canonicalId": "spell.raise-dead",
     "category": "spell",
     "name": "Raise Dead",
     "source": "PHB",
@@ -8517,6 +8788,7 @@
   },
   {
     "id": "phb|rary-s-telepathic-bond",
+    "canonicalId": "spell.rarys-telepathic-bond",
     "category": "spell",
     "name": "Rary's Telepathic Bond",
     "source": "PHB",
@@ -8542,6 +8814,7 @@
   },
   {
     "id": "phb|ray-of-enfeeblement",
+    "canonicalId": "spell.ray-of-enfeeblement",
     "category": "spell",
     "name": "Ray of Enfeeblement",
     "source": "PHB",
@@ -8567,6 +8840,7 @@
   },
   {
     "id": "phb|ray-of-frost",
+    "canonicalId": "spell.ray-of-frost",
     "category": "spell",
     "name": "Ray of Frost",
     "source": "PHB",
@@ -8592,6 +8866,7 @@
   },
   {
     "id": "phb|ray-of-sickness",
+    "canonicalId": "spell.ray-of-sickness",
     "category": "spell",
     "name": "Ray of Sickness",
     "source": "PHB",
@@ -8619,6 +8894,7 @@
   },
   {
     "id": "phb|regenerate",
+    "canonicalId": "spell.regenerate",
     "category": "spell",
     "name": "Regenerate",
     "source": "PHB",
@@ -8644,6 +8920,7 @@
   },
   {
     "id": "phb|reincarnate",
+    "canonicalId": "spell.reincarnate",
     "category": "spell",
     "name": "Reincarnate",
     "source": "PHB",
@@ -8697,6 +8974,7 @@
   },
   {
     "id": "phb|remove-curse",
+    "canonicalId": "spell.remove-curse",
     "category": "spell",
     "name": "Remove Curse",
     "source": "PHB",
@@ -8718,6 +8996,7 @@
   },
   {
     "id": "phb|resistance",
+    "canonicalId": "spell.resistance",
     "category": "spell",
     "name": "Resistance",
     "source": "PHB",
@@ -8739,6 +9018,7 @@
   },
   {
     "id": "phb|resurrection",
+    "canonicalId": "spell.resurrection",
     "category": "spell",
     "name": "Resurrection",
     "source": "PHB",
@@ -8776,6 +9056,7 @@
   },
   {
     "id": "phb|reverse-gravity",
+    "canonicalId": "spell.reverse-gravity",
     "category": "spell",
     "name": "Reverse Gravity",
     "source": "PHB",
@@ -8805,6 +9086,7 @@
   },
   {
     "id": "phb|revivify",
+    "canonicalId": "spell.revivify",
     "category": "spell",
     "name": "Revivify",
     "source": "PHB",
@@ -8826,6 +9108,7 @@
   },
   {
     "id": "phb|rope-trick",
+    "canonicalId": "spell.rope-trick",
     "category": "spell",
     "name": "Rope Trick",
     "source": "PHB",
@@ -8859,6 +9142,7 @@
   },
   {
     "id": "phb|sacred-flame",
+    "canonicalId": "spell.sacred-flame",
     "category": "spell",
     "name": "Sacred Flame",
     "source": "PHB",
@@ -8884,6 +9168,7 @@
   },
   {
     "id": "phb|sanctuary",
+    "canonicalId": "spell.sanctuary",
     "category": "spell",
     "name": "Sanctuary",
     "source": "PHB",
@@ -8909,6 +9194,7 @@
   },
   {
     "id": "phb|scorching-ray",
+    "canonicalId": "spell.scorching-ray",
     "category": "spell",
     "name": "Scorching Ray",
     "source": "PHB",
@@ -8940,6 +9226,7 @@
   },
   {
     "id": "phb|scrying",
+    "canonicalId": "spell.scrying",
     "category": "spell",
     "name": "Scrying",
     "source": "PHB",
@@ -8995,6 +9282,7 @@
   },
   {
     "id": "phb|searing-smite",
+    "canonicalId": "spell.searing-smite",
     "category": "spell",
     "name": "Searing Smite",
     "source": "PHB",
@@ -9022,6 +9310,7 @@
   },
   {
     "id": "phb|see-invisibility",
+    "canonicalId": "spell.see-invisibility",
     "category": "spell",
     "name": "See Invisibility",
     "source": "PHB",
@@ -9043,6 +9332,7 @@
   },
   {
     "id": "phb|seeming",
+    "canonicalId": "spell.seeming",
     "category": "spell",
     "name": "Seeming",
     "source": "PHB",
@@ -9076,6 +9366,7 @@
   },
   {
     "id": "phb|sending",
+    "canonicalId": "spell.sending",
     "category": "spell",
     "name": "Sending",
     "source": "PHB",
@@ -9101,6 +9392,7 @@
   },
   {
     "id": "phb|sequester",
+    "canonicalId": "spell.sequester",
     "category": "spell",
     "name": "Sequester",
     "source": "PHB",
@@ -9134,6 +9426,7 @@
   },
   {
     "id": "phb|shapechange",
+    "canonicalId": "spell.shapechange",
     "category": "spell",
     "name": "Shapechange",
     "source": "PHB",
@@ -9179,6 +9472,7 @@
   },
   {
     "id": "phb|shatter",
+    "canonicalId": "spell.shatter",
     "category": "spell",
     "name": "Shatter",
     "source": "PHB",
@@ -9210,6 +9504,7 @@
   },
   {
     "id": "phb|shield",
+    "canonicalId": "spell.shield",
     "category": "spell",
     "name": "Shield",
     "source": "PHB",
@@ -9231,6 +9526,7 @@
   },
   {
     "id": "phb|shield-of-faith",
+    "canonicalId": "spell.shield-of-faith",
     "category": "spell",
     "name": "Shield of Faith",
     "source": "PHB",
@@ -9252,6 +9548,7 @@
   },
   {
     "id": "phb|shillelagh",
+    "canonicalId": "spell.shillelagh",
     "category": "spell",
     "name": "Shillelagh",
     "source": "PHB",
@@ -9273,6 +9570,7 @@
   },
   {
     "id": "phb|shocking-grasp",
+    "canonicalId": "spell.shocking-grasp",
     "category": "spell",
     "name": "Shocking Grasp",
     "source": "PHB",
@@ -9298,6 +9596,7 @@
   },
   {
     "id": "phb|silence",
+    "canonicalId": "spell.silence",
     "category": "spell",
     "name": "Silence",
     "source": "PHB",
@@ -9319,6 +9618,7 @@
   },
   {
     "id": "phb|silent-image",
+    "canonicalId": "spell.silent-image",
     "category": "spell",
     "name": "Silent Image",
     "source": "PHB",
@@ -9348,6 +9648,7 @@
   },
   {
     "id": "phb|simulacrum",
+    "canonicalId": "spell.simulacrum",
     "category": "spell",
     "name": "Simulacrum",
     "source": "PHB",
@@ -9385,6 +9686,7 @@
   },
   {
     "id": "phb|sleep",
+    "canonicalId": "spell.sleep",
     "category": "spell",
     "name": "Sleep",
     "source": "PHB",
@@ -9420,6 +9722,7 @@
   },
   {
     "id": "phb|sleet-storm",
+    "canonicalId": "spell.sleet-storm",
     "category": "spell",
     "name": "Sleet Storm",
     "source": "PHB",
@@ -9449,6 +9752,7 @@
   },
   {
     "id": "phb|slow",
+    "canonicalId": "spell.slow",
     "category": "spell",
     "name": "Slow",
     "source": "PHB",
@@ -9482,6 +9786,7 @@
   },
   {
     "id": "phb|spare-the-dying",
+    "canonicalId": "spell.spare-the-dying",
     "category": "spell",
     "name": "Spare the Dying",
     "source": "PHB",
@@ -9503,6 +9808,7 @@
   },
   {
     "id": "phb|speak-with-animals",
+    "canonicalId": "spell.speak-with-animals",
     "category": "spell",
     "name": "Speak with Animals",
     "source": "PHB",
@@ -9524,6 +9830,7 @@
   },
   {
     "id": "phb|speak-with-dead",
+    "canonicalId": "spell.speak-with-dead",
     "category": "spell",
     "name": "Speak with Dead",
     "source": "PHB",
@@ -9549,6 +9856,7 @@
   },
   {
     "id": "phb|speak-with-plants",
+    "canonicalId": "spell.speak-with-plants",
     "category": "spell",
     "name": "Speak with Plants",
     "source": "PHB",
@@ -9586,6 +9894,7 @@
   },
   {
     "id": "phb|spider-climb",
+    "canonicalId": "spell.spider-climb",
     "category": "spell",
     "name": "Spider Climb",
     "source": "PHB",
@@ -9607,6 +9916,7 @@
   },
   {
     "id": "phb|spike-growth",
+    "canonicalId": "spell.spike-growth",
     "category": "spell",
     "name": "Spike Growth",
     "source": "PHB",
@@ -9636,6 +9946,7 @@
   },
   {
     "id": "phb|spirit-guardians",
+    "canonicalId": "spell.spirit-guardians",
     "category": "spell",
     "name": "Spirit Guardians",
     "source": "PHB",
@@ -9667,6 +9978,7 @@
   },
   {
     "id": "phb|spiritual-weapon",
+    "canonicalId": "spell.spiritual-weapon",
     "category": "spell",
     "name": "Spiritual Weapon",
     "source": "PHB",
@@ -9702,6 +10014,7 @@
   },
   {
     "id": "phb|staggering-smite",
+    "canonicalId": "spell.staggering-smite",
     "category": "spell",
     "name": "Staggering Smite",
     "source": "PHB",
@@ -9723,6 +10036,7 @@
   },
   {
     "id": "phb|stinking-cloud",
+    "canonicalId": "spell.stinking-cloud",
     "category": "spell",
     "name": "Stinking Cloud",
     "source": "PHB",
@@ -9752,6 +10066,7 @@
   },
   {
     "id": "phb|stone-shape",
+    "canonicalId": "spell.stone-shape",
     "category": "spell",
     "name": "Stone Shape",
     "source": "PHB",
@@ -9777,6 +10092,7 @@
   },
   {
     "id": "phb|stoneskin",
+    "canonicalId": "spell.stoneskin",
     "category": "spell",
     "name": "Stoneskin",
     "source": "PHB",
@@ -9798,6 +10114,7 @@
   },
   {
     "id": "phb|storm-of-vengeance",
+    "canonicalId": "spell.storm-of-vengeance",
     "category": "spell",
     "name": "Storm of Vengeance",
     "source": "PHB",
@@ -9839,6 +10156,7 @@
   },
   {
     "id": "phb|suggestion",
+    "canonicalId": "spell.suggestion",
     "category": "spell",
     "name": "Suggestion",
     "source": "PHB",
@@ -9875,6 +10193,7 @@
   },
   {
     "id": "phb|sunbeam",
+    "canonicalId": "spell.sunbeam",
     "category": "spell",
     "name": "Sunbeam",
     "source": "PHB",
@@ -9904,6 +10223,7 @@
   },
   {
     "id": "phb|sunburst",
+    "canonicalId": "spell.sunburst",
     "category": "spell",
     "name": "Sunburst",
     "source": "PHB",
@@ -9933,6 +10253,7 @@
   },
   {
     "id": "phb|swift-quiver",
+    "canonicalId": "spell.swift-quiver",
     "category": "spell",
     "name": "Swift Quiver",
     "source": "PHB",
@@ -9958,6 +10279,7 @@
   },
   {
     "id": "phb|symbol",
+    "canonicalId": "spell.symbol",
     "category": "spell",
     "name": "Symbol",
     "source": "PHB",
@@ -10031,6 +10353,7 @@
   },
   {
     "id": "phb|tasha-s-hideous-laughter",
+    "canonicalId": "spell.tashas-hideous-laughter",
     "category": "spell",
     "name": "Tasha's Hideous Laughter",
     "source": "PHB",
@@ -10056,6 +10379,7 @@
   },
   {
     "id": "phb|telekinesis",
+    "canonicalId": "spell.telekinesis",
     "category": "spell",
     "name": "Telekinesis",
     "source": "PHB",
@@ -10097,6 +10421,7 @@
   },
   {
     "id": "phb|telepathy",
+    "canonicalId": "spell.telepathy",
     "category": "spell",
     "name": "Telepathy",
     "source": "PHB",
@@ -10122,6 +10447,7 @@
   },
   {
     "id": "phb|teleport",
+    "canonicalId": "spell.teleport",
     "category": "spell",
     "name": "Teleport",
     "source": "PHB",
@@ -10188,6 +10514,7 @@
   },
   {
     "id": "phb|teleportation-circle",
+    "canonicalId": "spell.teleportation-circle",
     "category": "spell",
     "name": "Teleportation Circle",
     "source": "PHB",
@@ -10220,6 +10547,7 @@
   },
   {
     "id": "phb|tenser-s-floating-disk",
+    "canonicalId": "spell.tensers-floating-disk",
     "category": "spell",
     "name": "Tenser's Floating Disk",
     "source": "PHB",
@@ -10249,6 +10577,7 @@
   },
   {
     "id": "phb|thaumaturgy",
+    "canonicalId": "spell.thaumaturgy",
     "category": "spell",
     "name": "Thaumaturgy",
     "source": "PHB",
@@ -10285,6 +10614,7 @@
   },
   {
     "id": "phb|thorn-whip",
+    "canonicalId": "spell.thorn-whip",
     "category": "spell",
     "name": "Thorn Whip",
     "source": "PHB",
@@ -10310,6 +10640,7 @@
   },
   {
     "id": "phb|thunderous-smite",
+    "canonicalId": "spell.thunderous-smite",
     "category": "spell",
     "name": "Thunderous Smite",
     "source": "PHB",
@@ -10331,6 +10662,7 @@
   },
   {
     "id": "phb|thunderwave",
+    "canonicalId": "spell.thunderwave",
     "category": "spell",
     "name": "Thunderwave",
     "source": "PHB",
@@ -10362,6 +10694,7 @@
   },
   {
     "id": "phb|time-stop",
+    "canonicalId": "spell.time-stop",
     "category": "spell",
     "name": "Time Stop",
     "source": "PHB",
@@ -10387,6 +10720,7 @@
   },
   {
     "id": "phb|tongues",
+    "canonicalId": "spell.tongues",
     "category": "spell",
     "name": "Tongues",
     "source": "PHB",
@@ -10408,6 +10742,7 @@
   },
   {
     "id": "phb|transport-via-plants",
+    "canonicalId": "spell.transport-via-plants",
     "category": "spell",
     "name": "Transport via Plants",
     "source": "PHB",
@@ -10429,6 +10764,7 @@
   },
   {
     "id": "phb|tree-stride",
+    "canonicalId": "spell.tree-stride",
     "category": "spell",
     "name": "Tree Stride",
     "source": "PHB",
@@ -10454,6 +10790,7 @@
   },
   {
     "id": "phb|true-polymorph",
+    "canonicalId": "spell.true-polymorph",
     "category": "spell",
     "name": "True Polymorph",
     "source": "PHB",
@@ -10507,6 +10844,7 @@
   },
   {
     "id": "phb|true-resurrection",
+    "canonicalId": "spell.true-resurrection",
     "category": "spell",
     "name": "True Resurrection",
     "source": "PHB",
@@ -10540,6 +10878,7 @@
   },
   {
     "id": "phb|true-seeing",
+    "canonicalId": "spell.true-seeing",
     "category": "spell",
     "name": "True Seeing",
     "source": "PHB",
@@ -10565,6 +10904,7 @@
   },
   {
     "id": "phb|true-strike",
+    "canonicalId": "spell.true-strike",
     "category": "spell",
     "name": "True Strike",
     "source": "PHB",
@@ -10586,6 +10926,7 @@
   },
   {
     "id": "phb|tsunami",
+    "canonicalId": "spell.tsunami",
     "category": "spell",
     "name": "Tsunami",
     "source": "PHB",
@@ -10619,6 +10960,7 @@
   },
   {
     "id": "phb|unseen-servant",
+    "canonicalId": "spell.unseen-servant",
     "category": "spell",
     "name": "Unseen Servant",
     "source": "PHB",
@@ -10648,6 +10990,7 @@
   },
   {
     "id": "phb|vampiric-touch",
+    "canonicalId": "spell.vampiric-touch",
     "category": "spell",
     "name": "Vampiric Touch",
     "source": "PHB",
@@ -10675,6 +11018,7 @@
   },
   {
     "id": "phb|vicious-mockery",
+    "canonicalId": "spell.vicious-mockery",
     "category": "spell",
     "name": "Vicious Mockery",
     "source": "PHB",
@@ -10700,6 +11044,7 @@
   },
   {
     "id": "phb|wall-of-fire",
+    "canonicalId": "spell.wall-of-fire",
     "category": "spell",
     "name": "Wall of Fire",
     "source": "PHB",
@@ -10735,6 +11080,7 @@
   },
   {
     "id": "phb|wall-of-force",
+    "canonicalId": "spell.wall-of-force",
     "category": "spell",
     "name": "Wall of Force",
     "source": "PHB",
@@ -10760,6 +11106,7 @@
   },
   {
     "id": "phb|wall-of-ice",
+    "canonicalId": "spell.wall-of-ice",
     "category": "spell",
     "name": "Wall of Ice",
     "source": "PHB",
@@ -10795,6 +11142,7 @@
   },
   {
     "id": "phb|wall-of-stone",
+    "canonicalId": "spell.wall-of-stone",
     "category": "spell",
     "name": "Wall of Stone",
     "source": "PHB",
@@ -10836,6 +11184,7 @@
   },
   {
     "id": "phb|wall-of-thorns",
+    "canonicalId": "spell.wall-of-thorns",
     "category": "spell",
     "name": "Wall of Thorns",
     "source": "PHB",
@@ -10871,6 +11220,7 @@
   },
   {
     "id": "phb|warding-bond",
+    "canonicalId": "spell.warding-bond",
     "category": "spell",
     "name": "Warding Bond",
     "source": "PHB",
@@ -10900,6 +11250,7 @@
   },
   {
     "id": "phb|water-breathing",
+    "canonicalId": "spell.water-breathing",
     "category": "spell",
     "name": "Water Breathing",
     "source": "PHB",
@@ -10921,6 +11272,7 @@
   },
   {
     "id": "phb|water-walk",
+    "canonicalId": "spell.water-walk",
     "category": "spell",
     "name": "Water Walk",
     "source": "PHB",
@@ -10946,6 +11298,7 @@
   },
   {
     "id": "phb|web",
+    "canonicalId": "spell.web",
     "category": "spell",
     "name": "Web",
     "source": "PHB",
@@ -10983,6 +11336,7 @@
   },
   {
     "id": "phb|weird",
+    "canonicalId": "spell.weird",
     "category": "spell",
     "name": "Weird",
     "source": "PHB",
@@ -11004,6 +11358,7 @@
   },
   {
     "id": "phb|wind-walk",
+    "canonicalId": "spell.wind-walk",
     "category": "spell",
     "name": "Wind Walk",
     "source": "PHB",
@@ -11029,6 +11384,7 @@
   },
   {
     "id": "phb|wind-wall",
+    "canonicalId": "spell.wind-wall",
     "category": "spell",
     "name": "Wind Wall",
     "source": "PHB",
@@ -11058,6 +11414,7 @@
   },
   {
     "id": "phb|wish",
+    "canonicalId": "spell.wish",
     "category": "spell",
     "name": "Wish",
     "source": "PHB",
@@ -11101,6 +11458,7 @@
   },
   {
     "id": "phb|witch-bolt",
+    "canonicalId": "spell.witch-bolt",
     "category": "spell",
     "name": "Witch Bolt",
     "source": "PHB",
@@ -11128,6 +11486,7 @@
   },
   {
     "id": "phb|word-of-recall",
+    "canonicalId": "spell.word-of-recall",
     "category": "spell",
     "name": "Word of Recall",
     "source": "PHB",
@@ -11153,6 +11512,7 @@
   },
   {
     "id": "phb|wrathful-smite",
+    "canonicalId": "spell.wrathful-smite",
     "category": "spell",
     "name": "Wrathful Smite",
     "source": "PHB",
@@ -11174,6 +11534,7 @@
   },
   {
     "id": "phb|zone-of-truth",
+    "canonicalId": "spell.zone-of-truth",
     "category": "spell",
     "name": "Zone of Truth",
     "source": "PHB",
@@ -11199,6 +11560,7 @@
   },
   {
     "id": "xphb|acid-splash",
+    "canonicalId": "spell.acid-splash",
     "category": "spell",
     "name": "Acid Splash",
     "source": "XPHB",
@@ -11226,6 +11588,7 @@
   },
   {
     "id": "xphb|aid",
+    "canonicalId": "spell.aid",
     "category": "spell",
     "name": "Aid",
     "source": "XPHB",
@@ -11253,6 +11616,7 @@
   },
   {
     "id": "xphb|alarm",
+    "canonicalId": "spell.alarm",
     "category": "spell",
     "name": "Alarm",
     "source": "XPHB",
@@ -11281,6 +11645,7 @@
   },
   {
     "id": "xphb|alter-self",
+    "canonicalId": "spell.alter-self",
     "category": "spell",
     "name": "Alter Self",
     "source": "XPHB",
@@ -11314,6 +11679,7 @@
   },
   {
     "id": "xphb|animal-friendship",
+    "canonicalId": "spell.animal-friendship",
     "category": "spell",
     "name": "Animal Friendship",
     "source": "XPHB",
@@ -11341,6 +11707,7 @@
   },
   {
     "id": "xphb|animal-messenger",
+    "canonicalId": "spell.animal-messenger",
     "category": "spell",
     "name": "Animal Messenger",
     "source": "XPHB",
@@ -11372,6 +11739,7 @@
   },
   {
     "id": "xphb|animal-shapes",
+    "canonicalId": "spell.animal-shapes",
     "category": "spell",
     "name": "Animal Shapes",
     "source": "XPHB",
@@ -11401,6 +11769,7 @@
   },
   {
     "id": "xphb|animate-dead",
+    "canonicalId": "spell.animate-dead",
     "category": "spell",
     "name": "Animate Dead",
     "source": "XPHB",
@@ -11436,6 +11805,7 @@
   },
   {
     "id": "xphb|animate-objects",
+    "canonicalId": "spell.animate-objects",
     "category": "spell",
     "name": "Animate Objects",
     "source": "XPHB",
@@ -11471,6 +11841,7 @@
   },
   {
     "id": "xphb|antilife-shell",
+    "canonicalId": "spell.antilife-shell",
     "category": "spell",
     "name": "Antilife Shell",
     "source": "XPHB",
@@ -11496,6 +11867,7 @@
   },
   {
     "id": "xphb|antimagic-field",
+    "canonicalId": "spell.antimagic-field",
     "category": "spell",
     "name": "Antimagic Field",
     "source": "XPHB",
@@ -11529,6 +11901,7 @@
   },
   {
     "id": "xphb|antipathy-sympathy",
+    "canonicalId": "spell.antipathy-sympathy",
     "category": "spell",
     "name": "Antipathy/Sympathy",
     "source": "XPHB",
@@ -11561,6 +11934,7 @@
   },
   {
     "id": "xphb|arcane-eye",
+    "canonicalId": "spell.arcane-eye",
     "category": "spell",
     "name": "Arcane Eye",
     "source": "XPHB",
@@ -11586,6 +11960,7 @@
   },
   {
     "id": "xphb|arcane-gate",
+    "canonicalId": "spell.arcane-gate",
     "category": "spell",
     "name": "Arcane Gate",
     "source": "XPHB",
@@ -11615,6 +11990,7 @@
   },
   {
     "id": "xphb|arcane-lock",
+    "canonicalId": "spell.arcane-lock",
     "category": "spell",
     "name": "Arcane Lock",
     "source": "XPHB",
@@ -11636,6 +12012,7 @@
   },
   {
     "id": "xphb|arcane-vigor",
+    "canonicalId": "spell.arcane-vigor",
     "category": "spell",
     "name": "Arcane Vigor",
     "source": "XPHB",
@@ -11663,6 +12040,7 @@
   },
   {
     "id": "xphb|armor-of-agathys",
+    "canonicalId": "spell.armor-of-agathys",
     "category": "spell",
     "name": "Armor of Agathys",
     "source": "XPHB",
@@ -11690,6 +12068,7 @@
   },
   {
     "id": "xphb|arms-of-hadar",
+    "canonicalId": "spell.arms-of-hadar",
     "category": "spell",
     "name": "Arms of Hadar",
     "source": "XPHB",
@@ -11717,6 +12096,7 @@
   },
   {
     "id": "xphb|astral-projection",
+    "canonicalId": "spell.astral-projection",
     "category": "spell",
     "name": "Astral Projection",
     "source": "XPHB",
@@ -11758,6 +12138,7 @@
   },
   {
     "id": "xphb|augury",
+    "canonicalId": "spell.augury",
     "category": "spell",
     "name": "Augury",
     "source": "XPHB",
@@ -11801,6 +12182,7 @@
   },
   {
     "id": "xphb|aura-of-life",
+    "canonicalId": "spell.aura-of-life",
     "category": "spell",
     "name": "Aura of Life",
     "source": "XPHB",
@@ -11822,6 +12204,7 @@
   },
   {
     "id": "xphb|aura-of-purity",
+    "canonicalId": "spell.aura-of-purity",
     "category": "spell",
     "name": "Aura of Purity",
     "source": "XPHB",
@@ -11843,6 +12226,7 @@
   },
   {
     "id": "xphb|aura-of-vitality",
+    "canonicalId": "spell.aura-of-vitality",
     "category": "spell",
     "name": "Aura of Vitality",
     "source": "XPHB",
@@ -11864,6 +12248,7 @@
   },
   {
     "id": "xphb|awaken",
+    "canonicalId": "spell.awaken",
     "category": "spell",
     "name": "Awaken",
     "source": "XPHB",
@@ -11889,6 +12274,7 @@
   },
   {
     "id": "xphb|bane",
+    "canonicalId": "spell.bane",
     "category": "spell",
     "name": "Bane",
     "source": "XPHB",
@@ -11916,6 +12302,7 @@
   },
   {
     "id": "xphb|banishing-smite",
+    "canonicalId": "spell.banishing-smite",
     "category": "spell",
     "name": "Banishing Smite",
     "source": "XPHB",
@@ -11937,6 +12324,7 @@
   },
   {
     "id": "xphb|banishment",
+    "canonicalId": "spell.banishment",
     "category": "spell",
     "name": "Banishment",
     "source": "XPHB",
@@ -11968,6 +12356,7 @@
   },
   {
     "id": "xphb|barkskin",
+    "canonicalId": "spell.barkskin",
     "category": "spell",
     "name": "Barkskin",
     "source": "XPHB",
@@ -11989,6 +12378,7 @@
   },
   {
     "id": "xphb|beacon-of-hope",
+    "canonicalId": "spell.beacon-of-hope",
     "category": "spell",
     "name": "Beacon of Hope",
     "source": "XPHB",
@@ -12010,6 +12400,7 @@
   },
   {
     "id": "xphb|beast-sense",
+    "canonicalId": "spell.beast-sense",
     "category": "spell",
     "name": "Beast Sense",
     "source": "XPHB",
@@ -12031,6 +12422,7 @@
   },
   {
     "id": "xphb|befuddlement",
+    "canonicalId": "spell.befuddlement",
     "category": "spell",
     "name": "Befuddlement",
     "source": "XPHB",
@@ -12060,6 +12452,7 @@
   },
   {
     "id": "xphb|bestow-curse",
+    "canonicalId": "spell.bestow-curse",
     "category": "spell",
     "name": "Bestow Curse",
     "source": "XPHB",
@@ -12096,6 +12489,7 @@
   },
   {
     "id": "xphb|bigby-s-hand",
+    "canonicalId": "spell.bigbys-hand",
     "category": "spell",
     "name": "Bigby's Hand",
     "source": "XPHB",
@@ -12140,6 +12534,7 @@
   },
   {
     "id": "xphb|blade-barrier",
+    "canonicalId": "spell.blade-barrier",
     "category": "spell",
     "name": "Blade Barrier",
     "source": "XPHB",
@@ -12165,6 +12560,7 @@
   },
   {
     "id": "xphb|blade-ward",
+    "canonicalId": "spell.blade-ward",
     "category": "spell",
     "name": "Blade Ward",
     "source": "XPHB",
@@ -12186,6 +12582,7 @@
   },
   {
     "id": "xphb|bless",
+    "canonicalId": "spell.bless",
     "category": "spell",
     "name": "Bless",
     "source": "XPHB",
@@ -12213,6 +12610,7 @@
   },
   {
     "id": "xphb|blight",
+    "canonicalId": "spell.blight",
     "category": "spell",
     "name": "Blight",
     "source": "XPHB",
@@ -12244,6 +12642,7 @@
   },
   {
     "id": "xphb|blinding-smite",
+    "canonicalId": "spell.blinding-smite",
     "category": "spell",
     "name": "Blinding Smite",
     "source": "XPHB",
@@ -12271,6 +12670,7 @@
   },
   {
     "id": "xphb|blindness-deafness",
+    "canonicalId": "spell.blindness-deafness",
     "category": "spell",
     "name": "Blindness/Deafness",
     "source": "XPHB",
@@ -12298,6 +12698,7 @@
   },
   {
     "id": "xphb|blink",
+    "canonicalId": "spell.blink",
     "category": "spell",
     "name": "Blink",
     "source": "XPHB",
@@ -12323,6 +12724,7 @@
   },
   {
     "id": "xphb|blur",
+    "canonicalId": "spell.blur",
     "category": "spell",
     "name": "Blur",
     "source": "XPHB",
@@ -12344,6 +12746,7 @@
   },
   {
     "id": "xphb|burning-hands",
+    "canonicalId": "spell.burning-hands",
     "category": "spell",
     "name": "Burning Hands",
     "source": "XPHB",
@@ -12375,6 +12778,7 @@
   },
   {
     "id": "xphb|call-lightning",
+    "canonicalId": "spell.call-lightning",
     "category": "spell",
     "name": "Call Lightning",
     "source": "XPHB",
@@ -12414,6 +12818,7 @@
   },
   {
     "id": "xphb|calm-emotions",
+    "canonicalId": "spell.calm-emotions",
     "category": "spell",
     "name": "Calm Emotions",
     "source": "XPHB",
@@ -12442,6 +12847,7 @@
   },
   {
     "id": "xphb|chain-lightning",
+    "canonicalId": "spell.chain-lightning",
     "category": "spell",
     "name": "Chain Lightning",
     "source": "XPHB",
@@ -12473,6 +12879,7 @@
   },
   {
     "id": "xphb|charm-monster",
+    "canonicalId": "spell.charm-monster",
     "category": "spell",
     "name": "Charm Monster",
     "source": "XPHB",
@@ -12500,6 +12907,7 @@
   },
   {
     "id": "xphb|charm-person",
+    "canonicalId": "spell.charm-person",
     "category": "spell",
     "name": "Charm Person",
     "source": "XPHB",
@@ -12527,6 +12935,7 @@
   },
   {
     "id": "xphb|chill-touch",
+    "canonicalId": "spell.chill-touch",
     "category": "spell",
     "name": "Chill Touch",
     "source": "XPHB",
@@ -12554,6 +12963,7 @@
   },
   {
     "id": "xphb|chromatic-orb",
+    "canonicalId": "spell.chromatic-orb",
     "category": "spell",
     "name": "Chromatic Orb",
     "source": "XPHB",
@@ -12585,6 +12995,7 @@
   },
   {
     "id": "xphb|circle-of-death",
+    "canonicalId": "spell.circle-of-death",
     "category": "spell",
     "name": "Circle of Death",
     "source": "XPHB",
@@ -12612,6 +13023,7 @@
   },
   {
     "id": "xphb|circle-of-power",
+    "canonicalId": "spell.circle-of-power",
     "category": "spell",
     "name": "Circle of Power",
     "source": "XPHB",
@@ -12633,6 +13045,7 @@
   },
   {
     "id": "xphb|clairvoyance",
+    "canonicalId": "spell.clairvoyance",
     "category": "spell",
     "name": "Clairvoyance",
     "source": "XPHB",
@@ -12666,6 +13079,7 @@
   },
   {
     "id": "xphb|clone",
+    "canonicalId": "spell.clone",
     "category": "spell",
     "name": "Clone",
     "source": "XPHB",
@@ -12695,6 +13109,7 @@
   },
   {
     "id": "xphb|cloud-of-daggers",
+    "canonicalId": "spell.cloud-of-daggers",
     "category": "spell",
     "name": "Cloud of Daggers",
     "source": "XPHB",
@@ -12726,6 +13141,7 @@
   },
   {
     "id": "xphb|cloudkill",
+    "canonicalId": "spell.cloudkill",
     "category": "spell",
     "name": "Cloudkill",
     "source": "XPHB",
@@ -12761,6 +13177,7 @@
   },
   {
     "id": "xphb|color-spray",
+    "canonicalId": "spell.color-spray",
     "category": "spell",
     "name": "Color Spray",
     "source": "XPHB",
@@ -12782,6 +13199,7 @@
   },
   {
     "id": "xphb|command",
+    "canonicalId": "spell.command",
     "category": "spell",
     "name": "Command",
     "source": "XPHB",
@@ -12819,6 +13237,7 @@
   },
   {
     "id": "xphb|commune",
+    "canonicalId": "spell.commune",
     "category": "spell",
     "name": "Commune",
     "source": "XPHB",
@@ -12848,6 +13267,7 @@
   },
   {
     "id": "xphb|commune-with-nature",
+    "canonicalId": "spell.commune-with-nature",
     "category": "spell",
     "name": "Commune with Nature",
     "source": "XPHB",
@@ -12887,6 +13307,7 @@
   },
   {
     "id": "xphb|compelled-duel",
+    "canonicalId": "spell.compelled-duel",
     "category": "spell",
     "name": "Compelled Duel",
     "source": "XPHB",
@@ -12912,6 +13333,7 @@
   },
   {
     "id": "xphb|comprehend-languages",
+    "canonicalId": "spell.comprehend-languages",
     "category": "spell",
     "name": "Comprehend Languages",
     "source": "XPHB",
@@ -12933,6 +13355,7 @@
   },
   {
     "id": "xphb|compulsion",
+    "canonicalId": "spell.compulsion",
     "category": "spell",
     "name": "Compulsion",
     "source": "XPHB",
@@ -12958,6 +13381,7 @@
   },
   {
     "id": "xphb|cone-of-cold",
+    "canonicalId": "spell.cone-of-cold",
     "category": "spell",
     "name": "Cone of Cold",
     "source": "XPHB",
@@ -12985,6 +13409,7 @@
   },
   {
     "id": "xphb|confusion",
+    "canonicalId": "spell.confusion",
     "category": "spell",
     "name": "Confusion",
     "source": "XPHB",
@@ -13032,6 +13457,7 @@
   },
   {
     "id": "xphb|conjure-animals",
+    "canonicalId": "spell.conjure-animals",
     "category": "spell",
     "name": "Conjure Animals",
     "source": "XPHB",
@@ -13067,6 +13493,7 @@
   },
   {
     "id": "xphb|conjure-barrage",
+    "canonicalId": "spell.conjure-barrage",
     "category": "spell",
     "name": "Conjure Barrage",
     "source": "XPHB",
@@ -13094,6 +13521,7 @@
   },
   {
     "id": "xphb|conjure-celestial",
+    "canonicalId": "spell.conjure-celestial",
     "category": "spell",
     "name": "Conjure Celestial",
     "source": "XPHB",
@@ -13136,6 +13564,7 @@
   },
   {
     "id": "xphb|conjure-elemental",
+    "canonicalId": "spell.conjure-elemental",
     "category": "spell",
     "name": "Conjure Elemental",
     "source": "XPHB",
@@ -13167,6 +13596,7 @@
   },
   {
     "id": "xphb|conjure-fey",
+    "canonicalId": "spell.conjure-fey",
     "category": "spell",
     "name": "Conjure Fey",
     "source": "XPHB",
@@ -13198,6 +13628,7 @@
   },
   {
     "id": "xphb|conjure-minor-elementals",
+    "canonicalId": "spell.conjure-minor-elementals",
     "category": "spell",
     "name": "Conjure Minor Elementals",
     "source": "XPHB",
@@ -13229,6 +13660,7 @@
   },
   {
     "id": "xphb|conjure-volley",
+    "canonicalId": "spell.conjure-volley",
     "category": "spell",
     "name": "Conjure Volley",
     "source": "XPHB",
@@ -13250,6 +13682,7 @@
   },
   {
     "id": "xphb|conjure-woodland-beings",
+    "canonicalId": "spell.conjure-woodland-beings",
     "category": "spell",
     "name": "Conjure Woodland Beings",
     "source": "XPHB",
@@ -13281,6 +13714,7 @@
   },
   {
     "id": "xphb|contact-other-plane",
+    "canonicalId": "spell.contact-other-plane",
     "category": "spell",
     "name": "Contact Other Plane",
     "source": "XPHB",
@@ -13306,6 +13740,7 @@
   },
   {
     "id": "xphb|contagion",
+    "canonicalId": "spell.contagion",
     "category": "spell",
     "name": "Contagion",
     "source": "XPHB",
@@ -13335,6 +13770,7 @@
   },
   {
     "id": "xphb|contingency",
+    "canonicalId": "spell.contingency",
     "category": "spell",
     "name": "Contingency",
     "source": "XPHB",
@@ -13364,6 +13800,7 @@
   },
   {
     "id": "xphb|continual-flame",
+    "canonicalId": "spell.continual-flame",
     "category": "spell",
     "name": "Continual Flame",
     "source": "XPHB",
@@ -13385,6 +13822,7 @@
   },
   {
     "id": "xphb|control-water",
+    "canonicalId": "spell.control-water",
     "category": "spell",
     "name": "Control Water",
     "source": "XPHB",
@@ -13426,6 +13864,7 @@
   },
   {
     "id": "xphb|control-weather",
+    "canonicalId": "spell.control-weather",
     "category": "spell",
     "name": "Control Weather",
     "source": "XPHB",
@@ -13489,6 +13928,7 @@
   },
   {
     "id": "xphb|cordon-of-arrows",
+    "canonicalId": "spell.cordon-of-arrows",
     "category": "spell",
     "name": "Cordon of Arrows",
     "source": "XPHB",
@@ -13520,6 +13960,7 @@
   },
   {
     "id": "xphb|counterspell",
+    "canonicalId": "spell.counterspell",
     "category": "spell",
     "name": "Counterspell",
     "source": "XPHB",
@@ -13541,6 +13982,7 @@
   },
   {
     "id": "xphb|create-food-and-water",
+    "canonicalId": "spell.create-food-and-water",
     "category": "spell",
     "name": "Create Food and Water",
     "source": "XPHB",
@@ -13562,6 +14004,7 @@
   },
   {
     "id": "xphb|create-or-destroy-water",
+    "canonicalId": "spell.create-or-destroy-water",
     "category": "spell",
     "name": "Create or Destroy Water",
     "source": "XPHB",
@@ -13596,6 +14039,7 @@
   },
   {
     "id": "xphb|create-undead",
+    "canonicalId": "spell.create-undead",
     "category": "spell",
     "name": "Create Undead",
     "source": "XPHB",
@@ -13631,6 +14075,7 @@
   },
   {
     "id": "xphb|creation",
+    "canonicalId": "spell.creation",
     "category": "spell",
     "name": "Creation",
     "source": "XPHB",
@@ -13673,6 +14118,7 @@
   },
   {
     "id": "xphb|crown-of-madness",
+    "canonicalId": "spell.crown-of-madness",
     "category": "spell",
     "name": "Crown of Madness",
     "source": "XPHB",
@@ -13702,6 +14148,7 @@
   },
   {
     "id": "xphb|crusader-s-mantle",
+    "canonicalId": "spell.crusaders-mantle",
     "category": "spell",
     "name": "Crusader's Mantle",
     "source": "XPHB",
@@ -13723,6 +14170,7 @@
   },
   {
     "id": "xphb|cure-wounds",
+    "canonicalId": "spell.cure-wounds",
     "category": "spell",
     "name": "Cure Wounds",
     "source": "XPHB",
@@ -13750,6 +14198,7 @@
   },
   {
     "id": "xphb|dancing-lights",
+    "canonicalId": "spell.dancing-lights",
     "category": "spell",
     "name": "Dancing Lights",
     "source": "XPHB",
@@ -13775,6 +14224,7 @@
   },
   {
     "id": "xphb|darkness",
+    "canonicalId": "spell.darkness",
     "category": "spell",
     "name": "Darkness",
     "source": "XPHB",
@@ -13804,6 +14254,7 @@
   },
   {
     "id": "xphb|darkvision",
+    "canonicalId": "spell.darkvision",
     "category": "spell",
     "name": "Darkvision",
     "source": "XPHB",
@@ -13825,6 +14276,7 @@
   },
   {
     "id": "xphb|daylight",
+    "canonicalId": "spell.daylight",
     "category": "spell",
     "name": "Daylight",
     "source": "XPHB",
@@ -13854,6 +14306,7 @@
   },
   {
     "id": "xphb|death-ward",
+    "canonicalId": "spell.death-ward",
     "category": "spell",
     "name": "Death Ward",
     "source": "XPHB",
@@ -13879,6 +14332,7 @@
   },
   {
     "id": "xphb|delayed-blast-fireball",
+    "canonicalId": "spell.delayed-blast-fireball",
     "category": "spell",
     "name": "Delayed Blast Fireball",
     "source": "XPHB",
@@ -13918,6 +14372,7 @@
   },
   {
     "id": "xphb|demiplane",
+    "canonicalId": "spell.demiplane",
     "category": "spell",
     "name": "Demiplane",
     "source": "XPHB",
@@ -13947,6 +14402,7 @@
   },
   {
     "id": "xphb|destructive-wave",
+    "canonicalId": "spell.destructive-wave",
     "category": "spell",
     "name": "Destructive Wave",
     "source": "XPHB",
@@ -13968,6 +14424,7 @@
   },
   {
     "id": "xphb|detect-evil-and-good",
+    "canonicalId": "spell.detect-evil-and-good",
     "category": "spell",
     "name": "Detect Evil and Good",
     "source": "XPHB",
@@ -13993,6 +14450,7 @@
   },
   {
     "id": "xphb|detect-magic",
+    "canonicalId": "spell.detect-magic",
     "category": "spell",
     "name": "Detect Magic",
     "source": "XPHB",
@@ -14028,6 +14486,7 @@
   },
   {
     "id": "xphb|detect-poison-and-disease",
+    "canonicalId": "spell.detect-poison-and-disease",
     "category": "spell",
     "name": "Detect Poison and Disease",
     "source": "XPHB",
@@ -14053,6 +14512,7 @@
   },
   {
     "id": "xphb|detect-thoughts",
+    "canonicalId": "spell.detect-thoughts",
     "category": "spell",
     "name": "Detect Thoughts",
     "source": "XPHB",
@@ -14090,6 +14550,7 @@
   },
   {
     "id": "xphb|dimension-door",
+    "canonicalId": "spell.dimension-door",
     "category": "spell",
     "name": "Dimension Door",
     "source": "XPHB",
@@ -14119,6 +14580,7 @@
   },
   {
     "id": "xphb|disguise-self",
+    "canonicalId": "spell.disguise-self",
     "category": "spell",
     "name": "Disguise Self",
     "source": "XPHB",
@@ -14148,6 +14610,7 @@
   },
   {
     "id": "xphb|disintegrate",
+    "canonicalId": "spell.disintegrate",
     "category": "spell",
     "name": "Disintegrate",
     "source": "XPHB",
@@ -14183,6 +14646,7 @@
   },
   {
     "id": "xphb|dispel-evil-and-good",
+    "canonicalId": "spell.dispel-evil-and-good",
     "category": "spell",
     "name": "Dispel Evil and Good",
     "source": "XPHB",
@@ -14212,6 +14676,7 @@
   },
   {
     "id": "xphb|dispel-magic",
+    "canonicalId": "spell.dispel-magic",
     "category": "spell",
     "name": "Dispel Magic",
     "source": "XPHB",
@@ -14249,6 +14714,7 @@
   },
   {
     "id": "xphb|dissonant-whispers",
+    "canonicalId": "spell.dissonant-whispers",
     "category": "spell",
     "name": "Dissonant Whispers",
     "source": "XPHB",
@@ -14276,6 +14742,7 @@
   },
   {
     "id": "xphb|divination",
+    "canonicalId": "spell.divination",
     "category": "spell",
     "name": "Divination",
     "source": "XPHB",
@@ -14301,6 +14768,7 @@
   },
   {
     "id": "xphb|divine-favor",
+    "canonicalId": "spell.divine-favor",
     "category": "spell",
     "name": "Divine Favor",
     "source": "XPHB",
@@ -14322,6 +14790,7 @@
   },
   {
     "id": "xphb|divine-smite",
+    "canonicalId": "spell.divine-smite",
     "category": "spell",
     "name": "Divine Smite",
     "source": "XPHB",
@@ -14349,6 +14818,7 @@
   },
   {
     "id": "xphb|divine-word",
+    "canonicalId": "spell.divine-word",
     "category": "spell",
     "name": "Divine Word",
     "source": "XPHB",
@@ -14380,6 +14850,7 @@
   },
   {
     "id": "xphb|dominate-beast",
+    "canonicalId": "spell.dominate-beast",
     "category": "spell",
     "name": "Dominate Beast",
     "source": "XPHB",
@@ -14415,6 +14886,7 @@
   },
   {
     "id": "xphb|dominate-monster",
+    "canonicalId": "spell.dominate-monster",
     "category": "spell",
     "name": "Dominate Monster",
     "source": "XPHB",
@@ -14450,6 +14922,7 @@
   },
   {
     "id": "xphb|dominate-person",
+    "canonicalId": "spell.dominate-person",
     "category": "spell",
     "name": "Dominate Person",
     "source": "XPHB",
@@ -14485,6 +14958,7 @@
   },
   {
     "id": "xphb|dragon-s-breath",
+    "canonicalId": "spell.dragons-breath",
     "category": "spell",
     "name": "Dragon's Breath",
     "source": "XPHB",
@@ -14512,6 +14986,7 @@
   },
   {
     "id": "xphb|drawmij-s-instant-summons",
+    "canonicalId": "spell.drawmijs-instant-summons",
     "category": "spell",
     "name": "Drawmij's Instant Summons",
     "source": "XPHB",
@@ -14541,6 +15016,7 @@
   },
   {
     "id": "xphb|dream",
+    "canonicalId": "spell.dream",
     "category": "spell",
     "name": "Dream",
     "source": "XPHB",
@@ -14574,6 +15050,7 @@
   },
   {
     "id": "xphb|druidcraft",
+    "canonicalId": "spell.druidcraft",
     "category": "spell",
     "name": "Druidcraft",
     "source": "XPHB",
@@ -14611,6 +15088,7 @@
   },
   {
     "id": "xphb|earthquake",
+    "canonicalId": "spell.earthquake",
     "category": "spell",
     "name": "Earthquake",
     "source": "XPHB",
@@ -14652,6 +15130,7 @@
   },
   {
     "id": "xphb|eldritch-blast",
+    "canonicalId": "spell.eldritch-blast",
     "category": "spell",
     "name": "Eldritch Blast",
     "source": "XPHB",
@@ -14679,6 +15158,7 @@
   },
   {
     "id": "xphb|elemental-weapon",
+    "canonicalId": "spell.elemental-weapon",
     "category": "spell",
     "name": "Elemental Weapon",
     "source": "XPHB",
@@ -14706,6 +15186,7 @@
   },
   {
     "id": "xphb|elementalism",
+    "canonicalId": "spell.elementalism",
     "category": "spell",
     "name": "Elementalism",
     "source": "XPHB",
@@ -14747,6 +15228,7 @@
   },
   {
     "id": "xphb|enhance-ability",
+    "canonicalId": "spell.enhance-ability",
     "category": "spell",
     "name": "Enhance Ability",
     "source": "XPHB",
@@ -14774,6 +15256,7 @@
   },
   {
     "id": "xphb|enlarge-reduce",
+    "canonicalId": "spell.enlarge-reduce",
     "category": "spell",
     "name": "Enlarge/Reduce",
     "source": "XPHB",
@@ -14807,6 +15290,7 @@
   },
   {
     "id": "xphb|ensnaring-strike",
+    "canonicalId": "spell.ensnaring-strike",
     "category": "spell",
     "name": "Ensnaring Strike",
     "source": "XPHB",
@@ -14838,6 +15322,7 @@
   },
   {
     "id": "xphb|entangle",
+    "canonicalId": "spell.entangle",
     "category": "spell",
     "name": "Entangle",
     "source": "XPHB",
@@ -14863,6 +15348,7 @@
   },
   {
     "id": "xphb|enthrall",
+    "canonicalId": "spell.enthrall",
     "category": "spell",
     "name": "Enthrall",
     "source": "XPHB",
@@ -14884,6 +15370,7 @@
   },
   {
     "id": "xphb|etherealness",
+    "canonicalId": "spell.etherealness",
     "category": "spell",
     "name": "Etherealness",
     "source": "XPHB",
@@ -14923,6 +15410,7 @@
   },
   {
     "id": "xphb|evard-s-black-tentacles",
+    "canonicalId": "spell.evards-black-tentacles",
     "category": "spell",
     "name": "Evard's Black Tentacles",
     "source": "XPHB",
@@ -14952,6 +15440,7 @@
   },
   {
     "id": "xphb|expeditious-retreat",
+    "canonicalId": "spell.expeditious-retreat",
     "category": "spell",
     "name": "Expeditious Retreat",
     "source": "XPHB",
@@ -14973,6 +15462,7 @@
   },
   {
     "id": "xphb|eyebite",
+    "canonicalId": "spell.eyebite",
     "category": "spell",
     "name": "Eyebite",
     "source": "XPHB",
@@ -15010,6 +15500,7 @@
   },
   {
     "id": "xphb|fabricate",
+    "canonicalId": "spell.fabricate",
     "category": "spell",
     "name": "Fabricate",
     "source": "XPHB",
@@ -15039,6 +15530,7 @@
   },
   {
     "id": "xphb|faerie-fire",
+    "canonicalId": "spell.faerie-fire",
     "category": "spell",
     "name": "Faerie Fire",
     "source": "XPHB",
@@ -15064,6 +15556,7 @@
   },
   {
     "id": "xphb|false-life",
+    "canonicalId": "spell.false-life",
     "category": "spell",
     "name": "False Life",
     "source": "XPHB",
@@ -15091,6 +15584,7 @@
   },
   {
     "id": "xphb|fear",
+    "canonicalId": "spell.fear",
     "category": "spell",
     "name": "Fear",
     "source": "XPHB",
@@ -15116,6 +15610,7 @@
   },
   {
     "id": "xphb|feather-fall",
+    "canonicalId": "spell.feather-fall",
     "category": "spell",
     "name": "Feather Fall",
     "source": "XPHB",
@@ -15137,6 +15632,7 @@
   },
   {
     "id": "xphb|feign-death",
+    "canonicalId": "spell.feign-death",
     "category": "spell",
     "name": "Feign Death",
     "source": "XPHB",
@@ -15166,6 +15662,7 @@
   },
   {
     "id": "xphb|find-familiar",
+    "canonicalId": "spell.find-familiar",
     "category": "spell",
     "name": "Find Familiar",
     "source": "XPHB",
@@ -15207,6 +15704,7 @@
   },
   {
     "id": "xphb|find-steed",
+    "canonicalId": "spell.find-steed",
     "category": "spell",
     "name": "Find Steed",
     "source": "XPHB",
@@ -15246,6 +15744,7 @@
   },
   {
     "id": "xphb|find-the-path",
+    "canonicalId": "spell.find-the-path",
     "category": "spell",
     "name": "Find the Path",
     "source": "XPHB",
@@ -15271,6 +15770,7 @@
   },
   {
     "id": "xphb|find-traps",
+    "canonicalId": "spell.find-traps",
     "category": "spell",
     "name": "Find Traps",
     "source": "XPHB",
@@ -15296,6 +15796,7 @@
   },
   {
     "id": "xphb|finger-of-death",
+    "canonicalId": "spell.finger-of-death",
     "category": "spell",
     "name": "Finger of Death",
     "source": "XPHB",
@@ -15321,6 +15822,7 @@
   },
   {
     "id": "xphb|fire-bolt",
+    "canonicalId": "spell.fire-bolt",
     "category": "spell",
     "name": "Fire Bolt",
     "source": "XPHB",
@@ -15348,6 +15850,7 @@
   },
   {
     "id": "xphb|fire-shield",
+    "canonicalId": "spell.fire-shield",
     "category": "spell",
     "name": "Fire Shield",
     "source": "XPHB",
@@ -15377,6 +15880,7 @@
   },
   {
     "id": "xphb|fire-storm",
+    "canonicalId": "spell.fire-storm",
     "category": "spell",
     "name": "Fire Storm",
     "source": "XPHB",
@@ -15402,6 +15906,7 @@
   },
   {
     "id": "xphb|fireball",
+    "canonicalId": "spell.fireball",
     "category": "spell",
     "name": "Fireball",
     "source": "XPHB",
@@ -15433,6 +15938,7 @@
   },
   {
     "id": "xphb|flame-blade",
+    "canonicalId": "spell.flame-blade",
     "category": "spell",
     "name": "Flame Blade",
     "source": "XPHB",
@@ -15468,6 +15974,7 @@
   },
   {
     "id": "xphb|flame-strike",
+    "canonicalId": "spell.flame-strike",
     "category": "spell",
     "name": "Flame Strike",
     "source": "XPHB",
@@ -15495,6 +16002,7 @@
   },
   {
     "id": "xphb|flaming-sphere",
+    "canonicalId": "spell.flaming-sphere",
     "category": "spell",
     "name": "Flaming Sphere",
     "source": "XPHB",
@@ -15530,6 +16038,7 @@
   },
   {
     "id": "xphb|flesh-to-stone",
+    "canonicalId": "spell.flesh-to-stone",
     "category": "spell",
     "name": "Flesh to Stone",
     "source": "XPHB",
@@ -15559,6 +16068,7 @@
   },
   {
     "id": "xphb|fly",
+    "canonicalId": "spell.fly",
     "category": "spell",
     "name": "Fly",
     "source": "XPHB",
@@ -15586,6 +16096,7 @@
   },
   {
     "id": "xphb|fog-cloud",
+    "canonicalId": "spell.fog-cloud",
     "category": "spell",
     "name": "Fog Cloud",
     "source": "XPHB",
@@ -15613,6 +16124,7 @@
   },
   {
     "id": "xphb|forbiddance",
+    "canonicalId": "spell.forbiddance",
     "category": "spell",
     "name": "Forbiddance",
     "source": "XPHB",
@@ -15646,6 +16158,7 @@
   },
   {
     "id": "xphb|forcecage",
+    "canonicalId": "spell.forcecage",
     "category": "spell",
     "name": "Forcecage",
     "source": "XPHB",
@@ -15683,6 +16196,7 @@
   },
   {
     "id": "xphb|foresight",
+    "canonicalId": "spell.foresight",
     "category": "spell",
     "name": "Foresight",
     "source": "XPHB",
@@ -15704,6 +16218,7 @@
   },
   {
     "id": "xphb|fount-of-moonlight",
+    "canonicalId": "spell.fount-of-moonlight",
     "category": "spell",
     "name": "Fount of Moonlight",
     "source": "XPHB",
@@ -15733,6 +16248,7 @@
   },
   {
     "id": "xphb|freedom-of-movement",
+    "canonicalId": "spell.freedom-of-movement",
     "category": "spell",
     "name": "Freedom of Movement",
     "source": "XPHB",
@@ -15764,6 +16280,7 @@
   },
   {
     "id": "xphb|friends",
+    "canonicalId": "spell.friends",
     "category": "spell",
     "name": "Friends",
     "source": "XPHB",
@@ -15789,6 +16306,7 @@
   },
   {
     "id": "xphb|gaseous-form",
+    "canonicalId": "spell.gaseous-form",
     "category": "spell",
     "name": "Gaseous Form",
     "source": "XPHB",
@@ -15824,6 +16342,7 @@
   },
   {
     "id": "xphb|gate",
+    "canonicalId": "spell.gate",
     "category": "spell",
     "name": "Gate",
     "source": "XPHB",
@@ -15857,6 +16376,7 @@
   },
   {
     "id": "xphb|geas",
+    "canonicalId": "spell.geas",
     "category": "spell",
     "name": "Geas",
     "source": "XPHB",
@@ -15896,6 +16416,7 @@
   },
   {
     "id": "xphb|gentle-repose",
+    "canonicalId": "spell.gentle-repose",
     "category": "spell",
     "name": "Gentle Repose",
     "source": "XPHB",
@@ -15921,6 +16442,7 @@
   },
   {
     "id": "xphb|giant-insect",
+    "canonicalId": "spell.giant-insect",
     "category": "spell",
     "name": "Giant Insect",
     "source": "XPHB",
@@ -15952,6 +16474,7 @@
   },
   {
     "id": "xphb|glibness",
+    "canonicalId": "spell.glibness",
     "category": "spell",
     "name": "Glibness",
     "source": "XPHB",
@@ -15973,6 +16496,7 @@
   },
   {
     "id": "xphb|globe-of-invulnerability",
+    "canonicalId": "spell.globe-of-invulnerability",
     "category": "spell",
     "name": "Globe of Invulnerability",
     "source": "XPHB",
@@ -16004,6 +16528,7 @@
   },
   {
     "id": "xphb|glyph-of-warding",
+    "canonicalId": "spell.glyph-of-warding",
     "category": "spell",
     "name": "Glyph of Warding",
     "source": "XPHB",
@@ -16059,6 +16584,7 @@
   },
   {
     "id": "xphb|goodberry",
+    "canonicalId": "spell.goodberry",
     "category": "spell",
     "name": "Goodberry",
     "source": "XPHB",
@@ -16084,6 +16610,7 @@
   },
   {
     "id": "xphb|grasping-vine",
+    "canonicalId": "spell.grasping-vine",
     "category": "spell",
     "name": "Grasping Vine",
     "source": "XPHB",
@@ -16119,6 +16646,7 @@
   },
   {
     "id": "xphb|grease",
+    "canonicalId": "spell.grease",
     "category": "spell",
     "name": "Grease",
     "source": "XPHB",
@@ -16144,6 +16672,7 @@
   },
   {
     "id": "xphb|greater-invisibility",
+    "canonicalId": "spell.greater-invisibility",
     "category": "spell",
     "name": "Greater Invisibility",
     "source": "XPHB",
@@ -16165,6 +16694,7 @@
   },
   {
     "id": "xphb|greater-restoration",
+    "canonicalId": "spell.greater-restoration",
     "category": "spell",
     "name": "Greater Restoration",
     "source": "XPHB",
@@ -16196,6 +16726,7 @@
   },
   {
     "id": "xphb|guardian-of-faith",
+    "canonicalId": "spell.guardian-of-faith",
     "category": "spell",
     "name": "Guardian of Faith",
     "source": "XPHB",
@@ -16221,6 +16752,7 @@
   },
   {
     "id": "xphb|guards-and-wards",
+    "canonicalId": "spell.guards-and-wards",
     "category": "spell",
     "name": "Guards and Wards",
     "source": "XPHB",
@@ -16276,6 +16808,7 @@
   },
   {
     "id": "xphb|guidance",
+    "canonicalId": "spell.guidance",
     "category": "spell",
     "name": "Guidance",
     "source": "XPHB",
@@ -16297,6 +16830,7 @@
   },
   {
     "id": "xphb|guiding-bolt",
+    "canonicalId": "spell.guiding-bolt",
     "category": "spell",
     "name": "Guiding Bolt",
     "source": "XPHB",
@@ -16324,6 +16858,7 @@
   },
   {
     "id": "xphb|gust-of-wind",
+    "canonicalId": "spell.gust-of-wind",
     "category": "spell",
     "name": "Gust of Wind",
     "source": "XPHB",
@@ -16357,6 +16892,7 @@
   },
   {
     "id": "xphb|hail-of-thorns",
+    "canonicalId": "spell.hail-of-thorns",
     "category": "spell",
     "name": "Hail of Thorns",
     "source": "XPHB",
@@ -16384,6 +16920,7 @@
   },
   {
     "id": "xphb|hallow",
+    "canonicalId": "spell.hallow",
     "category": "spell",
     "name": "Hallow",
     "source": "XPHB",
@@ -16428,6 +16965,7 @@
   },
   {
     "id": "xphb|hallucinatory-terrain",
+    "canonicalId": "spell.hallucinatory-terrain",
     "category": "spell",
     "name": "Hallucinatory Terrain",
     "source": "XPHB",
@@ -16453,6 +16991,7 @@
   },
   {
     "id": "xphb|harm",
+    "canonicalId": "spell.harm",
     "category": "spell",
     "name": "Harm",
     "source": "XPHB",
@@ -16474,6 +17013,7 @@
   },
   {
     "id": "xphb|haste",
+    "canonicalId": "spell.haste",
     "category": "spell",
     "name": "Haste",
     "source": "XPHB",
@@ -16499,6 +17039,7 @@
   },
   {
     "id": "xphb|heal",
+    "canonicalId": "spell.heal",
     "category": "spell",
     "name": "Heal",
     "source": "XPHB",
@@ -16526,6 +17067,7 @@
   },
   {
     "id": "xphb|healing-word",
+    "canonicalId": "spell.healing-word",
     "category": "spell",
     "name": "Healing Word",
     "source": "XPHB",
@@ -16553,6 +17095,7 @@
   },
   {
     "id": "xphb|heat-metal",
+    "canonicalId": "spell.heat-metal",
     "category": "spell",
     "name": "Heat Metal",
     "source": "XPHB",
@@ -16584,6 +17127,7 @@
   },
   {
     "id": "xphb|hellish-rebuke",
+    "canonicalId": "spell.hellish-rebuke",
     "category": "spell",
     "name": "Hellish Rebuke",
     "source": "XPHB",
@@ -16611,6 +17155,7 @@
   },
   {
     "id": "xphb|heroes-feast",
+    "canonicalId": "spell.heroes-feast",
     "category": "spell",
     "name": "Heroes' Feast",
     "source": "XPHB",
@@ -16636,6 +17181,7 @@
   },
   {
     "id": "xphb|heroism",
+    "canonicalId": "spell.heroism",
     "category": "spell",
     "name": "Heroism",
     "source": "XPHB",
@@ -16663,6 +17209,7 @@
   },
   {
     "id": "xphb|hex",
+    "canonicalId": "spell.hex",
     "category": "spell",
     "name": "Hex",
     "source": "XPHB",
@@ -16694,6 +17241,7 @@
   },
   {
     "id": "xphb|hold-monster",
+    "canonicalId": "spell.hold-monster",
     "category": "spell",
     "name": "Hold Monster",
     "source": "XPHB",
@@ -16721,6 +17269,7 @@
   },
   {
     "id": "xphb|hold-person",
+    "canonicalId": "spell.hold-person",
     "category": "spell",
     "name": "Hold Person",
     "source": "XPHB",
@@ -16748,6 +17297,7 @@
   },
   {
     "id": "xphb|holy-aura",
+    "canonicalId": "spell.holy-aura",
     "category": "spell",
     "name": "Holy Aura",
     "source": "XPHB",
@@ -16769,6 +17319,7 @@
   },
   {
     "id": "xphb|hunger-of-hadar",
+    "canonicalId": "spell.hunger-of-hadar",
     "category": "spell",
     "name": "Hunger of Hadar",
     "source": "XPHB",
@@ -16800,6 +17351,7 @@
   },
   {
     "id": "xphb|hunter-s-mark",
+    "canonicalId": "spell.hunters-mark",
     "category": "spell",
     "name": "Hunter's Mark",
     "source": "XPHB",
@@ -16831,6 +17383,7 @@
   },
   {
     "id": "xphb|hypnotic-pattern",
+    "canonicalId": "spell.hypnotic-pattern",
     "category": "spell",
     "name": "Hypnotic Pattern",
     "source": "XPHB",
@@ -16856,6 +17409,7 @@
   },
   {
     "id": "xphb|ice-knife",
+    "canonicalId": "spell.ice-knife",
     "category": "spell",
     "name": "Ice Knife",
     "source": "XPHB",
@@ -16883,6 +17437,7 @@
   },
   {
     "id": "xphb|ice-storm",
+    "canonicalId": "spell.ice-storm",
     "category": "spell",
     "name": "Ice Storm",
     "source": "XPHB",
@@ -16914,6 +17469,7 @@
   },
   {
     "id": "xphb|identify",
+    "canonicalId": "spell.identify",
     "category": "spell",
     "name": "Identify",
     "source": "XPHB",
@@ -16939,6 +17495,7 @@
   },
   {
     "id": "xphb|illusory-script",
+    "canonicalId": "spell.illusory-script",
     "category": "spell",
     "name": "Illusory Script",
     "source": "XPHB",
@@ -16968,6 +17525,7 @@
   },
   {
     "id": "xphb|imprisonment",
+    "canonicalId": "spell.imprisonment",
     "category": "spell",
     "name": "Imprisonment",
     "source": "XPHB",
@@ -17011,6 +17569,7 @@
   },
   {
     "id": "xphb|incendiary-cloud",
+    "canonicalId": "spell.incendiary-cloud",
     "category": "spell",
     "name": "Incendiary Cloud",
     "source": "XPHB",
@@ -17040,6 +17599,7 @@
   },
   {
     "id": "xphb|inflict-wounds",
+    "canonicalId": "spell.inflict-wounds",
     "category": "spell",
     "name": "Inflict Wounds",
     "source": "XPHB",
@@ -17067,6 +17627,7 @@
   },
   {
     "id": "xphb|insect-plague",
+    "canonicalId": "spell.insect-plague",
     "category": "spell",
     "name": "Insect Plague",
     "source": "XPHB",
@@ -17098,6 +17659,7 @@
   },
   {
     "id": "xphb|invisibility",
+    "canonicalId": "spell.invisibility",
     "category": "spell",
     "name": "Invisibility",
     "source": "XPHB",
@@ -17125,6 +17687,7 @@
   },
   {
     "id": "xphb|jallarzi-s-storm-of-radiance",
+    "canonicalId": "spell.jallarzis-storm-of-radiance",
     "category": "spell",
     "name": "Jallarzi's Storm of Radiance",
     "source": "XPHB",
@@ -17156,6 +17719,7 @@
   },
   {
     "id": "xphb|jump",
+    "canonicalId": "spell.jump",
     "category": "spell",
     "name": "Jump",
     "source": "XPHB",
@@ -17183,6 +17747,7 @@
   },
   {
     "id": "xphb|knock",
+    "canonicalId": "spell.knock",
     "category": "spell",
     "name": "Knock",
     "source": "XPHB",
@@ -17216,6 +17781,7 @@
   },
   {
     "id": "xphb|legend-lore",
+    "canonicalId": "spell.legend-lore",
     "category": "spell",
     "name": "Legend Lore",
     "source": "XPHB",
@@ -17249,6 +17815,7 @@
   },
   {
     "id": "xphb|leomund-s-secret-chest",
+    "canonicalId": "spell.leomunds-secret-chest",
     "category": "spell",
     "name": "Leomund's Secret Chest",
     "source": "XPHB",
@@ -17282,6 +17849,7 @@
   },
   {
     "id": "xphb|leomund-s-tiny-hut",
+    "canonicalId": "spell.leomunds-tiny-hut",
     "category": "spell",
     "name": "Leomund's Tiny Hut",
     "source": "XPHB",
@@ -17315,6 +17883,7 @@
   },
   {
     "id": "xphb|lesser-restoration",
+    "canonicalId": "spell.lesser-restoration",
     "category": "spell",
     "name": "Lesser Restoration",
     "source": "XPHB",
@@ -17336,6 +17905,7 @@
   },
   {
     "id": "xphb|levitate",
+    "canonicalId": "spell.levitate",
     "category": "spell",
     "name": "Levitate",
     "source": "XPHB",
@@ -17365,6 +17935,7 @@
   },
   {
     "id": "xphb|light",
+    "canonicalId": "spell.light",
     "category": "spell",
     "name": "Light",
     "source": "XPHB",
@@ -17390,6 +17961,7 @@
   },
   {
     "id": "xphb|lightning-arrow",
+    "canonicalId": "spell.lightning-arrow",
     "category": "spell",
     "name": "Lightning Arrow",
     "source": "XPHB",
@@ -17421,6 +17993,7 @@
   },
   {
     "id": "xphb|lightning-bolt",
+    "canonicalId": "spell.lightning-bolt",
     "category": "spell",
     "name": "Lightning Bolt",
     "source": "XPHB",
@@ -17448,6 +18021,7 @@
   },
   {
     "id": "xphb|locate-animals-or-plants",
+    "canonicalId": "spell.locate-animals-or-plants",
     "category": "spell",
     "name": "Locate Animals or Plants",
     "source": "XPHB",
@@ -17469,6 +18043,7 @@
   },
   {
     "id": "xphb|locate-creature",
+    "canonicalId": "spell.locate-creature",
     "category": "spell",
     "name": "Locate Creature",
     "source": "XPHB",
@@ -17498,6 +18073,7 @@
   },
   {
     "id": "xphb|locate-object",
+    "canonicalId": "spell.locate-object",
     "category": "spell",
     "name": "Locate Object",
     "source": "XPHB",
@@ -17527,6 +18103,7 @@
   },
   {
     "id": "xphb|longstrider",
+    "canonicalId": "spell.longstrider",
     "category": "spell",
     "name": "Longstrider",
     "source": "XPHB",
@@ -17554,6 +18131,7 @@
   },
   {
     "id": "xphb|mage-armor",
+    "canonicalId": "spell.mage-armor",
     "category": "spell",
     "name": "Mage Armor",
     "source": "XPHB",
@@ -17575,6 +18153,7 @@
   },
   {
     "id": "xphb|mage-hand",
+    "canonicalId": "spell.mage-hand",
     "category": "spell",
     "name": "Mage Hand",
     "source": "XPHB",
@@ -17608,6 +18187,7 @@
   },
   {
     "id": "xphb|magic-circle",
+    "canonicalId": "spell.magic-circle",
     "category": "spell",
     "name": "Magic Circle",
     "source": "XPHB",
@@ -17655,6 +18235,7 @@
   },
   {
     "id": "xphb|magic-jar",
+    "canonicalId": "spell.magic-jar",
     "category": "spell",
     "name": "Magic Jar",
     "source": "XPHB",
@@ -17700,6 +18281,7 @@
   },
   {
     "id": "xphb|magic-missile",
+    "canonicalId": "spell.magic-missile",
     "category": "spell",
     "name": "Magic Missile",
     "source": "XPHB",
@@ -17727,6 +18309,7 @@
   },
   {
     "id": "xphb|magic-mouth",
+    "canonicalId": "spell.magic-mouth",
     "category": "spell",
     "name": "Magic Mouth",
     "source": "XPHB",
@@ -17756,6 +18339,7 @@
   },
   {
     "id": "xphb|magic-weapon",
+    "canonicalId": "spell.magic-weapon",
     "category": "spell",
     "name": "Magic Weapon",
     "source": "XPHB",
@@ -17783,6 +18367,7 @@
   },
   {
     "id": "xphb|major-image",
+    "canonicalId": "spell.major-image",
     "category": "spell",
     "name": "Major Image",
     "source": "XPHB",
@@ -17818,6 +18403,7 @@
   },
   {
     "id": "xphb|mass-cure-wounds",
+    "canonicalId": "spell.mass-cure-wounds",
     "category": "spell",
     "name": "Mass Cure Wounds",
     "source": "XPHB",
@@ -17845,6 +18431,7 @@
   },
   {
     "id": "xphb|mass-heal",
+    "canonicalId": "spell.mass-heal",
     "category": "spell",
     "name": "Mass Heal",
     "source": "XPHB",
@@ -17866,6 +18453,7 @@
   },
   {
     "id": "xphb|mass-healing-word",
+    "canonicalId": "spell.mass-healing-word",
     "category": "spell",
     "name": "Mass Healing Word",
     "source": "XPHB",
@@ -17893,6 +18481,7 @@
   },
   {
     "id": "xphb|mass-suggestion",
+    "canonicalId": "spell.mass-suggestion",
     "category": "spell",
     "name": "Mass Suggestion",
     "source": "XPHB",
@@ -17924,6 +18513,7 @@
   },
   {
     "id": "xphb|maze",
+    "canonicalId": "spell.maze",
     "category": "spell",
     "name": "Maze",
     "source": "XPHB",
@@ -17953,6 +18543,7 @@
   },
   {
     "id": "xphb|meld-into-stone",
+    "canonicalId": "spell.meld-into-stone",
     "category": "spell",
     "name": "Meld into Stone",
     "source": "XPHB",
@@ -17982,6 +18573,7 @@
   },
   {
     "id": "xphb|melf-s-acid-arrow",
+    "canonicalId": "spell.melfs-acid-arrow",
     "category": "spell",
     "name": "Melf's Acid Arrow",
     "source": "XPHB",
@@ -18009,6 +18601,7 @@
   },
   {
     "id": "xphb|mending",
+    "canonicalId": "spell.mending",
     "category": "spell",
     "name": "Mending",
     "source": "XPHB",
@@ -18034,6 +18627,7 @@
   },
   {
     "id": "xphb|message",
+    "canonicalId": "spell.message",
     "category": "spell",
     "name": "Message",
     "source": "XPHB",
@@ -18059,6 +18653,7 @@
   },
   {
     "id": "xphb|meteor-swarm",
+    "canonicalId": "spell.meteor-swarm",
     "category": "spell",
     "name": "Meteor Swarm",
     "source": "XPHB",
@@ -18084,6 +18679,7 @@
   },
   {
     "id": "xphb|mind-blank",
+    "canonicalId": "spell.mind-blank",
     "category": "spell",
     "name": "Mind Blank",
     "source": "XPHB",
@@ -18105,6 +18701,7 @@
   },
   {
     "id": "xphb|mind-sliver",
+    "canonicalId": "spell.mind-sliver",
     "category": "spell",
     "name": "Mind Sliver",
     "source": "XPHB",
@@ -18132,6 +18729,7 @@
   },
   {
     "id": "xphb|mind-spike",
+    "canonicalId": "spell.mind-spike",
     "category": "spell",
     "name": "Mind Spike",
     "source": "XPHB",
@@ -18159,6 +18757,7 @@
   },
   {
     "id": "xphb|minor-illusion",
+    "canonicalId": "spell.minor-illusion",
     "category": "spell",
     "name": "Minor Illusion",
     "source": "XPHB",
@@ -18192,6 +18791,7 @@
   },
   {
     "id": "xphb|mirage-arcane",
+    "canonicalId": "spell.mirage-arcane",
     "category": "spell",
     "name": "Mirage Arcane",
     "source": "XPHB",
@@ -18225,6 +18825,7 @@
   },
   {
     "id": "xphb|mirror-image",
+    "canonicalId": "spell.mirror-image",
     "category": "spell",
     "name": "Mirror Image",
     "source": "XPHB",
@@ -18254,6 +18855,7 @@
   },
   {
     "id": "xphb|mislead",
+    "canonicalId": "spell.mislead",
     "category": "spell",
     "name": "Mislead",
     "source": "XPHB",
@@ -18283,6 +18885,7 @@
   },
   {
     "id": "xphb|misty-step",
+    "canonicalId": "spell.misty-step",
     "category": "spell",
     "name": "Misty Step",
     "source": "XPHB",
@@ -18304,6 +18907,7 @@
   },
   {
     "id": "xphb|modify-memory",
+    "canonicalId": "spell.modify-memory",
     "category": "spell",
     "name": "Modify Memory",
     "source": "XPHB",
@@ -18347,6 +18951,7 @@
   },
   {
     "id": "xphb|moonbeam",
+    "canonicalId": "spell.moonbeam",
     "category": "spell",
     "name": "Moonbeam",
     "source": "XPHB",
@@ -18378,6 +18983,7 @@
   },
   {
     "id": "xphb|mordenkainen-s-faithful-hound",
+    "canonicalId": "spell.mordenkainens-faithful-hound",
     "category": "spell",
     "name": "Mordenkainen's Faithful Hound",
     "source": "XPHB",
@@ -18411,6 +19017,7 @@
   },
   {
     "id": "xphb|mordenkainen-s-magnificent-mansion",
+    "canonicalId": "spell.mordenkainens-magnificent-mansion",
     "category": "spell",
     "name": "Mordenkainen's Magnificent Mansion",
     "source": "XPHB",
@@ -18448,6 +19055,7 @@
   },
   {
     "id": "xphb|mordenkainen-s-private-sanctum",
+    "canonicalId": "spell.mordenkainens-private-sanctum",
     "category": "spell",
     "name": "Mordenkainen's Private Sanctum",
     "source": "XPHB",
@@ -18494,6 +19102,7 @@
   },
   {
     "id": "xphb|mordenkainen-s-sword",
+    "canonicalId": "spell.mordenkainens-sword",
     "category": "spell",
     "name": "Mordenkainen's Sword",
     "source": "XPHB",
@@ -18523,6 +19132,7 @@
   },
   {
     "id": "xphb|move-earth",
+    "canonicalId": "spell.move-earth",
     "category": "spell",
     "name": "Move Earth",
     "source": "XPHB",
@@ -18556,6 +19166,7 @@
   },
   {
     "id": "xphb|nondetection",
+    "canonicalId": "spell.nondetection",
     "category": "spell",
     "name": "Nondetection",
     "source": "XPHB",
@@ -18577,6 +19188,7 @@
   },
   {
     "id": "xphb|nystul-s-magic-aura",
+    "canonicalId": "spell.nystuls-magic-aura",
     "category": "spell",
     "name": "Nystul's Magic Aura",
     "source": "XPHB",
@@ -18606,6 +19218,7 @@
   },
   {
     "id": "xphb|otiluke-s-freezing-sphere",
+    "canonicalId": "spell.otilukes-freezing-sphere",
     "category": "spell",
     "name": "Otiluke's Freezing Sphere",
     "source": "XPHB",
@@ -18641,6 +19254,7 @@
   },
   {
     "id": "xphb|otiluke-s-resilient-sphere",
+    "canonicalId": "spell.otilukes-resilient-sphere",
     "category": "spell",
     "name": "Otiluke's Resilient Sphere",
     "source": "XPHB",
@@ -18674,6 +19288,7 @@
   },
   {
     "id": "xphb|otto-s-irresistible-dance",
+    "canonicalId": "spell.ottos-irresistible-dance",
     "category": "spell",
     "name": "Otto's Irresistible Dance",
     "source": "XPHB",
@@ -18699,6 +19314,7 @@
   },
   {
     "id": "xphb|pass-without-trace",
+    "canonicalId": "spell.pass-without-trace",
     "category": "spell",
     "name": "Pass without Trace",
     "source": "XPHB",
@@ -18720,6 +19336,7 @@
   },
   {
     "id": "xphb|passwall",
+    "canonicalId": "spell.passwall",
     "category": "spell",
     "name": "Passwall",
     "source": "XPHB",
@@ -18745,6 +19362,7 @@
   },
   {
     "id": "xphb|phantasmal-force",
+    "canonicalId": "spell.phantasmal-force",
     "category": "spell",
     "name": "Phantasmal Force",
     "source": "XPHB",
@@ -18778,6 +19396,7 @@
   },
   {
     "id": "xphb|phantasmal-killer",
+    "canonicalId": "spell.phantasmal-killer",
     "category": "spell",
     "name": "Phantasmal Killer",
     "source": "XPHB",
@@ -18809,6 +19428,7 @@
   },
   {
     "id": "xphb|phantom-steed",
+    "canonicalId": "spell.phantom-steed",
     "category": "spell",
     "name": "Phantom Steed",
     "source": "XPHB",
@@ -18834,6 +19454,7 @@
   },
   {
     "id": "xphb|planar-ally",
+    "canonicalId": "spell.planar-ally",
     "category": "spell",
     "name": "Planar Ally",
     "source": "XPHB",
@@ -18871,6 +19492,7 @@
   },
   {
     "id": "xphb|planar-binding",
+    "canonicalId": "spell.planar-binding",
     "category": "spell",
     "name": "Planar Binding",
     "source": "XPHB",
@@ -18902,6 +19524,7 @@
   },
   {
     "id": "xphb|plane-shift",
+    "canonicalId": "spell.plane-shift",
     "category": "spell",
     "name": "Plane Shift",
     "source": "XPHB",
@@ -18931,6 +19554,7 @@
   },
   {
     "id": "xphb|plant-growth",
+    "canonicalId": "spell.plant-growth",
     "category": "spell",
     "name": "Plant Growth",
     "source": "XPHB",
@@ -18960,6 +19584,7 @@
   },
   {
     "id": "xphb|poison-spray",
+    "canonicalId": "spell.poison-spray",
     "category": "spell",
     "name": "Poison Spray",
     "source": "XPHB",
@@ -18987,6 +19612,7 @@
   },
   {
     "id": "xphb|polymorph",
+    "canonicalId": "spell.polymorph",
     "category": "spell",
     "name": "Polymorph",
     "source": "XPHB",
@@ -19020,6 +19646,7 @@
   },
   {
     "id": "xphb|power-word-fortify",
+    "canonicalId": "spell.power-word-fortify",
     "category": "spell",
     "name": "Power Word Fortify",
     "source": "XPHB",
@@ -19041,6 +19668,7 @@
   },
   {
     "id": "xphb|power-word-heal",
+    "canonicalId": "spell.power-word-heal",
     "category": "spell",
     "name": "Power Word Heal",
     "source": "XPHB",
@@ -19062,6 +19690,7 @@
   },
   {
     "id": "xphb|power-word-kill",
+    "canonicalId": "spell.power-word-kill",
     "category": "spell",
     "name": "Power Word Kill",
     "source": "XPHB",
@@ -19083,6 +19712,7 @@
   },
   {
     "id": "xphb|power-word-stun",
+    "canonicalId": "spell.power-word-stun",
     "category": "spell",
     "name": "Power Word Stun",
     "source": "XPHB",
@@ -19108,6 +19738,7 @@
   },
   {
     "id": "xphb|prayer-of-healing",
+    "canonicalId": "spell.prayer-of-healing",
     "category": "spell",
     "name": "Prayer of Healing",
     "source": "XPHB",
@@ -19135,6 +19766,7 @@
   },
   {
     "id": "xphb|prestidigitation",
+    "canonicalId": "spell.prestidigitation",
     "category": "spell",
     "name": "Prestidigitation",
     "source": "XPHB",
@@ -19180,6 +19812,7 @@
   },
   {
     "id": "xphb|prismatic-spray",
+    "canonicalId": "spell.prismatic-spray",
     "category": "spell",
     "name": "Prismatic Spray",
     "source": "XPHB",
@@ -19236,6 +19869,7 @@
   },
   {
     "id": "xphb|prismatic-wall",
+    "canonicalId": "spell.prismatic-wall",
     "category": "spell",
     "name": "Prismatic Wall",
     "source": "XPHB",
@@ -19303,6 +19937,7 @@
   },
   {
     "id": "xphb|produce-flame",
+    "canonicalId": "spell.produce-flame",
     "category": "spell",
     "name": "Produce Flame",
     "source": "XPHB",
@@ -19334,6 +19969,7 @@
   },
   {
     "id": "xphb|programmed-illusion",
+    "canonicalId": "spell.programmed-illusion",
     "category": "spell",
     "name": "Programmed Illusion",
     "source": "XPHB",
@@ -19367,6 +20003,7 @@
   },
   {
     "id": "xphb|project-image",
+    "canonicalId": "spell.project-image",
     "category": "spell",
     "name": "Project Image",
     "source": "XPHB",
@@ -19396,6 +20033,7 @@
   },
   {
     "id": "xphb|protection-from-energy",
+    "canonicalId": "spell.protection-from-energy",
     "category": "spell",
     "name": "Protection from Energy",
     "source": "XPHB",
@@ -19417,6 +20055,7 @@
   },
   {
     "id": "xphb|protection-from-evil-and-good",
+    "canonicalId": "spell.protection-from-evil-and-good",
     "category": "spell",
     "name": "Protection from Evil and Good",
     "source": "XPHB",
@@ -19438,6 +20077,7 @@
   },
   {
     "id": "xphb|protection-from-poison",
+    "canonicalId": "spell.protection-from-poison",
     "category": "spell",
     "name": "Protection from Poison",
     "source": "XPHB",
@@ -19459,6 +20099,7 @@
   },
   {
     "id": "xphb|purify-food-and-drink",
+    "canonicalId": "spell.purify-food-and-drink",
     "category": "spell",
     "name": "Purify Food and Drink",
     "source": "XPHB",
@@ -19480,6 +20121,7 @@
   },
   {
     "id": "xphb|raise-dead",
+    "canonicalId": "spell.raise-dead",
     "category": "spell",
     "name": "Raise Dead",
     "source": "XPHB",
@@ -19513,6 +20155,7 @@
   },
   {
     "id": "xphb|rary-s-telepathic-bond",
+    "canonicalId": "spell.rarys-telepathic-bond",
     "category": "spell",
     "name": "Rary's Telepathic Bond",
     "source": "XPHB",
@@ -19538,6 +20181,7 @@
   },
   {
     "id": "xphb|ray-of-enfeeblement",
+    "canonicalId": "spell.ray-of-enfeeblement",
     "category": "spell",
     "name": "Ray of Enfeeblement",
     "source": "XPHB",
@@ -19563,6 +20207,7 @@
   },
   {
     "id": "xphb|ray-of-frost",
+    "canonicalId": "spell.ray-of-frost",
     "category": "spell",
     "name": "Ray of Frost",
     "source": "XPHB",
@@ -19590,6 +20235,7 @@
   },
   {
     "id": "xphb|ray-of-sickness",
+    "canonicalId": "spell.ray-of-sickness",
     "category": "spell",
     "name": "Ray of Sickness",
     "source": "XPHB",
@@ -19617,6 +20263,7 @@
   },
   {
     "id": "xphb|regenerate",
+    "canonicalId": "spell.regenerate",
     "category": "spell",
     "name": "Regenerate",
     "source": "XPHB",
@@ -19638,6 +20285,7 @@
   },
   {
     "id": "xphb|reincarnate",
+    "canonicalId": "spell.reincarnate",
     "category": "spell",
     "name": "Reincarnate",
     "source": "XPHB",
@@ -19679,6 +20327,7 @@
   },
   {
     "id": "xphb|remove-curse",
+    "canonicalId": "spell.remove-curse",
     "category": "spell",
     "name": "Remove Curse",
     "source": "XPHB",
@@ -19700,6 +20349,7 @@
   },
   {
     "id": "xphb|resistance",
+    "canonicalId": "spell.resistance",
     "category": "spell",
     "name": "Resistance",
     "source": "XPHB",
@@ -19721,6 +20371,7 @@
   },
   {
     "id": "xphb|resurrection",
+    "canonicalId": "spell.resurrection",
     "category": "spell",
     "name": "Resurrection",
     "source": "XPHB",
@@ -19754,6 +20405,7 @@
   },
   {
     "id": "xphb|reverse-gravity",
+    "canonicalId": "spell.reverse-gravity",
     "category": "spell",
     "name": "Reverse Gravity",
     "source": "XPHB",
@@ -19779,6 +20431,7 @@
   },
   {
     "id": "xphb|revivify",
+    "canonicalId": "spell.revivify",
     "category": "spell",
     "name": "Revivify",
     "source": "XPHB",
@@ -19800,6 +20453,7 @@
   },
   {
     "id": "xphb|rope-trick",
+    "canonicalId": "spell.rope-trick",
     "category": "spell",
     "name": "Rope Trick",
     "source": "XPHB",
@@ -19825,6 +20479,7 @@
   },
   {
     "id": "xphb|sacred-flame",
+    "canonicalId": "spell.sacred-flame",
     "category": "spell",
     "name": "Sacred Flame",
     "source": "XPHB",
@@ -19852,6 +20507,7 @@
   },
   {
     "id": "xphb|sanctuary",
+    "canonicalId": "spell.sanctuary",
     "category": "spell",
     "name": "Sanctuary",
     "source": "XPHB",
@@ -19877,6 +20533,7 @@
   },
   {
     "id": "xphb|scorching-ray",
+    "canonicalId": "spell.scorching-ray",
     "category": "spell",
     "name": "Scorching Ray",
     "source": "XPHB",
@@ -19904,6 +20561,7 @@
   },
   {
     "id": "xphb|scrying",
+    "canonicalId": "spell.scrying",
     "category": "spell",
     "name": "Scrying",
     "source": "XPHB",
@@ -19959,6 +20617,7 @@
   },
   {
     "id": "xphb|searing-smite",
+    "canonicalId": "spell.searing-smite",
     "category": "spell",
     "name": "Searing Smite",
     "source": "XPHB",
@@ -19986,6 +20645,7 @@
   },
   {
     "id": "xphb|see-invisibility",
+    "canonicalId": "spell.see-invisibility",
     "category": "spell",
     "name": "See Invisibility",
     "source": "XPHB",
@@ -20007,6 +20667,7 @@
   },
   {
     "id": "xphb|seeming",
+    "canonicalId": "spell.seeming",
     "category": "spell",
     "name": "Seeming",
     "source": "XPHB",
@@ -20040,6 +20701,7 @@
   },
   {
     "id": "xphb|sending",
+    "canonicalId": "spell.sending",
     "category": "spell",
     "name": "Sending",
     "source": "XPHB",
@@ -20069,6 +20731,7 @@
   },
   {
     "id": "xphb|sequester",
+    "canonicalId": "spell.sequester",
     "category": "spell",
     "name": "Sequester",
     "source": "XPHB",
@@ -20098,6 +20761,7 @@
   },
   {
     "id": "xphb|shapechange",
+    "canonicalId": "spell.shapechange",
     "category": "spell",
     "name": "Shapechange",
     "source": "XPHB",
@@ -20131,6 +20795,7 @@
   },
   {
     "id": "xphb|shatter",
+    "canonicalId": "spell.shatter",
     "category": "spell",
     "name": "Shatter",
     "source": "XPHB",
@@ -20162,6 +20827,7 @@
   },
   {
     "id": "xphb|shield",
+    "canonicalId": "spell.shield",
     "category": "spell",
     "name": "Shield",
     "source": "XPHB",
@@ -20183,6 +20849,7 @@
   },
   {
     "id": "xphb|shield-of-faith",
+    "canonicalId": "spell.shield-of-faith",
     "category": "spell",
     "name": "Shield of Faith",
     "source": "XPHB",
@@ -20204,6 +20871,7 @@
   },
   {
     "id": "xphb|shillelagh",
+    "canonicalId": "spell.shillelagh",
     "category": "spell",
     "name": "Shillelagh",
     "source": "XPHB",
@@ -20235,6 +20903,7 @@
   },
   {
     "id": "xphb|shining-smite",
+    "canonicalId": "spell.shining-smite",
     "category": "spell",
     "name": "Shining Smite",
     "source": "XPHB",
@@ -20262,6 +20931,7 @@
   },
   {
     "id": "xphb|shocking-grasp",
+    "canonicalId": "spell.shocking-grasp",
     "category": "spell",
     "name": "Shocking Grasp",
     "source": "XPHB",
@@ -20289,6 +20959,7 @@
   },
   {
     "id": "xphb|silence",
+    "canonicalId": "spell.silence",
     "category": "spell",
     "name": "Silence",
     "source": "XPHB",
@@ -20310,6 +20981,7 @@
   },
   {
     "id": "xphb|silent-image",
+    "canonicalId": "spell.silent-image",
     "category": "spell",
     "name": "Silent Image",
     "source": "XPHB",
@@ -20339,6 +21011,7 @@
   },
   {
     "id": "xphb|simulacrum",
+    "canonicalId": "spell.simulacrum",
     "category": "spell",
     "name": "Simulacrum",
     "source": "XPHB",
@@ -20372,6 +21045,7 @@
   },
   {
     "id": "xphb|sleep",
+    "canonicalId": "spell.sleep",
     "category": "spell",
     "name": "Sleep",
     "source": "XPHB",
@@ -20397,6 +21071,7 @@
   },
   {
     "id": "xphb|sleet-storm",
+    "canonicalId": "spell.sleet-storm",
     "category": "spell",
     "name": "Sleet Storm",
     "source": "XPHB",
@@ -20422,6 +21097,7 @@
   },
   {
     "id": "xphb|slow",
+    "canonicalId": "spell.slow",
     "category": "spell",
     "name": "Slow",
     "source": "XPHB",
@@ -20451,6 +21127,7 @@
   },
   {
     "id": "xphb|sorcerous-burst",
+    "canonicalId": "spell.sorcerous-burst",
     "category": "spell",
     "name": "Sorcerous Burst",
     "source": "XPHB",
@@ -20482,6 +21159,7 @@
   },
   {
     "id": "xphb|spare-the-dying",
+    "canonicalId": "spell.spare-the-dying",
     "category": "spell",
     "name": "Spare the Dying",
     "source": "XPHB",
@@ -20509,6 +21187,7 @@
   },
   {
     "id": "xphb|speak-with-animals",
+    "canonicalId": "spell.speak-with-animals",
     "category": "spell",
     "name": "Speak with Animals",
     "source": "XPHB",
@@ -20534,6 +21213,7 @@
   },
   {
     "id": "xphb|speak-with-dead",
+    "canonicalId": "spell.speak-with-dead",
     "category": "spell",
     "name": "Speak with Dead",
     "source": "XPHB",
@@ -20559,6 +21239,7 @@
   },
   {
     "id": "xphb|speak-with-plants",
+    "canonicalId": "spell.speak-with-plants",
     "category": "spell",
     "name": "Speak with Plants",
     "source": "XPHB",
@@ -20592,6 +21273,7 @@
   },
   {
     "id": "xphb|spider-climb",
+    "canonicalId": "spell.spider-climb",
     "category": "spell",
     "name": "Spider Climb",
     "source": "XPHB",
@@ -20619,6 +21301,7 @@
   },
   {
     "id": "xphb|spike-growth",
+    "canonicalId": "spell.spike-growth",
     "category": "spell",
     "name": "Spike Growth",
     "source": "XPHB",
@@ -20644,6 +21327,7 @@
   },
   {
     "id": "xphb|spirit-guardians",
+    "canonicalId": "spell.spirit-guardians",
     "category": "spell",
     "name": "Spirit Guardians",
     "source": "XPHB",
@@ -20675,6 +21359,7 @@
   },
   {
     "id": "xphb|spiritual-weapon",
+    "canonicalId": "spell.spiritual-weapon",
     "category": "spell",
     "name": "Spiritual Weapon",
     "source": "XPHB",
@@ -20706,6 +21391,7 @@
   },
   {
     "id": "xphb|staggering-smite",
+    "canonicalId": "spell.staggering-smite",
     "category": "spell",
     "name": "Staggering Smite",
     "source": "XPHB",
@@ -20733,6 +21419,7 @@
   },
   {
     "id": "xphb|starry-wisp",
+    "canonicalId": "spell.starry-wisp",
     "category": "spell",
     "name": "Starry Wisp",
     "source": "XPHB",
@@ -20760,6 +21447,7 @@
   },
   {
     "id": "xphb|steel-wind-strike",
+    "canonicalId": "spell.steel-wind-strike",
     "category": "spell",
     "name": "Steel Wind Strike",
     "source": "XPHB",
@@ -20785,6 +21473,7 @@
   },
   {
     "id": "xphb|stinking-cloud",
+    "canonicalId": "spell.stinking-cloud",
     "category": "spell",
     "name": "Stinking Cloud",
     "source": "XPHB",
@@ -20810,6 +21499,7 @@
   },
   {
     "id": "xphb|stone-shape",
+    "canonicalId": "spell.stone-shape",
     "category": "spell",
     "name": "Stone Shape",
     "source": "XPHB",
@@ -20831,6 +21521,7 @@
   },
   {
     "id": "xphb|stoneskin",
+    "canonicalId": "spell.stoneskin",
     "category": "spell",
     "name": "Stoneskin",
     "source": "XPHB",
@@ -20852,6 +21543,7 @@
   },
   {
     "id": "xphb|storm-of-vengeance",
+    "canonicalId": "spell.storm-of-vengeance",
     "category": "spell",
     "name": "Storm of Vengeance",
     "source": "XPHB",
@@ -20893,6 +21585,7 @@
   },
   {
     "id": "xphb|suggestion",
+    "canonicalId": "spell.suggestion",
     "category": "spell",
     "name": "Suggestion",
     "source": "XPHB",
@@ -20918,6 +21611,7 @@
   },
   {
     "id": "xphb|summon-aberration",
+    "canonicalId": "spell.summon-aberration",
     "category": "spell",
     "name": "Summon Aberration",
     "source": "XPHB",
@@ -20953,6 +21647,7 @@
   },
   {
     "id": "xphb|summon-beast",
+    "canonicalId": "spell.summon-beast",
     "category": "spell",
     "name": "Summon Beast",
     "source": "XPHB",
@@ -20988,6 +21683,7 @@
   },
   {
     "id": "xphb|summon-celestial",
+    "canonicalId": "spell.summon-celestial",
     "category": "spell",
     "name": "Summon Celestial",
     "source": "XPHB",
@@ -21019,6 +21715,7 @@
   },
   {
     "id": "xphb|summon-construct",
+    "canonicalId": "spell.summon-construct",
     "category": "spell",
     "name": "Summon Construct",
     "source": "XPHB",
@@ -21050,6 +21747,7 @@
   },
   {
     "id": "xphb|summon-dragon",
+    "canonicalId": "spell.summon-dragon",
     "category": "spell",
     "name": "Summon Dragon",
     "source": "XPHB",
@@ -21085,6 +21783,7 @@
   },
   {
     "id": "xphb|summon-elemental",
+    "canonicalId": "spell.summon-elemental",
     "category": "spell",
     "name": "Summon Elemental",
     "source": "XPHB",
@@ -21120,6 +21819,7 @@
   },
   {
     "id": "xphb|summon-fey",
+    "canonicalId": "spell.summon-fey",
     "category": "spell",
     "name": "Summon Fey",
     "source": "XPHB",
@@ -21151,6 +21851,7 @@
   },
   {
     "id": "xphb|summon-fiend",
+    "canonicalId": "spell.summon-fiend",
     "category": "spell",
     "name": "Summon Fiend",
     "source": "XPHB",
@@ -21182,6 +21883,7 @@
   },
   {
     "id": "xphb|summon-undead",
+    "canonicalId": "spell.summon-undead",
     "category": "spell",
     "name": "Summon Undead",
     "source": "XPHB",
@@ -21213,6 +21915,7 @@
   },
   {
     "id": "xphb|sunbeam",
+    "canonicalId": "spell.sunbeam",
     "category": "spell",
     "name": "Sunbeam",
     "source": "XPHB",
@@ -21242,6 +21945,7 @@
   },
   {
     "id": "xphb|sunburst",
+    "canonicalId": "spell.sunburst",
     "category": "spell",
     "name": "Sunburst",
     "source": "XPHB",
@@ -21271,6 +21975,7 @@
   },
   {
     "id": "xphb|swift-quiver",
+    "canonicalId": "spell.swift-quiver",
     "category": "spell",
     "name": "Swift Quiver",
     "source": "XPHB",
@@ -21292,6 +21997,7 @@
   },
   {
     "id": "xphb|symbol",
+    "canonicalId": "spell.symbol",
     "category": "spell",
     "name": "Symbol",
     "source": "XPHB",
@@ -21357,6 +22063,7 @@
   },
   {
     "id": "xphb|synaptic-static",
+    "canonicalId": "spell.synaptic-static",
     "category": "spell",
     "name": "Synaptic Static",
     "source": "XPHB",
@@ -21382,6 +22089,7 @@
   },
   {
     "id": "xphb|tasha-s-bubbling-cauldron",
+    "canonicalId": "spell.tashas-bubbling-cauldron",
     "category": "spell",
     "name": "Tasha's Bubbling Cauldron",
     "source": "XPHB",
@@ -21411,6 +22119,7 @@
   },
   {
     "id": "xphb|tasha-s-hideous-laughter",
+    "canonicalId": "spell.tashas-hideous-laughter",
     "category": "spell",
     "name": "Tasha's Hideous Laughter",
     "source": "XPHB",
@@ -21442,6 +22151,7 @@
   },
   {
     "id": "xphb|telekinesis",
+    "canonicalId": "spell.telekinesis",
     "category": "spell",
     "name": "Telekinesis",
     "source": "XPHB",
@@ -21479,6 +22189,7 @@
   },
   {
     "id": "xphb|telepathy",
+    "canonicalId": "spell.telepathy",
     "category": "spell",
     "name": "Telepathy",
     "source": "XPHB",
@@ -21504,6 +22215,7 @@
   },
   {
     "id": "xphb|teleport",
+    "canonicalId": "spell.teleport",
     "category": "spell",
     "name": "Teleport",
     "source": "XPHB",
@@ -21572,6 +22284,7 @@
   },
   {
     "id": "xphb|teleportation-circle",
+    "canonicalId": "spell.teleportation-circle",
     "category": "spell",
     "name": "Teleportation Circle",
     "source": "XPHB",
@@ -21605,6 +22318,7 @@
   },
   {
     "id": "xphb|tenser-s-floating-disk",
+    "canonicalId": "spell.tensers-floating-disk",
     "category": "spell",
     "name": "Tenser's Floating Disk",
     "source": "XPHB",
@@ -21634,6 +22348,7 @@
   },
   {
     "id": "xphb|thaumaturgy",
+    "canonicalId": "spell.thaumaturgy",
     "category": "spell",
     "name": "Thaumaturgy",
     "source": "XPHB",
@@ -21679,6 +22394,7 @@
   },
   {
     "id": "xphb|thorn-whip",
+    "canonicalId": "spell.thorn-whip",
     "category": "spell",
     "name": "Thorn Whip",
     "source": "XPHB",
@@ -21706,6 +22422,7 @@
   },
   {
     "id": "xphb|thunderclap",
+    "canonicalId": "spell.thunderclap",
     "category": "spell",
     "name": "Thunderclap",
     "source": "XPHB",
@@ -21733,6 +22450,7 @@
   },
   {
     "id": "xphb|thunderous-smite",
+    "canonicalId": "spell.thunderous-smite",
     "category": "spell",
     "name": "Thunderous Smite",
     "source": "XPHB",
@@ -21760,6 +22478,7 @@
   },
   {
     "id": "xphb|thunderwave",
+    "canonicalId": "spell.thunderwave",
     "category": "spell",
     "name": "Thunderwave",
     "source": "XPHB",
@@ -21791,6 +22510,7 @@
   },
   {
     "id": "xphb|time-stop",
+    "canonicalId": "spell.time-stop",
     "category": "spell",
     "name": "Time Stop",
     "source": "XPHB",
@@ -21816,6 +22536,7 @@
   },
   {
     "id": "xphb|toll-the-dead",
+    "canonicalId": "spell.toll-the-dead",
     "category": "spell",
     "name": "Toll the Dead",
     "source": "XPHB",
@@ -21843,6 +22564,7 @@
   },
   {
     "id": "xphb|tongues",
+    "canonicalId": "spell.tongues",
     "category": "spell",
     "name": "Tongues",
     "source": "XPHB",
@@ -21864,6 +22586,7 @@
   },
   {
     "id": "xphb|transport-via-plants",
+    "canonicalId": "spell.transport-via-plants",
     "category": "spell",
     "name": "Transport via Plants",
     "source": "XPHB",
@@ -21885,6 +22608,7 @@
   },
   {
     "id": "xphb|tree-stride",
+    "canonicalId": "spell.tree-stride",
     "category": "spell",
     "name": "Tree Stride",
     "source": "XPHB",
@@ -21910,6 +22634,7 @@
   },
   {
     "id": "xphb|true-polymorph",
+    "canonicalId": "spell.true-polymorph",
     "category": "spell",
     "name": "True Polymorph",
     "source": "XPHB",
@@ -21963,6 +22688,7 @@
   },
   {
     "id": "xphb|true-resurrection",
+    "canonicalId": "spell.true-resurrection",
     "category": "spell",
     "name": "True Resurrection",
     "source": "XPHB",
@@ -21992,6 +22718,7 @@
   },
   {
     "id": "xphb|true-seeing",
+    "canonicalId": "spell.true-seeing",
     "category": "spell",
     "name": "True Seeing",
     "source": "XPHB",
@@ -22013,6 +22740,7 @@
   },
   {
     "id": "xphb|true-strike",
+    "canonicalId": "spell.true-strike",
     "category": "spell",
     "name": "True Strike",
     "source": "XPHB",
@@ -22040,6 +22768,7 @@
   },
   {
     "id": "xphb|tsunami",
+    "canonicalId": "spell.tsunami",
     "category": "spell",
     "name": "Tsunami",
     "source": "XPHB",
@@ -22073,6 +22802,7 @@
   },
   {
     "id": "xphb|unseen-servant",
+    "canonicalId": "spell.unseen-servant",
     "category": "spell",
     "name": "Unseen Servant",
     "source": "XPHB",
@@ -22102,6 +22832,7 @@
   },
   {
     "id": "xphb|vampiric-touch",
+    "canonicalId": "spell.vampiric-touch",
     "category": "spell",
     "name": "Vampiric Touch",
     "source": "XPHB",
@@ -22133,6 +22864,7 @@
   },
   {
     "id": "xphb|vicious-mockery",
+    "canonicalId": "spell.vicious-mockery",
     "category": "spell",
     "name": "Vicious Mockery",
     "source": "XPHB",
@@ -22160,6 +22892,7 @@
   },
   {
     "id": "xphb|vitriolic-sphere",
+    "canonicalId": "spell.vitriolic-sphere",
     "category": "spell",
     "name": "Vitriolic Sphere",
     "source": "XPHB",
@@ -22187,6 +22920,7 @@
   },
   {
     "id": "xphb|wall-of-fire",
+    "canonicalId": "spell.wall-of-fire",
     "category": "spell",
     "name": "Wall of Fire",
     "source": "XPHB",
@@ -22222,6 +22956,7 @@
   },
   {
     "id": "xphb|wall-of-force",
+    "canonicalId": "spell.wall-of-force",
     "category": "spell",
     "name": "Wall of Force",
     "source": "XPHB",
@@ -22247,6 +22982,7 @@
   },
   {
     "id": "xphb|wall-of-ice",
+    "canonicalId": "spell.wall-of-ice",
     "category": "spell",
     "name": "Wall of Ice",
     "source": "XPHB",
@@ -22286,6 +23022,7 @@
   },
   {
     "id": "xphb|wall-of-stone",
+    "canonicalId": "spell.wall-of-stone",
     "category": "spell",
     "name": "Wall of Stone",
     "source": "XPHB",
@@ -22327,6 +23064,7 @@
   },
   {
     "id": "xphb|wall-of-thorns",
+    "canonicalId": "spell.wall-of-thorns",
     "category": "spell",
     "name": "Wall of Thorns",
     "source": "XPHB",
@@ -22362,6 +23100,7 @@
   },
   {
     "id": "xphb|warding-bond",
+    "canonicalId": "spell.warding-bond",
     "category": "spell",
     "name": "Warding Bond",
     "source": "XPHB",
@@ -22391,6 +23130,7 @@
   },
   {
     "id": "xphb|water-breathing",
+    "canonicalId": "spell.water-breathing",
     "category": "spell",
     "name": "Water Breathing",
     "source": "XPHB",
@@ -22412,6 +23152,7 @@
   },
   {
     "id": "xphb|water-walk",
+    "canonicalId": "spell.water-walk",
     "category": "spell",
     "name": "Water Walk",
     "source": "XPHB",
@@ -22437,6 +23178,7 @@
   },
   {
     "id": "xphb|web",
+    "canonicalId": "spell.web",
     "category": "spell",
     "name": "Web",
     "source": "XPHB",
@@ -22474,6 +23216,7 @@
   },
   {
     "id": "xphb|weird",
+    "canonicalId": "spell.weird",
     "category": "spell",
     "name": "Weird",
     "source": "XPHB",
@@ -22499,6 +23242,7 @@
   },
   {
     "id": "xphb|wind-walk",
+    "canonicalId": "spell.wind-walk",
     "category": "spell",
     "name": "Wind Walk",
     "source": "XPHB",
@@ -22524,6 +23268,7 @@
   },
   {
     "id": "xphb|wind-wall",
+    "canonicalId": "spell.wind-wall",
     "category": "spell",
     "name": "Wind Wall",
     "source": "XPHB",
@@ -22553,6 +23298,7 @@
   },
   {
     "id": "xphb|wish",
+    "canonicalId": "spell.wish",
     "category": "spell",
     "name": "Wish",
     "source": "XPHB",
@@ -22598,6 +23344,7 @@
   },
   {
     "id": "xphb|witch-bolt",
+    "canonicalId": "spell.witch-bolt",
     "category": "spell",
     "name": "Witch Bolt",
     "source": "XPHB",
@@ -22633,6 +23380,7 @@
   },
   {
     "id": "xphb|word-of-radiance",
+    "canonicalId": "spell.word-of-radiance",
     "category": "spell",
     "name": "Word of Radiance",
     "source": "XPHB",
@@ -22660,6 +23408,7 @@
   },
   {
     "id": "xphb|word-of-recall",
+    "canonicalId": "spell.word-of-recall",
     "category": "spell",
     "name": "Word of Recall",
     "source": "XPHB",
@@ -22685,6 +23434,7 @@
   },
   {
     "id": "xphb|wrathful-smite",
+    "canonicalId": "spell.wrathful-smite",
     "category": "spell",
     "name": "Wrathful Smite",
     "source": "XPHB",
@@ -22712,6 +23462,7 @@
   },
   {
     "id": "xphb|yolande-s-regal-presence",
+    "canonicalId": "spell.yolandes-regal-presence",
     "category": "spell",
     "name": "Yolande's Regal Presence",
     "source": "XPHB",
@@ -22733,6 +23484,7 @@
   },
   {
     "id": "xphb|zone-of-truth",
+    "canonicalId": "spell.zone-of-truth",
     "category": "spell",
     "name": "Zone of Truth",
     "source": "XPHB",
@@ -22758,6 +23510,7 @@
   },
   {
     "id": "tce|blade-of-disaster",
+    "canonicalId": "spell.blade-of-disaster",
     "category": "spell",
     "name": "Blade of Disaster",
     "source": "TCE",
@@ -22787,6 +23540,7 @@
   },
   {
     "id": "tce|booming-blade",
+    "canonicalId": "spell.booming-blade",
     "category": "spell",
     "name": "Booming Blade",
     "source": "TCE",
@@ -22812,6 +23566,7 @@
   },
   {
     "id": "tce|dream-of-the-blue-veil",
+    "canonicalId": "spell.dream-of-the-blue-veil",
     "category": "spell",
     "name": "Dream of the Blue Veil",
     "source": "TCE",
@@ -22841,6 +23596,7 @@
   },
   {
     "id": "tce|green-flame-blade",
+    "canonicalId": "spell.green-flame-blade",
     "category": "spell",
     "name": "Green-Flame Blade",
     "source": "TCE",
@@ -22866,6 +23622,7 @@
   },
   {
     "id": "tce|intellect-fortress",
+    "canonicalId": "spell.intellect-fortress",
     "category": "spell",
     "name": "Intellect Fortress",
     "source": "TCE",
@@ -22893,6 +23650,7 @@
   },
   {
     "id": "tce|lightning-lure",
+    "canonicalId": "spell.lightning-lure",
     "category": "spell",
     "name": "Lightning Lure",
     "source": "TCE",
@@ -22918,6 +23676,7 @@
   },
   {
     "id": "tce|mind-sliver",
+    "canonicalId": "spell.mind-sliver",
     "category": "spell",
     "name": "Mind Sliver",
     "source": "TCE",
@@ -22943,6 +23702,7 @@
   },
   {
     "id": "tce|spirit-shroud",
+    "canonicalId": "spell.spirit-shroud",
     "category": "spell",
     "name": "Spirit Shroud",
     "source": "TCE",
@@ -22978,6 +23738,7 @@
   },
   {
     "id": "tce|summon-aberration",
+    "canonicalId": "spell.summon-aberration",
     "category": "spell",
     "name": "Summon Aberration",
     "source": "TCE",
@@ -23013,6 +23774,7 @@
   },
   {
     "id": "tce|summon-beast",
+    "canonicalId": "spell.summon-beast",
     "category": "spell",
     "name": "Summon Beast",
     "source": "TCE",
@@ -23048,6 +23810,7 @@
   },
   {
     "id": "tce|summon-celestial",
+    "canonicalId": "spell.summon-celestial",
     "category": "spell",
     "name": "Summon Celestial",
     "source": "TCE",
@@ -23079,6 +23842,7 @@
   },
   {
     "id": "tce|summon-construct",
+    "canonicalId": "spell.summon-construct",
     "category": "spell",
     "name": "Summon Construct",
     "source": "TCE",
@@ -23110,6 +23874,7 @@
   },
   {
     "id": "tce|summon-elemental",
+    "canonicalId": "spell.summon-elemental",
     "category": "spell",
     "name": "Summon Elemental",
     "source": "TCE",
@@ -23145,6 +23910,7 @@
   },
   {
     "id": "tce|summon-fey",
+    "canonicalId": "spell.summon-fey",
     "category": "spell",
     "name": "Summon Fey",
     "source": "TCE",
@@ -23176,6 +23942,7 @@
   },
   {
     "id": "tce|summon-fiend",
+    "canonicalId": "spell.summon-fiend",
     "category": "spell",
     "name": "Summon Fiend",
     "source": "TCE",
@@ -23207,6 +23974,7 @@
   },
   {
     "id": "tce|summon-shadowspawn",
+    "canonicalId": "spell.summon-shadowspawn",
     "category": "spell",
     "name": "Summon Shadowspawn",
     "source": "TCE",
@@ -23238,6 +24006,7 @@
   },
   {
     "id": "tce|summon-undead",
+    "canonicalId": "spell.summon-undead",
     "category": "spell",
     "name": "Summon Undead",
     "source": "TCE",
@@ -23269,6 +24038,7 @@
   },
   {
     "id": "tce|sword-burst",
+    "canonicalId": "spell.sword-burst",
     "category": "spell",
     "name": "Sword Burst",
     "source": "TCE",
@@ -23294,6 +24064,7 @@
   },
   {
     "id": "tce|tasha-s-caustic-brew",
+    "canonicalId": "spell.tashas-caustic-brew",
     "category": "spell",
     "name": "Tasha's Caustic Brew",
     "source": "TCE",
@@ -23321,6 +24092,7 @@
   },
   {
     "id": "tce|tasha-s-mind-whip",
+    "canonicalId": "spell.tashas-mind-whip",
     "category": "spell",
     "name": "Tasha's Mind Whip",
     "source": "TCE",
@@ -23348,6 +24120,7 @@
   },
   {
     "id": "tce|tasha-s-otherworldly-guise",
+    "canonicalId": "spell.tashas-otherworldly-guise",
     "category": "spell",
     "name": "Tasha's Otherworldly Guise",
     "source": "TCE",
@@ -23384,6 +24157,7 @@
   },
   {
     "id": "xge|abi-dalzim-s-horrid-wilting",
+    "canonicalId": "spell.abi-dalzims-horrid-wilting",
     "category": "spell",
     "name": "Abi-Dalzim's Horrid Wilting",
     "source": "XGE",
@@ -23409,6 +24183,7 @@
   },
   {
     "id": "xge|absorb-elements",
+    "canonicalId": "spell.absorb-elements",
     "category": "spell",
     "name": "Absorb Elements",
     "source": "XGE",
@@ -23436,6 +24211,7 @@
   },
   {
     "id": "xge|aganazzar-s-scorcher",
+    "canonicalId": "spell.aganazzars-scorcher",
     "category": "spell",
     "name": "Aganazzar's Scorcher",
     "source": "XGE",
@@ -23463,6 +24239,7 @@
   },
   {
     "id": "xge|beast-bond",
+    "canonicalId": "spell.beast-bond",
     "category": "spell",
     "name": "Beast Bond",
     "source": "XGE",
@@ -23484,6 +24261,7 @@
   },
   {
     "id": "xge|bones-of-the-earth",
+    "canonicalId": "spell.bones-of-the-earth",
     "category": "spell",
     "name": "Bones of the Earth",
     "source": "XGE",
@@ -23519,6 +24297,7 @@
   },
   {
     "id": "xge|catapult",
+    "canonicalId": "spell.catapult",
     "category": "spell",
     "name": "Catapult",
     "source": "XGE",
@@ -23546,6 +24325,7 @@
   },
   {
     "id": "xge|catnap",
+    "canonicalId": "spell.catnap",
     "category": "spell",
     "name": "Catnap",
     "source": "XGE",
@@ -23573,6 +24353,7 @@
   },
   {
     "id": "xge|cause-fear",
+    "canonicalId": "spell.cause-fear",
     "category": "spell",
     "name": "Cause Fear",
     "source": "XGE",
@@ -23600,6 +24381,7 @@
   },
   {
     "id": "xge|ceremony",
+    "canonicalId": "spell.ceremony",
     "category": "spell",
     "name": "Ceremony",
     "source": "XGE",
@@ -23645,6 +24427,7 @@
   },
   {
     "id": "xge|chaos-bolt",
+    "canonicalId": "spell.chaos-bolt",
     "category": "spell",
     "name": "Chaos Bolt",
     "source": "XGE",
@@ -23694,6 +24477,7 @@
   },
   {
     "id": "xge|charm-monster",
+    "canonicalId": "spell.charm-monster",
     "category": "spell",
     "name": "Charm Monster",
     "source": "XGE",
@@ -23721,6 +24505,7 @@
   },
   {
     "id": "xge|control-flames",
+    "canonicalId": "spell.control-flames",
     "category": "spell",
     "name": "Control Flames",
     "source": "XGE",
@@ -23755,6 +24540,7 @@
   },
   {
     "id": "xge|control-winds",
+    "canonicalId": "spell.control-winds",
     "category": "spell",
     "name": "Control Winds",
     "source": "XGE",
@@ -23788,6 +24574,7 @@
   },
   {
     "id": "xge|create-bonfire",
+    "canonicalId": "spell.create-bonfire",
     "category": "spell",
     "name": "Create Bonfire",
     "source": "XGE",
@@ -23817,6 +24604,7 @@
   },
   {
     "id": "xge|create-homunculus",
+    "canonicalId": "spell.create-homunculus",
     "category": "spell",
     "name": "Create Homunculus",
     "source": "XGE",
@@ -23850,6 +24638,7 @@
   },
   {
     "id": "xge|crown-of-stars",
+    "canonicalId": "spell.crown-of-stars",
     "category": "spell",
     "name": "Crown of Stars",
     "source": "XGE",
@@ -23881,6 +24670,7 @@
   },
   {
     "id": "xge|danse-macabre",
+    "canonicalId": "spell.danse-macabre",
     "category": "spell",
     "name": "Danse Macabre",
     "source": "XGE",
@@ -23916,6 +24706,7 @@
   },
   {
     "id": "xge|dawn",
+    "canonicalId": "spell.dawn",
     "category": "spell",
     "name": "Dawn",
     "source": "XGE",
@@ -23945,6 +24736,7 @@
   },
   {
     "id": "xge|dragon-s-breath",
+    "canonicalId": "spell.dragons-breath",
     "category": "spell",
     "name": "Dragon's Breath",
     "source": "XGE",
@@ -23972,6 +24764,7 @@
   },
   {
     "id": "xge|druid-grove",
+    "canonicalId": "spell.druid-grove",
     "category": "spell",
     "name": "Druid Grove",
     "source": "XGE",
@@ -24033,6 +24826,7 @@
   },
   {
     "id": "xge|dust-devil",
+    "canonicalId": "spell.dust-devil",
     "category": "spell",
     "name": "Dust Devil",
     "source": "XGE",
@@ -24068,6 +24862,7 @@
   },
   {
     "id": "xge|earth-tremor",
+    "canonicalId": "spell.earth-tremor",
     "category": "spell",
     "name": "Earth Tremor",
     "source": "XGE",
@@ -24095,6 +24890,7 @@
   },
   {
     "id": "xge|earthbind",
+    "canonicalId": "spell.earthbind",
     "category": "spell",
     "name": "Earthbind",
     "source": "XGE",
@@ -24116,6 +24912,7 @@
   },
   {
     "id": "xge|elemental-bane",
+    "canonicalId": "spell.elemental-bane",
     "category": "spell",
     "name": "Elemental Bane",
     "source": "XGE",
@@ -24143,6 +24940,7 @@
   },
   {
     "id": "xge|enemies-abound",
+    "canonicalId": "spell.enemies-abound",
     "category": "spell",
     "name": "Enemies Abound",
     "source": "XGE",
@@ -24168,6 +24966,7 @@
   },
   {
     "id": "xge|enervation",
+    "canonicalId": "spell.enervation",
     "category": "spell",
     "name": "Enervation",
     "source": "XGE",
@@ -24199,6 +24998,7 @@
   },
   {
     "id": "xge|erupting-earth",
+    "canonicalId": "spell.erupting-earth",
     "category": "spell",
     "name": "Erupting Earth",
     "source": "XGE",
@@ -24226,6 +25026,7 @@
   },
   {
     "id": "xge|far-step",
+    "canonicalId": "spell.far-step",
     "category": "spell",
     "name": "Far Step",
     "source": "XGE",
@@ -24247,6 +25048,7 @@
   },
   {
     "id": "xge|find-greater-steed",
+    "canonicalId": "spell.find-greater-steed",
     "category": "spell",
     "name": "Find Greater Steed",
     "source": "XGE",
@@ -24284,6 +25086,7 @@
   },
   {
     "id": "xge|flame-arrows",
+    "canonicalId": "spell.flame-arrows",
     "category": "spell",
     "name": "Flame Arrows",
     "source": "XGE",
@@ -24311,6 +25114,7 @@
   },
   {
     "id": "xge|frostbite",
+    "canonicalId": "spell.frostbite",
     "category": "spell",
     "name": "Frostbite",
     "source": "XGE",
@@ -24336,6 +25140,7 @@
   },
   {
     "id": "xge|guardian-of-nature",
+    "canonicalId": "spell.guardian-of-nature",
     "category": "spell",
     "name": "Guardian of Nature",
     "source": "XGE",
@@ -24383,6 +25188,7 @@
   },
   {
     "id": "xge|gust",
+    "canonicalId": "spell.gust",
     "category": "spell",
     "name": "Gust",
     "source": "XGE",
@@ -24412,6 +25218,7 @@
   },
   {
     "id": "xge|healing-spirit",
+    "canonicalId": "spell.healing-spirit",
     "category": "spell",
     "name": "Healing Spirit",
     "source": "XGE",
@@ -24447,6 +25254,7 @@
   },
   {
     "id": "xge|holy-weapon",
+    "canonicalId": "spell.holy-weapon",
     "category": "spell",
     "name": "Holy Weapon",
     "source": "XGE",
@@ -24472,6 +25280,7 @@
   },
   {
     "id": "xge|ice-knife",
+    "canonicalId": "spell.ice-knife",
     "category": "spell",
     "name": "Ice Knife",
     "source": "XGE",
@@ -24499,6 +25308,7 @@
   },
   {
     "id": "xge|illusory-dragon",
+    "canonicalId": "spell.illusory-dragon",
     "category": "spell",
     "name": "Illusory Dragon",
     "source": "XGE",
@@ -24532,6 +25342,7 @@
   },
   {
     "id": "xge|immolation",
+    "canonicalId": "spell.immolation",
     "category": "spell",
     "name": "Immolation",
     "source": "XGE",
@@ -24557,6 +25368,7 @@
   },
   {
     "id": "xge|infernal-calling",
+    "canonicalId": "spell.infernal-calling",
     "category": "spell",
     "name": "Infernal Calling",
     "source": "XGE",
@@ -24600,6 +25412,7 @@
   },
   {
     "id": "xge|infestation",
+    "canonicalId": "spell.infestation",
     "category": "spell",
     "name": "Infestation",
     "source": "XGE",
@@ -24625,6 +25438,7 @@
   },
   {
     "id": "xge|investiture-of-flame",
+    "canonicalId": "spell.investiture-of-flame",
     "category": "spell",
     "name": "Investiture of Flame",
     "source": "XGE",
@@ -24654,6 +25468,7 @@
   },
   {
     "id": "xge|investiture-of-ice",
+    "canonicalId": "spell.investiture-of-ice",
     "category": "spell",
     "name": "Investiture of Ice",
     "source": "XGE",
@@ -24684,6 +25499,7 @@
   },
   {
     "id": "xge|investiture-of-stone",
+    "canonicalId": "spell.investiture-of-stone",
     "category": "spell",
     "name": "Investiture of Stone",
     "source": "XGE",
@@ -24713,6 +25529,7 @@
   },
   {
     "id": "xge|investiture-of-wind",
+    "canonicalId": "spell.investiture-of-wind",
     "category": "spell",
     "name": "Investiture of Wind",
     "source": "XGE",
@@ -24742,6 +25559,7 @@
   },
   {
     "id": "xge|invulnerability",
+    "canonicalId": "spell.invulnerability",
     "category": "spell",
     "name": "Invulnerability",
     "source": "XGE",
@@ -24767,6 +25585,7 @@
   },
   {
     "id": "xge|life-transference",
+    "canonicalId": "spell.life-transference",
     "category": "spell",
     "name": "Life Transference",
     "source": "XGE",
@@ -24794,6 +25613,7 @@
   },
   {
     "id": "xge|maddening-darkness",
+    "canonicalId": "spell.maddening-darkness",
     "category": "spell",
     "name": "Maddening Darkness",
     "source": "XGE",
@@ -24819,6 +25639,7 @@
   },
   {
     "id": "xge|maelstrom",
+    "canonicalId": "spell.maelstrom",
     "category": "spell",
     "name": "Maelstrom",
     "source": "XGE",
@@ -24840,6 +25661,7 @@
   },
   {
     "id": "xge|magic-stone",
+    "canonicalId": "spell.magic-stone",
     "category": "spell",
     "name": "Magic Stone",
     "source": "XGE",
@@ -24865,6 +25687,7 @@
   },
   {
     "id": "xge|mass-polymorph",
+    "canonicalId": "spell.mass-polymorph",
     "category": "spell",
     "name": "Mass Polymorph",
     "source": "XGE",
@@ -24902,6 +25725,7 @@
   },
   {
     "id": "xge|maximilian-s-earthen-grasp",
+    "canonicalId": "spell.maximilians-earthen-grasp",
     "category": "spell",
     "name": "Maximilian's Earthen Grasp",
     "source": "XGE",
@@ -24935,6 +25759,7 @@
   },
   {
     "id": "xge|melf-s-minute-meteors",
+    "canonicalId": "spell.melfs-minute-meteors",
     "category": "spell",
     "name": "Melf's Minute Meteors",
     "source": "XGE",
@@ -24962,6 +25787,7 @@
   },
   {
     "id": "xge|mental-prison",
+    "canonicalId": "spell.mental-prison",
     "category": "spell",
     "name": "Mental Prison",
     "source": "XGE",
@@ -24983,6 +25809,7 @@
   },
   {
     "id": "xge|mighty-fortress",
+    "canonicalId": "spell.mighty-fortress",
     "category": "spell",
     "name": "Mighty Fortress",
     "source": "XGE",
@@ -25028,6 +25855,7 @@
   },
   {
     "id": "xge|mind-spike",
+    "canonicalId": "spell.mind-spike",
     "category": "spell",
     "name": "Mind Spike",
     "source": "XGE",
@@ -25055,6 +25883,7 @@
   },
   {
     "id": "xge|mold-earth",
+    "canonicalId": "spell.mold-earth",
     "category": "spell",
     "name": "Mold Earth",
     "source": "XGE",
@@ -25088,6 +25917,7 @@
   },
   {
     "id": "xge|negative-energy-flood",
+    "canonicalId": "spell.negative-energy-flood",
     "category": "spell",
     "name": "Negative Energy Flood",
     "source": "XGE",
@@ -25113,6 +25943,7 @@
   },
   {
     "id": "xge|power-word-pain",
+    "canonicalId": "spell.power-word-pain",
     "category": "spell",
     "name": "Power Word Pain",
     "source": "XGE",
@@ -25142,6 +25973,7 @@
   },
   {
     "id": "xge|primal-savagery",
+    "canonicalId": "spell.primal-savagery",
     "category": "spell",
     "name": "Primal Savagery",
     "source": "XGE",
@@ -25167,6 +25999,7 @@
   },
   {
     "id": "xge|primordial-ward",
+    "canonicalId": "spell.primordial-ward",
     "category": "spell",
     "name": "Primordial Ward",
     "source": "XGE",
@@ -25192,6 +26025,7 @@
   },
   {
     "id": "xge|psychic-scream",
+    "canonicalId": "spell.psychic-scream",
     "category": "spell",
     "name": "Psychic Scream",
     "source": "XGE",
@@ -25221,6 +26055,7 @@
   },
   {
     "id": "xge|pyrotechnics",
+    "canonicalId": "spell.pyrotechnics",
     "category": "spell",
     "name": "Pyrotechnics",
     "source": "XGE",
@@ -25250,6 +26085,7 @@
   },
   {
     "id": "xge|scatter",
+    "canonicalId": "spell.scatter",
     "category": "spell",
     "name": "Scatter",
     "source": "XGE",
@@ -25271,6 +26107,7 @@
   },
   {
     "id": "xge|shadow-blade",
+    "canonicalId": "spell.shadow-blade",
     "category": "spell",
     "name": "Shadow Blade",
     "source": "XGE",
@@ -25302,6 +26139,7 @@
   },
   {
     "id": "xge|shadow-of-moil",
+    "canonicalId": "spell.shadow-of-moil",
     "category": "spell",
     "name": "Shadow of Moil",
     "source": "XGE",
@@ -25327,6 +26165,7 @@
   },
   {
     "id": "xge|shape-water",
+    "canonicalId": "spell.shape-water",
     "category": "spell",
     "name": "Shape Water",
     "source": "XGE",
@@ -25361,6 +26200,7 @@
   },
   {
     "id": "xge|sickening-radiance",
+    "canonicalId": "spell.sickening-radiance",
     "category": "spell",
     "name": "Sickening Radiance",
     "source": "XGE",
@@ -25386,6 +26226,7 @@
   },
   {
     "id": "xge|skill-empowerment",
+    "canonicalId": "spell.skill-empowerment",
     "category": "spell",
     "name": "Skill Empowerment",
     "source": "XGE",
@@ -25411,6 +26252,7 @@
   },
   {
     "id": "xge|skywrite",
+    "canonicalId": "spell.skywrite",
     "category": "spell",
     "name": "Skywrite",
     "source": "XGE",
@@ -25432,6 +26274,7 @@
   },
   {
     "id": "xge|snare",
+    "canonicalId": "spell.snare",
     "category": "spell",
     "name": "Snare",
     "source": "XGE",
@@ -25469,6 +26312,7 @@
   },
   {
     "id": "xge|snilloc-s-snowball-swarm",
+    "canonicalId": "spell.snillocs-snowball-swarm",
     "category": "spell",
     "name": "Snilloc's Snowball Swarm",
     "source": "XGE",
@@ -25496,6 +26340,7 @@
   },
   {
     "id": "xge|soul-cage",
+    "canonicalId": "spell.soul-cage",
     "category": "spell",
     "name": "Soul Cage",
     "source": "XGE",
@@ -25537,6 +26382,7 @@
   },
   {
     "id": "xge|steel-wind-strike",
+    "canonicalId": "spell.steel-wind-strike",
     "category": "spell",
     "name": "Steel Wind Strike",
     "source": "XGE",
@@ -25562,6 +26408,7 @@
   },
   {
     "id": "xge|storm-sphere",
+    "canonicalId": "spell.storm-sphere",
     "category": "spell",
     "name": "Storm Sphere",
     "source": "XGE",
@@ -25597,6 +26444,7 @@
   },
   {
     "id": "xge|summon-greater-demon",
+    "canonicalId": "spell.summon-greater-demon",
     "category": "spell",
     "name": "Summon Greater Demon",
     "source": "XGE",
@@ -25636,6 +26484,7 @@
   },
   {
     "id": "xge|summon-lesser-demons",
+    "canonicalId": "spell.summon-lesser-demons",
     "category": "spell",
     "name": "Summon Lesser Demons",
     "source": "XGE",
@@ -25684,6 +26533,7 @@
   },
   {
     "id": "xge|synaptic-static",
+    "canonicalId": "spell.synaptic-static",
     "category": "spell",
     "name": "Synaptic Static",
     "source": "XGE",
@@ -25709,6 +26559,7 @@
   },
   {
     "id": "xge|temple-of-the-gods",
+    "canonicalId": "spell.temple-of-the-gods",
     "category": "spell",
     "name": "Temple of the Gods",
     "source": "XGE",
@@ -25758,6 +26609,7 @@
   },
   {
     "id": "xge|tenser-s-transformation",
+    "canonicalId": "spell.tensers-transformation",
     "category": "spell",
     "name": "Tenser's Transformation",
     "source": "XGE",
@@ -25794,6 +26646,7 @@
   },
   {
     "id": "xge|thunder-step",
+    "canonicalId": "spell.thunder-step",
     "category": "spell",
     "name": "Thunder Step",
     "source": "XGE",
@@ -25825,6 +26678,7 @@
   },
   {
     "id": "xge|thunderclap",
+    "canonicalId": "spell.thunderclap",
     "category": "spell",
     "name": "Thunderclap",
     "source": "XGE",
@@ -25850,6 +26704,7 @@
   },
   {
     "id": "xge|tidal-wave",
+    "canonicalId": "spell.tidal-wave",
     "category": "spell",
     "name": "Tidal Wave",
     "source": "XGE",
@@ -25871,6 +26726,7 @@
   },
   {
     "id": "xge|tiny-servant",
+    "canonicalId": "spell.tiny-servant",
     "category": "spell",
     "name": "Tiny Servant",
     "source": "XGE",
@@ -25906,6 +26762,7 @@
   },
   {
     "id": "xge|toll-the-dead",
+    "canonicalId": "spell.toll-the-dead",
     "category": "spell",
     "name": "Toll the Dead",
     "source": "XGE",
@@ -25931,6 +26788,7 @@
   },
   {
     "id": "xge|transmute-rock",
+    "canonicalId": "spell.transmute-rock",
     "category": "spell",
     "name": "Transmute Rock",
     "source": "XGE",
@@ -25968,6 +26826,7 @@
   },
   {
     "id": "xge|vitriolic-sphere",
+    "canonicalId": "spell.vitriolic-sphere",
     "category": "spell",
     "name": "Vitriolic Sphere",
     "source": "XGE",
@@ -25995,6 +26854,7 @@
   },
   {
     "id": "xge|wall-of-light",
+    "canonicalId": "spell.wall-of-light",
     "category": "spell",
     "name": "Wall of Light",
     "source": "XGE",
@@ -26034,6 +26894,7 @@
   },
   {
     "id": "xge|wall-of-sand",
+    "canonicalId": "spell.wall-of-sand",
     "category": "spell",
     "name": "Wall of Sand",
     "source": "XGE",
@@ -26055,6 +26916,7 @@
   },
   {
     "id": "xge|wall-of-water",
+    "canonicalId": "spell.wall-of-water",
     "category": "spell",
     "name": "Wall of Water",
     "source": "XGE",
@@ -26080,6 +26942,7 @@
   },
   {
     "id": "xge|warding-wind",
+    "canonicalId": "spell.warding-wind",
     "category": "spell",
     "name": "Warding Wind",
     "source": "XGE",
@@ -26115,6 +26978,7 @@
   },
   {
     "id": "xge|watery-sphere",
+    "canonicalId": "spell.watery-sphere",
     "category": "spell",
     "name": "Watery Sphere",
     "source": "XGE",
@@ -26152,6 +27016,7 @@
   },
   {
     "id": "xge|whirlwind",
+    "canonicalId": "spell.whirlwind",
     "category": "spell",
     "name": "Whirlwind",
     "source": "XGE",
@@ -26181,6 +27046,7 @@
   },
   {
     "id": "xge|word-of-radiance",
+    "canonicalId": "spell.word-of-radiance",
     "category": "spell",
     "name": "Word of Radiance",
     "source": "XGE",
@@ -26206,6 +27072,7 @@
   },
   {
     "id": "xge|wrath-of-nature",
+    "canonicalId": "spell.wrath-of-nature",
     "category": "spell",
     "name": "Wrath of Nature",
     "source": "XGE",
@@ -26243,6 +27110,7 @@
   },
   {
     "id": "xge|zephyr-strike",
+    "canonicalId": "spell.zephyr-strike",
     "category": "spell",
     "name": "Zephyr Strike",
     "source": "XGE",

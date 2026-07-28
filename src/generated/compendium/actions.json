@@ -1,6 +1,7 @@
 [
   {
     "id": "phb|attack",
+    "canonicalId": "action.attack",
     "category": "action",
     "name": "Attack",
     "source": "PHB",
@@ -14,6 +15,7 @@
   },
   {
     "id": "phb|cast-a-spell",
+    "canonicalId": "action.cast-a-spell",
     "category": "action",
     "name": "Cast a Spell",
     "source": "PHB",
@@ -27,6 +29,7 @@
   },
   {
     "id": "phb|dash",
+    "canonicalId": "action.dash",
     "category": "action",
     "name": "Dash",
     "source": "PHB",
@@ -40,6 +43,7 @@
   },
   {
     "id": "phb|disengage",
+    "canonicalId": "action.disengage",
     "category": "action",
     "name": "Disengage",
     "source": "PHB",
@@ -53,6 +57,7 @@
   },
   {
     "id": "phb|dodge",
+    "canonicalId": "action.dodge",
     "category": "action",
     "name": "Dodge",
     "source": "PHB",
@@ -66,6 +71,7 @@
   },
   {
     "id": "phb|help",
+    "canonicalId": "action.help",
     "category": "action",
     "name": "Help",
     "source": "PHB",
@@ -79,6 +85,7 @@
   },
   {
     "id": "phb|hide",
+    "canonicalId": "action.hide",
     "category": "action",
     "name": "Hide",
     "source": "PHB",
@@ -92,6 +99,7 @@
   },
   {
     "id": "phb|ready",
+    "canonicalId": "action.ready",
     "category": "action",
     "name": "Ready",
     "source": "PHB",
@@ -105,6 +113,7 @@
   },
   {
     "id": "phb|search",
+    "canonicalId": "action.search",
     "category": "action",
     "name": "Search",
     "source": "PHB",
@@ -118,6 +127,7 @@
   },
   {
     "id": "phb|use-an-object",
+    "canonicalId": "action.use-an-object",
     "category": "action",
     "name": "Use an Object",
     "source": "PHB",
@@ -131,6 +141,7 @@
   },
   {
     "id": "xphb|influence",
+    "canonicalId": "action.influence",
     "category": "action",
     "name": "Influence",
     "source": "XPHB",
@@ -144,6 +155,7 @@
   },
   {
     "id": "xphb|study",
+    "canonicalId": "action.study",
     "category": "action",
     "name": "Study",
     "source": "XPHB",
@@ -157,6 +169,7 @@
   },
   {
     "id": "xphb|utilize",
+    "canonicalId": "action.utilize",
     "category": "action",
     "name": "Utilize",
     "source": "XPHB",

@@ -109,9 +109,7 @@ export function processEntries(entries: readonly unknown[]): ContentBlock[] {
 
     if (obj.type === "table" && Array.isArray(obj.colLabels) && Array.isArray(obj.rows)) {
       const headers = obj.colLabels.map(resolveCell);
-      const rows = obj.rows.map((row: readonly unknown[]) =>
-        row.map(resolveCell),
-      );
+      const rows = obj.rows.map((row: readonly unknown[]) => row.map(resolveCell));
       if (headers.length > 0 && rows.length > 0) {
         blocks.push({ type: "table", headers, rows });
       }

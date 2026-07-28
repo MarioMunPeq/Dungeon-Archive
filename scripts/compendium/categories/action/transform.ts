@@ -1,5 +1,6 @@
 import type { Action } from "../../../../src/types/compendium";
 import { generateId } from "../../id";
+import { createCanonicalId } from "../../identity";
 
 interface StaticAction {
   readonly name: string;
@@ -105,6 +106,7 @@ const STANDARD_ACTIONS: readonly StaticAction[] = [
 export function transformActions(): Action[] {
   return STANDARD_ACTIONS.map((a) => ({
     id: generateId(a.source, a.name),
+    canonicalId: createCanonicalId("action", a.name),
     category: "action" as const,
     name: a.name,
     source: a.source,

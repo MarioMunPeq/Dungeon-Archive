@@ -21,7 +21,11 @@ export function validateEquipment(items: Equipment[]): ValidationError[] {
       errors.push({ id: item.id, field: "type", message: "Type is empty" });
     }
     if (item.category !== "equipment") {
-      errors.push({ id: item.id, field: "category", message: `Invalid category: ${item.category}` });
+      errors.push({
+        id: item.id,
+        field: "category",
+        message: `Invalid category: ${item.category}`,
+      });
     }
     if (ids.has(item.id)) {
       errors.push({ id: item.id, field: "id", message: "Duplicate ID" });

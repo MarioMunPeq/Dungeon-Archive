@@ -21,7 +21,11 @@ export function validateSpells(spells: Spell[]): ValidationError[] {
       errors.push({ id: spell.id, field: "level", message: `Invalid level: ${spell.level}` });
     }
     if (spell.category !== "spell") {
-      errors.push({ id: spell.id, field: "category", message: `Invalid category: ${spell.category}` });
+      errors.push({
+        id: spell.id,
+        field: "category",
+        message: `Invalid category: ${spell.category}`,
+      });
     }
     if (ids.has(spell.id)) {
       errors.push({ id: spell.id, field: "id", message: "Duplicate ID" });

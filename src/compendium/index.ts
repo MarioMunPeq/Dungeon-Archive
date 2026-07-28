@@ -22,6 +22,7 @@ export type {
   SearchIndexEntry,
   CompendiumEntry,
   EntityCategory,
+  EntityVersion,
 } from "@/types/compendium";
 
 export type { ContentBlock } from "@/types/content-block";

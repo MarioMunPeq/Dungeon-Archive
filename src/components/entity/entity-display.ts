@@ -1,4 +1,11 @@
-import type { Spell, Condition, Equipment, Action, SearchIndexEntry } from "@/compendium";
+import type {
+  Spell,
+  Condition,
+  Equipment,
+  Action,
+  SearchIndexEntry,
+  EntityVersion,
+} from "@/compendium";
 import { getEntity } from "@/compendium";
 
 export interface EntityDisplayInfo {
@@ -8,9 +15,12 @@ export interface EntityDisplayInfo {
 
 export interface SearchResultItem {
   readonly id: string;
+  readonly canonicalId: string;
   readonly title: string;
   readonly subtitle: string;
+  readonly source: string;
   readonly to: string;
+  readonly versions?: readonly EntityVersion[];
 }
 
 const SOURCE_DISPLAY: Record<string, string> = {
@@ -109,33 +119,59 @@ export function createSearchResultItems(
   const enriched: {
     entry: SearchIndexEntry;
     entity: Spell | Condition | Equipment | Action;
-    display: EntityDisplayInfo;
   }[] = [];
 
   for (const entry of entries) {
     const entity = getEntity(entry.category, entry.id);
     if (!entity) continue;
-    enriched.push({
-      entry,
-      entity,
-      display: getEntityDisplayInfo(entity),
+    enriched.push({ entry, entity });
+  }
+
+  const groups = new Map<string, (typeof enriched)[number][]>();
+  for (const item of enriched) {
+    const key = item.entity.canonicalId;
+    const group = groups.get(key);
+    if (group) {
+      group.push(item);
+    } else {
+      groups.set(key, [item]);
+    }
+  }
+
+  const results: SearchResultItem[] = [];
+
+  for (const group of groups.values()) {
+    group.sort((a, b) => sourcePriority(a.entity.source) - sourcePriority(b.entity.source));
+
+    const preferred = group[0]!;
+    const display = getEntityDisplayInfo(preferred.entity);
+    const sources = group.map((g) => g.entity.source);
+    const versionCount = sources.length;
+
+    results.push({
+      id: preferred.entry.id,
+      canonicalId: preferred.entity.canonicalId,
+      title: display.title,
+      subtitle:
+        versionCount > 1 ? `${display.subtitle} \u00B7 ${versionCount} versions` : display.subtitle,
+      source: preferred.entity.source,
+      to: `/${preferred.entry.category}/${preferred.entry.id}`,
+      versions:
+        versionCount > 1
+          ? group.map((g) => ({ id: g.entry.id, source: g.entity.source }))
+          : undefined,
     });
   }
 
-  enriched.sort((a, b) => {
-    const scoreA = computeMatchScore(a.entry.name, query);
-    const scoreB = computeMatchScore(b.entry.name, query);
+  results.sort((a, b) => {
+    const scoreA = computeMatchScore(a.title, query);
+    const scoreB = computeMatchScore(b.title, query);
     if (scoreA !== scoreB) return scoreB - scoreA;
-    const spA = sourcePriority(a.entity.source);
-    const spB = sourcePriority(b.entity.source);
+    const spA = sourcePriority(a.source);
+    const spB = sourcePriority(b.source);
     if (spA !== spB) return spA - spB;
-    return a.entry.name.localeCompare(b.entry.name);
+    return a.title.localeCompare(b.title);
   });
 
-  return enriched.map((item) => ({
-    id: item.entry.id,
-    title: item.display.title,
-    subtitle: item.display.subtitle,
-    to: `/${item.entry.category}/${item.entry.id}`,
-  }));
+  return results;
 }
