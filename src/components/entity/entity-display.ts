@@ -6,7 +6,7 @@ import type {
   SearchIndexEntry,
   EntityVersion,
 } from "@/compendium";
-import { getEntity } from "@/compendium";
+import { getEntity, sourcePriority, formatSource } from "@/compendium";
 
 export interface EntityDisplayInfo {
   readonly title: string;
@@ -22,20 +22,6 @@ export interface SearchResultItem {
   readonly to: string;
   readonly versions?: readonly EntityVersion[];
 }
-
-const SOURCE_DISPLAY: Record<string, string> = {
-  XPHB: "PHB24",
-  PHB: "PHB",
-  TCE: "TCE",
-  XGE: "XGE",
-};
-
-const SOURCE_PRIORITY: Record<string, number> = {
-  XPHB: 1,
-  PHB: 2,
-  TCE: 3,
-  XGE: 4,
-};
 
 const SCHOOL_NAMES: Record<string, string> = {
   A: "Abjuration",
@@ -62,14 +48,6 @@ const EQUIPMENT_TYPE_DISPLAY: Record<string, string> = {
   T: "Tool",
   AIR: "Air",
 };
-
-function sourcePriority(source: string): number {
-  return SOURCE_PRIORITY[source] ?? 99;
-}
-
-function formatSource(source: string): string {
-  return SOURCE_DISPLAY[source] ?? source;
-}
 
 function formatEquipmentType(rawType: string): string {
   const clean = rawType.includes("|") ? rawType.split("|")[0]! : rawType;
@@ -155,10 +133,14 @@ export function createSearchResultItems(
       subtitle:
         versionCount > 1 ? `${display.subtitle} \u00B7 ${versionCount} versions` : display.subtitle,
       source: preferred.entity.source,
-      to: `/${preferred.entry.category}/${preferred.entry.id}`,
+      to: `/${preferred.entry.category}/${preferred.entity.canonicalId}`,
       versions:
         versionCount > 1
-          ? group.map((g) => ({ id: g.entry.id, source: g.entity.source }))
+          ? group.map((g) => ({
+              id: g.entry.id,
+              source: g.entity.source,
+              category: g.entity.category,
+            }))
           : undefined,
     });
   }

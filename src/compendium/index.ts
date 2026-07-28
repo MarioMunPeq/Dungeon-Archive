@@ -14,6 +14,13 @@ export {
   isInitialized,
 } from "./repository";
 
+export { resolveEntity } from "./resolver/entity-resolver";
+export type { ResolvedEntity } from "./resolver/entity-resolver";
+
+export { sourcePriority, selectPreferredVersion, formatSource } from "./resolver/version-selector";
+
+export { getVersions, isRegistered, registrySize } from "./registry/entity-registry";
+
 export type {
   Spell,
   Condition,

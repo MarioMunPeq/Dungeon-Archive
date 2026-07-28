@@ -62,4 +62,5 @@ export interface SearchIndexEntry {
 export interface EntityVersion {
   readonly id: string;
   readonly source: string;
+  readonly category: EntityCategory;
 }

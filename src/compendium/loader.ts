@@ -1,5 +1,6 @@
 import type { Spell, Condition, Equipment, Action, SearchIndexEntry } from "@/types/compendium";
 import type { CompendiumState } from "./types";
+import { buildRegistry } from "./registry/entity-registry";
 
 export let state: CompendiumState = {
   spells: new Map(),
@@ -48,6 +49,8 @@ export async function loadCompendium(): Promise<void> {
     actionList,
     initialized: true,
   };
+
+  buildRegistry([...spellList, ...conditionList, ...equipmentList, ...actionList]);
 
   setSearchIndex(searchIndex.default as SearchIndexEntry[]);
 }

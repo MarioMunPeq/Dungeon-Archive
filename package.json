@@ -15,7 +15,8 @@
     "build:compendium": "tsx scripts/compendium/build.ts",
     "test:identity": "tsx scripts/tests/identity.test.ts",
     "test:grouping": "tsx scripts/tests/grouping.test.ts",
-    "test": "npm run test:identity && npm run test:grouping"
+    "test:resolver": "tsx scripts/tests/resolver.test.ts",
+    "test": "npm run test:identity && npm run test:grouping && npm run test:resolver"
   },
   "dependencies": {
     "@tanstack/react-query": "^5.84.0",
