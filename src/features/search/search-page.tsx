@@ -1,12 +1,14 @@
 import { useState } from "react";
 import { search } from "@/compendium";
+import { createSearchResultItems } from "@/components/entity";
 import { EmptyState } from "@/components/ui/empty-state";
 import { SearchInput } from "./components/search-input";
 import { SearchResults } from "./components/search-results";
 
 export function SearchPage() {
   const [query, setQuery] = useState("");
-  const results = search(query);
+  const rawResults = search(query);
+  const results = createSearchResultItems(query, rawResults);
 
   return (
     <div>

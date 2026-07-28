@@ -1,19 +1,20 @@
 import { Link } from "react-router";
-import type { SearchIndexEntry } from "@/compendium";
 
 interface SearchResultRowProps {
-  readonly result: SearchIndexEntry;
+  readonly title: string;
+  readonly subtitle: string;
+  readonly to: string;
 }
 
-export function SearchResultRow({ result }: SearchResultRowProps) {
+export function SearchResultRow({ title, subtitle, to }: SearchResultRowProps) {
   return (
     <Link
-      to={`/${result.category}/${result.id}`}
+      to={to}
       className="flex items-center justify-between px-4 py-3 transition-colors hover:bg-accent active:bg-accent/80"
     >
       <div className="min-w-0 space-y-0.5">
-        <p className="truncate text-sm font-medium text-foreground">{result.name}</p>
-        <p className="text-xs capitalize text-muted-foreground">{result.category}</p>
+        <p className="truncate text-sm font-medium text-foreground">{title}</p>
+        <p className="text-xs text-muted-foreground">{subtitle}</p>
       </div>
       <span className="ml-2 shrink-0 text-muted-foreground">›</span>
     </Link>
