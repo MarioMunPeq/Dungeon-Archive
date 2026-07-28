@@ -6,6 +6,5 @@ export type {
   SearchIndexEntry,
   CompendiumEntry,
   EntityCategory,
-} from "@/types/compendium";
-
-export type { ContentBlock } from "@/types/content-block";
+  ContentBlock,
+} from "@/compendium";

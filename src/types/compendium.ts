@@ -2,6 +2,8 @@ import type { ContentBlock } from "./content-block";
 
 export type EntityCategory = "spell" | "condition" | "equipment" | "action";
 
+export type CompendiumCategory = EntityCategory;
+
 export interface CompendiumEntry {
   readonly id: string;
   readonly category: EntityCategory;

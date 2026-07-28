@@ -13,8 +13,9 @@ Nothing else.
 ```
 src/adapter/
 ├── README.md
+├── index.ts              ← re-exports DA types from @/compendium
 └── 5etools/
-    └── (adapter implementation — Phase 2)
+    └── (raw types used by build scripts only)
 ```
 
 ## Rules
@@ -27,13 +28,13 @@ src/adapter/
 ## Import Boundary
 
 ```
-external/5etools/ → src/adapter/5etools/ → src/ (everything else)
+external/5etools/ → scripts/compendium/ → src/generated/ → src/compendium/ → src/adapter/ → src/
 ```
 
-- `src/adapter/5etools/` can import from `external/5etools/`
-- `src/adapter/` exports Dungeon Archive types
-- Nothing else can import from `src/adapter/5etools/` directly
-- Everything imports from `src/adapter/` (the barrel)
+- `scripts/compendium/` reads from `external/5etools/` and writes to `src/generated/`
+- `src/compendium/` loads generated JSON and provides the runtime API
+- `src/adapter/` re-exports Dungeon Archive types
+- Everything imports from `src/adapter/` (the barrel) or `src/compendium/` directly
 
 ## Future Adapters
 

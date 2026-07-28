@@ -1,5 +1,6 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
+import { loadCompendium } from "@/compendium";
 import { App } from "@/app";
 import "./index.css";
 
@@ -8,8 +9,23 @@ if (!rootElement) {
   throw new Error("Root element not found");
 }
 
-createRoot(rootElement).render(
-  <StrictMode>
-    <App />
-  </StrictMode>,
-);
+const container = rootElement;
+
+async function main() {
+  try {
+    await loadCompendium();
+
+    createRoot(container).render(
+      <StrictMode>
+        <App />
+      </StrictMode>,
+    );
+  } catch (error) {
+    container.textContent = "Failed to load compendium data.";
+    container.style.padding = "2rem";
+    container.style.fontFamily = "system-ui";
+    console.error("Compendium initialization failed:", error);
+  }
+}
+
+main();

@@ -1,6 +1,8 @@
 export type EntityCategory =
   "spell" | "condition" | "action" | "equipment" | "monster" | "npc" | "character";
 
+export type { CompendiumCategory } from "./compendium";
+
 export interface Entity {
   readonly id: string;
   readonly category: EntityCategory;

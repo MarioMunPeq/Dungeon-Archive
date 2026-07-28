@@ -28,6 +28,7 @@
       "@/*": ["./src/*"],
       "@/app/*": ["./src/app/*"],
       "@/adapter/*": ["./src/adapter/*"],
+      "@/compendium/*": ["./src/compendium/*"],
       "@/components/*": ["./src/components/*"],
       "@/features/*": ["./src/features/*"],
       "@/shared/*": ["./src/shared/*"],
