@@ -1,8 +1,18 @@
+import { useState } from "react";
+import { search } from "@/compendium";
+import { EmptyState } from "@/components/ui/empty-state";
+import { SearchInput } from "./components/search-input";
+import { SearchResults } from "./components/search-results";
+
 export function SearchPage() {
+  const [query, setQuery] = useState("");
+  const results = search(query);
+
   return (
-    <div className="flex flex-col items-center justify-center px-4 py-16 text-center">
-      <div className="mb-2 text-sm text-muted-foreground">Search</div>
-      <p className="text-xs text-muted-foreground/60">Coming in Phase 2</p>
+    <div>
+      <SearchInput value={query} onChange={setQuery} />
+      {query.trim() && results.length === 0 && <EmptyState message="No results found" />}
+      {results.length > 0 && <SearchResults results={results} />}
     </div>
   );
 }
