@@ -1,6 +1,7 @@
 import type { Spell } from "@/compendium";
-import { MetadataGrid, Section } from "@/components/entity";
+import { Section } from "@/components/entity";
 import { ContentRenderer } from "@/components/content";
+import { EntityProperty, EntityMetadataGrid } from "@/components/ui/entity-property";
 
 const SCHOOL_NAMES: Record<string, string> = {
   A: "Abjuration",
@@ -21,10 +22,6 @@ export function SpellRenderer({ entity }: SpellRendererProps) {
   const levelText = entity.level === 0 ? "Cantrip" : `Level ${entity.level}`;
   const schoolName = SCHOOL_NAMES[entity.school] ?? entity.school;
 
-  const tags: { label: string; value: string }[] = [];
-  if (entity.ritual) tags.push({ label: "Ritual", value: "Yes" });
-  if (entity.concentration) tags.push({ label: "Concentration", value: "Yes" });
-
   return (
     <div className="space-y-6">
       <div>
@@ -33,16 +30,15 @@ export function SpellRenderer({ entity }: SpellRendererProps) {
         </p>
       </div>
 
-      <MetadataGrid
-        fields={[
-          { label: "Casting Time", value: entity.castingTime },
-          { label: "Range", value: entity.range },
-          { label: "Components", value: entity.components.join(", ") },
-          { label: "Duration", value: entity.duration },
-          ...tags,
-          { label: "Classes", value: entity.classes.join(", ") },
-        ]}
-      />
+      <EntityMetadataGrid>
+        <EntityProperty label="Casting Time" value={entity.castingTime} />
+        <EntityProperty label="Range" value={entity.range} />
+        <EntityProperty label="Components" value={entity.components.join(", ")} />
+        <EntityProperty label="Duration" value={entity.duration} />
+        {entity.ritual && <EntityProperty label="Ritual" value="Yes" />}
+        {entity.concentration && <EntityProperty label="Concentration" value="Yes" />}
+        <EntityProperty label="Classes" value={entity.classes.join(", ")} />
+      </EntityMetadataGrid>
 
       <Section title="Description">
         <ContentRenderer blocks={entity.description} />

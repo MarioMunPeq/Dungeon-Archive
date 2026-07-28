@@ -1,28 +1,28 @@
 import type { Equipment } from "@/compendium";
-import { MetadataGrid, Section } from "@/components/entity";
+import { Section } from "@/components/entity";
 import { ContentRenderer } from "@/components/content";
+import { EntityProperty, EntityMetadataGrid } from "@/components/ui/entity-property";
 
 interface EquipmentRendererProps {
   readonly entity: Equipment;
 }
 
 export function EquipmentRenderer({ entity }: EquipmentRendererProps) {
-  const fields: { label: string; value: string }[] = [{ label: "Type", value: entity.type }];
-
-  if (entity.cost) fields.push({ label: "Cost", value: entity.cost });
-  if (entity.weight) fields.push({ label: "Weight", value: entity.weight });
-  if (entity.damage) fields.push({ label: "Damage", value: entity.damage });
-  if (entity.damageType) fields.push({ label: "Damage Type", value: entity.damageType });
-  if (entity.ac !== undefined) fields.push({ label: "AC", value: String(entity.ac) });
-  if (entity.strength) fields.push({ label: "Strength", value: entity.strength });
-  if (entity.stealth) fields.push({ label: "Stealth", value: entity.stealth });
-  if (entity.properties && entity.properties.length > 0) {
-    fields.push({ label: "Properties", value: entity.properties.join(", ") });
-  }
-
   return (
     <div className="space-y-6">
-      <MetadataGrid fields={fields} />
+      <EntityMetadataGrid>
+        <EntityProperty label="Type" value={entity.type} />
+        {entity.cost && <EntityProperty label="Cost" value={entity.cost} />}
+        {entity.weight && <EntityProperty label="Weight" value={entity.weight} />}
+        {entity.damage && <EntityProperty label="Damage" value={entity.damage} />}
+        {entity.damageType && <EntityProperty label="Damage Type" value={entity.damageType} />}
+        {entity.ac !== undefined && <EntityProperty label="AC" value={String(entity.ac)} />}
+        {entity.strength && <EntityProperty label="Strength" value={entity.strength} />}
+        {entity.stealth && <EntityProperty label="Stealth" value={entity.stealth} />}
+        {entity.properties && entity.properties.length > 0 && (
+          <EntityProperty label="Properties" value={entity.properties.join(", ")} />
+        )}
+      </EntityMetadataGrid>
 
       {entity.description.length > 0 && (
         <Section title="Description">

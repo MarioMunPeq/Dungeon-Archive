@@ -6,7 +6,7 @@ import type {
   SearchIndexEntry,
   EntityVersion,
 } from "@/compendium";
-import { getEntity, sourcePriority, formatSource } from "@/compendium";
+import { getEntity, sourcePriority, formatSource, slugFromCanonicalId } from "@/compendium";
 
 export interface EntityDisplayInfo {
   readonly title: string;
@@ -133,7 +133,7 @@ export function createSearchResultItems(
       subtitle:
         versionCount > 1 ? `${display.subtitle} \u00B7 ${versionCount} versions` : display.subtitle,
       source: preferred.entity.source,
-      to: `/${preferred.entry.category}/${preferred.entity.canonicalId}`,
+      to: `/${preferred.entry.category}/${slugFromCanonicalId(preferred.entity.canonicalId)}`,
       versions:
         versionCount > 1
           ? group.map((g) => ({

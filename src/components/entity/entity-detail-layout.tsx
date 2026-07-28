@@ -1,6 +1,7 @@
 import type { ReactNode } from "react";
 import type { EntityVersion } from "@/compendium";
 import { EntityHeader } from "./entity-header";
+import { EntityBreadcrumbs } from "@/components/ui/breadcrumbs";
 import { formatSource } from "@/compendium";
 
 interface EntityDetailLayoutProps {
@@ -10,6 +11,7 @@ interface EntityDetailLayoutProps {
   readonly versions: readonly EntityVersion[];
   readonly onSourceChange: (source: string) => void;
   readonly children: ReactNode;
+  readonly breadcrumbs?: readonly { label: string; to?: string }[];
 }
 
 export function EntityDetailLayout({
@@ -19,9 +21,12 @@ export function EntityDetailLayout({
   versions,
   onSourceChange,
   children,
+  breadcrumbs,
 }: EntityDetailLayoutProps) {
   return (
     <article className="space-y-6 px-4 py-6">
+      {breadcrumbs && <EntityBreadcrumbs crumbs={breadcrumbs} />}
+
       <EntityHeader name={name} subtitle={subtitle} source={source} />
 
       {versions.length > 1 && (

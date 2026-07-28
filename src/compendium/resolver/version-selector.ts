@@ -11,17 +11,6 @@ export function sourcePriority(source: string): number {
   return SOURCE_PRIORITY[source] ?? 99;
 }
 
-export const SOURCE_DISPLAY: Record<string, string> = {
-  XPHB: "PHB24",
-  PHB: "PHB",
-  TCE: "TCE",
-  XGE: "XGE",
-};
-
-export function formatSource(source: string): string {
-  return SOURCE_DISPLAY[source] ?? source;
-}
-
 export function selectPreferredVersion(versions: readonly EntityVersion[]): EntityVersion {
   if (versions.length === 0) throw new Error("Cannot select from empty versions");
 
