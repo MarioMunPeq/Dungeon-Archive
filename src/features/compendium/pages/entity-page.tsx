@@ -11,6 +11,7 @@ import {
 import type { EntityCategory } from "@/compendium";
 import { EntityDetailLayout } from "@/components/entity";
 import { EntityRenderer } from "@/features/compendium/renderers/entity-renderer";
+import { RelatedEntities } from "@/features/compendium/components/related-entities";
 
 interface CompendiumPageProps {
   category: EntityCategory;
@@ -49,6 +50,7 @@ export function CompendiumPage({ category }: CompendiumPageProps) {
       ]}
     >
       <EntityRenderer entity={resolved.selected} />
+      <RelatedEntities canonicalId={fullCanonicalId} />
     </EntityDetailLayout>
   );
 }

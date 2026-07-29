@@ -87,7 +87,9 @@
     "weight": "2 lb",
     "damage": "1d4",
     "damageType": "S",
-    "properties": ["Light"],
+    "properties": [
+      "Light"
+    ],
     "description": [
       {
         "type": "paragraph",
@@ -206,7 +208,9 @@
     "weight": "2 lb",
     "damage": "1d4",
     "damageType": "S",
-    "properties": ["Light"],
+    "properties": [
+      "Light"
+    ],
     "description": [
       {
         "type": "paragraph",
@@ -325,7 +329,9 @@
     "weight": "2 lb",
     "damage": "1d4",
     "damageType": "S",
-    "properties": ["Light"],
+    "properties": [
+      "Light"
+    ],
     "description": [
       {
         "type": "paragraph",
@@ -767,7 +773,9 @@
     "weight": "4 lb",
     "damage": "1d6",
     "damageType": "B",
-    "properties": ["Versatile"],
+    "properties": [
+      "Versatile"
+    ],
     "description": [
       {
         "type": "paragraph",
@@ -6449,7 +6457,10 @@
     "type": "Melee Weapon",
     "damage": "1d6",
     "damageType": "Y",
-    "properties": ["F|XPHB", "T|XPHB"],
+    "properties": [
+      "F|XPHB",
+      "T|XPHB"
+    ],
     "description": []
   },
   {
@@ -7325,7 +7336,9 @@
     "weight": "4 lb",
     "damage": "1d6",
     "damageType": "B",
-    "properties": ["Versatile"],
+    "properties": [
+      "Versatile"
+    ],
     "description": [
       {
         "type": "paragraph",
@@ -7343,7 +7356,9 @@
     "weight": "4 lb",
     "damage": "1d6",
     "damageType": "B",
-    "properties": ["Versatile"],
+    "properties": [
+      "Versatile"
+    ],
     "description": [
       {
         "type": "paragraph",
@@ -7365,7 +7380,9 @@
     "weight": "4 lb",
     "damage": "1d6",
     "damageType": "B",
-    "properties": ["Versatile"],
+    "properties": [
+      "Versatile"
+    ],
     "description": [
       {
         "type": "paragraph",

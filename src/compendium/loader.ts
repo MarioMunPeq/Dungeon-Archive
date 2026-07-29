@@ -7,7 +7,9 @@ import type {
   SearchIndexEntry,
 } from "@/types/compendium";
 import type { CompendiumState } from "./types";
+import type { RelatedIndex } from "@/types/relationships";
 import { buildRegistry } from "./registry/entity-registry";
+import { setRelatedIndex } from "./relationships";
 
 export let state: CompendiumState = {
   spells: new Map(),
@@ -34,14 +36,16 @@ function toMap<T extends { id: string }>(items: readonly T[]): Map<string, T> {
 export async function loadCompendium(): Promise<void> {
   if (state.initialized) return;
 
-  const [spells, conditions, equipment, actions, monsters, searchIndex] = await Promise.all([
-    import("../generated/compendium/spells.json"),
-    import("../generated/compendium/conditions.json"),
-    import("../generated/compendium/equipment.json"),
-    import("../generated/compendium/actions.json"),
-    import("../generated/compendium/monsters.json"),
-    import("../generated/compendium/search-index.json"),
-  ]);
+  const [spells, conditions, equipment, actions, monsters, searchIndex, relatedIndexModule] =
+    await Promise.all([
+      import("../generated/compendium/spells.json"),
+      import("../generated/compendium/conditions.json"),
+      import("../generated/compendium/equipment.json"),
+      import("../generated/compendium/actions.json"),
+      import("../generated/compendium/monsters.json"),
+      import("../generated/compendium/search-index.json"),
+      import("../generated/compendium/related-index.json"),
+    ]);
 
   const spellList = Object.freeze(spells.default as Spell[]);
   const conditionList = Object.freeze(conditions.default as Condition[]);
@@ -66,6 +70,7 @@ export async function loadCompendium(): Promise<void> {
   buildRegistry([...spellList, ...conditionList, ...equipmentList, ...actionList, ...monsterList]);
 
   setSearchIndex(searchIndex.default as SearchIndexEntry[]);
+  setRelatedIndex(relatedIndexModule.default as RelatedIndex);
 }
 
 let searchIndex: SearchIndexEntry[] = [];

@@ -24,7 +24,8 @@
     "test:category": "tsx scripts/tests/category.test.ts",
     "test:content": "tsx scripts/tests/content.test.ts",
     "test:design": "tsx scripts/tests/design-system.test.tsx",
-    "test": "npm run test:identity && npm run test:grouping && npm run test:resolver && npm run test:compendium && npm run test:category && npm run test:content && npm run test:design"
+    "test:relationships": "tsx scripts/tests/relationships.test.ts",
+    "test": "npm run test:identity && npm run test:grouping && npm run test:resolver && npm run test:compendium && npm run test:category && npm run test:content && npm run test:design && npm run test:relationships"
   },
   "dependencies": {
     "@tanstack/react-query": "^5.84.0",

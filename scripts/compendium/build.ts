@@ -16,6 +16,7 @@ import { validateActions } from "./categories/action/validate";
 import { transformMonsters } from "./categories/monster/transform";
 import { validateMonsters } from "./categories/monster/validate";
 import { generateSearchIndex } from "./generate-index";
+import { generateRelatedIndex } from "./generate-related-index";
 
 const ROOT = join(import.meta.dirname, "..", "..");
 const EXTERNAL_DIR = join(ROOT, "external", "5etools", "data");
@@ -175,6 +176,13 @@ function main(): void {
   const searchIndex = generateSearchIndex(allEntities);
   writeJson(join(OUTPUT_DIR, "search-index.json"), searchIndex);
   console.log(`  Generated ${searchIndex.length} index entries`);
+  console.log();
+
+  // Related index
+  console.log("▶ related-index");
+  const relatedIndex = generateRelatedIndex(allEntities);
+  writeJson(join(OUTPUT_DIR, "related-index.json"), relatedIndex);
+  console.log(`  Indexed ${Object.keys(relatedIndex).length} entities`);
   console.log();
 
   // Manifest (no timestamps — deterministic)

@@ -26,6 +26,14 @@ export { getVersions, isRegistered, registrySize } from "./registry/entity-regis
 export { getSourceInfo, formatSource, formatEdition } from "./source";
 export type { SourceInfo } from "./source";
 
+export {
+  getRelatedEntities,
+  getReferencingEntities,
+  getRelatedEntityIds,
+  getReferencingEntityIds,
+  getEntityTags,
+} from "./relationships";
+
 export { referenceToUrl, referenceLabel } from "./reference";
 
 export {
