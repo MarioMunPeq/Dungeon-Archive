@@ -10,7 +10,12 @@ import type {
 import type { EntityCardData } from "@/features/compendium/components/entity-card";
 import type { FilterDefinition } from "@/features/compendium/components/filter-bar";
 import {
-  getSpells, getMonsters, getEquipmentList, getConditions, getActions, getMagicItems,
+  getSpells,
+  getMonsters,
+  getEquipmentList,
+  getConditions,
+  getActions,
+  getMagicItems,
 } from "./repository";
 import { slugFromCanonicalId, categoryLabelSingular } from "./slug";
 import { formatSource } from "./source";

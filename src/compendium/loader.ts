@@ -39,17 +39,25 @@ function toMap<T extends { id: string }>(items: readonly T[]): Map<string, T> {
 export async function loadCompendium(): Promise<void> {
   if (state.initialized) return;
 
-  const [spells, conditions, equipment, actions, monsters, magicItems, searchIndex, relatedIndexModule] =
-    await Promise.all([
-      import("../generated/compendium/spells.json"),
-      import("../generated/compendium/conditions.json"),
-      import("../generated/compendium/equipment.json"),
-      import("../generated/compendium/actions.json"),
-      import("../generated/compendium/monsters.json"),
-      import("../generated/compendium/magic-items.json"),
-      import("../generated/compendium/search-index.json"),
-      import("../generated/compendium/related-index.json"),
-    ]);
+  const [
+    spells,
+    conditions,
+    equipment,
+    actions,
+    monsters,
+    magicItems,
+    searchIndex,
+    relatedIndexModule,
+  ] = await Promise.all([
+    import("../generated/compendium/spells.json"),
+    import("../generated/compendium/conditions.json"),
+    import("../generated/compendium/equipment.json"),
+    import("../generated/compendium/actions.json"),
+    import("../generated/compendium/monsters.json"),
+    import("../generated/compendium/magic-items.json"),
+    import("../generated/compendium/search-index.json"),
+    import("../generated/compendium/related-index.json"),
+  ]);
 
   const spellList = Object.freeze(spells.default as Spell[]);
   const conditionList = Object.freeze(conditions.default as Condition[]);
@@ -75,7 +83,12 @@ export async function loadCompendium(): Promise<void> {
   };
 
   buildRegistry([
-    ...spellList, ...conditionList, ...equipmentList, ...actionList, ...monsterList, ...magicItemList,
+    ...spellList,
+    ...conditionList,
+    ...equipmentList,
+    ...actionList,
+    ...monsterList,
+    ...magicItemList,
   ]);
 
   setSearchIndex(searchIndex.default as SearchIndexEntry[]);

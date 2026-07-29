@@ -56,6 +56,12 @@ async function main() {
     strictEqual(actions[0]!.category, "action");
   });
 
+  test("getEntitiesForCategory returns magic items", () => {
+    const items = getEntitiesForCategory("magicitem");
+    ok(items.length > 0);
+    strictEqual(items[0]!.category, "magicitem");
+  });
+
   test("collectUnique deduplicates and sorts", () => {
     const result = collectUnique([{ x: "b" }, { x: "a" }, { x: "b" }], (i) => i.x);
     deepEqual(result, ["a", "b"]);
@@ -138,8 +144,43 @@ async function main() {
     ok(type.options.some((o: { value: string }) => o.value !== ""));
   });
 
+  test("buildFilterDefs creates rarity filter for magic items", () => {
+    const items = getEntitiesForCategory("magicitem");
+    const defs = buildFilterDefs("magicitem", items);
+    const rarity = defs.find((d: { key: string }) => d.key === "rarity");
+    ok(rarity);
+    ok(rarity.options.some((o: { value: string }) => o.value === "rare"));
+    ok(rarity.options.some((o: { value: string }) => o.value === "legendary"));
+  });
+
+  test("buildFilterDefs creates itemType filter for magic items", () => {
+    const items = getEntitiesForCategory("magicitem");
+    const defs = buildFilterDefs("magicitem", items);
+    const type = defs.find((d: { key: string }) => d.key === "itemType");
+    ok(type);
+    ok(type.options.some((o: { value: string }) => o.value === "Ring"));
+    ok(type.options.some((o: { value: string }) => o.value === "Potion"));
+  });
+
+  test("buildFilterDefs creates attunement filter for magic items", () => {
+    const items = getEntitiesForCategory("magicitem");
+    const defs = buildFilterDefs("magicitem", items);
+    const attune = defs.find((d: { key: string }) => d.key === "attunement");
+    ok(attune);
+    strictEqual(attune.options.length, 3);
+    strictEqual(attune.options[1]!.value, "required");
+    strictEqual(attune.options[2]!.value, "none");
+  });
+
   test("buildFilterDefs creates source filter for all categories", () => {
-    for (const cat of ["spell", "monster", "equipment", "condition", "action"] as const) {
+    for (const cat of [
+      "spell",
+      "monster",
+      "equipment",
+      "condition",
+      "action",
+      "magicitem",
+    ] as const) {
       const entities = getEntitiesForCategory(cat);
       const defs = buildFilterDefs(cat, entities);
       const source = defs.find((d: { key: string }) => d.key === "source");
@@ -238,6 +279,73 @@ async function main() {
       strictEqual(monster.monsterType, "dragon");
       strictEqual(m.source, "XMM");
     }
+  });
+
+  test("applyFilters filters magic items by rarity", () => {
+    const items = getEntitiesForCategory("magicitem");
+    const result = applyFilters("magicitem", items, { rarity: "legendary" });
+    ok(result.length > 0);
+    ok(result.length < items.length);
+    for (const item of result) {
+      strictEqual((item as import("../../src/types/compendium").MagicItem).rarity, "legendary");
+    }
+  });
+
+  test("applyFilters filters magic items by itemType", () => {
+    const items = getEntitiesForCategory("magicitem");
+    const result = applyFilters("magicitem", items, { itemType: "Ring" });
+    ok(result.length > 0);
+    for (const item of result) {
+      strictEqual((item as import("../../src/types/compendium").MagicItem).itemType, "Ring");
+    }
+  });
+
+  test("applyFilters filters magic items by attunement required", () => {
+    const items = getEntitiesForCategory("magicitem");
+    const result = applyFilters("magicitem", items, { attunement: "required" });
+    ok(result.length > 0);
+    for (const item of result) {
+      ok(
+        (item as import("../../src/types/compendium").MagicItem).requiresAttunement,
+        "should require attunement",
+      );
+    }
+  });
+
+  test("applyFilters filters magic items by attunement none", () => {
+    const items = getEntitiesForCategory("magicitem");
+    const result = applyFilters("magicitem", items, { attunement: "none" });
+    ok(result.length > 0);
+    for (const item of result) {
+      strictEqual(
+        (item as import("../../src/types/compendium").MagicItem).requiresAttunement,
+        "",
+        "should not require attunement",
+      );
+    }
+  });
+
+  test("applyFilters filters magic items by source", () => {
+    const items = getEntitiesForCategory("magicitem");
+    const result = applyFilters("magicitem", items, { source: "DMG" });
+    ok(result.length > 0);
+    for (const item of result) {
+      strictEqual(item.source, "DMG");
+    }
+  });
+
+  test("toCardData produces correct magic item card", () => {
+    const items = getEntitiesForCategory("magicitem");
+    const item = items.find(
+      (i: { name: string; source: string }) => i.name === "Staff of Power" && i.source === "DMG",
+    );
+    ok(item, "Staff of Power DMG should exist");
+    const card = toCardData("magicitem", item!);
+    strictEqual(card.name, "Staff of Power");
+    strictEqual(card.categoryLabel, "Magic Item");
+    ok(card.metadata.includes("very rare"));
+    strictEqual(card.source, "DMG");
+    ok(card.href.startsWith("/magicitem/"));
   });
 
   test("toCardData produces correct spell card", () => {

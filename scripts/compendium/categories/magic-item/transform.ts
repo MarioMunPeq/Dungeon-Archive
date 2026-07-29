@@ -52,6 +52,12 @@ function formatWeight(weight: number | undefined): string | undefined {
   return `${weight} lb`;
 }
 
+function cleanTypeCode(type: string | undefined): string {
+  if (!type) return "";
+  const pipeIdx = type.indexOf("|");
+  return pipeIdx !== -1 ? type.slice(0, pipeIdx) : type;
+}
+
 export function transformMagicItems(raw: readonly Raw5eMagicItem[]): MagicItem[] {
   return raw
     .filter((i) => isAllowedSource(i.source))
@@ -63,7 +69,7 @@ export function transformMagicItems(raw: readonly Raw5eMagicItem[]): MagicItem[]
       source: i.source,
       rarity: i.rarity ?? "unknown",
       requiresAttunement: i.reqAttune ?? "",
-      itemType: ITEM_TYPE_MAP[i.type] ?? i.type ?? "Wondrous Item",
+      itemType: ITEM_TYPE_MAP[cleanTypeCode(i.type)] ?? (cleanTypeCode(i.type) || "Wondrous Item"),
       value: formatCost(i.value),
       weight: formatWeight(i.weight),
       description: processEntries(i.entries ?? []),

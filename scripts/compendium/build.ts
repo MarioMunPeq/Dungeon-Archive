@@ -73,9 +73,12 @@ const CATEGORIES: readonly CategoryConfig[] = [
   },
   {
     name: "equipment",
-    sourcePaths: ["items-base.json", "items.json"],
+    sourcePaths: ["items.json"],
     dataKey: "item",
-    transform: (data) => transformEquipment(data as Raw5eItem[]),
+    transform: (data) => {
+      const mundane = (data as Raw5eItem[]).filter((i) => i.rarity === "none");
+      return transformEquipment(mundane);
+    },
     validate: validateEquipment as (entities: CompendiumEntry[]) => ValidationError[],
     outputPath: "equipment.json",
   },
@@ -104,10 +107,18 @@ const CATEGORIES: readonly CategoryConfig[] = [
   },
   {
     name: "magicitems",
-    sourcePaths: ["items.json", "items-base.json"],
+    sourcePaths: ["items.json"],
     dataKey: "item",
     transform: (data) => {
-      const withRarity = (data as Raw5eMagicItem[]).filter((i) => i.rarity);
+      const allItems = [...(data as Raw5eMagicItem[])];
+      // Also load items-base.json (uses "baseitem" key)
+      const basePath = join(EXTERNAL_DIR, "items-base.json");
+      if (existsSync(basePath)) {
+        const baseData = readFileJson(basePath) as Record<string, unknown>;
+        const baseItems = baseData["baseitem"] as Raw5eMagicItem[] | undefined;
+        if (Array.isArray(baseItems)) allItems.push(...baseItems);
+      }
+      const withRarity = allItems.filter((i) => i.rarity && i.rarity !== "none");
       return transformMagicItems(withRarity);
     },
     validate: validateMagicItems as (entities: CompendiumEntry[]) => ValidationError[],

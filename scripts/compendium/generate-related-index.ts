@@ -252,9 +252,7 @@ function equipmentScoring(a: Equipment, b: Equipment, _tagsA: string[], _tagsB: 
   return score;
 }
 
-function magicItemScoring(
-  a: MagicItem, b: MagicItem, tagsA: string[], tagsB: string[],
-): number {
+function magicItemScoring(a: MagicItem, b: MagicItem, tagsA: string[], tagsB: string[]): number {
   let score = 0;
   if (a.rarity === b.rarity) score += 3;
   if (a.itemType === b.itemType) score += 3;

@@ -1,6 +1,7 @@
 import type { ContentBlock } from "./content-block";
 
-export type EntityCategory = "spell" | "condition" | "equipment" | "action" | "monster" | "magicitem";
+export type EntityCategory =
+  "spell" | "condition" | "equipment" | "action" | "monster" | "magicitem";
 
 export type CompendiumCategory = EntityCategory;
 
