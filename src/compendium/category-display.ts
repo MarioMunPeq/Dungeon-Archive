@@ -185,7 +185,7 @@ export function buildFilterDefs(
 }
 
 export function applyFilters(
-  category: EntityCategory,
+  _category: EntityCategory,
   entities: readonly AnyEntity[],
   filters: Record<string, string>,
 ): readonly AnyEntity[] {

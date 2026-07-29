@@ -1,34 +1,24 @@
 // Converts 5etools entries array to Dungeon Archive ContentBlock[].
-// Shared across all category transformers.
 //
 // 5etools entry types handled:
 //   - string            → paragraph
-//   - { type: "list" }  → list (items may be strings or { type: "item", name, entries })
-//   - { type: "table" } → table (cells may be strings or { type: "cell", roll })
-//   - { type: "entries" } → recursive
-//   - { name, entries } → header + recursive (named entry section)
-//   - unknown objects   → ignored
+//   - { type: "list" }  → list (items may be strings or objects with nested entries)
+//   - { type: "table" } → table (cells may be strings or objects with roll/alignment)
+//   - { type: "entries" } → entries block (preserved, not flattened)
+//   - { type: "inset" }  → inset block
+//   - { type: "quote" }  → quote block
+//   - { type: "line" }   → separator
+//   - { type: "dice" }   → dice block
+//   - { name, entries } → entries block with name (header + nested content)
 
-import type { ContentBlock } from "../../src/types/content-block";
-import type { Raw5eEntry } from "../../src/adapter/5etools-raw-types";
+import type { ContentBlock, TableCell } from "../../src/types/content-block";
+import type { Raw5eCellRoll } from "../../src/adapter/5etools-raw-types";
 import { normalizeText } from "./normalizer/index";
 
 // --- Cell helpers ---
 
-interface CellRoll {
-  readonly exact?: number;
-  readonly min?: number;
-  readonly max?: number;
-  readonly pad?: boolean;
-}
-
-interface CellObject {
-  readonly type?: string;
-  readonly roll?: CellRoll;
-  readonly [key: string]: unknown;
-}
-
-function formatRoll(roll: CellRoll): string {
+function formatRoll(roll: Raw5eCellRoll): string {
+  if (roll.formula) return roll.formula;
   if (roll.exact !== undefined) return String(roll.exact);
   if (roll.min !== undefined && roll.max !== undefined) {
     if (roll.pad) {
@@ -40,42 +30,46 @@ function formatRoll(roll: CellRoll): string {
   return "";
 }
 
-function resolveCell(cell: unknown): string {
-  if (typeof cell === "string") return normalizeText(cell);
+function resolveCell(cell: unknown): TableCell {
+  if (typeof cell === "string") return { text: normalizeText(cell) };
   if (cell && typeof cell === "object") {
-    const obj = cell as CellObject;
-    if (obj.roll) return formatRoll(obj.roll);
-    if (obj.name) return normalizeText(obj.name);
+    const obj = cell as Record<string, unknown>;
+    const align =
+      typeof obj.alignment === "string" ? (obj.alignment as TableCell["align"]) : undefined;
+    if (obj.roll) return { text: formatRoll(obj.roll as Raw5eCellRoll), align };
+    if (typeof obj.name === "string") return { text: normalizeText(obj.name), align };
   }
-  return "";
+  return { text: "" };
 }
 
 // --- List item helpers ---
 
-interface ListItemObject {
-  readonly type?: string;
-  readonly name?: string;
-  readonly entries?: readonly unknown[];
-  readonly entry?: string;
-  readonly [key: string]: unknown;
-}
-
-function resolveListItem(item: unknown): string {
+function resolveListItem(item: unknown): string | ContentBlock {
   if (typeof item === "string") return normalizeText(item);
   if (item && typeof item === "object") {
-    const obj = item as ListItemObject;
-    // 5etools uses { type: "item", name: "...", entries: [...] }
-    if (Array.isArray(obj.entries) && obj.entries.length > 0) {
-      const name = obj.name ? normalizeText(obj.name) : "";
-      const body = obj.entries
-        .map((e) => resolveListItem(e))
-        .filter((s) => s.length > 0)
-        .join(" ");
-      return name ? `${name} ${body}` : body;
+    const obj = item as Record<string, unknown>;
+    if (obj.type === "item" && typeof obj.name === "string" && Array.isArray(obj.entries)) {
+      return {
+        type: "entries" as const,
+        name: normalizeText(obj.name),
+        blocks: processEntries(obj.entries),
+      };
     }
-    // Older format: { entry: "..." }
     if (typeof obj.entry === "string") return normalizeText(obj.entry);
     if (typeof obj.name === "string") return normalizeText(obj.name);
+  }
+  return "";
+}
+
+// --- Dice helpers ---
+
+function formatDiceFormula(roll: unknown): string {
+  if (!roll || typeof roll !== "object") return "";
+  const r = roll as Raw5eCellRoll;
+  if (r.formula) return r.formula;
+  if (r.exact !== undefined) return String(r.exact);
+  if (r.min !== undefined && r.max !== undefined) {
+    return `${r.min}\u2013${r.max}`;
   }
   return "";
 }
@@ -98,36 +92,95 @@ export function processEntries(entries: readonly unknown[]): ContentBlock[] {
       continue;
     }
 
-    const obj = entry as Raw5eEntry;
+    const obj = entry as Record<string, unknown>;
 
+    // List
     if (obj.type === "list" && Array.isArray(obj.items)) {
-      const items = obj.items.map(resolveListItem).filter((s) => s.length > 0);
+      const items = obj.items.map(resolveListItem).filter((s) => {
+        if (typeof s === "string") return s.length > 0;
+        return true;
+      });
       if (items.length > 0) {
-        blocks.push({ type: "list", items });
+        blocks.push({
+          type: "list",
+          items,
+          style: typeof obj.style === "string" ? obj.style : undefined,
+        });
       }
       continue;
     }
 
+    // Table
     if (obj.type === "table" && Array.isArray(obj.colLabels) && Array.isArray(obj.rows)) {
       const headers = obj.colLabels.map(resolveCell);
-      const rows = obj.rows.map((row: readonly unknown[]) => row.map(resolveCell));
+      const rows = obj.rows.map((row: unknown) => {
+        if (!Array.isArray(row)) return [];
+        return row.map(resolveCell);
+      });
       if (headers.length > 0 && rows.length > 0) {
-        blocks.push({ type: "table", headers, rows });
+        blocks.push({
+          type: "table",
+          headers,
+          rows,
+          caption: typeof obj.caption === "string" ? obj.caption : undefined,
+        });
       }
       continue;
     }
 
+    // Entries — preserve nesting (don't flatten)
     if (obj.type === "entries" && Array.isArray(obj.entries)) {
       const innerBlocks = processEntries(obj.entries);
-      blocks.push(...innerBlocks);
+      if (innerBlocks.length > 0) {
+        blocks.push({ type: "entries", blocks: innerBlocks });
+      }
       continue;
     }
 
-    // Named entry section: { name: "...", entries: [...] } (e.g., monster traits)
+    // Quote
+    if (obj.type === "quote") {
+      const innerBlocks = Array.isArray(obj.entries) ? processEntries(obj.entries) : [];
+      blocks.push({
+        type: "quote",
+        blocks: innerBlocks,
+        by: typeof obj.by === "string" ? obj.by : undefined,
+      });
+      continue;
+    }
+
+    // Inset
+    if (obj.type === "inset") {
+      const innerBlocks = Array.isArray(obj.entries) ? processEntries(obj.entries) : [];
+      blocks.push({ type: "inset", blocks: innerBlocks });
+      continue;
+    }
+
+    // Separator
+    if (obj.type === "line" || obj.type === "separator") {
+      blocks.push({ type: "separator" });
+      continue;
+    }
+
+    // Dice
+    if (obj.type === "dice") {
+      const formula = formatDiceFormula(obj.roll);
+      if (formula) {
+        blocks.push({
+          type: "dice",
+          formula,
+          label: typeof obj.name === "string" ? normalizeText(obj.name) : undefined,
+        });
+      }
+      continue;
+    }
+
+    // Named entry section: { name: "...", entries: [...] }
     if (typeof obj.name === "string" && obj.name && Array.isArray(obj.entries)) {
-      blocks.push({ type: "header", text: obj.name, level: 3 });
-      const innerBlocks = processEntries(obj.entries);
-      blocks.push(...innerBlocks);
+      blocks.push({
+        type: "entries",
+        name: normalizeText(obj.name),
+        blocks: processEntries(obj.entries),
+      });
       continue;
     }
 

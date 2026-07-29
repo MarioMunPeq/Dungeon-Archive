@@ -1,3 +1,5 @@
+import type { ChangeEvent } from "react";
+
 export interface FilterOption {
   readonly value: string;
   readonly label: string;
@@ -25,7 +27,9 @@ export function FilterBar({ filters, values, onChange }: FilterBarProps) {
           <label className="text-xs font-medium text-muted-foreground">{filter.label}</label>
           <select
             value={values[filter.key] ?? ""}
-            onChange={(e) => onChange(filter.key, e.target.value)}
+            onChange={(e: ChangeEvent<HTMLSelectElement>) => {
+              onChange(filter.key, e.currentTarget.value);
+            }}
             className="rounded border border-border bg-background px-2 py-1 text-xs text-foreground"
           >
             {filter.options.map((opt) => (

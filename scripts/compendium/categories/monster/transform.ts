@@ -5,6 +5,7 @@ import { generateId } from "../../id";
 import { createCanonicalId } from "../../identity";
 import { isAllowedSource } from "../../allowed-sources";
 import { processEntries } from "../../entries";
+import { normalizeText } from "../../normalizer/index";
 
 function resolveType(type: unknown): { monsterType: string; tags: readonly string[] } {
   if (typeof type === "string") return { monsterType: type, tags: [] };
@@ -110,8 +111,11 @@ function processNamedEntries(
   const blocks: ContentBlock[] = [];
   for (const entry of entries) {
     if (entry.name && Array.isArray(entry.entries)) {
-      blocks.push({ type: "header", text: entry.name, level: 3 });
-      blocks.push(...processEntries(entry.entries));
+      blocks.push({
+        type: "entries",
+        name: normalizeText(entry.name),
+        blocks: processEntries(entry.entries),
+      });
     }
   }
   return blocks;

@@ -1,5 +1,5 @@
 import type { ContentBlock } from "@/compendium";
-import { BlockSwitch } from "./block-switch";
+import { BlockSwitch } from "./blocks/block-switch";
 
 interface ContentRendererProps {
   readonly blocks: readonly ContentBlock[];

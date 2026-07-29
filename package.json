@@ -22,7 +22,8 @@
     "test:resolver": "tsx scripts/tests/resolver.test.ts",
     "test:compendium": "tsx scripts/tests/compendium.test.ts",
     "test:category": "tsx scripts/tests/category.test.ts",
-    "test": "npm run test:identity && npm run test:grouping && npm run test:resolver && npm run test:compendium && npm run test:category"
+    "test:content": "tsx scripts/tests/content.test.ts",
+    "test": "npm run test:identity && npm run test:grouping && npm run test:resolver && npm run test:compendium && npm run test:category && npm run test:content"
   },
   "dependencies": {
     "@tanstack/react-query": "^5.84.0",

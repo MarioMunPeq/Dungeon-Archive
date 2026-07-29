@@ -1,9 +1,16 @@
-import type { Spell, Condition, Equipment, Action, EntityVersion } from "@/types/compendium";
+import type {
+  Spell,
+  Condition,
+  Equipment,
+  Action,
+  Monster,
+  EntityVersion,
+} from "@/types/compendium";
 import { getVersions } from "../registry/entity-registry";
 import { selectPreferredVersion } from "./version-selector";
 import { getEntity } from "../repository";
 
-type AnyEntity = Spell | Condition | Equipment | Action;
+type AnyEntity = Spell | Condition | Equipment | Action | Monster;
 
 export interface ResolvedEntity {
   readonly canonicalId: string;

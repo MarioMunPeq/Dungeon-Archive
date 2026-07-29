@@ -71,14 +71,14 @@ async function main() {
 
   test("buildOptions applies labelMap", () => {
     const options = buildOptions(["V", "A"], SCHOOL_NAMES);
-    const vOpt = options.find((o) => o.value === "V");
+    const vOpt = options.find((o: { value: string }) => o.value === "V");
     ok(vOpt);
     strictEqual(vOpt.label, "Evocation");
   });
 
   test("buildOptions applies labelFn", () => {
     const options = buildOptions(["XPHB", "PHB"], {}, (s) => (s === "XPHB" ? "PHB24" : s));
-    const xphb = options.find((o) => o.value === "XPHB");
+    const xphb = options.find((o: { value: string }) => o.value === "XPHB");
     ok(xphb);
     strictEqual(xphb.label, "PHB24");
   });
@@ -86,63 +86,63 @@ async function main() {
   test("buildFilterDefs creates level filter for spells", () => {
     const spells = getEntitiesForCategory("spell");
     const defs = buildFilterDefs("spell", spells);
-    const level = defs.find((d) => d.key === "level");
+    const level = defs.find((d: { key: string }) => d.key === "level");
     ok(level);
     strictEqual(level.label, "Level");
-    ok(level.options.some((o) => o.value === "0"));
-    ok(level.options.some((o) => o.value === "3"));
-    ok(level.options.some((o) => o.value === "9"));
+    ok(level.options.some((o: { value: string }) => o.value === "0"));
+    ok(level.options.some((o: { value: string }) => o.value === "3"));
+    ok(level.options.some((o: { value: string }) => o.value === "9"));
   });
 
   test("buildFilterDefs creates school filter for spells", () => {
     const spells = getEntitiesForCategory("spell");
     const defs = buildFilterDefs("spell", spells);
-    const school = defs.find((d) => d.key === "school");
+    const school = defs.find((d: { key: string }) => d.key === "school");
     ok(school);
-    ok(school.options.some((o) => o.value === "V"));
-    ok(school.options.some((o) => o.value === "A"));
+    ok(school.options.some((o: { value: string }) => o.value === "V"));
+    ok(school.options.some((o: { value: string }) => o.value === "A"));
   });
 
   test("buildFilterDefs creates CR filter for monsters", () => {
     const monsters = getEntitiesForCategory("monster");
     const defs = buildFilterDefs("monster", monsters);
-    const cr = defs.find((d) => d.key === "cr");
+    const cr = defs.find((d: { key: string }) => d.key === "cr");
     ok(cr);
-    ok(cr.options.some((o) => o.value === "1"));
-    ok(cr.options.some((o) => o.value === "24"));
-    ok(cr.options.some((o) => o.value === "1/4"));
+    ok(cr.options.some((o: { value: string }) => o.value === "1"));
+    ok(cr.options.some((o: { value: string }) => o.value === "24"));
+    ok(cr.options.some((o: { value: string }) => o.value === "1/4"));
   });
 
   test("buildFilterDefs creates type filter for monsters", () => {
     const monsters = getEntitiesForCategory("monster");
     const defs = buildFilterDefs("monster", monsters);
-    const type = defs.find((d) => d.key === "type");
+    const type = defs.find((d: { key: string }) => d.key === "type");
     ok(type);
-    ok(type.options.some((o) => o.value === "dragon"));
+    ok(type.options.some((o: { value: string }) => o.value === "dragon"));
   });
 
   test("buildFilterDefs creates size filter for monsters", () => {
     const monsters = getEntitiesForCategory("monster");
     const defs = buildFilterDefs("monster", monsters);
-    const size = defs.find((d) => d.key === "size");
+    const size = defs.find((d: { key: string }) => d.key === "size");
     ok(size);
-    ok(size.options.some((o) => o.value === "Gargantuan"));
-    ok(size.options.some((o) => o.value === "Tiny"));
+    ok(size.options.some((o: { value: string }) => o.value === "Gargantuan"));
+    ok(size.options.some((o: { value: string }) => o.value === "Tiny"));
   });
 
   test("buildFilterDefs creates type filter for equipment", () => {
     const equipment = getEntitiesForCategory("equipment");
     const defs = buildFilterDefs("equipment", equipment);
-    const type = defs.find((d) => d.key === "type");
+    const type = defs.find((d: { key: string }) => d.key === "type");
     ok(type);
-    ok(type.options.some((o) => o.value !== ""));
+    ok(type.options.some((o: { value: string }) => o.value !== ""));
   });
 
   test("buildFilterDefs creates source filter for all categories", () => {
     for (const cat of ["spell", "monster", "equipment", "condition", "action"] as const) {
       const entities = getEntitiesForCategory(cat);
       const defs = buildFilterDefs(cat, entities);
-      const source = defs.find((d) => d.key === "source");
+      const source = defs.find((d: { key: string }) => d.key === "source");
       ok(source, `${cat} should have source filter`);
     }
   });
@@ -242,7 +242,9 @@ async function main() {
 
   test("toCardData produces correct spell card", () => {
     const spells = getEntitiesForCategory("spell");
-    const fireball = spells.find((s) => s.name === "Fireball" && s.source === "XPHB");
+    const fireball = spells.find(
+      (s: { name: string; source: string }) => s.name === "Fireball" && s.source === "XPHB",
+    );
     ok(fireball, "Fireball XPHB should exist");
     const card = toCardData("spell", fireball!);
     strictEqual(card.name, "Fireball");
@@ -256,7 +258,8 @@ async function main() {
   test("toCardData produces correct monster card", () => {
     const monsters = getEntitiesForCategory("monster");
     const ancient = monsters.find(
-      (m) => m.name.startsWith("Ancient Red Dragon") && m.source === "XMM",
+      (m: { name: string; source: string }) =>
+        m.name.startsWith("Ancient Red Dragon") && m.source === "XMM",
     );
     ok(ancient, "Ancient Red Dragon XMM should exist");
     const card = toCardData("monster", ancient!);
@@ -270,7 +273,9 @@ async function main() {
 
   test("toCardData produces correct equipment card", () => {
     const equipment = getEntitiesForCategory("equipment");
-    const item = equipment.find((e) => e.name === "Backpack" && e.source === "XPHB");
+    const item = equipment.find(
+      (e: { name: string; source: string }) => e.name === "Backpack" && e.source === "XPHB",
+    );
     ok(item, "Backpack XPHB should exist");
     const card = toCardData("equipment", item!);
     strictEqual(card.name, "Backpack");
@@ -280,7 +285,7 @@ async function main() {
 
   test("toCardData produces correct condition card", () => {
     const conditions = getEntitiesForCategory("condition");
-    const blinded = conditions.find((c) => c.name === "Blinded");
+    const blinded = conditions.find((c: { name: string }) => c.name === "Blinded");
     ok(blinded);
     const card = toCardData("condition", blinded!);
     strictEqual(card.categoryLabel, "Condition");
@@ -289,7 +294,7 @@ async function main() {
 
   test("toCardData produces correct action card", () => {
     const actions = getEntitiesForCategory("action");
-    const dodge = actions.find((a) => a.name === "Dodge");
+    const dodge = actions.find((a: { name: string }) => a.name === "Dodge");
     ok(dodge);
     const card = toCardData("action", dodge!);
     strictEqual(card.name, "Dodge");

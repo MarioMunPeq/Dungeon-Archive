@@ -28,17 +28,39 @@ export interface Raw5eDuration {
   readonly ends?: readonly string[];
 }
 
+export interface Raw5eCellRoll {
+  readonly exact?: number;
+  readonly min?: number;
+  readonly max?: number;
+  readonly pad?: boolean;
+  readonly formula?: string;
+}
+
+export interface Raw5eCell {
+  readonly type?: string;
+  readonly roll?: Raw5eCellRoll;
+  readonly name?: string;
+  readonly entry?: string;
+  readonly alignment?: "left" | "center" | "right";
+  readonly [key: string]: unknown;
+}
+
 export interface Raw5eEntry {
   readonly type?: string;
   readonly name?: string;
-  readonly entries?: readonly Raw5eEntry[];
-  readonly items?: readonly (
-    string | { readonly type: string; readonly name: string; readonly entry: string }
-  )[];
+  readonly entries?: readonly unknown[];
+  readonly items?: readonly unknown[];
   readonly caption?: string;
-  readonly colLabels?: readonly string[];
-  readonly rows?: readonly (readonly string[])[];
+  readonly colLabels?: readonly unknown[];
+  readonly rows?: readonly (readonly unknown[])[];
   readonly style?: string;
+  readonly by?: string;
+  readonly roll?: Raw5eCellRoll;
+  readonly url?: string;
+  readonly altText?: string;
+  readonly width?: number;
+  readonly height?: number;
+  readonly text?: string;
   readonly [key: string]: unknown;
 }
 
