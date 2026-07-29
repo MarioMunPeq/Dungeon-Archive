@@ -3,10 +3,18 @@ import type {
   Condition,
   Equipment,
   Action,
+  Monster,
   SearchIndexEntry,
   EntityVersion,
 } from "@/compendium";
-import { getEntity, sourcePriority, formatSource, slugFromCanonicalId } from "@/compendium";
+import {
+  getEntity,
+  sourcePriority,
+  formatSource,
+  slugFromCanonicalId,
+  categoryLabelSingular,
+  formatMonsterType,
+} from "@/compendium";
 
 export interface EntityDisplayInfo {
   readonly title: string;
@@ -62,27 +70,33 @@ function computeMatchScore(name: string, query: string): number {
   return 0;
 }
 
-function getSubtitle(entity: Spell | Condition | Equipment | Action): string {
+function getSubtitle(entity: Spell | Condition | Equipment | Action | Monster): string {
+  const category = categoryLabelSingular(entity.category);
+
   switch (entity.category) {
     case "spell": {
       const spell = entity as Spell;
       const levelText = spell.level === 0 ? "Cantrip" : `Level ${spell.level}`;
       const schoolName = SCHOOL_NAMES[spell.school] ?? spell.school;
-      return `${levelText} \u00B7 ${schoolName} \u00B7 ${formatSource(spell.source)}`;
+      return `${category} \u00B7 ${levelText} \u00B7 ${schoolName} \u00B7 ${formatSource(spell.source)}`;
     }
-    case "condition":
-      return `Condition \u00B7 ${formatSource(entity.source)}`;
+    case "monster": {
+      const monster = entity as Monster;
+      return `${category} \u00B7 CR ${monster.challengeRating} \u00B7 ${formatMonsterType(monster)} \u00B7 ${formatSource(monster.source)}`;
+    }
     case "equipment": {
       const item = entity as Equipment;
-      return `${formatEquipmentType(item.type)} \u00B7 ${formatSource(item.source)}`;
+      return `${category} \u00B7 ${formatEquipmentType(item.type)} \u00B7 ${formatSource(item.source)}`;
     }
+    case "condition":
+      return `${category} \u00B7 ${formatSource(entity.source)}`;
     case "action":
-      return `Action \u00B7 ${formatSource(entity.source)}`;
+      return `${category} \u00B7 ${formatSource(entity.source)}`;
   }
 }
 
 export function getEntityDisplayInfo(
-  entity: Spell | Condition | Equipment | Action,
+  entity: Spell | Condition | Equipment | Action | Monster,
 ): EntityDisplayInfo {
   return {
     title: entity.name,
@@ -96,7 +110,7 @@ export function createSearchResultItems(
 ): readonly SearchResultItem[] {
   const enriched: {
     entry: SearchIndexEntry;
-    entity: Spell | Condition | Equipment | Action;
+    entity: Spell | Condition | Equipment | Action | Monster;
   }[] = [];
 
   for (const entry of entries) {

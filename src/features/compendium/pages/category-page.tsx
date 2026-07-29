@@ -1,0 +1,73 @@
+import { useMemo } from "react";
+import { useSearchParams } from "react-router";
+import type { EntityCategory } from "@/compendium";
+import {
+  categoryLabel,
+  categoryLabelSingular,
+  getEntitiesForCategory,
+  buildFilterDefs,
+  applyFilters,
+  toCardData,
+} from "@/compendium";
+import { FilterBar } from "../components/filter-bar";
+import { EntityList } from "../components/entity-list";
+
+interface CategoryPageProps {
+  readonly category: EntityCategory;
+}
+
+export function CategoryPage({ category }: CategoryPageProps) {
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  const allEntities = useMemo(() => getEntitiesForCategory(category), [category]);
+  const filterDefs = useMemo(() => buildFilterDefs(category, allEntities), [category, allEntities]);
+  const currentFilters = useMemo(() => {
+    const filters: Record<string, string> = {};
+    for (const def of filterDefs) {
+      const val = searchParams.get(def.key);
+      if (val) filters[def.key] = val;
+    }
+    return filters;
+  }, [searchParams, filterDefs]);
+
+  const filtered = useMemo(
+    () => applyFilters(category, allEntities, currentFilters),
+    [category, allEntities, currentFilters],
+  );
+
+  const cards = useMemo(() => filtered.map((e) => toCardData(category, e)), [category, filtered]);
+
+  const handleFilterChange = (key: string, value: string) => {
+    setSearchParams(
+      (prev) => {
+        const next = new URLSearchParams(prev);
+        if (value) {
+          next.set(key, value);
+        } else {
+          next.delete(key);
+        }
+        return next;
+      },
+      { replace: true },
+    );
+  };
+
+  return (
+    <div className="space-y-4 px-4 py-6">
+      <div>
+        <h1 className="text-xl font-bold text-foreground">{categoryLabel(category)}</h1>
+        <p className="text-sm text-muted-foreground">
+          {allEntities.length} {categoryLabelSingular(category).toLowerCase()}
+          {filtered.length < allEntities.length ? ` (${filtered.length} filtered)` : ""}
+        </p>
+      </div>
+
+      <FilterBar filters={filterDefs} values={currentFilters} onChange={handleFilterChange} />
+
+      <EntityList
+        entities={cards}
+        emptyMessage={`No ${categoryLabelSingular(category).toLowerCase()} match your filters`}
+      />
+    </div>
+  );
+}

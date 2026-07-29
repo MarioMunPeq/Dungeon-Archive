@@ -1,0 +1,17 @@
+* [33m667c8e8[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m chore: downgrade pnpm version to 11.17.0
+*   [33m7a8240f[m Merge branch 'main' of https://github.com/MarioMunPeq/Dungeon-Archive
+[32m|[m[33m\[m  
+[32m|[m * [33m0304427[m Add README.md for Dungeon Archive project
+* [33m|[m [33m8ce05af[m chore: specify pnpm version
+[33m|[m[33m/[m  
+* [33m4cf2c88[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m)[m feat(compendium): add category browsing and filtering
+* [33m2d54318[m feat(compendium): add monster entity support
+* [33m1486cb1[m feat(compendium): improve entity navigation and content rendering
+* [33mc007294[m feat(compendium): add entity identity and source version grouping
+* [33mcfb4168[m refactor(search): isolate entity display logic and enrich results
+* [33m8228b78[m feat: implement compendium search flow
+* [33md508865[m feat: add reusable entity detail components
+* [33m0220e9d[m feat: add reusable compendium content renderer
+* [33m7995371[m feat: implement compendium runtime layer
+* [33m1dbe0e3[m feat: add compendium data pipeline
+* [33m4de1de0[m[33m ([m[1;33mtag: [m[1;33mv0.1.0-foundation[m[33m)[m docs: define product architecture and engineering principles

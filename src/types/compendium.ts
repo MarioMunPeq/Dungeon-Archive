@@ -56,6 +56,7 @@ export interface Monster extends CompendiumEntry {
   readonly category: "monster";
   readonly size: string;
   readonly monsterType: string;
+  readonly tags: readonly string[];
   readonly alignment: readonly string[];
   readonly challengeRating: string;
   readonly armorClass: string;

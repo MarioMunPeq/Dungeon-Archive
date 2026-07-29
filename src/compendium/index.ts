@@ -35,6 +35,19 @@ export {
   categoryLabelSingular,
 } from "./slug";
 
+export {
+  getEntitiesForCategory,
+  collectUnique,
+  buildOptions,
+  buildFilterDefs,
+  applyFilters,
+  toCardData,
+  formatMonsterType,
+  SCHOOL_NAMES,
+  SOURCE_ORDER,
+} from "./category-display";
+export type { AnyEntity } from "./category-display";
+
 export type {
   Spell,
   Condition,

@@ -6,6 +6,25 @@ import { createCanonicalId } from "../../identity";
 import { isAllowedSource } from "../../allowed-sources";
 import { processEntries } from "../../entries";
 
+function resolveType(type: unknown): { monsterType: string; tags: readonly string[] } {
+  if (typeof type === "string") return { monsterType: type, tags: [] };
+  if (type && typeof type === "object") {
+    const raw = type as { type?: unknown; tags?: readonly string[] };
+    const rawType = raw.type;
+    let monsterType: string;
+    if (typeof rawType === "string") {
+      monsterType = rawType;
+    } else if (rawType && typeof rawType === "object") {
+      const chooseObj = rawType as { choose?: readonly string[] };
+      monsterType = chooseObj.choose?.join(" or ") ?? "unknown";
+    } else {
+      monsterType = "unknown";
+    }
+    return { monsterType, tags: raw.tags ?? [] };
+  }
+  return { monsterType: "unknown", tags: [] };
+}
+
 function formatSpeedEntry(value: unknown): string {
   if (typeof value === "number") return `${value} ft.`;
   if (typeof value === "string") return value;
@@ -98,6 +117,15 @@ function processNamedEntries(
   return blocks;
 }
 
+const SIZE_MAP: Record<string, string> = {
+  T: "Tiny",
+  S: "Small",
+  M: "Medium",
+  L: "Large",
+  H: "Huge",
+  G: "Gargantuan",
+};
+
 export function transformMonsters(raw: readonly Raw5eMonster[]): Monster[] {
   return raw
     .filter((m) => isAllowedSource(m.source))
@@ -108,8 +136,8 @@ export function transformMonsters(raw: readonly Raw5eMonster[]): Monster[] {
       category: "monster" as const,
       name: m.name,
       source: m.source,
-      size: m.size?.[0] ?? "Medium",
-      monsterType: m.type,
+      size: SIZE_MAP[m.size?.[0] ?? ""] ?? "Medium",
+      ...resolveType(m.type),
       alignment: resolveAlignment(m.alignment),
       challengeRating: formatCr(m.cr),
       armorClass: formatAc(m.ac ?? []),
