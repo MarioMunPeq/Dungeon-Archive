@@ -4,6 +4,7 @@ import type {
   Equipment,
   Action,
   Monster,
+  MagicItem,
   SearchIndexEntry,
 } from "@/types/compendium";
 import type { CompendiumState } from "./types";
@@ -17,11 +18,13 @@ export let state: CompendiumState = {
   equipment: new Map(),
   actions: new Map(),
   monsters: new Map(),
+  magicItems: new Map(),
   spellList: [],
   conditionList: [],
   equipmentList: [],
   actionList: [],
   monsterList: [],
+  magicItemList: [],
   initialized: false,
 };
 
@@ -36,13 +39,14 @@ function toMap<T extends { id: string }>(items: readonly T[]): Map<string, T> {
 export async function loadCompendium(): Promise<void> {
   if (state.initialized) return;
 
-  const [spells, conditions, equipment, actions, monsters, searchIndex, relatedIndexModule] =
+  const [spells, conditions, equipment, actions, monsters, magicItems, searchIndex, relatedIndexModule] =
     await Promise.all([
       import("../generated/compendium/spells.json"),
       import("../generated/compendium/conditions.json"),
       import("../generated/compendium/equipment.json"),
       import("../generated/compendium/actions.json"),
       import("../generated/compendium/monsters.json"),
+      import("../generated/compendium/magic-items.json"),
       import("../generated/compendium/search-index.json"),
       import("../generated/compendium/related-index.json"),
     ]);
@@ -52,6 +56,7 @@ export async function loadCompendium(): Promise<void> {
   const equipmentList = Object.freeze(equipment.default as Equipment[]);
   const actionList = Object.freeze(actions.default as Action[]);
   const monsterList = Object.freeze(monsters.default as Monster[]);
+  const magicItemList = Object.freeze(magicItems.default as MagicItem[]);
 
   state = {
     spells: toMap(spellList),
@@ -59,15 +64,19 @@ export async function loadCompendium(): Promise<void> {
     equipment: toMap(equipmentList),
     actions: toMap(actionList),
     monsters: toMap(monsterList),
+    magicItems: toMap(magicItemList),
     spellList,
     conditionList,
     equipmentList,
     actionList,
     monsterList,
+    magicItemList,
     initialized: true,
   };
 
-  buildRegistry([...spellList, ...conditionList, ...equipmentList, ...actionList, ...monsterList]);
+  buildRegistry([
+    ...spellList, ...conditionList, ...equipmentList, ...actionList, ...monsterList, ...magicItemList,
+  ]);
 
   setSearchIndex(searchIndex.default as SearchIndexEntry[]);
   setRelatedIndex(relatedIndexModule.default as RelatedIndex);

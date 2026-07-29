@@ -118,6 +118,24 @@ export interface Raw5eItem {
   readonly additionalEntries?: readonly (string | Raw5eEntry)[];
 }
 
+export interface Raw5eMagicItem {
+  readonly name: string;
+  readonly source: string;
+  readonly page?: number;
+  readonly type: string;
+  readonly rarity: string;
+  readonly reqAttune?: string;
+  readonly reqAttuneTags?: readonly { readonly class?: string }[];
+  readonly wondrous?: boolean;
+  readonly bonusSpellAttack?: string;
+  readonly bonusSpellSaveDc?: string;
+  readonly focus?: readonly string[];
+  readonly weight?: number;
+  readonly value?: number;
+  readonly entries: readonly (string | Raw5eEntry)[];
+  readonly additionalEntries?: readonly (string | Raw5eEntry)[];
+}
+
 export interface Raw5eAction {
   readonly name: string;
   readonly source: string;

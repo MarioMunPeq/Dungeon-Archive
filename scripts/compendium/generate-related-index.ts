@@ -7,6 +7,7 @@ import type {
   Equipment,
   Condition,
   Action,
+  MagicItem,
 } from "../../src/types/compendium";
 
 const SCHOOL_NAMES: Record<string, string> = {
@@ -183,6 +184,17 @@ function extractActionTags(entity: Action): string[] {
   return tags;
 }
 
+function extractMagicItemTags(entity: MagicItem): string[] {
+  const tags: string[] = [];
+  tags.push(entity.rarity);
+  tags.push(entity.itemType);
+  if (entity.requiresAttunement) tags.push("Attunement");
+  const bodyText = textFromBlocks(entity.description);
+  tags.push(...extractKeywords(bodyText, DAMAGE_KEYWORDS));
+  tags.push(...extractKeywords(bodyText, THEMATIC_KEYWORDS));
+  return tags;
+}
+
 function extractTags(entity: CompendiumEntry): string[] {
   switch (entity.category) {
     case "spell":
@@ -195,6 +207,8 @@ function extractTags(entity: CompendiumEntry): string[] {
       return extractConditionTags(entity as Condition);
     case "action":
       return extractActionTags(entity as Action);
+    case "magicitem":
+      return extractMagicItemTags(entity as MagicItem);
   }
 }
 
@@ -238,6 +252,19 @@ function equipmentScoring(a: Equipment, b: Equipment, _tagsA: string[], _tagsB: 
   return score;
 }
 
+function magicItemScoring(
+  a: MagicItem, b: MagicItem, tagsA: string[], tagsB: string[],
+): number {
+  let score = 0;
+  if (a.rarity === b.rarity) score += 3;
+  if (a.itemType === b.itemType) score += 3;
+  if (a.requiresAttunement && b.requiresAttunement) score += 2;
+  const sharedTags = tagsA.filter((t) => tagsB.includes(t));
+  score += Math.min(sharedTags.length, 2);
+  if (a.source === b.source) score += 1;
+  return score;
+}
+
 function conditionScoring(a: Condition, b: Condition, _tagsA: string[], _tagsB: string[]): number {
   if (a.source === b.source) return 2;
   return 0;
@@ -267,6 +294,8 @@ function computeSimilarity(
       return equipmentScoring(a as Equipment, b as Equipment, tagsA, tagsB);
     case "condition":
       return conditionScoring(a as Condition, b as Condition, tagsA, tagsB);
+    case "magicitem":
+      return magicItemScoring(a as MagicItem, b as MagicItem, tagsA, tagsB);
     case "action":
       return 0;
   }
@@ -343,8 +372,9 @@ function collectDescriptionBlocks(entity: CompendiumEntry): readonly ContentBloc
     }
     case "condition":
     case "equipment":
-    case "action": {
-      const e = entity as Condition | Equipment | Action;
+    case "action":
+    case "magicitem": {
+      const e = entity as Condition | Equipment | Action | MagicItem;
       blocks.push(...e.description);
       break;
     }

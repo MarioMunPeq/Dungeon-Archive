@@ -5,14 +5,17 @@ import type {
   Equipment,
   Condition,
   Action,
+  MagicItem,
 } from "@/types/compendium";
 import type { EntityCardData } from "@/features/compendium/components/entity-card";
 import type { FilterDefinition } from "@/features/compendium/components/filter-bar";
-import { getSpells, getMonsters, getEquipmentList, getConditions, getActions } from "./repository";
+import {
+  getSpells, getMonsters, getEquipmentList, getConditions, getActions, getMagicItems,
+} from "./repository";
 import { slugFromCanonicalId, categoryLabelSingular } from "./slug";
 import { formatSource } from "./source";
 
-export type AnyEntity = Spell | Monster | Equipment | Condition | Action;
+export type AnyEntity = Spell | Monster | Equipment | Condition | Action | MagicItem;
 
 export function formatMonsterType(monster: Monster): string {
   const base = monster.monsterType;
@@ -40,6 +43,8 @@ export const SOURCE_ORDER: Record<string, number> = {
   XMM: 5,
   MPMM: 6,
   MM: 7,
+  DMG: 8,
+  XDMG: 9,
 };
 
 export function getEntitiesForCategory(category: EntityCategory): readonly AnyEntity[] {
@@ -54,6 +59,8 @@ export function getEntitiesForCategory(category: EntityCategory): readonly AnyEn
       return getConditions();
     case "action":
       return getActions();
+    case "magicitem":
+      return getMagicItems();
   }
 }
 
@@ -168,6 +175,39 @@ export function buildFilterDefs(
         },
       ];
     }
+    case "magicitem": {
+      const items = entities as readonly MagicItem[];
+      return [
+        {
+          key: "rarity",
+          label: "Rarity",
+          options: buildOptions(collectUnique(items, (m) => m.rarity)),
+        },
+        {
+          key: "itemType",
+          label: "Type",
+          options: buildOptions(collectUnique(items, (m) => m.itemType)),
+        },
+        {
+          key: "attunement",
+          label: "Attunement",
+          options: [
+            { value: "", label: "All" },
+            { value: "required", label: "Required" },
+            { value: "none", label: "None" },
+          ],
+        },
+        {
+          key: "source",
+          label: "Source",
+          options: buildOptions(
+            collectUnique(items, (e) => e.source),
+            {},
+            formatSource,
+          ),
+        },
+      ];
+    }
     case "condition":
     case "action":
       return [
@@ -210,6 +250,16 @@ export function applyFilters(
           break;
         case "size":
           if ((entity as Monster).size !== value) return false;
+          break;
+        case "rarity":
+          if ((entity as MagicItem).rarity !== value) return false;
+          break;
+        case "itemType":
+          if ((entity as MagicItem).itemType !== value) return false;
+          break;
+        case "attunement":
+          if (value === "required" && !(entity as MagicItem).requiresAttunement) return false;
+          if (value === "none" && (entity as MagicItem).requiresAttunement !== "") return false;
           break;
         case "source":
           if (entity.source !== value) return false;
@@ -255,6 +305,17 @@ export function toCardData(category: EntityCategory, entity: AnyEntity): EntityC
         categoryLabel: label,
         metadata: item.type,
         source: item.source,
+      };
+    }
+    case "magicitem": {
+      const magic = entity as MagicItem;
+      const attunement = magic.requiresAttunement ? " \u00B7 Attunement" : "";
+      return {
+        name: magic.name,
+        href,
+        categoryLabel: label,
+        metadata: `${magic.rarity}${attunement}`,
+        source: magic.source,
       };
     }
     case "condition":

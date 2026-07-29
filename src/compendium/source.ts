@@ -12,6 +12,8 @@ const SOURCE_MAP: Record<string, SourceInfo> = {
   MM: { code: "MM", name: "Monster Manual", edition: "2014" },
   XMM: { code: "XMM", name: "Monster Manual", edition: "2025" },
   MPMM: { code: "MPMM", name: "Mordenkainen's Monsters of the Multiverse", edition: "2022" },
+  DMG: { code: "DMG", name: "Dungeon Master's Guide", edition: "2014" },
+  XDMG: { code: "XDMG", name: "Dungeon Master's Guide", edition: "2024" },
 };
 
 const SOURCE_DISPLAY: Record<string, string> = {
@@ -22,6 +24,8 @@ const SOURCE_DISPLAY: Record<string, string> = {
   MM: "MM",
   XMM: "MM25",
   MPMM: "MPMM",
+  DMG: "DMG",
+  XDMG: "DMG24",
 };
 
 export function getSourceInfo(source: string): SourceInfo | null {

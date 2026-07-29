@@ -4,13 +4,14 @@ import type {
   Equipment,
   Action,
   Monster,
+  MagicItem,
   EntityVersion,
 } from "@/types/compendium";
 import { getVersions } from "../registry/entity-registry";
 import { selectPreferredVersion } from "./version-selector";
 import { getEntity } from "../repository";
 
-type AnyEntity = Spell | Condition | Equipment | Action | Monster;
+type AnyEntity = Spell | Condition | Equipment | Action | Monster | MagicItem;
 
 export interface ResolvedEntity {
   readonly canonicalId: string;

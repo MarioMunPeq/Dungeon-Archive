@@ -4,6 +4,7 @@ import type {
   Equipment,
   Action,
   Monster,
+  MagicItem,
   SearchIndexEntry,
   EntityVersion,
 } from "@/compendium";
@@ -70,7 +71,7 @@ function computeMatchScore(name: string, query: string): number {
   return 0;
 }
 
-function getSubtitle(entity: Spell | Condition | Equipment | Action | Monster): string {
+function getSubtitle(entity: Spell | Condition | Equipment | Action | Monster | MagicItem): string {
   const category = categoryLabelSingular(entity.category);
 
   switch (entity.category) {
@@ -88,6 +89,11 @@ function getSubtitle(entity: Spell | Condition | Equipment | Action | Monster): 
       const item = entity as Equipment;
       return `${category} \u00B7 ${formatEquipmentType(item.type)} \u00B7 ${formatSource(item.source)}`;
     }
+    case "magicitem": {
+      const magic = entity as MagicItem;
+      const attune = magic.requiresAttunement ? " \u00B7 Requires Attunement" : "";
+      return `${category} \u00B7 ${magic.rarity}${attune} \u00B7 ${formatSource(magic.source)}`;
+    }
     case "condition":
       return `${category} \u00B7 ${formatSource(entity.source)}`;
     case "action":
@@ -96,7 +102,7 @@ function getSubtitle(entity: Spell | Condition | Equipment | Action | Monster): 
 }
 
 export function getEntityDisplayInfo(
-  entity: Spell | Condition | Equipment | Action | Monster,
+  entity: Spell | Condition | Equipment | Action | Monster | MagicItem,
 ): EntityDisplayInfo {
   return {
     title: entity.name,
@@ -110,7 +116,7 @@ export function createSearchResultItems(
 ): readonly SearchResultItem[] {
   const enriched: {
     entry: SearchIndexEntry;
-    entity: Spell | Condition | Equipment | Action | Monster;
+    entity: Spell | Condition | Equipment | Action | Monster | MagicItem;
   }[] = [];
 
   for (const entry of entries) {

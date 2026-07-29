@@ -5,6 +5,7 @@ import type { Raw5eSpell } from "../../src/adapter/5etools-raw-types";
 import type { Raw5eCondition } from "../../src/adapter/5etools-raw-types";
 import type { Raw5eItem } from "../../src/adapter/5etools-raw-types";
 import type { Raw5eMonster } from "../../src/adapter/5etools-raw-types";
+import type { Raw5eMagicItem } from "../../src/adapter/5etools-raw-types";
 import { transformSpells } from "./categories/spell/transform";
 import { validateSpells } from "./categories/spell/validate";
 import { transformConditions } from "./categories/condition/transform";
@@ -15,6 +16,8 @@ import { transformActions } from "./categories/action/transform";
 import { validateActions } from "./categories/action/validate";
 import { transformMonsters } from "./categories/monster/transform";
 import { validateMonsters } from "./categories/monster/validate";
+import { transformMagicItems } from "./categories/magic-item/transform";
+import { validateMagicItems } from "./categories/magic-item/validate";
 import { generateSearchIndex } from "./generate-index";
 import { generateRelatedIndex } from "./generate-related-index";
 
@@ -98,6 +101,17 @@ const CATEGORIES: readonly CategoryConfig[] = [
     transform: (data) => transformMonsters(data as Raw5eMonster[]),
     validate: validateMonsters as (entities: CompendiumEntry[]) => ValidationError[],
     outputPath: "monsters.json",
+  },
+  {
+    name: "magicitems",
+    sourcePaths: ["items.json", "items-base.json"],
+    dataKey: "item",
+    transform: (data) => {
+      const withRarity = (data as Raw5eMagicItem[]).filter((i) => i.rarity);
+      return transformMagicItems(withRarity);
+    },
+    validate: validateMagicItems as (entities: CompendiumEntry[]) => ValidationError[],
+    outputPath: "magic-items.json",
   },
 ];
 

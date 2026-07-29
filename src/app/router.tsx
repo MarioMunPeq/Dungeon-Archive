@@ -10,7 +10,7 @@ import { DebugSpellPage } from "@/features/debug/debug-spell-page";
 import { NotFoundPage } from "@/features/not-found-page";
 import type { EntityCategory } from "@/compendium";
 
-const CATEGORIES: EntityCategory[] = ["spell", "condition", "equipment", "action", "monster"];
+const CATEGORIES: EntityCategory[] = ["spell", "condition", "equipment", "action", "monster", "magicitem"];
 
 export function AppRouter() {
   return (
