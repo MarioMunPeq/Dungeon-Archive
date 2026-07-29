@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import { Title, Subtitle } from "@/components/ui/Typography";
 
 interface EntityHeaderProps {
   readonly name: string;
@@ -9,8 +10,8 @@ interface EntityHeaderProps {
 export function EntityHeader({ name, subtitle, source }: EntityHeaderProps) {
   return (
     <div className="space-y-1">
-      <h1 className="text-2xl font-bold text-foreground">{name}</h1>
-      <p className="text-sm text-muted-foreground">{subtitle}</p>
+      <Title>{name}</Title>
+      <Subtitle>{subtitle}</Subtitle>
       <p className="text-xs text-muted-foreground">{source}</p>
     </div>
   );

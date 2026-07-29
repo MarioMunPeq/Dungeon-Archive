@@ -1,3 +1,5 @@
+import { Divider } from "@/components/ui/Divider";
+
 export function SeparatorBlock() {
-  return <hr className="my-4 border-border" />;
+  return <Divider />;
 }

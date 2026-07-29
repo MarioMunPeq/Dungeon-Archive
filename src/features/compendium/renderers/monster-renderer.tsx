@@ -1,5 +1,7 @@
 import type { Monster } from "@/compendium";
 import { AbilityScores } from "./ability-scores";
+import { Stack } from "@/components/ui/Stack";
+import { Heading } from "@/components/ui/Typography";
 import { EntityProperty, EntityMetadataGrid } from "@/components/ui/entity-property";
 import { ContentRenderer } from "@/components/content/content-renderer";
 
@@ -9,7 +11,7 @@ interface MonsterRendererProps {
 
 export function MonsterRenderer({ entity }: MonsterRendererProps) {
   return (
-    <div className="space-y-6">
+    <Stack gap="lg">
       <EntityMetadataGrid>
         <EntityProperty label="Armor Class" value={entity.armorClass} />
         <EntityProperty label="Hit Points" value={entity.hitPoints} />
@@ -19,51 +21,45 @@ export function MonsterRenderer({ entity }: MonsterRendererProps) {
         <EntityProperty label="Challenge Rating" value={entity.challengeRating} />
       </EntityMetadataGrid>
 
-      <div>
-        <h3 className="mb-2 text-sm font-semibold uppercase text-muted-foreground">
-          Ability Scores
-        </h3>
+      <section>
+        <Heading className="mb-2">Ability Scores</Heading>
         <AbilityScores abilities={entity.abilities} />
-      </div>
+      </section>
 
       {entity.traits.length > 0 && (
-        <div>
-          <h3 className="mb-2 text-sm font-semibold uppercase text-muted-foreground">Traits</h3>
+        <section>
+          <Heading className="mb-2">Traits</Heading>
           <ContentRenderer blocks={entity.traits} />
-        </div>
+        </section>
       )}
 
       {entity.actions.length > 0 && (
-        <div>
-          <h3 className="mb-2 text-sm font-semibold uppercase text-muted-foreground">Actions</h3>
+        <section>
+          <Heading className="mb-2">Actions</Heading>
           <ContentRenderer blocks={entity.actions} />
-        </div>
+        </section>
       )}
 
       {entity.reactions.length > 0 && (
-        <div>
-          <h3 className="mb-2 text-sm font-semibold uppercase text-muted-foreground">Reactions</h3>
+        <section>
+          <Heading className="mb-2">Reactions</Heading>
           <ContentRenderer blocks={entity.reactions} />
-        </div>
+        </section>
       )}
 
       {entity.legendaryActions.length > 0 && (
-        <div>
-          <h3 className="mb-2 text-sm font-semibold uppercase text-muted-foreground">
-            Legendary Actions
-          </h3>
+        <section>
+          <Heading className="mb-2">Legendary Actions</Heading>
           <ContentRenderer blocks={entity.legendaryActions} />
-        </div>
+        </section>
       )}
 
       {entity.description.length > 0 && (
-        <div>
-          <h3 className="mb-2 text-sm font-semibold uppercase text-muted-foreground">
-            Description
-          </h3>
+        <section>
+          <Heading className="mb-2">Description</Heading>
           <ContentRenderer blocks={entity.description} />
-        </div>
+        </section>
       )}
-    </div>
+    </Stack>
   );
 }

@@ -2,6 +2,8 @@ import type { ReactNode } from "react";
 import type { EntityVersion } from "@/compendium";
 import { EntityHeader } from "./entity-header";
 import { EntityBreadcrumbs } from "@/components/ui/breadcrumbs";
+import { Inline } from "@/components/ui/Inline";
+import { Stack } from "@/components/ui/Stack";
 import { formatSource } from "@/compendium";
 
 interface EntityDetailLayoutProps {
@@ -24,13 +26,13 @@ export function EntityDetailLayout({
   breadcrumbs,
 }: EntityDetailLayoutProps) {
   return (
-    <article className="space-y-6 px-4 py-6">
+    <Stack as="article" gap="lg" className="px-4 py-6">
       {breadcrumbs && <EntityBreadcrumbs crumbs={breadcrumbs} />}
 
       <EntityHeader name={name} subtitle={subtitle} source={source} />
 
       {versions.length > 1 && (
-        <div className="flex flex-wrap gap-2">
+        <Inline gap="xs">
           {versions.map((v) => (
             <button
               key={v.source}
@@ -45,10 +47,10 @@ export function EntityDetailLayout({
               {formatSource(v.source)}
             </button>
           ))}
-        </div>
+        </Inline>
       )}
 
       {children}
-    </article>
+    </Stack>
   );
 }

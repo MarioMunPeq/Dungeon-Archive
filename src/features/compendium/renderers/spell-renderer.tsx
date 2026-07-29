@@ -1,6 +1,8 @@
 import type { Spell } from "@/compendium";
 import { Section } from "@/components/entity";
 import { ContentRenderer } from "@/components/content";
+import { Subtitle } from "@/components/ui/Typography";
+import { Stack } from "@/components/ui/Stack";
 import { EntityProperty, EntityMetadataGrid } from "@/components/ui/entity-property";
 
 const SCHOOL_NAMES: Record<string, string> = {
@@ -23,12 +25,10 @@ export function SpellRenderer({ entity }: SpellRendererProps) {
   const schoolName = SCHOOL_NAMES[entity.school] ?? entity.school;
 
   return (
-    <div className="space-y-6">
-      <div>
-        <p className="text-sm text-muted-foreground">
-          {levelText} &middot; {schoolName}
-        </p>
-      </div>
+    <Stack gap="lg">
+      <Subtitle>
+        {levelText} &middot; {schoolName}
+      </Subtitle>
 
       <EntityMetadataGrid>
         <EntityProperty label="Casting Time" value={entity.castingTime} />
@@ -49,6 +49,6 @@ export function SpellRenderer({ entity }: SpellRendererProps) {
           <ContentRenderer blocks={entity.higherLevels} />
         </Section>
       )}
-    </div>
+    </Stack>
   );
 }
