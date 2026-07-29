@@ -5,6 +5,7 @@ import { VitePWA } from "vite-plugin-pwa";
 import path from "node:path";
 
 export default defineConfig({
+  base: "/dungeon-archive/",
   plugins: [
     react(),
     tailwindcss(),
@@ -18,8 +19,8 @@ export default defineConfig({
         theme_color: "#1a1a2e",
         background_color: "#1a1a2e",
         display: "standalone",
-        scope: "/",
-        start_url: "/",
+        scope: "/dungeon-archive/",
+        start_url: "/dungeon-archive/",
         orientation: "portrait",
         icons: [
           {
