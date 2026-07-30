@@ -9,6 +9,8 @@ export {
   hydrate,
   userStore,
   useIsFavorite,
+  useIsInSession,
+  useSessionIds,
   useRecentEntities,
   useRecentSearches,
 } from "./store";

@@ -33,6 +33,12 @@ function normalizeRecentSearches(raw: unknown): string[] {
   return arr;
 }
 
+function normalizeSession(raw: unknown): string[] {
+  const arr = uniqueStrings(raw, true);
+  if (arr.length > 100) arr.length = 100;
+  return arr;
+}
+
 export function validateIds(ids: string[]): string[] {
   return ids.filter((id) => isRegistered(id));
 }
@@ -43,5 +49,6 @@ export function normalize(state: UserState): UserState {
     favorites: normalizeFavorites(state.favorites),
     recentEntities: normalizeRecentEntities(state.recentEntities),
     recentSearches: normalizeRecentSearches(state.recentSearches),
+    session: normalizeSession(state.session),
   };
 }

@@ -1,6 +1,7 @@
 import { Routes, Route } from "react-router";
 import { HomePage } from "@/features/home/home-page";
 import { SearchPage } from "@/features/search/search-page";
+import { SessionPage } from "@/features/session/session-page";
 import { AdventurePage } from "@/features/adventure/adventure-page";
 import { PartyPage } from "@/features/party/party-page";
 import { CompendiumPage } from "@/features/compendium/pages/entity-page";
@@ -18,6 +19,7 @@ export function AppRouter() {
     <Routes>
       <Route path="/" element={<HomePage />} />
       <Route path="/search" element={<SearchPage />} />
+      <Route path="/session" element={<SessionPage />} />
       <Route path="/adventure" element={<AdventurePage />} />
       <Route path="/party" element={<PartyPage />} />
       {CATEGORIES.map((cat) => (

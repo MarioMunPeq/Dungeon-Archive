@@ -7,7 +7,7 @@ import {
   slugFromCanonicalId,
 } from "@/compendium";
 import type { EntityCategory } from "@/compendium";
-import { useRecentEntities, userStore } from "@/user-state";
+import { useRecentEntities, useSessionIds, userStore } from "@/user-state";
 import { EntityCard } from "@/features/compendium/components/entity-card";
 import type { EntityCardData } from "@/features/compendium/components/entity-card";
 
@@ -32,7 +32,14 @@ function entityCardFromCanonicalId(canonicalId: string): EntityCardData | null {
 }
 
 export function HomePage() {
+  const sessionIds = useSessionIds(10);
   const recentIds = useRecentEntities(10);
+
+  const sessionCards: EntityCardData[] = [];
+  for (const id of sessionIds) {
+    const card = entityCardFromCanonicalId(id);
+    if (card) sessionCards.push(card);
+  }
 
   const recentCards: EntityCardData[] = [];
   for (const id of recentIds) {
@@ -53,6 +60,27 @@ export function HomePage() {
         <h1 className="mb-2 text-3xl font-bold text-foreground">Dungeon Archive</h1>
         <p className="text-sm text-muted-foreground">Your tabletop companion</p>
       </div>
+
+      {sessionCards.length > 0 && (
+        <div className="flex flex-col gap-3">
+          <Link
+            to="/session"
+            className="flex items-center gap-1 text-sm font-semibold text-foreground hover:text-primary"
+          >
+            Continue Session
+            <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} className="h-3.5 w-3.5">
+              <path d="M9 18l6-6-6-6" />
+            </svg>
+          </Link>
+          <div className="-mx-4 flex gap-3 overflow-x-auto px-4 pb-2">
+            {sessionCards.map((card) => (
+              <div key={card.href} className="w-56 shrink-0">
+                <EntityCard {...card} />
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
 
       {recentCards.length > 0 && (
         <div className="flex flex-col gap-3">
@@ -86,10 +114,10 @@ export function HomePage() {
         </div>
       )}
 
-      {recentCards.length === 0 && favoriteCards.length === 0 && (
+      {sessionCards.length === 0 && recentCards.length === 0 && favoriteCards.length === 0 && (
         <div className="flex flex-col items-center gap-4 rounded-lg border border-border p-6 text-center">
           <p className="text-sm text-muted-foreground">
-            Browse entities, search for something, or tap the heart icon on any entity to get started.
+            Browse entities, search for something, or tap the heart and pin icons to save favorites and build your session.
           </p>
         </div>
       )}

@@ -1,6 +1,6 @@
 import { create } from "zustand";
 import type { UserState } from "./types";
-import { STORAGE_KEY } from "./types";
+import { STORAGE_KEY, CURRENT_VERSION } from "./types";
 import { read, write } from "./persistence";
 import { migrate } from "./migrations";
 import { normalize, validateIds } from "./normalize";
@@ -11,12 +11,15 @@ interface UserActions {
   addRecentSearch: (query: string) => void;
   clearRecentSearches: () => void;
   clearRecentEntities: () => void;
+  toggleSession: (canonicalId: string) => void;
+  clearSession: () => void;
   _replace: (state: UserState) => void;
   _reset: () => void;
 }
 
 export type UserStore = UserState & UserActions & {
   favoritesSet: Set<string>;
+  sessionSet: Set<string>;
   _hasHydrated: boolean;
 };
 
@@ -43,8 +46,8 @@ function schedulePersist(getState: () => UserStore): void {
   if (debounceTimer !== null) clearTimeout(debounceTimer);
   debounceTimer = setTimeout(() => {
     debounceTimer = null;
-    const { version, favorites, recentEntities, recentSearches } = getState();
-    write({ version, favorites, recentEntities, recentSearches });
+    const { version, favorites, recentEntities, recentSearches, session } = getState();
+    write({ version, favorites, recentEntities, recentSearches, session });
   }, 150);
 }
 
@@ -57,11 +60,13 @@ function arraysEqual(a: readonly string[], b: readonly string[]): boolean {
 }
 
 export const userStore = create<UserStore>((set, get) => ({
-  version: 1,
+  version: CURRENT_VERSION,
   favorites: [],
   favoritesSet: new Set<string>(),
   recentEntities: [],
   recentSearches: [],
+  session: [],
+  sessionSet: new Set<string>(),
   _hasHydrated: false,
 
   toggleFavorite: (canonicalId) => {
@@ -94,6 +99,25 @@ export const userStore = create<UserStore>((set, get) => ({
     schedulePersist(get);
   },
 
+  toggleSession: (canonicalId) => {
+    set((s) => {
+      const idx = s.session.indexOf(canonicalId);
+      if (idx !== -1) {
+        const copy = [...s.session];
+        copy.splice(idx, 1);
+        return { session: copy, sessionSet: new Set(copy) };
+      }
+      const updated = [canonicalId, ...s.session];
+      return { session: updated, sessionSet: new Set(updated) };
+    });
+    schedulePersist(get);
+  },
+
+  clearSession: () => {
+    set({ session: [], sessionSet: new Set<string>() });
+    schedulePersist(get);
+  },
+
   _replace: (state) => {
     set({
       version: state.version,
@@ -101,16 +125,20 @@ export const userStore = create<UserStore>((set, get) => ({
       favoritesSet: new Set(state.favorites),
       recentEntities: state.recentEntities,
       recentSearches: state.recentSearches,
+      session: state.session,
+      sessionSet: new Set(state.session),
     });
   },
 
   _reset: () => {
     set({
-      version: 1,
+      version: CURRENT_VERSION,
       favorites: [],
       favoritesSet: new Set<string>(),
       recentEntities: [],
       recentSearches: [],
+      session: [],
+      sessionSet: new Set<string>(),
       _hasHydrated: false,
     });
   },
@@ -118,6 +146,14 @@ export const userStore = create<UserStore>((set, get) => ({
 
 export function useIsFavorite(canonicalId: string): boolean {
   return userStore((s) => s.favoritesSet.has(canonicalId));
+}
+
+export function useIsInSession(canonicalId: string): boolean {
+  return userStore((s) => s.sessionSet.has(canonicalId));
+}
+
+export function useSessionIds(limit?: number): string[] {
+  return userStore((s) => (limit !== undefined ? s.session.slice(0, limit) : s.session));
 }
 
 export function useRecentEntities(limit = 10): string[] {
@@ -134,6 +170,7 @@ function processPersistedState(state: UserState): UserState {
     favorites: validateIds(state.favorites),
     recentEntities: validateIds(state.recentEntities),
     recentSearches: state.recentSearches,
+    session: validateIds(state.session),
   };
   return normalize(validated);
 }
@@ -144,7 +181,8 @@ function replaceState(state: UserState): void {
     current.version === state.version &&
     arraysEqual(current.favorites, state.favorites) &&
     arraysEqual(current.recentEntities, state.recentEntities) &&
-    arraysEqual(current.recentSearches, state.recentSearches)
+    arraysEqual(current.recentSearches, state.recentSearches) &&
+    arraysEqual(current.session, state.session)
   ) {
     return;
   }

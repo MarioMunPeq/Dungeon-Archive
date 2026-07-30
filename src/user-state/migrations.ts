@@ -8,6 +8,13 @@ const migrations: Record<number, (state: Record<string, unknown>) => Record<stri
     recentEntities: Array.isArray(raw.recentEntities) ? raw.recentEntities : [],
     recentSearches: Array.isArray(raw.recentSearches) ? raw.recentSearches : [],
   }),
+  2: (raw) => ({
+    version: 2,
+    favorites: Array.isArray(raw.favorites) ? raw.favorites : [],
+    recentEntities: Array.isArray(raw.recentEntities) ? raw.recentEntities : [],
+    recentSearches: Array.isArray(raw.recentSearches) ? raw.recentSearches : [],
+    session: Array.isArray(raw.session) ? raw.session : [],
+  }),
 };
 
 export function migrate(raw: unknown): UserState {
@@ -23,12 +30,16 @@ export function migrate(raw: unknown): UserState {
   if (version < 1) {
     migrated = migrations[1]!(migrated);
   }
+  if (version < 2) {
+    migrated = migrations[2]!(migrated);
+  }
 
   const result = migrated as unknown as UserState;
   if (
     !Array.isArray(result.favorites) ||
     !Array.isArray(result.recentEntities) ||
-    !Array.isArray(result.recentSearches)
+    !Array.isArray(result.recentSearches) ||
+    !Array.isArray(result.session)
   ) {
     return createDefaultState();
   }
@@ -38,5 +49,6 @@ export function migrate(raw: unknown): UserState {
     favorites: result.favorites,
     recentEntities: result.recentEntities,
     recentSearches: result.recentSearches,
+    session: result.session,
   };
 }

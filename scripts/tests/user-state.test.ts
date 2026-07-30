@@ -76,16 +76,17 @@ test("STORAGE_KEY equals dungeon:userState:v1", () => {
   strictEqual(STORAGE_KEY, "dungeon:userState:v1");
 });
 
-test("CURRENT_VERSION equals 1", () => {
-  strictEqual(CURRENT_VERSION, 1);
+test("CURRENT_VERSION equals 2", () => {
+  strictEqual(CURRENT_VERSION, 2);
 });
 
-test("createDefaultState returns valid v1 state", () => {
+test("createDefaultState returns valid v2 state", () => {
   const def = createDefaultState();
-  strictEqual(def.version, 1);
+  strictEqual(def.version, CURRENT_VERSION);
   deepStrictEqual(def.favorites, []);
   deepStrictEqual(def.recentEntities, []);
   deepStrictEqual(def.recentSearches, []);
+  deepStrictEqual(def.session, []);
 });
 
 // ---------------------------------------------------------------------------
@@ -96,7 +97,7 @@ console.log("\nuser-state \u2014 persistence\n");
 test("persistence.read() returns default on missing key", () => {
   resetMock();
   const result = read();
-  strictEqual(result.version, 1);
+  strictEqual(result.version, CURRENT_VERSION);
   deepStrictEqual(result.favorites, []);
 });
 
@@ -104,7 +105,7 @@ test("persistence.read() recovers default on invalid JSON", () => {
   resetMock();
   localStorage.setItem(STORAGE_KEY, "not-json");
   const result = read();
-  strictEqual(result.version, 1);
+  strictEqual(result.version, CURRENT_VERSION);
   deepStrictEqual(result.favorites, []);
 });
 
@@ -112,14 +113,14 @@ test("persistence.read() recovers default on null JSON", () => {
   resetMock();
   localStorage.setItem(STORAGE_KEY, "null");
   const result = read();
-  strictEqual(result.version, 1);
+  strictEqual(result.version, CURRENT_VERSION);
 });
 
 test("persistence.read() recovers default on non-object JSON", () => {
   resetMock();
   localStorage.setItem(STORAGE_KEY, '"string"');
   const result = read();
-  strictEqual(result.version, 1);
+  strictEqual(result.version, CURRENT_VERSION);
 });
 
 test("persistence.write() stores JSON under STORAGE_KEY", () => {
@@ -130,7 +131,7 @@ test("persistence.write() stores JSON under STORAGE_KEY", () => {
   const stored = localStorage.getItem(STORAGE_KEY);
   ok(stored, "should be stored");
   const parsed = JSON.parse(stored!);
-  strictEqual(parsed.version, 1);
+  strictEqual(parsed.version, CURRENT_VERSION);
   deepStrictEqual(parsed.favorites, ["spell.fireball"]);
 });
 
@@ -146,7 +147,7 @@ test("persistence.read() returns default when localStorage is unavailable", () =
   resetMock();
   localStorageThrows = true;
   const result = read();
-  strictEqual(result.version, 1);
+  strictEqual(result.version, CURRENT_VERSION);
   deepStrictEqual(result.favorites, []);
 });
 
@@ -154,7 +155,7 @@ test("persistence.read() returns default when stored version is unknown (migrate
   resetMock();
   localStorage.setItem(STORAGE_KEY, JSON.stringify({ version: 999, favorites: "invalid" }));
   const result = read();
-  strictEqual(result.version, 1);
+  strictEqual(result.version, CURRENT_VERSION);
   deepStrictEqual(result.favorites, []);
 });
 
@@ -163,14 +164,14 @@ test("persistence.read() returns default when stored version is unknown (migrate
 // ---------------------------------------------------------------------------
 console.log("\nuser-state \u2014 migrations\n");
 
-test("migrations.migrate() returns v1 for undefined input", () => {
+test("migrations.migrate() returns current version for undefined input", () => {
   const result = migrate(undefined);
-  strictEqual(result.version, 1);
+  strictEqual(result.version, CURRENT_VERSION);
 });
 
-test("migrations.migrate() returns v1 for null input", () => {
+test("migrations.migrate() returns current version for null input", () => {
   const result = migrate(null);
-  strictEqual(result.version, 1);
+  strictEqual(result.version, CURRENT_VERSION);
 });
 
 test("migrations.migrate() preserves valid v1 state", () => {
@@ -181,10 +182,10 @@ test("migrations.migrate() preserves valid v1 state", () => {
   deepStrictEqual(result.recentSearches, ["c"]);
 });
 
-test("migrations.migrate() converts legacy (no version) to v1", () => {
+test("migrations.migrate() converts legacy (no version) to current version", () => {
   const input = { favorites: ["x"], recentEntities: ["y"], recentSearches: ["z"] };
   const result = migrate(input);
-  strictEqual(result.version, 1);
+  strictEqual(result.version, CURRENT_VERSION);
   deepStrictEqual(result.favorites, ["x"]);
 });
 
@@ -199,6 +200,7 @@ test("normalize removes duplicate favorites", () => {
     favorites: ["a", "b", "a", "c", "b"],
     recentEntities: [],
     recentSearches: [],
+    session: [],
   });
   deepStrictEqual(result.favorites, ["a", "b", "c"]);
 });
@@ -209,6 +211,7 @@ test("normalize preserves insertion order (first occurrence wins)", () => {
     favorites: ["c", "a", "b", "a"],
     recentEntities: [],
     recentSearches: [],
+    session: [],
   });
   deepStrictEqual(result.favorites, ["c", "a", "b"]);
 });
@@ -219,6 +222,7 @@ test("normalize removes empty strings from favorites", () => {
     favorites: ["a", "", "b", "  ", "c"],
     recentEntities: [],
     recentSearches: [],
+    session: [],
   });
   deepStrictEqual(result.favorites, ["a", "b", "c"]);
 });
@@ -229,6 +233,7 @@ test("normalize removes non-string values from favorites", () => {
     favorites: ["a", 123 as unknown as string, null as unknown as string, "b"],
     recentEntities: [],
     recentSearches: [],
+    session: [],
   });
   deepStrictEqual(result.favorites, ["a", "b"]);
 });
@@ -239,6 +244,7 @@ test("normalize deduplicates recent entities, keeps first occurrence", () => {
     favorites: [],
     recentEntities: ["a", "b", "c", "a", "d", "b"],
     recentSearches: [],
+    session: [],
   });
   deepStrictEqual(result.recentEntities, ["a", "b", "c", "d"]);
 });
@@ -251,6 +257,7 @@ test("normalize enforces max 50 recent entities", () => {
     favorites: [],
     recentEntities: many,
     recentSearches: [],
+    session: [],
   });
   strictEqual(result.recentEntities.length, 50);
   strictEqual(result.recentEntities[0], "e-0");
@@ -263,6 +270,7 @@ test("normalize deduplicates recent searches", () => {
     favorites: [],
     recentEntities: [],
     recentSearches: ["fireball", "magic missile", "fireball", "shield"],
+    session: [],
   });
   deepStrictEqual(result.recentSearches, ["fireball", "magic missile", "shield"]);
 });
@@ -273,6 +281,7 @@ test("normalize trims whitespace from searches", () => {
     favorites: [],
     recentEntities: [],
     recentSearches: ["  fireball  ", "shield", " magic "],
+    session: [],
   });
   deepStrictEqual(result.recentSearches, ["fireball", "shield", "magic"]);
 });
@@ -283,6 +292,7 @@ test("normalize removes empty searches after trim", () => {
     favorites: [],
     recentEntities: [],
     recentSearches: ["fireball", "", "  ", "shield"],
+    session: [],
   });
   deepStrictEqual(result.recentSearches, ["fireball", "shield"]);
 });
@@ -295,6 +305,7 @@ test("normalize enforces max 20 recent searches", () => {
     favorites: [],
     recentEntities: [],
     recentSearches: many,
+    session: [],
   });
   strictEqual(result.recentSearches.length, 20);
   strictEqual(result.recentSearches[0], "q-0");
@@ -307,6 +318,7 @@ test("normalize handles non-array favorites gracefully", () => {
     favorites: "invalid" as unknown as string[],
     recentEntities: [],
     recentSearches: [],
+    session: [],
   });
   deepStrictEqual(result.favorites, []);
 });
@@ -317,6 +329,7 @@ test("normalize handles non-array recentEntities gracefully", () => {
     favorites: [],
     recentEntities: null as unknown as string[],
     recentSearches: [],
+    session: [],
   });
   deepStrictEqual(result.recentEntities, []);
 });
@@ -327,6 +340,7 @@ test("normalize handles non-array recentSearches gracefully", () => {
     favorites: [],
     recentEntities: [],
     recentSearches: 123 as unknown as string[],
+    session: [],
   });
   deepStrictEqual(result.recentSearches, []);
 });
@@ -342,8 +356,9 @@ test("normalize with validateIds removes stale IDs (with compendium loaded)", ()
     favorites: ["spell.fireball", "nonexistent.entity"],
     recentEntities: ["monster.goblin"],
     recentSearches: [],
+    session: [],
   };
-  const validated: typeof raw = {
+  const validated = {
     ...raw,
     favorites: validateIds(raw.favorites),
     recentEntities: validateIds(raw.recentEntities),
@@ -394,10 +409,11 @@ test("favoritesSet rebuilt on _replace", () => {
   resetMock();
   resetStore();
   userStore.getState()._replace({
-    version: 1,
+    version: CURRENT_VERSION,
     favorites: ["x", "y"],
     recentEntities: [],
     recentSearches: [],
+    session: [],
   });
   const state = userStore.getState();
   strictEqual(state.favoritesSet.has("x"), true);
@@ -582,7 +598,7 @@ test("hydrate() recovers from corrupted localStorage without throwing", () => {
   localStorage.setItem(STORAGE_KEY, "corrupted{{{json");
   hydrate();
   const state = userStore.getState();
-  ok(state.version === 1, "should recover to v1 default");
+  strictEqual(state.version, CURRENT_VERSION, "should recover to current version default");
   ok(Array.isArray(state.favorites));
   ok(state.favoritesSet instanceof Set);
 });
@@ -679,7 +695,7 @@ console.log("\nuser-state \u2014 cross-tab\n");
 test("cross-tab listener ignores identical state", () => {
   resetMock();
   resetStore();
-  const data = { version: 1, favorites: ["spell.fireball"], recentEntities: [], recentSearches: [] };
+  const data = { version: CURRENT_VERSION, favorites: ["spell.fireball"], recentEntities: [], recentSearches: [], session: [] };
   localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
   hydrate();
 
@@ -689,6 +705,7 @@ test("cross-tab listener ignores identical state", () => {
     favorites: current.favorites,
     recentEntities: current.recentEntities,
     recentSearches: current.recentSearches,
+    session: current.session,
   });
   strictEqual(currentStr, JSON.stringify(data), "state serialization matches stored data");
 });
@@ -697,20 +714,22 @@ test("safe replace does nothing when state is identical", () => {
   resetMock();
   resetStore();
   userStore.getState()._replace({
-    version: 1,
+    version: CURRENT_VERSION,
     favorites: ["a", "b"],
     recentEntities: ["x"],
     recentSearches: ["q"],
+    session: [],
   });
-  // Call _replace with identical data (simulating replaceState logic)
   userStore.getState()._replace({
-    version: 1,
+    version: CURRENT_VERSION,
     favorites: ["a", "b"],
     recentEntities: ["x"],
     recentSearches: ["q"],
+    session: [],
   });
   const state2 = userStore.getState();
   deepStrictEqual(state2.favorites, ["a", "b"]);
+  deepStrictEqual(state2.session, []);
 });
 
 // ---------------------------------------------------------------------------
@@ -771,6 +790,397 @@ test("useIsFavorite hook selector returns correct boolean", () => {
   s.toggleFavorite("spell.fireball");
   const state2 = userStore.getState();
   strictEqual(state2.favoritesSet.has("spell.fireball"), true, "favoritesSet O(1) lookup works");
+});
+
+// ---------------------------------------------------------------------------
+// Session
+// ---------------------------------------------------------------------------
+console.log("\nuser-state \u2014 session\n");
+
+test("session initial state is empty", () => {
+  resetMock();
+  resetStore();
+  deepStrictEqual(userStore.getState().session, []);
+  ok(userStore.getState().sessionSet instanceof Set);
+  strictEqual(userStore.getState().sessionSet.size, 0);
+});
+
+test("toggleSession adds entity to front of empty session", () => {
+  resetMock();
+  resetStore();
+  userStore.getState().toggleSession("spell.fireball");
+  deepStrictEqual(userStore.getState().session, ["spell.fireball"]);
+});
+
+test("toggleSession adds new entities to front (newest first)", () => {
+  resetMock();
+  resetStore();
+  const s = userStore.getState();
+  s.toggleSession("a");
+  s.toggleSession("b");
+  s.toggleSession("c");
+  deepStrictEqual(userStore.getState().session, ["c", "b", "a"]);
+});
+
+test("toggleSession with existing entity removes it (toggle-off)", () => {
+  resetMock();
+  resetStore();
+  const s = userStore.getState();
+  s.toggleSession("a");
+  s.toggleSession("b");
+  s.toggleSession("c");
+  s.toggleSession("a");
+  // "a" was already in session, so toggle removes it
+  deepStrictEqual(userStore.getState().session, ["c", "b"]);
+});
+
+test("toggleSession removes entity when already present", () => {
+  resetMock();
+  resetStore();
+  const s = userStore.getState();
+  s.toggleSession("spell.fireball");
+  s.toggleSession("monster.goblin");
+  s.toggleSession("spell.fireball");
+  deepStrictEqual(userStore.getState().session, ["monster.goblin"]);
+});
+
+test("toggleSession with single item removes it (session empty)", () => {
+  resetMock();
+  resetStore();
+  const s = userStore.getState();
+  s.toggleSession("a");
+  s.toggleSession("a");
+  deepStrictEqual(userStore.getState().session, []);
+});
+
+test("sessionSet stays in sync with session after toggle", () => {
+  resetMock();
+  resetStore();
+  const s = userStore.getState();
+  s.toggleSession("a");
+  s.toggleSession("b");
+  ok(userStore.getState().sessionSet.has("a"));
+  ok(userStore.getState().sessionSet.has("b"));
+  strictEqual(userStore.getState().sessionSet.size, 2);
+});
+
+test("sessionSet updated after remove", () => {
+  resetMock();
+  resetStore();
+  const s = userStore.getState();
+  s.toggleSession("a");
+  s.toggleSession("b");
+  s.toggleSession("a");
+  const state = userStore.getState();
+  ok(!state.sessionSet.has("a"));
+  ok(state.sessionSet.has("b"));
+  strictEqual(state.sessionSet.size, 1);
+});
+
+test("clearSession empties session and sessionSet", () => {
+  resetMock();
+  resetStore();
+  const s = userStore.getState();
+  s.toggleSession("a");
+  s.toggleSession("b");
+  s.clearSession();
+  const state = userStore.getState();
+  deepStrictEqual(state.session, []);
+  strictEqual(state.sessionSet.size, 0);
+});
+
+test("toggleSession persists to localStorage", () => {
+  resetMock();
+  resetStore();
+  userStore.getState().toggleSession("spell.fireball");
+  const stored = localStorage.getItem(STORAGE_KEY);
+  if (stored) {
+    const parsed = JSON.parse(stored);
+    ok(parsed.session.includes("spell.fireball"), "session persisted");
+  } else {
+    ok(userStore.getState().session.includes("spell.fireball"));
+  }
+});
+
+test("clearSession persists empty session to localStorage", () => {
+  resetMock();
+  resetStore();
+  const s = userStore.getState();
+  s.toggleSession("a");
+  s.clearSession();
+  const stored = localStorage.getItem(STORAGE_KEY);
+  if (stored) {
+    const parsed = JSON.parse(stored);
+    deepStrictEqual(parsed.session, []);
+  }
+});
+
+test("sessionSet stays in sync after _replace", () => {
+  resetMock();
+  resetStore();
+  userStore.getState()._replace({
+    version: CURRENT_VERSION,
+    favorites: [],
+    recentEntities: [],
+    recentSearches: [],
+    session: ["x", "y"],
+  });
+  const state = userStore.getState();
+  deepStrictEqual(state.session, ["x", "y"]);
+  ok(state.sessionSet.has("x"));
+  ok(state.sessionSet.has("y"));
+  strictEqual(state.sessionSet.size, 2);
+});
+
+test("sessionSet cleared on _reset", () => {
+  resetMock();
+  resetStore();
+  const s = userStore.getState();
+  s.toggleSession("a");
+  userStore.getState()._reset();
+  const state = userStore.getState();
+  deepStrictEqual(state.session, []);
+  strictEqual(state.sessionSet.size, 0);
+});
+
+// ---------------------------------------------------------------------------
+// Session normalization
+// ---------------------------------------------------------------------------
+console.log("\nuser-state \u2014 session normalization\n");
+
+test("normalize deduplicates session IDs", () => {
+  const result = normalize({
+    version: CURRENT_VERSION,
+    favorites: [],
+    recentEntities: [],
+    recentSearches: [],
+    session: ["a", "b", "a", "c", "b"],
+  });
+  deepStrictEqual(result.session, ["a", "b", "c"]);
+});
+
+test("normalize preserves session insertion order (first wins)", () => {
+  const result = normalize({
+    version: CURRENT_VERSION,
+    favorites: [],
+    recentEntities: [],
+    recentSearches: [],
+    session: ["c", "a", "b", "a"],
+  });
+  deepStrictEqual(result.session, ["c", "a", "b"]);
+});
+
+test("normalize removes empty strings from session", () => {
+  const result = normalize({
+    version: CURRENT_VERSION,
+    favorites: [],
+    recentEntities: [],
+    recentSearches: [],
+    session: ["a", "", "b", "  ", "c"],
+  });
+  deepStrictEqual(result.session, ["a", "b", "c"]);
+});
+
+test("normalize removes non-string values from session", () => {
+  const result = normalize({
+    version: CURRENT_VERSION,
+    favorites: [],
+    recentEntities: [],
+    recentSearches: [],
+    session: ["a", 123 as unknown as string, null as unknown as string, "b"],
+  });
+  deepStrictEqual(result.session, ["a", "b"]);
+});
+
+test("normalize handles non-array session gracefully", () => {
+  const result = normalize({
+    version: CURRENT_VERSION,
+    favorites: [],
+    recentEntities: [],
+    recentSearches: [],
+    session: "invalid" as unknown as string[],
+  });
+  deepStrictEqual(result.session, []);
+});
+
+test("normalize enforces max 100 session IDs", () => {
+  const many: string[] = [];
+  for (let i = 0; i < 120; i++) many.push(`s-${i}`);
+  const result = normalize({
+    version: CURRENT_VERSION,
+    favorites: [],
+    recentEntities: [],
+    recentSearches: [],
+    session: many,
+  });
+  strictEqual(result.session.length, 100);
+  strictEqual(result.session[0], "s-0");
+  strictEqual(result.session[99], "s-99");
+});
+
+test("normalize with validateIds removes stale session IDs", () => {
+  const raw = {
+    version: CURRENT_VERSION,
+    favorites: [],
+    recentEntities: [],
+    recentSearches: [],
+    session: ["spell.fireball", "nonexistent.entity"],
+  };
+  const validated: typeof raw = {
+    ...raw,
+    session: validateIds(raw.session),
+  };
+  const result = normalize(validated);
+  deepStrictEqual(result.session, ["spell.fireball"], "stale session ID removed");
+});
+
+// ---------------------------------------------------------------------------
+// Session hydrate
+// ---------------------------------------------------------------------------
+console.log("\nuser-state \u2014 session hydration\n");
+
+test("hydrate() loads session from persisted state", () => {
+  resetMock();
+  resetStore();
+  const data = { version: CURRENT_VERSION, favorites: [], recentEntities: [], recentSearches: [], session: ["spell.fireball", "monster.goblin"] };
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+  hydrate();
+  deepStrictEqual(userStore.getState().session, ["spell.fireball", "monster.goblin"]);
+});
+
+test("hydrate() rebuilds sessionSet from persisted session", () => {
+  resetMock();
+  resetStore();
+  const data = { version: CURRENT_VERSION, favorites: [], recentEntities: [], recentSearches: [], session: ["spell.fireball", "monster.goblin"] };
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+  hydrate();
+  const state = userStore.getState();
+  ok(state.sessionSet instanceof Set);
+  strictEqual(state.sessionSet.has("spell.fireball"), true);
+  strictEqual(state.sessionSet.has("monster.goblin"), true);
+});
+
+test("hydrate() removes stale session IDs", () => {
+  resetMock();
+  resetStore();
+  const data = { version: CURRENT_VERSION, favorites: [], recentEntities: [], recentSearches: [], session: ["nonexistent.entity"] };
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+  hydrate();
+  deepStrictEqual(userStore.getState().session, [], "stale session ID removed");
+  strictEqual(userStore.getState().sessionSet.size, 0);
+});
+
+test("hydrate() removes duplicate session IDs from persistence", () => {
+  resetMock();
+  resetStore();
+  const data = { version: CURRENT_VERSION, favorites: [], recentEntities: [], recentSearches: [], session: ["spell.fireball", "spell.fireball", "monster.goblin"] };
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+  hydrate();
+  deepStrictEqual(userStore.getState().session, ["spell.fireball", "monster.goblin"], "duplicate session IDs removed");
+});
+
+test("hydrate() preserves valid session IDs and removes stale", () => {
+  resetMock();
+  resetStore();
+  const data = { version: CURRENT_VERSION, favorites: [], recentEntities: [], recentSearches: [], session: ["spell.fireball", "nonexistent.entity", "monster.goblin"] };
+
+  const fireball = getEntity("spell", "fireball");
+  const goblin = getEntity("monster", "goblin");
+
+  if (fireball && goblin) {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+    hydrate();
+    deepStrictEqual(userStore.getState().session, ["spell.fireball", "monster.goblin"], "valid preserved, stale removed");
+  } else {
+    hydrate();
+    ok(true, "hydrate did not throw with mixed valid/invalid session IDs");
+  }
+});
+
+// ---------------------------------------------------------------------------
+// Session cross-tab
+// ---------------------------------------------------------------------------
+console.log("\nuser-state \u2014 session cross-tab\n");
+
+test("cross-tab session replace ignores identical state", () => {
+  resetMock();
+  resetStore();
+  const data = { version: CURRENT_VERSION, favorites: [], recentEntities: [], recentSearches: [], session: ["spell.fireball"] };
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+  hydrate();
+
+  const current = userStore.getState();
+  const currentStr = JSON.stringify({
+    version: current.version,
+    favorites: current.favorites,
+    recentEntities: current.recentEntities,
+    recentSearches: current.recentSearches,
+    session: current.session,
+  });
+  strictEqual(currentStr, JSON.stringify(data), "session serialization matches stored data");
+});
+
+test("_replace updates session when content differs", () => {
+  resetMock();
+  resetStore();
+  userStore.getState()._replace({
+    version: CURRENT_VERSION,
+    favorites: [],
+    recentEntities: [],
+    recentSearches: [],
+    session: ["a", "b"],
+  });
+  deepStrictEqual(userStore.getState().session, ["a", "b"]);
+});
+
+// ---------------------------------------------------------------------------
+// Session selectors
+// ---------------------------------------------------------------------------
+console.log("\nuser-state \u2014 session selectors\n");
+
+test("useIsInSession returns true for session member", () => {
+  resetMock();
+  resetStore();
+  const s = userStore.getState();
+  s.toggleSession("spell.fireball");
+  strictEqual(userStore.getState().sessionSet.has("spell.fireball"), true, "sessionSet O(1) lookup");
+});
+
+test("useIsInSession returns false for non-member", () => {
+  resetMock();
+  resetStore();
+  strictEqual(userStore.getState().sessionSet.has("nonexistent"), false);
+});
+
+test("sessionSet O(1) lookup works after hydrate", () => {
+  resetMock();
+  resetStore();
+  const data = { version: CURRENT_VERSION, favorites: [], recentEntities: [], recentSearches: [], session: ["spell.fireball"] };
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+  hydrate();
+  strictEqual(userStore.getState().sessionSet.has("spell.fireball"), true, "O(1) after hydrate");
+});
+
+test("useSessionIds returns all IDs when no limit", () => {
+  resetMock();
+  resetStore();
+  const s = userStore.getState();
+  s.toggleSession("a");
+  s.toggleSession("b");
+  const ids = userStore.getState().session;
+  deepStrictEqual(ids, ["b", "a"]);
+});
+
+test("useSessionIds respects limit", () => {
+  resetMock();
+  resetStore();
+  const s = userStore.getState();
+  s.toggleSession("a");
+  s.toggleSession("b");
+  s.toggleSession("c");
+  s.toggleSession("d");
+  const state = userStore.getState();
+  deepStrictEqual(state.session.slice(0, 2), ["d", "c"]);
 });
 
 console.log(

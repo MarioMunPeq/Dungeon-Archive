@@ -2,6 +2,7 @@ import { memo } from "react";
 import { Link } from "react-router";
 import { formatSource } from "@/compendium";
 import { FavoriteButton } from "@/components/ui/FavoriteButton";
+import { SessionButton } from "@/components/ui/SessionButton";
 
 export interface EntityCardData {
   readonly name: string;
@@ -20,7 +21,10 @@ export const EntityCard = memo(function EntityCard({ name, href, categoryLabel, 
     >
       <div className="flex items-center justify-between">
         <span className="truncate text-sm font-medium text-foreground">{name}</span>
-        <FavoriteButton canonicalId={canonicalId} />
+        <span className="flex items-center gap-1">
+          <FavoriteButton canonicalId={canonicalId} />
+          <SessionButton canonicalId={canonicalId} />
+        </span>
       </div>
       <span className="text-xs text-muted-foreground">
         {categoryLabel}

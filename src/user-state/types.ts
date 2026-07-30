@@ -7,10 +7,11 @@ export interface UserState {
   readonly favorites: string[];
   readonly recentEntities: string[];
   readonly recentSearches: string[];
+  readonly session: string[];
 }
 
 export const STORAGE_KEY = "dungeon:userState:v1";
-export const CURRENT_VERSION = 1;
+export const CURRENT_VERSION = 2;
 
 export function createDefaultState(): UserState {
   return {
@@ -18,5 +19,6 @@ export function createDefaultState(): UserState {
     favorites: [],
     recentEntities: [],
     recentSearches: [],
+    session: [],
   };
 }
