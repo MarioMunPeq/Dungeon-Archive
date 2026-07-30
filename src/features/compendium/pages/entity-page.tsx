@@ -1,4 +1,4 @@
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect } from "react";
 import { useParams } from "react-router";
 import { ErrorState } from "@/components/ui/error-state";
 import {
@@ -12,6 +12,8 @@ import type { EntityCategory } from "@/compendium";
 import { EntityDetailLayout } from "@/components/entity";
 import { EntityRenderer } from "@/features/compendium/renderers/entity-renderer";
 import { RelatedEntities } from "@/features/compendium/components/related-entities";
+import { FavoriteButton } from "@/components/ui/FavoriteButton";
+import { userStore } from "@/user-state";
 
 interface CompendiumPageProps {
   category: EntityCategory;
@@ -27,6 +29,12 @@ export function CompendiumPage({ category }: CompendiumPageProps) {
   const handleSourceChange = useCallback((newSource: string) => {
     setSource(newSource);
   }, []);
+
+  useEffect(() => {
+    if (fullCanonicalId) {
+      userStore.getState().addRecentEntity(fullCanonicalId);
+    }
+  }, [fullCanonicalId]);
 
   if (!slug) {
     return <ErrorState message="Missing entity identifier" />;
@@ -49,6 +57,7 @@ export function CompendiumPage({ category }: CompendiumPageProps) {
         { label: resolved.selected.name },
       ]}
     >
+      <FavoriteButton canonicalId={fullCanonicalId} />
       <EntityRenderer entity={resolved.selected} />
       <RelatedEntities canonicalId={fullCanonicalId} />
     </EntityDetailLayout>

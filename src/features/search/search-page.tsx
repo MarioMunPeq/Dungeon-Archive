@@ -4,7 +4,8 @@ import { search } from "@/compendium";
 import { createSearchResultItems } from "@/components/entity";
 import { SearchInput } from "./components/search-input";
 import { SearchResults } from "./components/search-results";
-import { SearchEmptyState, addRecentSearch } from "./components/search-empty-state";
+import { SearchEmptyState } from "./components/search-empty-state";
+import { userStore } from "@/user-state";
 import { SearchNoResults } from "./components/search-no-results";
 import { SearchCategoryFilter } from "./components/search-category-filter";
 
@@ -46,7 +47,7 @@ export function SearchPage() {
         e.preventDefault();
         const target = selectedIndex >= 0 ? filtered[selectedIndex] : filtered[0];
         if (target) {
-          addRecentSearch(query);
+          userStore.getState().addRecentSearch(query);
           navigate(target.to);
         }
         break;

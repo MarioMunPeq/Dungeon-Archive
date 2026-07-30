@@ -1,16 +1,10 @@
 import { Link } from "react-router";
 import { CATEGORY_REGISTRY } from "@/compendium";
-
-const recentSearches: string[] = [];
-
-export function addRecentSearch(query: string): void {
-  const idx = recentSearches.indexOf(query);
-  if (idx !== -1) recentSearches.splice(idx, 1);
-  recentSearches.unshift(query);
-  if (recentSearches.length > 5) recentSearches.pop();
-}
+import { useRecentSearches } from "@/user-state";
 
 export function SearchEmptyState() {
+  const recentSearches = useRecentSearches(5);
+
   return (
     <div className="flex flex-col gap-6 px-4 pt-6">
       {recentSearches.length > 0 && (

@@ -1,6 +1,7 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { loadCompendium } from "@/compendium";
+import { hydrate } from "@/user-state";
 import { App } from "@/app";
 import "./index.css";
 
@@ -14,6 +15,7 @@ const container = rootElement;
 async function main() {
   try {
     await loadCompendium();
+    hydrate();
 
     createRoot(container).render(
       <StrictMode>

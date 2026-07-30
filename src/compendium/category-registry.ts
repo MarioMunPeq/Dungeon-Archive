@@ -174,6 +174,7 @@ export const CATEGORY_REGISTRY: Record<EntityCategory, CategoryRegistration> = {
         categoryLabel: "Spell",
         metadata: `${level} \u00B7 ${school}`,
         source: spell.source,
+        canonicalId: spell.canonicalId,
       };
     },
     getSubtitle: (entity) => {
@@ -217,6 +218,7 @@ export const CATEGORY_REGISTRY: Record<EntityCategory, CategoryRegistration> = {
         categoryLabel: "Monster",
         metadata: `CR ${monster.challengeRating} \u00B7 ${formatMonsterType(monster)}`,
         source: monster.source,
+        canonicalId: monster.canonicalId,
       };
     },
     getSubtitle: (entity) => {
@@ -248,6 +250,7 @@ export const CATEGORY_REGISTRY: Record<EntityCategory, CategoryRegistration> = {
         categoryLabel: "Equipment",
         metadata: item.type,
         source: item.source,
+        canonicalId: item.canonicalId,
       };
     },
     getSubtitle: (entity) => {
@@ -267,6 +270,7 @@ export const CATEGORY_REGISTRY: Record<EntityCategory, CategoryRegistration> = {
       categoryLabel: "Condition",
       metadata: "",
       source: entity.source,
+      canonicalId: entity.canonicalId,
     }),
     getSubtitle: (entity) => `Condition \u00B7 ${formatSource(entity.source)}`,
   },
@@ -284,6 +288,7 @@ export const CATEGORY_REGISTRY: Record<EntityCategory, CategoryRegistration> = {
         categoryLabel: "Action",
         metadata: action.actionType,
         source: action.source,
+        canonicalId: action.canonicalId,
       };
     },
     getSubtitle: (entity) => `Action \u00B7 ${formatSource(entity.source)}`,
@@ -327,6 +332,7 @@ export const CATEGORY_REGISTRY: Record<EntityCategory, CategoryRegistration> = {
         categoryLabel: "Magic Item",
         metadata: `${magic.rarity}${attunement}`,
         source: magic.source,
+        canonicalId: magic.canonicalId,
       };
     },
     getSubtitle: (entity) => {
@@ -373,6 +379,7 @@ export const CATEGORY_REGISTRY: Record<EntityCategory, CategoryRegistration> = {
         categoryLabel: "Feat",
         metadata: meta,
         source: feat.source,
+        canonicalId: feat.canonicalId,
       };
     },
     getSubtitle: (entity) => {

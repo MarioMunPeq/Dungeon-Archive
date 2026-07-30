@@ -1,16 +1,98 @@
 import { Link } from "react-router";
-import { categoryLabel, getCategoryCount, CATEGORY_REGISTRY } from "@/compendium";
+import {
+  categoryLabel,
+  getCategoryCount,
+  CATEGORY_REGISTRY,
+  getEntity,
+  slugFromCanonicalId,
+} from "@/compendium";
 import type { EntityCategory } from "@/compendium";
+import { useRecentEntities, userStore } from "@/user-state";
+import { EntityCard } from "@/features/compendium/components/entity-card";
+import type { EntityCardData } from "@/features/compendium/components/entity-card";
 
 const CATEGORIES = Object.keys(CATEGORY_REGISTRY) as EntityCategory[];
 
+function entityCardFromCanonicalId(canonicalId: string): EntityCardData | null {
+  const dot = canonicalId.indexOf(".");
+  if (dot === -1) return null;
+  const category = canonicalId.substring(0, dot) as EntityCategory;
+  const id = canonicalId.substring(dot + 1);
+  const entity = getEntity(category, id);
+  if (!entity) return null;
+  const reg = CATEGORY_REGISTRY[category];
+  return {
+    name: entity.name,
+    href: `/${category}/${slugFromCanonicalId(canonicalId)}`,
+    categoryLabel: reg.singular,
+    metadata: reg.getSubtitle(entity),
+    source: entity.source,
+    canonicalId,
+  };
+}
+
 export function HomePage() {
+  const recentIds = useRecentEntities(10);
+
+  const recentCards: EntityCardData[] = [];
+  for (const id of recentIds) {
+    const card = entityCardFromCanonicalId(id);
+    if (card) recentCards.push(card);
+  }
+
+  const favoriteIds = userStore((s) => s.favorites.slice(0, 10));
+  const favoriteCards: EntityCardData[] = [];
+  for (const id of favoriteIds) {
+    const card = entityCardFromCanonicalId(id);
+    if (card) favoriteCards.push(card);
+  }
+
   return (
     <div className="flex flex-col gap-8 px-4 py-8">
       <div className="text-center">
         <h1 className="mb-2 text-3xl font-bold text-foreground">Dungeon Archive</h1>
         <p className="text-sm text-muted-foreground">Your tabletop companion</p>
       </div>
+
+      {recentCards.length > 0 && (
+        <div className="flex flex-col gap-3">
+          <h2 className="text-sm font-semibold text-foreground">Continue Reading</h2>
+          {recentCards.length <= 3 ? (
+            <div className="grid grid-cols-1 gap-2 sm:grid-cols-2 lg:grid-cols-3">
+              {recentCards.map((card) => (
+                <EntityCard key={card.href} {...card} />
+              ))}
+            </div>
+          ) : (
+            <div className="-mx-4 flex gap-3 overflow-x-auto px-4 pb-2">
+              {recentCards.map((card) => (
+                <div key={card.href} className="w-56 shrink-0">
+                  <EntityCard {...card} />
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+      )}
+
+      {favoriteCards.length > 0 && (
+        <div className="flex flex-col gap-3">
+          <h2 className="text-sm font-semibold text-foreground">Favorites</h2>
+          <div className="grid grid-cols-1 gap-2 sm:grid-cols-2 lg:grid-cols-3">
+            {favoriteCards.map((card) => (
+              <EntityCard key={card.href} {...card} />
+            ))}
+          </div>
+        </div>
+      )}
+
+      {recentCards.length === 0 && favoriteCards.length === 0 && (
+        <div className="flex flex-col items-center gap-4 rounded-lg border border-border p-6 text-center">
+          <p className="text-sm text-muted-foreground">
+            Browse entities, search for something, or tap the heart icon on any entity to get started.
+          </p>
+        </div>
+      )}
 
       <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
         {CATEGORIES.map((cat) => (
