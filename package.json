@@ -28,7 +28,8 @@
     "test:design": "tsx scripts/tests/design-system.test.tsx",
     "test:relationships": "tsx scripts/tests/relationships.test.ts",
     "test:magic-item": "tsx scripts/tests/magic-item.test.ts",
-    "test": "pnpm run test:identity && pnpm run test:grouping && pnpm run test:resolver && pnpm run test:compendium && pnpm run test:category && pnpm run test:content && pnpm run test:design && pnpm run test:relationships && pnpm run test:magic-item"
+    "test:feat": "tsx scripts/tests/feat.test.ts",
+    "test": "pnpm run test:identity && pnpm run test:grouping && pnpm run test:resolver && pnpm run test:compendium && pnpm run test:category && pnpm run test:content && pnpm run test:design && pnpm run test:relationships && pnpm run test:magic-item && pnpm run test:feat"
   },
   "dependencies": {
     "@tanstack/react-query": "^5.84.0",

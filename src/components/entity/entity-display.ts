@@ -8,6 +8,7 @@ import type {
   Feat,
   SearchIndexEntry,
   EntityVersion,
+  EntityCategory,
 } from "@/compendium";
 import {
   getEntity,
@@ -24,6 +25,7 @@ export interface EntityDisplayInfo {
 export interface SearchResultItem {
   readonly id: string;
   readonly canonicalId: string;
+  readonly category: EntityCategory;
   readonly title: string;
   readonly subtitle: string;
   readonly source: string;
@@ -32,6 +34,16 @@ export interface SearchResultItem {
 }
 
 type DisplayEntity = Spell | Condition | Equipment | Action | Monster | MagicItem | Feat;
+
+const CATEGORY_WEIGHT: Record<string, number> = {
+  spell: 10,
+  monster: 20,
+  equipment: 30,
+  magicitem: 40,
+  feat: 50,
+  condition: 60,
+  action: 70,
+};
 
 function computeMatchScore(name: string, query: string): number {
   const lower = name.toLowerCase();
@@ -91,6 +103,7 @@ export function createSearchResultItems(
     results.push({
       id: preferred.entry.id,
       canonicalId: preferred.entity.canonicalId,
+      category: preferred.entity.category,
       title: display.title,
       subtitle:
         versionCount > 1 ? `${display.subtitle} \u00B7 ${versionCount} versions` : display.subtitle,
@@ -111,6 +124,9 @@ export function createSearchResultItems(
     const scoreA = computeMatchScore(a.title, query);
     const scoreB = computeMatchScore(b.title, query);
     if (scoreA !== scoreB) return scoreB - scoreA;
+    const weightA = CATEGORY_WEIGHT[a.category] ?? 99;
+    const weightB = CATEGORY_WEIGHT[b.category] ?? 99;
+    if (weightA !== weightB) return weightA - weightB;
     const spA = sourcePriority(a.source);
     const spB = sourcePriority(b.source);
     if (spA !== spB) return spA - spB;
