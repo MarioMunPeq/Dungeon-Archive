@@ -37,6 +37,7 @@ export function EntityDetailLayout({
             <button
               key={v.source}
               type="button"
+              aria-pressed={v.source === source}
               onClick={() => onSourceChange(v.source)}
               className={`rounded-full border px-3 py-1 text-xs transition-colors ${
                 v.source === source

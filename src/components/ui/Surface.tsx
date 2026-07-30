@@ -1,5 +1,6 @@
 import type { ElementType, ReactNode } from "react";
 import type { SurfaceVariant } from "@/config/tokens";
+import { cn } from "@/lib/utils";
 
 const VARIANT_CLASSES: Record<SurfaceVariant, string> = {
   default: "rounded-lg border border-border bg-background p-3",
@@ -22,5 +23,5 @@ export function Surface({
   className = "",
   children,
 }: SurfaceProps) {
-  return <Tag className={`${VARIANT_CLASSES[variant]} ${className}`.trim()}>{children}</Tag>;
+  return <Tag className={cn(VARIANT_CLASSES[variant], className)}>{children}</Tag>;
 }

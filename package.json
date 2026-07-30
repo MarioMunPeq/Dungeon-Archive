@@ -11,6 +11,8 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "preview": "vite preview",
+    "check": "pnpm typecheck && pnpm lint",
+    "verify": "pnpm typecheck && pnpm lint && pnpm test && pnpm build",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "format": "prettier --write \"src/**/*.{ts,tsx,css,json}\" \"scripts/**/*.{ts,tsx}\"",
@@ -26,8 +28,7 @@
     "test:design": "tsx scripts/tests/design-system.test.tsx",
     "test:relationships": "tsx scripts/tests/relationships.test.ts",
     "test:magic-item": "tsx scripts/tests/magic-item.test.ts",
-    "test:feat": "tsx scripts/tests/feat.test.ts",
-    "test": "npm run test:identity && npm run test:grouping && npm run test:resolver && npm run test:compendium && npm run test:category && npm run test:content && npm run test:design && npm run test:relationships && npm run test:magic-item && npm run test:feat"
+    "test": "pnpm run test:identity && pnpm run test:grouping && pnpm run test:resolver && pnpm run test:compendium && pnpm run test:category && pnpm run test:content && pnpm run test:design && pnpm run test:relationships && pnpm run test:magic-item"
   },
   "dependencies": {
     "@tanstack/react-query": "^5.84.0",
