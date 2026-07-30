@@ -1,12 +1,12 @@
 import { memo } from "react";
-import { useIsInSession, userStore } from "@/user-state";
+import { useIsInAdventure, userStore } from "@/user-state";
 
-interface SessionButtonProps {
+interface AdventureButtonProps {
   readonly canonicalId: string;
   readonly className?: string;
 }
 
-function PinIcon({ filled }: { filled: boolean }) {
+function FlagIcon({ filled }: { filled: boolean }) {
   return (
     <svg
       aria-hidden="true"
@@ -16,18 +16,18 @@ function PinIcon({ filled }: { filled: boolean }) {
       strokeWidth={2}
       className="h-4 w-4"
     >
-      <path d="M12 2a8 8 0 00-8 8c0 5.25 8 13 8 13s8-7.75 8-13a8 8 0 00-8-8z" />
-      <circle cx="12" cy="10" r="3" />
+      <line x1="4" y1="3" x2="4" y2="21" />
+      <polyline points="4 3 20 3 18 7 20 11 4 11" />
     </svg>
   );
 }
 
-export const SessionButton = memo(function SessionButton({ canonicalId, className = "" }: SessionButtonProps) {
-  const inSession = useIsInSession(canonicalId);
+export const AdventureButton = memo(function AdventureButton({ canonicalId, className = "" }: AdventureButtonProps) {
+  const inAdventure = useIsInAdventure(canonicalId);
 
   function handleClick(e: React.MouseEvent) {
     e.stopPropagation();
-    userStore.getState().toggleSession(canonicalId);
+    userStore.getState().toggleAdventureEntity(canonicalId);
   }
 
   return (
@@ -35,11 +35,11 @@ export const SessionButton = memo(function SessionButton({ canonicalId, classNam
       type="button"
       onClick={handleClick}
       className={`hitbox-expand inline-flex items-center justify-center rounded p-1.5 transition-all duration-150 hover:bg-accent active:scale-90 active:bg-accent/80 ${className} ${
-        inSession ? "text-blue-500" : "text-muted-foreground"
+        inAdventure ? "text-emerald-500" : "text-muted-foreground"
       }`}
-      aria-label={inSession ? "Remove from session" : "Add to session"}
+      aria-label={inAdventure ? "Remove from adventure" : "Add to adventure"}
     >
-      <PinIcon filled={inSession} />
+      <FlagIcon filled={inAdventure} />
     </button>
   );
 });

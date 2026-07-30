@@ -33,7 +33,7 @@ export const FavoriteButton = memo(function FavoriteButton({ canonicalId, classN
     <button
       type="button"
       onClick={handleClick}
-      className={`inline-flex items-center justify-center rounded p-1.5 transition-all duration-150 hover:bg-accent active:scale-90 active:bg-accent/80 ${className} ${
+      className={`hitbox-expand inline-flex items-center justify-center rounded p-1.5 transition-all duration-150 hover:bg-accent active:scale-90 active:bg-accent/80 ${className} ${
         isFavorite ? "text-red-500" : "text-muted-foreground"
       }`}
       aria-label={isFavorite ? "Remove from favorites" : "Add to favorites"}

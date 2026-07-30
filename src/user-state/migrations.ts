@@ -1,4 +1,4 @@
-import type { UserState } from "./types";
+import type { Adventure, UserState } from "./types";
 import { CURRENT_VERSION, createDefaultState } from "./types";
 
 const migrations: Record<number, (state: Record<string, unknown>) => Record<string, unknown>> = {
@@ -14,6 +14,15 @@ const migrations: Record<number, (state: Record<string, unknown>) => Record<stri
     recentEntities: Array.isArray(raw.recentEntities) ? raw.recentEntities : [],
     recentSearches: Array.isArray(raw.recentSearches) ? raw.recentSearches : [],
     session: Array.isArray(raw.session) ? raw.session : [],
+  }),
+  3: (raw) => ({
+    version: 3,
+    favorites: Array.isArray(raw.favorites) ? raw.favorites : [],
+    recentEntities: Array.isArray(raw.recentEntities) ? raw.recentEntities : [],
+    recentSearches: Array.isArray(raw.recentSearches) ? raw.recentSearches : [],
+    session: Array.isArray(raw.session) ? raw.session : [],
+    adventures: Array.isArray(raw.adventures) ? raw.adventures : [],
+    activeAdventureId: typeof raw.activeAdventureId === "string" ? raw.activeAdventureId : null,
   }),
 };
 
@@ -33,8 +42,11 @@ export function migrate(raw: unknown): UserState {
   if (version < 2) {
     migrated = migrations[2]!(migrated);
   }
+  if (version < 3) {
+    migrated = migrations[3]!(migrated);
+  }
 
-  const result = migrated as unknown as UserState;
+  const result = migrated as unknown as Record<string, unknown>;
   if (
     !Array.isArray(result.favorites) ||
     !Array.isArray(result.recentEntities) ||
@@ -46,9 +58,11 @@ export function migrate(raw: unknown): UserState {
 
   return {
     version: CURRENT_VERSION,
-    favorites: result.favorites,
-    recentEntities: result.recentEntities,
-    recentSearches: result.recentSearches,
-    session: result.session,
+    favorites: result.favorites as string[],
+    recentEntities: result.recentEntities as string[],
+    recentSearches: result.recentSearches as string[],
+    session: result.session as string[],
+    adventures: Array.isArray(result.adventures) ? (result.adventures as Adventure[]) : [],
+    activeAdventureId: typeof result.activeAdventureId === "string" ? result.activeAdventureId : null,
   };
 }

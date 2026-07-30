@@ -5,6 +5,7 @@ import { Badge } from "@/components/ui/Badge";
 import { SearchHighlight } from "./search-highlight";
 import { FavoriteButton } from "@/components/ui/FavoriteButton";
 import { SessionButton } from "@/components/ui/SessionButton";
+import { AdventureButton } from "@/components/ui/AdventureButton";
 
 interface SearchResultRowProps extends SearchResultItem {
   readonly query: string;
@@ -58,6 +59,7 @@ export function SearchResultRow({
       <span className="shrink-0 text-xs text-muted-foreground">{displaySource}</span>
       <FavoriteButton canonicalId={canonicalId} />
       <SessionButton canonicalId={canonicalId} />
+      <AdventureButton canonicalId={canonicalId} />
     </Link>
   );
 }

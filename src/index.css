@@ -162,4 +162,13 @@
     min-width: var(--size-touch-comfortable);
     min-height: var(--size-touch-comfortable);
   }
+
+  .hitbox-expand {
+    position: relative;
+  }
+  .hitbox-expand::before {
+    content: "";
+    position: absolute;
+    inset: -10px;
+  }
 }

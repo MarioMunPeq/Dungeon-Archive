@@ -57,6 +57,7 @@ const { migrate } = await import("../../src/user-state/migrations");
 const { read, write } = await import("../../src/user-state/persistence");
 const { loadCompendium } = await import("../../src/compendium/loader");
 const { hydrate, userStore } = await import("../../src/user-state/store");
+import type { Adventure, UserState } from "../../src/user-state/types";
 const { normalize, validateIds } = await import("../../src/user-state/normalize");
 const { getEntity } = await import("../../src/compendium/repository");
 
@@ -76,17 +77,19 @@ test("STORAGE_KEY equals dungeon:userState:v1", () => {
   strictEqual(STORAGE_KEY, "dungeon:userState:v1");
 });
 
-test("CURRENT_VERSION equals 2", () => {
-  strictEqual(CURRENT_VERSION, 2);
+test("CURRENT_VERSION equals 3", () => {
+  strictEqual(CURRENT_VERSION, 3);
 });
 
-test("createDefaultState returns valid v2 state", () => {
+test("createDefaultState returns valid v3 state", () => {
   const def = createDefaultState();
   strictEqual(def.version, CURRENT_VERSION);
   deepStrictEqual(def.favorites, []);
   deepStrictEqual(def.recentEntities, []);
   deepStrictEqual(def.recentSearches, []);
   deepStrictEqual(def.session, []);
+  deepStrictEqual(def.adventures, []);
+  strictEqual(def.activeAdventureId, null);
 });
 
 // ---------------------------------------------------------------------------
@@ -414,6 +417,8 @@ test("favoritesSet rebuilt on _replace", () => {
     recentEntities: [],
     recentSearches: [],
     session: [],
+    adventures: [],
+    activeAdventureId: null,
   });
   const state = userStore.getState();
   strictEqual(state.favoritesSet.has("x"), true);
@@ -719,6 +724,8 @@ test("safe replace does nothing when state is identical", () => {
     recentEntities: ["x"],
     recentSearches: ["q"],
     session: [],
+    adventures: [],
+    activeAdventureId: null,
   });
   userStore.getState()._replace({
     version: CURRENT_VERSION,
@@ -726,6 +733,8 @@ test("safe replace does nothing when state is identical", () => {
     recentEntities: ["x"],
     recentSearches: ["q"],
     session: [],
+    adventures: [],
+    activeAdventureId: null,
   });
   const state2 = userStore.getState();
   deepStrictEqual(state2.favorites, ["a", "b"]);
@@ -924,6 +933,8 @@ test("sessionSet stays in sync after _replace", () => {
     recentEntities: [],
     recentSearches: [],
     session: ["x", "y"],
+    adventures: [],
+    activeAdventureId: null,
   });
   const state = userStore.getState();
   deepStrictEqual(state.session, ["x", "y"]);
@@ -1129,6 +1140,8 @@ test("_replace updates session when content differs", () => {
     recentEntities: [],
     recentSearches: [],
     session: ["a", "b"],
+    adventures: [],
+    activeAdventureId: null,
   });
   deepStrictEqual(userStore.getState().session, ["a", "b"]);
 });
@@ -1181,6 +1194,616 @@ test("useSessionIds respects limit", () => {
   s.toggleSession("d");
   const state = userStore.getState();
   deepStrictEqual(state.session.slice(0, 2), ["d", "c"]);
+});
+
+// ---------------------------------------------------------------------------
+// Adventure
+// ---------------------------------------------------------------------------
+console.log("\nuser-state \u2014 adventure\n");
+
+test("adventure initial state is empty", () => {
+  resetMock();
+  resetStore();
+  deepStrictEqual(userStore.getState().adventures, []);
+  strictEqual(userStore.getState().activeAdventureId, null);
+  ok(userStore.getState().adventureEntitySet instanceof Set);
+  strictEqual(userStore.getState().adventureEntitySet.size, 0);
+});
+
+test("createAdventure creates a new adventure and sets it active", () => {
+  resetMock();
+  resetStore();
+  userStore.getState().createAdventure({ title: "My Quest" });
+  const state = userStore.getState();
+  strictEqual(state.adventures.length, 1);
+  strictEqual(state.adventures[0]!.title, "My Quest");
+  strictEqual(state.activeAdventureId, state.adventures[0]!.id);
+  ok(state.adventureEntitySet instanceof Set);
+});
+
+test("createAdventure with no title uses default", () => {
+  resetMock();
+  resetStore();
+  userStore.getState().createAdventure();
+  const state = userStore.getState();
+  strictEqual(state.adventures.length, 1);
+  strictEqual(state.adventures[0]!.title, "New Adventure");
+});
+
+test("toggleAdventureEntity auto-creates adventure when none active", () => {
+  resetMock();
+  resetStore();
+  userStore.getState().toggleAdventureEntity("spell.fireball");
+  const state = userStore.getState();
+  strictEqual(state.adventures.length, 1);
+  strictEqual(state.activeAdventureId, state.adventures[0]!.id);
+  deepStrictEqual(state.adventures[0]!.entities, ["spell.fireball"]);
+  ok(state.adventureEntitySet.has("spell.fireball"));
+});
+
+test("toggleAdventureEntity adds entity to active adventure", () => {
+  resetMock();
+  resetStore();
+  const s = userStore.getState();
+  s.createAdventure({ title: "Test" });
+  s.toggleAdventureEntity("spell.fireball");
+  const state = userStore.getState();
+  deepStrictEqual(state.adventures[0]!.entities, ["spell.fireball"]);
+  ok(state.adventureEntitySet.has("spell.fireball"));
+});
+
+test("toggleAdventureEntity removes entity from active adventure", () => {
+  resetMock();
+  resetStore();
+  const s = userStore.getState();
+  s.createAdventure({ title: "Test" });
+  s.toggleAdventureEntity("spell.fireball");
+  s.toggleAdventureEntity("spell.fireball");
+  const state = userStore.getState();
+  deepStrictEqual(state.adventures[0]!.entities, []);
+  strictEqual(state.adventureEntitySet.size, 0);
+});
+
+test("toggleAdventureEntity adds multiple entities", () => {
+  resetMock();
+  resetStore();
+  const s = userStore.getState();
+  s.createAdventure({ title: "Test" });
+  s.toggleAdventureEntity("spell.fireball");
+  s.toggleAdventureEntity("monster.goblin");
+  const state = userStore.getState();
+  deepStrictEqual(state.adventures[0]!.entities, ["spell.fireball", "monster.goblin"]);
+  strictEqual(state.adventureEntitySet.size, 2);
+});
+
+test("adventureEntitySet O(1) lookup", () => {
+  resetMock();
+  resetStore();
+  const s = userStore.getState();
+  s.createAdventure({ title: "Test" });
+  s.toggleAdventureEntity("spell.fireball");
+  const state = userStore.getState();
+  strictEqual(state.adventureEntitySet.has("spell.fireball"), true);
+  strictEqual(state.adventureEntitySet.has("nonexistent"), false);
+});
+
+test("clearAdventureEntities removes all entities from active adventure", () => {
+  resetMock();
+  resetStore();
+  const s = userStore.getState();
+  s.createAdventure({ title: "Test" });
+  s.toggleAdventureEntity("spell.fireball");
+  s.toggleAdventureEntity("monster.goblin");
+  s.clearAdventureEntities();
+  const state = userStore.getState();
+  deepStrictEqual(state.adventures[0]!.entities, []);
+  strictEqual(state.adventureEntitySet.size, 0);
+});
+
+test("updateAdventure updates title, description, notes", () => {
+  resetMock();
+  resetStore();
+  const s = userStore.getState();
+  s.createAdventure({ title: "Old Title" });
+  const id = userStore.getState().adventures[0]!.id;
+  s.updateAdventure(id, { title: "New Title", description: "A description", notes: "Some notes" });
+  const state = userStore.getState();
+  strictEqual(state.adventures[0]!.title, "New Title");
+  strictEqual(state.adventures[0]!.description, "A description");
+  strictEqual(state.adventures[0]!.notes, "Some notes");
+});
+
+test("addObjective adds objective to adventure", () => {
+  resetMock();
+  resetStore();
+  const s = userStore.getState();
+  s.createAdventure({ title: "Test" });
+  const id = userStore.getState().adventures[0]!.id;
+  s.addObjective(id, "Find the treasure");
+  deepStrictEqual(userStore.getState().adventures[0]!.objectives, ["Find the treasure"]);
+});
+
+test("addObjective ignores empty string", () => {
+  resetMock();
+  resetStore();
+  const s = userStore.getState();
+  s.createAdventure({ title: "Test" });
+  const id = userStore.getState().adventures[0]!.id;
+  s.addObjective(id, "");
+  s.addObjective(id, "  ");
+  deepStrictEqual(userStore.getState().adventures[0]!.objectives, []);
+});
+
+test("removeObjective removes objective at index", () => {
+  resetMock();
+  resetStore();
+  const s = userStore.getState();
+  s.createAdventure({ title: "Test" });
+  const id = userStore.getState().adventures[0]!.id;
+  s.addObjective(id, "A");
+  s.addObjective(id, "B");
+  s.addObjective(id, "C");
+  s.removeObjective(id, 1);
+  deepStrictEqual(userStore.getState().adventures[0]!.objectives, ["A", "C"]);
+});
+
+test("archiveAdventure marks adventure as archived and clears active", () => {
+  resetMock();
+  resetStore();
+  const s = userStore.getState();
+  s.createAdventure({ title: "Test" });
+  const id = userStore.getState().adventures[0]!.id;
+  s.archiveAdventure(id);
+  const state = userStore.getState();
+  strictEqual(state.adventures[0]!.archived, true);
+  strictEqual(state.activeAdventureId, null);
+  strictEqual(state.adventureEntitySet.size, 0);
+});
+
+test("restoreAdventure restores archived adventure", () => {
+  resetMock();
+  resetStore();
+  const s = userStore.getState();
+  s.createAdventure({ title: "Test" });
+  const id = userStore.getState().adventures[0]!.id;
+  s.archiveAdventure(id);
+  s.restoreAdventure(id);
+  strictEqual(userStore.getState().adventures[0]!.archived, false);
+  strictEqual(userStore.getState().activeAdventureId, null);
+});
+
+test("setActiveAdventure switches active adventure", () => {
+  resetMock();
+  resetStore();
+  const s = userStore.getState();
+  s.createAdventure({ title: "First" });
+  const firstId = userStore.getState().adventures[0]!.id;
+  s.toggleAdventureEntity("spell.fireball");
+  s.createAdventure({ title: "Second" });
+  s.setActiveAdventure(firstId);
+  const state = userStore.getState();
+  strictEqual(state.activeAdventureId, firstId);
+  ok(state.adventureEntitySet.has("spell.fireball"));
+});
+
+test("setActiveAdventure with null clears active", () => {
+  resetMock();
+  resetStore();
+  const s = userStore.getState();
+  s.createAdventure({ title: "Test" });
+  s.setActiveAdventure(null);
+  strictEqual(userStore.getState().activeAdventureId, null);
+  strictEqual(userStore.getState().adventureEntitySet.size, 0);
+});
+
+test("createAdventure persists to localStorage", () => {
+  resetMock();
+  resetStore();
+  userStore.getState().createAdventure({ title: "Persisted" });
+  const stored = localStorage.getItem(STORAGE_KEY);
+  if (stored) {
+    const parsed = JSON.parse(stored);
+    strictEqual(parsed.adventures.length, 1);
+    strictEqual(parsed.adventures[0]!.title, "Persisted");
+    ok(typeof parsed.activeAdventureId === "string");
+  }
+});
+
+test("adventureSet rebuilt on _replace", () => {
+  resetMock();
+  resetStore();
+  userStore.getState()._replace({
+    version: CURRENT_VERSION,
+    favorites: [],
+    recentEntities: [],
+    recentSearches: [],
+    session: [],
+    adventures: [{
+      id: "adv-1",
+      title: "Test",
+      description: "",
+      objectives: [],
+      notes: "",
+      entities: ["x", "y"],
+      createdAt: Date.now(),
+      updatedAt: Date.now(),
+      archived: false,
+    }],
+    activeAdventureId: "adv-1",
+  });
+  const state = userStore.getState();
+  strictEqual(state.adventures.length, 1);
+  strictEqual(state.activeAdventureId, "adv-1");
+  ok(state.adventureEntitySet.has("x"));
+  ok(state.adventureEntitySet.has("y"));
+  strictEqual(state.adventureEntitySet.size, 2);
+});
+
+test("adventureSet cleared on _reset", () => {
+  resetMock();
+  resetStore();
+  const s = userStore.getState();
+  s.createAdventure({ title: "Test" });
+  s.toggleAdventureEntity("spell.fireball");
+  userStore.getState()._reset();
+  const state = userStore.getState();
+  deepStrictEqual(state.adventures, []);
+  strictEqual(state.activeAdventureId, null);
+  strictEqual(state.adventureEntitySet.size, 0);
+});
+
+// ---------------------------------------------------------------------------
+// Adventure normalization
+// ---------------------------------------------------------------------------
+console.log("\nuser-state \u2014 adventure normalization\n");
+
+test("normalize removes invalid adventure entries", () => {
+  const result = normalize({
+    version: CURRENT_VERSION,
+    favorites: [],
+    recentEntities: [],
+    recentSearches: [],
+    session: [],
+    adventures: [null, { no_id: true }, { id: "" }] as unknown as Adventure[],
+    activeAdventureId: null,
+  });
+  strictEqual(result.adventures.length, 0);
+});
+
+test("normalize trims adventure title and description", () => {
+  const result = normalize({
+    version: CURRENT_VERSION,
+    favorites: [],
+    recentEntities: [],
+    recentSearches: [],
+    session: [],
+    adventures: [{
+      id: "adv-1",
+      title: "  My Quest  ",
+      description: "  Desc  ",
+      objectives: [],
+      notes: "  Notes  ",
+      entities: [],
+      createdAt: 1000,
+      updatedAt: 2000,
+      archived: false,
+    }],
+    activeAdventureId: null,
+  });
+  strictEqual(result.adventures[0]!.title, "My Quest");
+  strictEqual(result.adventures[0]!.description, "Desc");
+  strictEqual(result.adventures[0]!.notes, "Notes");
+});
+
+test("normalize deduplicates adventure objectives", () => {
+  const result = normalize({
+    version: CURRENT_VERSION,
+    favorites: [],
+    recentEntities: [],
+    recentSearches: [],
+    session: [],
+    adventures: [{
+      id: "adv-1",
+      title: "Test",
+      description: "",
+      objectives: ["a", "a", "b", "c", "b"],
+      notes: "",
+      entities: [],
+      createdAt: 1000,
+      updatedAt: 2000,
+      archived: false,
+    }],
+    activeAdventureId: null,
+  });
+  deepStrictEqual(result.adventures[0]!.objectives, ["a", "b", "c"]);
+});
+
+test("normalize removes empty objective strings", () => {
+  const result = normalize({
+    version: CURRENT_VERSION,
+    favorites: [],
+    recentEntities: [],
+    recentSearches: [],
+    session: [],
+    adventures: [{
+      id: "adv-1",
+      title: "Test",
+      description: "",
+      objectives: ["a", "", "b", "  "],
+      notes: "",
+      entities: [],
+      createdAt: 1000,
+      updatedAt: 2000,
+      archived: false,
+    }],
+    activeAdventureId: null,
+  });
+  deepStrictEqual(result.adventures[0]!.objectives, ["a", "b"]);
+});
+
+test("normalize removes stale entity IDs from adventures", () => {
+  const raw = {
+    version: CURRENT_VERSION,
+    favorites: [],
+    recentEntities: [],
+    recentSearches: [],
+    session: [],
+    adventures: [{
+      id: "adv-1",
+      title: "Test",
+      description: "",
+      objectives: [],
+      notes: "",
+      entities: ["spell.fireball", "nonexistent.entity"],
+      createdAt: 1000,
+      updatedAt: 2000,
+      archived: false,
+    }],
+    activeAdventureId: null,
+  };
+  const result = normalize(raw);
+  deepStrictEqual(result.adventures[0]!.entities, ["spell.fireball"]);
+});
+
+test("normalize clears activeAdventureId if adventure was removed", () => {
+  const result = normalize({
+    version: CURRENT_VERSION,
+    favorites: [],
+    recentEntities: [],
+    recentSearches: [],
+    session: [],
+    adventures: [],
+    activeAdventureId: "nonexistent",
+  });
+  strictEqual(result.activeAdventureId, null);
+});
+
+test("normalize enforces max 20 adventures", () => {
+  const many = [];
+  for (let i = 0; i < 25; i++) {
+    many.push({
+      id: `adv-${i}`,
+      title: `Adventure ${i}`,
+      description: "",
+      objectives: [],
+      notes: "",
+      entities: [],
+      createdAt: 1000,
+      updatedAt: 1000 + i,
+      archived: false,
+    });
+  }
+  const result = normalize({
+    version: CURRENT_VERSION,
+    favorites: [],
+    recentEntities: [],
+    recentSearches: [],
+    session: [],
+    adventures: many,
+    activeAdventureId: null,
+  });
+  strictEqual(result.adventures.length, 20);
+  strictEqual(result.adventures[0]!.id, "adv-0");
+  strictEqual(result.adventures[19]!.id, "adv-19");
+});
+
+// ---------------------------------------------------------------------------
+// Adventure hydration
+// ---------------------------------------------------------------------------
+console.log("\nuser-state \u2014 adventure hydration\n");
+
+test("hydrate() loads adventures from persisted state", () => {
+  resetMock();
+  resetStore();
+  const data = {
+    version: CURRENT_VERSION,
+    favorites: [],
+    recentEntities: [],
+    recentSearches: [],
+    session: [],
+    adventures: [{
+      id: "adv-1",
+      title: "Saved Adventure",
+      description: "Desc",
+      objectives: ["Goal 1"],
+      notes: "Notes here",
+      entities: ["spell.fireball"],
+      createdAt: 1000,
+      updatedAt: 2000,
+      archived: false,
+    }],
+    activeAdventureId: "adv-1",
+  };
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+  hydrate();
+  const state = userStore.getState();
+  strictEqual(state.adventures.length, 1);
+  strictEqual(state.adventures[0]!.title, "Saved Adventure");
+  strictEqual(state.activeAdventureId, "adv-1");
+  strictEqual(state.adventureEntitySet.has("spell.fireball"), true);
+});
+
+test("hydrate() removes stale entity IDs from persisted adventures", () => {
+  resetMock();
+  resetStore();
+  const data = {
+    version: CURRENT_VERSION,
+    favorites: [],
+    recentEntities: [],
+    recentSearches: [],
+    session: [],
+    adventures: [{
+      id: "adv-1",
+      title: "Test",
+      description: "",
+      objectives: [],
+      notes: "",
+      entities: ["nonexistent.entity"],
+      createdAt: 1000,
+      updatedAt: 2000,
+      archived: false,
+    }],
+    activeAdventureId: "adv-1",
+  };
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+  hydrate();
+  const state = userStore.getState();
+  deepStrictEqual(state.adventures[0]!.entities, []);
+  strictEqual(state.adventureEntitySet.size, 0);
+});
+
+test("hydrate() with duplicate adventures removes duplicates via normalize", () => {
+  resetMock();
+  resetStore();
+  const data = {
+    version: CURRENT_VERSION,
+    favorites: [],
+    recentEntities: [],
+    recentSearches: [],
+    session: [],
+    adventures: [{
+      id: "adv-1",
+      title: "Test",
+      description: "",
+      objectives: ["a", "a", "b"],
+      notes: "",
+      entities: ["spell.fireball", "spell.fireball"],
+      createdAt: 1000,
+      updatedAt: 2000,
+      archived: false,
+    }],
+    activeAdventureId: "adv-1",
+  };
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+  hydrate();
+  const state = userStore.getState();
+  deepStrictEqual(state.adventures[0]!.objectives, ["a", "b"], "duplicate objectives removed");
+  deepStrictEqual(state.adventures[0]!.entities, ["spell.fireball"], "duplicate entities removed");
+});
+
+// ---------------------------------------------------------------------------
+// Adventure cross-tab
+// ---------------------------------------------------------------------------
+console.log("\nuser-state \u2014 adventure cross-tab\n");
+
+test("_replace updates adventures when content differs", () => {
+  resetMock();
+  resetStore();
+  userStore.getState()._replace({
+    version: CURRENT_VERSION,
+    favorites: [],
+    recentEntities: [],
+    recentSearches: [],
+    session: [],
+    adventures: [{
+      id: "adv-1",
+      title: "Cross Tab",
+      description: "",
+      objectives: [],
+      notes: "",
+      entities: ["spell.fireball"],
+      createdAt: 1000,
+      updatedAt: 2000,
+      archived: false,
+    }],
+    activeAdventureId: "adv-1",
+  });
+  const state = userStore.getState();
+  strictEqual(state.adventures.length, 1);
+  strictEqual(state.activeAdventureId, "adv-1");
+  ok(state.adventureEntitySet.has("spell.fireball"));
+});
+
+test("adventuresEqual prevents unnecessary _replace on identical state", () => {
+  resetMock();
+  resetStore();
+  const state: UserState = {
+    version: CURRENT_VERSION,
+    favorites: [],
+    recentEntities: [],
+    recentSearches: [],
+    session: [],
+    adventures: [{
+      id: "adv-1",
+      title: "Same",
+      description: "",
+      objectives: [],
+      notes: "",
+      entities: ["x"],
+      createdAt: 1000,
+      updatedAt: 2000,
+      archived: false,
+    }],
+    activeAdventureId: "adv-1",
+  };
+  userStore.getState()._replace(state);
+  userStore.getState()._replace(state);
+  strictEqual(userStore.getState().adventures.length, 1);
+});
+
+// ---------------------------------------------------------------------------
+// Adventure selectors
+// ---------------------------------------------------------------------------
+console.log("\nuser-state \u2014 adventure selectors\n");
+
+test("useIsInAdventure returns true for entity in active adventure", () => {
+  resetMock();
+  resetStore();
+  const s = userStore.getState();
+  s.createAdventure({ title: "Test" });
+  s.toggleAdventureEntity("spell.fireball");
+  strictEqual(userStore.getState().adventureEntitySet.has("spell.fireball"), true);
+  strictEqual(userStore.getState().adventureEntitySet.has("nonexistent"), false);
+});
+
+test("useActiveAdventure returns the active adventure", () => {
+  resetMock();
+  resetStore();
+  const s = userStore.getState();
+  s.createAdventure({ title: "Active One" });
+  const state = userStore.getState();
+  const active = state.adventures.find((a) => a.id === state.activeAdventureId);
+  ok(active);
+  strictEqual(active?.title, "Active One");
+});
+
+test("useActiveAdventure returns null when none active", () => {
+  resetMock();
+  resetStore();
+  strictEqual(userStore.getState().activeAdventureId, null);
+});
+
+test("useAdventureEntityIds returns entities for active adventure", () => {
+  resetMock();
+  resetStore();
+  const s = userStore.getState();
+  s.createAdventure({ title: "Test" });
+  s.toggleAdventureEntity("spell.fireball");
+  s.toggleAdventureEntity("monster.goblin");
+  const state = userStore.getState();
+  const active = state.adventures.find((a) => a.id === state.activeAdventureId);
+  ok(active);
+  deepStrictEqual(active?.entities, ["spell.fireball", "monster.goblin"]);
 });
 
 console.log(

@@ -10,11 +10,14 @@ export {
   userStore,
   useIsFavorite,
   useIsInSession,
+  useIsInAdventure,
+  useActiveAdventure,
+  useAdventureEntityIds,
   useSessionIds,
   useRecentEntities,
   useRecentSearches,
 } from "./store";
 export type { UserStore } from "./store";
-export type { UserState } from "./types";
+export type { UserState, Adventure } from "./types";
 export { STORAGE_KEY, CURRENT_VERSION } from "./types";
 export { normalize } from "./normalize";

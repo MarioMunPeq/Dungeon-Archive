@@ -1,9 +1,21 @@
 import { create } from "zustand";
-import type { UserState } from "./types";
+import type { Adventure, UserState } from "./types";
 import { STORAGE_KEY, CURRENT_VERSION } from "./types";
 import { read, write } from "./persistence";
 import { migrate } from "./migrations";
 import { normalize, validateIds } from "./normalize";
+
+interface AdventureActions {
+  createAdventure: (data?: { title?: string; description?: string }) => void;
+  updateAdventure: (id: string, data: { title?: string; description?: string; notes?: string }) => void;
+  addObjective: (adventureId: string, objective: string) => void;
+  removeObjective: (adventureId: string, index: number) => void;
+  toggleAdventureEntity: (canonicalId: string) => void;
+  clearAdventureEntities: () => void;
+  archiveAdventure: (id: string) => void;
+  restoreAdventure: (id: string) => void;
+  setActiveAdventure: (id: string | null) => void;
+}
 
 interface UserActions {
   toggleFavorite: (canonicalId: string) => void;
@@ -17,9 +29,10 @@ interface UserActions {
   _reset: () => void;
 }
 
-export type UserStore = UserState & UserActions & {
+export type UserStore = UserState & UserActions & AdventureActions & {
   favoritesSet: Set<string>;
   sessionSet: Set<string>;
+  adventureEntitySet: Set<string>;
   _hasHydrated: boolean;
 };
 
@@ -46,8 +59,8 @@ function schedulePersist(getState: () => UserStore): void {
   if (debounceTimer !== null) clearTimeout(debounceTimer);
   debounceTimer = setTimeout(() => {
     debounceTimer = null;
-    const { version, favorites, recentEntities, recentSearches, session } = getState();
-    write({ version, favorites, recentEntities, recentSearches, session });
+    const { version, favorites, recentEntities, recentSearches, session, adventures, activeAdventureId } = getState();
+    write({ version, favorites, recentEntities, recentSearches, session, adventures, activeAdventureId });
   }, 150);
 }
 
@@ -59,6 +72,15 @@ function arraysEqual(a: readonly string[], b: readonly string[]): boolean {
   return true;
 }
 
+function generateId(): string {
+  return Date.now().toString(36) + Math.random().toString(36).slice(2, 8);
+}
+
+function updateActiveAdventureSet(adventures: Adventure[], activeAdventureId: string | null): Set<string> {
+  const active = activeAdventureId ? adventures.find((a) => a.id === activeAdventureId) : undefined;
+  return new Set(active?.entities ?? []);
+}
+
 export const userStore = create<UserStore>((set, get) => ({
   version: CURRENT_VERSION,
   favorites: [],
@@ -67,6 +89,9 @@ export const userStore = create<UserStore>((set, get) => ({
   recentSearches: [],
   session: [],
   sessionSet: new Set<string>(),
+  adventures: [],
+  activeAdventureId: null,
+  adventureEntitySet: new Set<string>(),
   _hasHydrated: false,
 
   toggleFavorite: (canonicalId) => {
@@ -118,6 +143,194 @@ export const userStore = create<UserStore>((set, get) => ({
     schedulePersist(get);
   },
 
+  createAdventure: (data) => {
+    set((s) => {
+      const id = generateId();
+      const adventure: Adventure = {
+        id,
+        title: data?.title?.trim() || "New Adventure",
+        description: data?.description?.trim() || "",
+        objectives: [],
+        notes: "",
+        entities: [],
+        createdAt: Date.now(),
+        updatedAt: Date.now(),
+        archived: false,
+      };
+      return {
+        adventures: [...s.adventures, adventure],
+        activeAdventureId: id,
+        adventureEntitySet: new Set<string>(),
+      };
+    });
+    schedulePersist(get);
+  },
+
+  updateAdventure: (id, data) => {
+    set((s) => {
+      const idx = s.adventures.findIndex((a) => a.id === id);
+      if (idx === -1) return s;
+      const current = s.adventures[idx]!;
+      const updated: Adventure = {
+        ...current,
+        title: data.title !== undefined ? data.title.trim() || current.title : current.title,
+        description: data.description !== undefined ? data.description.trim() : current.description,
+        notes: data.notes !== undefined ? data.notes.trim() : current.notes,
+        updatedAt: Date.now(),
+      };
+      const adventures = [...s.adventures];
+      adventures[idx] = updated;
+      return { adventures, adventureEntitySet: updateActiveAdventureSet(adventures, s.activeAdventureId) };
+    });
+    schedulePersist(get);
+  },
+
+  addObjective: (adventureId, objective) => {
+    const trimmed = objective.trim();
+    if (!trimmed) return;
+    set((s) => {
+      const idx = s.adventures.findIndex((a) => a.id === adventureId);
+      if (idx === -1) return s;
+      const current = s.adventures[idx]!;
+      const updated: Adventure = {
+        ...current,
+        objectives: [...current.objectives, trimmed],
+        updatedAt: Date.now(),
+      };
+      const adventures = [...s.adventures];
+      adventures[idx] = updated;
+      return { adventures };
+    });
+    schedulePersist(get);
+  },
+
+  removeObjective: (adventureId, index) => {
+    set((s) => {
+      const idx = s.adventures.findIndex((a) => a.id === adventureId);
+      if (idx === -1) return s;
+      const current = s.adventures[idx]!;
+      const copy = [...current.objectives];
+      if (index < 0 || index >= copy.length) return s;
+      copy.splice(index, 1);
+      const updated: Adventure = {
+        ...current,
+        objectives: copy,
+        updatedAt: Date.now(),
+      };
+      const adventures = [...s.adventures];
+      adventures[idx] = updated;
+      return { adventures };
+    });
+    schedulePersist(get);
+  },
+
+  toggleAdventureEntity: (canonicalId) => {
+    set((s) => {
+      const { adventures, activeAdventureId } = s;
+
+      if (!activeAdventureId) {
+        const id = generateId();
+        const adventure: Adventure = {
+          id,
+          title: "New Adventure",
+          description: "",
+          objectives: [],
+          notes: "",
+          entities: [canonicalId],
+          createdAt: Date.now(),
+          updatedAt: Date.now(),
+          archived: false,
+        };
+        return {
+          adventures: [...adventures, adventure],
+          activeAdventureId: id,
+          adventureEntitySet: new Set([canonicalId]),
+        };
+      }
+
+      const idx = adventures.findIndex((a) => a.id === activeAdventureId);
+      if (idx === -1) return s;
+      const adventure = adventures[idx]!;
+      const entityIdx = adventure.entities.indexOf(canonicalId);
+      let newEntities: string[];
+      if (entityIdx !== -1) {
+        newEntities = [...adventure.entities];
+        newEntities.splice(entityIdx, 1);
+      } else {
+        newEntities = [...adventure.entities, canonicalId];
+      }
+      const updated: Adventure = {
+        ...adventure,
+        entities: newEntities,
+        updatedAt: Date.now(),
+      };
+      const newAdventures = [...adventures];
+      newAdventures[idx] = updated;
+
+      return {
+        adventures: newAdventures,
+        adventureEntitySet: new Set(newEntities),
+      };
+    });
+    schedulePersist(get);
+  },
+
+  clearAdventureEntities: () => {
+    set((s) => {
+      if (!s.activeAdventureId) return s;
+      const idx = s.adventures.findIndex((a) => a.id === s.activeAdventureId);
+      if (idx === -1) return s;
+      const current = s.adventures[idx]!;
+      const updated: Adventure = {
+        ...current,
+        entities: [],
+        updatedAt: Date.now(),
+      };
+      const adventures = [...s.adventures];
+      adventures[idx] = updated;
+      return { adventures, adventureEntitySet: new Set<string>() };
+    });
+    schedulePersist(get);
+  },
+
+  archiveAdventure: (id) => {
+    set((s) => {
+      const idx = s.adventures.findIndex((a) => a.id === id);
+      if (idx === -1) return s;
+      const current = s.adventures[idx]!;
+      const updated: Adventure = { ...current, archived: true, updatedAt: Date.now() };
+      const adventures = [...s.adventures];
+      adventures[idx] = updated;
+      return {
+        adventures,
+        activeAdventureId: s.activeAdventureId === id ? null : s.activeAdventureId,
+        adventureEntitySet: s.activeAdventureId === id ? new Set<string>() : s.adventureEntitySet,
+      };
+    });
+    schedulePersist(get);
+  },
+
+  restoreAdventure: (id) => {
+    set((s) => {
+      const idx = s.adventures.findIndex((a) => a.id === id);
+      if (idx === -1) return s;
+      const current = s.adventures[idx]!;
+      const updated: Adventure = { ...current, archived: false, updatedAt: Date.now() };
+      const adventures = [...s.adventures];
+      adventures[idx] = updated;
+      return { adventures };
+    });
+    schedulePersist(get);
+  },
+
+  setActiveAdventure: (id) => {
+    set((s) => ({
+      activeAdventureId: id,
+      adventureEntitySet: updateActiveAdventureSet(s.adventures, id),
+    }));
+    schedulePersist(get);
+  },
+
   _replace: (state) => {
     set({
       version: state.version,
@@ -127,6 +340,9 @@ export const userStore = create<UserStore>((set, get) => ({
       recentSearches: state.recentSearches,
       session: state.session,
       sessionSet: new Set(state.session),
+      adventures: state.adventures,
+      activeAdventureId: state.activeAdventureId,
+      adventureEntitySet: updateActiveAdventureSet(state.adventures, state.activeAdventureId),
     });
   },
 
@@ -139,6 +355,9 @@ export const userStore = create<UserStore>((set, get) => ({
       recentSearches: [],
       session: [],
       sessionSet: new Set<string>(),
+      adventures: [],
+      activeAdventureId: null,
+      adventureEntitySet: new Set<string>(),
       _hasHydrated: false,
     });
   },
@@ -150,6 +369,25 @@ export function useIsFavorite(canonicalId: string): boolean {
 
 export function useIsInSession(canonicalId: string): boolean {
   return userStore((s) => s.sessionSet.has(canonicalId));
+}
+
+export function useIsInAdventure(canonicalId: string): boolean {
+  return userStore((s) => s.adventureEntitySet.has(canonicalId));
+}
+
+export function useActiveAdventure(): Adventure | null {
+  return userStore((s) => {
+    if (!s.activeAdventureId) return null;
+    return s.adventures.find((a) => a.id === s.activeAdventureId) ?? null;
+  });
+}
+
+export function useAdventureEntityIds(): string[] {
+  return userStore((s) => {
+    if (!s.activeAdventureId) return [];
+    const active = s.adventures.find((a) => a.id === s.activeAdventureId);
+    return active?.entities ?? [];
+  });
 }
 
 export function useSessionIds(limit?: number): string[] {
@@ -171,8 +409,22 @@ function processPersistedState(state: UserState): UserState {
     recentEntities: validateIds(state.recentEntities),
     recentSearches: state.recentSearches,
     session: validateIds(state.session),
+    adventures: state.adventures,
+    activeAdventureId: state.activeAdventureId,
   };
   return normalize(validated);
+}
+
+function adventuresEqual(a: Adventure[], b: Adventure[]): boolean {
+  if (a.length !== b.length) return false;
+  for (let i = 0; i < a.length; i++) {
+    const aa = a[i]!;
+    const bb = b[i]!;
+    if (aa.id !== bb.id || aa.title !== bb.title || aa.updatedAt !== bb.updatedAt || aa.entities.length !== bb.entities.length) {
+      return false;
+    }
+  }
+  return true;
 }
 
 function replaceState(state: UserState): void {
@@ -182,7 +434,9 @@ function replaceState(state: UserState): void {
     arraysEqual(current.favorites, state.favorites) &&
     arraysEqual(current.recentEntities, state.recentEntities) &&
     arraysEqual(current.recentSearches, state.recentSearches) &&
-    arraysEqual(current.session, state.session)
+    arraysEqual(current.session, state.session) &&
+    current.activeAdventureId === state.activeAdventureId &&
+    adventuresEqual(current.adventures, state.adventures)
   ) {
     return;
   }
