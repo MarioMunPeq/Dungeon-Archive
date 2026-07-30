@@ -1,4 +1,5 @@
 import type { ElementType, ReactNode } from "react";
+import { cn } from "@/lib/utils";
 
 type StackGap = "xs" | "sm" | "md" | "lg" | "xl";
 
@@ -17,6 +18,6 @@ interface StackProps {
   readonly children?: ReactNode;
 }
 
-export function Stack({ as: Tag = "div", gap = "md", className = "", children }: StackProps) {
-  return <Tag className={`${GAP_CLASSES[gap]} ${className}`.trim()}>{children}</Tag>;
+export function Stack({ as: Tag = "div", gap = "md", className, children }: StackProps) {
+  return <Tag className={cn(GAP_CLASSES[gap], className)}>{children}</Tag>;
 }

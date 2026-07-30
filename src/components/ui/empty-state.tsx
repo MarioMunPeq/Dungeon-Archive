@@ -14,6 +14,7 @@ export function EmptyState({ message, action }: EmptyStateProps) {
         <button
           type="button"
           onClick={action.onClick}
+          aria-label={action.label}
           className="rounded-lg bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary-hover active:bg-primary-active"
         >
           {action.label}

@@ -5,6 +5,7 @@ interface IconProps {
 export function HomeIcon({ className }: IconProps) {
   return (
     <svg
+      aria-hidden="true"
       className={className}
       viewBox="0 0 24 24"
       fill="none"
@@ -20,6 +21,7 @@ export function HomeIcon({ className }: IconProps) {
 export function SearchIcon({ className }: IconProps) {
   return (
     <svg
+      aria-hidden="true"
       className={className}
       viewBox="0 0 24 24"
       fill="none"
@@ -35,6 +37,7 @@ export function SearchIcon({ className }: IconProps) {
 export function AdventureIcon({ className }: IconProps) {
   return (
     <svg
+      aria-hidden="true"
       className={className}
       viewBox="0 0 24 24"
       fill="none"
@@ -53,6 +56,7 @@ export function AdventureIcon({ className }: IconProps) {
 export function PartyIcon({ className }: IconProps) {
   return (
     <svg
+      aria-hidden="true"
       className={className}
       viewBox="0 0 24 24"
       fill="none"

@@ -1,3 +1,4 @@
+import { cn } from "@/lib/utils";
 import type { ReactNode } from "react";
 
 type BadgeVariant = "default" | "accent" | "outline" | "subtle";
@@ -15,10 +16,14 @@ interface BadgeProps {
   readonly children?: ReactNode;
 }
 
-export function Badge({ variant = "default", className = "", children }: BadgeProps) {
+export function Badge({ variant = "default", className, children }: BadgeProps) {
   return (
     <span
-      className={`inline-flex items-center rounded-full border px-3 py-1 text-xs transition-colors ${VARIANT_CLASSES[variant]} ${className}`.trim()}
+      className={cn(
+        "inline-flex items-center rounded-full border px-3 py-1 text-xs transition-colors",
+        VARIANT_CLASSES[variant],
+        className,
+      )}
     >
       {children}
     </span>

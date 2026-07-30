@@ -12,7 +12,9 @@ export function EntityHeader({ name, subtitle, source }: EntityHeaderProps) {
     <div className="space-y-1">
       <Title>{name}</Title>
       <Subtitle>{subtitle}</Subtitle>
-      <p className="text-xs text-muted-foreground">{source}</p>
+      <span className="text-xs text-muted-foreground" aria-label="Source">
+        {source}
+      </span>
     </div>
   );
 }

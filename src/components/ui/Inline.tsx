@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import { cn } from "@/lib/utils";
 
 type InlineGap = "xs" | "sm" | "md" | "lg";
 type InlineAlign = "start" | "center" | "end" | "baseline" | "stretch";
@@ -30,12 +31,18 @@ export function Inline({
   gap = "sm",
   align = "center",
   wrap = true,
-  className = "",
+  className,
   children,
 }: InlineProps) {
   return (
     <div
-      className={`flex ${ALIGN_CLASSES[align]} ${GAP_CLASSES[gap]} ${wrap ? "flex-wrap" : ""} ${className}`.trim()}
+      className={cn(
+        "flex",
+        ALIGN_CLASSES[align],
+        GAP_CLASSES[gap],
+        wrap && "flex-wrap",
+        className
+      )}
     >
       {children}
     </div>
