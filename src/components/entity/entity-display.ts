@@ -12,10 +12,8 @@ import type {
 import {
   getEntity,
   sourcePriority,
-  formatSource,
   slugFromCanonicalId,
-  categoryLabelSingular,
-  formatMonsterType,
+  CATEGORY_REGISTRY,
 } from "@/compendium";
 
 export interface EntityDisplayInfo {
@@ -33,36 +31,7 @@ export interface SearchResultItem {
   readonly versions?: readonly EntityVersion[];
 }
 
-const SCHOOL_NAMES: Record<string, string> = {
-  A: "Abjuration",
-  C: "Conjuration",
-  D: "Divination",
-  E: "Enchantment",
-  I: "Illusion",
-  N: "Necromancy",
-  T: "Transmutation",
-  V: "Evocation",
-};
-
-const EQUIPMENT_TYPE_DISPLAY: Record<string, string> = {
-  $C: "Clothing",
-  FD: "Food and Drink",
-  GS: "Gaming Set",
-  MNT: "Mount",
-  SCF: "Spellcasting Focus",
-  SHP: "Ship",
-  TAH: "Tack and Harness",
-  VEH: "Vehicle",
-  WD: "Wand",
-  G: "Gear",
-  T: "Tool",
-  AIR: "Air",
-};
-
-function formatEquipmentType(rawType: string): string {
-  const clean = rawType.includes("|") ? rawType.split("|")[0]! : rawType;
-  return EQUIPMENT_TYPE_DISPLAY[clean] ?? clean;
-}
+type DisplayEntity = Spell | Condition | Equipment | Action | Monster | MagicItem | Feat;
 
 function computeMatchScore(name: string, query: string): number {
   const lower = name.toLowerCase();
@@ -72,46 +41,11 @@ function computeMatchScore(name: string, query: string): number {
   return 0;
 }
 
-function getSubtitle(entity: Spell | Condition | Equipment | Action | Monster | MagicItem | Feat): string {
-  const category = categoryLabelSingular(entity.category);
-
-  switch (entity.category) {
-    case "spell": {
-      const spell = entity as Spell;
-      const levelText = spell.level === 0 ? "Cantrip" : `Level ${spell.level}`;
-      const schoolName = SCHOOL_NAMES[spell.school] ?? spell.school;
-      return `${category} \u00B7 ${levelText} \u00B7 ${schoolName} \u00B7 ${formatSource(spell.source)}`;
-    }
-    case "monster": {
-      const monster = entity as Monster;
-      return `${category} \u00B7 CR ${monster.challengeRating} \u00B7 ${formatMonsterType(monster)} \u00B7 ${formatSource(monster.source)}`;
-    }
-    case "equipment": {
-      const item = entity as Equipment;
-      return `${category} \u00B7 ${formatEquipmentType(item.type)} \u00B7 ${formatSource(item.source)}`;
-    }
-    case "magicitem": {
-      const magic = entity as MagicItem;
-      const attune = magic.requiresAttunement ? " \u00B7 Requires Attunement" : "";
-      return `${category} \u00B7 ${magic.rarity}${attune} \u00B7 ${formatSource(magic.source)}`;
-    }
-    case "feat": {
-      const feat = entity as Feat;
-      const prereq = feat.prerequisite ? `Prerequisite: ${feat.prerequisite}` : undefined;
-      const repeatable = feat.repeatable ? "Repeatable" : undefined;
-      const extras = [prereq, repeatable].filter(Boolean).join(" \u00B7 ");
-      return extras ? `${category} \u00B7 ${extras} \u00B7 ${formatSource(feat.source)}` : `${category} \u00B7 ${formatSource(feat.source)}`;
-    }
-    case "condition":
-      return `${category} \u00B7 ${formatSource(entity.source)}`;
-    case "action":
-      return `${category} \u00B7 ${formatSource(entity.source)}`;
-  }
+function getSubtitle(entity: DisplayEntity): string {
+  return CATEGORY_REGISTRY[entity.category].getSubtitle(entity);
 }
 
-export function getEntityDisplayInfo(
-  entity: Spell | Condition | Equipment | Action | Monster | MagicItem | Feat,
-): EntityDisplayInfo {
+export function getEntityDisplayInfo(entity: DisplayEntity): EntityDisplayInfo {
   return {
     title: entity.name,
     subtitle: getSubtitle(entity),
@@ -124,11 +58,11 @@ export function createSearchResultItems(
 ): readonly SearchResultItem[] {
   const enriched: {
     entry: SearchIndexEntry;
-    entity: Spell | Condition | Equipment | Action | Monster | MagicItem | Feat;
+    entity: DisplayEntity;
   }[] = [];
 
   for (const entry of entries) {
-    const entity = getEntity(entry.category, entry.id);
+    const entity = getEntity(entry.category, entry.id) as DisplayEntity | null;
     if (!entity) continue;
     enriched.push({ entry, entity });
   }

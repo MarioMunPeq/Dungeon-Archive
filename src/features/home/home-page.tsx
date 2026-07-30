@@ -1,8 +1,8 @@
 import { Link } from "react-router";
+import { categoryLabel, getCategoryCount, CATEGORY_REGISTRY } from "@/compendium";
 import type { EntityCategory } from "@/compendium";
-import { categoryLabel, getCategoryCount } from "@/compendium";
 
-const CATEGORIES: EntityCategory[] = ["spell", "monster", "equipment", "condition", "action"];
+const CATEGORIES = Object.keys(CATEGORY_REGISTRY) as EntityCategory[];
 
 export function HomePage() {
   return (

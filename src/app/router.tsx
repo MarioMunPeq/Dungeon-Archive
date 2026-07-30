@@ -8,17 +8,10 @@ import { CategoryPage } from "@/features/compendium/pages/category-page";
 import { DebugContentPage } from "@/features/debug/debug-content-page";
 import { DebugSpellPage } from "@/features/debug/debug-spell-page";
 import { NotFoundPage } from "@/features/not-found-page";
+import { CATEGORY_REGISTRY } from "@/compendium";
 import type { EntityCategory } from "@/compendium";
 
-const CATEGORIES: EntityCategory[] = [
-  "spell",
-  "condition",
-  "equipment",
-  "action",
-  "monster",
-  "magicitem",
-  "feat",
-];
+const CATEGORIES = Object.keys(CATEGORY_REGISTRY) as EntityCategory[];
 
 export function AppRouter() {
   return (

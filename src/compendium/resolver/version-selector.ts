@@ -1,17 +1,8 @@
 import type { EntityVersion } from "@/types/compendium";
-
-const SOURCE_PRIORITY: Record<string, number> = {
-  XPHB: 1,
-  PHB: 2,
-  TCE: 3,
-  XGE: 4,
-  XMM: 5,
-  MPMM: 6,
-  MM: 7,
-};
+import { SOURCE_ORDER } from "../category-registry";
 
 export function sourcePriority(source: string): number {
-  return SOURCE_PRIORITY[source] ?? 99;
+  return SOURCE_ORDER[source] ?? 99;
 }
 
 export function selectPreferredVersion(versions: readonly EntityVersion[]): EntityVersion {

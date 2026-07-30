@@ -40,12 +40,17 @@ export {
 
 export { referenceToUrl, referenceLabel } from "./reference";
 
+export { slugFromCanonicalId, canonicalIdFromSlug } from "./slug";
+
+export { categoryLabel, categoryLabelSingular } from "./category-registry";
+
 export {
-  slugFromCanonicalId,
-  canonicalIdFromSlug,
-  categoryLabel,
-  categoryLabelSingular,
-} from "./slug";
+  CATEGORY_REGISTRY,
+  SCHOOL_NAMES,
+  SOURCE_ORDER,
+  formatMonsterType,
+} from "./category-registry";
+export type { AnyEntity, CategoryRegistration } from "./category-registry";
 
 export {
   getEntitiesForCategory,
@@ -54,11 +59,7 @@ export {
   buildFilterDefs,
   applyFilters,
   toCardData,
-  formatMonsterType,
-  SCHOOL_NAMES,
-  SOURCE_ORDER,
 } from "./category-display";
-export type { AnyEntity } from "./category-display";
 
 export type {
   Spell,

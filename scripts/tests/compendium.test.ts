@@ -1,12 +1,8 @@
 import { strictEqual, ok } from "node:assert";
 import { getSourceInfo, formatSource, formatEdition } from "../../src/compendium/source";
 import { referenceToUrl, referenceLabel } from "../../src/compendium/reference";
-import {
-  slugFromCanonicalId,
-  canonicalIdFromSlug,
-  categoryLabel,
-  categoryLabelSingular,
-} from "../../src/compendium/slug";
+import { slugFromCanonicalId, canonicalIdFromSlug } from "../../src/compendium/slug";
+import { categoryLabel, categoryLabelSingular } from "../../src/compendium/category-registry";
 
 function test(description: string, fn: () => void): void {
   try {

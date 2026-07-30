@@ -2,75 +2,17 @@ import type {
   EntityCategory,
   Spell,
   Monster,
-  Equipment,
-  Condition,
-  Action,
   MagicItem,
   Feat,
 } from "@/types/compendium";
 import type { EntityCardData } from "@/features/compendium/components/entity-card";
 import type { FilterDefinition } from "@/features/compendium/components/filter-bar";
-import {
-  getSpells,
-  getMonsters,
-  getEquipmentList,
-  getConditions,
-  getActions,
-  getMagicItems,
-  getFeats,
-} from "./repository";
-import { slugFromCanonicalId, categoryLabelSingular } from "./slug";
-import { formatSource } from "./source";
+import { CATEGORY_REGISTRY, SOURCE_ORDER } from "./category-registry";
+export type { AnyEntity } from "./category-registry";
+export { SCHOOL_NAMES, formatMonsterType } from "./category-registry";
 
-export type AnyEntity = Spell | Monster | Equipment | Condition | Action | MagicItem | Feat;
-
-export function formatMonsterType(monster: Monster): string {
-  const base = monster.monsterType;
-  const tags = monster.tags;
-  if (tags.length === 0) return base;
-  return `${base} (${tags.join(", ")})`;
-}
-
-export const SCHOOL_NAMES: Record<string, string> = {
-  A: "Abjuration",
-  C: "Conjuration",
-  D: "Divination",
-  E: "Enchantment",
-  I: "Illusion",
-  N: "Necromancy",
-  T: "Transmutation",
-  V: "Evocation",
-};
-
-export const SOURCE_ORDER: Record<string, number> = {
-  XPHB: 1,
-  PHB: 2,
-  TCE: 3,
-  XGE: 4,
-  XMM: 5,
-  MPMM: 6,
-  MM: 7,
-  DMG: 8,
-  XDMG: 9,
-};
-
-export function getEntitiesForCategory(category: EntityCategory): readonly AnyEntity[] {
-  switch (category) {
-    case "spell":
-      return getSpells();
-    case "monster":
-      return getMonsters();
-    case "equipment":
-      return getEquipmentList();
-    case "condition":
-      return getConditions();
-    case "action":
-      return getActions();
-    case "magicitem":
-      return getMagicItems();
-    case "feat":
-      return getFeats();
-  }
+export function getEntitiesForCategory(category: EntityCategory): readonly import("./category-registry").AnyEntity[] {
+  return CATEGORY_REGISTRY[category].getList();
 }
 
 export function collectUnique<T>(items: readonly T[], get: (item: T) => string): string[] {
@@ -101,175 +43,16 @@ export function buildOptions(
 
 export function buildFilterDefs(
   category: EntityCategory,
-  entities: readonly AnyEntity[],
+  entities: readonly import("./category-registry").AnyEntity[],
 ): readonly FilterDefinition[] {
-  switch (category) {
-    case "spell": {
-      const spells = entities as readonly Spell[];
-      return [
-        {
-          key: "level",
-          label: "Level",
-          options: buildOptions(
-            collectUnique(spells, (s) => String(s.level)),
-            {
-              "0": "Cantrip",
-            },
-          ),
-        },
-        {
-          key: "school",
-          label: "School",
-          options: buildOptions(
-            collectUnique(spells, (s) => s.school),
-            SCHOOL_NAMES,
-          ),
-        },
-        {
-          key: "source",
-          label: "Source",
-          options: buildOptions(
-            collectUnique(spells, (s) => s.source),
-            {},
-            formatSource,
-          ),
-        },
-      ];
-    }
-    case "monster": {
-      const monsters = entities as readonly Monster[];
-      return [
-        {
-          key: "cr",
-          label: "CR",
-          options: buildOptions(collectUnique(monsters, (m) => m.challengeRating)),
-        },
-        {
-          key: "type",
-          label: "Type",
-          options: buildOptions(collectUnique(monsters, (m) => m.monsterType)),
-        },
-        {
-          key: "size",
-          label: "Size",
-          options: buildOptions(collectUnique(monsters, (m) => m.size)),
-        },
-        {
-          key: "source",
-          label: "Source",
-          options: buildOptions(
-            collectUnique(monsters, (m) => m.source),
-            {},
-            formatSource,
-          ),
-        },
-      ];
-    }
-    case "equipment": {
-      const equipment = entities as readonly Equipment[];
-      return [
-        {
-          key: "type",
-          label: "Type",
-          options: buildOptions(collectUnique(equipment, (e) => e.type)),
-        },
-        {
-          key: "source",
-          label: "Source",
-          options: buildOptions(
-            collectUnique(equipment, (e) => e.source),
-            {},
-            formatSource,
-          ),
-        },
-      ];
-    }
-    case "magicitem": {
-      const items = entities as readonly MagicItem[];
-      return [
-        {
-          key: "rarity",
-          label: "Rarity",
-          options: buildOptions(collectUnique(items, (m) => m.rarity)),
-        },
-        {
-          key: "itemType",
-          label: "Type",
-          options: buildOptions(collectUnique(items, (m) => m.itemType)),
-        },
-        {
-          key: "attunement",
-          label: "Attunement",
-          options: [
-            { value: "", label: "All" },
-            { value: "required", label: "Required" },
-            { value: "none", label: "None" },
-          ],
-        },
-        {
-          key: "source",
-          label: "Source",
-          options: buildOptions(
-            collectUnique(items, (e) => e.source),
-            {},
-            formatSource,
-          ),
-        },
-      ];
-    }
-    case "feat": {
-      const feats = entities as readonly Feat[];
-      return [
-        {
-          key: "prerequisite",
-          label: "Prerequisite",
-          options: [
-            { value: "", label: "All" },
-            { value: "yes", label: "Has Prerequisite" },
-            { value: "none", label: "No Prerequisite" },
-          ],
-        },
-        {
-          key: "repeatable",
-          label: "Repeatable",
-          options: [
-            { value: "", label: "All" },
-            { value: "yes", label: "Repeatable" },
-            { value: "no", label: "Not Repeatable" },
-          ],
-        },
-        {
-          key: "source",
-          label: "Source",
-          options: buildOptions(
-            collectUnique(feats, (e) => e.source),
-            {},
-            formatSource,
-          ),
-        },
-      ];
-    }
-    case "condition":
-    case "action":
-      return [
-        {
-          key: "source",
-          label: "Source",
-          options: buildOptions(
-            collectUnique(entities, (e) => e.source),
-            {},
-            formatSource,
-          ),
-        },
-      ];
-  }
+  return CATEGORY_REGISTRY[category].buildFilterDefs(entities);
 }
 
 export function applyFilters(
   _category: EntityCategory,
-  entities: readonly AnyEntity[],
+  entities: readonly import("./category-registry").AnyEntity[],
   filters: Record<string, string>,
-): readonly AnyEntity[] {
+): readonly import("./category-registry").AnyEntity[] {
   const keys = Object.keys(filters);
   if (keys.length === 0) return entities;
 
@@ -319,82 +102,6 @@ export function applyFilters(
   });
 }
 
-export function toCardData(category: EntityCategory, entity: AnyEntity): EntityCardData {
-  const href = `/${category}/${slugFromCanonicalId(entity.canonicalId)}`;
-  const label = categoryLabelSingular(category);
-
-  switch (category) {
-    case "spell": {
-      const spell = entity as Spell;
-      const level = spell.level === 0 ? "Cantrip" : `Level ${spell.level}`;
-      const school = SCHOOL_NAMES[spell.school] ?? spell.school;
-      return {
-        name: spell.name,
-        href,
-        categoryLabel: label,
-        metadata: `${level} \u00B7 ${school}`,
-        source: spell.source,
-      };
-    }
-    case "monster": {
-      const monster = entity as Monster;
-      return {
-        name: monster.name,
-        href,
-        categoryLabel: label,
-        metadata: `CR ${monster.challengeRating} \u00B7 ${formatMonsterType(monster)}`,
-        source: monster.source,
-      };
-    }
-    case "equipment": {
-      const item = entity as Equipment;
-      return {
-        name: item.name,
-        href,
-        categoryLabel: label,
-        metadata: item.type,
-        source: item.source,
-      };
-    }
-    case "magicitem": {
-      const magic = entity as MagicItem;
-      const attunement = magic.requiresAttunement ? " \u00B7 Attunement" : "";
-      return {
-        name: magic.name,
-        href,
-        categoryLabel: label,
-        metadata: `${magic.rarity}${attunement}`,
-        source: magic.source,
-      };
-    }
-    case "feat": {
-      const feat = entity as Feat;
-      const meta = feat.featCategory ? feat.featCategory : "";
-      return {
-        name: feat.name,
-        href,
-        categoryLabel: label,
-        metadata: meta,
-        source: feat.source,
-      };
-    }
-    case "condition":
-      return {
-        name: entity.name,
-        href,
-        categoryLabel: label,
-        metadata: "",
-        source: entity.source,
-      };
-    case "action": {
-      const action = entity as Action;
-      return {
-        name: action.name,
-        href,
-        categoryLabel: label,
-        metadata: action.actionType,
-        source: action.source,
-      };
-    }
-  }
+export function toCardData(category: EntityCategory, entity: import("./category-registry").AnyEntity): EntityCardData {
+  return CATEGORY_REGISTRY[category].toCardData(entity);
 }

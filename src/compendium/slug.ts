@@ -6,29 +6,3 @@ export function slugFromCanonicalId(canonicalId: string): string {
 export function canonicalIdFromSlug(category: string, slug: string): string {
   return `${category}.${slug}`;
 }
-
-export function categoryLabel(category: string): string {
-  const labels: Record<string, string> = {
-    spell: "Spells",
-    condition: "Conditions",
-    equipment: "Equipment",
-    action: "Actions",
-    monster: "Monsters",
-    magicitem: "Magic Items",
-    feat: "Feats",
-  };
-  return labels[category] ?? category;
-}
-
-export function categoryLabelSingular(category: string): string {
-  const labels: Record<string, string> = {
-    spell: "Spell",
-    condition: "Condition",
-    equipment: "Equipment",
-    action: "Action",
-    monster: "Monster",
-    magicitem: "Magic Item",
-    feat: "Feat",
-  };
-  return labels[category] ?? category;
-}
