@@ -16362,6 +16362,900 @@
     "category": "monster"
   },
   {
+    "id": "xphb|ability-score-improvement",
+    "canonicalId": "feat.ability-score-improvement",
+    "name": "Ability Score Improvement",
+    "category": "feat"
+  },
+  {
+    "id": "phb|actor",
+    "canonicalId": "feat.actor",
+    "name": "Actor",
+    "category": "feat"
+  },
+  {
+    "id": "xphb|actor",
+    "canonicalId": "feat.actor",
+    "name": "Actor",
+    "category": "feat"
+  },
+  {
+    "id": "phb|alert",
+    "canonicalId": "feat.alert",
+    "name": "Alert",
+    "category": "feat"
+  },
+  {
+    "id": "xphb|alert",
+    "canonicalId": "feat.alert",
+    "name": "Alert",
+    "category": "feat"
+  },
+  {
+    "id": "xphb|archery",
+    "canonicalId": "feat.archery",
+    "name": "Archery",
+    "category": "feat"
+  },
+  {
+    "id": "tce|artificer-initiate",
+    "canonicalId": "feat.artificer-initiate",
+    "name": "Artificer Initiate",
+    "category": "feat"
+  },
+  {
+    "id": "phb|athlete",
+    "canonicalId": "feat.athlete",
+    "name": "Athlete",
+    "category": "feat"
+  },
+  {
+    "id": "xphb|athlete",
+    "canonicalId": "feat.athlete",
+    "name": "Athlete",
+    "category": "feat"
+  },
+  {
+    "id": "xphb|blessed-warrior",
+    "canonicalId": "feat.blessed-warrior",
+    "name": "Blessed Warrior",
+    "category": "feat"
+  },
+  {
+    "id": "xphb|blind-fighting",
+    "canonicalId": "feat.blind-fighting",
+    "name": "Blind Fighting",
+    "category": "feat"
+  },
+  {
+    "id": "xphb|boon-of-combat-prowess",
+    "canonicalId": "feat.boon-of-combat-prowess",
+    "name": "Boon of Combat Prowess",
+    "category": "feat"
+  },
+  {
+    "id": "xphb|boon-of-dimensional-travel",
+    "canonicalId": "feat.boon-of-dimensional-travel",
+    "name": "Boon of Dimensional Travel",
+    "category": "feat"
+  },
+  {
+    "id": "xphb|boon-of-energy-resistance",
+    "canonicalId": "feat.boon-of-energy-resistance",
+    "name": "Boon of Energy Resistance",
+    "category": "feat"
+  },
+  {
+    "id": "xphb|boon-of-fate",
+    "canonicalId": "feat.boon-of-fate",
+    "name": "Boon of Fate",
+    "category": "feat"
+  },
+  {
+    "id": "xphb|boon-of-fortitude",
+    "canonicalId": "feat.boon-of-fortitude",
+    "name": "Boon of Fortitude",
+    "category": "feat"
+  },
+  {
+    "id": "xphb|boon-of-irresistible-offense",
+    "canonicalId": "feat.boon-of-irresistible-offense",
+    "name": "Boon of Irresistible Offense",
+    "category": "feat"
+  },
+  {
+    "id": "xphb|boon-of-recovery",
+    "canonicalId": "feat.boon-of-recovery",
+    "name": "Boon of Recovery",
+    "category": "feat"
+  },
+  {
+    "id": "xphb|boon-of-skill",
+    "canonicalId": "feat.boon-of-skill",
+    "name": "Boon of Skill",
+    "category": "feat"
+  },
+  {
+    "id": "xphb|boon-of-speed",
+    "canonicalId": "feat.boon-of-speed",
+    "name": "Boon of Speed",
+    "category": "feat"
+  },
+  {
+    "id": "xphb|boon-of-spell-recall",
+    "canonicalId": "feat.boon-of-spell-recall",
+    "name": "Boon of Spell Recall",
+    "category": "feat"
+  },
+  {
+    "id": "xphb|boon-of-the-night-spirit",
+    "canonicalId": "feat.boon-of-the-night-spirit",
+    "name": "Boon of the Night Spirit",
+    "category": "feat"
+  },
+  {
+    "id": "xphb|boon-of-truesight",
+    "canonicalId": "feat.boon-of-truesight",
+    "name": "Boon of Truesight",
+    "category": "feat"
+  },
+  {
+    "id": "xge|bountiful-luck",
+    "canonicalId": "feat.bountiful-luck",
+    "name": "Bountiful Luck",
+    "category": "feat"
+  },
+  {
+    "id": "phb|charger",
+    "canonicalId": "feat.charger",
+    "name": "Charger",
+    "category": "feat"
+  },
+  {
+    "id": "xphb|charger",
+    "canonicalId": "feat.charger",
+    "name": "Charger",
+    "category": "feat"
+  },
+  {
+    "id": "tce|chef",
+    "canonicalId": "feat.chef",
+    "name": "Chef",
+    "category": "feat"
+  },
+  {
+    "id": "xphb|chef",
+    "canonicalId": "feat.chef",
+    "name": "Chef",
+    "category": "feat"
+  },
+  {
+    "id": "xphb|crafter",
+    "canonicalId": "feat.crafter",
+    "name": "Crafter",
+    "category": "feat"
+  },
+  {
+    "id": "phb|crossbow-expert",
+    "canonicalId": "feat.crossbow-expert",
+    "name": "Crossbow Expert",
+    "category": "feat"
+  },
+  {
+    "id": "xphb|crossbow-expert",
+    "canonicalId": "feat.crossbow-expert",
+    "name": "Crossbow Expert",
+    "category": "feat"
+  },
+  {
+    "id": "tce|crusher",
+    "canonicalId": "feat.crusher",
+    "name": "Crusher",
+    "category": "feat"
+  },
+  {
+    "id": "xphb|crusher",
+    "canonicalId": "feat.crusher",
+    "name": "Crusher",
+    "category": "feat"
+  },
+  {
+    "id": "xphb|defense",
+    "canonicalId": "feat.defense",
+    "name": "Defense",
+    "category": "feat"
+  },
+  {
+    "id": "phb|defensive-duelist",
+    "canonicalId": "feat.defensive-duelist",
+    "name": "Defensive Duelist",
+    "category": "feat"
+  },
+  {
+    "id": "xphb|defensive-duelist",
+    "canonicalId": "feat.defensive-duelist",
+    "name": "Defensive Duelist",
+    "category": "feat"
+  },
+  {
+    "id": "xge|dragon-fear",
+    "canonicalId": "feat.dragon-fear",
+    "name": "Dragon Fear",
+    "category": "feat"
+  },
+  {
+    "id": "xge|dragon-hide",
+    "canonicalId": "feat.dragon-hide",
+    "name": "Dragon Hide",
+    "category": "feat"
+  },
+  {
+    "id": "xge|drow-high-magic",
+    "canonicalId": "feat.drow-high-magic",
+    "name": "Drow High Magic",
+    "category": "feat"
+  },
+  {
+    "id": "xphb|druidic-warrior",
+    "canonicalId": "feat.druidic-warrior",
+    "name": "Druidic Warrior",
+    "category": "feat"
+  },
+  {
+    "id": "phb|dual-wielder",
+    "canonicalId": "feat.dual-wielder",
+    "name": "Dual Wielder",
+    "category": "feat"
+  },
+  {
+    "id": "xphb|dual-wielder",
+    "canonicalId": "feat.dual-wielder",
+    "name": "Dual Wielder",
+    "category": "feat"
+  },
+  {
+    "id": "xphb|dueling",
+    "canonicalId": "feat.dueling",
+    "name": "Dueling",
+    "category": "feat"
+  },
+  {
+    "id": "phb|dungeon-delver",
+    "canonicalId": "feat.dungeon-delver",
+    "name": "Dungeon Delver",
+    "category": "feat"
+  },
+  {
+    "id": "phb|durable",
+    "canonicalId": "feat.durable",
+    "name": "Durable",
+    "category": "feat"
+  },
+  {
+    "id": "xphb|durable",
+    "canonicalId": "feat.durable",
+    "name": "Durable",
+    "category": "feat"
+  },
+  {
+    "id": "xge|dwarven-fortitude",
+    "canonicalId": "feat.dwarven-fortitude",
+    "name": "Dwarven Fortitude",
+    "category": "feat"
+  },
+  {
+    "id": "tce|eldritch-adept",
+    "canonicalId": "feat.eldritch-adept",
+    "name": "Eldritch Adept",
+    "category": "feat"
+  },
+  {
+    "id": "phb|elemental-adept",
+    "canonicalId": "feat.elemental-adept",
+    "name": "Elemental Adept",
+    "category": "feat"
+  },
+  {
+    "id": "xphb|elemental-adept",
+    "canonicalId": "feat.elemental-adept",
+    "name": "Elemental Adept",
+    "category": "feat"
+  },
+  {
+    "id": "xge|elven-accuracy",
+    "canonicalId": "feat.elven-accuracy",
+    "name": "Elven Accuracy",
+    "category": "feat"
+  },
+  {
+    "id": "xge|fade-away",
+    "canonicalId": "feat.fade-away",
+    "name": "Fade Away",
+    "category": "feat"
+  },
+  {
+    "id": "xge|fey-teleportation",
+    "canonicalId": "feat.fey-teleportation",
+    "name": "Fey Teleportation",
+    "category": "feat"
+  },
+  {
+    "id": "tce|fey-touched",
+    "canonicalId": "feat.fey-touched",
+    "name": "Fey Touched",
+    "category": "feat"
+  },
+  {
+    "id": "xphb|fey-touched",
+    "canonicalId": "feat.fey-touched",
+    "name": "Fey-Touched",
+    "category": "feat"
+  },
+  {
+    "id": "tce|fighting-initiate",
+    "canonicalId": "feat.fighting-initiate",
+    "name": "Fighting Initiate",
+    "category": "feat"
+  },
+  {
+    "id": "xge|flames-of-phlegethos",
+    "canonicalId": "feat.flames-of-phlegethos",
+    "name": "Flames of Phlegethos",
+    "category": "feat"
+  },
+  {
+    "id": "phb|grappler",
+    "canonicalId": "feat.grappler",
+    "name": "Grappler",
+    "category": "feat"
+  },
+  {
+    "id": "xphb|grappler",
+    "canonicalId": "feat.grappler",
+    "name": "Grappler",
+    "category": "feat"
+  },
+  {
+    "id": "xphb|great-weapon-fighting",
+    "canonicalId": "feat.great-weapon-fighting",
+    "name": "Great Weapon Fighting",
+    "category": "feat"
+  },
+  {
+    "id": "phb|great-weapon-master",
+    "canonicalId": "feat.great-weapon-master",
+    "name": "Great Weapon Master",
+    "category": "feat"
+  },
+  {
+    "id": "xphb|great-weapon-master",
+    "canonicalId": "feat.great-weapon-master",
+    "name": "Great Weapon Master",
+    "category": "feat"
+  },
+  {
+    "id": "tce|gunner",
+    "canonicalId": "feat.gunner",
+    "name": "Gunner",
+    "category": "feat"
+  },
+  {
+    "id": "phb|healer",
+    "canonicalId": "feat.healer",
+    "name": "Healer",
+    "category": "feat"
+  },
+  {
+    "id": "xphb|healer",
+    "canonicalId": "feat.healer",
+    "name": "Healer",
+    "category": "feat"
+  },
+  {
+    "id": "phb|heavily-armored",
+    "canonicalId": "feat.heavily-armored",
+    "name": "Heavily Armored",
+    "category": "feat"
+  },
+  {
+    "id": "xphb|heavily-armored",
+    "canonicalId": "feat.heavily-armored",
+    "name": "Heavily Armored",
+    "category": "feat"
+  },
+  {
+    "id": "phb|heavy-armor-master",
+    "canonicalId": "feat.heavy-armor-master",
+    "name": "Heavy Armor Master",
+    "category": "feat"
+  },
+  {
+    "id": "xphb|heavy-armor-master",
+    "canonicalId": "feat.heavy-armor-master",
+    "name": "Heavy Armor Master",
+    "category": "feat"
+  },
+  {
+    "id": "xge|infernal-constitution",
+    "canonicalId": "feat.infernal-constitution",
+    "name": "Infernal Constitution",
+    "category": "feat"
+  },
+  {
+    "id": "phb|inspiring-leader",
+    "canonicalId": "feat.inspiring-leader",
+    "name": "Inspiring Leader",
+    "category": "feat"
+  },
+  {
+    "id": "xphb|inspiring-leader",
+    "canonicalId": "feat.inspiring-leader",
+    "name": "Inspiring Leader",
+    "category": "feat"
+  },
+  {
+    "id": "xphb|interception",
+    "canonicalId": "feat.interception",
+    "name": "Interception",
+    "category": "feat"
+  },
+  {
+    "id": "phb|keen-mind",
+    "canonicalId": "feat.keen-mind",
+    "name": "Keen Mind",
+    "category": "feat"
+  },
+  {
+    "id": "xphb|keen-mind",
+    "canonicalId": "feat.keen-mind",
+    "name": "Keen Mind",
+    "category": "feat"
+  },
+  {
+    "id": "phb|lightly-armored",
+    "canonicalId": "feat.lightly-armored",
+    "name": "Lightly Armored",
+    "category": "feat"
+  },
+  {
+    "id": "xphb|lightly-armored",
+    "canonicalId": "feat.lightly-armored",
+    "name": "Lightly Armored",
+    "category": "feat"
+  },
+  {
+    "id": "phb|linguist",
+    "canonicalId": "feat.linguist",
+    "name": "Linguist",
+    "category": "feat"
+  },
+  {
+    "id": "phb|lucky",
+    "canonicalId": "feat.lucky",
+    "name": "Lucky",
+    "category": "feat"
+  },
+  {
+    "id": "xphb|lucky",
+    "canonicalId": "feat.lucky",
+    "name": "Lucky",
+    "category": "feat"
+  },
+  {
+    "id": "phb|mage-slayer",
+    "canonicalId": "feat.mage-slayer",
+    "name": "Mage Slayer",
+    "category": "feat"
+  },
+  {
+    "id": "xphb|mage-slayer",
+    "canonicalId": "feat.mage-slayer",
+    "name": "Mage Slayer",
+    "category": "feat"
+  },
+  {
+    "id": "phb|magic-initiate",
+    "canonicalId": "feat.magic-initiate",
+    "name": "Magic Initiate",
+    "category": "feat"
+  },
+  {
+    "id": "xphb|magic-initiate",
+    "canonicalId": "feat.magic-initiate",
+    "name": "Magic Initiate",
+    "category": "feat"
+  },
+  {
+    "id": "phb|martial-adept",
+    "canonicalId": "feat.martial-adept",
+    "name": "Martial Adept",
+    "category": "feat"
+  },
+  {
+    "id": "xphb|martial-weapon-training",
+    "canonicalId": "feat.martial-weapon-training",
+    "name": "Martial Weapon Training",
+    "category": "feat"
+  },
+  {
+    "id": "phb|medium-armor-master",
+    "canonicalId": "feat.medium-armor-master",
+    "name": "Medium Armor Master",
+    "category": "feat"
+  },
+  {
+    "id": "xphb|medium-armor-master",
+    "canonicalId": "feat.medium-armor-master",
+    "name": "Medium Armor Master",
+    "category": "feat"
+  },
+  {
+    "id": "tce|metamagic-adept",
+    "canonicalId": "feat.metamagic-adept",
+    "name": "Metamagic Adept",
+    "category": "feat"
+  },
+  {
+    "id": "phb|mobile",
+    "canonicalId": "feat.mobile",
+    "name": "Mobile",
+    "category": "feat"
+  },
+  {
+    "id": "phb|moderately-armored",
+    "canonicalId": "feat.moderately-armored",
+    "name": "Moderately Armored",
+    "category": "feat"
+  },
+  {
+    "id": "xphb|moderately-armored",
+    "canonicalId": "feat.moderately-armored",
+    "name": "Moderately Armored",
+    "category": "feat"
+  },
+  {
+    "id": "phb|mounted-combatant",
+    "canonicalId": "feat.mounted-combatant",
+    "name": "Mounted Combatant",
+    "category": "feat"
+  },
+  {
+    "id": "xphb|mounted-combatant",
+    "canonicalId": "feat.mounted-combatant",
+    "name": "Mounted Combatant",
+    "category": "feat"
+  },
+  {
+    "id": "xphb|musician",
+    "canonicalId": "feat.musician",
+    "name": "Musician",
+    "category": "feat"
+  },
+  {
+    "id": "phb|observant",
+    "canonicalId": "feat.observant",
+    "name": "Observant",
+    "category": "feat"
+  },
+  {
+    "id": "xphb|observant",
+    "canonicalId": "feat.observant",
+    "name": "Observant",
+    "category": "feat"
+  },
+  {
+    "id": "xge|orcish-fury",
+    "canonicalId": "feat.orcish-fury",
+    "name": "Orcish Fury",
+    "category": "feat"
+  },
+  {
+    "id": "tce|piercer",
+    "canonicalId": "feat.piercer",
+    "name": "Piercer",
+    "category": "feat"
+  },
+  {
+    "id": "xphb|piercer",
+    "canonicalId": "feat.piercer",
+    "name": "Piercer",
+    "category": "feat"
+  },
+  {
+    "id": "tce|poisoner",
+    "canonicalId": "feat.poisoner",
+    "name": "Poisoner",
+    "category": "feat"
+  },
+  {
+    "id": "xphb|poisoner",
+    "canonicalId": "feat.poisoner",
+    "name": "Poisoner",
+    "category": "feat"
+  },
+  {
+    "id": "phb|polearm-master",
+    "canonicalId": "feat.polearm-master",
+    "name": "Polearm Master",
+    "category": "feat"
+  },
+  {
+    "id": "xphb|polearm-master",
+    "canonicalId": "feat.polearm-master",
+    "name": "Polearm Master",
+    "category": "feat"
+  },
+  {
+    "id": "xge|prodigy",
+    "canonicalId": "feat.prodigy",
+    "name": "Prodigy",
+    "category": "feat"
+  },
+  {
+    "id": "xphb|protection",
+    "canonicalId": "feat.protection",
+    "name": "Protection",
+    "category": "feat"
+  },
+  {
+    "id": "phb|resilient",
+    "canonicalId": "feat.resilient",
+    "name": "Resilient",
+    "category": "feat"
+  },
+  {
+    "id": "xphb|resilient",
+    "canonicalId": "feat.resilient",
+    "name": "Resilient",
+    "category": "feat"
+  },
+  {
+    "id": "phb|ritual-caster",
+    "canonicalId": "feat.ritual-caster",
+    "name": "Ritual Caster",
+    "category": "feat"
+  },
+  {
+    "id": "xphb|ritual-caster",
+    "canonicalId": "feat.ritual-caster",
+    "name": "Ritual Caster",
+    "category": "feat"
+  },
+  {
+    "id": "phb|savage-attacker",
+    "canonicalId": "feat.savage-attacker",
+    "name": "Savage Attacker",
+    "category": "feat"
+  },
+  {
+    "id": "xphb|savage-attacker",
+    "canonicalId": "feat.savage-attacker",
+    "name": "Savage Attacker",
+    "category": "feat"
+  },
+  {
+    "id": "xge|second-chance",
+    "canonicalId": "feat.second-chance",
+    "name": "Second Chance",
+    "category": "feat"
+  },
+  {
+    "id": "phb|sentinel",
+    "canonicalId": "feat.sentinel",
+    "name": "Sentinel",
+    "category": "feat"
+  },
+  {
+    "id": "xphb|sentinel",
+    "canonicalId": "feat.sentinel",
+    "name": "Sentinel",
+    "category": "feat"
+  },
+  {
+    "id": "tce|shadow-touched",
+    "canonicalId": "feat.shadow-touched",
+    "name": "Shadow Touched",
+    "category": "feat"
+  },
+  {
+    "id": "xphb|shadow-touched",
+    "canonicalId": "feat.shadow-touched",
+    "name": "Shadow-Touched",
+    "category": "feat"
+  },
+  {
+    "id": "phb|sharpshooter",
+    "canonicalId": "feat.sharpshooter",
+    "name": "Sharpshooter",
+    "category": "feat"
+  },
+  {
+    "id": "xphb|sharpshooter",
+    "canonicalId": "feat.sharpshooter",
+    "name": "Sharpshooter",
+    "category": "feat"
+  },
+  {
+    "id": "phb|shield-master",
+    "canonicalId": "feat.shield-master",
+    "name": "Shield Master",
+    "category": "feat"
+  },
+  {
+    "id": "xphb|shield-master",
+    "canonicalId": "feat.shield-master",
+    "name": "Shield Master",
+    "category": "feat"
+  },
+  {
+    "id": "tce|skill-expert",
+    "canonicalId": "feat.skill-expert",
+    "name": "Skill Expert",
+    "category": "feat"
+  },
+  {
+    "id": "xphb|skill-expert",
+    "canonicalId": "feat.skill-expert",
+    "name": "Skill Expert",
+    "category": "feat"
+  },
+  {
+    "id": "phb|skilled",
+    "canonicalId": "feat.skilled",
+    "name": "Skilled",
+    "category": "feat"
+  },
+  {
+    "id": "xphb|skilled",
+    "canonicalId": "feat.skilled",
+    "name": "Skilled",
+    "category": "feat"
+  },
+  {
+    "id": "phb|skulker",
+    "canonicalId": "feat.skulker",
+    "name": "Skulker",
+    "category": "feat"
+  },
+  {
+    "id": "xphb|skulker",
+    "canonicalId": "feat.skulker",
+    "name": "Skulker",
+    "category": "feat"
+  },
+  {
+    "id": "tce|slasher",
+    "canonicalId": "feat.slasher",
+    "name": "Slasher",
+    "category": "feat"
+  },
+  {
+    "id": "xphb|slasher",
+    "canonicalId": "feat.slasher",
+    "name": "Slasher",
+    "category": "feat"
+  },
+  {
+    "id": "xphb|speedy",
+    "canonicalId": "feat.speedy",
+    "name": "Speedy",
+    "category": "feat"
+  },
+  {
+    "id": "phb|spell-sniper",
+    "canonicalId": "feat.spell-sniper",
+    "name": "Spell Sniper",
+    "category": "feat"
+  },
+  {
+    "id": "xphb|spell-sniper",
+    "canonicalId": "feat.spell-sniper",
+    "name": "Spell Sniper",
+    "category": "feat"
+  },
+  {
+    "id": "xge|squat-nimbleness",
+    "canonicalId": "feat.squat-nimbleness",
+    "name": "Squat Nimbleness",
+    "category": "feat"
+  },
+  {
+    "id": "phb|tavern-brawler",
+    "canonicalId": "feat.tavern-brawler",
+    "name": "Tavern Brawler",
+    "category": "feat"
+  },
+  {
+    "id": "xphb|tavern-brawler",
+    "canonicalId": "feat.tavern-brawler",
+    "name": "Tavern Brawler",
+    "category": "feat"
+  },
+  {
+    "id": "tce|telekinetic",
+    "canonicalId": "feat.telekinetic",
+    "name": "Telekinetic",
+    "category": "feat"
+  },
+  {
+    "id": "xphb|telekinetic",
+    "canonicalId": "feat.telekinetic",
+    "name": "Telekinetic",
+    "category": "feat"
+  },
+  {
+    "id": "tce|telepathic",
+    "canonicalId": "feat.telepathic",
+    "name": "Telepathic",
+    "category": "feat"
+  },
+  {
+    "id": "xphb|telepathic",
+    "canonicalId": "feat.telepathic",
+    "name": "Telepathic",
+    "category": "feat"
+  },
+  {
+    "id": "xphb|thrown-weapon-fighting",
+    "canonicalId": "feat.thrown-weapon-fighting",
+    "name": "Thrown Weapon Fighting",
+    "category": "feat"
+  },
+  {
+    "id": "phb|tough",
+    "canonicalId": "feat.tough",
+    "name": "Tough",
+    "category": "feat"
+  },
+  {
+    "id": "xphb|tough",
+    "canonicalId": "feat.tough",
+    "name": "Tough",
+    "category": "feat"
+  },
+  {
+    "id": "xphb|two-weapon-fighting",
+    "canonicalId": "feat.two-weapon-fighting",
+    "name": "Two-Weapon Fighting",
+    "category": "feat"
+  },
+  {
+    "id": "xphb|unarmed-fighting",
+    "canonicalId": "feat.unarmed-fighting",
+    "name": "Unarmed Fighting",
+    "category": "feat"
+  },
+  {
+    "id": "phb|war-caster",
+    "canonicalId": "feat.war-caster",
+    "name": "War Caster",
+    "category": "feat"
+  },
+  {
+    "id": "xphb|war-caster",
+    "canonicalId": "feat.war-caster",
+    "name": "War Caster",
+    "category": "feat"
+  },
+  {
+    "id": "phb|weapon-master",
+    "canonicalId": "feat.weapon-master",
+    "name": "Weapon Master",
+    "category": "feat"
+  },
+  {
+    "id": "xphb|weapon-master",
+    "canonicalId": "feat.weapon-master",
+    "name": "Weapon Master",
+    "category": "feat"
+  },
+  {
+    "id": "xge|wood-elf-magic",
+    "canonicalId": "feat.wood-elf-magic",
+    "name": "Wood Elf Magic",
+    "category": "feat"
+  },
+  {
     "id": "tce|1-all-purpose-tool",
     "canonicalId": "magicitem.1-all-purpose-tool",
     "name": "+1 All-Purpose Tool",

@@ -6,6 +6,7 @@ import type {
   Condition,
   Action,
   MagicItem,
+  Feat,
 } from "@/types/compendium";
 import type { EntityCardData } from "@/features/compendium/components/entity-card";
 import type { FilterDefinition } from "@/features/compendium/components/filter-bar";
@@ -16,11 +17,12 @@ import {
   getConditions,
   getActions,
   getMagicItems,
+  getFeats,
 } from "./repository";
 import { slugFromCanonicalId, categoryLabelSingular } from "./slug";
 import { formatSource } from "./source";
 
-export type AnyEntity = Spell | Monster | Equipment | Condition | Action | MagicItem;
+export type AnyEntity = Spell | Monster | Equipment | Condition | Action | MagicItem | Feat;
 
 export function formatMonsterType(monster: Monster): string {
   const base = monster.monsterType;
@@ -66,6 +68,8 @@ export function getEntitiesForCategory(category: EntityCategory): readonly AnyEn
       return getActions();
     case "magicitem":
       return getMagicItems();
+    case "feat":
+      return getFeats();
   }
 }
 
@@ -213,6 +217,38 @@ export function buildFilterDefs(
         },
       ];
     }
+    case "feat": {
+      const feats = entities as readonly Feat[];
+      return [
+        {
+          key: "prerequisite",
+          label: "Prerequisite",
+          options: [
+            { value: "", label: "All" },
+            { value: "yes", label: "Has Prerequisite" },
+            { value: "none", label: "No Prerequisite" },
+          ],
+        },
+        {
+          key: "repeatable",
+          label: "Repeatable",
+          options: [
+            { value: "", label: "All" },
+            { value: "yes", label: "Repeatable" },
+            { value: "no", label: "Not Repeatable" },
+          ],
+        },
+        {
+          key: "source",
+          label: "Source",
+          options: buildOptions(
+            collectUnique(feats, (e) => e.source),
+            {},
+            formatSource,
+          ),
+        },
+      ];
+    }
     case "condition":
     case "action":
       return [
@@ -265,6 +301,14 @@ export function applyFilters(
         case "attunement":
           if (value === "required" && !(entity as MagicItem).requiresAttunement) return false;
           if (value === "none" && (entity as MagicItem).requiresAttunement !== "") return false;
+          break;
+        case "prerequisite":
+          if (value === "yes" && !(entity as Feat).prerequisite) return false;
+          if (value === "none" && (entity as Feat).prerequisite) return false;
+          break;
+        case "repeatable":
+          if (value === "yes" && !(entity as Feat).repeatable) return false;
+          if (value === "no" && (entity as Feat).repeatable) return false;
           break;
         case "source":
           if (entity.source !== value) return false;
@@ -321,6 +365,17 @@ export function toCardData(category: EntityCategory, entity: AnyEntity): EntityC
         categoryLabel: label,
         metadata: `${magic.rarity}${attunement}`,
         source: magic.source,
+      };
+    }
+    case "feat": {
+      const feat = entity as Feat;
+      const meta = feat.featCategory ? feat.featCategory : "";
+      return {
+        name: feat.name,
+        href,
+        categoryLabel: label,
+        metadata: meta,
+        source: feat.source,
       };
     }
     case "condition":

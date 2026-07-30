@@ -8,6 +8,7 @@ import type {
   Condition,
   Action,
   MagicItem,
+  Feat,
 } from "../../src/types/compendium";
 
 const SCHOOL_NAMES: Record<string, string> = {
@@ -184,6 +185,17 @@ function extractActionTags(entity: Action): string[] {
   return tags;
 }
 
+function extractFeatTags(entity: Feat): string[] {
+  const tags: string[] = [];
+  if (entity.featCategory) tags.push(entity.featCategory);
+  if (entity.prerequisite) tags.push("Prerequisite");
+  if (entity.repeatable) tags.push("Repeatable");
+  const bodyText = textFromBlocks(entity.description);
+  tags.push(...extractKeywords(bodyText, DAMAGE_KEYWORDS));
+  tags.push(...extractKeywords(bodyText, THEMATIC_KEYWORDS));
+  return tags;
+}
+
 function extractMagicItemTags(entity: MagicItem): string[] {
   const tags: string[] = [];
   tags.push(entity.rarity);
@@ -209,6 +221,8 @@ function extractTags(entity: CompendiumEntry): string[] {
       return extractActionTags(entity as Action);
     case "magicitem":
       return extractMagicItemTags(entity as MagicItem);
+    case "feat":
+      return extractFeatTags(entity as Feat);
   }
 }
 
@@ -248,6 +262,16 @@ function equipmentScoring(a: Equipment, b: Equipment, _tagsA: string[], _tagsB: 
   let score = 0;
   if (a.type === b.type) score += 4;
   if (a.damageType && b.damageType && a.damageType === b.damageType) score += 2;
+  if (a.source === b.source) score += 1;
+  return score;
+}
+
+function featScoring(a: Feat, b: Feat, tagsA: string[], tagsB: string[]): number {
+  let score = 0;
+  if (a.featCategory && b.featCategory && a.featCategory === b.featCategory) score += 3;
+  if (a.repeatable === b.repeatable) score += 2;
+  const sharedTags = tagsA.filter((t) => tagsB.includes(t));
+  score += Math.min(sharedTags.length, 2);
   if (a.source === b.source) score += 1;
   return score;
 }
@@ -294,6 +318,8 @@ function computeSimilarity(
       return conditionScoring(a as Condition, b as Condition, tagsA, tagsB);
     case "magicitem":
       return magicItemScoring(a as MagicItem, b as MagicItem, tagsA, tagsB);
+    case "feat":
+      return featScoring(a as Feat, b as Feat, tagsA, tagsB);
     case "action":
       return 0;
   }
@@ -371,8 +397,9 @@ function collectDescriptionBlocks(entity: CompendiumEntry): readonly ContentBloc
     case "condition":
     case "equipment":
     case "action":
-    case "magicitem": {
-      const e = entity as Condition | Equipment | Action | MagicItem;
+    case "magicitem":
+    case "feat": {
+      const e = entity as Condition | Equipment | Action | MagicItem | Feat;
       blocks.push(...e.description);
       break;
     }

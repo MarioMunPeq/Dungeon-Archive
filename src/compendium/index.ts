@@ -7,6 +7,7 @@ export {
   getAction,
   getMonster,
   getMagicItem,
+  getFeat,
   getEntity,
   getSpells,
   getConditions,
@@ -14,6 +15,7 @@ export {
   getActions,
   getMonsters,
   getMagicItems,
+  getFeats,
   getCategoryCount,
   isInitialized,
 } from "./repository";
@@ -65,6 +67,7 @@ export type {
   Action,
   Monster,
   MagicItem,
+  Feat,
   SearchIndexEntry,
   CompendiumEntry,
   EntityCategory,

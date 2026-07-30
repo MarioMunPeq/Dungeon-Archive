@@ -5,6 +5,7 @@ import type {
   Action,
   Monster,
   MagicItem,
+  Feat,
   SearchIndexEntry,
   EntityVersion,
 } from "@/compendium";
@@ -71,7 +72,7 @@ function computeMatchScore(name: string, query: string): number {
   return 0;
 }
 
-function getSubtitle(entity: Spell | Condition | Equipment | Action | Monster | MagicItem): string {
+function getSubtitle(entity: Spell | Condition | Equipment | Action | Monster | MagicItem | Feat): string {
   const category = categoryLabelSingular(entity.category);
 
   switch (entity.category) {
@@ -94,6 +95,13 @@ function getSubtitle(entity: Spell | Condition | Equipment | Action | Monster | 
       const attune = magic.requiresAttunement ? " \u00B7 Requires Attunement" : "";
       return `${category} \u00B7 ${magic.rarity}${attune} \u00B7 ${formatSource(magic.source)}`;
     }
+    case "feat": {
+      const feat = entity as Feat;
+      const prereq = feat.prerequisite ? `Prerequisite: ${feat.prerequisite}` : undefined;
+      const repeatable = feat.repeatable ? "Repeatable" : undefined;
+      const extras = [prereq, repeatable].filter(Boolean).join(" \u00B7 ");
+      return extras ? `${category} \u00B7 ${extras} \u00B7 ${formatSource(feat.source)}` : `${category} \u00B7 ${formatSource(feat.source)}`;
+    }
     case "condition":
       return `${category} \u00B7 ${formatSource(entity.source)}`;
     case "action":
@@ -102,7 +110,7 @@ function getSubtitle(entity: Spell | Condition | Equipment | Action | Monster | 
 }
 
 export function getEntityDisplayInfo(
-  entity: Spell | Condition | Equipment | Action | Monster | MagicItem,
+  entity: Spell | Condition | Equipment | Action | Monster | MagicItem | Feat,
 ): EntityDisplayInfo {
   return {
     title: entity.name,
@@ -116,7 +124,7 @@ export function createSearchResultItems(
 ): readonly SearchResultItem[] {
   const enriched: {
     entry: SearchIndexEntry;
-    entity: Spell | Condition | Equipment | Action | Monster | MagicItem;
+    entity: Spell | Condition | Equipment | Action | Monster | MagicItem | Feat;
   }[] = [];
 
   for (const entry of entries) {

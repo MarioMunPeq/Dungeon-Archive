@@ -32511,6 +32511,1765 @@
     ],
     "references": []
   },
+  "feat.ability-score-improvement": {
+    "tags": [
+      "General",
+      "Prerequisite",
+      "Repeatable"
+    ],
+    "related": [
+      "feat.elemental-adept",
+      "feat.actor",
+      "feat.athlete",
+      "feat.charger",
+      "feat.chef",
+      "feat.crossbow-expert",
+      "feat.crusher",
+      "feat.defensive-duelist"
+    ],
+    "references": []
+  },
+  "feat.actor": {
+    "tags": [
+      "General",
+      "Prerequisite"
+    ],
+    "related": [
+      "feat.athlete",
+      "feat.charger",
+      "feat.chef",
+      "feat.crossbow-expert",
+      "feat.crusher",
+      "feat.defensive-duelist",
+      "feat.dual-wielder",
+      "feat.durable"
+    ],
+    "references": []
+  },
+  "feat.alert": {
+    "tags": [
+      "Origin"
+    ],
+    "related": [
+      "feat.crafter",
+      "feat.healer",
+      "feat.lucky",
+      "feat.musician",
+      "feat.savage-attacker",
+      "feat.tavern-brawler",
+      "feat.tough",
+      "feat.magic-initiate"
+    ],
+    "references": []
+  },
+  "feat.archery": {
+    "tags": [
+      "Fighting Style",
+      "Attack"
+    ],
+    "related": [
+      "feat.great-weapon-fighting",
+      "feat.interception",
+      "feat.protection",
+      "feat.thrown-weapon-fighting",
+      "feat.two-weapon-fighting",
+      "feat.unarmed-fighting",
+      "feat.blessed-warrior",
+      "feat.blind-fighting"
+    ],
+    "references": []
+  },
+  "feat.artificer-initiate": {
+    "tags": [],
+    "related": [
+      "feat.eldritch-adept",
+      "feat.fighting-initiate",
+      "feat.gunner",
+      "feat.metamagic-adept",
+      "feat.actor",
+      "feat.alert",
+      "feat.archery",
+      "feat.athlete"
+    ],
+    "references": []
+  },
+  "feat.athlete": {
+    "tags": [
+      "General",
+      "Prerequisite",
+      "Movement"
+    ],
+    "related": [
+      "feat.actor",
+      "feat.charger",
+      "feat.chef",
+      "feat.crossbow-expert",
+      "feat.crusher",
+      "feat.defensive-duelist",
+      "feat.dual-wielder",
+      "feat.durable"
+    ],
+    "references": []
+  },
+  "feat.blessed-warrior": {
+    "tags": [
+      "Fighting Style"
+    ],
+    "related": [
+      "feat.archery",
+      "feat.blind-fighting",
+      "feat.defense",
+      "feat.druidic-warrior",
+      "feat.dueling",
+      "feat.great-weapon-fighting",
+      "feat.interception",
+      "feat.protection"
+    ],
+    "references": []
+  },
+  "feat.blind-fighting": {
+    "tags": [
+      "Fighting Style"
+    ],
+    "related": [
+      "feat.archery",
+      "feat.blessed-warrior",
+      "feat.defense",
+      "feat.druidic-warrior",
+      "feat.dueling",
+      "feat.great-weapon-fighting",
+      "feat.interception",
+      "feat.protection"
+    ],
+    "references": []
+  },
+  "feat.boon-of-combat-prowess": {
+    "tags": [
+      "Epic Boon",
+      "Prerequisite",
+      "Attack"
+    ],
+    "related": [
+      "feat.boon-of-dimensional-travel",
+      "feat.boon-of-energy-resistance",
+      "feat.boon-of-fate",
+      "feat.boon-of-fortitude",
+      "feat.boon-of-irresistible-offense",
+      "feat.boon-of-recovery",
+      "feat.boon-of-skill",
+      "feat.boon-of-speed"
+    ],
+    "references": []
+  },
+  "feat.boon-of-dimensional-travel": {
+    "tags": [
+      "Epic Boon",
+      "Prerequisite",
+      "Attack",
+      "Teleport"
+    ],
+    "related": [
+      "feat.boon-of-combat-prowess",
+      "feat.boon-of-energy-resistance",
+      "feat.boon-of-fate",
+      "feat.boon-of-fortitude",
+      "feat.boon-of-irresistible-offense",
+      "feat.boon-of-recovery",
+      "feat.boon-of-skill",
+      "feat.boon-of-speed"
+    ],
+    "references": []
+  },
+  "feat.boon-of-energy-resistance": {
+    "tags": [
+      "Epic Boon",
+      "Prerequisite",
+      "Acid",
+      "Cold",
+      "Fire",
+      "Lightning",
+      "Necrotic",
+      "Poison",
+      "Psychic",
+      "Radiant",
+      "Thunder",
+      "Damage"
+    ],
+    "related": [
+      "feat.boon-of-combat-prowess",
+      "feat.boon-of-dimensional-travel",
+      "feat.boon-of-fate",
+      "feat.boon-of-fortitude",
+      "feat.boon-of-irresistible-offense",
+      "feat.boon-of-recovery",
+      "feat.boon-of-skill",
+      "feat.boon-of-speed"
+    ],
+    "references": []
+  },
+  "feat.boon-of-fate": {
+    "tags": [
+      "Epic Boon",
+      "Prerequisite"
+    ],
+    "related": [
+      "feat.boon-of-combat-prowess",
+      "feat.boon-of-dimensional-travel",
+      "feat.boon-of-energy-resistance",
+      "feat.boon-of-fortitude",
+      "feat.boon-of-irresistible-offense",
+      "feat.boon-of-recovery",
+      "feat.boon-of-skill",
+      "feat.boon-of-speed"
+    ],
+    "references": []
+  },
+  "feat.boon-of-fortitude": {
+    "tags": [
+      "Epic Boon",
+      "Prerequisite"
+    ],
+    "related": [
+      "feat.boon-of-combat-prowess",
+      "feat.boon-of-dimensional-travel",
+      "feat.boon-of-energy-resistance",
+      "feat.boon-of-fate",
+      "feat.boon-of-irresistible-offense",
+      "feat.boon-of-recovery",
+      "feat.boon-of-skill",
+      "feat.boon-of-speed"
+    ],
+    "references": []
+  },
+  "feat.boon-of-irresistible-offense": {
+    "tags": [
+      "Epic Boon",
+      "Prerequisite",
+      "Bludgeoning",
+      "Piercing",
+      "Slashing",
+      "Attack",
+      "Damage"
+    ],
+    "related": [
+      "feat.boon-of-combat-prowess",
+      "feat.boon-of-dimensional-travel",
+      "feat.boon-of-energy-resistance",
+      "feat.boon-of-fate",
+      "feat.boon-of-fortitude",
+      "feat.boon-of-recovery",
+      "feat.boon-of-skill",
+      "feat.boon-of-speed"
+    ],
+    "references": []
+  },
+  "feat.boon-of-recovery": {
+    "tags": [
+      "Epic Boon",
+      "Prerequisite"
+    ],
+    "related": [
+      "feat.boon-of-combat-prowess",
+      "feat.boon-of-dimensional-travel",
+      "feat.boon-of-energy-resistance",
+      "feat.boon-of-fate",
+      "feat.boon-of-fortitude",
+      "feat.boon-of-irresistible-offense",
+      "feat.boon-of-skill",
+      "feat.boon-of-speed"
+    ],
+    "references": []
+  },
+  "feat.boon-of-skill": {
+    "tags": [
+      "Epic Boon",
+      "Prerequisite"
+    ],
+    "related": [
+      "feat.boon-of-combat-prowess",
+      "feat.boon-of-dimensional-travel",
+      "feat.boon-of-energy-resistance",
+      "feat.boon-of-fate",
+      "feat.boon-of-fortitude",
+      "feat.boon-of-irresistible-offense",
+      "feat.boon-of-recovery",
+      "feat.boon-of-speed"
+    ],
+    "references": []
+  },
+  "feat.boon-of-speed": {
+    "tags": [
+      "Epic Boon",
+      "Prerequisite"
+    ],
+    "related": [
+      "feat.boon-of-combat-prowess",
+      "feat.boon-of-dimensional-travel",
+      "feat.boon-of-energy-resistance",
+      "feat.boon-of-fate",
+      "feat.boon-of-fortitude",
+      "feat.boon-of-irresistible-offense",
+      "feat.boon-of-recovery",
+      "feat.boon-of-skill"
+    ],
+    "references": []
+  },
+  "feat.boon-of-spell-recall": {
+    "tags": [
+      "Epic Boon",
+      "Prerequisite"
+    ],
+    "related": [
+      "feat.boon-of-combat-prowess",
+      "feat.boon-of-dimensional-travel",
+      "feat.boon-of-energy-resistance",
+      "feat.boon-of-fate",
+      "feat.boon-of-fortitude",
+      "feat.boon-of-irresistible-offense",
+      "feat.boon-of-recovery",
+      "feat.boon-of-skill"
+    ],
+    "references": []
+  },
+  "feat.boon-of-the-night-spirit": {
+    "tags": [
+      "Epic Boon",
+      "Prerequisite",
+      "Psychic",
+      "Radiant",
+      "Damage"
+    ],
+    "related": [
+      "feat.boon-of-combat-prowess",
+      "feat.boon-of-dimensional-travel",
+      "feat.boon-of-energy-resistance",
+      "feat.boon-of-fate",
+      "feat.boon-of-fortitude",
+      "feat.boon-of-irresistible-offense",
+      "feat.boon-of-recovery",
+      "feat.boon-of-skill"
+    ],
+    "references": []
+  },
+  "feat.boon-of-truesight": {
+    "tags": [
+      "Epic Boon",
+      "Prerequisite"
+    ],
+    "related": [
+      "feat.boon-of-combat-prowess",
+      "feat.boon-of-dimensional-travel",
+      "feat.boon-of-energy-resistance",
+      "feat.boon-of-fate",
+      "feat.boon-of-fortitude",
+      "feat.boon-of-irresistible-offense",
+      "feat.boon-of-recovery",
+      "feat.boon-of-skill"
+    ],
+    "references": []
+  },
+  "feat.bountiful-luck": {
+    "tags": [
+      "Attack"
+    ],
+    "related": [
+      "feat.elven-accuracy",
+      "feat.fade-away",
+      "feat.flames-of-phlegethos",
+      "feat.orcish-fury",
+      "feat.second-chance",
+      "feat.archery",
+      "feat.boon-of-combat-prowess",
+      "feat.boon-of-dimensional-travel"
+    ],
+    "references": []
+  },
+  "feat.charger": {
+    "tags": [
+      "General",
+      "Prerequisite",
+      "Attack",
+      "Damage"
+    ],
+    "related": [
+      "feat.actor",
+      "feat.athlete",
+      "feat.chef",
+      "feat.crossbow-expert",
+      "feat.crusher",
+      "feat.defensive-duelist",
+      "feat.dual-wielder",
+      "feat.durable"
+    ],
+    "references": []
+  },
+  "feat.chef": {
+    "tags": [
+      "General",
+      "Prerequisite"
+    ],
+    "related": [
+      "feat.actor",
+      "feat.athlete",
+      "feat.charger",
+      "feat.crossbow-expert",
+      "feat.crusher",
+      "feat.defensive-duelist",
+      "feat.dual-wielder",
+      "feat.durable"
+    ],
+    "references": []
+  },
+  "feat.crafter": {
+    "tags": [
+      "Origin"
+    ],
+    "related": [
+      "feat.alert",
+      "feat.healer",
+      "feat.lucky",
+      "feat.musician",
+      "feat.savage-attacker",
+      "feat.tavern-brawler",
+      "feat.tough",
+      "feat.magic-initiate"
+    ],
+    "references": []
+  },
+  "feat.crossbow-expert": {
+    "tags": [
+      "General",
+      "Prerequisite",
+      "Attack",
+      "Damage"
+    ],
+    "related": [
+      "feat.actor",
+      "feat.athlete",
+      "feat.charger",
+      "feat.chef",
+      "feat.crusher",
+      "feat.defensive-duelist",
+      "feat.dual-wielder",
+      "feat.durable"
+    ],
+    "references": []
+  },
+  "feat.crusher": {
+    "tags": [
+      "General",
+      "Prerequisite",
+      "Bludgeoning",
+      "Attack",
+      "Damage"
+    ],
+    "related": [
+      "feat.actor",
+      "feat.athlete",
+      "feat.charger",
+      "feat.chef",
+      "feat.crossbow-expert",
+      "feat.defensive-duelist",
+      "feat.dual-wielder",
+      "feat.durable"
+    ],
+    "references": []
+  },
+  "feat.defense": {
+    "tags": [
+      "Fighting Style"
+    ],
+    "related": [
+      "feat.archery",
+      "feat.blessed-warrior",
+      "feat.blind-fighting",
+      "feat.druidic-warrior",
+      "feat.dueling",
+      "feat.great-weapon-fighting",
+      "feat.interception",
+      "feat.protection"
+    ],
+    "references": []
+  },
+  "feat.defensive-duelist": {
+    "tags": [
+      "General",
+      "Prerequisite",
+      "Attack"
+    ],
+    "related": [
+      "feat.actor",
+      "feat.athlete",
+      "feat.charger",
+      "feat.chef",
+      "feat.crossbow-expert",
+      "feat.crusher",
+      "feat.dual-wielder",
+      "feat.durable"
+    ],
+    "references": []
+  },
+  "feat.dragon-fear": {
+    "tags": [
+      "Damage"
+    ],
+    "related": [
+      "feat.dragon-hide",
+      "feat.fade-away",
+      "feat.flames-of-phlegethos",
+      "feat.infernal-constitution",
+      "feat.orcish-fury",
+      "feat.boon-of-energy-resistance",
+      "feat.boon-of-irresistible-offense",
+      "feat.boon-of-the-night-spirit"
+    ],
+    "references": []
+  },
+  "feat.dragon-hide": {
+    "tags": [
+      "Bludgeoning",
+      "Slashing",
+      "Damage"
+    ],
+    "related": [
+      "feat.boon-of-irresistible-offense",
+      "feat.crusher",
+      "feat.dragon-fear",
+      "feat.fade-away",
+      "feat.flames-of-phlegethos",
+      "feat.heavy-armor-master",
+      "feat.infernal-constitution",
+      "feat.orcish-fury"
+    ],
+    "references": []
+  },
+  "feat.drow-high-magic": {
+    "tags": [],
+    "related": [
+      "feat.bountiful-luck",
+      "feat.dragon-fear",
+      "feat.dragon-hide",
+      "feat.dwarven-fortitude",
+      "feat.elven-accuracy",
+      "feat.fade-away",
+      "feat.fey-teleportation",
+      "feat.flames-of-phlegethos"
+    ],
+    "references": []
+  },
+  "feat.druidic-warrior": {
+    "tags": [
+      "Fighting Style"
+    ],
+    "related": [
+      "feat.archery",
+      "feat.blessed-warrior",
+      "feat.blind-fighting",
+      "feat.defense",
+      "feat.dueling",
+      "feat.great-weapon-fighting",
+      "feat.interception",
+      "feat.protection"
+    ],
+    "references": []
+  },
+  "feat.dual-wielder": {
+    "tags": [
+      "General",
+      "Prerequisite",
+      "Attack",
+      "Damage"
+    ],
+    "related": [
+      "feat.actor",
+      "feat.athlete",
+      "feat.charger",
+      "feat.chef",
+      "feat.crossbow-expert",
+      "feat.crusher",
+      "feat.defensive-duelist",
+      "feat.durable"
+    ],
+    "references": []
+  },
+  "feat.dueling": {
+    "tags": [
+      "Fighting Style",
+      "Damage"
+    ],
+    "related": [
+      "feat.great-weapon-fighting",
+      "feat.interception",
+      "feat.thrown-weapon-fighting",
+      "feat.two-weapon-fighting",
+      "feat.unarmed-fighting",
+      "feat.archery",
+      "feat.blessed-warrior",
+      "feat.blind-fighting"
+    ],
+    "references": []
+  },
+  "feat.dungeon-delver": {
+    "tags": [
+      "Damage"
+    ],
+    "related": [
+      "feat.boon-of-energy-resistance",
+      "feat.boon-of-irresistible-offense",
+      "feat.boon-of-the-night-spirit",
+      "feat.charger",
+      "feat.crossbow-expert",
+      "feat.crusher",
+      "feat.dragon-fear",
+      "feat.dragon-hide"
+    ],
+    "references": []
+  },
+  "feat.durable": {
+    "tags": [
+      "General",
+      "Prerequisite"
+    ],
+    "related": [
+      "feat.actor",
+      "feat.athlete",
+      "feat.charger",
+      "feat.chef",
+      "feat.crossbow-expert",
+      "feat.crusher",
+      "feat.defensive-duelist",
+      "feat.dual-wielder"
+    ],
+    "references": []
+  },
+  "feat.dwarven-fortitude": {
+    "tags": [],
+    "related": [
+      "feat.bountiful-luck",
+      "feat.dragon-fear",
+      "feat.dragon-hide",
+      "feat.drow-high-magic",
+      "feat.elven-accuracy",
+      "feat.fade-away",
+      "feat.fey-teleportation",
+      "feat.flames-of-phlegethos"
+    ],
+    "references": []
+  },
+  "feat.eldritch-adept": {
+    "tags": [],
+    "related": [
+      "feat.artificer-initiate",
+      "feat.fighting-initiate",
+      "feat.gunner",
+      "feat.metamagic-adept",
+      "feat.actor",
+      "feat.alert",
+      "feat.archery",
+      "feat.athlete"
+    ],
+    "references": []
+  },
+  "feat.elemental-adept": {
+    "tags": [
+      "General",
+      "Prerequisite",
+      "Repeatable",
+      "Acid",
+      "Cold",
+      "Fire",
+      "Lightning",
+      "Thunder",
+      "Damage"
+    ],
+    "related": [
+      "feat.ability-score-improvement",
+      "feat.actor",
+      "feat.athlete",
+      "feat.charger",
+      "feat.chef",
+      "feat.crossbow-expert",
+      "feat.crusher",
+      "feat.defensive-duelist"
+    ],
+    "references": []
+  },
+  "feat.elven-accuracy": {
+    "tags": [
+      "Force",
+      "Attack"
+    ],
+    "related": [
+      "feat.fade-away",
+      "feat.second-chance",
+      "feat.bountiful-luck",
+      "feat.flames-of-phlegethos",
+      "feat.mounted-combatant",
+      "feat.orcish-fury",
+      "feat.archery",
+      "feat.boon-of-combat-prowess"
+    ],
+    "references": []
+  },
+  "feat.fade-away": {
+    "tags": [
+      "Force",
+      "Attack",
+      "Damage",
+      "Illusion"
+    ],
+    "related": [
+      "feat.elven-accuracy",
+      "feat.flames-of-phlegethos",
+      "feat.orcish-fury",
+      "feat.second-chance",
+      "feat.boon-of-irresistible-offense",
+      "feat.bountiful-luck",
+      "feat.charger",
+      "feat.crossbow-expert"
+    ],
+    "references": []
+  },
+  "feat.fey-teleportation": {
+    "tags": [],
+    "related": [
+      "feat.bountiful-luck",
+      "feat.dragon-fear",
+      "feat.dragon-hide",
+      "feat.drow-high-magic",
+      "feat.dwarven-fortitude",
+      "feat.elven-accuracy",
+      "feat.fade-away",
+      "feat.flames-of-phlegethos"
+    ],
+    "references": []
+  },
+  "feat.fey-touched": {
+    "tags": [
+      "General",
+      "Prerequisite"
+    ],
+    "related": [
+      "feat.actor",
+      "feat.athlete",
+      "feat.charger",
+      "feat.chef",
+      "feat.crossbow-expert",
+      "feat.crusher",
+      "feat.defensive-duelist",
+      "feat.dual-wielder"
+    ],
+    "references": []
+  },
+  "feat.fighting-initiate": {
+    "tags": [
+      "Prerequisite"
+    ],
+    "related": [
+      "feat.actor",
+      "feat.artificer-initiate",
+      "feat.athlete",
+      "feat.boon-of-combat-prowess",
+      "feat.boon-of-dimensional-travel",
+      "feat.boon-of-energy-resistance",
+      "feat.boon-of-fate",
+      "feat.boon-of-fortitude"
+    ],
+    "references": []
+  },
+  "feat.flames-of-phlegethos": {
+    "tags": [
+      "Fire",
+      "Attack",
+      "Damage"
+    ],
+    "related": [
+      "feat.fade-away",
+      "feat.orcish-fury",
+      "feat.boon-of-energy-resistance",
+      "feat.boon-of-irresistible-offense",
+      "feat.bountiful-luck",
+      "feat.charger",
+      "feat.crossbow-expert",
+      "feat.crusher"
+    ],
+    "references": []
+  },
+  "feat.grappler": {
+    "tags": [
+      "General",
+      "Prerequisite",
+      "Attack",
+      "Damage",
+      "Movement"
+    ],
+    "related": [
+      "feat.actor",
+      "feat.athlete",
+      "feat.charger",
+      "feat.chef",
+      "feat.crossbow-expert",
+      "feat.crusher",
+      "feat.defensive-duelist",
+      "feat.dual-wielder"
+    ],
+    "references": []
+  },
+  "feat.great-weapon-fighting": {
+    "tags": [
+      "Fighting Style",
+      "Attack",
+      "Damage"
+    ],
+    "related": [
+      "feat.archery",
+      "feat.dueling",
+      "feat.interception",
+      "feat.protection",
+      "feat.thrown-weapon-fighting",
+      "feat.two-weapon-fighting",
+      "feat.unarmed-fighting",
+      "feat.blessed-warrior"
+    ],
+    "references": []
+  },
+  "feat.great-weapon-master": {
+    "tags": [
+      "General",
+      "Prerequisite",
+      "Attack",
+      "Damage"
+    ],
+    "related": [
+      "feat.actor",
+      "feat.athlete",
+      "feat.charger",
+      "feat.chef",
+      "feat.crossbow-expert",
+      "feat.crusher",
+      "feat.defensive-duelist",
+      "feat.dual-wielder"
+    ],
+    "references": []
+  },
+  "feat.gunner": {
+    "tags": [
+      "Fire",
+      "Attack"
+    ],
+    "related": [
+      "feat.flames-of-phlegethos",
+      "feat.archery",
+      "feat.artificer-initiate",
+      "feat.boon-of-combat-prowess",
+      "feat.boon-of-dimensional-travel",
+      "feat.boon-of-energy-resistance",
+      "feat.boon-of-irresistible-offense",
+      "feat.bountiful-luck"
+    ],
+    "references": []
+  },
+  "feat.healer": {
+    "tags": [
+      "Origin"
+    ],
+    "related": [
+      "feat.alert",
+      "feat.crafter",
+      "feat.lucky",
+      "feat.musician",
+      "feat.savage-attacker",
+      "feat.tavern-brawler",
+      "feat.tough",
+      "feat.magic-initiate"
+    ],
+    "references": []
+  },
+  "feat.heavily-armored": {
+    "tags": [
+      "General",
+      "Prerequisite"
+    ],
+    "related": [
+      "feat.actor",
+      "feat.athlete",
+      "feat.charger",
+      "feat.chef",
+      "feat.crossbow-expert",
+      "feat.crusher",
+      "feat.defensive-duelist",
+      "feat.dual-wielder"
+    ],
+    "references": []
+  },
+  "feat.heavy-armor-master": {
+    "tags": [
+      "General",
+      "Prerequisite",
+      "Bludgeoning",
+      "Piercing",
+      "Slashing",
+      "Attack",
+      "Damage"
+    ],
+    "related": [
+      "feat.actor",
+      "feat.athlete",
+      "feat.charger",
+      "feat.chef",
+      "feat.crossbow-expert",
+      "feat.crusher",
+      "feat.defensive-duelist",
+      "feat.dual-wielder"
+    ],
+    "references": []
+  },
+  "feat.infernal-constitution": {
+    "tags": [
+      "Cold",
+      "Poison",
+      "Damage"
+    ],
+    "related": [
+      "feat.boon-of-energy-resistance",
+      "feat.dragon-fear",
+      "feat.dragon-hide",
+      "feat.fade-away",
+      "feat.flames-of-phlegethos",
+      "feat.orcish-fury",
+      "feat.poisoner",
+      "feat.boon-of-irresistible-offense"
+    ],
+    "references": []
+  },
+  "feat.inspiring-leader": {
+    "tags": [
+      "General",
+      "Prerequisite"
+    ],
+    "related": [
+      "feat.actor",
+      "feat.athlete",
+      "feat.charger",
+      "feat.chef",
+      "feat.crossbow-expert",
+      "feat.crusher",
+      "feat.defensive-duelist",
+      "feat.dual-wielder"
+    ],
+    "references": []
+  },
+  "feat.interception": {
+    "tags": [
+      "Fighting Style",
+      "Attack",
+      "Damage"
+    ],
+    "related": [
+      "feat.archery",
+      "feat.dueling",
+      "feat.great-weapon-fighting",
+      "feat.protection",
+      "feat.thrown-weapon-fighting",
+      "feat.two-weapon-fighting",
+      "feat.unarmed-fighting",
+      "feat.blessed-warrior"
+    ],
+    "references": []
+  },
+  "feat.keen-mind": {
+    "tags": [
+      "General",
+      "Prerequisite"
+    ],
+    "related": [
+      "feat.actor",
+      "feat.athlete",
+      "feat.charger",
+      "feat.chef",
+      "feat.crossbow-expert",
+      "feat.crusher",
+      "feat.defensive-duelist",
+      "feat.dual-wielder"
+    ],
+    "references": []
+  },
+  "feat.lightly-armored": {
+    "tags": [
+      "General",
+      "Prerequisite"
+    ],
+    "related": [
+      "feat.actor",
+      "feat.athlete",
+      "feat.charger",
+      "feat.chef",
+      "feat.crossbow-expert",
+      "feat.crusher",
+      "feat.defensive-duelist",
+      "feat.dual-wielder"
+    ],
+    "references": []
+  },
+  "feat.linguist": {
+    "tags": [],
+    "related": [
+      "feat.dungeon-delver",
+      "feat.elemental-adept",
+      "feat.magic-initiate",
+      "feat.martial-adept",
+      "feat.mobile",
+      "feat.skilled",
+      "feat.actor",
+      "feat.alert"
+    ],
+    "references": []
+  },
+  "feat.lucky": {
+    "tags": [
+      "Origin",
+      "Attack"
+    ],
+    "related": [
+      "feat.tavern-brawler",
+      "feat.alert",
+      "feat.crafter",
+      "feat.healer",
+      "feat.musician",
+      "feat.savage-attacker",
+      "feat.tough",
+      "feat.magic-initiate"
+    ],
+    "references": []
+  },
+  "feat.mage-slayer": {
+    "tags": [
+      "General",
+      "Prerequisite",
+      "Damage"
+    ],
+    "related": [
+      "feat.actor",
+      "feat.athlete",
+      "feat.charger",
+      "feat.chef",
+      "feat.crossbow-expert",
+      "feat.crusher",
+      "feat.defensive-duelist",
+      "feat.dual-wielder"
+    ],
+    "references": []
+  },
+  "feat.magic-initiate": {
+    "tags": [
+      "Origin",
+      "Repeatable"
+    ],
+    "related": [
+      "feat.skilled",
+      "feat.alert",
+      "feat.crafter",
+      "feat.healer",
+      "feat.lucky",
+      "feat.musician",
+      "feat.savage-attacker",
+      "feat.tavern-brawler"
+    ],
+    "references": []
+  },
+  "feat.martial-adept": {
+    "tags": [],
+    "related": [
+      "feat.dungeon-delver",
+      "feat.elemental-adept",
+      "feat.linguist",
+      "feat.magic-initiate",
+      "feat.mobile",
+      "feat.skilled",
+      "feat.actor",
+      "feat.alert"
+    ],
+    "references": []
+  },
+  "feat.martial-weapon-training": {
+    "tags": [
+      "General",
+      "Prerequisite"
+    ],
+    "related": [
+      "feat.actor",
+      "feat.athlete",
+      "feat.charger",
+      "feat.chef",
+      "feat.crossbow-expert",
+      "feat.crusher",
+      "feat.defensive-duelist",
+      "feat.dual-wielder"
+    ],
+    "references": []
+  },
+  "feat.medium-armor-master": {
+    "tags": [
+      "General",
+      "Prerequisite"
+    ],
+    "related": [
+      "feat.actor",
+      "feat.athlete",
+      "feat.charger",
+      "feat.chef",
+      "feat.crossbow-expert",
+      "feat.crusher",
+      "feat.defensive-duelist",
+      "feat.dual-wielder"
+    ],
+    "references": []
+  },
+  "feat.metamagic-adept": {
+    "tags": [],
+    "related": [
+      "feat.artificer-initiate",
+      "feat.eldritch-adept",
+      "feat.fighting-initiate",
+      "feat.gunner",
+      "feat.actor",
+      "feat.alert",
+      "feat.archery",
+      "feat.athlete"
+    ],
+    "references": []
+  },
+  "feat.mobile": {
+    "tags": [
+      "Attack",
+      "Movement"
+    ],
+    "related": [
+      "feat.grappler",
+      "feat.speedy",
+      "feat.archery",
+      "feat.athlete",
+      "feat.boon-of-combat-prowess",
+      "feat.boon-of-dimensional-travel",
+      "feat.boon-of-irresistible-offense",
+      "feat.bountiful-luck"
+    ],
+    "references": []
+  },
+  "feat.moderately-armored": {
+    "tags": [
+      "General",
+      "Prerequisite"
+    ],
+    "related": [
+      "feat.actor",
+      "feat.athlete",
+      "feat.charger",
+      "feat.chef",
+      "feat.crossbow-expert",
+      "feat.crusher",
+      "feat.defensive-duelist",
+      "feat.dual-wielder"
+    ],
+    "references": []
+  },
+  "feat.mounted-combatant": {
+    "tags": [
+      "General",
+      "Prerequisite",
+      "Force",
+      "Attack",
+      "Damage"
+    ],
+    "related": [
+      "feat.actor",
+      "feat.athlete",
+      "feat.charger",
+      "feat.chef",
+      "feat.crossbow-expert",
+      "feat.crusher",
+      "feat.defensive-duelist",
+      "feat.dual-wielder"
+    ],
+    "references": []
+  },
+  "feat.musician": {
+    "tags": [
+      "Origin"
+    ],
+    "related": [
+      "feat.alert",
+      "feat.crafter",
+      "feat.healer",
+      "feat.lucky",
+      "feat.savage-attacker",
+      "feat.tavern-brawler",
+      "feat.tough",
+      "feat.magic-initiate"
+    ],
+    "references": []
+  },
+  "feat.observant": {
+    "tags": [
+      "General",
+      "Prerequisite"
+    ],
+    "related": [
+      "feat.actor",
+      "feat.athlete",
+      "feat.charger",
+      "feat.chef",
+      "feat.crossbow-expert",
+      "feat.crusher",
+      "feat.defensive-duelist",
+      "feat.dual-wielder"
+    ],
+    "references": []
+  },
+  "feat.orcish-fury": {
+    "tags": [
+      "Attack",
+      "Damage"
+    ],
+    "related": [
+      "feat.fade-away",
+      "feat.flames-of-phlegethos",
+      "feat.boon-of-irresistible-offense",
+      "feat.bountiful-luck",
+      "feat.charger",
+      "feat.crossbow-expert",
+      "feat.crusher",
+      "feat.dragon-fear"
+    ],
+    "references": []
+  },
+  "feat.piercer": {
+    "tags": [
+      "General",
+      "Prerequisite",
+      "Piercing",
+      "Attack",
+      "Damage"
+    ],
+    "related": [
+      "feat.actor",
+      "feat.athlete",
+      "feat.charger",
+      "feat.chef",
+      "feat.crossbow-expert",
+      "feat.crusher",
+      "feat.defensive-duelist",
+      "feat.dual-wielder"
+    ],
+    "references": []
+  },
+  "feat.poisoner": {
+    "tags": [
+      "General",
+      "Prerequisite",
+      "Poison",
+      "Damage"
+    ],
+    "related": [
+      "feat.actor",
+      "feat.athlete",
+      "feat.charger",
+      "feat.chef",
+      "feat.crossbow-expert",
+      "feat.crusher",
+      "feat.defensive-duelist",
+      "feat.dual-wielder"
+    ],
+    "references": []
+  },
+  "feat.polearm-master": {
+    "tags": [
+      "General",
+      "Prerequisite",
+      "Bludgeoning",
+      "Attack",
+      "Damage"
+    ],
+    "related": [
+      "feat.actor",
+      "feat.athlete",
+      "feat.charger",
+      "feat.chef",
+      "feat.crossbow-expert",
+      "feat.crusher",
+      "feat.defensive-duelist",
+      "feat.dual-wielder"
+    ],
+    "references": []
+  },
+  "feat.prodigy": {
+    "tags": [],
+    "related": [
+      "feat.bountiful-luck",
+      "feat.dragon-fear",
+      "feat.dragon-hide",
+      "feat.drow-high-magic",
+      "feat.dwarven-fortitude",
+      "feat.elven-accuracy",
+      "feat.fade-away",
+      "feat.fey-teleportation"
+    ],
+    "references": []
+  },
+  "feat.protection": {
+    "tags": [
+      "Fighting Style",
+      "Attack"
+    ],
+    "related": [
+      "feat.archery",
+      "feat.great-weapon-fighting",
+      "feat.interception",
+      "feat.thrown-weapon-fighting",
+      "feat.two-weapon-fighting",
+      "feat.unarmed-fighting",
+      "feat.blessed-warrior",
+      "feat.blind-fighting"
+    ],
+    "references": []
+  },
+  "feat.resilient": {
+    "tags": [
+      "General",
+      "Prerequisite"
+    ],
+    "related": [
+      "feat.actor",
+      "feat.athlete",
+      "feat.charger",
+      "feat.chef",
+      "feat.crossbow-expert",
+      "feat.crusher",
+      "feat.defensive-duelist",
+      "feat.dual-wielder"
+    ],
+    "references": []
+  },
+  "feat.ritual-caster": {
+    "tags": [
+      "General",
+      "Prerequisite"
+    ],
+    "related": [
+      "feat.actor",
+      "feat.athlete",
+      "feat.charger",
+      "feat.chef",
+      "feat.crossbow-expert",
+      "feat.crusher",
+      "feat.defensive-duelist",
+      "feat.dual-wielder"
+    ],
+    "references": []
+  },
+  "feat.savage-attacker": {
+    "tags": [
+      "Origin",
+      "Damage"
+    ],
+    "related": [
+      "feat.tavern-brawler",
+      "feat.alert",
+      "feat.crafter",
+      "feat.healer",
+      "feat.lucky",
+      "feat.musician",
+      "feat.tough",
+      "feat.magic-initiate"
+    ],
+    "references": []
+  },
+  "feat.second-chance": {
+    "tags": [
+      "Force",
+      "Attack"
+    ],
+    "related": [
+      "feat.elven-accuracy",
+      "feat.fade-away",
+      "feat.bountiful-luck",
+      "feat.flames-of-phlegethos",
+      "feat.mounted-combatant",
+      "feat.orcish-fury",
+      "feat.archery",
+      "feat.boon-of-combat-prowess"
+    ],
+    "references": []
+  },
+  "feat.sentinel": {
+    "tags": [
+      "General",
+      "Prerequisite",
+      "Attack"
+    ],
+    "related": [
+      "feat.actor",
+      "feat.athlete",
+      "feat.charger",
+      "feat.chef",
+      "feat.crossbow-expert",
+      "feat.crusher",
+      "feat.defensive-duelist",
+      "feat.dual-wielder"
+    ],
+    "references": []
+  },
+  "feat.shadow-touched": {
+    "tags": [
+      "General",
+      "Prerequisite",
+      "Illusion"
+    ],
+    "related": [
+      "feat.actor",
+      "feat.athlete",
+      "feat.charger",
+      "feat.chef",
+      "feat.crossbow-expert",
+      "feat.crusher",
+      "feat.defensive-duelist",
+      "feat.dual-wielder"
+    ],
+    "references": []
+  },
+  "feat.sharpshooter": {
+    "tags": [
+      "General",
+      "Prerequisite",
+      "Attack"
+    ],
+    "related": [
+      "feat.actor",
+      "feat.athlete",
+      "feat.charger",
+      "feat.chef",
+      "feat.crossbow-expert",
+      "feat.crusher",
+      "feat.defensive-duelist",
+      "feat.dual-wielder"
+    ],
+    "references": []
+  },
+  "feat.shield-master": {
+    "tags": [
+      "General",
+      "Prerequisite",
+      "Attack",
+      "Damage"
+    ],
+    "related": [
+      "feat.actor",
+      "feat.athlete",
+      "feat.charger",
+      "feat.chef",
+      "feat.crossbow-expert",
+      "feat.crusher",
+      "feat.defensive-duelist",
+      "feat.dual-wielder"
+    ],
+    "references": []
+  },
+  "feat.skill-expert": {
+    "tags": [
+      "General",
+      "Prerequisite"
+    ],
+    "related": [
+      "feat.actor",
+      "feat.athlete",
+      "feat.charger",
+      "feat.chef",
+      "feat.crossbow-expert",
+      "feat.crusher",
+      "feat.defensive-duelist",
+      "feat.dual-wielder"
+    ],
+    "references": []
+  },
+  "feat.skilled": {
+    "tags": [
+      "Origin",
+      "Repeatable"
+    ],
+    "related": [
+      "feat.magic-initiate",
+      "feat.alert",
+      "feat.crafter",
+      "feat.healer",
+      "feat.lucky",
+      "feat.musician",
+      "feat.savage-attacker",
+      "feat.tavern-brawler"
+    ],
+    "references": []
+  },
+  "feat.skulker": {
+    "tags": [
+      "General",
+      "Prerequisite",
+      "Attack"
+    ],
+    "related": [
+      "feat.actor",
+      "feat.athlete",
+      "feat.charger",
+      "feat.chef",
+      "feat.crossbow-expert",
+      "feat.crusher",
+      "feat.defensive-duelist",
+      "feat.dual-wielder"
+    ],
+    "references": []
+  },
+  "feat.slasher": {
+    "tags": [
+      "General",
+      "Prerequisite",
+      "Slashing",
+      "Attack",
+      "Damage"
+    ],
+    "related": [
+      "feat.actor",
+      "feat.athlete",
+      "feat.charger",
+      "feat.chef",
+      "feat.crossbow-expert",
+      "feat.crusher",
+      "feat.defensive-duelist",
+      "feat.dual-wielder"
+    ],
+    "references": []
+  },
+  "feat.speedy": {
+    "tags": [
+      "General",
+      "Prerequisite",
+      "Attack",
+      "Movement"
+    ],
+    "related": [
+      "feat.actor",
+      "feat.athlete",
+      "feat.charger",
+      "feat.chef",
+      "feat.crossbow-expert",
+      "feat.crusher",
+      "feat.defensive-duelist",
+      "feat.dual-wielder"
+    ],
+    "references": []
+  },
+  "feat.spell-sniper": {
+    "tags": [
+      "General",
+      "Prerequisite",
+      "Attack"
+    ],
+    "related": [
+      "feat.actor",
+      "feat.athlete",
+      "feat.charger",
+      "feat.chef",
+      "feat.crossbow-expert",
+      "feat.crusher",
+      "feat.defensive-duelist",
+      "feat.dual-wielder"
+    ],
+    "references": []
+  },
+  "feat.squat-nimbleness": {
+    "tags": [],
+    "related": [
+      "feat.bountiful-luck",
+      "feat.dragon-fear",
+      "feat.dragon-hide",
+      "feat.drow-high-magic",
+      "feat.dwarven-fortitude",
+      "feat.elven-accuracy",
+      "feat.fade-away",
+      "feat.fey-teleportation"
+    ],
+    "references": []
+  },
+  "feat.tavern-brawler": {
+    "tags": [
+      "Origin",
+      "Bludgeoning",
+      "Attack",
+      "Damage"
+    ],
+    "related": [
+      "feat.lucky",
+      "feat.savage-attacker",
+      "feat.alert",
+      "feat.crafter",
+      "feat.healer",
+      "feat.musician",
+      "feat.tough",
+      "feat.boon-of-irresistible-offense"
+    ],
+    "references": []
+  },
+  "feat.telekinetic": {
+    "tags": [
+      "General",
+      "Prerequisite"
+    ],
+    "related": [
+      "feat.actor",
+      "feat.athlete",
+      "feat.charger",
+      "feat.chef",
+      "feat.crossbow-expert",
+      "feat.crusher",
+      "feat.defensive-duelist",
+      "feat.dual-wielder"
+    ],
+    "references": []
+  },
+  "feat.telepathic": {
+    "tags": [
+      "General",
+      "Prerequisite"
+    ],
+    "related": [
+      "feat.actor",
+      "feat.athlete",
+      "feat.charger",
+      "feat.chef",
+      "feat.crossbow-expert",
+      "feat.crusher",
+      "feat.defensive-duelist",
+      "feat.dual-wielder"
+    ],
+    "references": []
+  },
+  "feat.thrown-weapon-fighting": {
+    "tags": [
+      "Fighting Style",
+      "Attack",
+      "Damage"
+    ],
+    "related": [
+      "feat.archery",
+      "feat.dueling",
+      "feat.great-weapon-fighting",
+      "feat.interception",
+      "feat.protection",
+      "feat.two-weapon-fighting",
+      "feat.unarmed-fighting",
+      "feat.blessed-warrior"
+    ],
+    "references": []
+  },
+  "feat.tough": {
+    "tags": [
+      "Origin"
+    ],
+    "related": [
+      "feat.alert",
+      "feat.crafter",
+      "feat.healer",
+      "feat.lucky",
+      "feat.musician",
+      "feat.savage-attacker",
+      "feat.tavern-brawler",
+      "feat.magic-initiate"
+    ],
+    "references": []
+  },
+  "feat.two-weapon-fighting": {
+    "tags": [
+      "Fighting Style",
+      "Attack",
+      "Damage"
+    ],
+    "related": [
+      "feat.archery",
+      "feat.dueling",
+      "feat.great-weapon-fighting",
+      "feat.interception",
+      "feat.protection",
+      "feat.thrown-weapon-fighting",
+      "feat.unarmed-fighting",
+      "feat.blessed-warrior"
+    ],
+    "references": []
+  },
+  "feat.unarmed-fighting": {
+    "tags": [
+      "Fighting Style",
+      "Bludgeoning",
+      "Attack",
+      "Damage"
+    ],
+    "related": [
+      "feat.archery",
+      "feat.dueling",
+      "feat.great-weapon-fighting",
+      "feat.interception",
+      "feat.protection",
+      "feat.thrown-weapon-fighting",
+      "feat.two-weapon-fighting",
+      "feat.blessed-warrior"
+    ],
+    "references": []
+  },
+  "feat.war-caster": {
+    "tags": [
+      "General",
+      "Prerequisite",
+      "Attack"
+    ],
+    "related": [
+      "feat.actor",
+      "feat.athlete",
+      "feat.charger",
+      "feat.chef",
+      "feat.crossbow-expert",
+      "feat.crusher",
+      "feat.defensive-duelist",
+      "feat.dual-wielder"
+    ],
+    "references": []
+  },
+  "feat.weapon-master": {
+    "tags": [
+      "General",
+      "Prerequisite"
+    ],
+    "related": [
+      "feat.actor",
+      "feat.athlete",
+      "feat.charger",
+      "feat.chef",
+      "feat.crossbow-expert",
+      "feat.crusher",
+      "feat.defensive-duelist",
+      "feat.dual-wielder"
+    ],
+    "references": []
+  },
+  "feat.wood-elf-magic": {
+    "tags": [],
+    "related": [
+      "feat.bountiful-luck",
+      "feat.dragon-fear",
+      "feat.dragon-hide",
+      "feat.drow-high-magic",
+      "feat.dwarven-fortitude",
+      "feat.elven-accuracy",
+      "feat.fade-away",
+      "feat.fey-teleportation"
+    ],
+    "references": []
+  },
   "magicitem.1-all-purpose-tool": {
     "tags": [
       "uncommon",

@@ -6,6 +6,9 @@ import type { Raw5eCondition } from "../../src/adapter/5etools-raw-types";
 import type { Raw5eItem } from "../../src/adapter/5etools-raw-types";
 import type { Raw5eMonster } from "../../src/adapter/5etools-raw-types";
 import type { Raw5eMagicItem } from "../../src/adapter/5etools-raw-types";
+import type { Raw5eFeat } from "../../src/adapter/5etools-raw-types";
+import { transformFeats } from "./categories/feat/transform";
+import { validateFeats } from "./categories/feat/validate";
 import { transformSpells } from "./categories/spell/transform";
 import { validateSpells } from "./categories/spell/validate";
 import { transformConditions } from "./categories/condition/transform";
@@ -104,6 +107,14 @@ const CATEGORIES: readonly CategoryConfig[] = [
     transform: (data) => transformMonsters(data as Raw5eMonster[]),
     validate: validateMonsters as (entities: CompendiumEntry[]) => ValidationError[],
     outputPath: "monsters.json",
+  },
+  {
+    name: "feats",
+    sourcePaths: ["feats.json"],
+    dataKey: "feat",
+    transform: (data) => transformFeats(data as Raw5eFeat[]),
+    validate: validateFeats as (entities: CompendiumEntry[]) => ValidationError[],
+    outputPath: "feats.json",
   },
   {
     name: "magicitems",

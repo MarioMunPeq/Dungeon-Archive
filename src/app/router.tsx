@@ -17,6 +17,7 @@ const CATEGORIES: EntityCategory[] = [
   "action",
   "monster",
   "magicitem",
+  "feat",
 ];
 
 export function AppRouter() {

@@ -15,6 +15,7 @@ export function categoryLabel(category: string): string {
     action: "Actions",
     monster: "Monsters",
     magicitem: "Magic Items",
+    feat: "Feats",
   };
   return labels[category] ?? category;
 }
@@ -27,6 +28,7 @@ export function categoryLabelSingular(category: string): string {
     action: "Action",
     monster: "Monster",
     magicitem: "Magic Item",
+    feat: "Feat",
   };
   return labels[category] ?? category;
 }

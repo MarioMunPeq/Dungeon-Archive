@@ -5,6 +5,7 @@ import type {
   Action,
   Monster,
   MagicItem,
+  Feat,
   SearchIndexEntry,
 } from "@/types/compendium";
 import type { CompendiumState } from "./types";
@@ -19,12 +20,14 @@ export let state: CompendiumState = {
   actions: new Map(),
   monsters: new Map(),
   magicItems: new Map(),
+  feats: new Map(),
   spellList: [],
   conditionList: [],
   equipmentList: [],
   actionList: [],
   monsterList: [],
   magicItemList: [],
+  featList: [],
   initialized: false,
 };
 
@@ -46,6 +49,7 @@ export async function loadCompendium(): Promise<void> {
     actions,
     monsters,
     magicItems,
+    feats,
     searchIndex,
     relatedIndexModule,
   ] = await Promise.all([
@@ -55,6 +59,7 @@ export async function loadCompendium(): Promise<void> {
     import("../generated/compendium/actions.json"),
     import("../generated/compendium/monsters.json"),
     import("../generated/compendium/magic-items.json"),
+    import("../generated/compendium/feats.json"),
     import("../generated/compendium/search-index.json"),
     import("../generated/compendium/related-index.json"),
   ]);
@@ -65,6 +70,7 @@ export async function loadCompendium(): Promise<void> {
   const actionList = Object.freeze(actions.default as Action[]);
   const monsterList = Object.freeze(monsters.default as Monster[]);
   const magicItemList = Object.freeze(magicItems.default as MagicItem[]);
+  const featList = Object.freeze(feats.default as Feat[]);
 
   state = {
     spells: toMap(spellList),
@@ -73,12 +79,14 @@ export async function loadCompendium(): Promise<void> {
     actions: toMap(actionList),
     monsters: toMap(monsterList),
     magicItems: toMap(magicItemList),
+    feats: toMap(featList),
     spellList,
     conditionList,
     equipmentList,
     actionList,
     monsterList,
     magicItemList,
+    featList,
     initialized: true,
   };
 
@@ -89,6 +97,7 @@ export async function loadCompendium(): Promise<void> {
     ...actionList,
     ...monsterList,
     ...magicItemList,
+    ...featList,
   ]);
 
   setSearchIndex(searchIndex.default as SearchIndexEntry[]);

@@ -62,6 +62,12 @@ async function main() {
     strictEqual(items[0]!.category, "magicitem");
   });
 
+  test("getEntitiesForCategory returns feats", () => {
+    const feats = getEntitiesForCategory("feat");
+    ok(feats.length > 0);
+    strictEqual(feats[0]!.category, "feat");
+  });
+
   test("collectUnique deduplicates and sorts", () => {
     const result = collectUnique([{ x: "b" }, { x: "a" }, { x: "b" }], (i) => i.x);
     deepEqual(result, ["a", "b"]);
@@ -172,6 +178,25 @@ async function main() {
     strictEqual(attune.options[2]!.value, "none");
   });
 
+  test("buildFilterDefs creates prerequisite filter for feats", () => {
+    const featsData = getEntitiesForCategory("feat");
+    const defs = buildFilterDefs("feat", featsData);
+    const prereq = defs.find((d: { key: string }) => d.key === "prerequisite");
+    ok(prereq);
+    strictEqual(prereq!.options.length, 3);
+    strictEqual(prereq!.options[1]!.value, "yes");
+    strictEqual(prereq!.options[2]!.value, "none");
+  });
+
+  test("buildFilterDefs creates repeatable filter for feats", () => {
+    const featsData = getEntitiesForCategory("feat");
+    const defs = buildFilterDefs("feat", featsData);
+    const rep = defs.find((d: { key: string }) => d.key === "repeatable");
+    ok(rep);
+    strictEqual(rep!.options[1]!.value, "yes");
+    strictEqual(rep!.options[2]!.value, "no");
+  });
+
   test("buildFilterDefs creates source filter for all categories", () => {
     for (const cat of [
       "spell",
@@ -180,6 +205,7 @@ async function main() {
       "condition",
       "action",
       "magicitem",
+      "feat",
     ] as const) {
       const entities = getEntitiesForCategory(cat);
       const defs = buildFilterDefs(cat, entities);
@@ -332,6 +358,48 @@ async function main() {
     for (const item of result) {
       strictEqual(item.source, "DMG");
     }
+  });
+
+  test("applyFilters filters feats by prerequisite", () => {
+    const featsData = getEntitiesForCategory("feat");
+    const result = applyFilters("feat", featsData, { prerequisite: "yes" });
+    ok(result.length > 0);
+    ok(result.length < featsData.length);
+    for (const f of result) {
+      ok((f as import("../../src/types/compendium").Feat).prerequisite, "should have prerequisite");
+    }
+  });
+
+  test("applyFilters filters feats by repeatable", () => {
+    const featsData = getEntitiesForCategory("feat");
+    const result = applyFilters("feat", featsData, { repeatable: "yes" });
+    ok(result.length > 0);
+    for (const f of result) {
+      strictEqual((f as import("../../src/types/compendium").Feat).repeatable, true);
+    }
+  });
+
+  test("applyFilters filters feats by source", () => {
+    const featsData = getEntitiesForCategory("feat");
+    const result = applyFilters("feat", featsData, { source: "XPHB" });
+    ok(result.length > 0);
+    for (const f of result) {
+      strictEqual(f.source, "XPHB");
+    }
+  });
+
+  test("toCardData produces correct feat card", () => {
+    const featsData = getEntitiesForCategory("feat");
+    const asi = featsData.find(
+      (f: { name: string; source: string }) => f.name === "Ability Score Improvement" && f.source === "XPHB",
+    );
+    ok(asi, "ASI XPHB should exist");
+    const card = toCardData("feat", asi!);
+    strictEqual(card.name, "Ability Score Improvement");
+    strictEqual(card.categoryLabel, "Feat");
+    strictEqual(card.metadata, "General");
+    strictEqual(card.source, "XPHB");
+    ok(card.href.startsWith("/feat/"));
   });
 
   test("toCardData produces correct magic item card", () => {

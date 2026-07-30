@@ -174,6 +174,34 @@ export interface Raw5eMonster {
   readonly [key: string]: unknown;
 }
 
+export interface Raw5eFeatPrerequisite {
+  readonly level?: number;
+  readonly campaign?: readonly string[];
+  readonly ability?: readonly { readonly ability?: readonly string[]; readonly minimum?: number }[];
+  readonly proficiency?: readonly { readonly armor?: boolean; readonly weapon?: boolean }[];
+  readonly skillProficiency?: readonly { readonly skill?: string }[];
+  readonly spellcasting?: boolean;
+  readonly pact?: string;
+  readonly patron?: string;
+  readonly racial?: readonly string[];
+  readonly feat?: readonly string[];
+  readonly exclusiveFeatCategory?: readonly string[];
+  readonly [key: string]: unknown;
+}
+
+export interface Raw5eFeat {
+  readonly name: string;
+  readonly source: string;
+  readonly page?: number;
+  readonly category?: string;
+  readonly prerequisite?: readonly Raw5eFeatPrerequisite[];
+  readonly repeatable?: boolean;
+  readonly repeatableHidden?: boolean;
+  readonly ability?: readonly Record<string, unknown>[];
+  readonly entries: readonly (string | Raw5eEntry)[];
+  readonly [key: string]: unknown;
+}
+
 export interface Raw5eSpellFile {
   readonly spell: readonly Raw5eSpell[];
 }
