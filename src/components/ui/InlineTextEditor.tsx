@@ -1,23 +1,22 @@
 import { useRef } from "react";
 import type { ChangeEvent, KeyboardEvent } from "react";
+import { cn } from "@/lib/utils";
 
-interface InlineTextareaEditorProps {
+interface InlineTextEditorProps {
   readonly value: string;
   readonly onChange: (value: string) => void;
   readonly onSave: (value: string) => void;
   readonly onCancel: () => void;
-  readonly rows?: number;
-  readonly placeholder?: string;
+  readonly className?: string;
 }
 
-export function InlineTextareaEditor({
+export function InlineTextEditor({
   value,
   onChange,
   onSave,
   onCancel,
-  rows = 2,
-  placeholder,
-}: InlineTextareaEditorProps) {
+  className = "",
+}: InlineTextEditorProps) {
   const done = useRef(false);
 
   const commit = () => {
@@ -32,23 +31,28 @@ export function InlineTextareaEditor({
     onCancel();
   };
 
-  const handleKeyDown = (e: KeyboardEvent<HTMLTextAreaElement>) => {
-    if (e.key === "Escape") {
+  const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      commit();
+    } else if (e.key === "Escape") {
       e.preventDefault();
       cancel();
     }
   };
 
   return (
-    <textarea
+    <input
+      type="text"
       value={value}
-      onChange={(e: ChangeEvent<HTMLTextAreaElement>) => onChange(e.target.value)}
+      onChange={(e: ChangeEvent<HTMLInputElement>) => onChange(e.target.value)}
       onBlur={commit}
       onKeyDown={handleKeyDown}
-      rows={rows}
-      placeholder={placeholder}
       autoFocus
-      className="w-full rounded-lg border border-border bg-background px-3 py-2 text-sm text-foreground outline-none focus:border-foreground"
+      className={cn(
+        "w-full rounded-lg border border-border bg-background px-3 py-1.5 text-foreground outline-none focus:border-foreground",
+        className,
+      )}
     />
   );
 }

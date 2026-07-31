@@ -5,7 +5,9 @@ import { CATEGORY_REGISTRY, getEntitiesForCategory } from "@/compendium";
 import type { EntityCategory } from "@/compendium";
 import { ReferencePicker } from "@/components/ui/ReferencePicker";
 import type { PickerCandidate } from "@/components/ui/ReferencePicker";
+import { InlineTextEditor } from "@/components/ui/InlineTextEditor";
 import { InlineTextareaEditor } from "@/components/ui/InlineTextareaEditor";
+import { Section } from "@/components/ui/Section";
 import { entityRefFromCanonicalId, EntityReferenceRow, RowRemoveButton } from "@/components/entity";
 import type { EntityRef } from "@/components/entity";
 
@@ -24,15 +26,155 @@ function buildSceneCandidates(): PickerCandidate[] {
   return out;
 }
 
-function SceneCard({ adventureId, scene, archived }: { adventureId: string; scene: AdventureScene; archived: boolean }) {
+function ChevronIcon({ open }: { open: boolean }) {
+  return (
+    <svg
+      aria-hidden="true"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth={2}
+      className={`h-4 w-4 shrink-0 text-muted-foreground transition-transform duration-150 ${open ? "rotate-180" : ""}`}
+    >
+      <path d="m6 9 6 6 6-6" />
+    </svg>
+  );
+}
+
+function SceneCardHeader({
+  scene,
+  expanded,
+  onToggle,
+}: {
+  scene: AdventureScene;
+  expanded: boolean;
+  onToggle: () => void;
+}) {
+  const refCount = scene.entities.length;
+  return (
+    <button
+      type="button"
+      onClick={onToggle}
+      aria-expanded={expanded}
+      className="flex w-full items-center gap-2 px-3 py-3 text-left transition-colors hover:bg-accent/30 active:bg-accent/60"
+    >
+      <ChevronIcon open={expanded} />
+      <div className="min-w-0 flex-1">
+        <p className="truncate text-sm font-medium text-foreground">{scene.title}</p>
+        <p className="truncate text-xs text-muted-foreground">
+          {scene.description || `${refCount} reference${refCount === 1 ? "" : "s"}`}
+        </p>
+      </div>
+    </button>
+  );
+}
+
+function SceneEntityList({
+  refs,
+  archived,
+  onRemove,
+}: {
+  refs: readonly EntityRef[];
+  archived: boolean;
+  onRemove: (canonicalId: string) => void;
+}) {
+  return (
+    <div className="border-t border-border">
+      {refs.map((ref) => (
+        <EntityReferenceRow
+          key={ref.canonicalId}
+          canonicalId={ref.canonicalId}
+          className="border-b border-border px-3 py-2.5 last:border-b-0"
+          action={
+            !archived && (
+              <RowRemoveButton
+                label={`Remove ${ref.name} from scene`}
+                onClick={() => onRemove(ref.canonicalId)}
+              />
+            )
+          }
+        />
+      ))}
+    </div>
+  );
+}
+
+function SceneNoteSection({
+  note,
+  archived,
+  onSave,
+}: {
+  note?: string;
+  archived: boolean;
+  onSave: (note: string) => void;
+}) {
+  const [editing, setEditing] = useState(false);
+  const [draft, setDraft] = useState(note ?? "");
+
+  const start = useCallback(() => {
+    setDraft(note ?? "");
+    setEditing(true);
+  }, [note]);
+
+  const save = useCallback(
+    (value: string) => {
+      onSave(value);
+      setEditing(false);
+    },
+    [onSave],
+  );
+
+  return (
+    <div>
+      <div className="mb-1 flex items-center justify-between">
+        <h3 className="text-xs font-medium text-muted-foreground">DM Note</h3>
+        {!archived && !editing && note && (
+          <button
+            type="button"
+            onClick={start}
+            className="touch-target px-2 py-1 text-xs text-muted-foreground underline transition-colors hover:text-foreground"
+          >
+            Edit
+          </button>
+        )}
+      </div>
+      {editing ? (
+        <InlineTextareaEditor
+          value={draft}
+          onChange={setDraft}
+          onSave={save}
+          onCancel={() => setEditing(false)}
+          rows={2}
+          placeholder="Add a private DM note\u2026"
+        />
+      ) : (
+        <button
+          type="button"
+          onClick={archived ? undefined : start}
+          className={`w-full rounded-lg border border-transparent px-3 py-2 text-left text-sm text-muted-foreground ${archived ? "cursor-default" : "hover:border-border hover:bg-accent/30"}`}
+        >
+          {note || "Add a private DM note\u2026"}
+        </button>
+      )}
+    </div>
+  );
+}
+
+function SceneCard({
+  adventureId,
+  scene,
+  archived,
+}: {
+  adventureId: string;
+  scene: AdventureScene;
+  archived: boolean;
+}) {
   const [expanded, setExpanded] = useState(false);
   const [pickerOpen, setPickerOpen] = useState(false);
   const [editingTitle, setEditingTitle] = useState(false);
   const [titleDraft, setTitleDraft] = useState(scene.title);
   const [editingDescription, setEditingDescription] = useState(false);
   const [descriptionDraft, setDescriptionDraft] = useState(scene.description ?? "");
-  const [editingNote, setEditingNote] = useState(false);
-  const [noteDraft, setNoteDraft] = useState(scene.note ?? "");
 
   const candidates = useMemo(() => (pickerOpen ? buildSceneCandidates() : []), [pickerOpen]);
 
@@ -47,36 +189,46 @@ function SceneCard({ adventureId, scene, archived }: { adventureId: string; scen
     setEditingTitle(true);
   }, [scene.title]);
 
-  const handleSaveTitle = useCallback(() => {
-    if (titleDraft.trim()) {
-      userStore.getState().updateScene(adventureId, scene.id, { title: titleDraft.trim() });
-    }
-    setEditingTitle(false);
-  }, [adventureId, scene.id, titleDraft]);
+  const handleSaveTitle = useCallback(
+    (value: string) => {
+      if (value.trim()) {
+        userStore.getState().updateScene(adventureId, scene.id, { title: value.trim() });
+      }
+      setEditingTitle(false);
+    },
+    [adventureId, scene.id],
+  );
 
   const handleStartDescriptionEdit = useCallback(() => {
     setDescriptionDraft(scene.description ?? "");
     setEditingDescription(true);
   }, [scene.description]);
 
-  const handleSaveDescription = useCallback(() => {
-    userStore.getState().updateScene(adventureId, scene.id, { description: descriptionDraft });
-    setEditingDescription(false);
-  }, [adventureId, scene.id, descriptionDraft]);
+  const handleSaveDescription = useCallback(
+    (value: string) => {
+      userStore.getState().updateScene(adventureId, scene.id, { description: value });
+      setEditingDescription(false);
+    },
+    [adventureId, scene.id],
+  );
 
-  const handleStartNoteEdit = useCallback(() => {
-    setNoteDraft(scene.note ?? "");
-    setEditingNote(true);
-  }, [scene.note]);
-
-  const handleSaveNote = useCallback(() => {
-    userStore.getState().updateScene(adventureId, scene.id, { note: noteDraft });
-    setEditingNote(false);
-  }, [adventureId, scene.id, noteDraft]);
+  const handleSaveNote = useCallback(
+    (note: string) => {
+      userStore.getState().updateScene(adventureId, scene.id, { note });
+    },
+    [adventureId, scene.id],
+  );
 
   const handleRemoveScene = useCallback(() => {
     userStore.getState().removeScene(adventureId, scene.id);
   }, [adventureId, scene.id]);
+
+  const handleRemoveRef = useCallback(
+    (canonicalId: string) => {
+      userStore.getState().toggleSceneEntity(adventureId, scene.id, canonicalId);
+    },
+    [adventureId, scene.id],
+  );
 
   const handlePickerSelect = useCallback(
     (canonicalId: string) => {
@@ -93,31 +245,11 @@ function SceneCard({ adventureId, scene, archived }: { adventureId: string; scen
 
   return (
     <div className="overflow-hidden rounded-lg border border-border bg-background">
-      <button
-        type="button"
-        onClick={() => setExpanded((v) => !v)}
-        aria-expanded={expanded}
-        className="flex w-full items-center gap-2 px-3 py-3 text-left transition-colors hover:bg-accent/30 active:bg-accent/60"
-      >
-        <svg
-          aria-hidden="true"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth={2}
-          className={`h-4 w-4 shrink-0 text-muted-foreground transition-transform duration-150 ${expanded ? "rotate-180" : ""}`}
-        >
-          <path d="m6 9 6 6 6-6" />
-        </svg>
-        <div className="min-w-0 flex-1">
-          <p className="truncate text-sm font-medium text-foreground">{scene.title}</p>
-          <p className="truncate text-xs text-muted-foreground">
-            {scene.description ? `${scene.description} \u00B7 ` : ""}
-            {refs.length} reference{refs.length === 1 ? "" : "s"}
-            {scene.note ? " \u00B7 DM note" : ""}
-          </p>
-        </div>
-      </button>
+      <SceneCardHeader scene={scene} expanded={expanded} onToggle={() => setExpanded((v) => !v)} />
+
+      {refs.length > 0 && (
+        <SceneEntityList refs={refs} archived={archived} onRemove={handleRemoveRef} />
+      )}
 
       {expanded && (
         <div className="flex flex-col gap-4 border-t border-border px-3 py-3">
@@ -135,26 +267,13 @@ function SceneCard({ adventureId, scene, archived }: { adventureId: string; scen
               )}
             </div>
             {editingTitle ? (
-              <div className="flex items-center gap-2">
-                <input
-                  type="text"
-                  value={titleDraft}
-                  onChange={(e) => setTitleDraft(e.target.value)}
-                  onKeyDown={(e) => {
-                    if (e.key === "Enter") handleSaveTitle();
-                    if (e.key === "Escape") setEditingTitle(false);
-                  }}
-                  className="w-full rounded-lg border border-border bg-background px-3 py-1.5 text-sm font-medium text-foreground outline-none focus:border-foreground"
-                  autoFocus
-                />
-                <button
-                  type="button"
-                  onClick={handleSaveTitle}
-                  className="rounded-lg bg-primary px-3 py-1.5 text-xs font-medium text-primary-foreground transition-all duration-150 hover:bg-primary/90 active:scale-90"
-                >
-                  Save
-                </button>
-              </div>
+              <InlineTextEditor
+                value={titleDraft}
+                onChange={setTitleDraft}
+                onSave={handleSaveTitle}
+                onCancel={() => setEditingTitle(false)}
+                className="text-sm font-medium"
+              />
             ) : (
               <p className="text-sm font-medium text-foreground">{scene.title}</p>
             )}
@@ -169,6 +288,7 @@ function SceneCard({ adventureId, scene, archived }: { adventureId: string; scen
                 onSave={handleSaveDescription}
                 onCancel={() => setEditingDescription(false)}
                 rows={2}
+                placeholder="Add a short description\u2026"
               />
             ) : (
               <button
@@ -181,82 +301,29 @@ function SceneCard({ adventureId, scene, archived }: { adventureId: string; scen
             )}
           </div>
 
-          <div>
-            <div className="mb-1 flex items-center justify-between">
-              <h3 className="text-xs font-medium text-muted-foreground">DM Note</h3>
-              {!archived && !editingNote && scene.note && (
-                <button
-                  type="button"
-                  onClick={handleStartNoteEdit}
-                  className="touch-target px-2 py-1 text-xs text-muted-foreground underline transition-colors hover:text-foreground"
-                >
-                  Edit
-                </button>
-              )}
-            </div>
-            {editingNote ? (
-              <InlineTextareaEditor
-                value={noteDraft}
-                onChange={setNoteDraft}
-                onSave={handleSaveNote}
-                onCancel={() => setEditingNote(false)}
-                rows={2}
-              />
-            ) : (
-              <button
-                type="button"
-                onClick={archived ? undefined : handleStartNoteEdit}
-                className={`w-full rounded-lg border border-transparent px-3 py-2 text-left text-sm text-muted-foreground ${archived ? "cursor-default" : "hover:border-border hover:bg-accent/30"}`}
-              >
-                {scene.note || "Add a private DM note\u2026"}
-              </button>
-            )}
-          </div>
+          <SceneNoteSection note={scene.note} archived={archived} onSave={handleSaveNote} />
 
-          <div>
-            <div className="mb-1 flex items-center justify-between">
-              <h3 className="text-xs font-medium text-muted-foreground">References</h3>
-              {!archived && (
-                <button
-                  type="button"
-                  onClick={() => setPickerOpen(true)}
-                  className="touch-target px-2 py-1 text-xs font-medium text-foreground underline transition-colors hover:text-primary"
-                >
-                  Add Reference
-                </button>
-              )}
-            </div>
-            {refs.length === 0 ? (
-              <p className="px-3 text-xs text-muted-foreground/60">No references yet.</p>
-            ) : (
-              <div className="flex flex-col">
-                {refs.map((ref) => (
-                  <EntityReferenceRow
-                    key={ref.canonicalId}
-                    canonicalId={ref.canonicalId}
-                    className="border-b border-border py-2.5"
-                    action={
-                      !archived && (
-                        <RowRemoveButton
-                          label={`Remove ${ref.name} from scene`}
-                          onClick={() => userStore.getState().toggleSceneEntity(adventureId, scene.id, ref.canonicalId)}
-                        />
-                      )
-                    }
-                  />
-                ))}
-              </div>
-            )}
-          </div>
+          {refs.length === 0 && (
+            <p className="text-xs text-muted-foreground/60">No references yet.</p>
+          )}
 
           {!archived && (
-            <button
-              type="button"
-              onClick={handleRemoveScene}
-              className="touch-target self-start rounded-lg border border-destructive/50 px-3 py-1.5 text-xs text-destructive transition-all duration-150 hover:bg-destructive/10 active:scale-95"
-            >
-              Remove Scene
-            </button>
+            <div className="flex gap-2">
+              <button
+                type="button"
+                onClick={() => setPickerOpen(true)}
+                className="touch-target rounded-lg border border-border px-3 py-1.5 text-xs font-medium text-foreground transition-all duration-150 hover:bg-accent active:scale-95"
+              >
+                Add Reference
+              </button>
+              <button
+                type="button"
+                onClick={handleRemoveScene}
+                className="touch-target rounded-lg border border-destructive/50 px-3 py-1.5 text-xs text-destructive transition-all duration-150 hover:bg-destructive/10 active:scale-95"
+              >
+                Remove Scene
+              </button>
+            </div>
           )}
         </div>
       )}
@@ -321,11 +388,14 @@ export function AdventurePage() {
     setNewObjective("");
   }, [adventure, newObjective]);
 
-  const handleRemoveObjective = useCallback((index: number) => {
-    if (adventure) {
-      userStore.getState().removeObjective(adventure.id, index);
-    }
-  }, [adventure]);
+  const handleRemoveObjective = useCallback(
+    (index: number) => {
+      if (adventure) {
+        userStore.getState().removeObjective(adventure.id, index);
+      }
+    },
+    [adventure],
+  );
 
   const handleAddScene = useCallback(() => {
     if (!adventure || !newSceneTitle.trim()) return;
@@ -341,12 +411,15 @@ export function AdventurePage() {
     }
   }, [adventure]);
 
-  const handleSaveTitle = useCallback(() => {
-    if (adventure && titleDraft.trim()) {
-      userStore.getState().updateAdventure(adventure.id, { title: titleDraft.trim() });
-    }
-    setEditingTitle(false);
-  }, [adventure, titleDraft]);
+  const handleSaveTitle = useCallback(
+    (value: string) => {
+      if (adventure && value.trim()) {
+        userStore.getState().updateAdventure(adventure.id, { title: value.trim() });
+      }
+      setEditingTitle(false);
+    },
+    [adventure],
+  );
 
   const handleStartDescriptionEdit = useCallback(() => {
     if (adventure) {
@@ -355,12 +428,15 @@ export function AdventurePage() {
     }
   }, [adventure]);
 
-  const handleSaveDescription = useCallback(() => {
-    if (adventure) {
-      userStore.getState().updateAdventure(adventure.id, { description: descriptionDraft });
-    }
-    setEditingDescription(false);
-  }, [adventure, descriptionDraft]);
+  const handleSaveDescription = useCallback(
+    (value: string) => {
+      if (adventure) {
+        userStore.getState().updateAdventure(adventure.id, { description: value });
+      }
+      setEditingDescription(false);
+    },
+    [adventure],
+  );
 
   const handleStartNotesEdit = useCallback(() => {
     if (adventure) {
@@ -369,12 +445,15 @@ export function AdventurePage() {
     }
   }, [adventure]);
 
-  const handleSaveNotes = useCallback(() => {
-    if (adventure) {
-      userStore.getState().updateAdventure(adventure.id, { notes: notesDraft });
-    }
-    setEditingNotes(false);
-  }, [adventure, notesDraft]);
+  const handleSaveNotes = useCallback(
+    (value: string) => {
+      if (adventure) {
+        userStore.getState().updateAdventure(adventure.id, { notes: value });
+      }
+      setEditingNotes(false);
+    },
+    [adventure],
+  );
 
   const entities: EntityRef[] = [];
   for (const id of entityIds) {
@@ -388,7 +467,8 @@ export function AdventurePage() {
         <h1 className="mb-6 text-xl font-bold text-foreground">Adventure</h1>
         <div className="flex flex-col items-center gap-4 rounded-lg border border-border p-6 text-center">
           <p className="text-sm text-muted-foreground">
-            No active adventure. Create one to track your campaign notes, objectives, and important entities.
+            No active adventure yet. Create one to track your campaign notes, objectives, scenes,
+            and important references.
           </p>
           <button
             type="button"
@@ -410,69 +490,106 @@ export function AdventurePage() {
   });
 
   return (
-    <div className="flex flex-col px-4 py-6">
-      <div className="mb-6 flex items-start justify-between">
-        <div className="min-w-0 flex-1">
-          {editingTitle ? (
-            <div className="flex items-center gap-2">
-              <input
-                type="text"
+    <div className="flex flex-col gap-6 px-4 py-6">
+      <header>
+        <div className="flex items-start justify-between gap-3">
+          <div className="min-w-0 flex-1">
+            {editingTitle ? (
+              <InlineTextEditor
                 value={titleDraft}
-                onChange={(e) => setTitleDraft(e.target.value)}
-                onKeyDown={(e) => {
-                  if (e.key === "Enter") handleSaveTitle();
-                  if (e.key === "Escape") setEditingTitle(false);
-                }}
-                className="w-full rounded-lg border border-border bg-background px-3 py-1.5 text-lg font-bold text-foreground outline-none focus:border-foreground"
-                autoFocus
+                onChange={setTitleDraft}
+                onSave={handleSaveTitle}
+                onCancel={() => setEditingTitle(false)}
+                className="text-lg font-bold"
               />
+            ) : (
+              <h1 className="text-xl font-bold text-foreground">{adventure.title}</h1>
+            )}
+            <p className="mt-1 text-xs text-muted-foreground">
+              {adventure.scenes.length} scene{adventure.scenes.length === 1 ? "" : "s"} &middot;{" "}
+              {entities.length} reference
+              {entities.length === 1 ? "" : "s"} &middot; Updated {lastUpdated}
+              {adventure.archived && " \u00B7 Archived"}
+            </p>
+          </div>
+          <div className="flex shrink-0 items-center gap-1">
+            {!adventure.archived && !editingTitle && (
               <button
                 type="button"
-                onClick={handleSaveTitle}
-                className="rounded-lg bg-primary px-3 py-1.5 text-xs font-medium text-primary-foreground transition-all duration-150 hover:bg-primary/90 active:scale-90"
+                onClick={handleStartTitleEdit}
+                aria-label="Edit title"
+                className="hitbox-expand inline-flex h-8 w-8 items-center justify-center rounded text-muted-foreground transition-all duration-150 hover:bg-accent hover:text-foreground active:scale-90 active:bg-accent/80"
               >
-                Save
+                <svg
+                  aria-hidden="true"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth={2}
+                  className="h-4 w-4"
+                >
+                  <path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3Z" />
+                </svg>
               </button>
-            </div>
+            )}
+            {allAdventures.length > 1 && (
+              <button
+                type="button"
+                onClick={handleToggleSwitch}
+                className="touch-target rounded-lg px-2 py-1 text-xs font-medium text-muted-foreground transition-colors hover:bg-accent hover:text-foreground active:bg-accent/60"
+              >
+                Switch
+              </button>
+            )}
+            {!adventure.archived && (
+              <button
+                type="button"
+                onClick={handleArchive}
+                className="touch-target rounded-lg px-2 py-1 text-xs font-medium text-destructive transition-colors hover:bg-destructive/10 hover:text-destructive active:bg-destructive/10"
+              >
+                Archive
+              </button>
+            )}
+          </div>
+        </div>
+
+        <div className="mt-3">
+          {editingDescription ? (
+            <InlineTextareaEditor
+              value={descriptionDraft}
+              onChange={setDescriptionDraft}
+              onSave={handleSaveDescription}
+              onCancel={() => setEditingDescription(false)}
+              rows={3}
+              placeholder="Add a description\u2026"
+            />
           ) : (
-            <h1
-              className="cursor-pointer text-lg font-bold text-foreground hover:text-primary"
-              onClick={handleStartTitleEdit}
-              title="Click to edit title"
-            >
-              {adventure.title}
-            </h1>
-          )}
-          <p className="mt-1 text-xs text-muted-foreground">
-            {adventure.scenes.length} scene{adventure.scenes.length === 1 ? "" : "s"} &middot; {entities.length} entr
-            {entities.length === 1 ? "y" : "ies"} &middot; Updated {lastUpdated}
-            {adventure.archived && " \u00B7 Archived"}
-          </p>
-        </div>
-        <div className="ml-4 flex items-center gap-2">
-          {allAdventures.length > 1 && (
             <button
               type="button"
-              onClick={handleToggleSwitch}
-              className="touch-target rounded-lg border border-border px-3 py-1.5 text-xs text-muted-foreground transition-all duration-150 hover:bg-accent active:scale-90"
+              onClick={adventure.archived ? undefined : handleStartDescriptionEdit}
+              className={`w-full rounded-lg border border-transparent px-3 py-2 text-left text-sm text-muted-foreground ${adventure.archived ? "cursor-default" : "hover:border-border hover:bg-accent/30"}`}
             >
-              Switch
-            </button>
-          )}
-          {!adventure.archived && (
-            <button
-              type="button"
-              onClick={handleArchive}
-              className="touch-target rounded-lg border border-destructive/50 px-3 py-1.5 text-xs text-destructive transition-all duration-150 hover:bg-destructive/10 active:scale-90"
-            >
-              Archive
+              {adventure.description || "Add a description\u2026"}
             </button>
           )}
         </div>
-      </div>
+      </header>
+
+      {adventure.archived && (
+        <div className="flex items-center gap-3 rounded-lg border border-border bg-accent/30 px-4 py-3">
+          <p className="text-xs text-muted-foreground">This adventure is archived.</p>
+          <button
+            type="button"
+            onClick={() => userStore.getState().restoreAdventure(adventure.id)}
+            className="touch-target px-2 py-1 text-xs font-medium text-foreground underline transition-colors hover:text-primary"
+          >
+            Restore
+          </button>
+        </div>
+      )}
 
       {showSwitch && (
-        <div className="mb-6 overflow-hidden rounded-lg border border-border bg-background animate-slide-down">
+        <div className="overflow-hidden rounded-lg border border-border bg-background animate-slide-down">
           <div className="border-b border-border px-4 py-2 text-xs font-medium text-muted-foreground">
             Switch Adventure
           </div>
@@ -487,117 +604,78 @@ export function AdventurePage() {
               {adv.id === adventure.id && (
                 <span className="text-xs font-medium text-emerald-500">Active</span>
               )}
-              {adv.archived && (
-                <span className="text-xs text-muted-foreground/60">Archived</span>
-              )}
+              {adv.archived && <span className="text-xs text-muted-foreground/60">Archived</span>}
             </button>
           ))}
         </div>
       )}
 
-      {adventure.archived && (
-        <div className="mb-6 flex items-center gap-3 rounded-lg border border-border bg-accent/30 px-4 py-3">
-          <p className="text-xs text-muted-foreground">This adventure is archived.</p>
-          <button
-            type="button"
-            onClick={() => userStore.getState().restoreAdventure(adventure.id)}
-            className="touch-target px-2 py-1 text-xs font-medium text-foreground underline transition-colors hover:text-primary"
-          >
-            Restore
-          </button>
-        </div>
-      )}
-
-      <div className="mb-6">
-        <h2 className="mb-2 text-xs font-medium text-muted-foreground">Description</h2>
-        {editingDescription ? (
-          <InlineTextareaEditor
-            value={descriptionDraft}
-            onChange={setDescriptionDraft}
-            onSave={handleSaveDescription}
-            onCancel={() => setEditingDescription(false)}
-            rows={3}
-          />
-        ) : (
-          <p
-            className="cursor-pointer rounded-lg border border-transparent px-3 py-2 text-sm text-muted-foreground hover:border-border hover:bg-accent/30"
-            onClick={handleStartDescriptionEdit}
-          >
-            {adventure.description || "Add a description\u2026"}
-          </p>
-        )}
-      </div>
-
-      <div className="mb-6">
-        <h2 className="mb-2 text-xs font-medium text-muted-foreground">Objectives</h2>
+      <Section title="Objectives">
         {adventure.objectives.length === 0 ? (
-          <p className="mb-2 px-3 text-xs text-muted-foreground/60">No objectives yet.</p>
+          <p className="px-3 text-xs text-muted-foreground/60">
+            No objectives yet. Add the first one below.
+          </p>
         ) : (
-          <ul className="mb-2 space-y-1">
+          <ul className="flex flex-col">
             {adventure.objectives.map((obj, i) => (
-              <li key={i} className="flex items-center gap-2 rounded-lg px-3 py-1.5 text-sm text-foreground hover:bg-accent/30">
+              <li
+                key={i}
+                className="flex items-center gap-2 rounded-lg px-3 py-1.5 text-sm text-foreground hover:bg-accent/30"
+              >
                 <span className="flex-1">{obj}</span>
-                <button
-                  type="button"
-                  onClick={() => handleRemoveObjective(i)}
-                  className="hitbox-expand inline-flex h-6 w-6 items-center justify-center rounded text-muted-foreground transition-all duration-150 hover:bg-accent hover:text-foreground active:scale-90"
-                  aria-label={`Remove objective: ${obj}`}
-                >
-                  <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} className="h-3.5 w-3.5">
-                    <line x1="18" y1="6" x2="6" y2="18" />
-                    <line x1="6" y1="6" x2="18" y2="18" />
-                  </svg>
-                </button>
+                {!adventure.archived && (
+                  <button
+                    type="button"
+                    onClick={() => handleRemoveObjective(i)}
+                    aria-label={`Remove objective: ${obj}`}
+                    className="hitbox-expand inline-flex h-6 w-6 items-center justify-center rounded text-muted-foreground transition-all duration-150 hover:bg-accent hover:text-foreground active:scale-90"
+                  >
+                    <svg
+                      aria-hidden="true"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth={2}
+                      className="h-3.5 w-3.5"
+                    >
+                      <line x1="18" y1="6" x2="6" y2="18" />
+                      <line x1="6" y1="6" x2="18" y2="18" />
+                    </svg>
+                  </button>
+                )}
               </li>
             ))}
           </ul>
         )}
-        <div className="flex items-center gap-2">
-          <input
-            type="text"
-            value={newObjective}
-            onChange={(e) => setNewObjective(e.target.value)}
-            onKeyDown={(e) => {
-              if (e.key === "Enter") handleAddObjective();
-            }}
-            placeholder="Add objective\u2026"
-            className="flex-1 rounded-lg border border-border bg-background px-3 py-1.5 text-sm text-foreground outline-none placeholder:text-muted-foreground/50 focus:border-foreground"
-          />
-          <button
-            type="button"
-            onClick={handleAddObjective}
-            disabled={!newObjective.trim()}
-            className="rounded-lg bg-primary px-3 py-1.5 text-xs font-medium text-primary-foreground transition-all duration-150 hover:bg-primary/90 active:scale-90 disabled:opacity-40"
-          >
-            Add
-          </button>
-        </div>
-      </div>
-
-      <div className="mb-6">
-        <h2 className="mb-2 text-xs font-medium text-muted-foreground">Notes</h2>
-        {editingNotes ? (
-          <InlineTextareaEditor
-            value={notesDraft}
-            onChange={setNotesDraft}
-            onSave={handleSaveNotes}
-            onCancel={() => setEditingNotes(false)}
-            rows={6}
-          />
-        ) : (
-          <p
-            className="min-h-[6rem] cursor-pointer rounded-lg border border-transparent px-3 py-2 text-sm text-muted-foreground hover:border-border hover:bg-accent/30"
-            onClick={handleStartNotesEdit}
-          >
-            {adventure.notes || "Add notes\u2026"}
-          </p>
+        {!adventure.archived && (
+          <div className="flex items-center gap-2">
+            <input
+              type="text"
+              value={newObjective}
+              onChange={(e) => setNewObjective(e.target.value)}
+              onKeyDown={(e) => {
+                if (e.key === "Enter") handleAddObjective();
+              }}
+              placeholder="Add objective\u2026"
+              className="flex-1 rounded-lg border border-border bg-background px-3 py-1.5 text-sm text-foreground outline-none placeholder:text-muted-foreground/50 focus:border-foreground"
+            />
+            <button
+              type="button"
+              onClick={handleAddObjective}
+              disabled={!newObjective.trim()}
+              className="rounded-lg bg-primary px-3 py-1.5 text-xs font-medium text-primary-foreground transition-all duration-150 hover:bg-primary/90 active:scale-90 disabled:opacity-40"
+            >
+              Add
+            </button>
+          </div>
         )}
-      </div>
+      </Section>
 
-      <div>
-        <div className="mb-2 flex items-center justify-between">
-          <h2 className="text-xs font-medium text-muted-foreground">Important Entities</h2>
-          {entities.length > 0 && !adventure.archived && (
+      <Section
+        title="Important References"
+        action={
+          entities.length > 0 &&
+          !adventure.archived && (
             <button
               type="button"
               onClick={handleClearEntities}
@@ -605,11 +683,13 @@ export function AdventurePage() {
             >
               Remove all
             </button>
-          )}
-        </div>
+          )
+        }
+      >
         {entities.length === 0 ? (
           <p className="px-3 text-xs text-muted-foreground/60">
-            No entities added yet. Use the flag icon on entity pages or search results to add entities to this adventure.
+            No references yet. Use the flag icon on entity pages or search results to pin entities
+            to this adventure.
           </p>
         ) : (
           <div className="flex flex-col">
@@ -617,7 +697,7 @@ export function AdventurePage() {
               <EntityReferenceRow
                 key={ref.canonicalId}
                 canonicalId={ref.canonicalId}
-                className="border-b border-border px-0 py-3"
+                className="border-b border-border px-0 py-3 last:border-b-0"
                 action={
                   !adventure.archived && (
                     <RowRemoveButton
@@ -630,12 +710,12 @@ export function AdventurePage() {
             ))}
           </div>
         )}
-      </div>
+      </Section>
 
-      <div className="mt-6">
-        <div className="mb-2 flex items-center justify-between">
-          <h2 className="text-xs font-medium text-muted-foreground">Scenes</h2>
-          {!adventure.archived && (
+      <Section
+        title="Scenes"
+        action={
+          !adventure.archived && (
             <button
               type="button"
               onClick={() => setNewSceneOpen((v) => !v)}
@@ -643,11 +723,11 @@ export function AdventurePage() {
             >
               {newSceneOpen ? "Cancel" : "Add Scene"}
             </button>
-          )}
-        </div>
-
-        {newSceneOpen && (
-          <div className="mb-3 flex items-center gap-2">
+          )
+        }
+      >
+        {newSceneOpen && !adventure.archived && (
+          <div className="flex items-center gap-2">
             <input
               type="text"
               value={newSceneTitle}
@@ -670,19 +750,45 @@ export function AdventurePage() {
             </button>
           </div>
         )}
-
         {adventure.scenes.length === 0 ? (
           <p className="px-3 text-xs text-muted-foreground/60">
-            Scenes are optional sections for organizing a larger adventure. Skip them, or add one to group references by chapter or location.
+            Scenes are optional sections for organizing a larger adventure. Skip them, or add one to
+            group references by chapter or location.
           </p>
         ) : (
           <div className="flex flex-col gap-2">
             {adventure.scenes.map((scene) => (
-              <SceneCard key={scene.id} adventureId={adventure.id} scene={scene} archived={adventure.archived} />
+              <SceneCard
+                key={scene.id}
+                adventureId={adventure.id}
+                scene={scene}
+                archived={adventure.archived}
+              />
             ))}
           </div>
         )}
-      </div>
+      </Section>
+
+      <Section title="Notes" subtitle="Private notes for the DM.">
+        {editingNotes ? (
+          <InlineTextareaEditor
+            value={notesDraft}
+            onChange={setNotesDraft}
+            onSave={handleSaveNotes}
+            onCancel={() => setEditingNotes(false)}
+            rows={6}
+            placeholder="Add notes\u2026"
+          />
+        ) : (
+          <button
+            type="button"
+            onClick={adventure.archived ? undefined : handleStartNotesEdit}
+            className={`min-h-[6rem] w-full rounded-lg border border-transparent px-3 py-2 text-left text-sm text-muted-foreground ${adventure.archived ? "cursor-default" : "hover:border-border hover:bg-accent/30"}`}
+          >
+            {adventure.notes || "Add notes\u2026"}
+          </button>
+        )}
+      </Section>
     </div>
   );
 }
