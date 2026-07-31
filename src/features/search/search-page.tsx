@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect, useMemo, type KeyboardEvent } from "react";
-import { useNavigate } from "react-router";
+import { useNavigate } from "react-router-dom";
 import { search } from "@/compendium";
 import { createSearchResultItems } from "@/components/entity";
 import { SearchInput } from "./components/search-input";

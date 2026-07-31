@@ -8796,6 +8796,1260 @@
     "category": "equipment"
   },
   {
+    "id": "phb|alchemist-s-supplies",
+    "canonicalId": "equipment.alchemists-supplies",
+    "name": "Alchemist's Supplies",
+    "category": "equipment"
+  },
+  {
+    "id": "xphb|alchemist-s-supplies",
+    "canonicalId": "equipment.alchemists-supplies",
+    "name": "Alchemist's Supplies",
+    "category": "equipment"
+  },
+  {
+    "id": "dmg|antimatter-rifle",
+    "canonicalId": "equipment.antimatter-rifle",
+    "name": "Antimatter Rifle",
+    "category": "equipment"
+  },
+  {
+    "id": "xdmg|antimatter-rifle",
+    "canonicalId": "equipment.antimatter-rifle",
+    "name": "Antimatter Rifle",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|arrow",
+    "canonicalId": "equipment.arrow",
+    "name": "Arrow",
+    "category": "equipment"
+  },
+  {
+    "id": "xphb|arrow",
+    "canonicalId": "equipment.arrow",
+    "name": "Arrow",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|arrows-20",
+    "canonicalId": "equipment.arrows-20",
+    "name": "Arrows (20)",
+    "category": "equipment"
+  },
+  {
+    "id": "xphb|arrows-20",
+    "canonicalId": "equipment.arrows-20",
+    "name": "Arrows (20)",
+    "category": "equipment"
+  },
+  {
+    "id": "dmg|automatic-pistol",
+    "canonicalId": "equipment.automatic-pistol",
+    "name": "Automatic Pistol",
+    "category": "equipment"
+  },
+  {
+    "id": "dmg|automatic-rifle",
+    "canonicalId": "equipment.automatic-rifle",
+    "name": "Automatic Rifle",
+    "category": "equipment"
+  },
+  {
+    "id": "xdmg|automatic-rifle",
+    "canonicalId": "equipment.automatic-rifle",
+    "name": "Automatic Rifle",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|bagpipes",
+    "canonicalId": "equipment.bagpipes",
+    "name": "Bagpipes",
+    "category": "equipment"
+  },
+  {
+    "id": "xphb|bagpipes",
+    "canonicalId": "equipment.bagpipes",
+    "name": "Bagpipes",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|battleaxe",
+    "canonicalId": "equipment.battleaxe",
+    "name": "Battleaxe",
+    "category": "equipment"
+  },
+  {
+    "id": "xphb|battleaxe",
+    "canonicalId": "equipment.battleaxe",
+    "name": "Battleaxe",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|blowgun",
+    "canonicalId": "equipment.blowgun",
+    "name": "Blowgun",
+    "category": "equipment"
+  },
+  {
+    "id": "xphb|blowgun",
+    "canonicalId": "equipment.blowgun",
+    "name": "Blowgun",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|blowgun-needle",
+    "canonicalId": "equipment.blowgun-needle",
+    "name": "Blowgun Needle",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|blowgun-needles-50",
+    "canonicalId": "equipment.blowgun-needles-50",
+    "name": "Blowgun Needles (50)",
+    "category": "equipment"
+  },
+  {
+    "id": "xphb|bolt",
+    "canonicalId": "equipment.bolt",
+    "name": "Bolt",
+    "category": "equipment"
+  },
+  {
+    "id": "xphb|bolts-20",
+    "canonicalId": "equipment.bolts-20",
+    "name": "Bolts (20)",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|breastplate",
+    "canonicalId": "equipment.breastplate",
+    "name": "Breastplate",
+    "category": "equipment"
+  },
+  {
+    "id": "xphb|breastplate",
+    "canonicalId": "equipment.breastplate",
+    "name": "Breastplate",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|brewer-s-supplies",
+    "canonicalId": "equipment.brewers-supplies",
+    "name": "Brewer's Supplies",
+    "category": "equipment"
+  },
+  {
+    "id": "xphb|brewer-s-supplies",
+    "canonicalId": "equipment.brewers-supplies",
+    "name": "Brewer's Supplies",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|calligrapher-s-supplies",
+    "canonicalId": "equipment.calligraphers-supplies",
+    "name": "Calligrapher's Supplies",
+    "category": "equipment"
+  },
+  {
+    "id": "xphb|calligrapher-s-supplies",
+    "canonicalId": "equipment.calligraphers-supplies",
+    "name": "Calligrapher's Supplies",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|carpenter-s-tools",
+    "canonicalId": "equipment.carpenters-tools",
+    "name": "Carpenter's Tools",
+    "category": "equipment"
+  },
+  {
+    "id": "xphb|carpenter-s-tools",
+    "canonicalId": "equipment.carpenters-tools",
+    "name": "Carpenter's Tools",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|cartographer-s-tools",
+    "canonicalId": "equipment.cartographers-tools",
+    "name": "Cartographer's Tools",
+    "category": "equipment"
+  },
+  {
+    "id": "xphb|cartographer-s-tools",
+    "canonicalId": "equipment.cartographers-tools",
+    "name": "Cartographer's Tools",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|chain-mail",
+    "canonicalId": "equipment.chain-mail",
+    "name": "Chain Mail",
+    "category": "equipment"
+  },
+  {
+    "id": "xphb|chain-mail",
+    "canonicalId": "equipment.chain-mail",
+    "name": "Chain Mail",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|chain-shirt",
+    "canonicalId": "equipment.chain-shirt",
+    "name": "Chain Shirt",
+    "category": "equipment"
+  },
+  {
+    "id": "xphb|chain-shirt",
+    "canonicalId": "equipment.chain-shirt",
+    "name": "Chain Shirt",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|club",
+    "canonicalId": "equipment.club",
+    "name": "Club",
+    "category": "equipment"
+  },
+  {
+    "id": "xphb|club",
+    "canonicalId": "equipment.club",
+    "name": "Club",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|cobbler-s-tools",
+    "canonicalId": "equipment.cobblers-tools",
+    "name": "Cobbler's Tools",
+    "category": "equipment"
+  },
+  {
+    "id": "xphb|cobbler-s-tools",
+    "canonicalId": "equipment.cobblers-tools",
+    "name": "Cobbler's Tools",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|cook-s-utensils",
+    "canonicalId": "equipment.cooks-utensils",
+    "name": "Cook's Utensils",
+    "category": "equipment"
+  },
+  {
+    "id": "xphb|cook-s-utensils",
+    "canonicalId": "equipment.cooks-utensils",
+    "name": "Cook's Utensils",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|crossbow-bolt",
+    "canonicalId": "equipment.crossbow-bolt",
+    "name": "Crossbow Bolt",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|crossbow-bolts-20",
+    "canonicalId": "equipment.crossbow-bolts-20",
+    "name": "Crossbow Bolts (20)",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|crystal",
+    "canonicalId": "equipment.crystal",
+    "name": "Crystal",
+    "category": "equipment"
+  },
+  {
+    "id": "xphb|crystal",
+    "canonicalId": "equipment.crystal",
+    "name": "Crystal",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|dagger",
+    "canonicalId": "equipment.dagger",
+    "name": "Dagger",
+    "category": "equipment"
+  },
+  {
+    "id": "xphb|dagger",
+    "canonicalId": "equipment.dagger",
+    "name": "Dagger",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|dart",
+    "canonicalId": "equipment.dart",
+    "name": "Dart",
+    "category": "equipment"
+  },
+  {
+    "id": "xphb|dart",
+    "canonicalId": "equipment.dart",
+    "name": "Dart",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|drum",
+    "canonicalId": "equipment.drum",
+    "name": "Drum",
+    "category": "equipment"
+  },
+  {
+    "id": "xphb|drum",
+    "canonicalId": "equipment.drum",
+    "name": "Drum",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|dulcimer",
+    "canonicalId": "equipment.dulcimer",
+    "name": "Dulcimer",
+    "category": "equipment"
+  },
+  {
+    "id": "xphb|dulcimer",
+    "canonicalId": "equipment.dulcimer",
+    "name": "Dulcimer",
+    "category": "equipment"
+  },
+  {
+    "id": "dmg|energy-cell",
+    "canonicalId": "equipment.energy-cell",
+    "name": "Energy Cell",
+    "category": "equipment"
+  },
+  {
+    "id": "xdmg|energy-cell",
+    "canonicalId": "equipment.energy-cell",
+    "name": "Energy Cell",
+    "category": "equipment"
+  },
+  {
+    "id": "xphb|firearm-bullet",
+    "canonicalId": "equipment.firearm-bullet",
+    "name": "Firearm Bullet",
+    "category": "equipment"
+  },
+  {
+    "id": "xphb|firearm-bullets-10",
+    "canonicalId": "equipment.firearm-bullets-10",
+    "name": "Firearm Bullets (10)",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|flail",
+    "canonicalId": "equipment.flail",
+    "name": "Flail",
+    "category": "equipment"
+  },
+  {
+    "id": "xphb|flail",
+    "canonicalId": "equipment.flail",
+    "name": "Flail",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|flute",
+    "canonicalId": "equipment.flute",
+    "name": "Flute",
+    "category": "equipment"
+  },
+  {
+    "id": "xphb|flute",
+    "canonicalId": "equipment.flute",
+    "name": "Flute",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|glaive",
+    "canonicalId": "equipment.glaive",
+    "name": "Glaive",
+    "category": "equipment"
+  },
+  {
+    "id": "xphb|glaive",
+    "canonicalId": "equipment.glaive",
+    "name": "Glaive",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|glassblower-s-tools",
+    "canonicalId": "equipment.glassblowers-tools",
+    "name": "Glassblower's Tools",
+    "category": "equipment"
+  },
+  {
+    "id": "xphb|glassblower-s-tools",
+    "canonicalId": "equipment.glassblowers-tools",
+    "name": "Glassblower's Tools",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|greataxe",
+    "canonicalId": "equipment.greataxe",
+    "name": "Greataxe",
+    "category": "equipment"
+  },
+  {
+    "id": "xphb|greataxe",
+    "canonicalId": "equipment.greataxe",
+    "name": "Greataxe",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|greatclub",
+    "canonicalId": "equipment.greatclub",
+    "name": "Greatclub",
+    "category": "equipment"
+  },
+  {
+    "id": "xphb|greatclub",
+    "canonicalId": "equipment.greatclub",
+    "name": "Greatclub",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|greatsword",
+    "canonicalId": "equipment.greatsword",
+    "name": "Greatsword",
+    "category": "equipment"
+  },
+  {
+    "id": "xphb|greatsword",
+    "canonicalId": "equipment.greatsword",
+    "name": "Greatsword",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|halberd",
+    "canonicalId": "equipment.halberd",
+    "name": "Halberd",
+    "category": "equipment"
+  },
+  {
+    "id": "xphb|halberd",
+    "canonicalId": "equipment.halberd",
+    "name": "Halberd",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|half-plate-armor",
+    "canonicalId": "equipment.half-plate-armor",
+    "name": "Half Plate Armor",
+    "category": "equipment"
+  },
+  {
+    "id": "xphb|half-plate-armor",
+    "canonicalId": "equipment.half-plate-armor",
+    "name": "Half Plate Armor",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|hand-crossbow",
+    "canonicalId": "equipment.hand-crossbow",
+    "name": "Hand Crossbow",
+    "category": "equipment"
+  },
+  {
+    "id": "xphb|hand-crossbow",
+    "canonicalId": "equipment.hand-crossbow",
+    "name": "Hand Crossbow",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|handaxe",
+    "canonicalId": "equipment.handaxe",
+    "name": "Handaxe",
+    "category": "equipment"
+  },
+  {
+    "id": "xphb|handaxe",
+    "canonicalId": "equipment.handaxe",
+    "name": "Handaxe",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|heavy-crossbow",
+    "canonicalId": "equipment.heavy-crossbow",
+    "name": "Heavy Crossbow",
+    "category": "equipment"
+  },
+  {
+    "id": "xphb|heavy-crossbow",
+    "canonicalId": "equipment.heavy-crossbow",
+    "name": "Heavy Crossbow",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|hide-armor",
+    "canonicalId": "equipment.hide-armor",
+    "name": "Hide Armor",
+    "category": "equipment"
+  },
+  {
+    "id": "xphb|hide-armor",
+    "canonicalId": "equipment.hide-armor",
+    "name": "Hide Armor",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|horn",
+    "canonicalId": "equipment.horn",
+    "name": "Horn",
+    "category": "equipment"
+  },
+  {
+    "id": "xphb|horn",
+    "canonicalId": "equipment.horn",
+    "name": "Horn",
+    "category": "equipment"
+  },
+  {
+    "id": "dmg|hunting-rifle",
+    "canonicalId": "equipment.hunting-rifle",
+    "name": "Hunting Rifle",
+    "category": "equipment"
+  },
+  {
+    "id": "xdmg|hunting-rifle",
+    "canonicalId": "equipment.hunting-rifle",
+    "name": "Hunting Rifle",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|javelin",
+    "canonicalId": "equipment.javelin",
+    "name": "Javelin",
+    "category": "equipment"
+  },
+  {
+    "id": "xphb|javelin",
+    "canonicalId": "equipment.javelin",
+    "name": "Javelin",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|jeweler-s-tools",
+    "canonicalId": "equipment.jewelers-tools",
+    "name": "Jeweler's Tools",
+    "category": "equipment"
+  },
+  {
+    "id": "xphb|jeweler-s-tools",
+    "canonicalId": "equipment.jewelers-tools",
+    "name": "Jeweler's Tools",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|lance",
+    "canonicalId": "equipment.lance",
+    "name": "Lance",
+    "category": "equipment"
+  },
+  {
+    "id": "xphb|lance",
+    "canonicalId": "equipment.lance",
+    "name": "Lance",
+    "category": "equipment"
+  },
+  {
+    "id": "dmg|laser-pistol",
+    "canonicalId": "equipment.laser-pistol",
+    "name": "Laser Pistol",
+    "category": "equipment"
+  },
+  {
+    "id": "xdmg|laser-pistol",
+    "canonicalId": "equipment.laser-pistol",
+    "name": "Laser Pistol",
+    "category": "equipment"
+  },
+  {
+    "id": "dmg|laser-rifle",
+    "canonicalId": "equipment.laser-rifle",
+    "name": "Laser Rifle",
+    "category": "equipment"
+  },
+  {
+    "id": "xdmg|laser-rifle",
+    "canonicalId": "equipment.laser-rifle",
+    "name": "Laser Rifle",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|leather-armor",
+    "canonicalId": "equipment.leather-armor",
+    "name": "Leather Armor",
+    "category": "equipment"
+  },
+  {
+    "id": "xphb|leather-armor",
+    "canonicalId": "equipment.leather-armor",
+    "name": "Leather Armor",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|leatherworker-s-tools",
+    "canonicalId": "equipment.leatherworkers-tools",
+    "name": "Leatherworker's Tools",
+    "category": "equipment"
+  },
+  {
+    "id": "xphb|leatherworker-s-tools",
+    "canonicalId": "equipment.leatherworkers-tools",
+    "name": "Leatherworker's Tools",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|light-crossbow",
+    "canonicalId": "equipment.light-crossbow",
+    "name": "Light Crossbow",
+    "category": "equipment"
+  },
+  {
+    "id": "xphb|light-crossbow",
+    "canonicalId": "equipment.light-crossbow",
+    "name": "Light Crossbow",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|light-hammer",
+    "canonicalId": "equipment.light-hammer",
+    "name": "Light Hammer",
+    "category": "equipment"
+  },
+  {
+    "id": "xphb|light-hammer",
+    "canonicalId": "equipment.light-hammer",
+    "name": "Light Hammer",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|longbow",
+    "canonicalId": "equipment.longbow",
+    "name": "Longbow",
+    "category": "equipment"
+  },
+  {
+    "id": "xphb|longbow",
+    "canonicalId": "equipment.longbow",
+    "name": "Longbow",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|longsword",
+    "canonicalId": "equipment.longsword",
+    "name": "Longsword",
+    "category": "equipment"
+  },
+  {
+    "id": "xphb|longsword",
+    "canonicalId": "equipment.longsword",
+    "name": "Longsword",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|lute",
+    "canonicalId": "equipment.lute",
+    "name": "Lute",
+    "category": "equipment"
+  },
+  {
+    "id": "xphb|lute",
+    "canonicalId": "equipment.lute",
+    "name": "Lute",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|lyre",
+    "canonicalId": "equipment.lyre",
+    "name": "Lyre",
+    "category": "equipment"
+  },
+  {
+    "id": "xphb|lyre",
+    "canonicalId": "equipment.lyre",
+    "name": "Lyre",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|mace",
+    "canonicalId": "equipment.mace",
+    "name": "Mace",
+    "category": "equipment"
+  },
+  {
+    "id": "xphb|mace",
+    "canonicalId": "equipment.mace",
+    "name": "Mace",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|mason-s-tools",
+    "canonicalId": "equipment.masons-tools",
+    "name": "Mason's Tools",
+    "category": "equipment"
+  },
+  {
+    "id": "xphb|mason-s-tools",
+    "canonicalId": "equipment.masons-tools",
+    "name": "Mason's Tools",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|maul",
+    "canonicalId": "equipment.maul",
+    "name": "Maul",
+    "category": "equipment"
+  },
+  {
+    "id": "xphb|maul",
+    "canonicalId": "equipment.maul",
+    "name": "Maul",
+    "category": "equipment"
+  },
+  {
+    "id": "dmg|modern-bullet",
+    "canonicalId": "equipment.modern-bullet",
+    "name": "Modern Bullet",
+    "category": "equipment"
+  },
+  {
+    "id": "dmg|modern-bullets-10",
+    "canonicalId": "equipment.modern-bullets-10",
+    "name": "Modern Bullets (10)",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|morningstar",
+    "canonicalId": "equipment.morningstar",
+    "name": "Morningstar",
+    "category": "equipment"
+  },
+  {
+    "id": "xphb|morningstar",
+    "canonicalId": "equipment.morningstar",
+    "name": "Morningstar",
+    "category": "equipment"
+  },
+  {
+    "id": "dmg|musket",
+    "canonicalId": "equipment.musket",
+    "name": "Musket",
+    "category": "equipment"
+  },
+  {
+    "id": "xphb|musket",
+    "canonicalId": "equipment.musket",
+    "name": "Musket",
+    "category": "equipment"
+  },
+  {
+    "id": "xphb|needle",
+    "canonicalId": "equipment.needle",
+    "name": "Needle",
+    "category": "equipment"
+  },
+  {
+    "id": "xphb|needles-50",
+    "canonicalId": "equipment.needles-50",
+    "name": "Needles (50)",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|net",
+    "canonicalId": "equipment.net",
+    "name": "Net",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|orb",
+    "canonicalId": "equipment.orb",
+    "name": "Orb",
+    "category": "equipment"
+  },
+  {
+    "id": "xphb|orb",
+    "canonicalId": "equipment.orb",
+    "name": "Orb",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|padded-armor",
+    "canonicalId": "equipment.padded-armor",
+    "name": "Padded Armor",
+    "category": "equipment"
+  },
+  {
+    "id": "xphb|padded-armor",
+    "canonicalId": "equipment.padded-armor",
+    "name": "Padded Armor",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|painter-s-supplies",
+    "canonicalId": "equipment.painters-supplies",
+    "name": "Painter's Supplies",
+    "category": "equipment"
+  },
+  {
+    "id": "xphb|painter-s-supplies",
+    "canonicalId": "equipment.painters-supplies",
+    "name": "Painter's Supplies",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|pan-flute",
+    "canonicalId": "equipment.pan-flute",
+    "name": "Pan Flute",
+    "category": "equipment"
+  },
+  {
+    "id": "xphb|pan-flute",
+    "canonicalId": "equipment.pan-flute",
+    "name": "Pan Flute",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|pike",
+    "canonicalId": "equipment.pike",
+    "name": "Pike",
+    "category": "equipment"
+  },
+  {
+    "id": "xphb|pike",
+    "canonicalId": "equipment.pike",
+    "name": "Pike",
+    "category": "equipment"
+  },
+  {
+    "id": "dmg|pistol",
+    "canonicalId": "equipment.pistol",
+    "name": "Pistol",
+    "category": "equipment"
+  },
+  {
+    "id": "xphb|pistol",
+    "canonicalId": "equipment.pistol",
+    "name": "Pistol",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|plate-armor",
+    "canonicalId": "equipment.plate-armor",
+    "name": "Plate Armor",
+    "category": "equipment"
+  },
+  {
+    "id": "xphb|plate-armor",
+    "canonicalId": "equipment.plate-armor",
+    "name": "Plate Armor",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|potter-s-tools",
+    "canonicalId": "equipment.potters-tools",
+    "name": "Potter's Tools",
+    "category": "equipment"
+  },
+  {
+    "id": "xphb|potter-s-tools",
+    "canonicalId": "equipment.potters-tools",
+    "name": "Potter's Tools",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|quarterstaff",
+    "canonicalId": "equipment.quarterstaff",
+    "name": "Quarterstaff",
+    "category": "equipment"
+  },
+  {
+    "id": "xphb|quarterstaff",
+    "canonicalId": "equipment.quarterstaff",
+    "name": "Quarterstaff",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|rapier",
+    "canonicalId": "equipment.rapier",
+    "name": "Rapier",
+    "category": "equipment"
+  },
+  {
+    "id": "xphb|rapier",
+    "canonicalId": "equipment.rapier",
+    "name": "Rapier",
+    "category": "equipment"
+  },
+  {
+    "id": "dmg|renaissance-bullet",
+    "canonicalId": "equipment.renaissance-bullet",
+    "name": "Renaissance Bullet",
+    "category": "equipment"
+  },
+  {
+    "id": "dmg|renaissance-bullets-10",
+    "canonicalId": "equipment.renaissance-bullets-10",
+    "name": "Renaissance Bullets (10)",
+    "category": "equipment"
+  },
+  {
+    "id": "dmg|revolver",
+    "canonicalId": "equipment.revolver",
+    "name": "Revolver",
+    "category": "equipment"
+  },
+  {
+    "id": "xdmg|revolver",
+    "canonicalId": "equipment.revolver",
+    "name": "Revolver",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|ring-mail",
+    "canonicalId": "equipment.ring-mail",
+    "name": "Ring Mail",
+    "category": "equipment"
+  },
+  {
+    "id": "xphb|ring-mail",
+    "canonicalId": "equipment.ring-mail",
+    "name": "Ring Mail",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|rod",
+    "canonicalId": "equipment.rod",
+    "name": "Rod",
+    "category": "equipment"
+  },
+  {
+    "id": "xphb|rod",
+    "canonicalId": "equipment.rod",
+    "name": "Rod",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|scale-mail",
+    "canonicalId": "equipment.scale-mail",
+    "name": "Scale Mail",
+    "category": "equipment"
+  },
+  {
+    "id": "xphb|scale-mail",
+    "canonicalId": "equipment.scale-mail",
+    "name": "Scale Mail",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|scimitar",
+    "canonicalId": "equipment.scimitar",
+    "name": "Scimitar",
+    "category": "equipment"
+  },
+  {
+    "id": "xphb|scimitar",
+    "canonicalId": "equipment.scimitar",
+    "name": "Scimitar",
+    "category": "equipment"
+  },
+  {
+    "id": "xdmg|semiautomatic-pistol",
+    "canonicalId": "equipment.semiautomatic-pistol",
+    "name": "Semiautomatic Pistol",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|shawm",
+    "canonicalId": "equipment.shawm",
+    "name": "Shawm",
+    "category": "equipment"
+  },
+  {
+    "id": "xphb|shawm",
+    "canonicalId": "equipment.shawm",
+    "name": "Shawm",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|shield",
+    "canonicalId": "equipment.shield",
+    "name": "Shield",
+    "category": "equipment"
+  },
+  {
+    "id": "xphb|shield",
+    "canonicalId": "equipment.shield",
+    "name": "Shield",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|shortbow",
+    "canonicalId": "equipment.shortbow",
+    "name": "Shortbow",
+    "category": "equipment"
+  },
+  {
+    "id": "xphb|shortbow",
+    "canonicalId": "equipment.shortbow",
+    "name": "Shortbow",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|shortsword",
+    "canonicalId": "equipment.shortsword",
+    "name": "Shortsword",
+    "category": "equipment"
+  },
+  {
+    "id": "xphb|shortsword",
+    "canonicalId": "equipment.shortsword",
+    "name": "Shortsword",
+    "category": "equipment"
+  },
+  {
+    "id": "dmg|shotgun",
+    "canonicalId": "equipment.shotgun",
+    "name": "Shotgun",
+    "category": "equipment"
+  },
+  {
+    "id": "xdmg|shotgun",
+    "canonicalId": "equipment.shotgun",
+    "name": "Shotgun",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|sickle",
+    "canonicalId": "equipment.sickle",
+    "name": "Sickle",
+    "category": "equipment"
+  },
+  {
+    "id": "xphb|sickle",
+    "canonicalId": "equipment.sickle",
+    "name": "Sickle",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|sling",
+    "canonicalId": "equipment.sling",
+    "name": "Sling",
+    "category": "equipment"
+  },
+  {
+    "id": "xphb|sling",
+    "canonicalId": "equipment.sling",
+    "name": "Sling",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|sling-bullet",
+    "canonicalId": "equipment.sling-bullet",
+    "name": "Sling Bullet",
+    "category": "equipment"
+  },
+  {
+    "id": "xphb|sling-bullet",
+    "canonicalId": "equipment.sling-bullet",
+    "name": "Sling Bullet",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|sling-bullets-20",
+    "canonicalId": "equipment.sling-bullets-20",
+    "name": "Sling Bullets (20)",
+    "category": "equipment"
+  },
+  {
+    "id": "xphb|sling-bullets-20",
+    "canonicalId": "equipment.sling-bullets-20",
+    "name": "Sling Bullets (20)",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|smith-s-tools",
+    "canonicalId": "equipment.smiths-tools",
+    "name": "Smith's Tools",
+    "category": "equipment"
+  },
+  {
+    "id": "xphb|smith-s-tools",
+    "canonicalId": "equipment.smiths-tools",
+    "name": "Smith's Tools",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|spear",
+    "canonicalId": "equipment.spear",
+    "name": "Spear",
+    "category": "equipment"
+  },
+  {
+    "id": "xphb|spear",
+    "canonicalId": "equipment.spear",
+    "name": "Spear",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|splint-armor",
+    "canonicalId": "equipment.splint-armor",
+    "name": "Splint Armor",
+    "category": "equipment"
+  },
+  {
+    "id": "xphb|splint-armor",
+    "canonicalId": "equipment.splint-armor",
+    "name": "Splint Armor",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|staff",
+    "canonicalId": "equipment.staff",
+    "name": "Staff",
+    "category": "equipment"
+  },
+  {
+    "id": "xphb|staff",
+    "canonicalId": "equipment.staff",
+    "name": "Staff",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|studded-leather-armor",
+    "canonicalId": "equipment.studded-leather-armor",
+    "name": "Studded Leather Armor",
+    "category": "equipment"
+  },
+  {
+    "id": "xphb|studded-leather-armor",
+    "canonicalId": "equipment.studded-leather-armor",
+    "name": "Studded Leather Armor",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|tinker-s-tools",
+    "canonicalId": "equipment.tinkers-tools",
+    "name": "Tinker's Tools",
+    "category": "equipment"
+  },
+  {
+    "id": "xphb|tinker-s-tools",
+    "canonicalId": "equipment.tinkers-tools",
+    "name": "Tinker's Tools",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|trident",
+    "canonicalId": "equipment.trident",
+    "name": "Trident",
+    "category": "equipment"
+  },
+  {
+    "id": "xphb|trident",
+    "canonicalId": "equipment.trident",
+    "name": "Trident",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|viol",
+    "canonicalId": "equipment.viol",
+    "name": "Viol",
+    "category": "equipment"
+  },
+  {
+    "id": "xphb|viol",
+    "canonicalId": "equipment.viol",
+    "name": "Viol",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|wand",
+    "canonicalId": "equipment.wand",
+    "name": "Wand",
+    "category": "equipment"
+  },
+  {
+    "id": "xphb|wand",
+    "canonicalId": "equipment.wand",
+    "name": "Wand",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|war-pick",
+    "canonicalId": "equipment.war-pick",
+    "name": "War Pick",
+    "category": "equipment"
+  },
+  {
+    "id": "xphb|war-pick",
+    "canonicalId": "equipment.war-pick",
+    "name": "War Pick",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|warhammer",
+    "canonicalId": "equipment.warhammer",
+    "name": "Warhammer",
+    "category": "equipment"
+  },
+  {
+    "id": "xphb|warhammer",
+    "canonicalId": "equipment.warhammer",
+    "name": "Warhammer",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|weaver-s-tools",
+    "canonicalId": "equipment.weavers-tools",
+    "name": "Weaver's Tools",
+    "category": "equipment"
+  },
+  {
+    "id": "xphb|weaver-s-tools",
+    "canonicalId": "equipment.weavers-tools",
+    "name": "Weaver's Tools",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|whip",
+    "canonicalId": "equipment.whip",
+    "name": "Whip",
+    "category": "equipment"
+  },
+  {
+    "id": "xphb|whip",
+    "canonicalId": "equipment.whip",
+    "name": "Whip",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|woodcarver-s-tools",
+    "canonicalId": "equipment.woodcarvers-tools",
+    "name": "Woodcarver's Tools",
+    "category": "equipment"
+  },
+  {
+    "id": "xphb|woodcarver-s-tools",
+    "canonicalId": "equipment.woodcarvers-tools",
+    "name": "Woodcarver's Tools",
+    "category": "equipment"
+  },
+  {
+    "id": "phb|wooden-staff",
+    "canonicalId": "equipment.wooden-staff",
+    "name": "Wooden Staff",
+    "category": "equipment"
+  },
+  {
+    "id": "xphb|wooden-staff",
+    "canonicalId": "equipment.wooden-staff",
+    "name": "Wooden Staff",
+    "category": "equipment"
+  },
+  {
     "id": "phb|attack",
     "canonicalId": "action.attack",
     "name": "Attack",

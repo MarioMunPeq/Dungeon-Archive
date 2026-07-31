@@ -80,7 +80,14 @@ const CATEGORIES: readonly CategoryConfig[] = [
     dataKey: "item",
     transform: (data) => {
       const mundane = (data as Raw5eItem[]).filter((i) => i.rarity === "none");
-      return transformEquipment(mundane);
+      const basePath = join(EXTERNAL_DIR, "items-base.json");
+      const baseItems: Raw5eItem[] = [];
+      if (existsSync(basePath)) {
+        const baseData = readFileJson(basePath) as Record<string, unknown>;
+        const items = baseData["baseitem"] as Raw5eItem[] | undefined;
+        if (Array.isArray(items)) baseItems.push(...items);
+      }
+      return transformEquipment([...mundane, ...baseItems]);
     },
     validate: validateEquipment as (entities: CompendiumEntry[]) => ValidationError[],
     outputPath: "equipment.json",

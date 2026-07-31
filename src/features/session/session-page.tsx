@@ -1,5 +1,5 @@
 import { useState, useCallback } from "react";
-import { Link } from "react-router";
+import { Link } from "react-router-dom";
 import { useSessionIds, userStore } from "@/user-state";
 import { CATEGORY_REGISTRY, formatSource, slugFromCanonicalId, getEntity } from "@/compendium";
 import type { EntityCategory } from "@/compendium";

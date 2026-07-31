@@ -1,4 +1,4 @@
-import type { Adventure, UserState } from "./types";
+import type { Adventure, PartyMember, UserState } from "./types";
 import { CURRENT_VERSION } from "./types";
 import { isRegistered } from "../compendium/registry/entity-registry";
 
@@ -82,7 +82,63 @@ function normalizeAdventures(raw: unknown): Adventure[] {
   return valid;
 }
 
-export function normalize(state: Omit<UserState, "adventures" | "activeAdventureId"> & { adventures?: Adventure[]; activeAdventureId?: string | null }): UserState {
+const MAX_PARTY_MEMBERS = 12;
+const MAX_SPELL_IDS = 50;
+const MAX_WEAPON_IDS = 10;
+const MAX_MAGIC_ITEM_IDS = 30;
+
+function normalizePartyMember(raw: unknown): PartyMember | null {
+  if (!raw || typeof raw !== "object") return null;
+  const m = raw as Record<string, unknown>;
+  if (typeof m.id !== "string" || !m.id) return null;
+  if (typeof m.name !== "string" || !m.name.trim()) return null;
+
+  const level = typeof m.level === "number" ? Math.max(1, Math.min(20, Math.floor(m.level))) : 1;
+
+  const knownSpellCanonicalIds = validateIds(uniqueStrings(m.knownSpellCanonicalIds, true));
+  if (knownSpellCanonicalIds.length > MAX_SPELL_IDS) knownSpellCanonicalIds.length = MAX_SPELL_IDS;
+
+  const equippedWeaponCanonicalIds = validateIds(uniqueStrings(m.equippedWeaponCanonicalIds, true));
+  if (equippedWeaponCanonicalIds.length > MAX_WEAPON_IDS) equippedWeaponCanonicalIds.length = MAX_WEAPON_IDS;
+
+  const equippedMagicItemCanonicalIds = validateIds(uniqueStrings(m.equippedMagicItemCanonicalIds, true));
+  if (equippedMagicItemCanonicalIds.length > MAX_MAGIC_ITEM_IDS) equippedMagicItemCanonicalIds.length = MAX_MAGIC_ITEM_IDS;
+
+  const equippedArmorCanonicalId =
+    typeof m.equippedArmorCanonicalId === "string" && isRegistered(m.equippedArmorCanonicalId)
+      ? m.equippedArmorCanonicalId
+      : undefined;
+
+  return {
+    id: m.id,
+    name: m.name.trim(),
+    class: typeof m.class === "string" ? m.class.trim() : "",
+    level,
+    race: typeof m.race === "string" ? m.race.trim() || undefined : undefined,
+    subclass: typeof m.subclass === "string" ? m.subclass.trim() || undefined : undefined,
+    passivePerception: typeof m.passivePerception === "number" ? m.passivePerception : undefined,
+    passiveInsight: typeof m.passiveInsight === "number" ? m.passiveInsight : undefined,
+    passiveInvestigation: typeof m.passiveInvestigation === "number" ? m.passiveInvestigation : undefined,
+    notes: typeof m.notes === "string" ? m.notes.trim() || undefined : undefined,
+    knownSpellCanonicalIds,
+    equippedArmorCanonicalId,
+    equippedWeaponCanonicalIds,
+    equippedMagicItemCanonicalIds,
+  };
+}
+
+function normalizeParty(raw: unknown): PartyMember[] {
+  if (!Array.isArray(raw)) return [];
+  const valid: PartyMember[] = [];
+  for (const item of raw) {
+    const member = normalizePartyMember(item);
+    if (member) valid.push(member);
+  }
+  if (valid.length > MAX_PARTY_MEMBERS) valid.length = MAX_PARTY_MEMBERS;
+  return valid;
+}
+
+export function normalize(state: Omit<UserState, "adventures" | "activeAdventureId" | "party"> & { adventures?: Adventure[]; activeAdventureId?: string | null; party?: PartyMember[] }): UserState {
   const adventures = normalizeAdventures(state.adventures ?? []);
   const activeAdventureId =
     state.activeAdventureId && adventures.some((a) => a.id === state.activeAdventureId)
@@ -97,5 +153,6 @@ export function normalize(state: Omit<UserState, "adventures" | "activeAdventure
     session: normalizeSession(state.session),
     adventures,
     activeAdventureId,
+    party: normalizeParty(state.party ?? []),
   };
 }

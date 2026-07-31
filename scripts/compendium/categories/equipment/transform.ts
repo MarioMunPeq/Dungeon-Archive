@@ -32,6 +32,11 @@ const ITEM_TYPE_MAP: Record<string, string> = {
   TT: "Trap",
 };
 
+function mapType(raw: string | undefined): string {
+  const code = raw?.split("|")[0] as string | undefined;
+  return (code && ITEM_TYPE_MAP[code]) || raw || "Wondrous Item";
+}
+
 const WEAPON_PROPERTY_MAP: Record<string, string> = {
   V: "Versatile",
   F: "Finesse",
@@ -60,9 +65,12 @@ function formatWeight(weight: number | undefined): string | undefined {
   return `${weight} lb`;
 }
 
-function mapProperties(props: readonly string[] | undefined): string[] | undefined {
+function mapProperties(props: readonly (string | { uid?: string })[] | undefined): string[] | undefined {
   if (!props || props.length === 0) return undefined;
-  return props.map((p) => WEAPON_PROPERTY_MAP[p] ?? p);
+  return props.map((p) => {
+    const code = (typeof p === "string" ? p : p.uid)?.split("|")[0] as string | undefined;
+    return (code && WEAPON_PROPERTY_MAP[code]) || (typeof p === "string" ? p : p.uid ?? "Special");
+  });
 }
 
 export function transformEquipment(raw: readonly Raw5eItem[]): Equipment[] {
@@ -74,7 +82,7 @@ export function transformEquipment(raw: readonly Raw5eItem[]): Equipment[] {
       category: "equipment" as const,
       name: i.name,
       source: i.source,
-      type: ITEM_TYPE_MAP[i.type] ?? i.type ?? "Wondrous Item",
+      type: mapType(i.type),
       cost: formatCost(i.value),
       weight: formatWeight(i.weight),
       damage: i.dmg1,

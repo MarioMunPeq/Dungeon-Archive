@@ -1,4 +1,4 @@
-import { BrowserRouter } from "react-router";
+import { BrowserRouter } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { AppRouter } from "@/app/router";
 import { AppLayout } from "@/app/layouts/app-layout";
@@ -15,7 +15,7 @@ const queryClient = new QueryClient({
 export function App() {
   return (
     <QueryClientProvider client={queryClient}>
-      <BrowserRouter>
+      <BrowserRouter basename="/dungeon-archive/">
         <AppLayout>
           <AppRouter />
         </AppLayout>

@@ -1,5 +1,6 @@
 import { create } from "zustand";
-import type { Adventure, UserState } from "./types";
+import { useMemo } from "react";
+import type { Adventure, PartyMember, UserState } from "./types";
 import { STORAGE_KEY, CURRENT_VERSION } from "./types";
 import { read, write } from "./persistence";
 import { migrate } from "./migrations";
@@ -17,6 +18,12 @@ interface AdventureActions {
   setActiveAdventure: (id: string | null) => void;
 }
 
+interface PartyActions {
+  addPartyMember: (data: Omit<PartyMember, "id">) => void;
+  updatePartyMember: (id: string, data: Partial<Omit<PartyMember, "id">>) => void;
+  removePartyMember: (id: string) => void;
+}
+
 interface UserActions {
   toggleFavorite: (canonicalId: string) => void;
   addRecentEntity: (canonicalId: string) => void;
@@ -29,7 +36,7 @@ interface UserActions {
   _reset: () => void;
 }
 
-export type UserStore = UserState & UserActions & AdventureActions & {
+export type UserStore = UserState & UserActions & AdventureActions & PartyActions & {
   favoritesSet: Set<string>;
   sessionSet: Set<string>;
   adventureEntitySet: Set<string>;
@@ -59,8 +66,8 @@ function schedulePersist(getState: () => UserStore): void {
   if (debounceTimer !== null) clearTimeout(debounceTimer);
   debounceTimer = setTimeout(() => {
     debounceTimer = null;
-    const { version, favorites, recentEntities, recentSearches, session, adventures, activeAdventureId } = getState();
-    write({ version, favorites, recentEntities, recentSearches, session, adventures, activeAdventureId });
+    const { version, favorites, recentEntities, recentSearches, session, adventures, activeAdventureId, party } = getState();
+    write({ version, favorites, recentEntities, recentSearches, session, adventures, activeAdventureId, party });
   }, 150);
 }
 
@@ -92,6 +99,7 @@ export const userStore = create<UserStore>((set, get) => ({
   adventures: [],
   activeAdventureId: null,
   adventureEntitySet: new Set<string>(),
+  party: [],
   _hasHydrated: false,
 
   toggleFavorite: (canonicalId) => {
@@ -331,6 +339,56 @@ export const userStore = create<UserStore>((set, get) => ({
     schedulePersist(get);
   },
 
+  addPartyMember: (data) => {
+    set((s) => {
+      const member: PartyMember = {
+        id: generateId(),
+        name: data.name.trim(),
+        class: data.class.trim(),
+        level: Math.max(1, Math.min(20, Math.floor(data.level))),
+        race: data.race?.trim() || undefined,
+        subclass: data.subclass?.trim() || undefined,
+        passivePerception: data.passivePerception,
+        passiveInsight: data.passiveInsight,
+        passiveInvestigation: data.passiveInvestigation,
+        notes: data.notes?.trim() || undefined,
+        knownSpellCanonicalIds: [...data.knownSpellCanonicalIds],
+        equippedArmorCanonicalId: data.equippedArmorCanonicalId,
+        equippedWeaponCanonicalIds: [...data.equippedWeaponCanonicalIds],
+        equippedMagicItemCanonicalIds: [...data.equippedMagicItemCanonicalIds],
+      };
+      return { party: [...s.party, member] };
+    });
+    schedulePersist(get);
+  },
+
+  updatePartyMember: (id, data) => {
+    set((s) => {
+      const idx = s.party.findIndex((m) => m.id === id);
+      if (idx === -1) return s;
+      const current = s.party[idx]!;
+      const updated: PartyMember = {
+        ...current,
+        ...data,
+        level: data.level !== undefined ? Math.max(1, Math.min(20, Math.floor(data.level))) : current.level,
+        name: data.name !== undefined ? data.name.trim() || current.name : current.name,
+        class: data.class !== undefined ? data.class.trim() || current.class : current.class,
+        race: data.race !== undefined ? data.race.trim() || undefined : current.race,
+        subclass: data.subclass !== undefined ? data.subclass.trim() || undefined : current.subclass,
+        notes: data.notes !== undefined ? data.notes.trim() || undefined : current.notes,
+      };
+      const party = [...s.party];
+      party[idx] = updated;
+      return { party };
+    });
+    schedulePersist(get);
+  },
+
+  removePartyMember: (id) => {
+    set((s) => ({ party: s.party.filter((m) => m.id !== id) }));
+    schedulePersist(get);
+  },
+
   _replace: (state) => {
     set({
       version: state.version,
@@ -343,6 +401,7 @@ export const userStore = create<UserStore>((set, get) => ({
       adventures: state.adventures,
       activeAdventureId: state.activeAdventureId,
       adventureEntitySet: updateActiveAdventureSet(state.adventures, state.activeAdventureId),
+      party: state.party,
     });
   },
 
@@ -358,6 +417,7 @@ export const userStore = create<UserStore>((set, get) => ({
       adventures: [],
       activeAdventureId: null,
       adventureEntitySet: new Set<string>(),
+      party: [],
       _hasHydrated: false,
     });
   },
@@ -383,23 +443,37 @@ export function useActiveAdventure(): Adventure | null {
 }
 
 export function useAdventureEntityIds(): string[] {
-  return userStore((s) => {
-    if (!s.activeAdventureId) return [];
-    const active = s.adventures.find((a) => a.id === s.activeAdventureId);
+  const activeAdventureId = userStore((s) => s.activeAdventureId);
+  const adventures = userStore((s) => s.adventures);
+  return useMemo(() => {
+    if (!activeAdventureId) return [];
+    const active = adventures.find((a) => a.id === activeAdventureId);
     return active?.entities ?? [];
-  });
+  }, [activeAdventureId, adventures]);
+}
+
+export function useFavoriteIds(limit = 10): string[] {
+  const favorites = userStore((s) => s.favorites);
+  return useMemo(() => favorites.slice(0, limit), [favorites, limit]);
 }
 
 export function useSessionIds(limit?: number): string[] {
-  return userStore((s) => (limit !== undefined ? s.session.slice(0, limit) : s.session));
+  const session = userStore((s) => s.session);
+  return useMemo(() => (limit !== undefined ? session.slice(0, limit) : session), [session, limit]);
 }
 
 export function useRecentEntities(limit = 10): string[] {
-  return userStore((s) => s.recentEntities.slice(0, limit));
+  const recentEntities = userStore((s) => s.recentEntities);
+  return useMemo(() => recentEntities.slice(0, limit), [recentEntities, limit]);
 }
 
 export function useRecentSearches(limit = 5): string[] {
-  return userStore((s) => s.recentSearches.slice(0, limit));
+  const recentSearches = userStore((s) => s.recentSearches);
+  return useMemo(() => recentSearches.slice(0, limit), [recentSearches, limit]);
+}
+
+export function usePartyMembers(): PartyMember[] {
+  return userStore((s) => s.party);
 }
 
 function processPersistedState(state: UserState): UserState {
@@ -411,6 +485,7 @@ function processPersistedState(state: UserState): UserState {
     session: validateIds(state.session),
     adventures: state.adventures,
     activeAdventureId: state.activeAdventureId,
+    party: state.party,
   };
   return normalize(validated);
 }
@@ -427,6 +502,14 @@ function adventuresEqual(a: Adventure[], b: Adventure[]): boolean {
   return true;
 }
 
+function partyEqual(a: PartyMember[], b: PartyMember[]): boolean {
+  if (a.length !== b.length) return false;
+  for (let i = 0; i < a.length; i++) {
+    if (a[i]!.id !== b[i]!.id || a[i]!.name !== b[i]!.name || a[i]!.level !== b[i]!.level) return false;
+  }
+  return true;
+}
+
 function replaceState(state: UserState): void {
   const current = userStore.getState();
   if (
@@ -436,7 +519,8 @@ function replaceState(state: UserState): void {
     arraysEqual(current.recentSearches, state.recentSearches) &&
     arraysEqual(current.session, state.session) &&
     current.activeAdventureId === state.activeAdventureId &&
-    adventuresEqual(current.adventures, state.adventures)
+    adventuresEqual(current.adventures, state.adventures) &&
+    partyEqual(current.party, state.party)
   ) {
     return;
   }

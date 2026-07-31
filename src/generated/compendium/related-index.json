@@ -10951,17 +10951,17 @@
       "equipment.acid-vial",
       "equipment.alchemists-fire-flask",
       "equipment.antitoxin-vial",
-      "equipment.backpack",
       "equipment.ball-bearing",
       "equipment.ball-bearings-bag-of-1-000",
-      "equipment.barrel",
-      "equipment.basic-poison-vial"
+      "equipment.basic-poison-vial",
+      "equipment.caltrop",
+      "equipment.caltrops-bag-of-20"
     ],
     "references": []
   },
   "equipment.acid": {
     "tags": [
-      "G|XPHB"
+      "Gear"
     ],
     "related": [
       "equipment.alchemists-fire",
@@ -10983,11 +10983,11 @@
       "equipment.abacus",
       "equipment.alchemists-fire-flask",
       "equipment.antitoxin-vial",
-      "equipment.backpack",
       "equipment.ball-bearing",
       "equipment.ball-bearings-bag-of-1-000",
-      "equipment.barrel",
-      "equipment.basic-poison-vial"
+      "equipment.basic-poison-vial",
+      "equipment.caltrop",
+      "equipment.caltrops-bag-of-20"
     ],
     "references": []
   },
@@ -10998,18 +10998,18 @@
     "related": [
       "equipment.acid",
       "equipment.alchemists-fire",
+      "equipment.alchemists-supplies",
       "equipment.ale-mug",
       "equipment.alexandrite",
       "equipment.amber",
       "equipment.amethyst",
-      "equipment.amulet",
-      "equipment.antitoxin"
+      "equipment.amulet"
     ],
     "references": []
   },
   "equipment.alchemists-fire": {
     "tags": [
-      "G|XPHB"
+      "Gear"
     ],
     "related": [
       "equipment.acid",
@@ -11031,11 +11031,11 @@
       "equipment.abacus",
       "equipment.acid-vial",
       "equipment.antitoxin-vial",
-      "equipment.backpack",
       "equipment.ball-bearing",
       "equipment.ball-bearings-bag-of-1-000",
-      "equipment.barrel",
-      "equipment.basic-poison-vial"
+      "equipment.basic-poison-vial",
+      "equipment.caltrop",
+      "equipment.caltrops-bag-of-20"
     ],
     "references": []
   },
@@ -11121,23 +11121,23 @@
   },
   "equipment.amulet": {
     "tags": [
-      "SCF|XPHB"
+      "Spellcasting Focus"
     ],
     "related": [
+      "equipment.crystal",
       "equipment.emblem",
+      "equipment.orb",
       "equipment.reliquary",
+      "equipment.rod",
       "equipment.sprig-of-mistletoe",
-      "equipment.totem",
-      "equipment.yew-wand",
-      "equipment.abacus",
-      "equipment.acid",
-      "equipment.acid-vial"
+      "equipment.staff",
+      "equipment.wand"
     ],
     "references": []
   },
   "equipment.antitoxin": {
     "tags": [
-      "G|XPHB"
+      "Gear"
     ],
     "related": [
       "equipment.acid",
@@ -11159,11 +11159,11 @@
       "equipment.abacus",
       "equipment.acid-vial",
       "equipment.alchemists-fire-flask",
-      "equipment.backpack",
       "equipment.ball-bearing",
       "equipment.ball-bearings-bag-of-1-000",
-      "equipment.barrel",
-      "equipment.basic-poison-vial"
+      "equipment.basic-poison-vial",
+      "equipment.caltrop",
+      "equipment.caltrops-bag-of-20"
     ],
     "references": []
   },
@@ -11185,17 +11185,17 @@
   },
   "equipment.assassins-blood": {
     "tags": [
-      "G|XPHB"
+      "Gear"
     ],
     "related": [
       "equipment.burnt-othur-fumes",
       "equipment.carrion-crawler-mucus",
-      "equipment.drow-poison",
       "equipment.essence-of-ether",
       "equipment.grenade-launcher",
       "equipment.lolths-sting",
       "equipment.malice",
-      "equipment.midnight-tears"
+      "equipment.midnight-tears",
+      "equipment.oil-of-taggit"
     ],
     "references": []
   },
@@ -11217,17 +11217,17 @@
   },
   "equipment.backpack": {
     "tags": [
-      "G|XPHB"
+      "Gear"
     ],
     "related": [
-      "equipment.abacus",
       "equipment.acid",
-      "equipment.acid-vial",
       "equipment.alchemists-fire",
-      "equipment.alchemists-fire-flask",
       "equipment.antitoxin",
-      "equipment.antitoxin-vial",
-      "equipment.ball-bearing"
+      "equipment.ball-bearings",
+      "equipment.barrel",
+      "equipment.basic-poison",
+      "equipment.basket",
+      "equipment.bedroll"
     ],
     "references": []
   },
@@ -11240,16 +11240,16 @@
       "equipment.acid-vial",
       "equipment.alchemists-fire-flask",
       "equipment.antitoxin-vial",
-      "equipment.backpack",
       "equipment.ball-bearings-bag-of-1-000",
-      "equipment.barrel",
-      "equipment.basic-poison-vial"
+      "equipment.basic-poison-vial",
+      "equipment.caltrop",
+      "equipment.caltrops-bag-of-20"
     ],
     "references": []
   },
   "equipment.ball-bearings": {
     "tags": [
-      "G|XPHB"
+      "Gear"
     ],
     "related": [
       "equipment.acid",
@@ -11272,10 +11272,10 @@
       "equipment.acid-vial",
       "equipment.alchemists-fire-flask",
       "equipment.antitoxin-vial",
-      "equipment.backpack",
       "equipment.ball-bearing",
-      "equipment.barrel",
-      "equipment.basic-poison-vial"
+      "equipment.basic-poison-vial",
+      "equipment.caltrop",
+      "equipment.caltrops-bag-of-20"
     ],
     "references": []
   },
@@ -11297,23 +11297,23 @@
   },
   "equipment.barrel": {
     "tags": [
-      "G|XPHB"
+      "Gear"
     ],
     "related": [
-      "equipment.abacus",
       "equipment.acid",
-      "equipment.acid-vial",
       "equipment.alchemists-fire",
-      "equipment.alchemists-fire-flask",
       "equipment.antitoxin",
-      "equipment.antitoxin-vial",
-      "equipment.backpack"
+      "equipment.backpack",
+      "equipment.ball-bearings",
+      "equipment.basic-poison",
+      "equipment.basket",
+      "equipment.bedroll"
     ],
     "references": []
   },
   "equipment.basic-poison": {
     "tags": [
-      "G|XPHB"
+      "Gear"
     ],
     "related": [
       "equipment.acid",
@@ -11336,42 +11336,42 @@
       "equipment.acid-vial",
       "equipment.alchemists-fire-flask",
       "equipment.antitoxin-vial",
-      "equipment.backpack",
       "equipment.ball-bearing",
       "equipment.ball-bearings-bag-of-1-000",
-      "equipment.barrel"
+      "equipment.caltrop",
+      "equipment.caltrops-bag-of-20"
     ],
     "references": []
   },
   "equipment.basket": {
     "tags": [
-      "G|XPHB"
+      "Gear"
     ],
     "related": [
-      "equipment.abacus",
       "equipment.acid",
-      "equipment.acid-vial",
       "equipment.alchemists-fire",
-      "equipment.alchemists-fire-flask",
       "equipment.antitoxin",
-      "equipment.antitoxin-vial",
-      "equipment.backpack"
+      "equipment.backpack",
+      "equipment.ball-bearings",
+      "equipment.barrel",
+      "equipment.basic-poison",
+      "equipment.bedroll"
     ],
     "references": []
   },
   "equipment.bedroll": {
     "tags": [
-      "G|XPHB"
+      "Gear"
     ],
     "related": [
-      "equipment.abacus",
       "equipment.acid",
-      "equipment.acid-vial",
       "equipment.alchemists-fire",
-      "equipment.alchemists-fire-flask",
       "equipment.antitoxin",
-      "equipment.antitoxin-vial",
-      "equipment.backpack"
+      "equipment.backpack",
+      "equipment.ball-bearings",
+      "equipment.barrel",
+      "equipment.basic-poison",
+      "equipment.basket"
     ],
     "references": []
   },
@@ -11409,17 +11409,17 @@
   },
   "equipment.bell": {
     "tags": [
-      "G|XPHB"
+      "Gear"
     ],
     "related": [
-      "equipment.abacus",
       "equipment.acid",
-      "equipment.acid-vial",
       "equipment.alchemists-fire",
-      "equipment.alchemists-fire-flask",
       "equipment.antitoxin",
-      "equipment.antitoxin-vial",
-      "equipment.backpack"
+      "equipment.backpack",
+      "equipment.ball-bearings",
+      "equipment.barrel",
+      "equipment.basic-poison",
+      "equipment.basket"
     ],
     "references": []
   },
@@ -11505,33 +11505,33 @@
   },
   "equipment.blanket": {
     "tags": [
-      "G|XPHB"
+      "Gear"
     ],
     "related": [
-      "equipment.abacus",
       "equipment.acid",
-      "equipment.acid-vial",
       "equipment.alchemists-fire",
-      "equipment.alchemists-fire-flask",
       "equipment.antitoxin",
-      "equipment.antitoxin-vial",
-      "equipment.backpack"
+      "equipment.backpack",
+      "equipment.ball-bearings",
+      "equipment.barrel",
+      "equipment.basic-poison",
+      "equipment.basket"
     ],
     "references": []
   },
   "equipment.block-and-tackle": {
     "tags": [
-      "G|XPHB"
+      "Gear"
     ],
     "related": [
-      "equipment.abacus",
       "equipment.acid",
-      "equipment.acid-vial",
       "equipment.alchemists-fire",
-      "equipment.alchemists-fire-flask",
       "equipment.antitoxin",
-      "equipment.antitoxin-vial",
-      "equipment.backpack"
+      "equipment.backpack",
+      "equipment.ball-bearings",
+      "equipment.barrel",
+      "equipment.basic-poison",
+      "equipment.basket"
     ],
     "references": []
   },
@@ -11617,17 +11617,17 @@
   },
   "equipment.book": {
     "tags": [
-      "G|XPHB"
+      "Gear"
     ],
     "related": [
-      "equipment.abacus",
       "equipment.acid",
-      "equipment.acid-vial",
       "equipment.alchemists-fire",
-      "equipment.alchemists-fire-flask",
       "equipment.antitoxin",
-      "equipment.antitoxin-vial",
-      "equipment.backpack"
+      "equipment.backpack",
+      "equipment.ball-bearings",
+      "equipment.barrel",
+      "equipment.basic-poison",
+      "equipment.basket"
     ],
     "references": []
   },
@@ -11691,7 +11691,7 @@
       "equipment.acid",
       "equipment.airship",
       "equipment.alchemists-fire",
-      "equipment.amulet"
+      "equipment.alchemists-supplies"
     ],
     "references": []
   },
@@ -11713,33 +11713,33 @@
   },
   "equipment.bucket": {
     "tags": [
-      "G|XPHB"
+      "Gear"
     ],
     "related": [
-      "equipment.abacus",
       "equipment.acid",
-      "equipment.acid-vial",
       "equipment.alchemists-fire",
-      "equipment.alchemists-fire-flask",
       "equipment.antitoxin",
-      "equipment.antitoxin-vial",
-      "equipment.backpack"
+      "equipment.backpack",
+      "equipment.ball-bearings",
+      "equipment.barrel",
+      "equipment.basic-poison",
+      "equipment.basket"
     ],
     "references": []
   },
   "equipment.bullseye-lantern": {
     "tags": [
-      "G|XPHB"
+      "Gear"
     ],
     "related": [
-      "equipment.abacus",
       "equipment.acid",
-      "equipment.acid-vial",
       "equipment.alchemists-fire",
-      "equipment.alchemists-fire-flask",
       "equipment.antitoxin",
-      "equipment.antitoxin-vial",
-      "equipment.backpack"
+      "equipment.backpack",
+      "equipment.ball-bearings",
+      "equipment.barrel",
+      "equipment.basic-poison",
+      "equipment.basket"
     ],
     "references": []
   },
@@ -11761,33 +11761,33 @@
   },
   "equipment.burglars-pack": {
     "tags": [
-      "G|XPHB"
+      "Gear"
     ],
     "related": [
-      "equipment.abacus",
       "equipment.acid",
-      "equipment.acid-vial",
       "equipment.alchemists-fire",
-      "equipment.alchemists-fire-flask",
       "equipment.antitoxin",
-      "equipment.antitoxin-vial",
-      "equipment.backpack"
+      "equipment.backpack",
+      "equipment.ball-bearings",
+      "equipment.barrel",
+      "equipment.basic-poison",
+      "equipment.basket"
     ],
     "references": []
   },
   "equipment.burnt-othur-fumes": {
     "tags": [
-      "G|XPHB"
+      "Gear"
     ],
     "related": [
       "equipment.assassins-blood",
       "equipment.carrion-crawler-mucus",
-      "equipment.drow-poison",
       "equipment.essence-of-ether",
       "equipment.grenade-launcher",
       "equipment.lolths-sting",
       "equipment.malice",
-      "equipment.midnight-tears"
+      "equipment.midnight-tears",
+      "equipment.oil-of-taggit"
     ],
     "references": []
   },
@@ -11800,16 +11800,16 @@
       "equipment.acid-vial",
       "equipment.alchemists-fire-flask",
       "equipment.antitoxin-vial",
-      "equipment.backpack",
       "equipment.ball-bearing",
       "equipment.ball-bearings-bag-of-1-000",
-      "equipment.barrel"
+      "equipment.basic-poison-vial",
+      "equipment.caltrops-bag-of-20"
     ],
     "references": []
   },
   "equipment.caltrops": {
     "tags": [
-      "G|XPHB"
+      "Gear"
     ],
     "related": [
       "equipment.acid",
@@ -11832,10 +11832,10 @@
       "equipment.acid-vial",
       "equipment.alchemists-fire-flask",
       "equipment.antitoxin-vial",
-      "equipment.backpack",
       "equipment.ball-bearing",
       "equipment.ball-bearings-bag-of-1-000",
-      "equipment.barrel"
+      "equipment.basic-poison-vial",
+      "equipment.caltrop"
     ],
     "references": []
   },
@@ -11857,23 +11857,23 @@
   },
   "equipment.candle": {
     "tags": [
-      "G|XPHB"
+      "Gear"
     ],
     "related": [
-      "equipment.abacus",
       "equipment.acid",
-      "equipment.acid-vial",
       "equipment.alchemists-fire",
-      "equipment.alchemists-fire-flask",
       "equipment.antitoxin",
-      "equipment.antitoxin-vial",
-      "equipment.backpack"
+      "equipment.backpack",
+      "equipment.ball-bearings",
+      "equipment.barrel",
+      "equipment.basic-poison",
+      "equipment.basket"
     ],
     "references": []
   },
   "equipment.canvas-1-sq-yd": {
     "tags": [
-      "TG|XDMG"
+      "Mount/Tack"
     ],
     "related": [
       "equipment.chicken",
@@ -11921,17 +11921,17 @@
   },
   "equipment.carrion-crawler-mucus": {
     "tags": [
-      "G|XPHB"
+      "Gear"
     ],
     "related": [
       "equipment.assassins-blood",
       "equipment.burnt-othur-fumes",
-      "equipment.drow-poison",
       "equipment.essence-of-ether",
       "equipment.grenade-launcher",
       "equipment.lolths-sting",
       "equipment.malice",
-      "equipment.midnight-tears"
+      "equipment.midnight-tears",
+      "equipment.oil-of-taggit"
     ],
     "references": []
   },
@@ -12049,7 +12049,7 @@
   },
   "equipment.chain": {
     "tags": [
-      "G|XPHB"
+      "Gear"
     ],
     "related": [
       "equipment.acid",
@@ -12072,10 +12072,10 @@
       "equipment.acid-vial",
       "equipment.alchemists-fire-flask",
       "equipment.antitoxin-vial",
-      "equipment.backpack",
       "equipment.ball-bearing",
       "equipment.ball-bearings-bag-of-1-000",
-      "equipment.barrel"
+      "equipment.basic-poison-vial",
+      "equipment.caltrop"
     ],
     "references": []
   },
@@ -12104,10 +12104,10 @@
       "equipment.acid-vial",
       "equipment.alchemists-fire-flask",
       "equipment.antitoxin-vial",
-      "equipment.backpack",
       "equipment.ball-bearing",
       "equipment.ball-bearings-bag-of-1-000",
-      "equipment.barrel"
+      "equipment.basic-poison-vial",
+      "equipment.caltrop"
     ],
     "references": []
   },
@@ -12139,29 +12139,29 @@
       "equipment.acid",
       "equipment.airship",
       "equipment.alchemists-fire",
-      "equipment.amulet"
+      "equipment.alchemists-supplies"
     ],
     "references": []
   },
   "equipment.chest": {
     "tags": [
-      "G|XPHB"
+      "Gear"
     ],
     "related": [
-      "equipment.abacus",
       "equipment.acid",
-      "equipment.acid-vial",
       "equipment.alchemists-fire",
-      "equipment.alchemists-fire-flask",
       "equipment.antitoxin",
-      "equipment.antitoxin-vial",
-      "equipment.backpack"
+      "equipment.backpack",
+      "equipment.ball-bearings",
+      "equipment.barrel",
+      "equipment.basic-poison",
+      "equipment.basket"
     ],
     "references": []
   },
   "equipment.chicken": {
     "tags": [
-      "TG|XDMG"
+      "Mount/Tack"
     ],
     "related": [
       "equipment.canvas-1-sq-yd",
@@ -12225,7 +12225,7 @@
   },
   "equipment.cinnamon": {
     "tags": [
-      "TG|XDMG"
+      "Mount/Tack"
     ],
     "related": [
       "equipment.canvas-1-sq-yd",
@@ -12257,17 +12257,17 @@
   },
   "equipment.climbers-kit": {
     "tags": [
-      "G|XPHB"
+      "Gear"
     ],
     "related": [
-      "equipment.abacus",
       "equipment.acid",
-      "equipment.acid-vial",
       "equipment.alchemists-fire",
-      "equipment.alchemists-fire-flask",
       "equipment.antitoxin",
-      "equipment.antitoxin-vial",
-      "equipment.backpack"
+      "equipment.backpack",
+      "equipment.ball-bearings",
+      "equipment.barrel",
+      "equipment.basic-poison",
+      "equipment.basket"
     ],
     "references": []
   },
@@ -12289,7 +12289,7 @@
   },
   "equipment.cloves": {
     "tags": [
-      "TG|XDMG"
+      "Mount/Tack"
     ],
     "related": [
       "equipment.canvas-1-sq-yd",
@@ -12312,10 +12312,10 @@
       "equipment.acid-vial",
       "equipment.alchemists-fire-flask",
       "equipment.antitoxin-vial",
-      "equipment.backpack",
       "equipment.ball-bearing",
       "equipment.ball-bearings-bag-of-1-000",
-      "equipment.barrel"
+      "equipment.basic-poison-vial",
+      "equipment.caltrop"
     ],
     "references": []
   },
@@ -12331,7 +12331,7 @@
       "equipment.acid",
       "equipment.airship",
       "equipment.alchemists-fire",
-      "equipment.amulet"
+      "equipment.alchemists-supplies"
     ],
     "references": []
   },
@@ -12353,23 +12353,23 @@
   },
   "equipment.component-pouch": {
     "tags": [
-      "G|XPHB"
+      "Gear"
     ],
     "related": [
-      "equipment.abacus",
       "equipment.acid",
-      "equipment.acid-vial",
       "equipment.alchemists-fire",
-      "equipment.alchemists-fire-flask",
       "equipment.antitoxin",
-      "equipment.antitoxin-vial",
-      "equipment.backpack"
+      "equipment.backpack",
+      "equipment.ball-bearings",
+      "equipment.barrel",
+      "equipment.basic-poison",
+      "equipment.basket"
     ],
     "references": []
   },
   "equipment.copper": {
     "tags": [
-      "TG|XDMG"
+      "Mount/Tack"
     ],
     "related": [
       "equipment.canvas-1-sq-yd",
@@ -12395,7 +12395,7 @@
       "equipment.abacus",
       "equipment.acid-vial",
       "equipment.alchemists-fire-flask",
-      "equipment.ale-gallon"
+      "equipment.alchemists-supplies"
     ],
     "references": []
   },
@@ -12433,7 +12433,7 @@
   },
   "equipment.costume": {
     "tags": [
-      "G|XPHB"
+      "Gear"
     ],
     "related": [
       "equipment.acid",
@@ -12456,16 +12456,16 @@
       "equipment.acid-vial",
       "equipment.alchemists-fire-flask",
       "equipment.antitoxin-vial",
-      "equipment.backpack",
       "equipment.ball-bearing",
       "equipment.ball-bearings-bag-of-1-000",
-      "equipment.barrel"
+      "equipment.basic-poison-vial",
+      "equipment.caltrop"
     ],
     "references": []
   },
   "equipment.cotton-cloth-1-sq-yd": {
     "tags": [
-      "TG|XDMG"
+      "Mount/Tack"
     ],
     "related": [
       "equipment.canvas-1-sq-yd",
@@ -12481,7 +12481,7 @@
   },
   "equipment.cow": {
     "tags": [
-      "TG|XDMG"
+      "Mount/Tack"
     ],
     "related": [
       "equipment.canvas-1-sq-yd",
@@ -12497,33 +12497,33 @@
   },
   "equipment.crossbow-bolt-case": {
     "tags": [
-      "G|XPHB"
+      "Gear"
     ],
     "related": [
-      "equipment.abacus",
       "equipment.acid",
-      "equipment.acid-vial",
       "equipment.alchemists-fire",
-      "equipment.alchemists-fire-flask",
       "equipment.antitoxin",
-      "equipment.antitoxin-vial",
-      "equipment.backpack"
+      "equipment.backpack",
+      "equipment.ball-bearings",
+      "equipment.barrel",
+      "equipment.basic-poison",
+      "equipment.basket"
     ],
     "references": []
   },
   "equipment.crowbar": {
     "tags": [
-      "G|XPHB"
+      "Gear"
     ],
     "related": [
-      "equipment.abacus",
       "equipment.acid",
-      "equipment.acid-vial",
       "equipment.alchemists-fire",
-      "equipment.alchemists-fire-flask",
       "equipment.antitoxin",
-      "equipment.antitoxin-vial",
-      "equipment.backpack"
+      "equipment.backpack",
+      "equipment.ball-bearings",
+      "equipment.barrel",
+      "equipment.basic-poison",
+      "equipment.basket"
     ],
     "references": []
   },
@@ -12577,23 +12577,23 @@
   },
   "equipment.diplomats-pack": {
     "tags": [
-      "G|XPHB"
+      "Gear"
     ],
     "related": [
-      "equipment.abacus",
       "equipment.acid",
-      "equipment.acid-vial",
       "equipment.alchemists-fire",
-      "equipment.alchemists-fire-flask",
       "equipment.antitoxin",
-      "equipment.antitoxin-vial",
-      "equipment.backpack"
+      "equipment.backpack",
+      "equipment.ball-bearings",
+      "equipment.barrel",
+      "equipment.basic-poison",
+      "equipment.basket"
     ],
     "references": []
   },
   "equipment.disguise-kit": {
     "tags": [
-      "T|XPHB"
+      "Tool"
     ],
     "related": [
       "equipment.forgery-kit",
@@ -12660,22 +12660,6 @@
       "Gear"
     ],
     "related": [
-      "equipment.assassins-blood",
-      "equipment.burnt-othur-fumes",
-      "equipment.carrion-crawler-mucus",
-      "equipment.essence-of-ether",
-      "equipment.grenade-launcher",
-      "equipment.malice",
-      "equipment.midnight-tears",
-      "equipment.oil-of-taggit"
-    ],
-    "references": []
-  },
-  "equipment.dungeoneers-pack": {
-    "tags": [
-      "G|XPHB"
-    ],
-    "related": [
       "equipment.abacus",
       "equipment.acid",
       "equipment.acid-vial",
@@ -12683,7 +12667,23 @@
       "equipment.alchemists-fire-flask",
       "equipment.antitoxin",
       "equipment.antitoxin-vial",
-      "equipment.backpack"
+      "equipment.assassins-blood"
+    ],
+    "references": []
+  },
+  "equipment.dungeoneers-pack": {
+    "tags": [
+      "Gear"
+    ],
+    "related": [
+      "equipment.acid",
+      "equipment.alchemists-fire",
+      "equipment.antitoxin",
+      "equipment.backpack",
+      "equipment.ball-bearings",
+      "equipment.barrel",
+      "equipment.basic-poison",
+      "equipment.basket"
     ],
     "references": []
   },
@@ -12715,7 +12715,7 @@
       "equipment.abacus",
       "equipment.acid-vial",
       "equipment.alchemists-fire-flask",
-      "equipment.ale-gallon"
+      "equipment.alchemists-supplies"
     ],
     "references": []
   },
@@ -12737,17 +12737,17 @@
   },
   "equipment.emblem": {
     "tags": [
-      "SCF|XPHB"
+      "Spellcasting Focus"
     ],
     "related": [
       "equipment.amulet",
+      "equipment.crystal",
+      "equipment.orb",
       "equipment.reliquary",
+      "equipment.rod",
       "equipment.sprig-of-mistletoe",
-      "equipment.totem",
-      "equipment.yew-wand",
-      "equipment.abacus",
-      "equipment.acid",
-      "equipment.acid-vial"
+      "equipment.staff",
+      "equipment.wand"
     ],
     "references": []
   },
@@ -12817,33 +12817,33 @@
   },
   "equipment.entertainers-pack": {
     "tags": [
-      "G|XPHB"
+      "Gear"
     ],
     "related": [
-      "equipment.abacus",
       "equipment.acid",
-      "equipment.acid-vial",
       "equipment.alchemists-fire",
-      "equipment.alchemists-fire-flask",
       "equipment.antitoxin",
-      "equipment.antitoxin-vial",
-      "equipment.backpack"
+      "equipment.backpack",
+      "equipment.ball-bearings",
+      "equipment.barrel",
+      "equipment.basic-poison",
+      "equipment.basket"
     ],
     "references": []
   },
   "equipment.essence-of-ether": {
     "tags": [
-      "G|XPHB"
+      "Gear"
     ],
     "related": [
       "equipment.assassins-blood",
       "equipment.burnt-othur-fumes",
       "equipment.carrion-crawler-mucus",
-      "equipment.drow-poison",
       "equipment.grenade-launcher",
       "equipment.lolths-sting",
       "equipment.malice",
-      "equipment.midnight-tears"
+      "equipment.midnight-tears",
+      "equipment.oil-of-taggit"
     ],
     "references": []
   },
@@ -12865,17 +12865,17 @@
   },
   "equipment.explorers-pack": {
     "tags": [
-      "G|XPHB"
+      "Gear"
     ],
     "related": [
-      "equipment.abacus",
       "equipment.acid",
-      "equipment.acid-vial",
       "equipment.alchemists-fire",
-      "equipment.alchemists-fire-flask",
       "equipment.antitoxin",
-      "equipment.antitoxin-vial",
-      "equipment.backpack"
+      "equipment.backpack",
+      "equipment.ball-bearings",
+      "equipment.barrel",
+      "equipment.basic-poison",
+      "equipment.basket"
     ],
     "references": []
   },
@@ -12945,17 +12945,17 @@
   },
   "equipment.fine-clothes": {
     "tags": [
-      "G|XPHB"
+      "Gear"
     ],
     "related": [
-      "equipment.abacus",
       "equipment.acid",
-      "equipment.acid-vial",
       "equipment.alchemists-fire",
-      "equipment.alchemists-fire-flask",
       "equipment.antitoxin",
-      "equipment.antitoxin-vial",
-      "equipment.backpack"
+      "equipment.backpack",
+      "equipment.ball-bearings",
+      "equipment.barrel",
+      "equipment.basic-poison",
+      "equipment.basket"
     ],
     "references": []
   },
@@ -13016,32 +13016,32 @@
       "equipment.acid-vial",
       "equipment.alchemists-fire-flask",
       "equipment.antitoxin-vial",
-      "equipment.backpack",
       "equipment.ball-bearing",
       "equipment.ball-bearings-bag-of-1-000",
-      "equipment.barrel"
+      "equipment.basic-poison-vial",
+      "equipment.caltrop"
     ],
     "references": []
   },
   "equipment.flask": {
     "tags": [
-      "G|XPHB"
+      "Gear"
     ],
     "related": [
-      "equipment.abacus",
       "equipment.acid",
-      "equipment.acid-vial",
       "equipment.alchemists-fire",
-      "equipment.alchemists-fire-flask",
       "equipment.antitoxin",
-      "equipment.antitoxin-vial",
-      "equipment.backpack"
+      "equipment.backpack",
+      "equipment.ball-bearings",
+      "equipment.barrel",
+      "equipment.basic-poison",
+      "equipment.basket"
     ],
     "references": []
   },
   "equipment.flour": {
     "tags": [
-      "TG|XDMG"
+      "Mount/Tack"
     ],
     "related": [
       "equipment.canvas-1-sq-yd",
@@ -13057,7 +13057,7 @@
   },
   "equipment.forgery-kit": {
     "tags": [
-      "T|XPHB"
+      "Tool"
     ],
     "related": [
       "equipment.disguise-kit",
@@ -13137,7 +13137,7 @@
   },
   "equipment.ginger": {
     "tags": [
-      "TG|XDMG"
+      "Mount/Tack"
     ],
     "related": [
       "equipment.canvas-1-sq-yd",
@@ -13153,23 +13153,23 @@
   },
   "equipment.glass-bottle": {
     "tags": [
-      "G|XPHB"
+      "Gear"
     ],
     "related": [
-      "equipment.abacus",
       "equipment.acid",
-      "equipment.acid-vial",
       "equipment.alchemists-fire",
-      "equipment.alchemists-fire-flask",
       "equipment.antitoxin",
-      "equipment.antitoxin-vial",
-      "equipment.backpack"
+      "equipment.backpack",
+      "equipment.ball-bearings",
+      "equipment.barrel",
+      "equipment.basic-poison",
+      "equipment.basket"
     ],
     "references": []
   },
   "equipment.goat": {
     "tags": [
-      "TG|XDMG"
+      "Mount/Tack"
     ],
     "related": [
       "equipment.canvas-1-sq-yd",
@@ -13185,7 +13185,7 @@
   },
   "equipment.gold": {
     "tags": [
-      "TG|XDMG"
+      "Mount/Tack"
     ],
     "related": [
       "equipment.canvas-1-sq-yd",
@@ -13211,7 +13211,7 @@
       "equipment.abacus",
       "equipment.acid-vial",
       "equipment.alchemists-fire-flask",
-      "equipment.ale-gallon"
+      "equipment.alchemists-supplies"
     ],
     "references": []
   },
@@ -13225,9 +13225,9 @@
       "equipment.alexandrite",
       "equipment.amber",
       "equipment.amethyst",
+      "equipment.antimatter-rifle",
       "equipment.aquamarine",
-      "equipment.assassins-blood",
-      "equipment.azurite"
+      "equipment.assassins-blood"
     ],
     "references": []
   },
@@ -13441,33 +13441,33 @@
   },
   "equipment.grappling-hook": {
     "tags": [
-      "G|XPHB"
+      "Gear"
     ],
     "related": [
-      "equipment.abacus",
       "equipment.acid",
-      "equipment.acid-vial",
       "equipment.alchemists-fire",
-      "equipment.alchemists-fire-flask",
       "equipment.antitoxin",
-      "equipment.antitoxin-vial",
-      "equipment.backpack"
+      "equipment.backpack",
+      "equipment.ball-bearings",
+      "equipment.barrel",
+      "equipment.basic-poison",
+      "equipment.basket"
     ],
     "references": []
   },
   "equipment.grenade-launcher": {
     "tags": [
-      "G|XPHB"
+      "Gear"
     ],
     "related": [
       "equipment.assassins-blood",
       "equipment.burnt-othur-fumes",
       "equipment.carrion-crawler-mucus",
-      "equipment.drow-poison",
       "equipment.essence-of-ether",
       "equipment.lolths-sting",
       "equipment.malice",
-      "equipment.midnight-tears"
+      "equipment.midnight-tears",
+      "equipment.oil-of-taggit"
     ],
     "references": []
   },
@@ -13528,10 +13528,10 @@
       "equipment.acid-vial",
       "equipment.alchemists-fire-flask",
       "equipment.antitoxin-vial",
-      "equipment.backpack",
       "equipment.ball-bearing",
       "equipment.ball-bearings-bag-of-1-000",
-      "equipment.barrel"
+      "equipment.basic-poison-vial",
+      "equipment.caltrop"
     ],
     "references": []
   },
@@ -13553,17 +13553,17 @@
   },
   "equipment.healers-kit": {
     "tags": [
-      "G|XPHB"
+      "Gear"
     ],
     "related": [
-      "equipment.abacus",
       "equipment.acid",
-      "equipment.acid-vial",
       "equipment.alchemists-fire",
-      "equipment.alchemists-fire-flask",
       "equipment.antitoxin",
-      "equipment.antitoxin-vial",
-      "equipment.backpack"
+      "equipment.backpack",
+      "equipment.ball-bearings",
+      "equipment.barrel",
+      "equipment.basic-poison",
+      "equipment.basket"
     ],
     "references": []
   },
@@ -13592,16 +13592,16 @@
       "equipment.acid-vial",
       "equipment.alchemists-fire-flask",
       "equipment.antitoxin-vial",
-      "equipment.backpack",
       "equipment.ball-bearing",
       "equipment.ball-bearings-bag-of-1-000",
-      "equipment.barrel"
+      "equipment.basic-poison-vial",
+      "equipment.caltrop"
     ],
     "references": []
   },
   "equipment.herbalism-kit": {
     "tags": [
-      "T|XPHB"
+      "Tool"
     ],
     "related": [
       "equipment.disguise-kit",
@@ -13617,7 +13617,7 @@
   },
   "equipment.holy-water": {
     "tags": [
-      "G|XPHB"
+      "Gear"
     ],
     "related": [
       "equipment.acid",
@@ -13640,26 +13640,26 @@
       "equipment.acid-vial",
       "equipment.alchemists-fire-flask",
       "equipment.antitoxin-vial",
-      "equipment.backpack",
       "equipment.ball-bearing",
       "equipment.ball-bearings-bag-of-1-000",
-      "equipment.barrel"
+      "equipment.basic-poison-vial",
+      "equipment.caltrop"
     ],
     "references": []
   },
   "equipment.hooded-lantern": {
     "tags": [
-      "G|XPHB"
+      "Gear"
     ],
     "related": [
-      "equipment.abacus",
       "equipment.acid",
-      "equipment.acid-vial",
       "equipment.alchemists-fire",
-      "equipment.alchemists-fire-flask",
       "equipment.antitoxin",
-      "equipment.antitoxin-vial",
-      "equipment.backpack"
+      "equipment.backpack",
+      "equipment.ball-bearings",
+      "equipment.barrel",
+      "equipment.basic-poison",
+      "equipment.basket"
     ],
     "references": []
   },
@@ -13672,10 +13672,10 @@
       "equipment.acid-vial",
       "equipment.alchemists-fire-flask",
       "equipment.antitoxin-vial",
-      "equipment.backpack",
       "equipment.ball-bearing",
       "equipment.ball-bearings-bag-of-1-000",
-      "equipment.barrel"
+      "equipment.basic-poison-vial",
+      "equipment.caltrop"
     ],
     "references": []
   },
@@ -13697,23 +13697,23 @@
   },
   "equipment.hunting-trap": {
     "tags": [
-      "G|XPHB"
+      "Gear"
     ],
     "related": [
-      "equipment.abacus",
       "equipment.acid",
-      "equipment.acid-vial",
       "equipment.alchemists-fire",
-      "equipment.alchemists-fire-flask",
       "equipment.antitoxin",
-      "equipment.antitoxin-vial",
-      "equipment.backpack"
+      "equipment.backpack",
+      "equipment.ball-bearings",
+      "equipment.barrel",
+      "equipment.basic-poison",
+      "equipment.basket"
     ],
     "references": []
   },
   "equipment.ink": {
     "tags": [
-      "G|XPHB"
+      "Gear"
     ],
     "related": [
       "equipment.acid",
@@ -13736,32 +13736,32 @@
       "equipment.acid-vial",
       "equipment.alchemists-fire-flask",
       "equipment.antitoxin-vial",
-      "equipment.backpack",
       "equipment.ball-bearing",
       "equipment.ball-bearings-bag-of-1-000",
-      "equipment.barrel"
+      "equipment.basic-poison-vial",
+      "equipment.caltrop"
     ],
     "references": []
   },
   "equipment.ink-pen": {
     "tags": [
-      "G|XPHB"
+      "Gear"
     ],
     "related": [
-      "equipment.abacus",
       "equipment.acid",
-      "equipment.acid-vial",
       "equipment.alchemists-fire",
-      "equipment.alchemists-fire-flask",
       "equipment.antitoxin",
-      "equipment.antitoxin-vial",
-      "equipment.backpack"
+      "equipment.backpack",
+      "equipment.ball-bearings",
+      "equipment.barrel",
+      "equipment.basic-poison",
+      "equipment.basket"
     ],
     "references": []
   },
   "equipment.iron": {
     "tags": [
-      "TG|XDMG"
+      "Mount/Tack"
     ],
     "related": [
       "equipment.canvas-1-sq-yd",
@@ -13777,39 +13777,39 @@
   },
   "equipment.iron-pot": {
     "tags": [
-      "G|XPHB"
+      "Gear"
     ],
     "related": [
-      "equipment.abacus",
       "equipment.acid",
-      "equipment.acid-vial",
       "equipment.alchemists-fire",
-      "equipment.alchemists-fire-flask",
       "equipment.antitoxin",
-      "equipment.antitoxin-vial",
-      "equipment.backpack"
+      "equipment.backpack",
+      "equipment.ball-bearings",
+      "equipment.barrel",
+      "equipment.basic-poison",
+      "equipment.basket"
     ],
     "references": []
   },
   "equipment.iron-spike": {
     "tags": [
-      "G|XPHB"
+      "Gear"
     ],
     "related": [
-      "equipment.abacus",
       "equipment.acid",
-      "equipment.acid-vial",
       "equipment.alchemists-fire",
-      "equipment.alchemists-fire-flask",
       "equipment.antitoxin",
-      "equipment.antitoxin-vial",
-      "equipment.backpack"
+      "equipment.backpack",
+      "equipment.ball-bearings",
+      "equipment.barrel",
+      "equipment.basic-poison",
+      "equipment.basket"
     ],
     "references": []
   },
   "equipment.iron-spikes": {
     "tags": [
-      "G|XPHB"
+      "Gear"
     ],
     "related": [
       "equipment.acid",
@@ -13832,10 +13832,10 @@
       "equipment.acid-vial",
       "equipment.alchemists-fire-flask",
       "equipment.antitoxin-vial",
-      "equipment.backpack",
       "equipment.ball-bearing",
       "equipment.ball-bearings-bag-of-1-000",
-      "equipment.barrel"
+      "equipment.basic-poison-vial",
+      "equipment.caltrop"
     ],
     "references": []
   },
@@ -13985,17 +13985,17 @@
   },
   "equipment.jug": {
     "tags": [
-      "G|XPHB"
+      "Gear"
     ],
     "related": [
-      "equipment.abacus",
       "equipment.acid",
-      "equipment.acid-vial",
       "equipment.alchemists-fire",
-      "equipment.alchemists-fire-flask",
       "equipment.antitoxin",
-      "equipment.antitoxin-vial",
-      "equipment.backpack"
+      "equipment.backpack",
+      "equipment.ball-bearings",
+      "equipment.barrel",
+      "equipment.basic-poison",
+      "equipment.basket"
     ],
     "references": []
   },
@@ -14017,7 +14017,7 @@
   },
   "equipment.ladder": {
     "tags": [
-      "G|XPHB"
+      "Gear"
     ],
     "related": [
       "equipment.acid",
@@ -14040,26 +14040,26 @@
       "equipment.acid-vial",
       "equipment.alchemists-fire-flask",
       "equipment.antitoxin-vial",
-      "equipment.backpack",
       "equipment.ball-bearing",
       "equipment.ball-bearings-bag-of-1-000",
-      "equipment.barrel"
+      "equipment.basic-poison-vial",
+      "equipment.caltrop"
     ],
     "references": []
   },
   "equipment.lamp": {
     "tags": [
-      "G|XPHB"
+      "Gear"
     ],
     "related": [
-      "equipment.abacus",
       "equipment.acid",
-      "equipment.acid-vial",
       "equipment.alchemists-fire",
-      "equipment.alchemists-fire-flask",
       "equipment.antitoxin",
-      "equipment.antitoxin-vial",
-      "equipment.backpack"
+      "equipment.backpack",
+      "equipment.ball-bearings",
+      "equipment.barrel",
+      "equipment.basic-poison",
+      "equipment.basket"
     ],
     "references": []
   },
@@ -14113,7 +14113,7 @@
   },
   "equipment.linen-1-sq-yd": {
     "tags": [
-      "TG|XDMG"
+      "Mount/Tack"
     ],
     "related": [
       "equipment.canvas-1-sq-yd",
@@ -14145,23 +14145,23 @@
   },
   "equipment.lock": {
     "tags": [
-      "G|XPHB"
+      "Gear"
     ],
     "related": [
-      "equipment.abacus",
       "equipment.acid",
-      "equipment.acid-vial",
       "equipment.alchemists-fire",
-      "equipment.alchemists-fire-flask",
       "equipment.antitoxin",
-      "equipment.antitoxin-vial",
-      "equipment.backpack"
+      "equipment.backpack",
+      "equipment.ball-bearings",
+      "equipment.barrel",
+      "equipment.basic-poison",
+      "equipment.basket"
     ],
     "references": []
   },
   "equipment.lolths-sting": {
     "tags": [
-      "G|XPHB"
+      "Gear"
     ],
     "related": [
       "equipment.assassins-blood",
@@ -14193,17 +14193,17 @@
   },
   "equipment.magnifying-glass": {
     "tags": [
-      "G|XPHB"
+      "Gear"
     ],
     "related": [
-      "equipment.abacus",
       "equipment.acid",
-      "equipment.acid-vial",
       "equipment.alchemists-fire",
-      "equipment.alchemists-fire-flask",
       "equipment.antitoxin",
-      "equipment.antitoxin-vial",
-      "equipment.backpack"
+      "equipment.backpack",
+      "equipment.ball-bearings",
+      "equipment.barrel",
+      "equipment.basic-poison",
+      "equipment.basket"
     ],
     "references": []
   },
@@ -14225,39 +14225,39 @@
   },
   "equipment.malice": {
     "tags": [
-      "G|XPHB"
+      "Gear"
     ],
     "related": [
       "equipment.assassins-blood",
       "equipment.burnt-othur-fumes",
       "equipment.carrion-crawler-mucus",
-      "equipment.drow-poison",
       "equipment.essence-of-ether",
       "equipment.grenade-launcher",
       "equipment.lolths-sting",
-      "equipment.midnight-tears"
+      "equipment.midnight-tears",
+      "equipment.oil-of-taggit"
     ],
     "references": []
   },
   "equipment.manacles": {
     "tags": [
-      "G|XPHB"
+      "Gear"
     ],
     "related": [
-      "equipment.abacus",
       "equipment.acid",
-      "equipment.acid-vial",
       "equipment.alchemists-fire",
-      "equipment.alchemists-fire-flask",
       "equipment.antitoxin",
-      "equipment.antitoxin-vial",
-      "equipment.backpack"
+      "equipment.backpack",
+      "equipment.ball-bearings",
+      "equipment.barrel",
+      "equipment.basic-poison",
+      "equipment.basket"
     ],
     "references": []
   },
   "equipment.map": {
     "tags": [
-      "G|XPHB"
+      "Gear"
     ],
     "related": [
       "equipment.acid",
@@ -14273,17 +14273,17 @@
   },
   "equipment.map-or-scroll-case": {
     "tags": [
-      "G|XPHB"
+      "Gear"
     ],
     "related": [
-      "equipment.abacus",
       "equipment.acid",
-      "equipment.acid-vial",
       "equipment.alchemists-fire",
-      "equipment.alchemists-fire-flask",
       "equipment.antitoxin",
-      "equipment.antitoxin-vial",
-      "equipment.backpack"
+      "equipment.backpack",
+      "equipment.ball-bearings",
+      "equipment.barrel",
+      "equipment.basic-poison",
+      "equipment.basket"
     ],
     "references": []
   },
@@ -14312,10 +14312,10 @@
       "equipment.acid-vial",
       "equipment.alchemists-fire-flask",
       "equipment.antitoxin-vial",
-      "equipment.backpack",
       "equipment.ball-bearing",
       "equipment.ball-bearings-bag-of-1-000",
-      "equipment.barrel"
+      "equipment.basic-poison-vial",
+      "equipment.caltrop"
     ],
     "references": []
   },
@@ -14328,26 +14328,26 @@
       "equipment.acid-vial",
       "equipment.alchemists-fire-flask",
       "equipment.antitoxin-vial",
-      "equipment.backpack",
       "equipment.ball-bearing",
       "equipment.ball-bearings-bag-of-1-000",
-      "equipment.barrel"
+      "equipment.basic-poison-vial",
+      "equipment.caltrop"
     ],
     "references": []
   },
   "equipment.midnight-tears": {
     "tags": [
-      "G|XPHB"
+      "Gear"
     ],
     "related": [
       "equipment.assassins-blood",
       "equipment.burnt-othur-fumes",
       "equipment.carrion-crawler-mucus",
-      "equipment.drow-poison",
       "equipment.essence-of-ether",
       "equipment.grenade-launcher",
       "equipment.lolths-sting",
-      "equipment.malice"
+      "equipment.malice",
+      "equipment.oil-of-taggit"
     ],
     "references": []
   },
@@ -14376,16 +14376,16 @@
       "equipment.acid-vial",
       "equipment.alchemists-fire-flask",
       "equipment.antitoxin-vial",
-      "equipment.backpack",
       "equipment.ball-bearing",
       "equipment.ball-bearings-bag-of-1-000",
-      "equipment.barrel"
+      "equipment.basic-poison-vial",
+      "equipment.caltrop"
     ],
     "references": []
   },
   "equipment.mirror": {
     "tags": [
-      "G|XPHB"
+      "Gear"
     ],
     "related": [
       "equipment.acid",
@@ -14449,7 +14449,7 @@
   },
   "equipment.navigators-tools": {
     "tags": [
-      "T|XPHB"
+      "Tool"
     ],
     "related": [
       "equipment.disguise-kit",
@@ -14481,7 +14481,9 @@
   },
   "equipment.net": {
     "tags": [
-      "G|XPHB"
+      "Ranged Weapon",
+      "Special",
+      "Thrown"
     ],
     "related": [
       "equipment.acid",
@@ -14529,7 +14531,7 @@
   },
   "equipment.oil": {
     "tags": [
-      "G|XPHB"
+      "Gear"
     ],
     "related": [
       "equipment.acid",
@@ -14552,26 +14554,26 @@
       "equipment.acid-vial",
       "equipment.alchemists-fire-flask",
       "equipment.antitoxin-vial",
-      "equipment.backpack",
       "equipment.ball-bearing",
       "equipment.ball-bearings-bag-of-1-000",
-      "equipment.barrel"
+      "equipment.basic-poison-vial",
+      "equipment.caltrop"
     ],
     "references": []
   },
   "equipment.oil-of-taggit": {
     "tags": [
-      "G|XPHB"
+      "Gear"
     ],
     "related": [
       "equipment.assassins-blood",
       "equipment.burnt-othur-fumes",
       "equipment.carrion-crawler-mucus",
-      "equipment.drow-poison",
       "equipment.essence-of-ether",
       "equipment.grenade-launcher",
       "equipment.lolths-sting",
-      "equipment.malice"
+      "equipment.malice",
+      "equipment.midnight-tears"
     ],
     "references": []
   },
@@ -14625,7 +14627,7 @@
   },
   "equipment.ox": {
     "tags": [
-      "TG|XDMG"
+      "Mount/Tack"
     ],
     "related": [
       "equipment.canvas-1-sq-yd",
@@ -14705,23 +14707,23 @@
   },
   "equipment.pale-tincture": {
     "tags": [
-      "G|XPHB"
+      "Gear"
     ],
     "related": [
       "equipment.assassins-blood",
       "equipment.burnt-othur-fumes",
       "equipment.carrion-crawler-mucus",
-      "equipment.drow-poison",
       "equipment.essence-of-ether",
       "equipment.grenade-launcher",
       "equipment.lolths-sting",
-      "equipment.malice"
+      "equipment.malice",
+      "equipment.midnight-tears"
     ],
     "references": []
   },
   "equipment.paper": {
     "tags": [
-      "G|XPHB"
+      "Gear"
     ],
     "related": [
       "equipment.acid",
@@ -14744,16 +14746,16 @@
       "equipment.acid-vial",
       "equipment.alchemists-fire-flask",
       "equipment.antitoxin-vial",
-      "equipment.backpack",
       "equipment.ball-bearing",
       "equipment.ball-bearings-bag-of-1-000",
-      "equipment.barrel"
+      "equipment.basic-poison-vial",
+      "equipment.caltrop"
     ],
     "references": []
   },
   "equipment.parchment": {
     "tags": [
-      "G|XPHB"
+      "Gear"
     ],
     "related": [
       "equipment.acid",
@@ -14776,10 +14778,10 @@
       "equipment.acid-vial",
       "equipment.alchemists-fire-flask",
       "equipment.antitoxin-vial",
-      "equipment.backpack",
       "equipment.ball-bearing",
       "equipment.ball-bearings-bag-of-1-000",
-      "equipment.barrel"
+      "equipment.basic-poison-vial",
+      "equipment.caltrop"
     ],
     "references": []
   },
@@ -14801,7 +14803,7 @@
   },
   "equipment.pepper": {
     "tags": [
-      "TG|XDMG"
+      "Mount/Tack"
     ],
     "related": [
       "equipment.canvas-1-sq-yd",
@@ -14817,7 +14819,7 @@
   },
   "equipment.perfume": {
     "tags": [
-      "G|XPHB"
+      "Gear"
     ],
     "related": [
       "equipment.acid",
@@ -14840,10 +14842,10 @@
       "equipment.acid-vial",
       "equipment.alchemists-fire-flask",
       "equipment.antitoxin-vial",
-      "equipment.backpack",
       "equipment.ball-bearing",
       "equipment.ball-bearings-bag-of-1-000",
-      "equipment.barrel"
+      "equipment.basic-poison-vial",
+      "equipment.caltrop"
     ],
     "references": []
   },
@@ -14865,7 +14867,7 @@
   },
   "equipment.pig": {
     "tags": [
-      "TG|XDMG"
+      "Mount/Tack"
     ],
     "related": [
       "equipment.canvas-1-sq-yd",
@@ -14888,10 +14890,10 @@
       "equipment.acid-vial",
       "equipment.alchemists-fire-flask",
       "equipment.antitoxin-vial",
-      "equipment.backpack",
       "equipment.ball-bearing",
       "equipment.ball-bearings-bag-of-1-000",
-      "equipment.barrel"
+      "equipment.basic-poison-vial",
+      "equipment.caltrop"
     ],
     "references": []
   },
@@ -14904,16 +14906,16 @@
       "equipment.acid-vial",
       "equipment.alchemists-fire-flask",
       "equipment.antitoxin-vial",
-      "equipment.backpack",
       "equipment.ball-bearing",
       "equipment.ball-bearings-bag-of-1-000",
-      "equipment.barrel"
+      "equipment.basic-poison-vial",
+      "equipment.caltrop"
     ],
     "references": []
   },
   "equipment.platinum": {
     "tags": [
-      "TG|XDMG"
+      "Mount/Tack"
     ],
     "related": [
       "equipment.canvas-1-sq-yd",
@@ -14939,7 +14941,7 @@
       "equipment.abacus",
       "equipment.acid-vial",
       "equipment.alchemists-fire-flask",
-      "equipment.ale-gallon"
+      "equipment.alchemists-supplies"
     ],
     "references": []
   },
@@ -14986,8 +14988,8 @@
       "equipment.abacus",
       "equipment.acid-vial",
       "equipment.alchemists-fire-flask",
-      "equipment.ale-gallon",
-      "equipment.ale-mug"
+      "equipment.alchemists-supplies",
+      "equipment.ale-gallon"
     ],
     "references": []
   },
@@ -15002,14 +15004,14 @@
       "equipment.acid",
       "equipment.airship",
       "equipment.alchemists-fire",
-      "equipment.ale-mug",
-      "equipment.amulet"
+      "equipment.alchemists-supplies",
+      "equipment.ale-mug"
     ],
     "references": []
   },
   "equipment.poisoners-kit": {
     "tags": [
-      "T|XPHB"
+      "Tool"
     ],
     "related": [
       "equipment.disguise-kit",
@@ -15025,7 +15027,7 @@
   },
   "equipment.pole": {
     "tags": [
-      "G|XPHB"
+      "Gear"
     ],
     "related": [
       "equipment.acid",
@@ -15048,10 +15050,10 @@
       "equipment.acid-vial",
       "equipment.alchemists-fire-flask",
       "equipment.antitoxin-vial",
-      "equipment.backpack",
       "equipment.ball-bearing",
       "equipment.ball-bearings-bag-of-1-000",
-      "equipment.barrel"
+      "equipment.basic-poison-vial",
+      "equipment.caltrop"
     ],
     "references": []
   },
@@ -15073,49 +15075,49 @@
   },
   "equipment.portable-ram": {
     "tags": [
-      "G|XPHB"
+      "Gear"
     ],
     "related": [
-      "equipment.abacus",
       "equipment.acid",
-      "equipment.acid-vial",
       "equipment.alchemists-fire",
-      "equipment.alchemists-fire-flask",
       "equipment.antitoxin",
-      "equipment.antitoxin-vial",
-      "equipment.backpack"
+      "equipment.backpack",
+      "equipment.ball-bearings",
+      "equipment.barrel",
+      "equipment.basic-poison",
+      "equipment.basket"
     ],
     "references": []
   },
   "equipment.pouch": {
     "tags": [
-      "G|XPHB"
+      "Gear"
     ],
     "related": [
-      "equipment.abacus",
       "equipment.acid",
-      "equipment.acid-vial",
       "equipment.alchemists-fire",
-      "equipment.alchemists-fire-flask",
       "equipment.antitoxin",
-      "equipment.antitoxin-vial",
-      "equipment.backpack"
+      "equipment.backpack",
+      "equipment.ball-bearings",
+      "equipment.barrel",
+      "equipment.basic-poison",
+      "equipment.basket"
     ],
     "references": []
   },
   "equipment.priests-pack": {
     "tags": [
-      "G|XPHB"
+      "Gear"
     ],
     "related": [
-      "equipment.abacus",
       "equipment.acid",
-      "equipment.acid-vial",
       "equipment.alchemists-fire",
-      "equipment.alchemists-fire-flask",
       "equipment.antitoxin",
-      "equipment.antitoxin-vial",
-      "equipment.backpack"
+      "equipment.backpack",
+      "equipment.ball-bearings",
+      "equipment.barrel",
+      "equipment.basic-poison",
+      "equipment.basket"
     ],
     "references": []
   },
@@ -15123,34 +15125,34 @@
     "tags": [
       "Melee Weapon",
       "Y",
-      "F|XPHB",
-      "T|XPHB"
+      "Finesse",
+      "Thrown"
     ],
     "related": [
-      "equipment.acid",
-      "equipment.airship",
-      "equipment.alchemists-fire",
-      "equipment.ale-mug",
-      "equipment.amulet",
-      "equipment.antitoxin",
-      "equipment.backpack",
-      "equipment.ball-bearings"
+      "equipment.battleaxe",
+      "equipment.club",
+      "equipment.dagger",
+      "equipment.flail",
+      "equipment.glaive",
+      "equipment.greataxe",
+      "equipment.greatclub",
+      "equipment.greatsword"
     ],
     "references": []
   },
   "equipment.purple-worm-poison": {
     "tags": [
-      "G|XPHB"
+      "Gear"
     ],
     "related": [
       "equipment.assassins-blood",
       "equipment.burnt-othur-fumes",
       "equipment.carrion-crawler-mucus",
-      "equipment.drow-poison",
       "equipment.essence-of-ether",
       "equipment.grenade-launcher",
       "equipment.lolths-sting",
-      "equipment.malice"
+      "equipment.malice",
+      "equipment.midnight-tears"
     ],
     "references": []
   },
@@ -15172,23 +15174,23 @@
   },
   "equipment.quiver": {
     "tags": [
-      "G|XPHB"
+      "Gear"
     ],
     "related": [
-      "equipment.abacus",
       "equipment.acid",
-      "equipment.acid-vial",
       "equipment.alchemists-fire",
-      "equipment.alchemists-fire-flask",
       "equipment.antitoxin",
-      "equipment.antitoxin-vial",
-      "equipment.backpack"
+      "equipment.backpack",
+      "equipment.ball-bearings",
+      "equipment.barrel",
+      "equipment.basic-poison",
+      "equipment.basket"
     ],
     "references": []
   },
   "equipment.rations": {
     "tags": [
-      "G|XPHB"
+      "Gear"
     ],
     "related": [
       "equipment.acid",
@@ -15211,26 +15213,26 @@
       "equipment.acid-vial",
       "equipment.alchemists-fire-flask",
       "equipment.antitoxin-vial",
-      "equipment.backpack",
       "equipment.ball-bearing",
       "equipment.ball-bearings-bag-of-1-000",
-      "equipment.barrel"
+      "equipment.basic-poison-vial",
+      "equipment.caltrop"
     ],
     "references": []
   },
   "equipment.reliquary": {
     "tags": [
-      "SCF|XPHB"
+      "Spellcasting Focus"
     ],
     "related": [
       "equipment.amulet",
+      "equipment.crystal",
       "equipment.emblem",
+      "equipment.orb",
+      "equipment.rod",
       "equipment.sprig-of-mistletoe",
-      "equipment.totem",
-      "equipment.yew-wand",
-      "equipment.abacus",
-      "equipment.acid",
-      "equipment.acid-vial"
+      "equipment.staff",
+      "equipment.wand"
     ],
     "references": []
   },
@@ -15284,7 +15286,7 @@
   },
   "equipment.robe": {
     "tags": [
-      "G|XPHB"
+      "Gear"
     ],
     "related": [
       "equipment.acid",
@@ -15307,16 +15309,16 @@
       "equipment.acid-vial",
       "equipment.alchemists-fire-flask",
       "equipment.antitoxin-vial",
-      "equipment.backpack",
       "equipment.ball-bearing",
       "equipment.ball-bearings-bag-of-1-000",
-      "equipment.barrel"
+      "equipment.basic-poison-vial",
+      "equipment.caltrop"
     ],
     "references": []
   },
   "equipment.rope": {
     "tags": [
-      "G|XPHB"
+      "Gear"
     ],
     "related": [
       "equipment.acid",
@@ -15364,17 +15366,17 @@
   },
   "equipment.sack": {
     "tags": [
-      "G|XPHB"
+      "Gear"
     ],
     "related": [
-      "equipment.abacus",
       "equipment.acid",
-      "equipment.acid-vial",
       "equipment.alchemists-fire",
-      "equipment.alchemists-fire-flask",
       "equipment.antitoxin",
-      "equipment.antitoxin-vial",
-      "equipment.backpack"
+      "equipment.backpack",
+      "equipment.ball-bearings",
+      "equipment.barrel",
+      "equipment.basic-poison",
+      "equipment.basket"
     ],
     "references": []
   },
@@ -15396,7 +15398,7 @@
   },
   "equipment.saffron": {
     "tags": [
-      "TG|XDMG"
+      "Mount/Tack"
     ],
     "related": [
       "equipment.canvas-1-sq-yd",
@@ -15428,7 +15430,7 @@
   },
   "equipment.salt": {
     "tags": [
-      "TG|XDMG"
+      "Mount/Tack"
     ],
     "related": [
       "equipment.canvas-1-sq-yd",
@@ -15460,17 +15462,17 @@
   },
   "equipment.scholars-pack": {
     "tags": [
-      "G|XPHB"
+      "Gear"
     ],
     "related": [
-      "equipment.abacus",
       "equipment.acid",
-      "equipment.acid-vial",
       "equipment.alchemists-fire",
-      "equipment.alchemists-fire-flask",
       "equipment.antitoxin",
-      "equipment.antitoxin-vial",
-      "equipment.backpack"
+      "equipment.backpack",
+      "equipment.ball-bearings",
+      "equipment.barrel",
+      "equipment.basic-poison",
+      "equipment.basket"
     ],
     "references": []
   },
@@ -15483,26 +15485,26 @@
       "equipment.acid-vial",
       "equipment.alchemists-fire-flask",
       "equipment.antitoxin-vial",
-      "equipment.backpack",
       "equipment.ball-bearing",
       "equipment.ball-bearings-bag-of-1-000",
-      "equipment.barrel"
+      "equipment.basic-poison-vial",
+      "equipment.caltrop"
     ],
     "references": []
   },
   "equipment.serpent-venom": {
     "tags": [
-      "G|XPHB"
+      "Gear"
     ],
     "related": [
       "equipment.assassins-blood",
       "equipment.burnt-othur-fumes",
       "equipment.carrion-crawler-mucus",
-      "equipment.drow-poison",
       "equipment.essence-of-ether",
       "equipment.grenade-launcher",
       "equipment.lolths-sting",
-      "equipment.malice"
+      "equipment.malice",
+      "equipment.midnight-tears"
     ],
     "references": []
   },
@@ -15524,7 +15526,7 @@
   },
   "equipment.sheep": {
     "tags": [
-      "TG|XDMG"
+      "Mount/Tack"
     ],
     "related": [
       "equipment.canvas-1-sq-yd",
@@ -15540,33 +15542,33 @@
   },
   "equipment.shovel": {
     "tags": [
-      "G|XPHB"
+      "Gear"
     ],
     "related": [
-      "equipment.abacus",
       "equipment.acid",
-      "equipment.acid-vial",
       "equipment.alchemists-fire",
-      "equipment.alchemists-fire-flask",
       "equipment.antitoxin",
-      "equipment.antitoxin-vial",
-      "equipment.backpack"
+      "equipment.backpack",
+      "equipment.ball-bearings",
+      "equipment.barrel",
+      "equipment.basic-poison",
+      "equipment.basket"
     ],
     "references": []
   },
   "equipment.signal-whistle": {
     "tags": [
-      "G|XPHB"
+      "Gear"
     ],
     "related": [
-      "equipment.abacus",
       "equipment.acid",
-      "equipment.acid-vial",
       "equipment.alchemists-fire",
-      "equipment.alchemists-fire-flask",
       "equipment.antitoxin",
-      "equipment.antitoxin-vial",
-      "equipment.backpack"
+      "equipment.backpack",
+      "equipment.ball-bearings",
+      "equipment.barrel",
+      "equipment.basic-poison",
+      "equipment.basket"
     ],
     "references": []
   },
@@ -15579,16 +15581,16 @@
       "equipment.acid-vial",
       "equipment.alchemists-fire-flask",
       "equipment.antitoxin-vial",
-      "equipment.backpack",
       "equipment.ball-bearing",
       "equipment.ball-bearings-bag-of-1-000",
-      "equipment.barrel"
+      "equipment.basic-poison-vial",
+      "equipment.caltrop"
     ],
     "references": []
   },
   "equipment.silk": {
     "tags": [
-      "TG|XDMG"
+      "Mount/Tack"
     ],
     "related": [
       "equipment.canvas-1-sq-yd",
@@ -15643,10 +15645,10 @@
       "equipment.acid-vial",
       "equipment.alchemists-fire-flask",
       "equipment.antitoxin-vial",
-      "equipment.backpack",
       "equipment.ball-bearing",
       "equipment.ball-bearings-bag-of-1-000",
-      "equipment.barrel"
+      "equipment.basic-poison-vial",
+      "equipment.caltrop"
     ],
     "references": []
   },
@@ -15668,7 +15670,7 @@
   },
   "equipment.silver": {
     "tags": [
-      "TG|XDMG"
+      "Mount/Tack"
     ],
     "related": [
       "equipment.canvas-1-sq-yd",
@@ -15694,7 +15696,7 @@
       "equipment.abacus",
       "equipment.acid-vial",
       "equipment.alchemists-fire-flask",
-      "equipment.ale-gallon"
+      "equipment.alchemists-supplies"
     ],
     "references": []
   },
@@ -15724,9 +15726,9 @@
       "equipment.alexandrite",
       "equipment.amber",
       "equipment.amethyst",
+      "equipment.antimatter-rifle",
       "equipment.aquamarine",
-      "equipment.assassins-blood",
-      "equipment.azurite"
+      "equipment.assassins-blood"
     ],
     "references": []
   },
@@ -15740,9 +15742,9 @@
       "equipment.alexandrite",
       "equipment.amber",
       "equipment.amethyst",
+      "equipment.antimatter-rifle",
       "equipment.aquamarine",
-      "equipment.assassins-blood",
-      "equipment.azurite"
+      "equipment.assassins-blood"
     ],
     "references": []
   },
@@ -15835,10 +15837,10 @@
       "equipment.acid-vial",
       "equipment.alchemists-fire-flask",
       "equipment.antitoxin-vial",
-      "equipment.backpack",
       "equipment.ball-bearing",
       "equipment.ball-bearings-bag-of-1-000",
-      "equipment.barrel"
+      "equipment.basic-poison-vial",
+      "equipment.caltrop"
     ],
     "references": []
   },
@@ -15931,10 +15933,10 @@
       "equipment.acid-vial",
       "equipment.alchemists-fire-flask",
       "equipment.antitoxin-vial",
-      "equipment.backpack",
       "equipment.ball-bearing",
       "equipment.ball-bearings-bag-of-1-000",
-      "equipment.barrel"
+      "equipment.basic-poison-vial",
+      "equipment.caltrop"
     ],
     "references": []
   },
@@ -15947,10 +15949,10 @@
       "equipment.acid-vial",
       "equipment.alchemists-fire-flask",
       "equipment.antitoxin-vial",
-      "equipment.backpack",
       "equipment.ball-bearing",
       "equipment.ball-bearings-bag-of-1-000",
-      "equipment.barrel"
+      "equipment.basic-poison-vial",
+      "equipment.caltrop"
     ],
     "references": []
   },
@@ -15972,33 +15974,33 @@
   },
   "equipment.sprig-of-mistletoe": {
     "tags": [
-      "SCF|XPHB"
+      "Spellcasting Focus"
     ],
     "related": [
       "equipment.amulet",
+      "equipment.crystal",
       "equipment.emblem",
+      "equipment.orb",
       "equipment.reliquary",
-      "equipment.totem",
-      "equipment.yew-wand",
-      "equipment.abacus",
-      "equipment.acid",
-      "equipment.acid-vial"
+      "equipment.rod",
+      "equipment.staff",
+      "equipment.wand"
     ],
     "references": []
   },
   "equipment.spyglass": {
     "tags": [
-      "G|XPHB"
+      "Gear"
     ],
     "related": [
-      "equipment.abacus",
       "equipment.acid",
-      "equipment.acid-vial",
       "equipment.alchemists-fire",
-      "equipment.alchemists-fire-flask",
       "equipment.antitoxin",
-      "equipment.antitoxin-vial",
-      "equipment.backpack"
+      "equipment.backpack",
+      "equipment.ball-bearings",
+      "equipment.barrel",
+      "equipment.basic-poison",
+      "equipment.basket"
     ],
     "references": []
   },
@@ -16075,16 +16077,16 @@
       "equipment.acid-vial",
       "equipment.alchemists-fire-flask",
       "equipment.antitoxin-vial",
-      "equipment.backpack",
       "equipment.ball-bearing",
       "equipment.ball-bearings-bag-of-1-000",
-      "equipment.barrel"
+      "equipment.basic-poison-vial",
+      "equipment.caltrop"
     ],
     "references": []
   },
   "equipment.string": {
     "tags": [
-      "G|XPHB"
+      "Gear"
     ],
     "related": [
       "equipment.acid",
@@ -16107,16 +16109,16 @@
       "equipment.acid-vial",
       "equipment.alchemists-fire-flask",
       "equipment.antitoxin-vial",
-      "equipment.backpack",
       "equipment.ball-bearing",
       "equipment.ball-bearings-bag-of-1-000",
-      "equipment.barrel"
+      "equipment.basic-poison-vial",
+      "equipment.caltrop"
     ],
     "references": []
   },
   "equipment.tent": {
     "tags": [
-      "G|XPHB"
+      "Gear"
     ],
     "related": [
       "equipment.acid",
@@ -16132,7 +16134,7 @@
   },
   "equipment.thieves-tools": {
     "tags": [
-      "T|XPHB"
+      "Tool"
     ],
     "related": [
       "equipment.disguise-kit",
@@ -16180,17 +16182,17 @@
   },
   "equipment.tinderbox": {
     "tags": [
-      "G|XPHB"
+      "Gear"
     ],
     "related": [
-      "equipment.abacus",
       "equipment.acid",
-      "equipment.acid-vial",
       "equipment.alchemists-fire",
-      "equipment.alchemists-fire-flask",
       "equipment.antitoxin",
-      "equipment.antitoxin-vial",
-      "equipment.backpack"
+      "equipment.backpack",
+      "equipment.ball-bearings",
+      "equipment.barrel",
+      "equipment.basic-poison",
+      "equipment.basket"
     ],
     "references": []
   },
@@ -16212,33 +16214,33 @@
   },
   "equipment.torch": {
     "tags": [
-      "G|XPHB"
+      "Gear"
     ],
     "related": [
-      "equipment.abacus",
       "equipment.acid",
-      "equipment.acid-vial",
       "equipment.alchemists-fire",
-      "equipment.alchemists-fire-flask",
       "equipment.antitoxin",
-      "equipment.antitoxin-vial",
-      "equipment.backpack"
+      "equipment.backpack",
+      "equipment.ball-bearings",
+      "equipment.barrel",
+      "equipment.basic-poison",
+      "equipment.basket"
     ],
     "references": []
   },
   "equipment.torpor": {
     "tags": [
-      "G|XPHB"
+      "Gear"
     ],
     "related": [
       "equipment.assassins-blood",
       "equipment.burnt-othur-fumes",
       "equipment.carrion-crawler-mucus",
-      "equipment.drow-poison",
       "equipment.essence-of-ether",
       "equipment.grenade-launcher",
       "equipment.lolths-sting",
-      "equipment.malice"
+      "equipment.malice",
+      "equipment.midnight-tears"
     ],
     "references": []
   },
@@ -16248,13 +16250,13 @@
     ],
     "related": [
       "equipment.amulet",
+      "equipment.crystal",
       "equipment.emblem",
+      "equipment.orb",
       "equipment.reliquary",
+      "equipment.rod",
       "equipment.sprig-of-mistletoe",
-      "equipment.yew-wand",
-      "equipment.abacus",
-      "equipment.acid-vial",
-      "equipment.alchemists-fire-flask"
+      "equipment.staff"
     ],
     "references": []
   },
@@ -16276,49 +16278,49 @@
   },
   "equipment.travelers-clothes": {
     "tags": [
-      "G|XPHB"
+      "Gear"
     ],
     "related": [
-      "equipment.abacus",
       "equipment.acid",
-      "equipment.acid-vial",
       "equipment.alchemists-fire",
-      "equipment.alchemists-fire-flask",
       "equipment.antitoxin",
-      "equipment.antitoxin-vial",
-      "equipment.backpack"
+      "equipment.backpack",
+      "equipment.ball-bearings",
+      "equipment.barrel",
+      "equipment.basic-poison",
+      "equipment.basket"
     ],
     "references": []
   },
   "equipment.trinket": {
     "tags": [
-      "G|XPHB"
+      "Gear"
     ],
     "related": [
-      "equipment.abacus",
       "equipment.acid",
-      "equipment.acid-vial",
       "equipment.alchemists-fire",
-      "equipment.alchemists-fire-flask",
       "equipment.antitoxin",
-      "equipment.antitoxin-vial",
-      "equipment.backpack"
+      "equipment.backpack",
+      "equipment.ball-bearings",
+      "equipment.barrel",
+      "equipment.basic-poison",
+      "equipment.basket"
     ],
     "references": []
   },
   "equipment.truth-serum": {
     "tags": [
-      "G|XPHB"
+      "Gear"
     ],
     "related": [
       "equipment.assassins-blood",
       "equipment.burnt-othur-fumes",
       "equipment.carrion-crawler-mucus",
-      "equipment.drow-poison",
       "equipment.essence-of-ether",
       "equipment.grenade-launcher",
       "equipment.lolths-sting",
-      "equipment.malice"
+      "equipment.malice",
+      "equipment.midnight-tears"
     ],
     "references": []
   },
@@ -16347,26 +16349,26 @@
       "equipment.acid-vial",
       "equipment.alchemists-fire-flask",
       "equipment.antitoxin-vial",
-      "equipment.backpack",
       "equipment.ball-bearing",
       "equipment.ball-bearings-bag-of-1-000",
-      "equipment.barrel"
+      "equipment.basic-poison-vial",
+      "equipment.caltrop"
     ],
     "references": []
   },
   "equipment.vial": {
     "tags": [
-      "G|XPHB"
+      "Gear"
     ],
     "related": [
-      "equipment.abacus",
       "equipment.acid",
-      "equipment.acid-vial",
       "equipment.alchemists-fire",
-      "equipment.alchemists-fire-flask",
       "equipment.antitoxin",
-      "equipment.antitoxin-vial",
-      "equipment.backpack"
+      "equipment.backpack",
+      "equipment.ball-bearings",
+      "equipment.barrel",
+      "equipment.basic-poison",
+      "equipment.basket"
     ],
     "references": []
   },
@@ -16420,17 +16422,17 @@
   },
   "equipment.waterskin": {
     "tags": [
-      "G|XPHB"
+      "Gear"
     ],
     "related": [
-      "equipment.abacus",
       "equipment.acid",
-      "equipment.acid-vial",
       "equipment.alchemists-fire",
-      "equipment.alchemists-fire-flask",
       "equipment.antitoxin",
-      "equipment.antitoxin-vial",
-      "equipment.backpack"
+      "equipment.backpack",
+      "equipment.ball-bearings",
+      "equipment.barrel",
+      "equipment.basic-poison",
+      "equipment.basket"
     ],
     "references": []
   },
@@ -16452,7 +16454,7 @@
   },
   "equipment.wheat": {
     "tags": [
-      "TG|XDMG"
+      "Mount/Tack"
     ],
     "related": [
       "equipment.canvas-1-sq-yd",
@@ -16475,26 +16477,26 @@
       "equipment.acid-vial",
       "equipment.alchemists-fire-flask",
       "equipment.antitoxin-vial",
-      "equipment.backpack",
       "equipment.ball-bearing",
       "equipment.ball-bearings-bag-of-1-000",
-      "equipment.barrel"
+      "equipment.basic-poison-vial",
+      "equipment.caltrop"
     ],
     "references": []
   },
   "equipment.wyvern-poison": {
     "tags": [
-      "G|XPHB"
+      "Gear"
     ],
     "related": [
       "equipment.assassins-blood",
       "equipment.burnt-othur-fumes",
       "equipment.carrion-crawler-mucus",
-      "equipment.drow-poison",
       "equipment.essence-of-ether",
       "equipment.grenade-launcher",
       "equipment.lolths-sting",
-      "equipment.malice"
+      "equipment.malice",
+      "equipment.midnight-tears"
     ],
     "references": []
   },
@@ -16516,17 +16518,17 @@
   },
   "equipment.yew-wand": {
     "tags": [
-      "SCF|XPHB"
+      "Spellcasting Focus"
     ],
     "related": [
       "equipment.amulet",
+      "equipment.crystal",
       "equipment.emblem",
+      "equipment.orb",
       "equipment.reliquary",
+      "equipment.rod",
       "equipment.sprig-of-mistletoe",
-      "equipment.totem",
-      "equipment.abacus",
-      "equipment.acid",
-      "equipment.acid-vial"
+      "equipment.staff"
     ],
     "references": []
   },
@@ -16543,6 +16545,1943 @@
       "equipment.banded-agate",
       "equipment.black-opal",
       "equipment.black-pearl"
+    ],
+    "references": []
+  },
+  "equipment.alchemists-supplies": {
+    "tags": [
+      "Adventuring Gear"
+    ],
+    "related": [
+      "equipment.brewers-supplies",
+      "equipment.calligraphers-supplies",
+      "equipment.carpenters-tools",
+      "equipment.cartographers-tools",
+      "equipment.cobblers-tools",
+      "equipment.cooks-utensils",
+      "equipment.glassblowers-tools",
+      "equipment.jewelers-tools"
+    ],
+    "references": []
+  },
+  "equipment.antimatter-rifle": {
+    "tags": [
+      "Ranged Weapon",
+      "N",
+      "Autofire",
+      "Reload",
+      "Two-Handed"
+    ],
+    "related": [
+      "equipment.automatic-rifle",
+      "equipment.hunting-rifle",
+      "equipment.laser-pistol",
+      "equipment.laser-rifle",
+      "equipment.revolver",
+      "equipment.semiautomatic-pistol",
+      "equipment.shotgun",
+      "equipment.automatic-pistol"
+    ],
+    "references": []
+  },
+  "equipment.arrow": {
+    "tags": [
+      "Ammunition"
+    ],
+    "related": [
+      "equipment.arrows-20",
+      "equipment.bolt",
+      "equipment.bolts-20",
+      "equipment.firearm-bullet",
+      "equipment.firearm-bullets-10",
+      "equipment.needle",
+      "equipment.needles-50",
+      "equipment.sling-bullet"
+    ],
+    "references": []
+  },
+  "equipment.arrows-20": {
+    "tags": [
+      "Ammunition"
+    ],
+    "related": [
+      "equipment.arrow",
+      "equipment.bolt",
+      "equipment.bolts-20",
+      "equipment.firearm-bullet",
+      "equipment.firearm-bullets-10",
+      "equipment.needle",
+      "equipment.needles-50",
+      "equipment.sling-bullet"
+    ],
+    "references": []
+  },
+  "equipment.automatic-pistol": {
+    "tags": [
+      "Ranged Weapon",
+      "P",
+      "Autofire",
+      "Reload"
+    ],
+    "related": [
+      "equipment.automatic-rifle",
+      "equipment.blowgun",
+      "equipment.dart",
+      "equipment.hand-crossbow",
+      "equipment.heavy-crossbow",
+      "equipment.hunting-rifle",
+      "equipment.light-crossbow",
+      "equipment.longbow"
+    ],
+    "references": []
+  },
+  "equipment.automatic-rifle": {
+    "tags": [
+      "Ranged Weapon",
+      "P",
+      "Autofire",
+      "Burst Fire",
+      "Reload",
+      "Two-Handed"
+    ],
+    "related": [
+      "equipment.hunting-rifle",
+      "equipment.revolver",
+      "equipment.semiautomatic-pistol",
+      "equipment.shotgun",
+      "equipment.automatic-pistol",
+      "equipment.blowgun",
+      "equipment.dart",
+      "equipment.hand-crossbow"
+    ],
+    "references": []
+  },
+  "equipment.bagpipes": {
+    "tags": [
+      "Instrument"
+    ],
+    "related": [
+      "equipment.drum",
+      "equipment.dulcimer",
+      "equipment.flute",
+      "equipment.horn",
+      "equipment.lute",
+      "equipment.lyre",
+      "equipment.pan-flute",
+      "equipment.shawm"
+    ],
+    "references": []
+  },
+  "equipment.battleaxe": {
+    "tags": [
+      "Melee Weapon",
+      "S",
+      "Versatile"
+    ],
+    "related": [
+      "equipment.glaive",
+      "equipment.greataxe",
+      "equipment.greatsword",
+      "equipment.halberd",
+      "equipment.handaxe",
+      "equipment.longsword",
+      "equipment.scimitar",
+      "equipment.sickle"
+    ],
+    "references": []
+  },
+  "equipment.blowgun": {
+    "tags": [
+      "Ranged Weapon",
+      "P",
+      "Ammunition",
+      "Loading"
+    ],
+    "related": [
+      "equipment.dart",
+      "equipment.hand-crossbow",
+      "equipment.heavy-crossbow",
+      "equipment.light-crossbow",
+      "equipment.longbow",
+      "equipment.musket",
+      "equipment.pistol",
+      "equipment.shortbow"
+    ],
+    "references": []
+  },
+  "equipment.blowgun-needle": {
+    "tags": [
+      "Ammunition"
+    ],
+    "related": [
+      "equipment.blowgun-needles-50",
+      "equipment.crossbow-bolt",
+      "equipment.crossbow-bolts-20",
+      "equipment.arrow",
+      "equipment.arrows-20",
+      "equipment.bolt",
+      "equipment.bolts-20",
+      "equipment.firearm-bullet"
+    ],
+    "references": []
+  },
+  "equipment.blowgun-needles-50": {
+    "tags": [
+      "Ammunition"
+    ],
+    "related": [
+      "equipment.blowgun-needle",
+      "equipment.crossbow-bolt",
+      "equipment.crossbow-bolts-20",
+      "equipment.arrow",
+      "equipment.arrows-20",
+      "equipment.bolt",
+      "equipment.bolts-20",
+      "equipment.firearm-bullet"
+    ],
+    "references": []
+  },
+  "equipment.bolt": {
+    "tags": [
+      "Ammunition"
+    ],
+    "related": [
+      "equipment.arrow",
+      "equipment.arrows-20",
+      "equipment.bolts-20",
+      "equipment.firearm-bullet",
+      "equipment.firearm-bullets-10",
+      "equipment.needle",
+      "equipment.needles-50",
+      "equipment.sling-bullet"
+    ],
+    "references": []
+  },
+  "equipment.bolts-20": {
+    "tags": [
+      "Ammunition"
+    ],
+    "related": [
+      "equipment.arrow",
+      "equipment.arrows-20",
+      "equipment.bolt",
+      "equipment.firearm-bullet",
+      "equipment.firearm-bullets-10",
+      "equipment.needle",
+      "equipment.needles-50",
+      "equipment.sling-bullet"
+    ],
+    "references": []
+  },
+  "equipment.breastplate": {
+    "tags": [
+      "Medium Armor"
+    ],
+    "related": [
+      "equipment.chain-shirt",
+      "equipment.half-plate-armor",
+      "equipment.hide-armor",
+      "equipment.scale-mail",
+      "equipment.abacus",
+      "equipment.acid",
+      "equipment.acid-vial",
+      "equipment.airship"
+    ],
+    "references": []
+  },
+  "equipment.brewers-supplies": {
+    "tags": [
+      "Adventuring Gear"
+    ],
+    "related": [
+      "equipment.alchemists-supplies",
+      "equipment.calligraphers-supplies",
+      "equipment.carpenters-tools",
+      "equipment.cartographers-tools",
+      "equipment.cobblers-tools",
+      "equipment.cooks-utensils",
+      "equipment.glassblowers-tools",
+      "equipment.jewelers-tools"
+    ],
+    "references": []
+  },
+  "equipment.calligraphers-supplies": {
+    "tags": [
+      "Adventuring Gear"
+    ],
+    "related": [
+      "equipment.alchemists-supplies",
+      "equipment.brewers-supplies",
+      "equipment.carpenters-tools",
+      "equipment.cartographers-tools",
+      "equipment.cobblers-tools",
+      "equipment.cooks-utensils",
+      "equipment.glassblowers-tools",
+      "equipment.jewelers-tools"
+    ],
+    "references": []
+  },
+  "equipment.carpenters-tools": {
+    "tags": [
+      "Adventuring Gear"
+    ],
+    "related": [
+      "equipment.alchemists-supplies",
+      "equipment.brewers-supplies",
+      "equipment.calligraphers-supplies",
+      "equipment.cartographers-tools",
+      "equipment.cobblers-tools",
+      "equipment.cooks-utensils",
+      "equipment.glassblowers-tools",
+      "equipment.jewelers-tools"
+    ],
+    "references": []
+  },
+  "equipment.cartographers-tools": {
+    "tags": [
+      "Adventuring Gear"
+    ],
+    "related": [
+      "equipment.alchemists-supplies",
+      "equipment.brewers-supplies",
+      "equipment.calligraphers-supplies",
+      "equipment.carpenters-tools",
+      "equipment.cobblers-tools",
+      "equipment.cooks-utensils",
+      "equipment.glassblowers-tools",
+      "equipment.jewelers-tools"
+    ],
+    "references": []
+  },
+  "equipment.chain-mail": {
+    "tags": [
+      "Heavy Armor"
+    ],
+    "related": [
+      "equipment.plate-armor",
+      "equipment.ring-mail",
+      "equipment.splint-armor",
+      "equipment.abacus",
+      "equipment.acid",
+      "equipment.acid-vial",
+      "equipment.airship",
+      "equipment.alchemists-fire"
+    ],
+    "references": []
+  },
+  "equipment.chain-shirt": {
+    "tags": [
+      "Medium Armor"
+    ],
+    "related": [
+      "equipment.breastplate",
+      "equipment.half-plate-armor",
+      "equipment.hide-armor",
+      "equipment.scale-mail",
+      "equipment.abacus",
+      "equipment.acid",
+      "equipment.acid-vial",
+      "equipment.airship"
+    ],
+    "references": []
+  },
+  "equipment.club": {
+    "tags": [
+      "Melee Weapon",
+      "B",
+      "Light"
+    ],
+    "related": [
+      "equipment.flail",
+      "equipment.greatclub",
+      "equipment.light-hammer",
+      "equipment.mace",
+      "equipment.maul",
+      "equipment.quarterstaff",
+      "equipment.warhammer",
+      "equipment.battleaxe"
+    ],
+    "references": []
+  },
+  "equipment.cobblers-tools": {
+    "tags": [
+      "Adventuring Gear"
+    ],
+    "related": [
+      "equipment.alchemists-supplies",
+      "equipment.brewers-supplies",
+      "equipment.calligraphers-supplies",
+      "equipment.carpenters-tools",
+      "equipment.cartographers-tools",
+      "equipment.cooks-utensils",
+      "equipment.glassblowers-tools",
+      "equipment.jewelers-tools"
+    ],
+    "references": []
+  },
+  "equipment.cooks-utensils": {
+    "tags": [
+      "Adventuring Gear"
+    ],
+    "related": [
+      "equipment.alchemists-supplies",
+      "equipment.brewers-supplies",
+      "equipment.calligraphers-supplies",
+      "equipment.carpenters-tools",
+      "equipment.cartographers-tools",
+      "equipment.cobblers-tools",
+      "equipment.glassblowers-tools",
+      "equipment.jewelers-tools"
+    ],
+    "references": []
+  },
+  "equipment.crossbow-bolt": {
+    "tags": [
+      "Ammunition"
+    ],
+    "related": [
+      "equipment.blowgun-needle",
+      "equipment.blowgun-needles-50",
+      "equipment.crossbow-bolts-20",
+      "equipment.arrow",
+      "equipment.arrows-20",
+      "equipment.bolt",
+      "equipment.bolts-20",
+      "equipment.firearm-bullet"
+    ],
+    "references": []
+  },
+  "equipment.crossbow-bolts-20": {
+    "tags": [
+      "Ammunition"
+    ],
+    "related": [
+      "equipment.blowgun-needle",
+      "equipment.blowgun-needles-50",
+      "equipment.crossbow-bolt",
+      "equipment.arrow",
+      "equipment.arrows-20",
+      "equipment.bolt",
+      "equipment.bolts-20",
+      "equipment.firearm-bullet"
+    ],
+    "references": []
+  },
+  "equipment.crystal": {
+    "tags": [
+      "Spellcasting Focus"
+    ],
+    "related": [
+      "equipment.amulet",
+      "equipment.emblem",
+      "equipment.orb",
+      "equipment.reliquary",
+      "equipment.rod",
+      "equipment.sprig-of-mistletoe",
+      "equipment.staff",
+      "equipment.wand"
+    ],
+    "references": []
+  },
+  "equipment.dagger": {
+    "tags": [
+      "Melee Weapon",
+      "P",
+      "Finesse",
+      "Light",
+      "Thrown"
+    ],
+    "related": [
+      "equipment.javelin",
+      "equipment.lance",
+      "equipment.morningstar",
+      "equipment.pike",
+      "equipment.rapier",
+      "equipment.shortsword",
+      "equipment.spear",
+      "equipment.trident"
+    ],
+    "references": []
+  },
+  "equipment.dart": {
+    "tags": [
+      "Ranged Weapon",
+      "P",
+      "Finesse",
+      "Thrown"
+    ],
+    "related": [
+      "equipment.blowgun",
+      "equipment.hand-crossbow",
+      "equipment.heavy-crossbow",
+      "equipment.light-crossbow",
+      "equipment.longbow",
+      "equipment.musket",
+      "equipment.pistol",
+      "equipment.shortbow"
+    ],
+    "references": []
+  },
+  "equipment.drum": {
+    "tags": [
+      "Instrument"
+    ],
+    "related": [
+      "equipment.bagpipes",
+      "equipment.dulcimer",
+      "equipment.flute",
+      "equipment.horn",
+      "equipment.lute",
+      "equipment.lyre",
+      "equipment.pan-flute",
+      "equipment.shawm"
+    ],
+    "references": []
+  },
+  "equipment.dulcimer": {
+    "tags": [
+      "Instrument"
+    ],
+    "related": [
+      "equipment.bagpipes",
+      "equipment.drum",
+      "equipment.flute",
+      "equipment.horn",
+      "equipment.lute",
+      "equipment.lyre",
+      "equipment.pan-flute",
+      "equipment.shawm"
+    ],
+    "references": []
+  },
+  "equipment.energy-cell": {
+    "tags": [
+      "AF|XDMG"
+    ],
+    "related": [
+      "equipment.modern-bullet",
+      "equipment.modern-bullets-10",
+      "equipment.renaissance-bullet",
+      "equipment.renaissance-bullets-10",
+      "equipment.airship",
+      "equipment.alexandrite",
+      "equipment.amber",
+      "equipment.amethyst"
+    ],
+    "references": []
+  },
+  "equipment.firearm-bullet": {
+    "tags": [
+      "Ammunition"
+    ],
+    "related": [
+      "equipment.arrow",
+      "equipment.arrows-20",
+      "equipment.bolt",
+      "equipment.bolts-20",
+      "equipment.firearm-bullets-10",
+      "equipment.needle",
+      "equipment.needles-50",
+      "equipment.sling-bullet"
+    ],
+    "references": []
+  },
+  "equipment.firearm-bullets-10": {
+    "tags": [
+      "Ammunition"
+    ],
+    "related": [
+      "equipment.arrow",
+      "equipment.arrows-20",
+      "equipment.bolt",
+      "equipment.bolts-20",
+      "equipment.firearm-bullet",
+      "equipment.needle",
+      "equipment.needles-50",
+      "equipment.sling-bullet"
+    ],
+    "references": []
+  },
+  "equipment.flail": {
+    "tags": [
+      "Melee Weapon",
+      "B"
+    ],
+    "related": [
+      "equipment.club",
+      "equipment.greatclub",
+      "equipment.light-hammer",
+      "equipment.mace",
+      "equipment.maul",
+      "equipment.quarterstaff",
+      "equipment.warhammer",
+      "equipment.battleaxe"
+    ],
+    "references": []
+  },
+  "equipment.flute": {
+    "tags": [
+      "Instrument"
+    ],
+    "related": [
+      "equipment.bagpipes",
+      "equipment.drum",
+      "equipment.dulcimer",
+      "equipment.horn",
+      "equipment.lute",
+      "equipment.lyre",
+      "equipment.pan-flute",
+      "equipment.shawm"
+    ],
+    "references": []
+  },
+  "equipment.glaive": {
+    "tags": [
+      "Melee Weapon",
+      "S",
+      "Heavy",
+      "Reach",
+      "Two-Handed"
+    ],
+    "related": [
+      "equipment.battleaxe",
+      "equipment.greataxe",
+      "equipment.greatsword",
+      "equipment.halberd",
+      "equipment.handaxe",
+      "equipment.longsword",
+      "equipment.scimitar",
+      "equipment.sickle"
+    ],
+    "references": []
+  },
+  "equipment.glassblowers-tools": {
+    "tags": [
+      "Adventuring Gear"
+    ],
+    "related": [
+      "equipment.alchemists-supplies",
+      "equipment.brewers-supplies",
+      "equipment.calligraphers-supplies",
+      "equipment.carpenters-tools",
+      "equipment.cartographers-tools",
+      "equipment.cobblers-tools",
+      "equipment.cooks-utensils",
+      "equipment.jewelers-tools"
+    ],
+    "references": []
+  },
+  "equipment.greataxe": {
+    "tags": [
+      "Melee Weapon",
+      "S",
+      "Heavy",
+      "Two-Handed"
+    ],
+    "related": [
+      "equipment.battleaxe",
+      "equipment.glaive",
+      "equipment.greatsword",
+      "equipment.halberd",
+      "equipment.handaxe",
+      "equipment.longsword",
+      "equipment.scimitar",
+      "equipment.sickle"
+    ],
+    "references": []
+  },
+  "equipment.greatclub": {
+    "tags": [
+      "Melee Weapon",
+      "B",
+      "Two-Handed"
+    ],
+    "related": [
+      "equipment.club",
+      "equipment.flail",
+      "equipment.light-hammer",
+      "equipment.mace",
+      "equipment.maul",
+      "equipment.quarterstaff",
+      "equipment.warhammer",
+      "equipment.battleaxe"
+    ],
+    "references": []
+  },
+  "equipment.greatsword": {
+    "tags": [
+      "Melee Weapon",
+      "S",
+      "Heavy",
+      "Two-Handed"
+    ],
+    "related": [
+      "equipment.battleaxe",
+      "equipment.glaive",
+      "equipment.greataxe",
+      "equipment.halberd",
+      "equipment.handaxe",
+      "equipment.longsword",
+      "equipment.scimitar",
+      "equipment.sickle"
+    ],
+    "references": []
+  },
+  "equipment.halberd": {
+    "tags": [
+      "Melee Weapon",
+      "S",
+      "Heavy",
+      "Reach",
+      "Two-Handed"
+    ],
+    "related": [
+      "equipment.battleaxe",
+      "equipment.glaive",
+      "equipment.greataxe",
+      "equipment.greatsword",
+      "equipment.handaxe",
+      "equipment.longsword",
+      "equipment.scimitar",
+      "equipment.sickle"
+    ],
+    "references": []
+  },
+  "equipment.half-plate-armor": {
+    "tags": [
+      "Medium Armor"
+    ],
+    "related": [
+      "equipment.breastplate",
+      "equipment.chain-shirt",
+      "equipment.hide-armor",
+      "equipment.scale-mail",
+      "equipment.abacus",
+      "equipment.acid",
+      "equipment.acid-vial",
+      "equipment.airship"
+    ],
+    "references": []
+  },
+  "equipment.hand-crossbow": {
+    "tags": [
+      "Ranged Weapon",
+      "P",
+      "Ammunition",
+      "Light",
+      "Loading"
+    ],
+    "related": [
+      "equipment.blowgun",
+      "equipment.dart",
+      "equipment.heavy-crossbow",
+      "equipment.light-crossbow",
+      "equipment.longbow",
+      "equipment.musket",
+      "equipment.pistol",
+      "equipment.shortbow"
+    ],
+    "references": []
+  },
+  "equipment.handaxe": {
+    "tags": [
+      "Melee Weapon",
+      "S",
+      "Light",
+      "Thrown"
+    ],
+    "related": [
+      "equipment.battleaxe",
+      "equipment.glaive",
+      "equipment.greataxe",
+      "equipment.greatsword",
+      "equipment.halberd",
+      "equipment.longsword",
+      "equipment.scimitar",
+      "equipment.sickle"
+    ],
+    "references": []
+  },
+  "equipment.heavy-crossbow": {
+    "tags": [
+      "Ranged Weapon",
+      "P",
+      "Ammunition",
+      "Heavy",
+      "Loading",
+      "Two-Handed"
+    ],
+    "related": [
+      "equipment.blowgun",
+      "equipment.dart",
+      "equipment.hand-crossbow",
+      "equipment.light-crossbow",
+      "equipment.longbow",
+      "equipment.musket",
+      "equipment.pistol",
+      "equipment.shortbow"
+    ],
+    "references": []
+  },
+  "equipment.hide-armor": {
+    "tags": [
+      "Medium Armor"
+    ],
+    "related": [
+      "equipment.breastplate",
+      "equipment.chain-shirt",
+      "equipment.half-plate-armor",
+      "equipment.scale-mail",
+      "equipment.abacus",
+      "equipment.acid",
+      "equipment.acid-vial",
+      "equipment.airship"
+    ],
+    "references": []
+  },
+  "equipment.horn": {
+    "tags": [
+      "Instrument"
+    ],
+    "related": [
+      "equipment.bagpipes",
+      "equipment.drum",
+      "equipment.dulcimer",
+      "equipment.flute",
+      "equipment.lute",
+      "equipment.lyre",
+      "equipment.pan-flute",
+      "equipment.shawm"
+    ],
+    "references": []
+  },
+  "equipment.hunting-rifle": {
+    "tags": [
+      "Ranged Weapon",
+      "P",
+      "Autofire",
+      "Reload",
+      "Two-Handed"
+    ],
+    "related": [
+      "equipment.automatic-rifle",
+      "equipment.revolver",
+      "equipment.semiautomatic-pistol",
+      "equipment.shotgun",
+      "equipment.automatic-pistol",
+      "equipment.blowgun",
+      "equipment.dart",
+      "equipment.hand-crossbow"
+    ],
+    "references": []
+  },
+  "equipment.javelin": {
+    "tags": [
+      "Melee Weapon",
+      "P",
+      "Thrown"
+    ],
+    "related": [
+      "equipment.dagger",
+      "equipment.lance",
+      "equipment.morningstar",
+      "equipment.pike",
+      "equipment.rapier",
+      "equipment.shortsword",
+      "equipment.spear",
+      "equipment.trident"
+    ],
+    "references": []
+  },
+  "equipment.jewelers-tools": {
+    "tags": [
+      "Adventuring Gear"
+    ],
+    "related": [
+      "equipment.alchemists-supplies",
+      "equipment.brewers-supplies",
+      "equipment.calligraphers-supplies",
+      "equipment.carpenters-tools",
+      "equipment.cartographers-tools",
+      "equipment.cobblers-tools",
+      "equipment.cooks-utensils",
+      "equipment.glassblowers-tools"
+    ],
+    "references": []
+  },
+  "equipment.lance": {
+    "tags": [
+      "Melee Weapon",
+      "P",
+      "Heavy",
+      "Reach",
+      "Two-Handed"
+    ],
+    "related": [
+      "equipment.dagger",
+      "equipment.javelin",
+      "equipment.morningstar",
+      "equipment.pike",
+      "equipment.rapier",
+      "equipment.shortsword",
+      "equipment.spear",
+      "equipment.trident"
+    ],
+    "references": []
+  },
+  "equipment.laser-pistol": {
+    "tags": [
+      "Ranged Weapon",
+      "R",
+      "Autofire",
+      "Reload"
+    ],
+    "related": [
+      "equipment.laser-rifle",
+      "equipment.antimatter-rifle",
+      "equipment.automatic-rifle",
+      "equipment.hunting-rifle",
+      "equipment.revolver",
+      "equipment.semiautomatic-pistol",
+      "equipment.shotgun",
+      "equipment.automatic-pistol"
+    ],
+    "references": []
+  },
+  "equipment.laser-rifle": {
+    "tags": [
+      "Ranged Weapon",
+      "R",
+      "Autofire",
+      "Reload",
+      "Two-Handed"
+    ],
+    "related": [
+      "equipment.laser-pistol",
+      "equipment.antimatter-rifle",
+      "equipment.automatic-rifle",
+      "equipment.hunting-rifle",
+      "equipment.revolver",
+      "equipment.semiautomatic-pistol",
+      "equipment.shotgun",
+      "equipment.automatic-pistol"
+    ],
+    "references": []
+  },
+  "equipment.leather-armor": {
+    "tags": [
+      "Light Armor"
+    ],
+    "related": [
+      "equipment.padded-armor",
+      "equipment.studded-leather-armor",
+      "equipment.abacus",
+      "equipment.acid",
+      "equipment.acid-vial",
+      "equipment.airship",
+      "equipment.alchemists-fire",
+      "equipment.alchemists-fire-flask"
+    ],
+    "references": []
+  },
+  "equipment.leatherworkers-tools": {
+    "tags": [
+      "Adventuring Gear"
+    ],
+    "related": [
+      "equipment.alchemists-supplies",
+      "equipment.brewers-supplies",
+      "equipment.calligraphers-supplies",
+      "equipment.carpenters-tools",
+      "equipment.cartographers-tools",
+      "equipment.cobblers-tools",
+      "equipment.cooks-utensils",
+      "equipment.glassblowers-tools"
+    ],
+    "references": []
+  },
+  "equipment.light-crossbow": {
+    "tags": [
+      "Ranged Weapon",
+      "P",
+      "Ammunition",
+      "Loading",
+      "Two-Handed"
+    ],
+    "related": [
+      "equipment.blowgun",
+      "equipment.dart",
+      "equipment.hand-crossbow",
+      "equipment.heavy-crossbow",
+      "equipment.longbow",
+      "equipment.musket",
+      "equipment.pistol",
+      "equipment.shortbow"
+    ],
+    "references": []
+  },
+  "equipment.light-hammer": {
+    "tags": [
+      "Melee Weapon",
+      "B",
+      "Light",
+      "Thrown"
+    ],
+    "related": [
+      "equipment.club",
+      "equipment.flail",
+      "equipment.greatclub",
+      "equipment.mace",
+      "equipment.maul",
+      "equipment.quarterstaff",
+      "equipment.warhammer",
+      "equipment.battleaxe"
+    ],
+    "references": []
+  },
+  "equipment.longbow": {
+    "tags": [
+      "Ranged Weapon",
+      "P",
+      "Ammunition",
+      "Heavy",
+      "Two-Handed"
+    ],
+    "related": [
+      "equipment.blowgun",
+      "equipment.dart",
+      "equipment.hand-crossbow",
+      "equipment.heavy-crossbow",
+      "equipment.light-crossbow",
+      "equipment.musket",
+      "equipment.pistol",
+      "equipment.shortbow"
+    ],
+    "references": []
+  },
+  "equipment.longsword": {
+    "tags": [
+      "Melee Weapon",
+      "S",
+      "Versatile"
+    ],
+    "related": [
+      "equipment.battleaxe",
+      "equipment.glaive",
+      "equipment.greataxe",
+      "equipment.greatsword",
+      "equipment.halberd",
+      "equipment.handaxe",
+      "equipment.scimitar",
+      "equipment.sickle"
+    ],
+    "references": []
+  },
+  "equipment.lute": {
+    "tags": [
+      "Instrument"
+    ],
+    "related": [
+      "equipment.bagpipes",
+      "equipment.drum",
+      "equipment.dulcimer",
+      "equipment.flute",
+      "equipment.horn",
+      "equipment.lyre",
+      "equipment.pan-flute",
+      "equipment.shawm"
+    ],
+    "references": []
+  },
+  "equipment.lyre": {
+    "tags": [
+      "Instrument"
+    ],
+    "related": [
+      "equipment.bagpipes",
+      "equipment.drum",
+      "equipment.dulcimer",
+      "equipment.flute",
+      "equipment.horn",
+      "equipment.lute",
+      "equipment.pan-flute",
+      "equipment.shawm"
+    ],
+    "references": []
+  },
+  "equipment.mace": {
+    "tags": [
+      "Melee Weapon",
+      "B"
+    ],
+    "related": [
+      "equipment.club",
+      "equipment.flail",
+      "equipment.greatclub",
+      "equipment.light-hammer",
+      "equipment.maul",
+      "equipment.quarterstaff",
+      "equipment.warhammer",
+      "equipment.battleaxe"
+    ],
+    "references": []
+  },
+  "equipment.masons-tools": {
+    "tags": [
+      "Adventuring Gear"
+    ],
+    "related": [
+      "equipment.alchemists-supplies",
+      "equipment.brewers-supplies",
+      "equipment.calligraphers-supplies",
+      "equipment.carpenters-tools",
+      "equipment.cartographers-tools",
+      "equipment.cobblers-tools",
+      "equipment.cooks-utensils",
+      "equipment.glassblowers-tools"
+    ],
+    "references": []
+  },
+  "equipment.maul": {
+    "tags": [
+      "Melee Weapon",
+      "B",
+      "Heavy",
+      "Two-Handed"
+    ],
+    "related": [
+      "equipment.club",
+      "equipment.flail",
+      "equipment.greatclub",
+      "equipment.light-hammer",
+      "equipment.mace",
+      "equipment.quarterstaff",
+      "equipment.warhammer",
+      "equipment.battleaxe"
+    ],
+    "references": []
+  },
+  "equipment.modern-bullet": {
+    "tags": [
+      "AF|DMG"
+    ],
+    "related": [
+      "equipment.energy-cell",
+      "equipment.modern-bullets-10",
+      "equipment.renaissance-bullet",
+      "equipment.renaissance-bullets-10",
+      "equipment.airship",
+      "equipment.alexandrite",
+      "equipment.amber",
+      "equipment.amethyst"
+    ],
+    "references": []
+  },
+  "equipment.modern-bullets-10": {
+    "tags": [
+      "AF|DMG"
+    ],
+    "related": [
+      "equipment.energy-cell",
+      "equipment.modern-bullet",
+      "equipment.renaissance-bullet",
+      "equipment.renaissance-bullets-10",
+      "equipment.airship",
+      "equipment.alexandrite",
+      "equipment.amber",
+      "equipment.amethyst"
+    ],
+    "references": []
+  },
+  "equipment.morningstar": {
+    "tags": [
+      "Melee Weapon",
+      "P"
+    ],
+    "related": [
+      "equipment.dagger",
+      "equipment.javelin",
+      "equipment.lance",
+      "equipment.pike",
+      "equipment.rapier",
+      "equipment.shortsword",
+      "equipment.spear",
+      "equipment.trident"
+    ],
+    "references": []
+  },
+  "equipment.musket": {
+    "tags": [
+      "Ranged Weapon",
+      "P",
+      "Ammunition",
+      "Loading",
+      "Two-Handed"
+    ],
+    "related": [
+      "equipment.blowgun",
+      "equipment.dart",
+      "equipment.hand-crossbow",
+      "equipment.heavy-crossbow",
+      "equipment.light-crossbow",
+      "equipment.longbow",
+      "equipment.pistol",
+      "equipment.shortbow"
+    ],
+    "references": []
+  },
+  "equipment.needle": {
+    "tags": [
+      "Ammunition"
+    ],
+    "related": [
+      "equipment.arrow",
+      "equipment.arrows-20",
+      "equipment.bolt",
+      "equipment.bolts-20",
+      "equipment.firearm-bullet",
+      "equipment.firearm-bullets-10",
+      "equipment.needles-50",
+      "equipment.sling-bullet"
+    ],
+    "references": []
+  },
+  "equipment.needles-50": {
+    "tags": [
+      "Ammunition"
+    ],
+    "related": [
+      "equipment.arrow",
+      "equipment.arrows-20",
+      "equipment.bolt",
+      "equipment.bolts-20",
+      "equipment.firearm-bullet",
+      "equipment.firearm-bullets-10",
+      "equipment.needle",
+      "equipment.sling-bullet"
+    ],
+    "references": []
+  },
+  "equipment.orb": {
+    "tags": [
+      "Spellcasting Focus"
+    ],
+    "related": [
+      "equipment.amulet",
+      "equipment.crystal",
+      "equipment.emblem",
+      "equipment.reliquary",
+      "equipment.rod",
+      "equipment.sprig-of-mistletoe",
+      "equipment.staff",
+      "equipment.wand"
+    ],
+    "references": []
+  },
+  "equipment.padded-armor": {
+    "tags": [
+      "Light Armor"
+    ],
+    "related": [
+      "equipment.leather-armor",
+      "equipment.studded-leather-armor",
+      "equipment.abacus",
+      "equipment.acid",
+      "equipment.acid-vial",
+      "equipment.airship",
+      "equipment.alchemists-fire",
+      "equipment.alchemists-fire-flask"
+    ],
+    "references": []
+  },
+  "equipment.painters-supplies": {
+    "tags": [
+      "Adventuring Gear"
+    ],
+    "related": [
+      "equipment.alchemists-supplies",
+      "equipment.brewers-supplies",
+      "equipment.calligraphers-supplies",
+      "equipment.carpenters-tools",
+      "equipment.cartographers-tools",
+      "equipment.cobblers-tools",
+      "equipment.cooks-utensils",
+      "equipment.glassblowers-tools"
+    ],
+    "references": []
+  },
+  "equipment.pan-flute": {
+    "tags": [
+      "Instrument"
+    ],
+    "related": [
+      "equipment.bagpipes",
+      "equipment.drum",
+      "equipment.dulcimer",
+      "equipment.flute",
+      "equipment.horn",
+      "equipment.lute",
+      "equipment.lyre",
+      "equipment.shawm"
+    ],
+    "references": []
+  },
+  "equipment.pike": {
+    "tags": [
+      "Melee Weapon",
+      "P",
+      "Heavy",
+      "Reach",
+      "Two-Handed"
+    ],
+    "related": [
+      "equipment.dagger",
+      "equipment.javelin",
+      "equipment.lance",
+      "equipment.morningstar",
+      "equipment.rapier",
+      "equipment.shortsword",
+      "equipment.spear",
+      "equipment.trident"
+    ],
+    "references": []
+  },
+  "equipment.pistol": {
+    "tags": [
+      "Ranged Weapon",
+      "P",
+      "Ammunition",
+      "Loading"
+    ],
+    "related": [
+      "equipment.blowgun",
+      "equipment.dart",
+      "equipment.hand-crossbow",
+      "equipment.heavy-crossbow",
+      "equipment.light-crossbow",
+      "equipment.longbow",
+      "equipment.musket",
+      "equipment.shortbow"
+    ],
+    "references": []
+  },
+  "equipment.plate-armor": {
+    "tags": [
+      "Heavy Armor"
+    ],
+    "related": [
+      "equipment.chain-mail",
+      "equipment.ring-mail",
+      "equipment.splint-armor",
+      "equipment.abacus",
+      "equipment.acid",
+      "equipment.acid-vial",
+      "equipment.airship",
+      "equipment.alchemists-fire"
+    ],
+    "references": []
+  },
+  "equipment.potters-tools": {
+    "tags": [
+      "Adventuring Gear"
+    ],
+    "related": [
+      "equipment.alchemists-supplies",
+      "equipment.brewers-supplies",
+      "equipment.calligraphers-supplies",
+      "equipment.carpenters-tools",
+      "equipment.cartographers-tools",
+      "equipment.cobblers-tools",
+      "equipment.cooks-utensils",
+      "equipment.glassblowers-tools"
+    ],
+    "references": []
+  },
+  "equipment.quarterstaff": {
+    "tags": [
+      "Melee Weapon",
+      "B",
+      "Versatile"
+    ],
+    "related": [
+      "equipment.club",
+      "equipment.flail",
+      "equipment.greatclub",
+      "equipment.light-hammer",
+      "equipment.mace",
+      "equipment.maul",
+      "equipment.warhammer",
+      "equipment.battleaxe"
+    ],
+    "references": []
+  },
+  "equipment.rapier": {
+    "tags": [
+      "Melee Weapon",
+      "P",
+      "Finesse"
+    ],
+    "related": [
+      "equipment.dagger",
+      "equipment.javelin",
+      "equipment.lance",
+      "equipment.morningstar",
+      "equipment.pike",
+      "equipment.shortsword",
+      "equipment.spear",
+      "equipment.trident"
+    ],
+    "references": []
+  },
+  "equipment.renaissance-bullet": {
+    "tags": [
+      "AF|DMG"
+    ],
+    "related": [
+      "equipment.energy-cell",
+      "equipment.modern-bullet",
+      "equipment.modern-bullets-10",
+      "equipment.renaissance-bullets-10",
+      "equipment.airship",
+      "equipment.alexandrite",
+      "equipment.amber",
+      "equipment.amethyst"
+    ],
+    "references": []
+  },
+  "equipment.renaissance-bullets-10": {
+    "tags": [
+      "AF|DMG"
+    ],
+    "related": [
+      "equipment.energy-cell",
+      "equipment.modern-bullet",
+      "equipment.modern-bullets-10",
+      "equipment.renaissance-bullet",
+      "equipment.airship",
+      "equipment.alexandrite",
+      "equipment.amber",
+      "equipment.amethyst"
+    ],
+    "references": []
+  },
+  "equipment.revolver": {
+    "tags": [
+      "Ranged Weapon",
+      "P",
+      "Autofire",
+      "Reload"
+    ],
+    "related": [
+      "equipment.automatic-rifle",
+      "equipment.hunting-rifle",
+      "equipment.semiautomatic-pistol",
+      "equipment.shotgun",
+      "equipment.automatic-pistol",
+      "equipment.blowgun",
+      "equipment.dart",
+      "equipment.hand-crossbow"
+    ],
+    "references": []
+  },
+  "equipment.ring-mail": {
+    "tags": [
+      "Heavy Armor"
+    ],
+    "related": [
+      "equipment.chain-mail",
+      "equipment.plate-armor",
+      "equipment.splint-armor",
+      "equipment.abacus",
+      "equipment.acid",
+      "equipment.acid-vial",
+      "equipment.airship",
+      "equipment.alchemists-fire"
+    ],
+    "references": []
+  },
+  "equipment.rod": {
+    "tags": [
+      "Spellcasting Focus"
+    ],
+    "related": [
+      "equipment.amulet",
+      "equipment.crystal",
+      "equipment.emblem",
+      "equipment.orb",
+      "equipment.reliquary",
+      "equipment.sprig-of-mistletoe",
+      "equipment.staff",
+      "equipment.wand"
+    ],
+    "references": []
+  },
+  "equipment.scale-mail": {
+    "tags": [
+      "Medium Armor"
+    ],
+    "related": [
+      "equipment.breastplate",
+      "equipment.chain-shirt",
+      "equipment.half-plate-armor",
+      "equipment.hide-armor",
+      "equipment.abacus",
+      "equipment.acid",
+      "equipment.acid-vial",
+      "equipment.airship"
+    ],
+    "references": []
+  },
+  "equipment.scimitar": {
+    "tags": [
+      "Melee Weapon",
+      "S",
+      "Finesse",
+      "Light"
+    ],
+    "related": [
+      "equipment.battleaxe",
+      "equipment.glaive",
+      "equipment.greataxe",
+      "equipment.greatsword",
+      "equipment.halberd",
+      "equipment.handaxe",
+      "equipment.longsword",
+      "equipment.sickle"
+    ],
+    "references": []
+  },
+  "equipment.semiautomatic-pistol": {
+    "tags": [
+      "Ranged Weapon",
+      "P",
+      "Autofire",
+      "Reload"
+    ],
+    "related": [
+      "equipment.automatic-rifle",
+      "equipment.hunting-rifle",
+      "equipment.revolver",
+      "equipment.shotgun",
+      "equipment.automatic-pistol",
+      "equipment.blowgun",
+      "equipment.dart",
+      "equipment.hand-crossbow"
+    ],
+    "references": []
+  },
+  "equipment.shawm": {
+    "tags": [
+      "Instrument"
+    ],
+    "related": [
+      "equipment.bagpipes",
+      "equipment.drum",
+      "equipment.dulcimer",
+      "equipment.flute",
+      "equipment.horn",
+      "equipment.lute",
+      "equipment.lyre",
+      "equipment.pan-flute"
+    ],
+    "references": []
+  },
+  "equipment.shield": {
+    "tags": [
+      "Shield"
+    ],
+    "related": [
+      "equipment.abacus",
+      "equipment.acid",
+      "equipment.acid-vial",
+      "equipment.airship",
+      "equipment.alchemists-fire",
+      "equipment.alchemists-fire-flask",
+      "equipment.alchemists-supplies",
+      "equipment.ale-gallon"
+    ],
+    "references": []
+  },
+  "equipment.shortbow": {
+    "tags": [
+      "Ranged Weapon",
+      "P",
+      "Ammunition",
+      "Two-Handed"
+    ],
+    "related": [
+      "equipment.blowgun",
+      "equipment.dart",
+      "equipment.hand-crossbow",
+      "equipment.heavy-crossbow",
+      "equipment.light-crossbow",
+      "equipment.longbow",
+      "equipment.musket",
+      "equipment.pistol"
+    ],
+    "references": []
+  },
+  "equipment.shortsword": {
+    "tags": [
+      "Melee Weapon",
+      "P",
+      "Finesse",
+      "Light"
+    ],
+    "related": [
+      "equipment.dagger",
+      "equipment.javelin",
+      "equipment.lance",
+      "equipment.morningstar",
+      "equipment.pike",
+      "equipment.rapier",
+      "equipment.spear",
+      "equipment.trident"
+    ],
+    "references": []
+  },
+  "equipment.shotgun": {
+    "tags": [
+      "Ranged Weapon",
+      "P",
+      "Autofire",
+      "Reload",
+      "Two-Handed"
+    ],
+    "related": [
+      "equipment.automatic-rifle",
+      "equipment.hunting-rifle",
+      "equipment.revolver",
+      "equipment.semiautomatic-pistol",
+      "equipment.automatic-pistol",
+      "equipment.blowgun",
+      "equipment.dart",
+      "equipment.hand-crossbow"
+    ],
+    "references": []
+  },
+  "equipment.sickle": {
+    "tags": [
+      "Melee Weapon",
+      "S",
+      "Light"
+    ],
+    "related": [
+      "equipment.battleaxe",
+      "equipment.glaive",
+      "equipment.greataxe",
+      "equipment.greatsword",
+      "equipment.halberd",
+      "equipment.handaxe",
+      "equipment.longsword",
+      "equipment.scimitar"
+    ],
+    "references": []
+  },
+  "equipment.sling": {
+    "tags": [
+      "Ranged Weapon",
+      "B",
+      "Ammunition"
+    ],
+    "related": [
+      "equipment.blowgun",
+      "equipment.dart",
+      "equipment.hand-crossbow",
+      "equipment.heavy-crossbow",
+      "equipment.light-crossbow",
+      "equipment.longbow",
+      "equipment.musket",
+      "equipment.pistol"
+    ],
+    "references": []
+  },
+  "equipment.sling-bullet": {
+    "tags": [
+      "Ammunition"
+    ],
+    "related": [
+      "equipment.arrow",
+      "equipment.arrows-20",
+      "equipment.bolt",
+      "equipment.bolts-20",
+      "equipment.firearm-bullet",
+      "equipment.firearm-bullets-10",
+      "equipment.needle",
+      "equipment.needles-50"
+    ],
+    "references": []
+  },
+  "equipment.sling-bullets-20": {
+    "tags": [
+      "Ammunition"
+    ],
+    "related": [
+      "equipment.arrow",
+      "equipment.arrows-20",
+      "equipment.bolt",
+      "equipment.bolts-20",
+      "equipment.firearm-bullet",
+      "equipment.firearm-bullets-10",
+      "equipment.needle",
+      "equipment.needles-50"
+    ],
+    "references": []
+  },
+  "equipment.smiths-tools": {
+    "tags": [
+      "Adventuring Gear"
+    ],
+    "related": [
+      "equipment.alchemists-supplies",
+      "equipment.brewers-supplies",
+      "equipment.calligraphers-supplies",
+      "equipment.carpenters-tools",
+      "equipment.cartographers-tools",
+      "equipment.cobblers-tools",
+      "equipment.cooks-utensils",
+      "equipment.glassblowers-tools"
+    ],
+    "references": []
+  },
+  "equipment.spear": {
+    "tags": [
+      "Melee Weapon",
+      "P",
+      "Thrown",
+      "Versatile"
+    ],
+    "related": [
+      "equipment.dagger",
+      "equipment.javelin",
+      "equipment.lance",
+      "equipment.morningstar",
+      "equipment.pike",
+      "equipment.rapier",
+      "equipment.shortsword",
+      "equipment.trident"
+    ],
+    "references": []
+  },
+  "equipment.splint-armor": {
+    "tags": [
+      "Heavy Armor"
+    ],
+    "related": [
+      "equipment.chain-mail",
+      "equipment.plate-armor",
+      "equipment.ring-mail",
+      "equipment.abacus",
+      "equipment.acid",
+      "equipment.acid-vial",
+      "equipment.airship",
+      "equipment.alchemists-fire"
+    ],
+    "references": []
+  },
+  "equipment.staff": {
+    "tags": [
+      "Spellcasting Focus",
+      "B",
+      "Versatile"
+    ],
+    "related": [
+      "equipment.wooden-staff",
+      "equipment.amulet",
+      "equipment.crystal",
+      "equipment.emblem",
+      "equipment.orb",
+      "equipment.reliquary",
+      "equipment.rod",
+      "equipment.sprig-of-mistletoe"
+    ],
+    "references": []
+  },
+  "equipment.studded-leather-armor": {
+    "tags": [
+      "Light Armor"
+    ],
+    "related": [
+      "equipment.leather-armor",
+      "equipment.padded-armor",
+      "equipment.abacus",
+      "equipment.acid",
+      "equipment.acid-vial",
+      "equipment.airship",
+      "equipment.alchemists-fire",
+      "equipment.alchemists-fire-flask"
+    ],
+    "references": []
+  },
+  "equipment.tinkers-tools": {
+    "tags": [
+      "Adventuring Gear"
+    ],
+    "related": [
+      "equipment.alchemists-supplies",
+      "equipment.brewers-supplies",
+      "equipment.calligraphers-supplies",
+      "equipment.carpenters-tools",
+      "equipment.cartographers-tools",
+      "equipment.cobblers-tools",
+      "equipment.cooks-utensils",
+      "equipment.glassblowers-tools"
+    ],
+    "references": []
+  },
+  "equipment.trident": {
+    "tags": [
+      "Melee Weapon",
+      "P",
+      "Thrown",
+      "Versatile"
+    ],
+    "related": [
+      "equipment.dagger",
+      "equipment.javelin",
+      "equipment.lance",
+      "equipment.morningstar",
+      "equipment.pike",
+      "equipment.rapier",
+      "equipment.shortsword",
+      "equipment.spear"
+    ],
+    "references": []
+  },
+  "equipment.viol": {
+    "tags": [
+      "Instrument"
+    ],
+    "related": [
+      "equipment.bagpipes",
+      "equipment.drum",
+      "equipment.dulcimer",
+      "equipment.flute",
+      "equipment.horn",
+      "equipment.lute",
+      "equipment.lyre",
+      "equipment.pan-flute"
+    ],
+    "references": []
+  },
+  "equipment.wand": {
+    "tags": [
+      "Spellcasting Focus"
+    ],
+    "related": [
+      "equipment.amulet",
+      "equipment.crystal",
+      "equipment.emblem",
+      "equipment.orb",
+      "equipment.reliquary",
+      "equipment.rod",
+      "equipment.sprig-of-mistletoe",
+      "equipment.staff"
+    ],
+    "references": []
+  },
+  "equipment.war-pick": {
+    "tags": [
+      "Melee Weapon",
+      "P",
+      "Versatile"
+    ],
+    "related": [
+      "equipment.dagger",
+      "equipment.javelin",
+      "equipment.lance",
+      "equipment.morningstar",
+      "equipment.pike",
+      "equipment.rapier",
+      "equipment.shortsword",
+      "equipment.spear"
+    ],
+    "references": []
+  },
+  "equipment.warhammer": {
+    "tags": [
+      "Melee Weapon",
+      "B",
+      "Versatile"
+    ],
+    "related": [
+      "equipment.club",
+      "equipment.flail",
+      "equipment.greatclub",
+      "equipment.light-hammer",
+      "equipment.mace",
+      "equipment.maul",
+      "equipment.quarterstaff",
+      "equipment.battleaxe"
+    ],
+    "references": []
+  },
+  "equipment.weavers-tools": {
+    "tags": [
+      "Adventuring Gear"
+    ],
+    "related": [
+      "equipment.alchemists-supplies",
+      "equipment.brewers-supplies",
+      "equipment.calligraphers-supplies",
+      "equipment.carpenters-tools",
+      "equipment.cartographers-tools",
+      "equipment.cobblers-tools",
+      "equipment.cooks-utensils",
+      "equipment.glassblowers-tools"
+    ],
+    "references": []
+  },
+  "equipment.whip": {
+    "tags": [
+      "Melee Weapon",
+      "S",
+      "Finesse",
+      "Reach"
+    ],
+    "related": [
+      "equipment.battleaxe",
+      "equipment.glaive",
+      "equipment.greataxe",
+      "equipment.greatsword",
+      "equipment.halberd",
+      "equipment.handaxe",
+      "equipment.longsword",
+      "equipment.scimitar"
+    ],
+    "references": []
+  },
+  "equipment.woodcarvers-tools": {
+    "tags": [
+      "Adventuring Gear"
+    ],
+    "related": [
+      "equipment.alchemists-supplies",
+      "equipment.brewers-supplies",
+      "equipment.calligraphers-supplies",
+      "equipment.carpenters-tools",
+      "equipment.cartographers-tools",
+      "equipment.cobblers-tools",
+      "equipment.cooks-utensils",
+      "equipment.glassblowers-tools"
+    ],
+    "references": []
+  },
+  "equipment.wooden-staff": {
+    "tags": [
+      "Spellcasting Focus",
+      "B",
+      "Versatile"
+    ],
+    "related": [
+      "equipment.staff",
+      "equipment.amulet",
+      "equipment.crystal",
+      "equipment.emblem",
+      "equipment.orb",
+      "equipment.reliquary",
+      "equipment.rod",
+      "equipment.sprig-of-mistletoe"
     ],
     "references": []
   },

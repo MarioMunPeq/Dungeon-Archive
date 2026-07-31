@@ -1,4 +1,4 @@
-import { NavLink } from "react-router";
+import { NavLink } from "react-router-dom";
 import { cn } from "@/lib/utils";
 import { HomeIcon, SearchIcon, AdventureIcon, PartyIcon } from "@/components/layout/nav-icons";
 

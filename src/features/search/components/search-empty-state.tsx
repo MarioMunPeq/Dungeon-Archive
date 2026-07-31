@@ -1,4 +1,4 @@
-import { Link } from "react-router";
+import { Link } from "react-router-dom";
 import { CATEGORY_REGISTRY } from "@/compendium";
 import { useRecentSearches } from "@/user-state";
 

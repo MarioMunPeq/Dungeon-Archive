@@ -57,9 +57,9 @@ const { migrate } = await import("../../src/user-state/migrations");
 const { read, write } = await import("../../src/user-state/persistence");
 const { loadCompendium } = await import("../../src/compendium/loader");
 const { hydrate, userStore } = await import("../../src/user-state/store");
-import type { Adventure, UserState } from "../../src/user-state/types";
+import type { Adventure, PartyMember, UserState } from "../../src/user-state/types";
 const { normalize, validateIds } = await import("../../src/user-state/normalize");
-const { getEntity } = await import("../../src/compendium/repository");
+const { getEntity, getSpells, getEquipmentList, getMagicItems } = await import("../../src/compendium/repository");
 
 function resetStore(): void {
   userStore.getState()._reset();
@@ -77,11 +77,11 @@ test("STORAGE_KEY equals dungeon:userState:v1", () => {
   strictEqual(STORAGE_KEY, "dungeon:userState:v1");
 });
 
-test("CURRENT_VERSION equals 3", () => {
-  strictEqual(CURRENT_VERSION, 3);
+test("CURRENT_VERSION equals 4", () => {
+  strictEqual(CURRENT_VERSION, 4);
 });
 
-test("createDefaultState returns valid v3 state", () => {
+test("createDefaultState returns valid v4 state", () => {
   const def = createDefaultState();
   strictEqual(def.version, CURRENT_VERSION);
   deepStrictEqual(def.favorites, []);
@@ -90,6 +90,7 @@ test("createDefaultState returns valid v3 state", () => {
   deepStrictEqual(def.session, []);
   deepStrictEqual(def.adventures, []);
   strictEqual(def.activeAdventureId, null);
+  deepStrictEqual(def.party, []);
 });
 
 // ---------------------------------------------------------------------------
@@ -419,6 +420,7 @@ test("favoritesSet rebuilt on _replace", () => {
     session: [],
     adventures: [],
     activeAdventureId: null,
+    party: [],
   });
   const state = userStore.getState();
   strictEqual(state.favoritesSet.has("x"), true);
@@ -726,6 +728,7 @@ test("safe replace does nothing when state is identical", () => {
     session: [],
     adventures: [],
     activeAdventureId: null,
+    party: [],
   });
   userStore.getState()._replace({
     version: CURRENT_VERSION,
@@ -735,6 +738,7 @@ test("safe replace does nothing when state is identical", () => {
     session: [],
     adventures: [],
     activeAdventureId: null,
+    party: [],
   });
   const state2 = userStore.getState();
   deepStrictEqual(state2.favorites, ["a", "b"]);
@@ -935,6 +939,7 @@ test("sessionSet stays in sync after _replace", () => {
     session: ["x", "y"],
     adventures: [],
     activeAdventureId: null,
+    party: [],
   });
   const state = userStore.getState();
   deepStrictEqual(state.session, ["x", "y"]);
@@ -1142,6 +1147,7 @@ test("_replace updates session when content differs", () => {
     session: ["a", "b"],
     adventures: [],
     activeAdventureId: null,
+    party: [],
   });
   deepStrictEqual(userStore.getState().session, ["a", "b"]);
 });
@@ -1430,6 +1436,7 @@ test("adventureSet rebuilt on _replace", () => {
       archived: false,
     }],
     activeAdventureId: "adv-1",
+    party: [],
   });
   const state = userStore.getState();
   strictEqual(state.adventures.length, 1);
@@ -1727,6 +1734,7 @@ test("_replace updates adventures when content differs", () => {
       archived: false,
     }],
     activeAdventureId: "adv-1",
+    party: [],
   });
   const state = userStore.getState();
   strictEqual(state.adventures.length, 1);
@@ -1755,6 +1763,7 @@ test("adventuresEqual prevents unnecessary _replace on identical state", () => {
       archived: false,
     }],
     activeAdventureId: "adv-1",
+    party: [],
   };
   userStore.getState()._replace(state);
   userStore.getState()._replace(state);
@@ -1804,6 +1813,520 @@ test("useAdventureEntityIds returns entities for active adventure", () => {
   const active = state.adventures.find((a) => a.id === state.activeAdventureId);
   ok(active);
   deepStrictEqual(active?.entities, ["spell.fireball", "monster.goblin"]);
+});
+
+// ---------------------------------------------------------------------------
+// Party
+// ---------------------------------------------------------------------------
+console.log("\nuser-state \u2014 party\n");
+
+test("party initial state is empty", () => {
+  resetMock();
+  resetStore();
+  deepStrictEqual(userStore.getState().party, []);
+});
+
+test("addPartyMember adds a member with defaults", () => {
+  resetMock();
+  resetStore();
+  userStore.getState().addPartyMember({
+    name: "Lyra",
+    class: "Wizard",
+    level: 5,
+    knownSpellCanonicalIds: [],
+    equippedWeaponCanonicalIds: [],
+    equippedMagicItemCanonicalIds: [],
+  });
+  const state = userStore.getState();
+  strictEqual(state.party.length, 1);
+  const member = state.party[0]!;
+  strictEqual(member.name, "Lyra");
+  strictEqual(member.class, "Wizard");
+  strictEqual(member.level, 5);
+  deepStrictEqual(member.knownSpellCanonicalIds, []);
+  strictEqual(member.equippedArmorCanonicalId, undefined);
+  deepStrictEqual(member.equippedWeaponCanonicalIds, []);
+  deepStrictEqual(member.equippedMagicItemCanonicalIds, []);
+  ok(member.id.length > 0);
+});
+
+test("addPartyMember trims name and class", () => {
+  resetMock();
+  resetStore();
+  userStore.getState().addPartyMember({
+    name: "  Lyra  ",
+    class: "  Wizard ",
+    level: 5,
+    knownSpellCanonicalIds: [],
+    equippedWeaponCanonicalIds: [],
+    equippedMagicItemCanonicalIds: [],
+  });
+  const member = userStore.getState().party[0]!;
+  strictEqual(member.name, "Lyra");
+  strictEqual(member.class, "Wizard");
+});
+
+test("addPartyMember clamps level to 1-20", () => {
+  resetMock();
+  resetStore();
+  const s = userStore.getState();
+  s.addPartyMember({
+    name: "Low",
+    class: "Cleric",
+    level: 0,
+    knownSpellCanonicalIds: [],
+    equippedWeaponCanonicalIds: [],
+    equippedMagicItemCanonicalIds: [],
+  });
+  s.addPartyMember({
+    name: "High",
+    class: "Cleric",
+    level: 99,
+    knownSpellCanonicalIds: [],
+    equippedWeaponCanonicalIds: [],
+    equippedMagicItemCanonicalIds: [],
+  });
+  const members = userStore.getState().party;
+  strictEqual(members[0]!.level, 1);
+  strictEqual(members[1]!.level, 20);
+});
+
+test("addPartyMember accepts references", () => {
+  resetMock();
+  resetStore();
+  userStore.getState().addPartyMember({
+    name: "Lyra",
+    class: "Wizard",
+    level: 5,
+    race: "High Elf",
+    subclass: "Evocation",
+    passivePerception: 15,
+    notes: "Guild wizard",
+    knownSpellCanonicalIds: ["spell.fireball"],
+    equippedArmorCanonicalId: "equipment.chain-mail",
+    equippedWeaponCanonicalIds: ["equipment.longsword"],
+    equippedMagicItemCanonicalIds: ["magicitem.wand-of-magic-missiles"],
+  });
+  const member = userStore.getState().party[0]!;
+  strictEqual(member.race, "High Elf");
+  strictEqual(member.subclass, "Evocation");
+  strictEqual(member.passivePerception, 15);
+  strictEqual(member.notes, "Guild wizard");
+  deepStrictEqual(member.knownSpellCanonicalIds, ["spell.fireball"]);
+  strictEqual(member.equippedArmorCanonicalId, "equipment.chain-mail");
+  deepStrictEqual(member.equippedWeaponCanonicalIds, ["equipment.longsword"]);
+  deepStrictEqual(member.equippedMagicItemCanonicalIds, ["magicitem.wand-of-magic-missiles"]);
+});
+
+test("addPartyMember trims optional strings and keeps empty as undefined", () => {
+  resetMock();
+  resetStore();
+  userStore.getState().addPartyMember({
+    name: "Lyra",
+    class: "Wizard",
+    level: 5,
+    race: "  ",
+    subclass: "",
+    notes: "",
+    knownSpellCanonicalIds: [],
+    equippedWeaponCanonicalIds: [],
+    equippedMagicItemCanonicalIds: [],
+  });
+  const member = userStore.getState().party[0]!;
+  strictEqual(member.race, undefined);
+  strictEqual(member.subclass, undefined);
+  strictEqual(member.notes, undefined);
+});
+
+test("addPartyMember persists to localStorage", () => {
+  resetMock();
+  resetStore();
+  userStore.getState().addPartyMember({
+    name: "Lyra",
+    class: "Wizard",
+    level: 5,
+    knownSpellCanonicalIds: [],
+    equippedWeaponCanonicalIds: [],
+    equippedMagicItemCanonicalIds: [],
+  });
+  const stored = localStorage.getItem(STORAGE_KEY);
+  if (stored) {
+    const parsed = JSON.parse(stored);
+    ok(parsed.party.length === 1, "party persisted");
+  } else {
+    ok(userStore.getState().party.length === 1);
+  }
+});
+
+test("updatePartyMember updates fields", () => {
+  resetMock();
+  resetStore();
+  userStore.getState().addPartyMember({
+    name: "Lyra",
+    class: "Wizard",
+    level: 5,
+    knownSpellCanonicalIds: [],
+    equippedWeaponCanonicalIds: [],
+    equippedMagicItemCanonicalIds: [],
+  });
+  const id = userStore.getState().party[0]!.id;
+  userStore.getState().updatePartyMember(id, {
+    level: 6,
+    subclass: "Evocation",
+    knownSpellCanonicalIds: ["spell.fireball"],
+  });
+  const member = userStore.getState().party[0]!;
+  strictEqual(member.level, 6);
+  strictEqual(member.subclass, "Evocation");
+  deepStrictEqual(member.knownSpellCanonicalIds, ["spell.fireball"]);
+  strictEqual(member.name, "Lyra");
+});
+
+test("updatePartyMember clamps level", () => {
+  resetMock();
+  resetStore();
+  userStore.getState().addPartyMember({
+    name: "Lyra",
+    class: "Wizard",
+    level: 5,
+    knownSpellCanonicalIds: [],
+    equippedWeaponCanonicalIds: [],
+    equippedMagicItemCanonicalIds: [],
+  });
+  const id = userStore.getState().party[0]!.id;
+  userStore.getState().updatePartyMember(id, { level: 99 });
+  strictEqual(userStore.getState().party[0]!.level, 20);
+});
+
+test("updatePartyMember converts empty strings to undefined", () => {
+  resetMock();
+  resetStore();
+  userStore.getState().addPartyMember({
+    name: "Lyra",
+    class: "Wizard",
+    level: 5,
+    race: "High Elf",
+    notes: "Keep notes",
+    knownSpellCanonicalIds: [],
+    equippedWeaponCanonicalIds: [],
+    equippedMagicItemCanonicalIds: [],
+  });
+  const id = userStore.getState().party[0]!.id;
+  userStore.getState().updatePartyMember(id, { race: "  ", notes: "" });
+  const member = userStore.getState().party[0]!;
+  strictEqual(member.race, undefined);
+  strictEqual(member.notes, undefined);
+});
+
+test("updatePartyMember is a no-op for unknown id", () => {
+  resetMock();
+  resetStore();
+  userStore.getState().addPartyMember({
+    name: "Lyra",
+    class: "Wizard",
+    level: 5,
+    knownSpellCanonicalIds: [],
+    equippedWeaponCanonicalIds: [],
+    equippedMagicItemCanonicalIds: [],
+  });
+  userStore.getState().updatePartyMember("nonexistent", { name: "Changed" });
+  strictEqual(userStore.getState().party[0]!.name, "Lyra");
+});
+
+test("removePartyMember removes by id", () => {
+  resetMock();
+  resetStore();
+  userStore.getState().addPartyMember({
+    name: "Lyra",
+    class: "Wizard",
+    level: 5,
+    knownSpellCanonicalIds: [],
+    equippedWeaponCanonicalIds: [],
+    equippedMagicItemCanonicalIds: [],
+  });
+  const id = userStore.getState().party[0]!.id;
+  userStore.getState().removePartyMember(id);
+  deepStrictEqual(userStore.getState().party, []);
+});
+
+test("_replace updates party when content differs", () => {
+  resetMock();
+  resetStore();
+  userStore.getState()._replace({
+    version: CURRENT_VERSION,
+    favorites: [],
+    recentEntities: [],
+    recentSearches: [],
+    session: [],
+    adventures: [],
+    activeAdventureId: null,
+    party: [
+      {
+        id: "p1",
+        name: "Lyra",
+        class: "Wizard",
+        level: 5,
+        knownSpellCanonicalIds: [],
+        equippedWeaponCanonicalIds: [],
+        equippedMagicItemCanonicalIds: [],
+      },
+    ],
+  });
+  const state = userStore.getState();
+  strictEqual(state.party.length, 1);
+  strictEqual(state.party[0]?.name, "Lyra");
+});
+
+test("party cleared on _reset", () => {
+  resetMock();
+  resetStore();
+  const s = userStore.getState();
+  s.addPartyMember({
+    name: "Lyra",
+    class: "Wizard",
+    level: 5,
+    knownSpellCanonicalIds: [],
+    equippedWeaponCanonicalIds: [],
+    equippedMagicItemCanonicalIds: [],
+  });
+  userStore.getState()._reset();
+  deepStrictEqual(userStore.getState().party, []);
+});
+
+// ---------------------------------------------------------------------------
+// Party normalization
+// ---------------------------------------------------------------------------
+console.log("\nuser-state \u2014 party normalization\n");
+
+test("normalize drops invalid party members", () => {
+  const party = [
+    null,
+    "bad",
+    { id: "p1", name: "Lyra", class: "Wizard", level: 5, knownSpellCanonicalIds: [], equippedWeaponCanonicalIds: [], equippedMagicItemCanonicalIds: [] },
+    { id: "", name: "NoId", class: "Cleric", level: 5 },
+    { id: "p2", name: "  ", class: "Fighter", level: 3 },
+  ] as unknown as PartyMember[];
+  const result = normalize({
+    version: CURRENT_VERSION,
+    favorites: [],
+    recentEntities: [],
+    recentSearches: [],
+    session: [],
+    party,
+  });
+  strictEqual(result.party.length, 1);
+  strictEqual(result.party[0]?.id, "p1");
+});
+
+test("normalize trims name and class", () => {
+  const result = normalize({
+    version: CURRENT_VERSION,
+    favorites: [],
+    recentEntities: [],
+    recentSearches: [],
+    session: [],
+    party: [
+      { id: "p1", name: "  Lyra  ", class: " Wizard ", level: 5, knownSpellCanonicalIds: [], equippedWeaponCanonicalIds: [], equippedMagicItemCanonicalIds: [] },
+    ],
+  });
+  strictEqual(result.party[0]?.name, "Lyra");
+  strictEqual(result.party[0]?.class, "Wizard");
+});
+
+test("normalize clamps party member level", () => {
+  const result = normalize({
+    version: CURRENT_VERSION,
+    favorites: [],
+    recentEntities: [],
+    recentSearches: [],
+    session: [],
+    party: [
+      { id: "p1", name: "Low", class: "Cleric", level: 0, knownSpellCanonicalIds: [], equippedWeaponCanonicalIds: [], equippedMagicItemCanonicalIds: [] },
+      { id: "p2", name: "High", class: "Cleric", level: 99, knownSpellCanonicalIds: [], equippedWeaponCanonicalIds: [], equippedMagicItemCanonicalIds: [] },
+    ],
+  });
+  strictEqual(result.party[0]?.level, 1);
+  strictEqual(result.party[1]?.level, 20);
+});
+
+test("normalize removes stale reference IDs from party members", () => {
+  const result = normalize({
+    version: CURRENT_VERSION,
+    favorites: [],
+    recentEntities: [],
+    recentSearches: [],
+    session: [],
+    party: [
+      {
+        id: "p1",
+        name: "Lyra",
+        class: "Wizard",
+        level: 5,
+        knownSpellCanonicalIds: ["spell.fireball", "nonexistent.entity"],
+        equippedArmorCanonicalId: "nonexistent.armor",
+        equippedWeaponCanonicalIds: ["equipment.longsword", "nonexistent.weapon"],
+        equippedMagicItemCanonicalIds: ["magicitem.wand-of-magic-missiles", "nonexistent.item"],
+      },
+    ],
+  });
+  const member = result.party[0]!;
+  deepStrictEqual(member.knownSpellCanonicalIds, ["spell.fireball"]);
+  strictEqual(member.equippedArmorCanonicalId, undefined);
+  deepStrictEqual(member.equippedWeaponCanonicalIds, ["equipment.longsword"]);
+  deepStrictEqual(member.equippedMagicItemCanonicalIds, ["magicitem.wand-of-magic-missiles"]);
+});
+
+test("normalize converts empty optional strings to undefined", () => {
+  const result = normalize({
+    version: CURRENT_VERSION,
+    favorites: [],
+    recentEntities: [],
+    recentSearches: [],
+    session: [],
+    party: [
+      { id: "p1", name: "Lyra", class: "Wizard", level: 5, race: "  ", subclass: "", notes: "  ", knownSpellCanonicalIds: [], equippedWeaponCanonicalIds: [], equippedMagicItemCanonicalIds: [] },
+    ],
+  });
+  const member = result.party[0]!;
+  strictEqual(member.race, undefined);
+  strictEqual(member.subclass, undefined);
+  strictEqual(member.notes, undefined);
+});
+
+test("normalize caps party at 12 members", () => {
+  const party = Array.from({ length: 15 }, (_, i) => ({
+    id: `p${i}`,
+    name: `Member ${i}`,
+    class: "Fighter",
+    level: 1,
+    knownSpellCanonicalIds: [],
+    equippedWeaponCanonicalIds: [],
+    equippedMagicItemCanonicalIds: [],
+  }));
+  const result = normalize({
+    version: CURRENT_VERSION,
+    favorites: [],
+    recentEntities: [],
+    recentSearches: [],
+    session: [],
+    party,
+  });
+  strictEqual(result.party.length, 12);
+});
+
+test("normalize caps party reference lists", () => {
+  const distinct = (items: readonly { canonicalId: string }[], max: number): string[] => {
+    const seen = new Set<string>();
+    const result: string[] = [];
+    for (const item of items) {
+      if (seen.has(item.canonicalId)) continue;
+      seen.add(item.canonicalId);
+      result.push(item.canonicalId);
+      if (result.length === max) break;
+    }
+    return result;
+  };
+  const spellIds = distinct(getSpells(), 51);
+  const weaponIds = distinct(
+    getEquipmentList().filter((e) => e.type === "Melee Weapon" || e.type === "Ranged Weapon"),
+    11,
+  );
+  const magicItemIds = distinct(getMagicItems(), 31);
+  const result = normalize({
+    version: CURRENT_VERSION,
+    favorites: [],
+    recentEntities: [],
+    recentSearches: [],
+    session: [],
+    party: [
+      {
+        id: "p1",
+        name: "Lyra",
+        class: "Wizard",
+        level: 5,
+        knownSpellCanonicalIds: spellIds,
+        equippedWeaponCanonicalIds: weaponIds,
+        equippedMagicItemCanonicalIds: magicItemIds,
+      },
+    ],
+  });
+  const member = result.party[0]!;
+  strictEqual(member.knownSpellCanonicalIds.length, 50);
+  strictEqual(member.equippedWeaponCanonicalIds.length, 10);
+  strictEqual(member.equippedMagicItemCanonicalIds.length, 30);
+});
+
+test("normalize handles non-array party gracefully", () => {
+  const result = normalize({
+    version: CURRENT_VERSION,
+    favorites: [],
+    recentEntities: [],
+    recentSearches: [],
+    session: [],
+    party: "not-an-array" as unknown as PartyMember[],
+  });
+  deepStrictEqual(result.party, []);
+});
+
+// ---------------------------------------------------------------------------
+// Party hydration
+// ---------------------------------------------------------------------------
+console.log("\nuser-state \u2014 party hydration\n");
+
+test("hydrate() loads party from persisted state", () => {
+  resetMock();
+  resetStore();
+  const data = {
+    version: CURRENT_VERSION,
+    favorites: [],
+    recentEntities: [],
+    recentSearches: [],
+    session: [],
+    party: [
+      {
+        id: "p1",
+        name: "Lyra",
+        class: "Wizard",
+        level: 5,
+        knownSpellCanonicalIds: ["spell.fireball"],
+        equippedWeaponCanonicalIds: ["equipment.longsword"],
+        equippedMagicItemCanonicalIds: [],
+      },
+    ],
+  };
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+  hydrate();
+  const state = userStore.getState();
+  strictEqual(state.party.length, 1);
+  strictEqual(state.party[0]?.name, "Lyra");
+  deepStrictEqual(state.party[0]?.knownSpellCanonicalIds, ["spell.fireball"]);
+});
+
+test("hydrate() removes stale reference IDs from persisted party", () => {
+  resetMock();
+  resetStore();
+  const data = {
+    version: CURRENT_VERSION,
+    favorites: [],
+    recentEntities: [],
+    recentSearches: [],
+    session: [],
+    party: [
+      {
+        id: "p1",
+        name: "Lyra",
+        class: "Wizard",
+        level: 5,
+        knownSpellCanonicalIds: ["spell.fireball", "nonexistent.entity"],
+        equippedWeaponCanonicalIds: [],
+        equippedMagicItemCanonicalIds: [],
+      },
+    ],
+  };
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+  hydrate();
+  const state = userStore.getState();
+  deepStrictEqual(state.party[0]?.knownSpellCanonicalIds, ["spell.fireball"]);
 });
 
 console.log(

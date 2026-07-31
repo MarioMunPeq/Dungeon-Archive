@@ -1,4 +1,4 @@
-import { Link } from "react-router";
+import { Link } from "react-router-dom";
 import {
   categoryLabel,
   getCategoryCount,
@@ -7,7 +7,7 @@ import {
   slugFromCanonicalId,
 } from "@/compendium";
 import type { EntityCategory } from "@/compendium";
-import { useRecentEntities, useSessionIds, useActiveAdventure, userStore } from "@/user-state";
+import { useFavoriteIds, useRecentEntities, useSessionIds, useActiveAdventure, usePartyMembers } from "@/user-state";
 import { EntityCard } from "@/features/compendium/components/entity-card";
 import type { EntityCardData } from "@/features/compendium/components/entity-card";
 
@@ -48,12 +48,15 @@ export function HomePage() {
     if (card) recentCards.push(card);
   }
 
-  const favoriteIds = userStore((s) => s.favorites.slice(0, 10));
+  const favoriteIds = useFavoriteIds(10);
   const favoriteCards: EntityCardData[] = [];
   for (const id of favoriteIds) {
     const card = entityCardFromCanonicalId(id);
     if (card) favoriteCards.push(card);
   }
+
+  const party = usePartyMembers();
+  const shownMembers = party.slice(0, 5);
 
   return (
     <div className="flex flex-col gap-8 px-4 py-8">
@@ -102,6 +105,46 @@ export function HomePage() {
             <polyline points="4 3 20 3 18 7 20 11 4 11" />
           </svg>
           <span>Create Adventure</span>
+        </Link>
+      )}
+
+      {party.length > 0 ? (
+        <div className="flex flex-col gap-3">
+          <Link
+            to="/party"
+            className="flex items-center gap-1 text-sm font-semibold text-foreground hover:text-primary"
+          >
+            Party
+            <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} className="h-3.5 w-3.5">
+              <path d="M9 18l6-6-6-6" />
+            </svg>
+          </Link>
+          <div className="flex flex-col gap-2 rounded-lg border border-border p-4">
+            {shownMembers.map((member) => (
+              <div key={member.id} className="flex items-center justify-between gap-2">
+                <span className="truncate text-sm font-medium text-foreground">{member.name}</span>
+                <span className="shrink-0 text-xs text-muted-foreground">
+                  {member.class} {"\u00B7"} Lv {member.level}
+                </span>
+              </div>
+            ))}
+            {party.length > shownMembers.length && (
+              <p className="text-xs text-muted-foreground/60">+{party.length - shownMembers.length} more</p>
+            )}
+          </div>
+        </div>
+      ) : (
+        <Link
+          to="/party"
+          className="flex items-center gap-2 rounded-lg border border-dashed border-border p-4 text-sm text-muted-foreground transition-colors hover:bg-accent active:bg-accent/80"
+        >
+          <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} className="h-4 w-4">
+            <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+            <circle cx="9" cy="7" r="4" />
+            <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
+            <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+          </svg>
+          <span>Add Party Member</span>
         </Link>
       )}
 

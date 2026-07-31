@@ -1,5 +1,5 @@
 import { useState, useCallback, useEffect } from "react";
-import { useParams } from "react-router";
+import { useParams } from "react-router-dom";
 import { ErrorState } from "@/components/ui/error-state";
 import {
   resolveEntity,

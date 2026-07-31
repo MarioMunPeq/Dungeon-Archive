@@ -2,6 +2,23 @@
  * Only canonical IDs are stored, never full entity data.
  * The Compendium is the source of truth for entity resolution.
  */
+export interface PartyMember {
+  readonly id: string;
+  readonly name: string;
+  readonly class: string;
+  readonly level: number;
+  readonly race?: string;
+  readonly subclass?: string;
+  readonly passivePerception?: number;
+  readonly passiveInsight?: number;
+  readonly passiveInvestigation?: number;
+  readonly notes?: string;
+  readonly knownSpellCanonicalIds: string[];
+  readonly equippedArmorCanonicalId?: string;
+  readonly equippedWeaponCanonicalIds: string[];
+  readonly equippedMagicItemCanonicalIds: string[];
+}
+
 export interface Adventure {
   readonly id: string;
   readonly title: string;
@@ -22,10 +39,11 @@ export interface UserState {
   readonly session: string[];
   readonly adventures: Adventure[];
   readonly activeAdventureId: string | null;
+  readonly party: PartyMember[];
 }
 
 export const STORAGE_KEY = "dungeon:userState:v1";
-export const CURRENT_VERSION = 3;
+export const CURRENT_VERSION = 4;
 
 export function createDefaultState(): UserState {
   return {
@@ -36,5 +54,6 @@ export function createDefaultState(): UserState {
     session: [],
     adventures: [],
     activeAdventureId: null,
+    party: [],
   };
 }

@@ -1,4 +1,4 @@
-import type { Adventure, UserState } from "./types";
+import type { Adventure, PartyMember, UserState } from "./types";
 import { CURRENT_VERSION, createDefaultState } from "./types";
 
 const migrations: Record<number, (state: Record<string, unknown>) => Record<string, unknown>> = {
@@ -24,6 +24,16 @@ const migrations: Record<number, (state: Record<string, unknown>) => Record<stri
     adventures: Array.isArray(raw.adventures) ? raw.adventures : [],
     activeAdventureId: typeof raw.activeAdventureId === "string" ? raw.activeAdventureId : null,
   }),
+  4: (raw) => ({
+    version: 4,
+    favorites: Array.isArray(raw.favorites) ? raw.favorites : [],
+    recentEntities: Array.isArray(raw.recentEntities) ? raw.recentEntities : [],
+    recentSearches: Array.isArray(raw.recentSearches) ? raw.recentSearches : [],
+    session: Array.isArray(raw.session) ? raw.session : [],
+    adventures: Array.isArray(raw.adventures) ? raw.adventures : [],
+    activeAdventureId: typeof raw.activeAdventureId === "string" ? raw.activeAdventureId : null,
+    party: Array.isArray(raw.party) ? raw.party : [],
+  }),
 };
 
 export function migrate(raw: unknown): UserState {
@@ -45,6 +55,9 @@ export function migrate(raw: unknown): UserState {
   if (version < 3) {
     migrated = migrations[3]!(migrated);
   }
+  if (version < 4) {
+    migrated = migrations[4]!(migrated);
+  }
 
   const result = migrated as unknown as Record<string, unknown>;
   if (
@@ -64,5 +77,6 @@ export function migrate(raw: unknown): UserState {
     session: result.session as string[],
     adventures: Array.isArray(result.adventures) ? (result.adventures as Adventure[]) : [],
     activeAdventureId: typeof result.activeAdventureId === "string" ? result.activeAdventureId : null,
+    party: Array.isArray(result.party) ? (result.party as PartyMember[]) : [],
   };
 }

@@ -1,4 +1,4 @@
-import { Link } from "react-router";
+import { Link } from "react-router-dom";
 import type { SearchResultItem } from "@/components/entity";
 import { CATEGORY_REGISTRY, formatSource } from "@/compendium";
 import { Badge } from "@/components/ui/Badge";

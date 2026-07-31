@@ -1,5 +1,5 @@
 import { memo } from "react";
-import { Link } from "react-router";
+import { Link } from "react-router-dom";
 import { formatSource } from "@/compendium";
 import { FavoriteButton } from "@/components/ui/FavoriteButton";
 import { SessionButton } from "@/components/ui/SessionButton";
