@@ -5,6 +5,7 @@ import { CATEGORY_REGISTRY, getEntitiesForCategory } from "@/compendium";
 import type { EntityCategory } from "@/compendium";
 import { ReferencePicker } from "@/components/ui/ReferencePicker";
 import type { PickerCandidate } from "@/components/ui/ReferencePicker";
+import { InlineTextareaEditor } from "@/components/ui/InlineTextareaEditor";
 import { entityRefFromCanonicalId, EntityReferenceRow, RowRemoveButton } from "@/components/entity";
 import type { EntityRef } from "@/components/entity";
 
@@ -162,31 +163,13 @@ function SceneCard({ adventureId, scene, archived }: { adventureId: string; scen
           <div>
             <h3 className="mb-1 text-xs font-medium text-muted-foreground">Description</h3>
             {editingDescription ? (
-              <div className="flex flex-col gap-2">
-                <textarea
-                  value={descriptionDraft}
-                  onChange={(e) => setDescriptionDraft(e.target.value)}
-                  rows={2}
-                  autoFocus
-                  className="w-full rounded-lg border border-border bg-background px-3 py-2 text-sm text-foreground outline-none focus:border-foreground"
-                />
-                <div className="flex gap-2">
-                  <button
-                    type="button"
-                    onClick={handleSaveDescription}
-                    className="rounded-lg bg-primary px-3 py-1.5 text-xs font-medium text-primary-foreground transition-all duration-150 hover:bg-primary/90 active:scale-90"
-                  >
-                    Save
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => setEditingDescription(false)}
-                    className="rounded-lg border border-border px-3 py-1.5 text-xs text-muted-foreground transition-all duration-150 hover:bg-accent active:scale-90"
-                  >
-                    Cancel
-                  </button>
-                </div>
-              </div>
+              <InlineTextareaEditor
+                value={descriptionDraft}
+                onChange={setDescriptionDraft}
+                onSave={handleSaveDescription}
+                onCancel={() => setEditingDescription(false)}
+                rows={2}
+              />
             ) : (
               <button
                 type="button"
@@ -212,31 +195,13 @@ function SceneCard({ adventureId, scene, archived }: { adventureId: string; scen
               )}
             </div>
             {editingNote ? (
-              <div className="flex flex-col gap-2">
-                <textarea
-                  value={noteDraft}
-                  onChange={(e) => setNoteDraft(e.target.value)}
-                  rows={2}
-                  autoFocus
-                  className="w-full rounded-lg border border-border bg-background px-3 py-2 text-sm text-foreground outline-none focus:border-foreground"
-                />
-                <div className="flex gap-2">
-                  <button
-                    type="button"
-                    onClick={handleSaveNote}
-                    className="rounded-lg bg-primary px-3 py-1.5 text-xs font-medium text-primary-foreground transition-all duration-150 hover:bg-primary/90 active:scale-90"
-                  >
-                    Save
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => setEditingNote(false)}
-                    className="rounded-lg border border-border px-3 py-1.5 text-xs text-muted-foreground transition-all duration-150 hover:bg-accent active:scale-90"
-                  >
-                    Cancel
-                  </button>
-                </div>
-              </div>
+              <InlineTextareaEditor
+                value={noteDraft}
+                onChange={setNoteDraft}
+                onSave={handleSaveNote}
+                onCancel={() => setEditingNote(false)}
+                rows={2}
+              />
             ) : (
               <button
                 type="button"
@@ -546,31 +511,13 @@ export function AdventurePage() {
       <div className="mb-6">
         <h2 className="mb-2 text-xs font-medium text-muted-foreground">Description</h2>
         {editingDescription ? (
-          <div className="flex flex-col gap-2">
-            <textarea
-              value={descriptionDraft}
-              onChange={(e) => setDescriptionDraft(e.target.value)}
-              className="w-full rounded-lg border border-border bg-background px-3 py-2 text-sm text-foreground outline-none focus:border-foreground"
-              rows={3}
-              autoFocus
-            />
-            <div className="flex gap-2">
-              <button
-                type="button"
-                onClick={handleSaveDescription}
-                className="rounded-lg bg-primary px-3 py-1.5 text-xs font-medium text-primary-foreground transition-all duration-150 hover:bg-primary/90 active:scale-90"
-              >
-                Save
-              </button>
-              <button
-                type="button"
-                onClick={() => setEditingDescription(false)}
-                className="rounded-lg border border-border px-3 py-1.5 text-xs text-muted-foreground transition-all duration-150 hover:bg-accent active:scale-90"
-              >
-                Cancel
-              </button>
-            </div>
-          </div>
+          <InlineTextareaEditor
+            value={descriptionDraft}
+            onChange={setDescriptionDraft}
+            onSave={handleSaveDescription}
+            onCancel={() => setEditingDescription(false)}
+            rows={3}
+          />
         ) : (
           <p
             className="cursor-pointer rounded-lg border border-transparent px-3 py-2 text-sm text-muted-foreground hover:border-border hover:bg-accent/30"
@@ -630,31 +577,13 @@ export function AdventurePage() {
       <div className="mb-6">
         <h2 className="mb-2 text-xs font-medium text-muted-foreground">Notes</h2>
         {editingNotes ? (
-          <div className="flex flex-col gap-2">
-            <textarea
-              value={notesDraft}
-              onChange={(e) => setNotesDraft(e.target.value)}
-              className="w-full rounded-lg border border-border bg-background px-3 py-2 text-sm text-foreground outline-none focus:border-foreground"
-              rows={6}
-              autoFocus
-            />
-            <div className="flex gap-2">
-              <button
-                type="button"
-                onClick={handleSaveNotes}
-                className="rounded-lg bg-primary px-3 py-1.5 text-xs font-medium text-primary-foreground transition-all duration-150 hover:bg-primary/90 active:scale-90"
-              >
-                Save
-              </button>
-              <button
-                type="button"
-                onClick={() => setEditingNotes(false)}
-                className="rounded-lg border border-border px-3 py-1.5 text-xs text-muted-foreground transition-all duration-150 hover:bg-accent active:scale-90"
-              >
-                Cancel
-              </button>
-            </div>
-          </div>
+          <InlineTextareaEditor
+            value={notesDraft}
+            onChange={setNotesDraft}
+            onSave={handleSaveNotes}
+            onCancel={() => setEditingNotes(false)}
+            rows={6}
+          />
         ) : (
           <p
             className="min-h-[6rem] cursor-pointer rounded-lg border border-transparent px-3 py-2 text-sm text-muted-foreground hover:border-border hover:bg-accent/30"

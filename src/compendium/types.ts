@@ -29,3 +29,23 @@ export type CategoryMap = {
 };
 
 export type CategoryKey = keyof CategoryMap;
+
+export interface EntityCardData {
+  readonly name: string;
+  readonly href: string;
+  readonly categoryLabel: string;
+  readonly metadata: string;
+  readonly source: string;
+  readonly canonicalId: string;
+}
+
+export interface FilterOption {
+  readonly value: string;
+  readonly label: string;
+}
+
+export interface FilterDefinition {
+  readonly key: string;
+  readonly label: string;
+  readonly options: readonly FilterOption[];
+}

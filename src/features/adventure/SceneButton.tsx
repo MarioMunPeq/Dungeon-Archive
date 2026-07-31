@@ -1,6 +1,6 @@
 import { memo, useState, useMemo } from "react";
 import { useActiveAdventure, userStore } from "@/user-state";
-import { SceneTargetSheet } from "@/features/adventure/scene-target-sheet";
+import { SceneTargetSheet } from "./scene-target-sheet";
 
 interface SceneButtonProps {
   readonly canonicalId: string;
@@ -49,7 +49,7 @@ export const SceneButton = memo(function SceneButton({ canonicalId, className = 
         className={`hitbox-expand inline-flex items-center justify-center rounded p-1.5 transition-all duration-150 hover:bg-accent active:scale-90 active:bg-accent/80 ${className} ${
           inScene ? "text-violet-500" : "text-muted-foreground"
         }`}
-        aria-label={inScene ? "Remove from scene" : "Add to scene"}
+        aria-label={inScene ? "Add to scene (already in a scene)" : "Add to scene"}
         title="Add to a scene"
       >
         <SceneIcon filled={inScene} />

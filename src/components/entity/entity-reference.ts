@@ -1,4 +1,4 @@
-import { CATEGORY_REGISTRY, getEntity, slugFromCanonicalId } from "@/compendium";
+import { CATEGORY_REGISTRY, getEntity, referenceToUrl } from "@/compendium";
 import type { EntityCategory } from "@/compendium";
 
 export type BadgeVariant = "default" | "accent" | "outline" | "subtle";
@@ -39,6 +39,6 @@ export function entityRefFromCanonicalId(canonicalId: string): EntityRef | null 
     name: entity.name,
     source: entity.source,
     subtitle: CATEGORY_REGISTRY[category].getSubtitle(entity),
-    href: `/${category}/${slugFromCanonicalId(canonicalId)}`,
+    href: referenceToUrl(canonicalId),
   };
 }

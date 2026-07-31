@@ -1,33 +1,26 @@
 import { Link } from "react-router-dom";
 import {
   categoryLabel,
+  categoryLabelSingular,
   getCategoryCount,
   CATEGORY_REGISTRY,
-  getEntity,
-  slugFromCanonicalId,
 } from "@/compendium";
-import type { EntityCategory } from "@/compendium";
+import type { EntityCategory, EntityCardData } from "@/compendium";
 import { useFavoriteIds, useRecentEntities, useSessionIds, useActiveAdventure, usePartyMembers } from "@/user-state";
-import { EntityCard } from "@/features/compendium/components/entity-card";
-import type { EntityCardData } from "@/features/compendium/components/entity-card";
+import { entityRefFromCanonicalId, EntityCard } from "@/components/entity";
 
 const CATEGORIES = Object.keys(CATEGORY_REGISTRY) as EntityCategory[];
 
 function entityCardFromCanonicalId(canonicalId: string): EntityCardData | null {
-  const dot = canonicalId.indexOf(".");
-  if (dot === -1) return null;
-  const category = canonicalId.substring(0, dot) as EntityCategory;
-  const id = canonicalId.substring(dot + 1);
-  const entity = getEntity(category, id);
-  if (!entity) return null;
-  const reg = CATEGORY_REGISTRY[category];
+  const ref = entityRefFromCanonicalId(canonicalId);
+  if (!ref) return null;
   return {
-    name: entity.name,
-    href: `/${category}/${slugFromCanonicalId(canonicalId)}`,
-    categoryLabel: reg.singular,
-    metadata: reg.getSubtitle(entity),
-    source: entity.source,
-    canonicalId,
+    name: ref.name,
+    href: ref.href,
+    categoryLabel: categoryLabelSingular(ref.category),
+    metadata: ref.subtitle,
+    source: ref.source,
+    canonicalId: ref.canonicalId,
   };
 }
 

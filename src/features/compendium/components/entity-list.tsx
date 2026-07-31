@@ -1,5 +1,5 @@
-import { EntityCard } from "./entity-card";
-import type { EntityCardData } from "./entity-card";
+import { EntityCard } from "@/components/entity";
+import type { EntityCardData } from "@/compendium";
 
 interface EntityListProps {
   readonly entities: readonly EntityCardData[];

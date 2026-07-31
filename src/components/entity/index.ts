@@ -10,3 +10,5 @@ export { entityRefFromCanonicalId, badgeVariantForCategory } from "./entity-refe
 export type { EntityRef, BadgeVariant } from "./entity-reference";
 
 export { EntityReferenceRow, RowRemoveButton } from "./entity-reference-row";
+
+export { EntityCard } from "./entity-card";

@@ -8,8 +8,7 @@ import type {
   MagicItem,
   Feat,
 } from "@/types/compendium";
-import type { FilterDefinition } from "@/features/compendium/components/filter-bar";
-import type { EntityCardData } from "@/features/compendium/components/entity-card";
+import type { FilterDefinition, EntityCardData } from "./types";
 import {
   getSpells,
   getMonsters,
@@ -20,7 +19,7 @@ import {
   getFeats,
 } from "./repository";
 import { formatSource } from "./source";
-import { slugFromCanonicalId } from "./slug";
+import { referenceToUrl } from "./reference";
 
 export type AnyEntity = Spell | Condition | Equipment | Action | Monster | MagicItem | Feat;
 
@@ -170,7 +169,7 @@ export const CATEGORY_REGISTRY: Record<EntityCategory, CategoryRegistration> = {
       const school = SCHOOL_NAMES[spell.school] ?? spell.school;
       return {
         name: spell.name,
-        href: `/spell/${slugFromCanonicalId(spell.canonicalId)}`,
+        href: referenceToUrl(spell.canonicalId),
         categoryLabel: "Spell",
         metadata: `${level} \u00B7 ${school}`,
         source: spell.source,
@@ -214,7 +213,7 @@ export const CATEGORY_REGISTRY: Record<EntityCategory, CategoryRegistration> = {
       const monster = entity as Monster;
       return {
         name: monster.name,
-        href: `/monster/${slugFromCanonicalId(monster.canonicalId)}`,
+        href: referenceToUrl(monster.canonicalId),
         categoryLabel: "Monster",
         metadata: `CR ${monster.challengeRating} \u00B7 ${formatMonsterType(monster)}`,
         source: monster.source,
@@ -246,7 +245,7 @@ export const CATEGORY_REGISTRY: Record<EntityCategory, CategoryRegistration> = {
       const item = entity as Equipment;
       return {
         name: item.name,
-        href: `/equipment/${slugFromCanonicalId(item.canonicalId)}`,
+        href: referenceToUrl(item.canonicalId),
         categoryLabel: "Equipment",
         metadata: item.type,
         source: item.source,
@@ -266,7 +265,7 @@ export const CATEGORY_REGISTRY: Record<EntityCategory, CategoryRegistration> = {
     buildFilterDefs: (entities) => [sourceFilter(entities)],
     toCardData: (entity) => ({
       name: entity.name,
-      href: `/condition/${slugFromCanonicalId(entity.canonicalId)}`,
+      href: referenceToUrl(entity.canonicalId),
       categoryLabel: "Condition",
       metadata: "",
       source: entity.source,
@@ -284,7 +283,7 @@ export const CATEGORY_REGISTRY: Record<EntityCategory, CategoryRegistration> = {
       const action = entity as Action;
       return {
         name: action.name,
-        href: `/action/${slugFromCanonicalId(action.canonicalId)}`,
+        href: referenceToUrl(action.canonicalId),
         categoryLabel: "Action",
         metadata: action.actionType,
         source: action.source,
@@ -328,7 +327,7 @@ export const CATEGORY_REGISTRY: Record<EntityCategory, CategoryRegistration> = {
       const attunement = magic.requiresAttunement ? " \u00B7 Attunement" : "";
       return {
         name: magic.name,
-        href: `/magicitem/${slugFromCanonicalId(magic.canonicalId)}`,
+        href: referenceToUrl(magic.canonicalId),
         categoryLabel: "Magic Item",
         metadata: `${magic.rarity}${attunement}`,
         source: magic.source,
@@ -375,7 +374,7 @@ export const CATEGORY_REGISTRY: Record<EntityCategory, CategoryRegistration> = {
       const meta = feat.featCategory ? feat.featCategory : "";
       return {
         name: feat.name,
-        href: `/feat/${slugFromCanonicalId(feat.canonicalId)}`,
+        href: referenceToUrl(feat.canonicalId),
         categoryLabel: "Feat",
         metadata: meta,
         source: feat.source,

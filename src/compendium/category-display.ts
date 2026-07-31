@@ -5,8 +5,7 @@ import type {
   MagicItem,
   Feat,
 } from "@/types/compendium";
-import type { EntityCardData } from "@/features/compendium/components/entity-card";
-import type { FilterDefinition } from "@/features/compendium/components/filter-bar";
+import type { EntityCardData, FilterDefinition } from "./types";
 import { CATEGORY_REGISTRY, SOURCE_ORDER } from "./category-registry";
 export type { AnyEntity } from "./category-registry";
 export { SCHOOL_NAMES, formatMonsterType } from "./category-registry";

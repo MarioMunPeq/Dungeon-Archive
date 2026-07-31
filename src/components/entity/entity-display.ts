@@ -13,7 +13,7 @@ import type {
 import {
   getEntity,
   sourcePriority,
-  slugFromCanonicalId,
+  referenceToUrl,
   CATEGORY_REGISTRY,
 } from "@/compendium";
 
@@ -108,7 +108,7 @@ export function createSearchResultItems(
       subtitle:
         versionCount > 1 ? `${display.subtitle} \u00B7 ${versionCount} versions` : display.subtitle,
       source: preferred.entity.source,
-      to: `/${preferred.entry.category}/${slugFromCanonicalId(preferred.entity.canonicalId)}`,
+      to: referenceToUrl(preferred.entity.canonicalId),
       versions:
         versionCount > 1
           ? group.map((g) => ({

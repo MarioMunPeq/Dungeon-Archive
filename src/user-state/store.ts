@@ -67,6 +67,18 @@ function toggleItem(arr: string[], item: string): string[] {
   return [...arr, item];
 }
 
+function mapAdventure(
+  adventures: readonly Adventure[],
+  id: string,
+  update: (adventure: Adventure) => Adventure,
+): Adventure[] | null {
+  const idx = adventures.findIndex((a) => a.id === id);
+  if (idx === -1) return null;
+  const next = [...adventures];
+  next[idx] = update(adventures[idx]!);
+  return next;
+}
+
 let debounceTimer: ReturnType<typeof setTimeout> | null = null;
 
 function schedulePersist(getState: () => UserStore): void {
@@ -184,18 +196,14 @@ export const userStore = create<UserStore>((set, get) => ({
 
   updateAdventure: (id, data) => {
     set((s) => {
-      const idx = s.adventures.findIndex((a) => a.id === id);
-      if (idx === -1) return s;
-      const current = s.adventures[idx]!;
-      const updated: Adventure = {
-        ...current,
-        title: data.title !== undefined ? data.title.trim() || current.title : current.title,
-        description: data.description !== undefined ? data.description.trim() : current.description,
-        notes: data.notes !== undefined ? data.notes.trim() : current.notes,
+      const adventures = mapAdventure(s.adventures, id, (a) => ({
+        ...a,
+        title: data.title !== undefined ? data.title.trim() || a.title : a.title,
+        description: data.description !== undefined ? data.description.trim() : a.description,
+        notes: data.notes !== undefined ? data.notes.trim() : a.notes,
         updatedAt: Date.now(),
-      };
-      const adventures = [...s.adventures];
-      adventures[idx] = updated;
+      }));
+      if (!adventures) return s;
       return { adventures, adventureEntitySet: updateActiveAdventureSet(adventures, s.activeAdventureId) };
     });
     schedulePersist(get);
@@ -205,16 +213,12 @@ export const userStore = create<UserStore>((set, get) => ({
     const trimmed = objective.trim();
     if (!trimmed) return;
     set((s) => {
-      const idx = s.adventures.findIndex((a) => a.id === adventureId);
-      if (idx === -1) return s;
-      const current = s.adventures[idx]!;
-      const updated: Adventure = {
-        ...current,
-        objectives: [...current.objectives, trimmed],
+      const adventures = mapAdventure(s.adventures, adventureId, (a) => ({
+        ...a,
+        objectives: [...a.objectives, trimmed],
         updatedAt: Date.now(),
-      };
-      const adventures = [...s.adventures];
-      adventures[idx] = updated;
+      }));
+      if (!adventures) return s;
       return { adventures };
     });
     schedulePersist(get);
@@ -222,19 +226,13 @@ export const userStore = create<UserStore>((set, get) => ({
 
   removeObjective: (adventureId, index) => {
     set((s) => {
-      const idx = s.adventures.findIndex((a) => a.id === adventureId);
-      if (idx === -1) return s;
-      const current = s.adventures[idx]!;
-      const copy = [...current.objectives];
-      if (index < 0 || index >= copy.length) return s;
-      copy.splice(index, 1);
-      const updated: Adventure = {
-        ...current,
-        objectives: copy,
-        updatedAt: Date.now(),
-      };
-      const adventures = [...s.adventures];
-      adventures[idx] = updated;
+      const adventures = mapAdventure(s.adventures, adventureId, (a) => {
+        const copy = [...a.objectives];
+        if (index < 0 || index >= copy.length) return a;
+        copy.splice(index, 1);
+        return { ...a, objectives: copy, updatedAt: Date.now() };
+      });
+      if (!adventures) return s;
       return { adventures };
     });
     schedulePersist(get);
@@ -265,28 +263,19 @@ export const userStore = create<UserStore>((set, get) => ({
         };
       }
 
-      const idx = adventures.findIndex((a) => a.id === activeAdventureId);
-      if (idx === -1) return s;
-      const adventure = adventures[idx]!;
-      const entityIdx = adventure.entities.indexOf(canonicalId);
-      let newEntities: string[];
-      if (entityIdx !== -1) {
-        newEntities = [...adventure.entities];
-        newEntities.splice(entityIdx, 1);
-      } else {
-        newEntities = [...adventure.entities, canonicalId];
-      }
-      const updated: Adventure = {
-        ...adventure,
-        entities: newEntities,
-        updatedAt: Date.now(),
-      };
-      const newAdventures = [...adventures];
-      newAdventures[idx] = updated;
-
+      const next = mapAdventure(adventures, activeAdventureId, (a) => {
+        const entityIdx = a.entities.indexOf(canonicalId);
+        const entities =
+          entityIdx !== -1
+            ? a.entities.filter((_, i) => i !== entityIdx)
+            : [...a.entities, canonicalId];
+        return { ...a, entities, updatedAt: Date.now() };
+      });
+      if (!next) return s;
+      const active = next.find((a) => a.id === activeAdventureId)!;
       return {
-        adventures: newAdventures,
-        adventureEntitySet: new Set(newEntities),
+        adventures: next,
+        adventureEntitySet: new Set(active.entities),
       };
     });
     schedulePersist(get);
@@ -295,16 +284,12 @@ export const userStore = create<UserStore>((set, get) => ({
   clearAdventureEntities: () => {
     set((s) => {
       if (!s.activeAdventureId) return s;
-      const idx = s.adventures.findIndex((a) => a.id === s.activeAdventureId);
-      if (idx === -1) return s;
-      const current = s.adventures[idx]!;
-      const updated: Adventure = {
-        ...current,
+      const adventures = mapAdventure(s.adventures, s.activeAdventureId, (a) => ({
+        ...a,
         entities: [],
         updatedAt: Date.now(),
-      };
-      const adventures = [...s.adventures];
-      adventures[idx] = updated;
+      }));
+      if (!adventures) return s;
       return { adventures, adventureEntitySet: new Set<string>() };
     });
     schedulePersist(get);
@@ -312,12 +297,12 @@ export const userStore = create<UserStore>((set, get) => ({
 
   archiveAdventure: (id) => {
     set((s) => {
-      const idx = s.adventures.findIndex((a) => a.id === id);
-      if (idx === -1) return s;
-      const current = s.adventures[idx]!;
-      const updated: Adventure = { ...current, archived: true, updatedAt: Date.now() };
-      const adventures = [...s.adventures];
-      adventures[idx] = updated;
+      const adventures = mapAdventure(s.adventures, id, (a) => ({
+        ...a,
+        archived: true,
+        updatedAt: Date.now(),
+      }));
+      if (!adventures) return s;
       return {
         adventures,
         activeAdventureId: s.activeAdventureId === id ? null : s.activeAdventureId,
@@ -329,12 +314,12 @@ export const userStore = create<UserStore>((set, get) => ({
 
   restoreAdventure: (id) => {
     set((s) => {
-      const idx = s.adventures.findIndex((a) => a.id === id);
-      if (idx === -1) return s;
-      const current = s.adventures[idx]!;
-      const updated: Adventure = { ...current, archived: false, updatedAt: Date.now() };
-      const adventures = [...s.adventures];
-      adventures[idx] = updated;
+      const adventures = mapAdventure(s.adventures, id, (a) => ({
+        ...a,
+        archived: false,
+        updatedAt: Date.now(),
+      }));
+      if (!adventures) return s;
       return { adventures };
     });
     schedulePersist(get);
@@ -403,27 +388,25 @@ export const userStore = create<UserStore>((set, get) => ({
     if (!title) return null;
     let sceneId: string | null = null;
     set((s) => {
-      const idx = s.adventures.findIndex((a) => a.id === adventureId);
-      if (idx === -1) return s;
-      const current = s.adventures[idx]!;
-      const id = generateId();
-      sceneId = id;
-      const updated: Adventure = {
-        ...current,
-        scenes: [
-          ...current.scenes,
-          {
-            id,
-            title,
-            description: data.description?.trim() || undefined,
-            note: data.note?.trim() || undefined,
-            entities: [],
-          },
-        ],
-        updatedAt: Date.now(),
-      };
-      const adventures = [...s.adventures];
-      adventures[idx] = updated;
+      const adventures = mapAdventure(s.adventures, adventureId, (a) => {
+        const id = generateId();
+        sceneId = id;
+        return {
+          ...a,
+          scenes: [
+            ...a.scenes,
+            {
+              id,
+              title,
+              description: data.description?.trim() || undefined,
+              note: data.note?.trim() || undefined,
+              entities: [],
+            },
+          ],
+          updatedAt: Date.now(),
+        };
+      });
+      if (!adventures) return s;
       return { adventures };
     });
     schedulePersist(get);
@@ -432,23 +415,20 @@ export const userStore = create<UserStore>((set, get) => ({
 
   updateScene: (adventureId, sceneId, data) => {
     set((s) => {
-      const idx = s.adventures.findIndex((a) => a.id === adventureId);
-      if (idx === -1) return s;
-      const current = s.adventures[idx]!;
-      const sceneIdx = current.scenes.findIndex((sc) => sc.id === sceneId);
-      if (sceneIdx === -1) return s;
-      const existing = current.scenes[sceneIdx]!;
-      const updatedScene = {
-        ...existing,
-        title: data.title !== undefined ? data.title.trim() || existing.title : existing.title,
-        description: data.description !== undefined ? data.description.trim() || undefined : existing.description,
-        note: data.note !== undefined ? data.note.trim() || undefined : existing.note,
-      };
-      const scenes = [...current.scenes];
-      scenes[sceneIdx] = updatedScene;
-      const updated: Adventure = { ...current, scenes, updatedAt: Date.now() };
-      const adventures = [...s.adventures];
-      adventures[idx] = updated;
+      const adventures = mapAdventure(s.adventures, adventureId, (a) => {
+        const sceneIdx = a.scenes.findIndex((sc) => sc.id === sceneId);
+        if (sceneIdx === -1) return a;
+        const existing = a.scenes[sceneIdx]!;
+        const scenes = [...a.scenes];
+        scenes[sceneIdx] = {
+          ...existing,
+          title: data.title !== undefined ? data.title.trim() || existing.title : existing.title,
+          description: data.description !== undefined ? data.description.trim() || undefined : existing.description,
+          note: data.note !== undefined ? data.note.trim() || undefined : existing.note,
+        };
+        return { ...a, scenes, updatedAt: Date.now() };
+      });
+      if (!adventures) return s;
       return { adventures };
     });
     schedulePersist(get);
@@ -456,16 +436,12 @@ export const userStore = create<UserStore>((set, get) => ({
 
   removeScene: (adventureId, sceneId) => {
     set((s) => {
-      const idx = s.adventures.findIndex((a) => a.id === adventureId);
-      if (idx === -1) return s;
-      const current = s.adventures[idx]!;
-      const updated: Adventure = {
-        ...current,
-        scenes: current.scenes.filter((sc) => sc.id !== sceneId),
+      const adventures = mapAdventure(s.adventures, adventureId, (a) => ({
+        ...a,
+        scenes: a.scenes.filter((sc) => sc.id !== sceneId),
         updatedAt: Date.now(),
-      };
-      const adventures = [...s.adventures];
-      adventures[idx] = updated;
+      }));
+      if (!adventures) return s;
       return { adventures };
     });
     schedulePersist(get);
@@ -473,25 +449,20 @@ export const userStore = create<UserStore>((set, get) => ({
 
   toggleSceneEntity: (adventureId, sceneId, canonicalId) => {
     set((s) => {
-      const idx = s.adventures.findIndex((a) => a.id === adventureId);
-      if (idx === -1) return s;
-      const current = s.adventures[idx]!;
-      const sceneIdx = current.scenes.findIndex((sc) => sc.id === sceneId);
-      if (sceneIdx === -1) return s;
-      const scene = current.scenes[sceneIdx]!;
-      const entityIdx = scene.entities.indexOf(canonicalId);
-      let entities: string[];
-      if (entityIdx !== -1) {
-        entities = [...scene.entities];
-        entities.splice(entityIdx, 1);
-      } else {
-        entities = [...scene.entities, canonicalId];
-      }
-      const scenes = [...current.scenes];
-      scenes[sceneIdx] = { ...scene, entities };
-      const updated: Adventure = { ...current, scenes, updatedAt: Date.now() };
-      const adventures = [...s.adventures];
-      adventures[idx] = updated;
+      const adventures = mapAdventure(s.adventures, adventureId, (a) => {
+        const sceneIdx = a.scenes.findIndex((sc) => sc.id === sceneId);
+        if (sceneIdx === -1) return a;
+        const scene = a.scenes[sceneIdx]!;
+        const entityIdx = scene.entities.indexOf(canonicalId);
+        const entities =
+          entityIdx !== -1
+            ? scene.entities.filter((_, i) => i !== entityIdx)
+            : [...scene.entities, canonicalId];
+        const scenes = [...a.scenes];
+        scenes[sceneIdx] = { ...scene, entities };
+        return { ...a, scenes, updatedAt: Date.now() };
+      });
+      if (!adventures) return s;
       return { adventures };
     });
     schedulePersist(get);

@@ -15,7 +15,7 @@ import { RelatedEntities } from "@/features/compendium/components/related-entiti
 import { FavoriteButton } from "@/components/ui/FavoriteButton";
 import { SessionButton } from "@/components/ui/SessionButton";
 import { AdventureButton } from "@/components/ui/AdventureButton";
-import { SceneButton } from "@/components/ui/SceneButton";
+import { SceneButton } from "@/features/adventure/SceneButton";
 import { userStore } from "@/user-state";
 
 interface CompendiumPageProps {

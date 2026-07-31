@@ -1,18 +1,10 @@
 import { memo } from "react";
 import { Link } from "react-router-dom";
 import { formatSource } from "@/compendium";
+import type { EntityCardData } from "@/compendium";
 import { FavoriteButton } from "@/components/ui/FavoriteButton";
 import { SessionButton } from "@/components/ui/SessionButton";
 import { AdventureButton } from "@/components/ui/AdventureButton";
-
-export interface EntityCardData {
-  readonly name: string;
-  readonly href: string;
-  readonly categoryLabel: string;
-  readonly metadata: string;
-  readonly source: string;
-  readonly canonicalId: string;
-}
 
 export const EntityCard = memo(function EntityCard({ name, href, categoryLabel, metadata, source, canonicalId }: EntityCardData) {
   return (

@@ -76,3 +76,5 @@ export type {
 } from "@/types/compendium";
 
 export type { ContentBlock } from "@/types/content-block";
+
+export type { EntityCardData, FilterOption, FilterDefinition } from "./types";

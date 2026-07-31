@@ -1,15 +1,5 @@
 import type { ChangeEvent } from "react";
-
-export interface FilterOption {
-  readonly value: string;
-  readonly label: string;
-}
-
-export interface FilterDefinition {
-  readonly key: string;
-  readonly label: string;
-  readonly options: readonly FilterOption[];
-}
+import type { FilterDefinition } from "@/compendium";
 
 interface FilterBarProps {
   readonly filters: readonly FilterDefinition[];
