@@ -1,17 +1,11 @@
 import { useState, useCallback, useMemo, type FormEvent, type ReactNode } from "react";
-import { Link } from "react-router-dom";
 import { usePartyMembers, userStore } from "@/user-state";
 import type { PartyMember } from "@/user-state";
-import {
-  getEntity,
-  getEntitiesForCategory,
-  slugFromCanonicalId,
-  CATEGORY_REGISTRY,
-  SCHOOL_NAMES,
-} from "@/compendium";
-import type { EntityCategory, Equipment, Spell, MagicItem } from "@/compendium";
-import { ReferencePicker } from "./reference-picker";
-import type { PickerCandidate } from "./reference-picker";
+import { getEntity, getEntitiesForCategory, slugFromCanonicalId, SCHOOL_NAMES } from "@/compendium";
+import type { Equipment, Spell, MagicItem } from "@/compendium";
+import { entityRefFromCanonicalId, EntityReferenceRow, RowRemoveButton } from "@/components/entity";
+import { ReferencePicker } from "@/components/ui/ReferencePicker";
+import type { PickerCandidate } from "@/components/ui/ReferencePicker";
 
 type PickerKind = "spell" | "armor" | "weapon" | "magicitem";
 
@@ -105,34 +99,10 @@ const EMPTY_DRAFT: MemberDraft = {
 const inputClass =
   "w-full rounded-lg border border-border bg-background px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary";
 
-function idFromCanonical(canonicalId: string): { category: EntityCategory; id: string } | null {
-  const dot = canonicalId.indexOf(".");
-  if (dot === -1) return null;
-  return {
-    category: canonicalId.substring(0, dot) as EntityCategory,
-    id: canonicalId.substring(dot + 1),
-  };
-}
-
-function entityRef(canonicalId: string): { name: string; href: string; subtitle: string } | null {
-  const parts = idFromCanonical(canonicalId);
-  if (!parts) return null;
-  const entity = getEntity(parts.category, parts.id);
-  if (!entity) return null;
-  return {
-    name: entity.name,
-    href: `/${parts.category}/${slugFromCanonicalId(canonicalId)}`,
-    subtitle: CATEGORY_REGISTRY[parts.category].getSubtitle(entity),
-  };
-}
-
 function armorLabel(armorId: string | undefined): string | null {
-  if (!armorId) return null;
-  const parts = idFromCanonical(armorId);
-  if (!parts || parts.category !== "equipment") return null;
-  const entity = getEntity("equipment", parts.id);
-  if (!entity) return null;
-  const item = entity as Equipment;
+  if (!armorId || !armorId.startsWith("equipment.")) return null;
+  const item = getEntity("equipment", slugFromCanonicalId(armorId)) as Equipment | undefined;
+  if (!item) return null;
   return item.ac !== undefined ? `${item.type} \u00B7 AC ${item.ac}` : item.type;
 }
 
@@ -208,26 +178,17 @@ function SectionTitle({ children }: { children: ReactNode }) {
 }
 
 function RefRow({ canonicalId, onRemove }: { canonicalId: string; onRemove: (id: string) => void }) {
-  const ref = entityRef(canonicalId);
+  const ref = entityRefFromCanonicalId(canonicalId);
   if (!ref) return null;
   return (
-    <div className="flex items-center gap-3 border-b border-border py-2">
-      <Link to={ref.href} className="min-w-0 flex-1">
-        <p className="truncate text-sm font-medium text-foreground">{ref.name}</p>
-        <p className="truncate text-xs text-muted-foreground">{ref.subtitle}</p>
-      </Link>
-      <button
-        type="button"
-        onClick={() => onRemove(canonicalId)}
-        aria-label={`Remove ${ref.name}`}
-        className="hitbox-expand inline-flex h-8 w-8 items-center justify-center rounded text-muted-foreground transition-all duration-150 hover:bg-accent hover:text-foreground active:scale-90 active:bg-accent/80"
-      >
-        <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} className="h-4 w-4">
-          <line x1="18" y1="6" x2="6" y2="18" />
-          <line x1="6" y1="6" x2="18" y2="18" />
-        </svg>
-      </button>
-    </div>
+    <EntityReferenceRow
+      canonicalId={canonicalId}
+      subtitle={ref.subtitle}
+      showBadge={false}
+      asLink={false}
+      className="border-b border-border py-2"
+      action={<RowRemoveButton label={`Remove ${ref.name}`} onClick={() => onRemove(canonicalId)} />}
+    />
   );
 }
 
@@ -506,28 +467,23 @@ export function PartyPage() {
           <section className="flex flex-col gap-3">
             <SectionTitle>Armor</SectionTitle>
             {draft.equippedArmorCanonicalId ? (() => {
-              const ref = entityRef(draft.equippedArmorCanonicalId);
+              const armorId = draft.equippedArmorCanonicalId;
+              const ref = entityRefFromCanonicalId(armorId);
               if (!ref) return <p className="text-xs text-muted-foreground">None</p>;
               return (
-                <div className="flex items-center gap-3 rounded-lg border border-border p-3">
-                  <Link to={ref.href} className="min-w-0 flex-1">
-                    <p className="truncate text-sm font-medium text-foreground">{ref.name}</p>
-                    <p className="truncate text-xs text-muted-foreground">
-                      {armorLabel(draft.equippedArmorCanonicalId) ?? ref.subtitle}
-                    </p>
-                  </Link>
-                  <button
-                    type="button"
-                    onClick={() => setDraft((d) => ({ ...d, equippedArmorCanonicalId: undefined }))}
-                    aria-label={`Remove ${ref.name}`}
-                    className="hitbox-expand inline-flex h-8 w-8 items-center justify-center rounded text-muted-foreground transition-all duration-150 hover:bg-accent hover:text-foreground active:scale-90 active:bg-accent/80"
-                  >
-                    <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} className="h-4 w-4">
-                      <line x1="18" y1="6" x2="6" y2="18" />
-                      <line x1="6" y1="6" x2="18" y2="18" />
-                    </svg>
-                  </button>
-                </div>
+                <EntityReferenceRow
+                  canonicalId={armorId}
+                  subtitle={armorLabel(armorId) ?? ref.subtitle}
+                  showBadge={false}
+                  asLink={false}
+                  className="rounded-lg border border-border p-3"
+                  action={
+                    <RowRemoveButton
+                      label={`Remove ${ref.name}`}
+                      onClick={() => setDraft((d) => ({ ...d, equippedArmorCanonicalId: undefined }))}
+                    />
+                  }
+                />
               );
             })() : (
               <p className="text-xs text-muted-foreground">None</p>

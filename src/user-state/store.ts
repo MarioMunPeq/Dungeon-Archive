@@ -24,6 +24,13 @@ interface PartyActions {
   removePartyMember: (id: string) => void;
 }
 
+interface SceneActions {
+  addScene: (adventureId: string, data: { title: string; description?: string; note?: string }) => string | null;
+  updateScene: (adventureId: string, sceneId: string, data: { title?: string; description?: string; note?: string }) => void;
+  removeScene: (adventureId: string, sceneId: string) => void;
+  toggleSceneEntity: (adventureId: string, sceneId: string, canonicalId: string) => void;
+}
+
 interface UserActions {
   toggleFavorite: (canonicalId: string) => void;
   addRecentEntity: (canonicalId: string) => void;
@@ -36,7 +43,7 @@ interface UserActions {
   _reset: () => void;
 }
 
-export type UserStore = UserState & UserActions & AdventureActions & PartyActions & {
+export type UserStore = UserState & UserActions & AdventureActions & PartyActions & SceneActions & {
   favoritesSet: Set<string>;
   sessionSet: Set<string>;
   adventureEntitySet: Set<string>;
@@ -161,6 +168,7 @@ export const userStore = create<UserStore>((set, get) => ({
         objectives: [],
         notes: "",
         entities: [],
+        scenes: [],
         createdAt: Date.now(),
         updatedAt: Date.now(),
         archived: false,
@@ -245,6 +253,7 @@ export const userStore = create<UserStore>((set, get) => ({
           objectives: [],
           notes: "",
           entities: [canonicalId],
+          scenes: [],
           createdAt: Date.now(),
           updatedAt: Date.now(),
           archived: false,
@@ -389,6 +398,105 @@ export const userStore = create<UserStore>((set, get) => ({
     schedulePersist(get);
   },
 
+  addScene: (adventureId, data) => {
+    const title = data.title.trim();
+    if (!title) return null;
+    let sceneId: string | null = null;
+    set((s) => {
+      const idx = s.adventures.findIndex((a) => a.id === adventureId);
+      if (idx === -1) return s;
+      const current = s.adventures[idx]!;
+      const id = generateId();
+      sceneId = id;
+      const updated: Adventure = {
+        ...current,
+        scenes: [
+          ...current.scenes,
+          {
+            id,
+            title,
+            description: data.description?.trim() || undefined,
+            note: data.note?.trim() || undefined,
+            entities: [],
+          },
+        ],
+        updatedAt: Date.now(),
+      };
+      const adventures = [...s.adventures];
+      adventures[idx] = updated;
+      return { adventures };
+    });
+    schedulePersist(get);
+    return sceneId;
+  },
+
+  updateScene: (adventureId, sceneId, data) => {
+    set((s) => {
+      const idx = s.adventures.findIndex((a) => a.id === adventureId);
+      if (idx === -1) return s;
+      const current = s.adventures[idx]!;
+      const sceneIdx = current.scenes.findIndex((sc) => sc.id === sceneId);
+      if (sceneIdx === -1) return s;
+      const existing = current.scenes[sceneIdx]!;
+      const updatedScene = {
+        ...existing,
+        title: data.title !== undefined ? data.title.trim() || existing.title : existing.title,
+        description: data.description !== undefined ? data.description.trim() || undefined : existing.description,
+        note: data.note !== undefined ? data.note.trim() || undefined : existing.note,
+      };
+      const scenes = [...current.scenes];
+      scenes[sceneIdx] = updatedScene;
+      const updated: Adventure = { ...current, scenes, updatedAt: Date.now() };
+      const adventures = [...s.adventures];
+      adventures[idx] = updated;
+      return { adventures };
+    });
+    schedulePersist(get);
+  },
+
+  removeScene: (adventureId, sceneId) => {
+    set((s) => {
+      const idx = s.adventures.findIndex((a) => a.id === adventureId);
+      if (idx === -1) return s;
+      const current = s.adventures[idx]!;
+      const updated: Adventure = {
+        ...current,
+        scenes: current.scenes.filter((sc) => sc.id !== sceneId),
+        updatedAt: Date.now(),
+      };
+      const adventures = [...s.adventures];
+      adventures[idx] = updated;
+      return { adventures };
+    });
+    schedulePersist(get);
+  },
+
+  toggleSceneEntity: (adventureId, sceneId, canonicalId) => {
+    set((s) => {
+      const idx = s.adventures.findIndex((a) => a.id === adventureId);
+      if (idx === -1) return s;
+      const current = s.adventures[idx]!;
+      const sceneIdx = current.scenes.findIndex((sc) => sc.id === sceneId);
+      if (sceneIdx === -1) return s;
+      const scene = current.scenes[sceneIdx]!;
+      const entityIdx = scene.entities.indexOf(canonicalId);
+      let entities: string[];
+      if (entityIdx !== -1) {
+        entities = [...scene.entities];
+        entities.splice(entityIdx, 1);
+      } else {
+        entities = [...scene.entities, canonicalId];
+      }
+      const scenes = [...current.scenes];
+      scenes[sceneIdx] = { ...scene, entities };
+      const updated: Adventure = { ...current, scenes, updatedAt: Date.now() };
+      const adventures = [...s.adventures];
+      adventures[idx] = updated;
+      return { adventures };
+    });
+    schedulePersist(get);
+  },
+
   _replace: (state) => {
     set({
       version: state.version,
@@ -495,7 +603,13 @@ function adventuresEqual(a: Adventure[], b: Adventure[]): boolean {
   for (let i = 0; i < a.length; i++) {
     const aa = a[i]!;
     const bb = b[i]!;
-    if (aa.id !== bb.id || aa.title !== bb.title || aa.updatedAt !== bb.updatedAt || aa.entities.length !== bb.entities.length) {
+    if (
+      aa.id !== bb.id ||
+      aa.title !== bb.title ||
+      aa.updatedAt !== bb.updatedAt ||
+      aa.entities.length !== bb.entities.length ||
+      aa.scenes.length !== bb.scenes.length
+    ) {
       return false;
     }
   }

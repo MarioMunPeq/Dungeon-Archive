@@ -19,6 +19,14 @@ export interface PartyMember {
   readonly equippedMagicItemCanonicalIds: string[];
 }
 
+export interface AdventureScene {
+  readonly id: string;
+  readonly title: string;
+  readonly description?: string;
+  readonly note?: string;
+  readonly entities: string[];
+}
+
 export interface Adventure {
   readonly id: string;
   readonly title: string;
@@ -26,6 +34,7 @@ export interface Adventure {
   readonly objectives: string[];
   readonly notes: string;
   readonly entities: string[];
+  readonly scenes: AdventureScene[];
   readonly createdAt: number;
   readonly updatedAt: number;
   readonly archived: boolean;
@@ -43,7 +52,7 @@ export interface UserState {
 }
 
 export const STORAGE_KEY = "dungeon:userState:v1";
-export const CURRENT_VERSION = 4;
+export const CURRENT_VERSION = 5;
 
 export function createDefaultState(): UserState {
   return {

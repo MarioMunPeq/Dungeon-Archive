@@ -57,7 +57,7 @@ const { migrate } = await import("../../src/user-state/migrations");
 const { read, write } = await import("../../src/user-state/persistence");
 const { loadCompendium } = await import("../../src/compendium/loader");
 const { hydrate, userStore } = await import("../../src/user-state/store");
-import type { Adventure, PartyMember, UserState } from "../../src/user-state/types";
+import type { Adventure, AdventureScene, PartyMember, UserState } from "../../src/user-state/types";
 const { normalize, validateIds } = await import("../../src/user-state/normalize");
 const { getEntity, getSpells, getEquipmentList, getMagicItems } = await import("../../src/compendium/repository");
 
@@ -77,11 +77,11 @@ test("STORAGE_KEY equals dungeon:userState:v1", () => {
   strictEqual(STORAGE_KEY, "dungeon:userState:v1");
 });
 
-test("CURRENT_VERSION equals 4", () => {
-  strictEqual(CURRENT_VERSION, 4);
+test("CURRENT_VERSION equals 5", () => {
+  strictEqual(CURRENT_VERSION, 5);
 });
 
-test("createDefaultState returns valid v4 state", () => {
+test("createDefaultState returns valid v5 state", () => {
   const def = createDefaultState();
   strictEqual(def.version, CURRENT_VERSION);
   deepStrictEqual(def.favorites, []);
@@ -191,6 +191,61 @@ test("migrations.migrate() converts legacy (no version) to current version", () 
   const result = migrate(input);
   strictEqual(result.version, CURRENT_VERSION);
   deepStrictEqual(result.favorites, ["x"]);
+});
+
+test("migrations.migrate() upgrades v4 adventures with an empty scenes array", () => {
+  const input = {
+    version: 4,
+    favorites: [],
+    recentEntities: [],
+    recentSearches: [],
+    session: [],
+    adventures: [{
+      id: "adv-1",
+      title: "Legacy",
+      description: "",
+      objectives: [],
+      notes: "",
+      entities: [],
+      createdAt: 1000,
+      updatedAt: 2000,
+      archived: false,
+    }],
+    activeAdventureId: "adv-1",
+    party: [],
+  };
+  const result = migrate(input);
+  strictEqual(result.version, CURRENT_VERSION);
+  strictEqual(result.adventures.length, 1);
+  deepStrictEqual(result.adventures[0]!.scenes, []);
+});
+
+test("migrations.migrate() preserves existing scenes at v5", () => {
+  const input = {
+    version: 5,
+    favorites: [],
+    recentEntities: [],
+    recentSearches: [],
+    session: [],
+    adventures: [{
+      id: "adv-1",
+      title: "Current",
+      description: "",
+      objectives: [],
+      notes: "",
+      entities: [],
+      scenes: [{ id: "sc-1", title: "Tavern", description: "Intro", note: "Hook", entities: ["spell.fireball"] }],
+      createdAt: 1000,
+      updatedAt: 2000,
+      archived: false,
+    }],
+    activeAdventureId: "adv-1",
+    party: [],
+  };
+  const result = migrate(input);
+  strictEqual(result.adventures[0]!.scenes.length, 1);
+  strictEqual(result.adventures[0]!.scenes[0]!.title, "Tavern");
+  deepStrictEqual(result.adventures[0]!.scenes[0]!.entities, ["spell.fireball"]);
 });
 
 // ---------------------------------------------------------------------------
@@ -1431,6 +1486,7 @@ test("adventureSet rebuilt on _replace", () => {
       objectives: [],
       notes: "",
       entities: ["x", "y"],
+      scenes: [],
       createdAt: Date.now(),
       updatedAt: Date.now(),
       archived: false,
@@ -1491,6 +1547,7 @@ test("normalize trims adventure title and description", () => {
       objectives: [],
       notes: "  Notes  ",
       entities: [],
+      scenes: [],
       createdAt: 1000,
       updatedAt: 2000,
       archived: false,
@@ -1516,6 +1573,7 @@ test("normalize deduplicates adventure objectives", () => {
       objectives: ["a", "a", "b", "c", "b"],
       notes: "",
       entities: [],
+      scenes: [],
       createdAt: 1000,
       updatedAt: 2000,
       archived: false,
@@ -1539,6 +1597,7 @@ test("normalize removes empty objective strings", () => {
       objectives: ["a", "", "b", "  "],
       notes: "",
       entities: [],
+      scenes: [],
       createdAt: 1000,
       updatedAt: 2000,
       archived: false,
@@ -1562,6 +1621,7 @@ test("normalize removes stale entity IDs from adventures", () => {
       objectives: [],
       notes: "",
       entities: ["spell.fireball", "nonexistent.entity"],
+      scenes: [],
       createdAt: 1000,
       updatedAt: 2000,
       archived: false,
@@ -1595,6 +1655,7 @@ test("normalize enforces max 20 adventures", () => {
       objectives: [],
       notes: "",
       entities: [],
+      scenes: [],
       createdAt: 1000,
       updatedAt: 1000 + i,
       archived: false,
@@ -1635,6 +1696,7 @@ test("hydrate() loads adventures from persisted state", () => {
       objectives: ["Goal 1"],
       notes: "Notes here",
       entities: ["spell.fireball"],
+      scenes: [],
       createdAt: 1000,
       updatedAt: 2000,
       archived: false,
@@ -1695,6 +1757,7 @@ test("hydrate() with duplicate adventures removes duplicates via normalize", () 
       objectives: ["a", "a", "b"],
       notes: "",
       entities: ["spell.fireball", "spell.fireball"],
+      scenes: [],
       createdAt: 1000,
       updatedAt: 2000,
       archived: false,
@@ -1729,6 +1792,7 @@ test("_replace updates adventures when content differs", () => {
       objectives: [],
       notes: "",
       entities: ["spell.fireball"],
+      scenes: [],
       createdAt: 1000,
       updatedAt: 2000,
       archived: false,
@@ -1758,6 +1822,7 @@ test("adventuresEqual prevents unnecessary _replace on identical state", () => {
       objectives: [],
       notes: "",
       entities: ["x"],
+      scenes: [],
       createdAt: 1000,
       updatedAt: 2000,
       archived: false,
@@ -2266,6 +2331,342 @@ test("normalize handles non-array party gracefully", () => {
     party: "not-an-array" as unknown as PartyMember[],
   });
   deepStrictEqual(result.party, []);
+});
+
+// ---------------------------------------------------------------------------
+// Scenes
+// ---------------------------------------------------------------------------
+console.log("\nuser-state \u2014 scenes\n");
+
+test("addScene adds a scene to the adventure", () => {
+  resetMock();
+  resetStore();
+  const s = userStore.getState();
+  s.createAdventure({ title: "Test" });
+  const advId = userStore.getState().activeAdventureId!;
+  const sceneId = s.addScene(advId, { title: "Arrival at the Village" });
+  ok(sceneId, "returns a scene id");
+  const adventure = userStore.getState().adventures[0]!;
+  strictEqual(adventure.scenes.length, 1);
+  strictEqual(adventure.scenes[0]!.title, "Arrival at the Village");
+  deepStrictEqual(adventure.scenes[0]!.entities, []);
+  ok(adventure.scenes[0]!.id.length > 0);
+});
+
+test("addScene trims the title and rejects empty titles", () => {
+  resetMock();
+  resetStore();
+  const s = userStore.getState();
+  s.createAdventure({ title: "Test" });
+  const advId = userStore.getState().activeAdventureId!;
+  s.addScene(advId, { title: "  Tavern Investigation  " });
+  strictEqual(userStore.getState().adventures[0]!.scenes[0]!.title, "Tavern Investigation");
+  const emptyId = s.addScene(advId, { title: "   " });
+  strictEqual(emptyId, null);
+  strictEqual(userStore.getState().adventures[0]!.scenes.length, 1);
+});
+
+test("updateScene edits title, description, and note", () => {
+  resetMock();
+  resetStore();
+  const s = userStore.getState();
+  s.createAdventure({ title: "Test" });
+  const advId = userStore.getState().activeAdventureId!;
+  const sceneId = s.addScene(advId, { title: "Tavern" })!;
+  s.updateScene(advId, sceneId, { title: "  The Weeping Boar  ", description: "  Talk to the barkeep  ", note: "  Reveal after they help  " });
+  const scene = userStore.getState().adventures[0]!.scenes[0]!;
+  strictEqual(scene.title, "The Weeping Boar");
+  strictEqual(scene.description, "Talk to the barkeep");
+  strictEqual(scene.note, "Reveal after they help");
+});
+
+test("updateScene converts empty optional strings to undefined and keeps title", () => {
+  resetMock();
+  resetStore();
+  const s = userStore.getState();
+  s.createAdventure({ title: "Test" });
+  const advId = userStore.getState().activeAdventureId!;
+  const sceneId = s.addScene(advId, { title: "Tavern", description: "Desc", note: "Note" })!;
+  s.updateScene(advId, sceneId, { title: "  ", description: "  ", note: "" });
+  const scene = userStore.getState().adventures[0]!.scenes[0]!;
+  strictEqual(scene.title, "Tavern");
+  strictEqual(scene.description, undefined);
+  strictEqual(scene.note, undefined);
+});
+
+test("removeScene removes the scene", () => {
+  resetMock();
+  resetStore();
+  const s = userStore.getState();
+  s.createAdventure({ title: "Test" });
+  const advId = userStore.getState().activeAdventureId!;
+  const a = s.addScene(advId, { title: "Tavern" })!;
+  const b = s.addScene(advId, { title: "Bandit Ambush" })!;
+  s.removeScene(advId, a);
+  const scenes = userStore.getState().adventures[0]!.scenes;
+  strictEqual(scenes.length, 1);
+  strictEqual(scenes[0]!.id, b);
+});
+
+test("toggleSceneEntity adds and removes a reference", () => {
+  resetMock();
+  resetStore();
+  const s = userStore.getState();
+  s.createAdventure({ title: "Test" });
+  const advId = userStore.getState().activeAdventureId!;
+  const sceneId = s.addScene(advId, { title: "Tavern" })!;
+  s.toggleSceneEntity(advId, sceneId, "spell.fireball");
+  deepStrictEqual(userStore.getState().adventures[0]!.scenes[0]!.entities, ["spell.fireball"]);
+  s.toggleSceneEntity(advId, sceneId, "spell.fireball");
+  deepStrictEqual(userStore.getState().adventures[0]!.scenes[0]!.entities, []);
+});
+
+test("scene actions ignore unknown adventure or scene ids", () => {
+  resetMock();
+  resetStore();
+  const s = userStore.getState();
+  s.createAdventure({ title: "Test" });
+  const advId = userStore.getState().activeAdventureId!;
+  const sceneId = s.addScene(advId, { title: "Tavern" })!;
+  strictEqual(s.addScene("nope", { title: "X" }), null);
+  s.updateScene("nope", sceneId, { title: "Y" });
+  s.updateScene(advId, "nope", { title: "Y" });
+  s.removeScene(advId, "nope");
+  s.toggleSceneEntity(advId, "nope", "spell.fireball");
+  s.toggleSceneEntity("nope", sceneId, "spell.fireball");
+  const adventure = userStore.getState().adventures[0]!;
+  strictEqual(adventure.scenes.length, 1);
+  strictEqual(adventure.scenes[0]!.title, "Tavern");
+  deepStrictEqual(adventure.scenes[0]!.entities, []);
+});
+
+test("normalize trims scene title, description, and note", () => {
+  const result = normalize({
+    version: CURRENT_VERSION,
+    favorites: [],
+    recentEntities: [],
+    recentSearches: [],
+    session: [],
+    adventures: [{
+      id: "adv-1",
+      title: "Test",
+      description: "",
+      objectives: [],
+      notes: "",
+      entities: [],
+      scenes: [{ id: "sc-1", title: "  Tavern  ", description: "  Desc  ", note: "  Note  ", entities: [] }],
+      createdAt: 1000,
+      updatedAt: 2000,
+      archived: false,
+    }],
+    activeAdventureId: null,
+  });
+  const scene = result.adventures[0]!.scenes[0]!;
+  strictEqual(scene.title, "Tavern");
+  strictEqual(scene.description, "Desc");
+  strictEqual(scene.note, "Note");
+});
+
+test("normalize drops invalid scenes and empty titles", () => {
+  const result = normalize({
+    version: CURRENT_VERSION,
+    favorites: [],
+    recentEntities: [],
+    recentSearches: [],
+    session: [],
+    adventures: [{
+      id: "adv-1",
+      title: "Test",
+      description: "",
+      objectives: [],
+      notes: "",
+      entities: [],
+      scenes: [
+        { id: "sc-1", title: "Valid", entities: [] },
+        null,
+        { no_id: true },
+        { id: "sc-2", title: "  ", entities: [] },
+      ] as unknown as AdventureScene[],
+      createdAt: 1000,
+      updatedAt: 2000,
+      archived: false,
+    }],
+    activeAdventureId: null,
+  });
+  const scenes = result.adventures[0]!.scenes;
+  strictEqual(scenes.length, 1);
+  strictEqual(scenes[0]!.id, "sc-1");
+});
+
+test("normalize removes stale scene reference IDs", () => {
+  const result = normalize({
+    version: CURRENT_VERSION,
+    favorites: [],
+    recentEntities: [],
+    recentSearches: [],
+    session: [],
+    adventures: [{
+      id: "adv-1",
+      title: "Test",
+      description: "",
+      objectives: [],
+      notes: "",
+      entities: [],
+      scenes: [{ id: "sc-1", title: "Tavern", entities: ["spell.fireball", "nonexistent.entity"] }],
+      createdAt: 1000,
+      updatedAt: 2000,
+      archived: false,
+    }],
+    activeAdventureId: null,
+  });
+  deepStrictEqual(result.adventures[0]!.scenes[0]!.entities, ["spell.fireball"]);
+});
+
+test("normalize converts empty scene description and note to undefined", () => {
+  const result = normalize({
+    version: CURRENT_VERSION,
+    favorites: [],
+    recentEntities: [],
+    recentSearches: [],
+    session: [],
+    adventures: [{
+      id: "adv-1",
+      title: "Test",
+      description: "",
+      objectives: [],
+      notes: "",
+      entities: [],
+      scenes: [{ id: "sc-1", title: "Tavern", description: "  ", note: "", entities: [] }],
+      createdAt: 1000,
+      updatedAt: 2000,
+      archived: false,
+    }],
+    activeAdventureId: null,
+  });
+  const scene = result.adventures[0]!.scenes[0]!;
+  strictEqual(scene.description, undefined);
+  strictEqual(scene.note, undefined);
+});
+
+test("normalize handles non-array scenes gracefully", () => {
+  const result = normalize({
+    version: CURRENT_VERSION,
+    favorites: [],
+    recentEntities: [],
+    recentSearches: [],
+    session: [],
+    adventures: [{
+      id: "adv-1",
+      title: "Test",
+      description: "",
+      objectives: [],
+      notes: "",
+      entities: [],
+      scenes: "invalid" as unknown as AdventureScene[],
+      createdAt: 1000,
+      updatedAt: 2000,
+      archived: false,
+    }],
+    activeAdventureId: null,
+  });
+  deepStrictEqual(result.adventures[0]!.scenes, []);
+});
+
+test("normalize caps scenes per adventure at 30", () => {
+  const scenes = Array.from({ length: 35 }, (_, i) => ({ id: `sc-${i}`, title: `Scene ${i}`, entities: [] }));
+  const result = normalize({
+    version: CURRENT_VERSION,
+    favorites: [],
+    recentEntities: [],
+    recentSearches: [],
+    session: [],
+    adventures: [{
+      id: "adv-1",
+      title: "Test",
+      description: "",
+      objectives: [],
+      notes: "",
+      entities: [],
+      scenes,
+      createdAt: 1000,
+      updatedAt: 2000,
+      archived: false,
+    }],
+    activeAdventureId: null,
+  });
+  strictEqual(result.adventures[0]!.scenes.length, 30);
+  strictEqual(result.adventures[0]!.scenes[0]!.id, "sc-0");
+  strictEqual(result.adventures[0]!.scenes[29]!.id, "sc-29");
+});
+
+test("normalize caps scene references at 60", () => {
+  const seen = new Set<string>();
+  const refs: string[] = [];
+  for (const spell of getSpells()) {
+    if (seen.has(spell.canonicalId)) continue;
+    seen.add(spell.canonicalId);
+    refs.push(spell.canonicalId);
+    if (refs.length === 61) break;
+  }
+  const result = normalize({
+    version: CURRENT_VERSION,
+    favorites: [],
+    recentEntities: [],
+    recentSearches: [],
+    session: [],
+    adventures: [{
+      id: "adv-1",
+      title: "Test",
+      description: "",
+      objectives: [],
+      notes: "",
+      entities: [],
+      scenes: [{ id: "sc-1", title: "Tavern", entities: refs }],
+      createdAt: 1000,
+      updatedAt: 2000,
+      archived: false,
+    }],
+    activeAdventureId: null,
+  });
+  strictEqual(result.adventures[0]!.scenes[0]!.entities.length, 60);
+});
+
+test("hydrate() loads scenes from persisted state", () => {
+  resetMock();
+  resetStore();
+  const data = {
+    version: CURRENT_VERSION,
+    favorites: [],
+    recentEntities: [],
+    recentSearches: [],
+    session: [],
+    adventures: [{
+      id: "adv-1",
+      title: "Saved Adventure",
+      description: "",
+      objectives: [],
+      notes: "",
+      entities: [],
+      scenes: [{
+        id: "sc-1",
+        title: "Tavern",
+        description: "Talk to the barkeep",
+        note: "Reveal the hook",
+        entities: ["spell.fireball", "nonexistent.entity"],
+      }],
+      createdAt: 1000,
+      updatedAt: 2000,
+      archived: false,
+    }],
+    activeAdventureId: "adv-1",
+  };
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+  hydrate();
+  const adventure = userStore.getState().adventures[0]!;
+  strictEqual(adventure.scenes.length, 1);
+  strictEqual(adventure.scenes[0]!.title, "Tavern");
+  strictEqual(adventure.scenes[0]!.note, "Reveal the hook");
+  deepStrictEqual(adventure.scenes[0]!.entities, ["spell.fireball"]);
 });
 
 // ---------------------------------------------------------------------------

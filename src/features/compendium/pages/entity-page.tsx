@@ -15,6 +15,7 @@ import { RelatedEntities } from "@/features/compendium/components/related-entiti
 import { FavoriteButton } from "@/components/ui/FavoriteButton";
 import { SessionButton } from "@/components/ui/SessionButton";
 import { AdventureButton } from "@/components/ui/AdventureButton";
+import { SceneButton } from "@/components/ui/SceneButton";
 import { userStore } from "@/user-state";
 
 interface CompendiumPageProps {
@@ -63,6 +64,7 @@ export function CompendiumPage({ category }: CompendiumPageProps) {
         <FavoriteButton canonicalId={fullCanonicalId} />
         <SessionButton canonicalId={fullCanonicalId} />
         <AdventureButton canonicalId={fullCanonicalId} />
+        <SceneButton canonicalId={fullCanonicalId} />
       </div>
       <EntityRenderer entity={resolved.selected} />
       <RelatedEntities canonicalId={fullCanonicalId} />

@@ -1,26 +1,18 @@
 import { Link } from "react-router-dom";
 import type { SearchResultItem } from "@/components/entity";
 import { CATEGORY_REGISTRY, formatSource } from "@/compendium";
+import { badgeVariantForCategory } from "@/components/entity";
 import { Badge } from "@/components/ui/Badge";
 import { SearchHighlight } from "./search-highlight";
 import { FavoriteButton } from "@/components/ui/FavoriteButton";
 import { SessionButton } from "@/components/ui/SessionButton";
 import { AdventureButton } from "@/components/ui/AdventureButton";
+import { SceneButton } from "@/components/ui/SceneButton";
 
 interface SearchResultRowProps extends SearchResultItem {
   readonly query: string;
   readonly isSelected: boolean;
 }
-
-const BADGE_VARIANT: Record<string, "default" | "accent" | "outline" | "subtle"> = {
-  spell: "default",
-  monster: "accent",
-  equipment: "outline",
-  magicitem: "accent",
-  feat: "subtle",
-  condition: "outline",
-  action: "subtle",
-};
 
 const ROW_BASE =
   "flex items-center gap-3 px-4 py-3 transition-colors";
@@ -37,7 +29,7 @@ export function SearchResultRow({
   canonicalId,
 }: SearchResultRowProps) {
   const cat = CATEGORY_REGISTRY[category];
-  const variant = BADGE_VARIANT[category] ?? "default";
+  const variant = badgeVariantForCategory(category);
   const displaySource = formatSource(source);
 
   return (
@@ -60,6 +52,7 @@ export function SearchResultRow({
       <FavoriteButton canonicalId={canonicalId} />
       <SessionButton canonicalId={canonicalId} />
       <AdventureButton canonicalId={canonicalId} />
+      <SceneButton canonicalId={canonicalId} />
     </Link>
   );
 }

@@ -34,6 +34,23 @@ const migrations: Record<number, (state: Record<string, unknown>) => Record<stri
     activeAdventureId: typeof raw.activeAdventureId === "string" ? raw.activeAdventureId : null,
     party: Array.isArray(raw.party) ? raw.party : [],
   }),
+  5: (raw) => {
+    const adventures = Array.isArray(raw.adventures)
+      ? raw.adventures.map((a) => {
+          if (!a || typeof a !== "object") return a;
+          const adventure = a as Record<string, unknown>;
+          return {
+            ...adventure,
+            scenes: Array.isArray(adventure.scenes) ? adventure.scenes : [],
+          };
+        })
+      : [];
+    return {
+      ...raw,
+      version: 5,
+      adventures,
+    };
+  },
 };
 
 export function migrate(raw: unknown): UserState {
@@ -57,6 +74,9 @@ export function migrate(raw: unknown): UserState {
   }
   if (version < 4) {
     migrated = migrations[4]!(migrated);
+  }
+  if (version < 5) {
+    migrated = migrations[5]!(migrated);
   }
 
   const result = migrated as unknown as Record<string, unknown>;

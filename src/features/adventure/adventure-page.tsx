@@ -1,42 +1,311 @@
-import { useState, useCallback } from "react";
-import { Link } from "react-router-dom";
+import { useState, useCallback, useMemo } from "react";
 import { useActiveAdventure, useAdventureEntityIds, userStore } from "@/user-state";
-import { CATEGORY_REGISTRY, formatSource, slugFromCanonicalId, getEntity } from "@/compendium";
+import type { AdventureScene } from "@/user-state";
+import { CATEGORY_REGISTRY, getEntitiesForCategory } from "@/compendium";
 import type { EntityCategory } from "@/compendium";
-import { Badge } from "@/components/ui/Badge";
+import { ReferencePicker } from "@/components/ui/ReferencePicker";
+import type { PickerCandidate } from "@/components/ui/ReferencePicker";
+import { entityRefFromCanonicalId, EntityReferenceRow, RowRemoveButton } from "@/components/entity";
+import type { EntityRef } from "@/components/entity";
 
-const BADGE_VARIANT: Record<string, "default" | "accent" | "outline" | "subtle"> = {
-  spell: "default",
-  monster: "accent",
-  equipment: "outline",
-  magicitem: "accent",
-  feat: "subtle",
-  condition: "outline",
-  action: "subtle",
-};
-
-interface EntityEntry {
-  canonicalId: string;
-  category: EntityCategory;
-  name: string;
-  source: string;
-  href: string;
+function buildSceneCandidates(): PickerCandidate[] {
+  const out: PickerCandidate[] = [];
+  for (const category of Object.keys(CATEGORY_REGISTRY) as EntityCategory[]) {
+    const reg = CATEGORY_REGISTRY[category];
+    for (const entity of getEntitiesForCategory(category)) {
+      out.push({
+        canonicalId: entity.canonicalId,
+        name: entity.name,
+        subtitle: `${reg.singular} \u00B7 ${reg.getSubtitle(entity)}`,
+      });
+    }
+  }
+  return out;
 }
 
-function entryFromCanonicalId(id: string): EntityEntry | null {
-  const dot = id.indexOf(".");
-  if (dot === -1) return null;
-  const category = id.substring(0, dot) as EntityCategory;
-  const entityId = id.substring(dot + 1);
-  const entity = getEntity(category, entityId);
-  if (!entity) return null;
-  return {
-    canonicalId: id,
-    category,
-    name: entity.name,
-    source: entity.source,
-    href: `/${category}/${slugFromCanonicalId(id)}`,
-  };
+function SceneCard({ adventureId, scene, archived }: { adventureId: string; scene: AdventureScene; archived: boolean }) {
+  const [expanded, setExpanded] = useState(false);
+  const [pickerOpen, setPickerOpen] = useState(false);
+  const [editingTitle, setEditingTitle] = useState(false);
+  const [titleDraft, setTitleDraft] = useState(scene.title);
+  const [editingDescription, setEditingDescription] = useState(false);
+  const [descriptionDraft, setDescriptionDraft] = useState(scene.description ?? "");
+  const [editingNote, setEditingNote] = useState(false);
+  const [noteDraft, setNoteDraft] = useState(scene.note ?? "");
+
+  const candidates = useMemo(() => (pickerOpen ? buildSceneCandidates() : []), [pickerOpen]);
+
+  const refs: EntityRef[] = [];
+  for (const id of scene.entities) {
+    const ref = entityRefFromCanonicalId(id);
+    if (ref) refs.push(ref);
+  }
+
+  const handleStartTitleEdit = useCallback(() => {
+    setTitleDraft(scene.title);
+    setEditingTitle(true);
+  }, [scene.title]);
+
+  const handleSaveTitle = useCallback(() => {
+    if (titleDraft.trim()) {
+      userStore.getState().updateScene(adventureId, scene.id, { title: titleDraft.trim() });
+    }
+    setEditingTitle(false);
+  }, [adventureId, scene.id, titleDraft]);
+
+  const handleStartDescriptionEdit = useCallback(() => {
+    setDescriptionDraft(scene.description ?? "");
+    setEditingDescription(true);
+  }, [scene.description]);
+
+  const handleSaveDescription = useCallback(() => {
+    userStore.getState().updateScene(adventureId, scene.id, { description: descriptionDraft });
+    setEditingDescription(false);
+  }, [adventureId, scene.id, descriptionDraft]);
+
+  const handleStartNoteEdit = useCallback(() => {
+    setNoteDraft(scene.note ?? "");
+    setEditingNote(true);
+  }, [scene.note]);
+
+  const handleSaveNote = useCallback(() => {
+    userStore.getState().updateScene(adventureId, scene.id, { note: noteDraft });
+    setEditingNote(false);
+  }, [adventureId, scene.id, noteDraft]);
+
+  const handleRemoveScene = useCallback(() => {
+    userStore.getState().removeScene(adventureId, scene.id);
+  }, [adventureId, scene.id]);
+
+  const handlePickerSelect = useCallback(
+    (canonicalId: string) => {
+      const state = userStore.getState();
+      const adv = state.adventures.find((a) => a.id === adventureId);
+      const current = adv?.scenes.find((sc) => sc.id === scene.id);
+      if (adv && current && !current.entities.includes(canonicalId)) {
+        userStore.getState().toggleSceneEntity(adventureId, scene.id, canonicalId);
+      }
+      setPickerOpen(false);
+    },
+    [adventureId, scene.id],
+  );
+
+  return (
+    <div className="overflow-hidden rounded-lg border border-border bg-background">
+      <button
+        type="button"
+        onClick={() => setExpanded((v) => !v)}
+        aria-expanded={expanded}
+        className="flex w-full items-center gap-2 px-3 py-3 text-left transition-colors hover:bg-accent/30 active:bg-accent/60"
+      >
+        <svg
+          aria-hidden="true"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth={2}
+          className={`h-4 w-4 shrink-0 text-muted-foreground transition-transform duration-150 ${expanded ? "rotate-180" : ""}`}
+        >
+          <path d="m6 9 6 6 6-6" />
+        </svg>
+        <div className="min-w-0 flex-1">
+          <p className="truncate text-sm font-medium text-foreground">{scene.title}</p>
+          <p className="truncate text-xs text-muted-foreground">
+            {scene.description ? `${scene.description} \u00B7 ` : ""}
+            {refs.length} reference{refs.length === 1 ? "" : "s"}
+            {scene.note ? " \u00B7 DM note" : ""}
+          </p>
+        </div>
+      </button>
+
+      {expanded && (
+        <div className="flex flex-col gap-4 border-t border-border px-3 py-3">
+          <div>
+            <div className="mb-1 flex items-center justify-between">
+              <h3 className="text-xs font-medium text-muted-foreground">Title</h3>
+              {!archived && !editingTitle && (
+                <button
+                  type="button"
+                  onClick={handleStartTitleEdit}
+                  className="touch-target px-2 py-1 text-xs text-muted-foreground underline transition-colors hover:text-foreground"
+                >
+                  Edit
+                </button>
+              )}
+            </div>
+            {editingTitle ? (
+              <div className="flex items-center gap-2">
+                <input
+                  type="text"
+                  value={titleDraft}
+                  onChange={(e) => setTitleDraft(e.target.value)}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter") handleSaveTitle();
+                    if (e.key === "Escape") setEditingTitle(false);
+                  }}
+                  className="w-full rounded-lg border border-border bg-background px-3 py-1.5 text-sm font-medium text-foreground outline-none focus:border-foreground"
+                  autoFocus
+                />
+                <button
+                  type="button"
+                  onClick={handleSaveTitle}
+                  className="rounded-lg bg-primary px-3 py-1.5 text-xs font-medium text-primary-foreground transition-all duration-150 hover:bg-primary/90 active:scale-90"
+                >
+                  Save
+                </button>
+              </div>
+            ) : (
+              <p className="text-sm font-medium text-foreground">{scene.title}</p>
+            )}
+          </div>
+
+          <div>
+            <h3 className="mb-1 text-xs font-medium text-muted-foreground">Description</h3>
+            {editingDescription ? (
+              <div className="flex flex-col gap-2">
+                <textarea
+                  value={descriptionDraft}
+                  onChange={(e) => setDescriptionDraft(e.target.value)}
+                  rows={2}
+                  autoFocus
+                  className="w-full rounded-lg border border-border bg-background px-3 py-2 text-sm text-foreground outline-none focus:border-foreground"
+                />
+                <div className="flex gap-2">
+                  <button
+                    type="button"
+                    onClick={handleSaveDescription}
+                    className="rounded-lg bg-primary px-3 py-1.5 text-xs font-medium text-primary-foreground transition-all duration-150 hover:bg-primary/90 active:scale-90"
+                  >
+                    Save
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setEditingDescription(false)}
+                    className="rounded-lg border border-border px-3 py-1.5 text-xs text-muted-foreground transition-all duration-150 hover:bg-accent active:scale-90"
+                  >
+                    Cancel
+                  </button>
+                </div>
+              </div>
+            ) : (
+              <button
+                type="button"
+                onClick={archived ? undefined : handleStartDescriptionEdit}
+                className={`w-full rounded-lg border border-transparent px-3 py-2 text-left text-sm text-muted-foreground ${archived ? "cursor-default" : "hover:border-border hover:bg-accent/30"}`}
+              >
+                {scene.description || "Add a short description\u2026"}
+              </button>
+            )}
+          </div>
+
+          <div>
+            <div className="mb-1 flex items-center justify-between">
+              <h3 className="text-xs font-medium text-muted-foreground">DM Note</h3>
+              {!archived && !editingNote && scene.note && (
+                <button
+                  type="button"
+                  onClick={handleStartNoteEdit}
+                  className="touch-target px-2 py-1 text-xs text-muted-foreground underline transition-colors hover:text-foreground"
+                >
+                  Edit
+                </button>
+              )}
+            </div>
+            {editingNote ? (
+              <div className="flex flex-col gap-2">
+                <textarea
+                  value={noteDraft}
+                  onChange={(e) => setNoteDraft(e.target.value)}
+                  rows={2}
+                  autoFocus
+                  className="w-full rounded-lg border border-border bg-background px-3 py-2 text-sm text-foreground outline-none focus:border-foreground"
+                />
+                <div className="flex gap-2">
+                  <button
+                    type="button"
+                    onClick={handleSaveNote}
+                    className="rounded-lg bg-primary px-3 py-1.5 text-xs font-medium text-primary-foreground transition-all duration-150 hover:bg-primary/90 active:scale-90"
+                  >
+                    Save
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setEditingNote(false)}
+                    className="rounded-lg border border-border px-3 py-1.5 text-xs text-muted-foreground transition-all duration-150 hover:bg-accent active:scale-90"
+                  >
+                    Cancel
+                  </button>
+                </div>
+              </div>
+            ) : (
+              <button
+                type="button"
+                onClick={archived ? undefined : handleStartNoteEdit}
+                className={`w-full rounded-lg border border-transparent px-3 py-2 text-left text-sm text-muted-foreground ${archived ? "cursor-default" : "hover:border-border hover:bg-accent/30"}`}
+              >
+                {scene.note || "Add a private DM note\u2026"}
+              </button>
+            )}
+          </div>
+
+          <div>
+            <div className="mb-1 flex items-center justify-between">
+              <h3 className="text-xs font-medium text-muted-foreground">References</h3>
+              {!archived && (
+                <button
+                  type="button"
+                  onClick={() => setPickerOpen(true)}
+                  className="touch-target px-2 py-1 text-xs font-medium text-foreground underline transition-colors hover:text-primary"
+                >
+                  Add Reference
+                </button>
+              )}
+            </div>
+            {refs.length === 0 ? (
+              <p className="px-3 text-xs text-muted-foreground/60">No references yet.</p>
+            ) : (
+              <div className="flex flex-col">
+                {refs.map((ref) => (
+                  <EntityReferenceRow
+                    key={ref.canonicalId}
+                    canonicalId={ref.canonicalId}
+                    className="border-b border-border py-2.5"
+                    action={
+                      !archived && (
+                        <RowRemoveButton
+                          label={`Remove ${ref.name} from scene`}
+                          onClick={() => userStore.getState().toggleSceneEntity(adventureId, scene.id, ref.canonicalId)}
+                        />
+                      )
+                    }
+                  />
+                ))}
+              </div>
+            )}
+          </div>
+
+          {!archived && (
+            <button
+              type="button"
+              onClick={handleRemoveScene}
+              className="touch-target self-start rounded-lg border border-destructive/50 px-3 py-1.5 text-xs text-destructive transition-all duration-150 hover:bg-destructive/10 active:scale-95"
+            >
+              Remove Scene
+            </button>
+          )}
+        </div>
+      )}
+
+      {pickerOpen && (
+        <ReferencePicker
+          title="Add Reference"
+          candidates={candidates}
+          onSelect={handlePickerSelect}
+          onClose={() => setPickerOpen(false)}
+        />
+      )}
+    </div>
+  );
 }
 
 export function AdventurePage() {
@@ -51,6 +320,8 @@ export function AdventurePage() {
   const [editingNotes, setEditingNotes] = useState(false);
   const [notesDraft, setNotesDraft] = useState("");
   const [showSwitch, setShowSwitch] = useState(false);
+  const [newSceneOpen, setNewSceneOpen] = useState(false);
+  const [newSceneTitle, setNewSceneTitle] = useState("");
 
   const handleCreateAdventure = useCallback(() => {
     userStore.getState().createAdventure();
@@ -90,6 +361,13 @@ export function AdventurePage() {
       userStore.getState().removeObjective(adventure.id, index);
     }
   }, [adventure]);
+
+  const handleAddScene = useCallback(() => {
+    if (!adventure || !newSceneTitle.trim()) return;
+    userStore.getState().addScene(adventure.id, { title: newSceneTitle.trim() });
+    setNewSceneTitle("");
+    setNewSceneOpen(false);
+  }, [adventure, newSceneTitle]);
 
   const handleStartTitleEdit = useCallback(() => {
     if (adventure) {
@@ -133,10 +411,10 @@ export function AdventurePage() {
     setEditingNotes(false);
   }, [adventure, notesDraft]);
 
-  const entities: EntityEntry[] = [];
+  const entities: EntityRef[] = [];
   for (const id of entityIds) {
-    const entry = entryFromCanonicalId(id);
-    if (entry) entities.push(entry);
+    const ref = entityRefFromCanonicalId(id);
+    if (ref) entities.push(ref);
   }
 
   if (!adventure) {
@@ -201,7 +479,8 @@ export function AdventurePage() {
             </h1>
           )}
           <p className="mt-1 text-xs text-muted-foreground">
-            {entities.length} entr{entities.length === 1 ? "y" : "ies"} &middot; Updated {lastUpdated}
+            {adventure.scenes.length} scene{adventure.scenes.length === 1 ? "" : "s"} &middot; {entities.length} entr
+            {entities.length === 1 ? "y" : "ies"} &middot; Updated {lastUpdated}
             {adventure.archived && " \u00B7 Archived"}
           </p>
         </div>
@@ -405,42 +684,73 @@ export function AdventurePage() {
           </p>
         ) : (
           <div className="flex flex-col">
-            {entities.map((entry) => {
-              const variant = BADGE_VARIANT[entry.category] ?? "default";
-              const cat = CATEGORY_REGISTRY[entry.category];
-              return (
-                <Link
-                  key={entry.canonicalId}
-                  to={entry.href}
-                  className="flex items-center gap-3 border-b border-border px-0 py-3 transition-all duration-150 hover:bg-accent/50 active:bg-accent/80"
-                >
-                  <Badge variant={variant} className="shrink-0">
-                    {cat.singular}
-                  </Badge>
-                  <div className="min-w-0 flex-1">
-                    <p className="truncate text-sm font-medium text-foreground">{entry.name}</p>
-                    <p className="truncate text-xs text-muted-foreground">{formatSource(entry.source)}</p>
-                  </div>
-                  {!adventure.archived && (
-                    <button
-                      type="button"
-                      onClick={(e) => {
-                        e.preventDefault();
-                        e.stopPropagation();
-                        handleToggleEntity(entry.canonicalId);
-                      }}
-                      className="hitbox-expand inline-flex h-8 w-8 items-center justify-center rounded text-muted-foreground transition-all duration-150 hover:bg-accent hover:text-foreground active:scale-90 active:bg-accent/80"
-                      aria-label={`Remove ${entry.name} from adventure`}
-                    >
-                      <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} className="h-4 w-4">
-                        <line x1="18" y1="6" x2="6" y2="18" />
-                        <line x1="6" y1="6" x2="18" y2="18" />
-                      </svg>
-                    </button>
-                  )}
-                </Link>
-              );
-            })}
+            {entities.map((ref) => (
+              <EntityReferenceRow
+                key={ref.canonicalId}
+                canonicalId={ref.canonicalId}
+                className="border-b border-border px-0 py-3"
+                action={
+                  !adventure.archived && (
+                    <RowRemoveButton
+                      label={`Remove ${ref.name} from adventure`}
+                      onClick={() => handleToggleEntity(ref.canonicalId)}
+                    />
+                  )
+                }
+              />
+            ))}
+          </div>
+        )}
+      </div>
+
+      <div className="mt-6">
+        <div className="mb-2 flex items-center justify-between">
+          <h2 className="text-xs font-medium text-muted-foreground">Scenes</h2>
+          {!adventure.archived && (
+            <button
+              type="button"
+              onClick={() => setNewSceneOpen((v) => !v)}
+              className="touch-target rounded-lg border border-border px-3 py-1.5 text-xs text-muted-foreground transition-all duration-150 hover:bg-accent active:scale-90"
+            >
+              {newSceneOpen ? "Cancel" : "Add Scene"}
+            </button>
+          )}
+        </div>
+
+        {newSceneOpen && (
+          <div className="mb-3 flex items-center gap-2">
+            <input
+              type="text"
+              value={newSceneTitle}
+              onChange={(e) => setNewSceneTitle(e.target.value)}
+              onKeyDown={(e) => {
+                if (e.key === "Enter") handleAddScene();
+                if (e.key === "Escape") setNewSceneOpen(false);
+              }}
+              placeholder="Scene title\u2026"
+              autoComplete="off"
+              className="flex-1 rounded-lg border border-border bg-background px-3 py-2 text-sm text-foreground outline-none placeholder:text-muted-foreground/50 focus:border-foreground"
+            />
+            <button
+              type="button"
+              onClick={handleAddScene}
+              disabled={!newSceneTitle.trim()}
+              className="rounded-lg bg-primary px-3 py-2 text-xs font-medium text-primary-foreground transition-all duration-150 hover:bg-primary/90 active:scale-95 disabled:opacity-40"
+            >
+              Add
+            </button>
+          </div>
+        )}
+
+        {adventure.scenes.length === 0 ? (
+          <p className="px-3 text-xs text-muted-foreground/60">
+            Scenes are optional sections for organizing a larger adventure. Skip them, or add one to group references by chapter or location.
+          </p>
+        ) : (
+          <div className="flex flex-col gap-2">
+            {adventure.scenes.map((scene) => (
+              <SceneCard key={scene.id} adventureId={adventure.id} scene={scene} archived={adventure.archived} />
+            ))}
           </div>
         )}
       </div>
