@@ -13,7 +13,7 @@ export function Section({ title, subtitle, action, children }: SectionProps) {
       <div className="flex items-center justify-between gap-3">
         <div className="min-w-0 space-y-0.5">
           <h2 className="text-xs font-medium text-muted-foreground">{title}</h2>
-          {subtitle && <p className="text-xs text-muted-foreground/70">{subtitle}</p>}
+          {subtitle && <p className="text-xs text-muted-foreground">{subtitle}</p>}
         </div>
         {action && <div className="shrink-0">{action}</div>}
       </div>

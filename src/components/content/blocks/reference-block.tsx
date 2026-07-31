@@ -10,7 +10,7 @@ export function ReferenceBlock({ target, label }: ReferenceBlockProps) {
   return (
     <Link
       to={referenceToUrl(target)}
-      className="text-accent-foreground underline underline-offset-2 hover:text-foreground transition-colors"
+      className="text-primary-muted underline underline-offset-2 hover:text-foreground transition-colors"
     >
       {label ?? referenceLabel(target)}
     </Link>

@@ -97,7 +97,7 @@ const EMPTY_DRAFT: MemberDraft = {
 };
 
 const inputClass =
-  "w-full rounded-lg border border-border bg-background px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary";
+  "w-full rounded-lg border border-border bg-background px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground focus:border-focus focus:outline-none focus:ring-1 focus:ring-focus";
 
 function armorLabel(armorId: string | undefined): string | null {
   if (!armorId || !armorId.startsWith("equipment.")) return null;
@@ -476,7 +476,7 @@ export function PartyPage() {
                   subtitle={armorLabel(armorId) ?? ref.subtitle}
                   showBadge={false}
                   asLink={false}
-                  className="rounded-lg border border-border p-3"
+                  className="rounded-lg border border-border bg-surface p-3"
                   action={
                     <RowRemoveButton
                       label={`Remove ${ref.name}`}
@@ -580,7 +580,7 @@ export function PartyPage() {
       </div>
 
       {party.length === 0 ? (
-        <div className="flex flex-col items-center gap-4 rounded-lg border border-border p-6 text-center">
+        <div className="flex flex-col items-center gap-4 rounded-lg border border-border bg-surface p-6 text-center">
           <p className="text-sm text-muted-foreground">
             Your party is empty. Add a member and reference the spells, armor, weapons, and magic items they carry.
           </p>
@@ -594,7 +594,7 @@ export function PartyPage() {
                 key={member.id}
                 type="button"
                 onClick={() => handleEdit(member)}
-                className="flex flex-col gap-2 rounded-lg border border-border p-4 text-left transition-all duration-150 hover:bg-accent/50 active:bg-accent/80 active:scale-[0.99]"
+                className="flex flex-col gap-2 rounded-lg border border-border bg-surface p-4 text-left transition-all duration-150 hover:bg-accent/50 active:bg-accent/80 active:scale-[0.99]"
               >
                 <div className="flex items-start justify-between gap-2">
                   <div className="min-w-0">

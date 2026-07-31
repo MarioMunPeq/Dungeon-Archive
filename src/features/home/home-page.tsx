@@ -62,22 +62,22 @@ export function HomePage() {
         <div className="flex flex-col gap-3">
           <Link
             to="/adventure"
-            className="flex items-center gap-1 text-sm font-semibold text-foreground hover:text-primary"
+            className="flex items-center gap-1 text-sm font-semibold text-foreground hover:text-primary-muted"
           >
             Current Adventure
             <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} className="h-3.5 w-3.5">
               <path d="M9 18l6-6-6-6" />
             </svg>
           </Link>
-          <div className="flex flex-col gap-2 rounded-lg border border-border p-4">
+          <div className="flex flex-col gap-2 rounded-lg border border-border bg-surface p-4">
             <div className="flex items-center justify-between">
               <span className="text-sm font-medium text-foreground">{adventure.title}</span>
-              {adventure.archived && <span className="text-xs text-muted-foreground/60">Archived</span>}
+              {adventure.archived && <span className="text-xs text-foreground-subtle">Archived</span>}
             </div>
             {adventure.description && (
               <p className="line-clamp-2 text-xs text-muted-foreground">{adventure.description}</p>
             )}
-            <div className="flex items-center gap-3 text-xs text-muted-foreground/60">
+            <div className="flex items-center gap-3 text-xs text-foreground-subtle">
               <span>{adventure.entities.length} entr{adventure.entities.length === 1 ? "y" : "ies"}</span>
               <span>{adventure.objectives.length} objective{adventure.objectives.length === 1 ? "" : "s"}</span>
               <span className="ml-auto">
@@ -105,14 +105,14 @@ export function HomePage() {
         <div className="flex flex-col gap-3">
           <Link
             to="/party"
-            className="flex items-center gap-1 text-sm font-semibold text-foreground hover:text-primary"
+            className="flex items-center gap-1 text-sm font-semibold text-foreground hover:text-primary-muted"
           >
             Party
             <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} className="h-3.5 w-3.5">
               <path d="M9 18l6-6-6-6" />
             </svg>
           </Link>
-          <div className="flex flex-col gap-2 rounded-lg border border-border p-4">
+          <div className="flex flex-col gap-2 rounded-lg border border-border bg-surface p-4">
             {shownMembers.map((member) => (
               <div key={member.id} className="flex items-center justify-between gap-2">
                 <span className="truncate text-sm font-medium text-foreground">{member.name}</span>
@@ -122,7 +122,7 @@ export function HomePage() {
               </div>
             ))}
             {party.length > shownMembers.length && (
-              <p className="text-xs text-muted-foreground/60">+{party.length - shownMembers.length} more</p>
+              <p className="text-xs text-foreground-subtle">+{party.length - shownMembers.length} more</p>
             )}
           </div>
         </div>
@@ -145,7 +145,7 @@ export function HomePage() {
         <div className="flex flex-col gap-3">
           <Link
             to="/session"
-            className="flex items-center gap-1 text-sm font-semibold text-foreground hover:text-primary"
+            className="flex items-center gap-1 text-sm font-semibold text-foreground hover:text-primary-muted"
           >
             Continue Session
             <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} className="h-3.5 w-3.5">
@@ -195,7 +195,7 @@ export function HomePage() {
       )}
 
       {sessionCards.length === 0 && recentCards.length === 0 && favoriteCards.length === 0 && (
-        <div className="flex flex-col items-center gap-4 rounded-lg border border-border p-6 text-center">
+        <div className="flex flex-col items-center gap-4 rounded-lg border border-border bg-surface p-6 text-center">
           <p className="text-sm text-muted-foreground">
             Browse entities, search for something, or tap the heart, pin, and flag icons to save favorites, build your session, and track your adventure.
           </p>
@@ -207,7 +207,7 @@ export function HomePage() {
           <Link
             key={cat}
             to={`/${cat}`}
-            className="flex flex-col gap-1 rounded-lg border border-border p-4 transition-colors hover:bg-accent active:bg-accent/80"
+            className="flex flex-col gap-1 rounded-lg border border-border bg-surface p-4 transition-colors hover:bg-accent active:bg-accent/80"
           >
             <span className="text-base font-semibold text-foreground">{categoryLabel(cat)}</span>
             <span className="text-sm text-muted-foreground">{getCategoryCount(cat)} entries</span>
@@ -218,13 +218,13 @@ export function HomePage() {
       <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
         <Link
           to="/search"
-          className="rounded-lg border border-border p-4 text-center transition-colors hover:bg-accent active:bg-accent/80"
+          className="rounded-lg border border-border bg-surface p-4 text-center transition-colors hover:bg-accent active:bg-accent/80"
         >
           <span className="text-sm font-medium text-foreground">Search</span>
         </Link>
         <Link
           to="/adventure"
-          className="rounded-lg border border-border p-4 text-center transition-colors hover:bg-accent active:bg-accent/80"
+          className="rounded-lg border border-border bg-surface p-4 text-center transition-colors hover:bg-accent active:bg-accent/80"
         >
           <span className="text-sm font-medium text-foreground">Adventure</span>
         </Link>

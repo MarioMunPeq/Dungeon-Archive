@@ -10,7 +10,7 @@ export const EntityCard = memo(function EntityCard({ name, href, categoryLabel, 
   return (
     <Link
       to={href}
-      className="flex flex-col gap-1 rounded-lg border border-border p-3 transition-colors hover:bg-accent active:bg-accent/80"
+      className="flex flex-col gap-1 rounded-lg border border-border bg-surface p-3 transition-colors hover:bg-accent active:bg-accent/80"
     >
       <div className="flex items-center justify-between">
         <span className="truncate text-sm font-medium text-foreground">{name}</span>
@@ -24,7 +24,7 @@ export const EntityCard = memo(function EntityCard({ name, href, categoryLabel, 
         {categoryLabel}
         {metadata ? ` \u00B7 ${metadata}` : ""}
       </span>
-      <span className="text-xs text-muted-foreground/60">{formatSource(source)}</span>
+      <span className="text-xs text-foreground-subtle">{formatSource(source)}</span>
     </Link>
   );
 });

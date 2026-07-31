@@ -47,7 +47,7 @@ export const SceneButton = memo(function SceneButton({ canonicalId, className = 
         type="button"
         onClick={handleClick}
         className={`hitbox-expand inline-flex items-center justify-center rounded p-1.5 transition-all duration-150 hover:bg-accent active:scale-90 active:bg-accent/80 ${className} ${
-          inScene ? "text-violet-500" : "text-muted-foreground"
+          inScene ? "text-scene" : "text-muted-foreground"
         }`}
         aria-label={inScene ? "Add to scene (already in a scene)" : "Add to scene"}
         title="Add to a scene"

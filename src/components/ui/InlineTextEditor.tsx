@@ -50,7 +50,7 @@ export function InlineTextEditor({
       onKeyDown={handleKeyDown}
       autoFocus
       className={cn(
-        "w-full rounded-lg border border-border bg-background px-3 py-1.5 text-foreground outline-none focus:border-foreground",
+        "w-full rounded-lg border border-border bg-background px-3 py-1.5 text-foreground outline-none focus:border-focus focus:ring-1 focus:ring-focus",
         className,
       )}
     />

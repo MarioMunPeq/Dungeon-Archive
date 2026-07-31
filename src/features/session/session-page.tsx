@@ -73,7 +73,7 @@ export function SessionPage() {
       </div>
 
       {entries.length === 0 ? (
-        <div className="flex flex-col items-center gap-4 rounded-lg border border-border p-6 text-center">
+        <div className="flex flex-col items-center gap-4 rounded-lg border border-border bg-surface p-6 text-center">
           <p className="text-sm text-muted-foreground">
             Session is empty. Search for entities and pin what you need for your encounter.
           </p>

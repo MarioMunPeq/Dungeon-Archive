@@ -244,7 +244,7 @@ function SceneCard({
   );
 
   return (
-    <div className="overflow-hidden rounded-lg border border-border bg-background">
+    <div className="overflow-hidden rounded-lg border border-border bg-surface">
       <SceneCardHeader scene={scene} expanded={expanded} onToggle={() => setExpanded((v) => !v)} />
 
       {refs.length > 0 && (
@@ -304,7 +304,7 @@ function SceneCard({
           <SceneNoteSection note={scene.note} archived={archived} onSave={handleSaveNote} />
 
           {refs.length === 0 && (
-            <p className="text-xs text-muted-foreground/60">No references yet.</p>
+            <p className="text-xs text-foreground-subtle">No references yet.</p>
           )}
 
           {!archived && (
@@ -465,7 +465,7 @@ export function AdventurePage() {
     return (
       <div className="flex flex-col px-4 py-6">
         <h1 className="mb-6 text-xl font-bold text-foreground">Adventure</h1>
-        <div className="flex flex-col items-center gap-4 rounded-lg border border-border p-6 text-center">
+        <div className="flex flex-col items-center gap-4 rounded-lg border border-border bg-surface p-6 text-center">
           <p className="text-sm text-muted-foreground">
             No active adventure yet. Create one to track your campaign notes, objectives, scenes,
             and important references.
@@ -581,7 +581,7 @@ export function AdventurePage() {
           <button
             type="button"
             onClick={() => userStore.getState().restoreAdventure(adventure.id)}
-            className="touch-target px-2 py-1 text-xs font-medium text-foreground underline transition-colors hover:text-primary"
+            className="touch-target px-2 py-1 text-xs font-medium text-foreground underline transition-colors hover:text-primary-muted"
           >
             Restore
           </button>
@@ -589,7 +589,7 @@ export function AdventurePage() {
       )}
 
       {showSwitch && (
-        <div className="overflow-hidden rounded-lg border border-border bg-background animate-slide-down">
+        <div className="overflow-hidden rounded-lg border border-border bg-surface animate-slide-down">
           <div className="border-b border-border px-4 py-2 text-xs font-medium text-muted-foreground">
             Switch Adventure
           </div>
@@ -602,9 +602,9 @@ export function AdventurePage() {
             >
               <span className="flex-1 truncate">{adv.title}</span>
               {adv.id === adventure.id && (
-                <span className="text-xs font-medium text-emerald-500">Active</span>
+                <span className="text-xs font-medium text-success">Active</span>
               )}
-              {adv.archived && <span className="text-xs text-muted-foreground/60">Archived</span>}
+              {adv.archived && <span className="text-xs text-foreground-subtle">Archived</span>}
             </button>
           ))}
         </div>
@@ -612,7 +612,7 @@ export function AdventurePage() {
 
       <Section title="Objectives">
         {adventure.objectives.length === 0 ? (
-          <p className="px-3 text-xs text-muted-foreground/60">
+          <p className="px-3 text-xs text-foreground-subtle">
             No objectives yet. Add the first one below.
           </p>
         ) : (
@@ -657,7 +657,7 @@ export function AdventurePage() {
                 if (e.key === "Enter") handleAddObjective();
               }}
               placeholder="Add objective\u2026"
-              className="flex-1 rounded-lg border border-border bg-background px-3 py-1.5 text-sm text-foreground outline-none placeholder:text-muted-foreground/50 focus:border-foreground"
+              className="flex-1 rounded-lg border border-border bg-background px-3 py-1.5 text-sm text-foreground outline-none placeholder:text-muted-foreground focus:border-focus focus:ring-1 focus:ring-focus"
             />
             <button
               type="button"
@@ -687,7 +687,7 @@ export function AdventurePage() {
         }
       >
         {entities.length === 0 ? (
-          <p className="px-3 text-xs text-muted-foreground/60">
+          <p className="px-3 text-xs text-foreground-subtle">
             No references yet. Use the flag icon on entity pages or search results to pin entities
             to this adventure.
           </p>
@@ -738,7 +738,7 @@ export function AdventurePage() {
               }}
               placeholder="Scene title\u2026"
               autoComplete="off"
-              className="flex-1 rounded-lg border border-border bg-background px-3 py-2 text-sm text-foreground outline-none placeholder:text-muted-foreground/50 focus:border-foreground"
+              className="flex-1 rounded-lg border border-border bg-background px-3 py-2 text-sm text-foreground outline-none placeholder:text-muted-foreground focus:border-focus focus:ring-1 focus:ring-focus"
             />
             <button
               type="button"
@@ -751,7 +751,7 @@ export function AdventurePage() {
           </div>
         )}
         {adventure.scenes.length === 0 ? (
-          <p className="px-3 text-xs text-muted-foreground/60">
+          <p className="px-3 text-xs text-foreground-subtle">
             Scenes are optional sections for organizing a larger adventure. Skip them, or add one to
             group references by chapter or location.
           </p>

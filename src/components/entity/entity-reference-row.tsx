@@ -49,7 +49,7 @@ export function EntityReferenceRow({
       fill="none"
       stroke="currentColor"
       strokeWidth={2}
-      className="h-4 w-4 shrink-0 text-muted-foreground/40"
+      className="h-4 w-4 shrink-0 text-foreground-subtle"
     >
       <path d="m9 18 6-6-6-6" />
     </svg>

@@ -35,7 +35,7 @@ export const SessionButton = memo(function SessionButton({ canonicalId, classNam
       type="button"
       onClick={handleClick}
       className={`hitbox-expand inline-flex items-center justify-center rounded p-1.5 transition-all duration-150 hover:bg-accent active:scale-90 active:bg-accent/80 ${className} ${
-        inSession ? "text-blue-500" : "text-muted-foreground"
+        inSession ? "text-info" : "text-muted-foreground"
       }`}
       aria-label={inSession ? "Remove from session" : "Add to session"}
     >

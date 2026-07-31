@@ -8,7 +8,7 @@ export function SearchNoResults({ query }: SearchNoResultsProps) {
       <p className="mb-2 text-sm text-muted-foreground">
         No results for &ldquo;{query}&rdquo;
       </p>
-      <p className="text-xs text-muted-foreground/60">
+      <p className="text-xs text-foreground-subtle">
         Try a different search term or browse categories
       </p>
     </div>

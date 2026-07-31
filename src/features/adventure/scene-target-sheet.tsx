@@ -40,7 +40,7 @@ export function SceneTargetSheet({ canonicalId, onClose }: SceneTargetSheetProps
   );
 
   return (
-    <div className="fixed inset-0 z-50 flex flex-col bg-background">
+    <div className="fixed inset-0 z-50 flex flex-col bg-card">
       <div className="flex items-center gap-2 border-b border-border px-4 py-3">
         <h2 className="flex-1 text-sm font-semibold text-foreground">Add to Scene</h2>
         <button
@@ -78,7 +78,7 @@ export function SceneTargetSheet({ canonicalId, onClose }: SceneTargetSheetProps
               onChange={(e) => setNewTitle(e.target.value)}
               placeholder="New scene title\u2026"
               autoComplete="off"
-              className="min-w-0 flex-1 rounded-lg border border-border bg-background px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary"
+              className="min-w-0 flex-1 rounded-lg border border-border bg-background px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground focus:border-focus focus:outline-none focus:ring-1 focus:ring-focus"
             />
             <button
               type="submit"
@@ -91,7 +91,7 @@ export function SceneTargetSheet({ canonicalId, onClose }: SceneTargetSheetProps
 
           <p className="mb-1 text-xs font-medium text-muted-foreground">Scenes in {activeAdventure.title}</p>
           {activeAdventure.scenes.length === 0 ? (
-            <p className="px-3 py-6 text-center text-xs text-muted-foreground/60">
+            <p className="px-3 py-6 text-center text-xs text-foreground-subtle">
               No scenes yet. Create one above, or tap the flag to add to this adventure directly.
             </p>
           ) : (
@@ -111,7 +111,7 @@ export function SceneTargetSheet({ canonicalId, onClose }: SceneTargetSheetProps
                     <li key={scene.id}>
                       <div className="flex w-full items-center gap-3 border-b border-border py-3">
                         {label}
-                        <span className="inline-flex shrink-0 items-center gap-1 text-xs font-medium text-emerald-500">
+                        <span className="inline-flex shrink-0 items-center gap-1 text-xs font-medium text-success">
                           <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} className="h-4 w-4">
                             <polyline points="20 6 9 17 4 12" />
                           </svg>

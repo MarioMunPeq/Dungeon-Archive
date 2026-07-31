@@ -35,7 +35,7 @@ export function SearchEmptyState() {
             <Link
               key={key}
               to={`/${key}`}
-              className="rounded-lg border border-border p-3 text-center transition-colors hover:bg-accent hover:text-foreground"
+              className="rounded-lg border border-border bg-surface p-3 text-center transition-colors hover:bg-accent hover:text-foreground"
             >
               <span className="text-sm font-medium text-foreground">{reg.plural}</span>
             </Link>

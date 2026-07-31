@@ -14,7 +14,7 @@ export function QuoteBlock({ blocks, by }: QuoteBlockProps) {
           <BlockSwitch key={i} block={block} />
         ))}
       </div>
-      {by && <p className="mt-2 text-xs not-italic text-muted-foreground/70">&mdash; {by}</p>}
+      {by && <p className="mt-2 text-xs not-italic text-muted-foreground">&mdash; {by}</p>}
     </blockquote>
   );
 }

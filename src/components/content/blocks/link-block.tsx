@@ -9,7 +9,7 @@ export function LinkBlock({ href, text }: LinkBlockProps) {
       href={href}
       target="_blank"
       rel="noopener noreferrer"
-      className="text-accent-foreground underline underline-offset-2 hover:text-foreground transition-colors"
+      className="text-primary-muted underline underline-offset-2 hover:text-foreground transition-colors"
     >
       {text}
     </a>
