@@ -30,7 +30,9 @@ export function AbilityScores({ abilities }: AbilityScoresProps) {
         <div key={key} className="flex flex-col items-center gap-0.5">
           <span className="text-xs font-semibold uppercase text-muted-foreground">{label}</span>
           <span className="text-lg font-bold tabular-nums">{abilities[key]}</span>
-          <span className="text-sm text-muted-foreground tabular-nums">({mod(abilities[key])})</span>
+          <span className="text-sm text-muted-foreground tabular-nums">
+            ({mod(abilities[key])})
+          </span>
         </div>
       ))}
     </div>

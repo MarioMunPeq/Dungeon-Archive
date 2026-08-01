@@ -10,6 +10,8 @@ interface EntityReferenceRowProps {
   readonly subtitle?: string;
   readonly showBadge?: boolean;
   readonly asLink?: boolean;
+  readonly expanded?: boolean;
+  readonly onToggle?: () => void;
   readonly trailing?: ReactNode;
   readonly action?: ReactNode;
   readonly className?: string;
@@ -20,6 +22,8 @@ export function EntityReferenceRow({
   subtitle,
   showBadge = true,
   asLink = true,
+  expanded,
+  onToggle,
   trailing,
   action,
   className = "",
@@ -56,6 +60,33 @@ export function EntityReferenceRow({
       <path d="m9 18 6-6-6-6" />
     </svg>
   );
+
+  if (typeof onToggle === "function") {
+    return (
+      <div
+        role="button"
+        tabIndex={0}
+        aria-expanded={expanded}
+        onClick={onToggle}
+        onKeyDown={(e) => {
+          if (e.key === "Enter" || e.key === " ") {
+            e.preventDefault();
+            onToggle();
+          }
+        }}
+        className={cn(
+          base,
+          "cursor-pointer transition-all duration-150 hover:bg-accent/50 active:bg-accent/80",
+          expanded && "bg-accent/40",
+        )}
+      >
+        {badge}
+        <div className="min-w-0 flex-1">{text}</div>
+        {trailing}
+        {action}
+      </div>
+    );
+  }
 
   if (asLink) {
     return (

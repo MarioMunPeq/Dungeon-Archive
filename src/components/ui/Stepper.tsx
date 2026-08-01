@@ -13,6 +13,7 @@ interface StepperProps {
   readonly variant?: "bordered" | "ghost";
   readonly valueClassName?: string;
   readonly className?: string;
+  readonly hiddenControls?: boolean;
 }
 
 const REPEAT_DELAY_MS = 400;
@@ -28,6 +29,7 @@ export function Stepper({
   variant = "bordered",
   valueClassName = "",
   className = "",
+  hiddenControls = false,
 }: StepperProps) {
   const [editing, setEditing] = useState(false);
   const [draft, setDraft] = useState("");
@@ -80,20 +82,34 @@ export function Stepper({
     setEditing(false);
   }, [draft, min, max, onChange]);
 
+  const controlMotion = hiddenControls
+    ? "transition-opacity duration-150 ease-out"
+    : variant === "ghost"
+      ? "transition-all duration-150 active:scale-90 active:text-foreground"
+      : "transition-all duration-150 active:scale-90";
+
   const controlClass =
     variant === "ghost"
-      ? "hitbox-expand flex h-7 w-7 shrink-0 select-none items-center justify-center rounded-md text-muted-foreground transition-all duration-100 active:scale-90 active:text-foreground disabled:cursor-default disabled:text-disabled-foreground disabled:active:scale-100 hover:text-foreground"
-      : "flex h-9 w-9 shrink-0 select-none items-center justify-center rounded-md border border-border bg-background text-base font-semibold text-foreground transition-all duration-100 active:scale-90 disabled:cursor-default disabled:bg-disabled disabled:text-disabled-foreground disabled:active:scale-100 hover:border-border-strong";
+      ? cn(
+          "hitbox-expand flex h-7 w-7 shrink-0 select-none items-center justify-center rounded-md text-muted-foreground active:scale-90 disabled:cursor-default disabled:text-disabled-foreground disabled:active:scale-100 hover:text-foreground",
+          controlMotion,
+          hiddenControls &&
+            "opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto group-focus-within:opacity-100 group-focus-within:pointer-events-auto",
+        )
+      : cn(
+          "flex h-9 w-9 shrink-0 select-none items-center justify-center rounded-md border border-border bg-background text-base font-semibold text-foreground disabled:cursor-default disabled:bg-disabled disabled:text-disabled-foreground disabled:active:scale-100 hover:border-border-strong",
+          controlMotion,
+        );
 
   const iconClass = variant === "ghost" ? "h-3.5 w-3.5" : "h-4 w-4";
 
   const valueButtonClass =
     variant === "ghost"
       ? cn(
-          "flex h-9 min-w-0 flex-1 select-none items-center justify-center rounded-md font-bold tabular-nums text-foreground transition-all duration-100 active:scale-95 hover:bg-accent/60",
+          "flex h-9 min-w-0 flex-1 select-none items-center justify-center rounded-md font-bold tabular-nums text-foreground transition-all duration-150 active:scale-95 hover:bg-accent/60",
           valueClassName,
         )
-      : "flex h-9 min-w-0 flex-1 select-none items-center justify-center rounded-md border border-border bg-background px-1 text-base font-semibold tabular-nums text-foreground transition-all duration-100 active:scale-95 hover:border-border-strong";
+      : "flex h-9 min-w-0 flex-1 select-none items-center justify-center rounded-md border border-border bg-background px-1 text-base font-semibold tabular-nums text-foreground transition-all duration-150 active:scale-95 hover:border-border-strong";
 
   return (
     <div className={cn("flex w-full items-center gap-1", className)}>

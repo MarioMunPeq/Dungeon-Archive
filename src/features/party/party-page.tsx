@@ -1,8 +1,9 @@
 import { useState, useCallback, useMemo } from "react";
+import { Link } from "react-router-dom";
 import { usePlayerReferences, userStore } from "@/user-state";
 import type { PlayerReference, PlayerReferenceUpdate } from "@/user-state";
 import { getEntitiesForCategory, SCHOOL_NAMES, resolveEntity } from "@/compendium";
-import type { Equipment, MagicItem, Spell } from "@/compendium";
+import type { ContentBlock, Equipment, MagicItem, Spell } from "@/compendium";
 import { entityRefFromCanonicalId, EntityReferenceRow, RowRemoveButton } from "@/components/entity";
 import { ReferencePicker } from "@/components/ui/ReferencePicker";
 import type { PickerCandidate } from "@/components/ui/ReferencePicker";
@@ -214,6 +215,91 @@ function weaponStats(canonicalId: string): string | undefined {
   return damage || undefined;
 }
 
+function spellSubtitle(entity: Spell | undefined): string | undefined {
+  if (!entity) return undefined;
+  const levelText = entity.level === 0 ? "Cantrip" : `Level ${entity.level}`;
+  return `${levelText} \u00B7 ${SCHOOL_NAMES[entity.school] ?? entity.school}`;
+}
+
+function weaponSubtitle(entity: Equipment | undefined): string | undefined {
+  if (!entity) return undefined;
+  const damage = [entity.damage, entity.damageType].filter(Boolean).join(" ");
+  return damage ? `${entity.type} \u00B7 ${damage}` : entity.type;
+}
+
+function firstParagraphText(blocks: readonly ContentBlock[]): string | undefined {
+  for (const block of blocks) {
+    if (block.type === "paragraph" && block.text.trim()) return block.text;
+    if (block.type === "entries") {
+      const inner = firstParagraphText(block.blocks);
+      if (inner) return inner;
+    }
+    if (block.type === "list") {
+      const item = block.items.find((i) => typeof i === "string" && i.trim());
+      if (typeof item === "string") return item;
+    }
+    if (block.type === "inset" || block.type === "quote") {
+      const inner = firstParagraphText(block.blocks);
+      if (inner) return inner;
+    }
+  }
+  return undefined;
+}
+
+function WeaponPreview({ item, href }: { item: Equipment; href: string }) {
+  const damage = [item.damage, item.damageType].filter(Boolean).join(" ");
+  const properties = item.properties ?? [];
+  return (
+    <div className="flex flex-col gap-1.5 rounded-lg bg-card px-3 py-2 animate-slide-up">
+      {damage && <p className="text-base font-bold tabular-nums text-foreground">{damage}</p>}
+      {properties.length > 0 && (
+        <p className="text-xs text-foreground-subtle">{properties.join(" \u00B7 ")}</p>
+      )}
+      <Link
+        to={href}
+        className="self-start text-xs font-medium text-primary transition-colors duration-150 hover:underline"
+      >
+        Open in Compendium
+      </Link>
+    </div>
+  );
+}
+
+function SpellPreview({ spell, href }: { spell: Spell; href: string }) {
+  const levelText = spell.level === 0 ? "Cantrip" : `Level ${spell.level}`;
+  const school = SCHOOL_NAMES[spell.school] ?? spell.school;
+  const summary = firstParagraphText(spell.description);
+  const flags = [spell.concentration && "Concentration", spell.ritual && "Ritual"].filter(
+    Boolean,
+  ) as string[];
+  return (
+    <div className="flex flex-col gap-1.5 rounded-lg bg-card px-3 py-2 animate-slide-up">
+      <p className="text-xs leading-relaxed text-foreground-subtle">
+        {[levelText, school, spell.castingTime, spell.range, spell.duration].join(" \u00B7 ")}
+      </p>
+      {flags.length > 0 && (
+        <div className="flex items-center gap-1">
+          {flags.map((flag) => (
+            <span
+              key={flag}
+              className="rounded-full border border-border bg-muted px-1.5 py-0.5 text-[10px] font-medium uppercase tracking-wide text-muted-foreground"
+            >
+              {flag}
+            </span>
+          ))}
+        </div>
+      )}
+      {summary && <p className="line-clamp-2 text-xs text-muted-foreground">{summary}</p>}
+      <Link
+        to={href}
+        className="self-start text-xs font-medium text-primary transition-colors duration-150 hover:underline"
+      >
+        Open in Compendium
+      </Link>
+    </div>
+  );
+}
+
 function createEmptyReference(): Omit<PlayerReference, "id"> {
   return {
     name: "New Player",
@@ -247,7 +333,7 @@ function ValueLabel({ children, onClear }: { children: string; onClear?: () => v
           type="button"
           onClick={onClear}
           aria-label={`Clear ${children}`}
-          className="inline-flex h-5 w-5 shrink-0 items-center justify-center rounded text-muted-foreground transition-colors duration-100 hover:bg-accent hover:text-foreground active:scale-90"
+          className="inline-flex h-5 w-5 shrink-0 items-center justify-center rounded text-muted-foreground transition-colors duration-150 hover:bg-accent hover:text-foreground active:scale-90"
         >
           <svg
             aria-hidden="true"
@@ -286,10 +372,11 @@ function NumberCell({
   valueClassName?: string;
 }) {
   return (
-    <div className="flex min-w-0 flex-col items-center gap-0.5">
+    <div className="group flex min-w-0 flex-col items-center gap-0.5">
       <ValueLabel onClear={onClear}>{label}</ValueLabel>
       <Stepper
         variant="ghost"
+        hiddenControls
         value={value}
         min={min}
         max={max}
@@ -329,7 +416,7 @@ function OptionalNumberCell({
           type="button"
           onClick={() => onCommit(initial)}
           aria-label={`Set ${label}`}
-          className="hitbox-expand flex h-9 w-full select-none items-center justify-center rounded-md text-muted-foreground transition-all duration-100 hover:text-foreground active:scale-95"
+          className="hitbox-expand flex h-9 w-full select-none items-center justify-center rounded-md text-muted-foreground transition-all duration-150 hover:text-foreground active:scale-95"
         >
           <svg
             aria-hidden="true"
@@ -381,20 +468,43 @@ function AddButton({ onClick, label }: { onClick: () => void; label: string }) {
 
 function ReferenceRow({
   canonicalId,
+  kind,
   onRemove,
   quickStats,
 }: {
   canonicalId: string;
+  kind: PickerKind;
   onRemove: (id: string) => void;
   quickStats?: string;
 }) {
+  const [expanded, setExpanded] = useState(false);
+  const [leaving, setLeaving] = useState(false);
+  const resolved = useMemo(() => resolveEntity(canonicalId), [canonicalId]);
   const ref = entityRefFromCanonicalId(canonicalId);
   if (!ref) return null;
+
+  const selected = resolved?.selected;
+  const previewable = kind !== "magicitem";
+
+  const subtitle =
+    kind === "spell" && selected?.category === "spell"
+      ? spellSubtitle(selected)
+      : kind === "weapon" && selected?.category === "equipment"
+        ? weaponSubtitle(selected)
+        : kind === "magicitem" && selected?.category === "magicitem"
+          ? selected.rarity
+          : undefined;
+
+  const handleRemove = () => {
+    setLeaving(true);
+    window.setTimeout(() => onRemove(canonicalId), 150);
+  };
+
   return (
-    <div className="animate-fade-in">
+    <div className={cn("flex flex-col", leaving ? "animate-fade-out" : "animate-fade-in")}>
       <EntityReferenceRow
         canonicalId={canonicalId}
-        subtitle={ref.subtitle}
+        subtitle={subtitle}
         showBadge={false}
         className="py-1"
         trailing={
@@ -404,22 +514,31 @@ function ReferenceRow({
             </span>
           ) : undefined
         }
-        action={
-          <RowRemoveButton label={`Remove ${ref.name}`} onClick={() => onRemove(canonicalId)} />
-        }
+        action={<RowRemoveButton label={`Remove ${ref.name}`} onClick={handleRemove} />}
+        asLink={!previewable}
+        onToggle={previewable ? () => setExpanded((v) => !v) : undefined}
+        expanded={previewable ? expanded : undefined}
       />
+      {previewable && expanded && selected?.category === "spell" && (
+        <SpellPreview spell={selected} href={ref.href} />
+      )}
+      {previewable && expanded && selected?.category === "equipment" && (
+        <WeaponPreview item={selected} href={ref.href} />
+      )}
     </div>
   );
 }
 
 function ReferenceGroup({
   title,
+  kind,
   ids,
   onAdd,
   onRemove,
   getQuickStats,
 }: {
   title: string;
+  kind: PickerKind;
   ids: string[];
   onAdd: () => void;
   onRemove: (canonicalId: string) => void;
@@ -441,6 +560,7 @@ function ReferenceGroup({
             <ReferenceRow
               key={canonicalId}
               canonicalId={canonicalId}
+              kind={kind}
               onRemove={onRemove}
               quickStats={getQuickStats?.(canonicalId)}
             />
@@ -684,12 +804,14 @@ function PlayerReferenceCard({
       <div className="flex flex-col gap-5">
         <ReferenceGroup
           title="Known Spells"
+          kind="spell"
           ids={reference.knownSpellCanonicalIds}
           onAdd={() => setPicker("spell")}
           onRemove={(canonicalId) => removeReference("spell", canonicalId)}
         />
         <ReferenceGroup
           title="Weapons"
+          kind="weapon"
           ids={reference.weaponCanonicalIds}
           onAdd={() => setPicker("weapon")}
           onRemove={(canonicalId) => removeReference("weapon", canonicalId)}
@@ -697,6 +819,7 @@ function PlayerReferenceCard({
         />
         <ReferenceGroup
           title="Magic Items"
+          kind="magicitem"
           ids={reference.magicItemCanonicalIds}
           onAdd={() => setPicker("magicitem")}
           onRemove={(canonicalId) => removeReference("magicitem", canonicalId)}
