@@ -11,9 +11,10 @@ import { AdventureButton } from "@/components/ui/AdventureButton";
 interface SearchResultRowProps extends SearchResultItem {
   readonly query: string;
   readonly isSelected: boolean;
+  readonly id: string;
 }
 
-const ROW_BASE = "flex items-center gap-3 px-4 py-3 transition-colors";
+const ROW_BASE = "flex items-center gap-3 px-4 py-2.5 transition-colors";
 const ROW_SELECTED = "bg-accent";
 
 export function SearchResultRow({
@@ -24,13 +25,17 @@ export function SearchResultRow({
   query,
   isSelected,
   canonicalId,
+  id,
 }: SearchResultRowProps) {
   const cat = CATEGORY_REGISTRY[category];
   const variant = badgeVariantForCategory(category);
 
   return (
     <Link
+      id={id}
       to={to}
+      role="option"
+      aria-selected={isSelected}
       className={`${ROW_BASE} ${isSelected ? ROW_SELECTED : "hover:bg-accent/50 active:bg-accent/80"}`}
     >
       <Badge variant={variant} className="shrink-0">

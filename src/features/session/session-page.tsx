@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { useSessionIds, userStore } from "@/user-state";
 import { entityRefFromCanonicalId, EntityReferenceRow, RowRemoveButton } from "@/components/entity";
 import type { EntityRef } from "@/components/entity";
+import { Button } from "@/components/ui/Button";
 
 export function SessionPage() {
   const sessionIds = useSessionIds();
@@ -44,30 +45,18 @@ export function SessionPage() {
         </div>
         {showConfirm ? (
           <div className="flex items-center gap-2">
-            <button
-              type="button"
-              onClick={handleCancelConfirm}
-              className="rounded-lg border border-border px-3 py-1.5 text-xs text-muted-foreground transition-all duration-150 hover:bg-accent active:scale-90"
-            >
+            <Button variant="outline" size="sm" onClick={handleCancelConfirm}>
               Cancel
-            </button>
-            <button
-              type="button"
-              onClick={handleClearSession}
-              className="rounded-lg bg-destructive px-3 py-1.5 text-xs font-medium text-destructive-foreground transition-all duration-150 hover:bg-destructive/90 active:scale-90"
-            >
+            </Button>
+            <Button variant="danger-solid" size="sm" onClick={handleClearSession}>
               End
-            </button>
+            </Button>
           </div>
         ) : (
           sessionIds.length > 0 && (
-            <button
-              type="button"
-              onClick={handleShowConfirm}
-              className="rounded-lg border border-destructive/50 px-3 py-1.5 text-xs text-destructive transition-all duration-150 hover:bg-destructive/10 active:scale-90"
-            >
+            <Button variant="danger" size="sm" onClick={handleShowConfirm}>
               End Session
-            </button>
+            </Button>
           )
         )}
       </div>
@@ -79,7 +68,7 @@ export function SessionPage() {
           </p>
           <Link
             to="/search"
-            className="rounded-lg bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-all duration-150 hover:bg-primary/90 active:scale-95"
+            className="inline-flex items-center justify-center gap-1.5 rounded-lg bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-all duration-150 hover:bg-primary-hover active:scale-95 active:bg-primary-active"
           >
             Search
           </Link>
@@ -90,7 +79,7 @@ export function SessionPage() {
             <EntityReferenceRow
               key={ref.canonicalId}
               canonicalId={ref.canonicalId}
-              className="border-b border-border px-0 py-3"
+              className="border-b border-border px-0 py-3 last:border-b-0"
               action={
                 <RowRemoveButton
                   label={`Remove ${ref.name} from session`}

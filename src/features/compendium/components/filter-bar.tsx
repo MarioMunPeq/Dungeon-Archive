@@ -1,5 +1,5 @@
-import type { ChangeEvent } from "react";
 import type { FilterDefinition } from "@/compendium";
+import { SelectField } from "@/components/ui/SelectField";
 
 interface FilterBarProps {
   readonly filters: readonly FilterDefinition[];
@@ -15,19 +15,12 @@ export function FilterBar({ filters, values, onChange }: FilterBarProps) {
       {filters.map((filter) => (
         <div key={filter.key} className="flex items-center gap-1.5">
           <label className="text-xs font-medium text-muted-foreground">{filter.label}</label>
-          <select
+          <SelectField
             value={values[filter.key] ?? ""}
-            onChange={(e: ChangeEvent<HTMLSelectElement>) => {
-              onChange(filter.key, e.currentTarget.value);
-            }}
-            className="rounded border border-border bg-background px-2 py-1 text-xs text-foreground"
-          >
-            {filter.options.map((opt) => (
-              <option key={opt.value} value={opt.value}>
-                {opt.label}
-              </option>
-            ))}
-          </select>
+            options={filter.options}
+            onChange={(value) => onChange(filter.key, value)}
+            ariaLabel={filter.label}
+          />
         </div>
       ))}
     </div>

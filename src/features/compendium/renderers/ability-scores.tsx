@@ -25,12 +25,12 @@ const ABILITIES = [
 
 export function AbilityScores({ abilities }: AbilityScoresProps) {
   return (
-    <div className="grid grid-cols-6 gap-2">
+    <div className="grid grid-cols-6 gap-1">
       {ABILITIES.map(({ key, label }) => (
-        <div key={key} className="flex flex-col items-center rounded border border-border p-2">
+        <div key={key} className="flex flex-col items-center gap-0.5">
           <span className="text-xs font-semibold uppercase text-muted-foreground">{label}</span>
-          <span className="text-lg font-bold">{abilities[key]}</span>
-          <span className="text-sm text-muted-foreground">({mod(abilities[key])})</span>
+          <span className="text-lg font-bold tabular-nums">{abilities[key]}</span>
+          <span className="text-sm text-muted-foreground tabular-nums">({mod(abilities[key])})</span>
         </div>
       ))}
     </div>

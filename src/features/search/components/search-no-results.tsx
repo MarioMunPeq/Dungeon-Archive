@@ -1,14 +1,22 @@
+import { Button } from "@/components/ui/Button";
+
 interface SearchNoResultsProps {
   readonly query: string;
+  readonly onClear?: () => void;
 }
 
-export function SearchNoResults({ query }: SearchNoResultsProps) {
+export function SearchNoResults({ query, onClear }: SearchNoResultsProps) {
   return (
-    <div className="flex flex-col items-center px-4 py-16 text-center">
-      <p className="mb-2 text-sm text-muted-foreground">No results for &ldquo;{query}&rdquo;</p>
+    <div className="flex flex-col items-center gap-4 px-4 py-16 text-center">
+      <p className="text-sm font-medium text-foreground">No results for &ldquo;{query}&rdquo;</p>
       <p className="text-xs text-foreground-subtle">
         Try a different search term or browse categories
       </p>
+      {onClear && (
+        <Button variant="outline" size="sm" onClick={onClear}>
+          Clear search
+        </Button>
+      )}
     </div>
   );
 }

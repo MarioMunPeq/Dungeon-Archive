@@ -1,3 +1,5 @@
+import { Button } from "./Button";
+
 interface ErrorStateProps {
   readonly message: string;
   readonly onRetry?: () => void;
@@ -9,13 +11,9 @@ export function ErrorState({ message, onRetry }: ErrorStateProps) {
       <p className="mb-2 text-sm font-medium text-destructive">Something went wrong</p>
       <p className="mb-4 text-xs text-muted-foreground">{message}</p>
       {onRetry && (
-        <button
-          type="button"
-          onClick={onRetry}
-          className="rounded-lg bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary-hover active:bg-primary-active"
-        >
+        <Button variant="outline" onClick={onRetry}>
           Try again
-        </button>
+        </Button>
       )}
     </div>
   );

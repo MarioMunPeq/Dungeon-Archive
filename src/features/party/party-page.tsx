@@ -1,14 +1,14 @@
 import { useState, useCallback, useMemo } from "react";
 import { usePlayerReferences, userStore } from "@/user-state";
 import type { PlayerReference, PlayerReferenceUpdate } from "@/user-state";
-import { getEntitiesForCategory, SCHOOL_NAMES } from "@/compendium";
+import { getEntitiesForCategory, SCHOOL_NAMES, resolveEntity } from "@/compendium";
 import type { Equipment, MagicItem, Spell } from "@/compendium";
 import { entityRefFromCanonicalId, EntityReferenceRow, RowRemoveButton } from "@/components/entity";
 import { ReferencePicker } from "@/components/ui/ReferencePicker";
 import type { PickerCandidate } from "@/components/ui/ReferencePicker";
 import { InlineTextEditor } from "@/components/ui/InlineTextEditor";
 import { InlineTextareaEditor } from "@/components/ui/InlineTextareaEditor";
-import { SelectField, Stepper } from "@/components/ui";
+import { Button, SelectField, Stepper } from "@/components/ui";
 import { cn } from "@/lib/utils";
 
 type PickerKind = "spell" | "weapon" | "magicitem";
@@ -206,6 +206,14 @@ function formatSigned(value: number): string {
   return value > 0 ? `+${value}` : `${value}`;
 }
 
+function weaponStats(canonicalId: string): string | undefined {
+  const resolved = resolveEntity(canonicalId);
+  if (!resolved || resolved.selected.category !== "equipment") return undefined;
+  const item = resolved.selected as Equipment;
+  const damage = [item.damage, item.damageType].filter(Boolean).join(" ");
+  return damage || undefined;
+}
+
 function createEmptyReference(): Omit<PlayerReference, "id"> {
   return {
     name: "New Player",
@@ -354,11 +362,7 @@ function OptionalNumberCell({
 
 function AddButton({ onClick, label }: { onClick: () => void; label: string }) {
   return (
-    <button
-      type="button"
-      onClick={onClick}
-      className="hitbox-expand inline-flex items-center gap-1 rounded-md px-2 py-1 text-xs font-medium text-muted-foreground transition-all duration-150 hover:bg-accent/60 hover:text-foreground active:bg-accent active:scale-95"
-    >
+    <Button variant="ghost" size="sm" onClick={onClick}>
       <svg
         aria-hidden="true"
         viewBox="0 0 24 24"
@@ -371,16 +375,18 @@ function AddButton({ onClick, label }: { onClick: () => void; label: string }) {
         <line x1="5" y1="12" x2="19" y2="12" />
       </svg>
       {label}
-    </button>
+    </Button>
   );
 }
 
 function ReferenceRow({
   canonicalId,
   onRemove,
+  quickStats,
 }: {
   canonicalId: string;
   onRemove: (id: string) => void;
+  quickStats?: string;
 }) {
   const ref = entityRefFromCanonicalId(canonicalId);
   if (!ref) return null;
@@ -391,6 +397,13 @@ function ReferenceRow({
         subtitle={ref.subtitle}
         showBadge={false}
         className="py-1"
+        trailing={
+          quickStats ? (
+            <span className="shrink-0 rounded-md bg-card px-1.5 py-0.5 text-xs font-semibold tabular-nums text-foreground">
+              {quickStats}
+            </span>
+          ) : undefined
+        }
         action={
           <RowRemoveButton label={`Remove ${ref.name}`} onClick={() => onRemove(canonicalId)} />
         }
@@ -404,11 +417,13 @@ function ReferenceGroup({
   ids,
   onAdd,
   onRemove,
+  getQuickStats,
 }: {
   title: string;
   ids: string[];
   onAdd: () => void;
   onRemove: (canonicalId: string) => void;
+  getQuickStats?: (canonicalId: string) => string | undefined;
 }) {
   return (
     <div className="flex flex-col gap-1">
@@ -423,7 +438,12 @@ function ReferenceGroup({
       ) : (
         <div className="flex flex-col">
           {ids.map((canonicalId) => (
-            <ReferenceRow key={canonicalId} canonicalId={canonicalId} onRemove={onRemove} />
+            <ReferenceRow
+              key={canonicalId}
+              canonicalId={canonicalId}
+              onRemove={onRemove}
+              quickStats={getQuickStats?.(canonicalId)}
+            />
           ))}
         </div>
       )}
@@ -673,6 +693,7 @@ function PlayerReferenceCard({
           ids={reference.weaponCanonicalIds}
           onAdd={() => setPicker("weapon")}
           onRemove={(canonicalId) => removeReference("weapon", canonicalId)}
+          getQuickStats={weaponStats}
         />
         <ReferenceGroup
           title="Magic Items"
@@ -746,13 +767,7 @@ export function PartyPage() {
               : `${players.length} reference${players.length === 1 ? "" : "s"}`}
           </p>
         </div>
-        <button
-          type="button"
-          onClick={handleAdd}
-          className="touch-target rounded-lg bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-all duration-150 hover:bg-primary/90 active:scale-95"
-        >
-          Add Player
-        </button>
+        <Button onClick={handleAdd}>Add Player</Button>
       </div>
 
       {players.length === 0 ? (
@@ -761,13 +776,7 @@ export function PartyPage() {
             Quick-access references: combat numbers, ability modifiers, and links to the spells,
             weapons, and magic items you use most. Nothing else — no inventory, no tracking.
           </p>
-          <button
-            type="button"
-            onClick={handleAdd}
-            className="touch-target rounded-lg bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-all duration-150 hover:bg-primary/90 active:scale-95"
-          >
-            Create your first reference
-          </button>
+          <Button onClick={handleAdd}>Create your first reference</Button>
         </div>
       ) : (
         <div className="flex flex-col gap-4">

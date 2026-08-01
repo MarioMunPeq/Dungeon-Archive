@@ -1,16 +1,23 @@
+import type { ReactNode } from "react";
 import { EntityCard } from "@/components/entity";
 import type { EntityCardData } from "@/compendium";
 
 interface EntityListProps {
   readonly entities: readonly EntityCardData[];
   readonly emptyMessage?: string;
+  readonly emptyAction?: ReactNode;
 }
 
-export function EntityList({ entities, emptyMessage = "No entities found" }: EntityListProps) {
+export function EntityList({
+  entities,
+  emptyMessage = "No entities found",
+  emptyAction,
+}: EntityListProps) {
   if (entities.length === 0) {
     return (
-      <div className="flex flex-col items-center justify-center px-4 py-16 text-center">
-        <p className="text-sm text-muted-foreground">{emptyMessage}</p>
+      <div className="flex flex-col items-center gap-4 px-4 py-16 text-center">
+        <p className="text-sm font-medium text-foreground">{emptyMessage}</p>
+        {emptyAction}
       </div>
     );
   }

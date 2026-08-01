@@ -10,6 +10,7 @@ interface EntityReferenceRowProps {
   readonly subtitle?: string;
   readonly showBadge?: boolean;
   readonly asLink?: boolean;
+  readonly trailing?: ReactNode;
   readonly action?: ReactNode;
   readonly className?: string;
 }
@@ -19,6 +20,7 @@ export function EntityReferenceRow({
   subtitle,
   showBadge = true,
   asLink = true,
+  trailing,
   action,
   className = "",
 }: EntityReferenceRowProps) {
@@ -63,6 +65,7 @@ export function EntityReferenceRow({
       >
         {badge}
         <div className="min-w-0 flex-1">{text}</div>
+        {trailing}
         {action}
         {chevron}
       </Link>
@@ -75,6 +78,7 @@ export function EntityReferenceRow({
       <Link to={ref.href} className="min-w-0 flex-1">
         {text}
       </Link>
+      {trailing}
       {action}
     </div>
   );

@@ -62,15 +62,23 @@ export function SearchPage() {
 
   const hasQuery = query.trim().length > 0;
   const hasResults = filtered.length > 0;
+  const activeDescendantId = selectedIndex >= 0 ? `search-result-${selectedIndex}` : undefined;
 
   return (
     <div className="flex flex-col pb-4">
-      <SearchInput ref={inputRef} value={query} onChange={setQuery} onKeyDown={handleKeyDown} />
+      <SearchInput
+        ref={inputRef}
+        value={query}
+        onChange={setQuery}
+        onKeyDown={handleKeyDown}
+        activeDescendantId={activeDescendantId}
+        hasResults={hasResults}
+      />
 
       {hasQuery && <SearchCategoryFilter selected={categoryFilter} onChange={setCategoryFilter} />}
 
       {!hasQuery && <SearchEmptyState />}
-      {hasQuery && !hasResults && <SearchNoResults query={query} />}
+      {hasQuery && !hasResults && <SearchNoResults query={query} onClear={() => setQuery("")} />}
       {hasResults && (
         <SearchResults results={filtered} query={query} selectedIndex={selectedIndex} />
       )}

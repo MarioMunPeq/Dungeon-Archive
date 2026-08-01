@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { Button } from "@/components/ui/Button";
 
 export function NotFoundPage() {
   return (
@@ -8,11 +9,8 @@ export function NotFoundPage() {
       <p className="mb-6 text-sm text-muted-foreground">
         The page you&apos;re looking for doesn&apos;t exist.
       </p>
-      <Link
-        to="/"
-        className="rounded-lg bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary-hover active:bg-primary-active"
-      >
-        Go home
+      <Link to="/">
+        <Button>Go home</Button>
       </Link>
     </div>
   );

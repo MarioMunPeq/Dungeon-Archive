@@ -109,7 +109,7 @@ test("renders title and children", () => {
   );
   ok(html.includes("My Title"));
   ok(html.includes("body"));
-  ok(html.includes("text-xs font-medium text-muted-foreground"));
+  ok(html.includes("text-xs font-semibold uppercase tracking-wide text-muted-foreground"));
 });
 
 test("renders optional subtitle", () => {

@@ -1,13 +1,24 @@
 import type { ChangeEvent } from "react";
 import { cn } from "@/lib/utils";
 
+export interface SelectFieldOption {
+  readonly value: string;
+  readonly label: string;
+}
+
+type SelectFieldOptionInput = string | SelectFieldOption;
+
 interface SelectFieldProps {
   readonly value: string;
-  readonly options: readonly string[];
+  readonly options: readonly SelectFieldOptionInput[];
   readonly onChange: (value: string) => void;
   readonly ariaLabel: string;
   readonly placeholder?: string;
   readonly className?: string;
+}
+
+function normalizeOption(option: SelectFieldOptionInput): SelectFieldOption {
+  return typeof option === "string" ? { value: option, label: option } : option;
 }
 
 export function SelectField({
@@ -18,7 +29,8 @@ export function SelectField({
   placeholder = "",
   className = "",
 }: SelectFieldProps) {
-  const showCurrent = value !== "" && !options.includes(value);
+  const normalized = options.map(normalizeOption);
+  const showCurrent = value !== "" && !normalized.some((o) => o.value === value);
   return (
     <select
       value={value}
@@ -39,9 +51,9 @@ export function SelectField({
     >
       {placeholder && <option value="">{placeholder}</option>}
       {showCurrent && <option value={value}>{value}</option>}
-      {options.map((option) => (
-        <option key={option} value={option}>
-          {option}
+      {normalized.map((option) => (
+        <option key={option.value} value={option.value}>
+          {option.label}
         </option>
       ))}
     </select>

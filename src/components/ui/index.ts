@@ -1,5 +1,6 @@
 export { Surface } from "./Surface";
 export type { SurfaceVariant } from "@/config/tokens";
+export { Button } from "./Button";
 export { Section } from "./Section";
 export { Badge } from "./Badge";
 export { Divider } from "./Divider";

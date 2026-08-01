@@ -3,6 +3,7 @@ import { useActiveAdventure, useAdventureEntityIds, userStore } from "@/user-sta
 import { InlineTextEditor } from "@/components/ui/InlineTextEditor";
 import { InlineTextareaEditor } from "@/components/ui/InlineTextareaEditor";
 import { Section } from "@/components/ui/Section";
+import { Button } from "@/components/ui/Button";
 import { entityRefFromCanonicalId, EntityReferenceRow, RowRemoveButton } from "@/components/entity";
 import type { EntityRef } from "@/components/entity";
 
@@ -127,13 +128,7 @@ export function AdventurePage() {
             No active adventure yet. Create one to track your campaign notes, objectives, and
             important references.
           </p>
-          <button
-            type="button"
-            onClick={handleCreateAdventure}
-            className="rounded-lg bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-all duration-150 hover:bg-primary/90 active:scale-95"
-          >
-            Create Adventure
-          </button>
+          <Button onClick={handleCreateAdventure}>Create Adventure</Button>
         </div>
       </div>
     );
@@ -189,22 +184,14 @@ export function AdventurePage() {
               </button>
             )}
             {allAdventures.length > 1 && (
-              <button
-                type="button"
-                onClick={handleToggleSwitch}
-                className="touch-target rounded-lg px-2 py-1 text-xs font-medium text-muted-foreground transition-colors hover:bg-accent hover:text-foreground active:bg-accent/60"
-              >
+              <Button variant="ghost" size="sm" onClick={handleToggleSwitch}>
                 Switch
-              </button>
+              </Button>
             )}
             {!adventure.archived && (
-              <button
-                type="button"
-                onClick={handleArchive}
-                className="touch-target rounded-lg px-2 py-1 text-xs font-medium text-destructive transition-colors hover:bg-destructive/10 hover:text-destructive active:bg-destructive/10"
-              >
+              <Button variant="danger" size="sm" onClick={handleArchive}>
                 Archive
-              </button>
+              </Button>
             )}
           </div>
         </div>
@@ -234,13 +221,13 @@ export function AdventurePage() {
       {adventure.archived && (
         <div className="flex items-center gap-3 rounded-lg border border-border bg-accent/30 px-4 py-3">
           <p className="text-xs text-muted-foreground">This adventure is archived.</p>
-          <button
-            type="button"
+          <Button
+            variant="ghost"
+            size="sm"
             onClick={() => userStore.getState().restoreAdventure(adventure.id)}
-            className="touch-target px-2 py-1 text-xs font-medium text-foreground underline transition-colors hover:text-primary-muted"
           >
             Restore
-          </button>
+          </Button>
         </div>
       )}
 
@@ -315,14 +302,9 @@ export function AdventurePage() {
               placeholder="Add objective\u2026"
               className="flex-1 rounded-lg border border-border bg-background px-3 py-1.5 text-sm text-foreground outline-none placeholder:text-muted-foreground focus:border-focus focus:ring-1 focus:ring-focus"
             />
-            <button
-              type="button"
-              onClick={handleAddObjective}
-              disabled={!newObjective.trim()}
-              className="rounded-lg bg-primary px-3 py-1.5 text-xs font-medium text-primary-foreground transition-all duration-150 hover:bg-primary/90 active:scale-90 disabled:opacity-40"
-            >
+            <Button size="sm" onClick={handleAddObjective} disabled={!newObjective.trim()}>
               Add
-            </button>
+            </Button>
           </div>
         )}
       </Section>
@@ -332,13 +314,14 @@ export function AdventurePage() {
         action={
           entities.length > 0 &&
           !adventure.archived && (
-            <button
-              type="button"
+            <Button
+              variant="ghost"
+              size="sm"
+              className="text-destructive"
               onClick={handleClearEntities}
-              className="touch-target px-2 py-1 text-xs text-destructive transition-colors hover:text-destructive/80"
             >
               Remove all
-            </button>
+            </Button>
           )
         }
       >

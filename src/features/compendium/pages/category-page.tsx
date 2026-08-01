@@ -11,6 +11,7 @@ import {
 } from "@/compendium";
 import { FilterBar } from "../components/filter-bar";
 import { EntityList } from "../components/entity-list";
+import { Button } from "@/components/ui/Button";
 
 interface CategoryPageProps {
   readonly category: EntityCategory;
@@ -52,6 +53,12 @@ export function CategoryPage({ category }: CategoryPageProps) {
     );
   };
 
+  const hasActiveFilters = Object.keys(currentFilters).length > 0;
+
+  const handleClearFilters = () => {
+    setSearchParams(new URLSearchParams(), { replace: true });
+  };
+
   return (
     <div className="space-y-4 px-4 py-6">
       <div>
@@ -67,6 +74,13 @@ export function CategoryPage({ category }: CategoryPageProps) {
       <EntityList
         entities={cards}
         emptyMessage={`No ${categoryLabelSingular(category).toLowerCase()} match your filters`}
+        emptyAction={
+          hasActiveFilters ? (
+            <Button variant="outline" size="sm" onClick={handleClearFilters}>
+              Clear filters
+            </Button>
+          ) : undefined
+        }
       />
     </div>
   );
