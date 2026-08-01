@@ -20,6 +20,6 @@ export {
   usePartyMembers,
 } from "./store";
 export type { UserStore } from "./store";
-export type { UserState, Adventure, AdventureScene, PartyMember } from "./types";
+export type { UserState, Adventure, PartyMember } from "./types";
 export { STORAGE_KEY, CURRENT_VERSION } from "./types";
 export { normalize } from "./normalize";

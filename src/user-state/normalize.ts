@@ -1,4 +1,4 @@
-import type { Adventure, AdventureScene, PartyMember, UserState } from "./types";
+import type { Adventure, PartyMember, UserState } from "./types";
 import { CURRENT_VERSION } from "./types";
 import { isRegistered } from "../compendium/registry/entity-registry";
 
@@ -46,38 +46,6 @@ export function validateIds(ids: string[]): string[] {
 const MAX_ADVENTURES = 20;
 const MAX_ENTITIES_PER_ADVENTURE = 100;
 const MAX_OBJECTIVES_PER_ADVENTURE = 20;
-const MAX_SCENES_PER_ADVENTURE = 30;
-const MAX_REFERENCES_PER_SCENE = 60;
-
-function normalizeScene(raw: unknown): AdventureScene | null {
-  if (!raw || typeof raw !== "object") return null;
-  const s = raw as Record<string, unknown>;
-  if (typeof s.id !== "string" || !s.id) return null;
-  const title = typeof s.title === "string" ? s.title.trim() : "";
-  if (!title) return null;
-
-  const entities = validateIds(uniqueStrings(s.entities, true));
-  if (entities.length > MAX_REFERENCES_PER_SCENE) entities.length = MAX_REFERENCES_PER_SCENE;
-
-  return {
-    id: s.id,
-    title,
-    description: typeof s.description === "string" ? s.description.trim() || undefined : undefined,
-    note: typeof s.note === "string" ? s.note.trim() || undefined : undefined,
-    entities,
-  };
-}
-
-function normalizeScenes(raw: unknown): AdventureScene[] {
-  if (!Array.isArray(raw)) return [];
-  const valid: AdventureScene[] = [];
-  for (const item of raw) {
-    const scene = normalizeScene(item);
-    if (scene) valid.push(scene);
-  }
-  if (valid.length > MAX_SCENES_PER_ADVENTURE) valid.length = MAX_SCENES_PER_ADVENTURE;
-  return valid;
-}
 
 function normalizeAdventure(raw: unknown): Adventure | null {
   if (!raw || typeof raw !== "object") return null;
@@ -97,7 +65,6 @@ function normalizeAdventure(raw: unknown): Adventure | null {
     objectives,
     notes: typeof a.notes === "string" ? a.notes.trim() : "",
     entities,
-    scenes: normalizeScenes(a.scenes),
     createdAt: typeof a.createdAt === "number" ? a.createdAt : Date.now(),
     updatedAt: typeof a.updatedAt === "number" ? a.updatedAt : Date.now(),
     archived: typeof a.archived === "boolean" ? a.archived : false,

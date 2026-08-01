@@ -24,13 +24,6 @@ interface PartyActions {
   removePartyMember: (id: string) => void;
 }
 
-interface SceneActions {
-  addScene: (adventureId: string, data: { title: string; description?: string; note?: string }) => string | null;
-  updateScene: (adventureId: string, sceneId: string, data: { title?: string; description?: string; note?: string }) => void;
-  removeScene: (adventureId: string, sceneId: string) => void;
-  toggleSceneEntity: (adventureId: string, sceneId: string, canonicalId: string) => void;
-}
-
 interface UserActions {
   toggleFavorite: (canonicalId: string) => void;
   addRecentEntity: (canonicalId: string) => void;
@@ -43,7 +36,7 @@ interface UserActions {
   _reset: () => void;
 }
 
-export type UserStore = UserState & UserActions & AdventureActions & PartyActions & SceneActions & {
+export type UserStore = UserState & UserActions & AdventureActions & PartyActions & {
   favoritesSet: Set<string>;
   sessionSet: Set<string>;
   adventureEntitySet: Set<string>;
@@ -180,7 +173,6 @@ export const userStore = create<UserStore>((set, get) => ({
         objectives: [],
         notes: "",
         entities: [],
-        scenes: [],
         createdAt: Date.now(),
         updatedAt: Date.now(),
         archived: false,
@@ -251,7 +243,6 @@ export const userStore = create<UserStore>((set, get) => ({
           objectives: [],
           notes: "",
           entities: [canonicalId],
-          scenes: [],
           createdAt: Date.now(),
           updatedAt: Date.now(),
           archived: false,
@@ -383,91 +374,6 @@ export const userStore = create<UserStore>((set, get) => ({
     schedulePersist(get);
   },
 
-  addScene: (adventureId, data) => {
-    const title = data.title.trim();
-    if (!title) return null;
-    let sceneId: string | null = null;
-    set((s) => {
-      const adventures = mapAdventure(s.adventures, adventureId, (a) => {
-        const id = generateId();
-        sceneId = id;
-        return {
-          ...a,
-          scenes: [
-            ...a.scenes,
-            {
-              id,
-              title,
-              description: data.description?.trim() || undefined,
-              note: data.note?.trim() || undefined,
-              entities: [],
-            },
-          ],
-          updatedAt: Date.now(),
-        };
-      });
-      if (!adventures) return s;
-      return { adventures };
-    });
-    schedulePersist(get);
-    return sceneId;
-  },
-
-  updateScene: (adventureId, sceneId, data) => {
-    set((s) => {
-      const adventures = mapAdventure(s.adventures, adventureId, (a) => {
-        const sceneIdx = a.scenes.findIndex((sc) => sc.id === sceneId);
-        if (sceneIdx === -1) return a;
-        const existing = a.scenes[sceneIdx]!;
-        const scenes = [...a.scenes];
-        scenes[sceneIdx] = {
-          ...existing,
-          title: data.title !== undefined ? data.title.trim() || existing.title : existing.title,
-          description: data.description !== undefined ? data.description.trim() || undefined : existing.description,
-          note: data.note !== undefined ? data.note.trim() || undefined : existing.note,
-        };
-        return { ...a, scenes, updatedAt: Date.now() };
-      });
-      if (!adventures) return s;
-      return { adventures };
-    });
-    schedulePersist(get);
-  },
-
-  removeScene: (adventureId, sceneId) => {
-    set((s) => {
-      const adventures = mapAdventure(s.adventures, adventureId, (a) => ({
-        ...a,
-        scenes: a.scenes.filter((sc) => sc.id !== sceneId),
-        updatedAt: Date.now(),
-      }));
-      if (!adventures) return s;
-      return { adventures };
-    });
-    schedulePersist(get);
-  },
-
-  toggleSceneEntity: (adventureId, sceneId, canonicalId) => {
-    set((s) => {
-      const adventures = mapAdventure(s.adventures, adventureId, (a) => {
-        const sceneIdx = a.scenes.findIndex((sc) => sc.id === sceneId);
-        if (sceneIdx === -1) return a;
-        const scene = a.scenes[sceneIdx]!;
-        const entityIdx = scene.entities.indexOf(canonicalId);
-        const entities =
-          entityIdx !== -1
-            ? scene.entities.filter((_, i) => i !== entityIdx)
-            : [...scene.entities, canonicalId];
-        const scenes = [...a.scenes];
-        scenes[sceneIdx] = { ...scene, entities };
-        return { ...a, scenes, updatedAt: Date.now() };
-      });
-      if (!adventures) return s;
-      return { adventures };
-    });
-    schedulePersist(get);
-  },
-
   _replace: (state) => {
     set({
       version: state.version,
@@ -578,8 +484,7 @@ function adventuresEqual(a: Adventure[], b: Adventure[]): boolean {
       aa.id !== bb.id ||
       aa.title !== bb.title ||
       aa.updatedAt !== bb.updatedAt ||
-      aa.entities.length !== bb.entities.length ||
-      aa.scenes.length !== bb.scenes.length
+      aa.entities.length !== bb.entities.length
     ) {
       return false;
     }
