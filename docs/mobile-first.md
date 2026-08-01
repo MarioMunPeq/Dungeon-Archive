@@ -13,6 +13,7 @@ Dungeon Archive is a **mobile-first** application. The phone is the primary plat
 ### The Scenario
 
 A player or DM is sitting at a table with:
+
 - One hand holding the phone
 - The other hand holding dice, a pencil, or a character sheet
 - Limited attention (watching the game)
@@ -37,11 +38,36 @@ The app must work with **one thumb** on a phone screen.
 
 ### Design Implications
 
-- **Primary actions** in bottom third of screen
-- **Navigation** in bottom tab bar (thumb-reachable)
-- **Secondary actions** in middle third
-- **Avoid** top third for interactive elements
-- **Scroll** for content, not navigation
+- **Primary navigation** in the bottom tab bar (thumb-reachable).
+- **Primary actions** in the bottom two-thirds of the screen.
+- **Content** scrolls; navigation never scrolls away.
+- **No hover states** — touch-first; feedback via color and scale on press.
+- **Layout constrained** to a single column, `max-w-xl`, centered — the app never renders wide multi-panel layouts.
+
+---
+
+## Screen Layout
+
+```
+┌─────────────────────────────┐
+│ TopBar (title, breadcrumbs) │ ← Context, not action
+├─────────────────────────────┤
+│                             │
+│ Content Area                │ ← Middle (scroll)
+│ (scrollable)                │
+│                             │
+├─────────────────────────────┤
+│  ⌂     🔍     📜     👥    │ ← Bottom (thumb zone)
+│ Home  Search Adventure Party│
+└─────────────────────────────┘
+```
+
+### Key Principles
+
+- **TopBar:** Minimal. Shows the app name (home) or breadcrumbs (entity detail). Not a place for primary actions.
+- **Content:** Scrollable, single column, primary content.
+- **BottomNav:** Always visible, four tabs (Home, Search, Adventure, Party), minimum 56px target height.
+- **Session** has no tab: it is reached from Home ("Continue Session") and from the SessionButton on entity detail.
 
 ---
 
@@ -51,144 +77,51 @@ The app must work with **one thumb** on a phone screen.
 
 | Interaction | Zone | Result |
 |-------------|------|--------|
-| **Tap** | Bottom tab bar | Switch sections |
-| **Tap** | Middle screen | Select item |
-| **Swipe up** | Anywhere | Scroll down |
-| **Swipe down** | Top edge | Pull to refresh |
-| **Swipe left** | List item | Quick action |
-| **Swipe right** | List item | Quick action |
-
-### Secondary (Two-Handed)
-
-| Interaction | Zone | Result |
-|-------------|------|--------|
-| **Long-press** | Anywhere | Context menu |
-| **Pinch** | Map/image | Zoom |
-| **Two-finger scroll** | List | Fast scroll |
+| **Tap tab** | Bottom tab bar | Switch section |
+| **Tap item** | Middle screen | Open entity / edit |
+| **Swipe up/down** | Anywhere | Scroll |
+| **Tap quick action** | Entity detail | Favorite / pin to Session / pin to Adventure |
 
 ### Search Interactions
 
 | Interaction | Result |
 |-------------|--------|
-| **Tap search bar** | Open search, show keyboard |
-| **Type** | Instant results |
-| **Tap result** | Open detail |
-| **Swipe back** | Return to search |
-| **Tap clear** | Clear search |
-
----
-
-## Screen Layout
-
-### Mobile Layout
-
-```
-┌─────────────────────────────┐
-│ Header (back, title, menu)  │ ← Top (avoid for actions)
-├─────────────────────────────┤
-│                             │
-│ Content Area                │ ← Middle (scroll)
-│ (scrollable)                │
-│                             │
-│                             │
-├─────────────────────────────┤
-│ Search Bar (persistent)     │ ← Bottom middle
-├─────────────────────────────┤
-│ 🏠  🗺️  🔍  👥            │ ← Bottom (thumb zone)
-│ Tab Bar                     │
-└─────────────────────────────┘
-```
-
-### Key Principles
-
-- **Header:** Minimal, back button + title
-- **Content:** Scrollable, primary content
-- **Search bar:** Persistent, always accessible
-- **Tab bar:** Always visible, thumb-reachable
-
----
-
-## Mobile-Specific Patterns
-
-### Pull to Refresh
-
-```
-┌─────────────────────────────┐
-│ ↓ ↓ ↓ ↓ ↓ ↓ ↓ ↓ ↓ ↓ ↓ ↓ ↓ │ ← Pull down
-│ ┌─────────────────────────┐ │
-│ │ Refreshing...           │ │
-│ └─────────────────────────┘ │
-│                             │
-│ Content                     │
-└─────────────────────────────┘
-```
-
-### Swipe Actions
-
-```
-┌─────────────────────────────┐
-│ ┌─────────────────────────┐ │
-│ │ Item content  ← swipe  │ │
-│ │ [Action revealed]       │ │
-│ └─────────────────────────┘ │
-└─────────────────────────────┘
-```
-
-### Modal Sheet
-
-```
-┌─────────────────────────────┐
-│ ┌─────────────────────────┐ │
-│ │ ▬ (drag handle)         │ │
-│ │                         │ │
-│ │ Modal Content           │ │
-│ │                         │ │
-│ │ [Actions]               │ │
-│ └─────────────────────────┘ │
-│                             │
-│ (dimmed background)         │
-└─────────────────────────────┘
-```
-
-### Bottom Sheet
-
-```
-┌─────────────────────────────┐
-│                             │
-│ Content                     │
-│                             │
-├─────────────────────────────┤
-│ ┌─────────────────────────┐ │
-│ │ ▬ (drag handle)         │ │
-│ │ Bottom Sheet Content    │ │
-│ └─────────────────────────┘ │
-└─────────────────────────────┘
-```
+| **Tap Search tab** | Open search, focus input |
+| **Type** | Instant results (150ms debounce) |
+| **Arrow keys / Enter** | Keyboard navigation through results |
+| **Escape** | Clear the query |
+| **Tap result** | Open entity detail |
+| **Category filter** | Narrow results to one category |
 
 ---
 
 ## Search UX
 
-### Always Accessible
+### A Dedicated Tab, Not a Persistent Bar
 
-Search is available from every screen:
-- **Global search bar** at top
-- **Search tab** in bottom navigation
-- **Contextual search** within sections
+Search is the **primary interface**, not a decorative bar. It lives in the bottom navigation as its own tab and is one tap away from every screen. There is no always-visible search input in the layout; the Search tab is the entry point.
 
 ### Instant Results
 
-- No loading spinner
-- Results appear as user types
-- 150ms debounce
-- < 200ms response time
+- No loading spinner.
+- Results appear as the user types.
+- 150ms debounce, synchronous in-memory scoring.
+- Search latency target < 150ms.
 
-### Keyboard Management
+### Keyboard
 
-- Keyboard opens automatically on search focus
-- Keyboard dismisses on result tap
-- Search results adjust keyboard height
-- No keyboard shortcuts (mobile doesn't have a keyboard)
+- Keyboard opens automatically on search focus.
+- Keyboard dismisses on result tap.
+- Arrow/Enter/Escape shortcuts work with external keyboards too.
+
+---
+
+## Dark-First Theming
+
+- The app is dark-first: dark surfaces, high-contrast text.
+- Semantic color tokens (`primary`, `background`, `surface`, `card`, ...) live in the Tailwind `@theme` block in `src/index.css`.
+- Fonts: Inter for UI, JetBrains Mono for data/code-like content.
+- No reliance on color alone for meaning.
 
 ---
 
@@ -196,23 +129,23 @@ Search is available from every screen:
 
 ### Touch Targets
 
-- Minimum 44x44px touch targets
-- Adequate spacing between interactive elements
-- Clear visual feedback on tap
+- Tab bar items: minimum 56px height.
+- Interactive elements: minimum 44x44px.
+- Clear visual feedback on tap (color + scale).
 
 ### Visual Hierarchy
 
-- High contrast text (WCAG AA)
-- Clear focus states
-- Readable font sizes (16px minimum for body)
-- No reliance on color alone
+- High contrast text (WCAG AA).
+- Clear focus states.
+- Readable font sizes.
+- No reliance on color alone.
 
 ### Screen Reader
 
-- Semantic HTML
-- ARIA labels for interactive elements
-- Logical tab order
-- Descriptive alt text
+- Semantic HTML.
+- ARIA labels for interactive elements.
+- Logical tab order.
+- Meaningful text alternatives.
 
 ---
 
@@ -220,18 +153,16 @@ Search is available from every screen:
 
 ### Mobile Optimizations
 
-- **Lazy loading** — Load content as needed
-- **Virtual scrolling** — For long lists
-- **Image optimization** — WebP, appropriate sizes
-- **Minimal re-renders** — Use React.memo, useMemo
-- **Efficient queries** — IndexedDB queries, not full scans
+- The Compendium loads once at startup; navigation after that is synchronous.
+- Search is computed in memory — no network, no async flicker.
+- Minimal animation.
+- Service worker (PWA) caches assets for offline use and installability.
 
 ### Battery Considerations
 
-- No continuous background processes
-- No frequent network requests
-- Efficient DOM updates
-- Minimal animation
+- No continuous background processes.
+- No network requests.
+- Minimal DOM churn.
 
 ---
 
@@ -239,26 +170,26 @@ Search is available from every screen:
 
 ### Device Testing
 
-- Test on real devices (not just simulators)
-- Test with one hand
-- Test with dirty/wet hands (tabletop environment)
-- Test in low light (typical gaming environment)
+- Test on real devices (not just simulators).
+- Test with one hand.
+- Test in low light (typical gaming environment).
 
 ### Interaction Testing
 
-- Verify all actions work with one thumb
-- Verify search is accessible from every screen
-- Verify back navigation works consistently
-- Verify modal dismissal works (tap outside, swipe down)
+- Verify all actions work with one thumb.
+- Verify search is one tap away from every screen.
+- Verify back navigation works consistently.
+- Verify the layout never exceeds single-column width.
 
 ---
 
 ## Desktop (Development Only)
 
 Desktop is used only for:
+
 - Code editing
 - Running tests
 - Building the application
 - Debugging
 
-**Not a product platform.** No keyboard shortcuts as product features.
+**Not a product platform.** No keyboard shortcuts as product features (search keyboard navigation is for hardware keyboards on phones).

@@ -2,283 +2,148 @@
 
 ## Overview
 
-Search is not a feature — it is the core interface of Dungeon Archive. The search bar is the primary navigation method. Every screen should feel like a search result.
+Search is not a feature — it is the core interface of Dungeon Archive. The Search tab is the primary way users find information. The whole app is built around the assumption that the fastest path to any answer is typing its name.
 
 ---
 
 ## Search Philosophy
 
-### Search Everywhere
+### Search Is the Primary Interface
 
-Search is accessible from every screen in the application:
-- **Global search bar** — Persistent at top of every screen
-- **Tab bar search entry** — Dedicated search tab
-- **Contextual search** — Each section's search scope
-- **Long-press search** — Quick search within current context
+Users find things by asking, not by browsing:
 
-### Heterogeneous Results
-
-Search results are **mixed by relevance**, not grouped by category. A search for "fireball" might return:
-1. **Spell:** Fireball (most relevant)
-2. **Condition:** Burning (related)
-3. **Equipment:** Flask of Oil (combustible)
-4. **Action:** Improvised Fire Damage (related)
-5. **Rules:** Fire Damage (rules reference)
-
-This mirrors how humans think — "I'm looking for something about fire" — not how databases organize data.
+- **Search tab** — A dedicated bottom-nav tab, one tap away from every screen.
+- **Category pages are fallbacks** — browsable, but not the primary path.
+- **Search from user data** (roadmap) — future work: party members and adventures become searchable too.
 
 ### Instant Response
 
-- < 200ms for all searches
-- Results appear as user types
-- No loading states for search
-- Typo tolerance via fuzzy matching
+- Results appear as the user types.
+- 150ms debounce on keystroke input.
+- Synchronous in-memory scoring — no network, no loading states.
+- Latency target < 150ms.
+
+### Heterogeneous Results
+
+Results are **mixed by relevance**, not grouped by category. A search for "fire" can return a spell (Fireball), a monster, a condition, and equipment together, ordered by score then name. This mirrors how humans think — "I'm looking for something about fire" — not how databases organize data.
 
 ---
 
-## Search Scopes
+## Current Implementation
 
-### Global Search
-
-The default search scope. Searches across:
-- Compendium (all categories)
-- Campaign data (notes, NPCs, locations)
-- User-created content
-
-**Entry points:**
-- Tap search bar at top of any screen
-- Tap Search tab in bottom nav
-- Long-press on any tab for quick search
-
-### Contextual Search
-
-Each section provides its own search scope:
-
-#### Home Search
-- Searches everything (same as global)
-- Shows recent activity alongside results
-
-#### Adventure Search
-- Searches within current adventure's notes
-- Searches NPCs in this adventure
-- Searches session logs
-- Shows compendium results as secondary
-
-#### Compendium Search
-- Searches only official D&D content
-- Filters by category (spells, conditions, etc.)
-- Shows related rules references
-
-#### Party Search
-- Searches within party characters
-- Searches character inventories
-- Searches party notes
-- Searches NPCs the party knows
-
----
-
-## Search Implementation
-
-### Data Sources
+### Data Source
 
 ```
 Search Request
     ↓
-┌─────────────────────────────────────┐
-│  Search Router                      │
-│  ├── Global → all sources           │
-│  ├── Adventure → adventure data     │
-│  ├── Compendium → compendium only   │
-│  └── Party → party data             │
-└─────────────────────────────────────┘
+search.ts (src/compendium/search.ts)
+    ├── loads prebuilt index (search-index.json)
+    ├── substring-scored matching
+    └── sorts by score, then name
     ↓
-┌─────────────────────────────────────┐
-│  Data Sources                       │
-│  ├── Static JSON (compendium)       │
-│  ├── IndexedDB (campaign data)      │
-│  └── In-memory index (search idx)   │
-└─────────────────────────────────────┘
-    ↓
-┌─────────────────────────────────────┐
-│  Result Processor                   │
-│  ├── Deduplicate                    │
-│  ├── Rank by relevance              │
-│  ├── Apply reveal filters           │
-│  └── Format for display             │
-└─────────────────────────────────────┘
-    ↓
-Heterogeneous Results
+readonly SearchIndexEntry[]
 ```
+
+There is exactly **one search scope**: the Compendium. There is no search of user data yet (adventure notes, party members — roadmap item).
 
 ### Search Index
 
-**Pre-built at application startup:**
-- Load compendium static JSON into memory
-- Build search index with fuzzy matching
-- Index campaign data from IndexedDB
+- **Generated at build time** into `src/generated/compendium/search-index.json`.
+- **Loaded once at startup** by `loadCompendium()` alongside all entity data.
+- **In memory** for the lifetime of the app; every query is a synchronous pass.
 
-**Index structure:**
-```typescript
-interface SearchIndex {
-  compendium: CompendiumEntry[];  // Loaded from static JSON
-  campaign: CampaignEntry[];      // Loaded from IndexedDB
-  recency: Map<string, number>;   // Last accessed timestamps
-}
-```
+### Scoring
 
-### Search Algorithm
+Each result is scored deterministically:
 
-1. **Tokenize** — Split query into tokens
-2. **Fuzzy Match** — Find entries matching tokens (typo tolerance)
-3. **Rank** — Score by relevance (exact match > partial > fuzzy)
-4. **Boost** — Increase score for:
-   - Recently accessed entries
-   - Frequently accessed entries
-   - Exact name matches
-5. **Filter** — Apply reveal settings (hide DM content from players)
-6. **Deduplicate** — Remove duplicate entries
-7. **Limit** — Return top N results (configurable, default 20)
+| Match type | Score |
+|-----------|-------|
+| Exact name match | 100 |
+| Name starts with query | 80 |
+| Query included in name | 60 |
 
-### Search Types
+Results are sorted by **score descending**, then **name ascending**. The scoring is intentionally simple, predictable, and cheap.
 
-#### Exact Match
-```
-Query: "Fireball"
-→ Spell: Fireball (exact match, highest rank)
-```
+### Entry Points
 
-#### Partial Match
-```
-Query: "fire"
-→ Spell: Fireball
-→ Spell: Fire Bolt
-→ Condition: Burning
-→ Action: Improvised Fire Damage
-```
-
-#### Fuzzy Match (typo tolerance)
-```
-Query: "firebal"
-→ Spell: Fireball (fuzzy match)
-```
-
-#### Multi-token Match
-```
-Query: "lightning bolt"
-→ Spell: Lightning Bolt (both tokens match)
-→ Spell: Chain Lightning (partial match)
-```
+- **Search tab** — the primary entry point.
+- **Category filter** — narrows results to one category after a search.
+- **Keyboard navigation** — Arrow keys move through results, Enter opens, Escape clears.
 
 ---
 
-## Search Results Display
+## Result Display
 
-### Result Card Structure
+### Result Row
 
-Each search result is displayed as a **heterogeneous card**:
-
-```
-┌─────────────────────────────────────┐
-│ 🔮 Spell                        3rd │
-│ Fireball                          🔥│
-│ A bright streak flashes from your  │
-│ pointing finger to a point you     │
-│ choose...                          │
-├─────────────────────────────────────┤
-│ Evocation · 150 ft · 1 round       │
-└─────────────────────────────────────┘
-```
+Each result is a single row with:
 
 ```
-┌─────────────────────────────────────┐
-│ ⚔️ Action                          │
-│ Improvised Fire Damage              │
-│ When you throw something flammable │
-│ at a creature...                   │
-├─────────────────────────────────────┤
-│ 1d6 fire damage                    │
-└─────────────────────────────────────┘
+┌────────────────────────────────────────┐
+│ ⚔️  Action — Attack                    │
+│    Quick metadata for the entity       │
+└────────────────────────────────────────┘
 ```
 
-### Result Types
-
-Each result shows:
-- **Type icon** — Visual category indicator (Spell, Condition, Equipment, etc.)
-- **Name** — Entity name
-- **Quick info** — Most relevant stats (level, damage, cost, etc.)
-- **Preview** — First line of description
-- **Relevance badge** — Why this result appeared
+- **Category icon + label** — visual category indicator.
+- **Name** — entity name.
+- **Quick metadata** — most relevant line (level, CR, cost, etc.).
+- **Highlight** — matched substring highlighted.
 
 ### Result Actions
 
-From any search result:
-- **Tap** — Open full detail view
-- **Long-press** — Context menu (copy, share, favorite)
-- **Swipe right** — Quick add to favorites
-- **Swipe left** — Dismiss (for future similar results)
+- **Tap** — open entity detail.
 
----
-
-## Search State
-
-### Zustand Store
-
-```typescript
-interface SearchState {
-  query: string;
-  scope: 'global' | 'adventure' | 'compendium' | 'party';
-  results: SearchResult[];
-  isLoading: boolean;
-  recentSearches: string[];
-  favorites: string[];
-}
-```
-
-### Persisted State
-
-- **Recent searches** — Last 10 searches (stored in localStorage)
-- **Favorites** — Bookmarked entries (stored in IndexedDB)
-- **Search history** — Per-session (memory only)
-
----
-
-## Performance Optimization
-
-### Lazy Loading
-- Search index loads asynchronously at startup
-- Results render progressively (virtual scrolling)
-- Images load on demand
-
-### Caching
-- Recent searches cached in memory
-- Frequent queries cached via TanStack Query
-- Static JSON cached after first load
-
-### Debouncing
-- 150ms debounce on keystroke input
-- Prevents excessive searches during fast typing
+No swipe actions, no long-press menus. One tap to the answer.
 
 ---
 
 ## Edge Cases
 
-### Empty Results
-- Show "No results found"
-- Suggest related searches
-- Offer to search in compendium
+### Empty Query
+- No results shown; the page offers category browsing and recent searches.
+
+### No Results
+- "No results" state with a hint to check the spelling or change the filter.
 
 ### Too Many Results
-- Limit to top 20 by default
-- "Show more" button for additional results
-- Category filters to narrow results
+- Results are capped; the category filter narrows the field.
 
 ### Offline Mode
-- All search works offline
-- No network requests for search
-- Static JSON pre-loaded at build time
+- Search works offline by construction — it is a pure in-memory operation over shipped data.
 
-### Reveal Filtering
-- DM sees all results
-- Player sees only revealed content
-- Hidden content filtered out of results
-- Search never reveals hidden information
+### Empty Category Filter
+- If the chosen category has no matches, the empty state explains it.
+
+---
+
+## Search State
+
+- **Recent searches** — stored in user state (`recentSearches`), cleared via the store action.
+- **Query and filter** — local to the search page; results are derived synchronously from the query.
+
+---
+
+## Performance Optimization
+
+- **Prebuilt index** — no index construction at runtime.
+- **Single startup load** — no lazy index, no async population.
+- **150ms debounce** — prevents excess work during fast typing.
+- **Cap results** — bounded work per keystroke.
+- **No TanStack Query** — search is synchronous; async state machinery is unnecessary.
+
+---
+
+## Future Work
+
+- **Better ranking** — multi-token matching, diacritics, prefix weighting.
+- **Typo tolerance** — deliberate fuzzy matching (currently absent by design; scoring is strict substring).
+- **User-data search** — party members, adventures, session history alongside Compendium results.
+
+---
+
+## Non-Goals
+
+- **No network-backed search.** No external search service, ever.
+- **No search over user content until the product question is answered** ("When is searching my notes faster than scrolling them?").
+- **No reveal-based filtering.** Search is a personal tool; there is no per-role visibility system.

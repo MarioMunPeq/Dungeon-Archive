@@ -2,37 +2,45 @@
 
 ## Overview
 
-Dungeon Archive is intentionally incomplete. This document lists features that are **explicitly excluded** from the product. These are not "future features" — they are permanent exclusions that define what the product is not.
+Dungeon Archive is intentionally incomplete. This document lists product categories that are **explicitly excluded** — permanent exclusions, not "future features". They define what the product is not.
 
 The purpose of this list is to:
-1. Prevent scope creep
-2. Clarify product boundaries
-3. Help users choose the right tool for their needs
-4. Keep the product focused on its core mission
 
----
+1. Prevent scope creep.
+2. Clarify product boundaries.
+3. Help users choose the right tool for their needs.
+4. Keep the product focused on its core mission.
 
 ## Core Mission
 
-> **Reduce tabletop session downtime by making D&D 5e reference information instantly searchable.**
+> **Reduce dead time during play.**
 
-Every feature must directly support this mission. If it doesn't reduce downtime, it doesn't belong.
+The single test for every feature request:
 
----
+> **Does this reduce the time players spend waiting because someone is looking for information?**
+
+If the answer is no, the feature does not belong.
+
+## The Filter
+
+When evaluating any proposed feature, run it through this filter:
+
+1. **Does it reduce dead time at the table?** If no, reject.
+2. **Does it require constant data entry or maintenance?** If yes, reject (consultation over administration).
+3. **Does it turn the app from reference into a platform?** If yes, reject.
+4. **Does it need a server or an internet connection?** If yes, reject (offline-first).
+5. **Does it duplicate a tool that already does this well?** If yes, reject and point users to that tool.
+6. **Does it duplicate Compendium data?** If yes, reject (the Compendium is the single source of truth).
 
 ## Excluded Features
 
 ### Virtual Tabletop (VTT)
 
-**What it is:** A digital interface for playing D&D online with maps, tokens, and real-time interaction.
+**What it is:** Online play with maps, tokens, and real-time interaction (Roll20, Foundry, Owlbear Rodeo).
 
-**Why excluded:**
-- Requires internet connectivity (breaks offline-first)
-- Requires a server backend (breaks client-only architecture)
-- Changes the nature of the product from companion to platform
-- Existing VTTs (Roll20, Foundry, Owlbear Rodeo) already do this well
+**Why excluded:** Requires internet and a server. Changes the product from companion to platform. Online play tools already do this well.
 
-**Alternative:** Use Owlbear Rodeo, Roll20, or Foundry VTT for online play.
+**Alternative:** Roll20, Foundry VTT, or Owlbear Rodeo.
 
 ---
 
@@ -40,25 +48,17 @@ Every feature must directly support this mission. If it doesn't reduce downtime,
 
 **What it is:** Initiative order, hit points, conditions, and combat round management.
 
-**Why excluded:**
-- The product is not a combat manager
-- Combat tracking requires constant interaction during turns (breaks "disappears into gameplay")
-- Adds complexity without reducing downtime (combat tracking is its own workflow)
-- DMs typically use their own methods (paper, whiteboard, etc.)
+**Why excluded:** Combat tracking demands constant interaction during turns — the opposite of disappearing software. It becomes the focus of the session rather than a companion. DMs already have their own methods.
 
-**Alternative:** Use paper initiative tracker or dedicated combat apps.
+**Alternative:** Paper, whiteboard, or a dedicated combat app.
 
 ---
 
 ### Initiative Tracker
 
-**What it is:** A system for rolling initiative and managing turn order.
+**What it is:** Rolling initiative and managing turn order.
 
-**Why excluded:**
-- Subset of combat tracker
-- Requires constant interaction during combat
-- DMs typically handle this manually
-- Would become the focus of the session rather than a companion
+**Why excluded:** Subset of the combat tracker. Requires constant interaction mid-combat. DMs handle this manually.
 
 **Alternative:** Roll dice and write on paper.
 
@@ -68,11 +68,7 @@ Every feature must directly support this mission. If it doesn't reduce downtime,
 
 **What it is:** Virtual dice rolling with results and calculations.
 
-**Why excluded:**
-- Physical dice are part of the tabletop experience
-- Rolling dice is a social, tactile activity
-- Digital dice feel impersonal and reduce engagement
-- The product is not about replacing physical components
+**Why excluded:** Physical dice are part of the tabletop experience — tactile and social. Digital dice are impersonal. The product is not about replacing physical components.
 
 **Alternative:** Roll physical dice.
 
@@ -80,44 +76,61 @@ Every feature must directly support this mission. If it doesn't reduce downtime,
 
 ### Character Builder
 
-**What it is:** Step-by-step character creation with level-up tracking.
+**What it is:** Step-by-step character creation and level-up tracking.
 
-**Why excluded:**
-- Complex, time-consuming feature
-- Requires extensive validation rules
-- Character creation is a social, collaborative activity
-- Existing tools (D&D Beyond, Roll20) do this well
-- Adds significant complexity without reducing session downtime
+**Why excluded:** Complex, time-consuming, and full of validation rules. Character creation is a social, collaborative activity. Dedicated tools do this well.
 
-**Alternative:** Use D&D Beyond or paper character sheets.
+**Alternative:** D&D Beyond or paper character sheets.
+
+---
+
+### Character Sheet Replacement
+
+**What it is:** A full digital character sheet that replaces the paper sheet — ability scores and modifiers, all stats, proficiencies, features, resources, and per-use tracking.
+
+**Why excluded:** Full sheets are administration, not consultation. They require constant maintenance and invite the user to run their whole character from the phone. Dungeon Archive stores only the repeatedly-consulted combat information (passive senses, known spells, equipped items), never a full sheet.
+
+**Alternative:** Paper character sheet. The phone complements it; it does not replace it.
 
 ---
 
 ### Campaign Manager
 
-**What it is:** Long-term campaign planning, story arcs, world-building, and session scheduling.
+**What it is:** Long-term campaign planning, story arcs, session scheduling, plot tracking.
 
-**Why excluded:**
-- Changes the product from companion to project management tool
-- Requires ongoing maintenance and data entry
-- Campaign planning happens outside sessions (not during downtime)
-- Existing tools (Notion, Obsidian, World Anvil) do this better
+**Why excluded:** Turns the product from companion into a project-management tool. Requires ongoing maintenance and data entry. Campaign planning happens outside sessions — it is not dead time at the table. Note: Dungeon Archive is not a "lightweight version" of these tools; it is a different category of product.
 
-**Alternative:** Use Notion, Obsidian, or World Anvil for campaign planning.
+**Alternative:** A campaign planner, wiki, or note tool of the DM's choice.
 
 ---
 
-### World Builder
+### Digital Notebook / Wiki Engine
 
-**What it is:** Creating and managing fictional worlds, maps, lore, and setting details.
+**What it is:** Creating and organizing interconnected articles about the campaign world (a "second brain" or "DM wiki").
 
-**Why excluded:**
-- Creative, time-consuming activity
-- Not related to session downtime reduction
-- Requires extensive content creation tools
-- Changes the product from reference tool to creative tool
+**Why excluded:** Requires content creation and editing tools. Changes the product from reference tool to content-management system. Dedicated wikis and notes apps do this better. This product is explicitly **not** a lightweight Obsidian/Notion.
 
-**Alternative:** Use World Anvil, Azgaar's Fantasy Map Generator, or paper.
+**Alternative:** Notion, Obsidian, or a wiki tool.
+
+---
+
+### Worldbuilding Tool
+
+**What it is:** Creating and managing fictional worlds, maps, lore, and settings.
+
+**Why excluded:** Creative, time-consuming activity. Not related to session-time retrieval. Changes the product from reference tool to creative tool.
+
+**Alternative:** A worldbuilding platform or paper.
+
+---
+
+### Timeline Manager
+
+**What it is:** Tracking in-game dates, events, and chronology.
+
+**Why excluded:** A niche workflow with ongoing maintenance. DMs track time manually. Not related to reference lookup.
+
+**Alternative:** Simple notes or paper.
 
 ---
 
@@ -125,98 +138,49 @@ Every feature must directly support this mission. If it doesn't reduce downtime,
 
 **What it is:** Creating and editing tactical maps with tokens and fog of war.
 
-**Why excluded:**
-- Requires complex graphics editor
-- Changes the product to a visual tool
-- Existing map tools (Dungeondraft, Wonderdraft, Owlbear Rodeo) do this well
-- Not related to reference lookup
+**Why excluded:** Requires a complex graphics editor. Changes the product into a visual tool. Dedicated map tools exist.
 
-**Alternative:** Use Dungeondraft, Wonderdraft, or Owlbear Rodeo for maps.
+**Alternative:** Dungeondraft, Wonderdraft, or Owlbear Rodeo.
 
 ---
 
-### Wiki Engine
+### Encounter Builder
 
-**What it is:** Creating and organizing interconnected articles about campaign world.
+**What it is:** Designing balanced encounters with XP calculation.
 
-**Why excluded:**
-- Requires content creation and editing tools
-- Changes the product from reference tool to content management system
-- Existing wikis (Notion, Obsidian, World Anvil) do this better
-- Not related to session downtime reduction
+**Why excluded:** Happens outside sessions. A complex calculation tool. Existing tools do this well.
 
-**Alternative:** Use Notion or Obsidian for campaign wikis.
+**Alternative:** Kobold Fight Club or DMG guidelines.
 
 ---
 
-### Rule Automation
+### Rule Automation / Rules Engine
 
 **What it is:** Automated rule calculations, macros, and condition tracking.
 
-**Why excluded:**
-- Requires complex rule engine
-- Changes the product from reference tool to automation platform
-- Removes DM agency and judgment
-- Increases complexity exponentially
+**Why excluded:** Requires a rule engine. Changes the product from reference to automation platform. Removes DM agency and judgment.
 
-**Alternative:** DMs make rulings manually.
+**Alternative:** DMs make rulings manually; the app provides the rule text.
 
 ---
 
-### Calendar System
+### Inventory Manager
 
-**What it is:** In-game calendar tracking, time passage, and scheduling.
+**What it is:** Detailed item tracking, weight calculation, and encumbrance.
 
-**Why excluded:**
-- Niche feature with limited use cases
-- Adds complexity without reducing downtime
-- DMs typically handle time manually
-- Not related to reference lookup
+**Why excluded:** Constant data entry. Most groups ignore encumbrance. Turns reference into bookkeeping. Party members may reference equipped items, but the app never tracks counts, weights, or containers.
 
-**Alternative:** Track time manually or use simple notes.
+**Alternative:** Paper or simple notes.
 
 ---
 
-### Quest Generator
+### Equipment Tracker / Gold Tracker / XP Tracker
 
-**What it is:** AI-powered or procedural quest creation.
+**What it is:** Tracking equipment quantities, currency, or experience points.
 
-**Why excluded:**
-- Creative activity, not reference lookup
-- Requires AI/ML infrastructure
-- Changes the product from tool to content generator
-- DMs prefer their own creative content
+**Why excluded:** All are bookkeeping. All require constant maintenance. None reduce dead time at the table.
 
-**Alternative:** DMs create their own quests.
-
----
-
-### AI DM Assistance
-
-**What it is:** AI-powered suggestions for DMs (encounter design, story hooks, etc.).
-
-**Why excluded:**
-- Requires AI/ML infrastructure
-- Changes the product from tool to assistant
-- Removes DM agency and creativity
-- Adds complexity and potential inaccuracies
-- Not related to reference lookup
-
-**Alternative:** DMs use their own judgment and resources.
-
----
-
-### Inventory Management
-
-**What it is:** Detailed item tracking, weight calculation, and encumbrance rules.
-
-**Why excluded:**
-- Detailed tracking requires constant data entry
-- Most groups ignore encumbrance rules
-- Changes the product from reference tool to bookkeeping tool
-- Not related to session downtime reduction
-
-**Alternative:** Use paper or simple notes for inventory.
+**Alternative:** Paper character sheet.
 
 ---
 
@@ -224,55 +188,39 @@ Every feature must directly support this mission. If it doesn't reduce downtime,
 
 **What it is:** Tracking spell slot usage and rests.
 
-**Why excluded:**
-- Requires constant interaction during sessions
-- Players typically track this manually
-- Changes the product from reference tool to tracker
-- Not related to reference lookup
+**Why excluded:** Constant interaction during sessions. Players track this manually on their sheets. Not reference lookup.
 
 **Alternative:** Players track spell slots on paper.
 
 ---
 
-### NPC Generator
+### NPC Generator / Quest Generator / Treasure Generator / AI DM Assistance
 
-**What it is:** Procedural or AI-powered NPC creation.
+**What it is:** Procedural or AI-powered creation of NPCs, quests, treasure, or DM suggestions.
 
-**Why excluded:**
-- Creative activity, not reference lookup
-- DMs prefer their own NPCs
-- Adds complexity without reducing downtime
-- Changes the product from tool to generator
+**Why excluded:** Creative activities, not reference lookup. Require AI/ML infrastructure. Change the product from tool to generator/assistant. DMs prefer their own creative content.
 
-**Alternative:** DMs create their own NPCs.
+**Alternative:** DMs create their own content.
 
 ---
 
-### Encounter Builder
+### AI Campaign Generator
 
-**What it is:** Tools for designing balanced encounters with XP calculation.
+**What it is:** AI-generated campaigns, plots, or adventures.
 
-**Why excluded:**
-- Complex calculation tool
-- Happens outside sessions (not during downtime)
-- Existing tools (Kobold Fight Club) do this well
-- Not related to reference lookup
+**Why excluded:** Creative generation is the opposite of consultation. Requires infrastructure. Changes the product's nature.
 
-**Alternative:** Use Kobold Fight Club or DMG guidelines.
+**Alternative:** DMs write their own adventures.
 
 ---
 
-### Treasure Generator
+### Calendar System
 
-**What it is:** Procedural loot generation based on challenge rating.
+**What it is:** In-game calendar and scheduling.
 
-**Why excluded:**
-- DMs typically prepare loot in advance
-- Adds complexity without reducing downtime
-- Not related to reference lookup
-- Existing tools exist for this purpose
+**Why excluded:** Niche, with manual tracking. Not related to reference lookup.
 
-**Alternative:** Use DMG loot tables manually.
+**Alternative:** Track time manually.
 
 ---
 
@@ -280,54 +228,19 @@ Every feature must directly support this mission. If it doesn't reduce downtime,
 
 **What it is:** Audio/video recording of sessions.
 
-**Why excluded:**
-- Requires microphone/camera access
-- Privacy concerns
-- Changes the product from tool to recording platform
-- Not related to reference lookup
+**Why excluded:** Requires microphone/camera access, raises privacy concerns, and changes the product from tool to recording platform.
 
-**Alternative:** Use phone or dedicated recording device.
+**Alternative:** A dedicated recording device.
 
 ---
 
-## Feature Request Filter
+### Multiplayer / Sync / Social Features
 
-When evaluating new feature requests, ask:
+**What it is:** Cloud sync, account systems, shared sessions, chat, community features.
 
-1. **Does this reduce session downtime?** If no, reject.
-2. **Does this require constant interaction during sessions?** If yes, reject.
-3. **Does this change the product from companion to platform?** If yes, reject.
-4. **Does this require a server backend?** If yes, reject.
-5. **Does this require internet connectivity?** If yes, reject.
-6. **Does this duplicate existing tools?** If yes, consider alternatives.
+**Why excluded:** Require a server and internet, breaking offline-first. Add accounts and complexity without reducing dead time.
 
----
-
-## Permanent Product Rules
-
-### The 80% Rule
-
-> **"If 80% of users would not use this feature during a normal game session, it probably does not belong in Dungeon Archive."**
-
-This rule exists because Dungeon Archive is a **companion**, not a platform. The product serves the moments between turns — the quick lookups, the reference checks, the "what does this spell do again?" moments.
-
-Features that serve edge cases, niche workflows, or rare use cases add complexity without proportionate value. Every feature increases cognitive load, maintenance burden, and UI clutter. If most users will never touch it during a session, the cost outweighs the benefit.
-
-The app must stay simple enough to use without thinking. Features that serve 20% of users in 20% of sessions dilute the core experience for everyone.
-
-**How to apply:** Before adding any feature, ask: "Will most users need this during a typical session?" If the answer is no, the feature does not belong.
-
-### The "Just Because" Rule
-
-> **"We can build it" is never a valid reason. "We need it at the table" is.**
-
-This rule exists because technical capability does not equal product value. The fact that something is possible does not mean it should exist.
-
-Dungeon Archive's purpose is to reduce downtime at the table. Every feature must justify its existence by answering a real question that real players and DMs ask during sessions. "Because we can" is a technical justification. "Because we need it" is a product justification.
-
-The difference matters. Technical justification leads to feature bloat. Product justification leads to focused utility.
-
-**How to apply:** When proposing a feature, the first question is not "Can we build this?" It is "Do users need this at the table?" If the answer is no, stop there.
+**Alternative:** The phone is a personal reference; the table is the shared screen.
 
 ---
 
@@ -335,4 +248,4 @@ The difference matters. Technical justification leads to feature bloat. Product 
 
 Dungeon Archive is a **reference companion**, not a **game platform**. It finds information fast and disappears. Every excluded feature exists to preserve this focus.
 
-The product is successful when it's forgotten during gameplay — used, then set aside.
+The product succeeds when it is forgotten during gameplay — used, then set aside.

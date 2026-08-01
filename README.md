@@ -1,6 +1,6 @@
 # Dungeon Archive
 
-> *Una aplicación ****offline-first**** diseñada para consultar el contenido de Dungeons & Dragons 5ª edición de forma inmediata.*
+> *Una aplicación móvil **offline-first** que acompaña a la mesa de Dungeons & Dragons 5ª edición. Su único propósito es reducir el tiempo muerto durante la partida.*
 
 ---
 
@@ -21,8 +21,6 @@ No pretende sustituir la experiencia de juego.
 No pretende añadir más funcionalidades que el resto.
 
 Su único objetivo es que cualquier consulta tarde lo mínimo posible.
-
-Toda la arquitectura del proyecto existe para cumplir esa idea.
 
 ---
 
@@ -67,163 +65,99 @@ Este proyecto parte de una decisión muy concreta.
 
 **Hacer una sola cosa. Hacerla muy bien.**
 
+Dungeon Archive es un **acompañante de mesa**. Se abre cuando aparece una pregunta, muestra la respuesta y se aparta. Nunca se convierte en el centro de atención.
+
+Cada funcionalidad debe superar una única prueba:
+
+> **¿Reduce el tiempo que los jugadores esperan porque alguien está buscando información?**
+
+Si la respuesta es no, no pertenece a este proyecto.
+
 Dungeon Archive **no es**:
 
-* Un creador de personajes.
 * Un gestor de campañas.
 * Un tablero virtual (VTT).
-* Un sustituto de los libros oficiales.
+* Un creador de personajes ni un sustituto de la hoja de personaje.
+* Un rastreador de combate o de iniciativa.
+* Un cuaderno digital, una wiki ni una herramienta de worldbuilding.
 
-Es un compendio optimizado para consulta rápida.
-
-Nada más.
-
-Y precisamente por eso puede centrarse completamente en la velocidad, la simplicidad y la experiencia de uso.
+Es un compendio de referencia con un contexto ligero de campaña.
 
 ---
 
-# Principios de diseño
+# Qué es hoy
 
-Todas las decisiones técnicas del proyecto responden al menos a uno de estos principios.
+## Compendio
 
-## Offline First
+La base de datos de referencia completa de D&D 5e: **hechizos, condiciones, acciones, equipo, monstruos, objetos mágicos y dotes**. Se genera a partir de datos oficiales en tiempo de compilación y queda disponible sin conexión.
 
-La aplicación debe seguir funcionando aunque no exista conexión a Internet.
+El Compendio es la fuente única de verdad de las reglas. Los datos del usuario guardan **referencias** (identificadores canónicos), nunca copias del contenido oficial.
 
-Toda la información necesaria reside en el propio dispositivo.
+## Búsqueda
 
-Durante el uso normal no existen peticiones a servidores externos.
+El interfaz principal. Búsqueda instantánea y síncrona sobre todo el Compendio, con filtro por categoría y navegación con teclado. Resultados en milisegundos.
 
----
+## Aventura (contexto de campaña)
 
-## La velocidad es una funcionalidad
+Un contenedor ligero: título, descripción, objetivos, notas privadas del máster y referencias importantes ancladas. Una aventura activa; las anteriores pueden archivarse y restaurarse.
 
-Buscar información no es una característica adicional.
+## Grupo (hojas de referencia ligeras)
 
-Es el producto.
+Solo la información que se consulta durante la partida: identidad, nivel, sentidos pasivos, hechizos conocidos, equipo equipado y notas. Todo como referencias al Compendio; nada se duplica.
 
-Cada capa de la aplicación está diseñada para minimizar el tiempo entre una pregunta y una respuesta.
+## Sesión
 
----
+La lista de entidades ancladas para el encuentro actual, con la opción de cerrarla, y el historial de sesiones del máster.
 
-## Independencia de los datos
+## Favoritos y recientes
 
-Dungeon Archive nunca depende directamente de una fuente externa.
+Acceso rápido a las entidades que importan.
 
-Los datos siempre pasan por un proceso de transformación antes de formar parte de la aplicación.
+## Detalle de entidad
 
-Esto permite cambiar el origen de los datos sin modificar el resto del código.
-
----
-
-## Arquitectura antes que funcionalidades
-
-Añadir pantallas es sencillo.
-
-Cambiar una mala arquitectura no lo es.
-
-El proyecto prioriza construir una base sólida antes de incorporar nuevas características.
+Vistas completas con renderizado de contenido, entidades relacionadas y selección de versión/edición (2014 frente a 2024).
 
 ---
 
 # Arquitectura
 
 ```
-                  Datos externos
-                         │
-                         ▼
-             Pipeline de transformación
-                         │
-                         ▼
-              Modelos internos normalizados
-                         │
-                         ▼
-             Base de datos local (IndexedDB)
-                         │
-                         ▼
-                API del Compendio
-                         │
-                         ▼
-                  Aplicación React
+5etools (datos oficiales, read-only)
+        │
+        ▼
+Scripts de compilación (scripts/compendium)
+        │
+        ▼
+JSON estático (src/generated/compendium)
+        │
+        ▼
+API del Compendio (src/compendium)
+        │
+        ▼
+Aplicación React
 ```
 
-Cada bloque tiene una única responsabilidad.
-
-La interfaz desconoce completamente cómo se almacenan los datos.
-
-La base de datos desconoce cómo fueron generados.
-
-El pipeline desconoce cómo serán mostrados.
-
-Esa separación permite evolucionar cada parte de forma independiente.
-
----
-
-# Pipeline de datos
-
-Una parte importante del proyecto ocurre antes incluso de ejecutar la aplicación.
-
-Dungeon Archive no consume directamente los datos originales.
-
-Primero los transforma.
-
-```
-5etools
-
-↓
-
-Lectura
-
-↓
-
-Validación
-
-↓
-
-Normalización
-
-↓
-
-Enriquecimiento
-
-↓
-
-Generación
-
-↓
-
-Compendio de Dungeon Archive
-```
-
-Durante este proceso se:
-
-* eliminan estructuras innecesarias;
-* validan registros incompletos;
-* unifican formatos;
-* generan identificadores estables;
-* adaptan los modelos a las necesidades reales de la aplicación.
-
-El resultado no es una copia de 5etools.
-
-Es una base de datos diseñada específicamente para Dungeon Archive.
+* Los datos externos se procesan en tiempo de compilación y nunca se acceden directamente en tiempo de ejecución.
+* El Compendio vive en memoria tras una única carga inicial; el acceso es síncrono.
+* El estado del usuario (favoritos, recientes, aventura, grupo, sesión) se guarda en `localStorage` con migraciones versionadas.
+* Toda la aplicación funciona sin conexión. No hay servidor ni login.
 
 ---
 
 # Stack tecnológico
 
-| Capa             | Tecnología        |
-| ---------------- | ----------------- |
-| Lenguaje         | TypeScript        |
-| Interfaz         | React             |
-| Build Tool       | Vite              |
-| Estilos          | Tailwind CSS      |
-| Persistencia     | IndexedDB + Dexie |
-| Estado global    | Zustand           |
-| Estado asíncrono | TanStack Query    |
+| Capa         | Tecnología                          |
+| ------------ | ----------------------------------- |
+| Lenguaje     | TypeScript (strict)                 |
+| Interfaz     | React 19                            |
+| Build Tool   | Vite                                |
+| Estilos      | Tailwind CSS (tokens de diseño)     |
+| Estado       | Zustand + persistencia en localStorage |
+| Ruteo        | React Router                        |
+| Offline      | PWA (service worker)                |
+| Datos        | JSON estático generado en build     |
 
-Cada tecnología ha sido elegida por una responsabilidad concreta.
-
-No existe ninguna dependencia únicamente por tendencia o popularidad.
+Cada tecnología tiene una responsabilidad concreta. No existe ninguna dependencia por tendencia o popularidad.
 
 ---
 
@@ -232,104 +166,46 @@ No existe ninguna dependencia únicamente por tendencia o popularidad.
 ```text
 src/
 │
-├── app/
-├── components/
-├── features/
-├── services/
-├── shared/
-└── generated/
+├── app/            # Router, layout, arranque
+├── features/       # Páginas por área (home, search, adventure, party, session, compendium)
+├── compendium/     # API de lectura del Compendio (carga, búsqueda, repositorio)
+├── components/     # Componentes compartidos de UI y de entidad
+├── user-state/     # Estado persistente del usuario (store, migraciones, normalización)
+├── adapter/        # Tipos de fuentes externas (5etools)
+├── generated/      # JSON del Compendio generado en build
+├── types/          # Tipos del dominio
+├── config/         # Constantes de configuración
+└── shared/         # Primitivas compartidas (sin lógica de negocio)
 
 scripts/
-└── compendium/
+└── compendium/     # Pipeline de generación del Compendio
 
-docs/
-└── adr/
+docs/               # Documentación técnica y de producto
 ```
-
-El repositorio mantiene separadas las distintas responsabilidades del sistema.
-
-La interfaz, la lógica de dominio, la infraestructura y la generación de datos evolucionan de forma independiente.
-
----
-
-# Decisiones de arquitectura
-
-Las decisiones importantes no quedan únicamente reflejadas en el código.
-
-Cada cambio relevante se documenta mediante un **ADR (Architecture Decision Record)**.
-
-Cada ADR responde tres preguntas:
-
-* ¿Qué decisión se ha tomado?
-* ¿Por qué se ha tomado?
-* ¿Qué alternativas se descartaron?
-
-El objetivo es que el conocimiento permanezca en el repositorio y no únicamente en quien escribió el código.
-
----
-
-# Estado del proyecto
-
-El proyecto se encuentra construyendo la infraestructura principal.
-
-En esta fase se priorizan:
-
-* el pipeline de generación;
-* el modelo de datos;
-* la persistencia offline;
-* la arquitectura base;
-* el motor de búsqueda.
-
-Las funcionalidades visibles llegarán cuando la base técnica sea suficientemente sólida.
 
 ---
 
 # Roadmap
 
-## Infraestructura
+Las prioridades están en [docs/roadmap.md](docs/roadmap.md).
 
-* [ ] Pipeline completo de generación.
-* [ ] Base de datos local.
-* [ ] API del Compendio.
-
-## Aplicación
-
-* [ ] Buscador instantáneo.
-* [ ] Navegación entre entidades.
-* [ ] Favoritos.
-* [ ] Historial.
-
-## Calidad
-
-* [ ] Cobertura de pruebas.
-* [ ] Integración continua.
-* [ ] Versionado automático.
-* [ ] Documentación técnica completa.
+* **Alto:** hojas de referencia de jugador, historial de sesiones, mejoras del Compendio y de la búsqueda, rendimiento, offline, velocidad de navegación.
+* **Bajo:** mejoras de campaña, pulido visual, temas.
+* **Excluido permanentemente:** todo lo que aparece en [docs/anti-features.md](docs/anti-features.md).
 
 ---
 
-# No objetivos
+# Estado del proyecto
 
-Dungeon Archive no pretende convertirse en una plataforma con decenas de funcionalidades.
-
-Cada nueva característica debe responder afirmativamente a una única pregunta.
-
-> **¿Reduce el tiempo que un jugador tarda en encontrar información durante una partida?**
-
-Si la respuesta es no, probablemente no pertenece a este proyecto.
-
----
-
-# Estado de madurez
-
-| Área              | Estado           |
-| ----------------- | ---------------- |
-| Arquitectura      | 🟢 Estable       |
-| Modelo de datos   | 🟡 En desarrollo |
-| Pipeline          | 🟡 En desarrollo |
-| Motor de búsqueda | 🟡 En desarrollo |
-| Interfaz          | 🔵 Prototipo     |
-| Documentación     | 🟢 Activa        |
+| Área               | Estado                     |
+| ------------------ | -------------------------- |
+| Compendio          | 🟢 Operativo (7 categorías) |
+| Búsqueda           | 🟢 Operativa                |
+| Aventura           | 🟢 Operativa                |
+| Grupo              | 🟢 Operativo (referencias)  |
+| Sesión             | 🟢 Operativa                |
+| Offline            | 🟢 Operativo (PWA)          |
+| Documentación      | 🟢 Activa                   |
 
 ---
 
@@ -337,11 +213,9 @@ Si la respuesta es no, probablemente no pertenece a este proyecto.
 
 Dungeon Archive no pretende demostrar cuántas tecnologías puede utilizar.
 
-Pretende demostrar que una buena arquitectura permite construir software sencillo de mantener, desacoplado y preparado para evolucionar.
+Pretende demostrar que un producto enfocado puede resolver un problema real: **el tiempo que se pierde buscando información en una mesa de D&D**.
 
-Si dentro de unos años cambia la fuente de datos, cambia el framework o cambia la interfaz, el proyecto debería seguir funcionando prácticamente igual.
-
-Esa es la verdadera meta.
+Si dentro de unos años cambia la fuente de datos, cambia el framework o cambia la interfaz, la idea central — consulta rápida, contexto ligero, sin servidor — debería seguir intacta.
 
 ---
 

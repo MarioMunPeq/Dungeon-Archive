@@ -1,23 +1,26 @@
 # Folder Structure
 
+This document describes the **actual** layout of the repository. Keep it in sync with the code.
+
+---
+
 ## Project Root
 
 ```
 dungeon-archive/
-├── public/                    # Static assets
-│   ├── favicon.ico
-│   └── manifest.json
-├── src/                       # Application source code
-├── scripts/                   # Build scripts
-├── external/                  # External dependencies (read-only)
-├── docs/                      # Architecture documentation
-├── data/                      # Generated data
-├── index.html                 # Entry HTML
-├── vite.config.ts             # Vite configuration
-├── tsconfig.json              # TypeScript configuration
-├── tailwind.config.js         # Tailwind CSS configuration
-├── package.json               # Dependencies and scripts
-└── pnpm-lock.yaml             # Lock file
+├── public/                  # Static assets
+├── src/                     # Application source code
+├── scripts/compendium/      # Build-time Compendium generation
+├── external/5etools/        # Read-only external data source
+├── docs/                    # Documentation
+├── index.html               # Entry HTML
+├── vite.config.ts           # Vite configuration
+├── tsconfig.json            # Base TypeScript config
+├── tsconfig.app.json        # App typecheck config
+├── tsconfig.scripts.json    # Scripts typecheck config
+├── eslint.config.js         # ESLint configuration
+├── package.json             # Dependencies and scripts
+└── pnpm-lock.yaml           # Lock file
 ```
 
 ---
@@ -26,112 +29,118 @@ dungeon-archive/
 
 ```
 src/
-├── main.tsx                   # Application entry point
-├── App.tsx                    # Root component
-├── routes/                    # Route definitions
-│   └── index.tsx
-├── screens/                   # Page-level components
-│   ├── Home/
-│   │   └── HomeScreen.tsx
-│   ├── Adventure/
-│   │   ├── AdventureListScreen.tsx
-│   │   ├── AdventureDetailScreen.tsx
-│   │   └── SessionEditorScreen.tsx
-│   ├── Search/
-│   │   └── SearchScreen.tsx
-│   ├── Party/
-│   │   ├── CharacterListScreen.tsx
-│   │   ├── CharacterDetailScreen.tsx
-│   │   └── CharacterEditorScreen.tsx
-│   ├── Compendium/
-│   │   ├── SpellDetailScreen.tsx
-│   │   ├── MonsterDetailScreen.tsx
-│   │   ├── EquipmentDetailScreen.tsx
-│   │   ├── ConditionDetailScreen.tsx
-│   │   └── RulesDetailScreen.tsx
-│   └── Settings/
-│       └── SettingsScreen.tsx
-├── components/                # Reusable UI components
-│   ├── layout/
-│   │   ├── TabBar.tsx
-│   │   ├── Header.tsx
-│   │   └── ScreenContainer.tsx
-│   ├── search/
-│   │   ├── SearchBar.tsx
-│   │   ├── SearchResults.tsx
-│   │   └── SearchResultCard.tsx
-│   ├── compendium/
-│   │   ├── SpellCard.tsx
-│   │   ├── MonsterCard.tsx
-│   │   ├── EquipmentCard.tsx
-│   │   └── ConditionCard.tsx
-│   ├── adventure/
-│   │   ├── SessionNoteCard.tsx
-│   │   ├── NPCCard.tsx
-│   │   └── LootCard.tsx
-│   ├── party/
-│   │   ├── CharacterCard.tsx
-│   │   ├── CharacterSheet.tsx
-│   │   └── PartyRoster.tsx
-│   ├── reveal/
-│   │   ├── RevealToggle.tsx
-│   │   ├── RevealGate.tsx
-│   │   └── SpoilerBlur.tsx
-│   └── common/
-│       ├── Button.tsx
-│       ├── Card.tsx
-│       ├── Input.tsx
-│       ├── Modal.tsx
-│       └── Loading.tsx
-├── hooks/                     # Custom React hooks
-│   ├── useSearch.ts
-│   ├── useCampaign.ts
-│   ├── useCharacter.ts
-│   ├── useReveal.ts
-│   └── useCompendium.ts
-├── stores/                    # Zustand state stores
-│   ├── appStore.ts
-│   ├── campaignStore.ts
-│   └── searchStore.ts
-├── services/                  # Business logic services
-│   ├── searchService.ts
-│   ├── compendiumService.ts
-│   ├── campaignService.ts
-│   └── revealService.ts
-├── db/                        # Database layer
-│   ├── index.ts
-│   ├── schema.ts
-│   └── migrations/
-├── utils/                     # Utility functions
-│   ├── formatters.ts
-│   ├── validators.ts
-│   └── helpers.ts
-├── types/                     # TypeScript type definitions
-│   ├── index.ts
+├── main.tsx                 # Entry point: loadCompendium → hydrate → render <App/>
+├── index.css                # Global styles + Tailwind v4 design tokens (@theme)
+│
+├── app/                     # Application shell
+│   ├── index.tsx            # Router provider, query client provider, layout
+│   ├── router.tsx           # All routes (tabs, categories, entities, debug)
+│   └── app-layout.tsx       # TopBar + main + BottomNav (max-w-xl)
+│
+├── features/                # Pages by product area
+│   ├── home/                # home-page.tsx — landing (categories, favorites, recents, session, adventure, party)
+│   ├── search/              # search-page.tsx + components/ (input, results, filter, empty states)
+│   ├── adventure/           # adventure-page.tsx — campaign container (metadata, objectives, notes, references)
+│   ├── party/               # party-page.tsx — player reference sheets
+│   ├── session/             # session-page.tsx — pinned entities + history + clear
+│   ├── compendium/          # Category + entity pages, renderers
+│   │   ├── pages/           #   category-page.tsx, entity-page.tsx
+│   │   ├── components/      #   entity-list, filter-bar, related-entities
+│   │   └── renderers/       #   per-category content renderers (spell, monster, ...)
+│   ├── debug/               # debug-content-page.tsx, debug-spell-page.tsx (dev)
+│   └── not-found-page.tsx   # 404 route
+│
+├── compendium/              # Read-only Compendium API (in-memory)
+│   ├── loader.ts            # Loads generated JSON into memory
+│   ├── repository.ts        # Map-based lookups
+│   ├── search.ts            # Synchronous scoring search
+│   ├── index.ts             # Public API (loadCompendium, search, getEntity, ...)
+│   ├── category-registry.ts # 7 category registry
+│   ├── category-display.ts  # Category display metadata
+│   ├── source.ts            # Source/edition info
+│   ├── reference.ts         # Entity reference helpers
+│   ├── relationships.ts     # Cross-entity relationships
+│   ├── slug.ts              # Canonical id <-> slug
+│   ├── types.ts             # Compendium domain types
+│   └── README.md            # Compendium module docs
+│
+├── user-state/              # Persisted user state (Zustand + localStorage)
+│   ├── store.ts             # Zustand store + actions
+│   ├── types.ts             # UserState, PartyMember, Adventure, ...
+│   ├── persistence.ts       # localStorage read/write + versioning
+│   ├── migrations.ts        # Versioned forward migrations (current: v6)
+│   ├── normalize.ts         # Normalize persisted data on load
+│   └── index.ts             # Public API (useUserState, selectors)
+│
+├── components/              # Shared UI
+│   ├── layout/              #   bottom-nav.tsx, top-bar.tsx, nav-icons.tsx
+│   ├── entity/              #   entity-card, entity-header, metadata-grid, reference rows
+│   ├── content/             #   content-renderer + blocks/ (paragraph, list, table, dice, ...)
+│   └── ui/                  #   Button-like atoms: FavoriteButton, SessionButton,
+│                            #   AdventureButton, ReferencePicker, Inline editors, Badge, ...
+│
+├── adapter/                 # External-source types boundary
+│   ├── 5etools-raw-types.ts # Types mirroring 5etools JSON shape
+│   ├── index.ts             # Re-export of application-facing types
+│   └── README.md            # Adapter contract
+│
+├── generated/compendium/    # Generated data (do not edit by hand)
+│   ├── spells.json
+│   ├── monsters.json
+│   ├── equipment.json
+│   ├── conditions.json
+│   ├── actions.json
+│   ├── magic-items.json
+│   ├── feats.json
+│   ├── search-index.json
+│   ├── related-index.json
+│   └── manifest.json
+│
+├── types/                   # Domain type definitions
 │   ├── compendium.ts
-│   ├── campaign.ts
-│   └── character.ts
-└── styles/                    # Global styles
-    └── globals.css
+│   ├── content-block.ts     # Renderable content blocks
+│   ├── relationships.ts
+│   └── index.ts
+│
+├── config/                  # App-wide constants
+│   ├── constants.ts         # ROUTES, APP_NAME, category keys
+│   └── tokens.ts            # Design tokens (spacing, etc.)
+│
+├── lib/                     # Utilities (utils.ts)
+├── hooks/                   # Custom hooks (reserved)
+├── shared/                  # Shared primitives (README.md)
+└── assets/                  # Static assets
 ```
+
+---
+
+## Generated Data
+
+`src/generated/compendium/` contains the output of the build-time pipeline:
+
+- One JSON file per category (spells, monsters, equipment, conditions, actions, magic-items, feats).
+- `search-index.json` — prebuilt search index.
+- `related-index.json` — prebuilt cross-entity relationships.
+- `manifest.json` — build metadata and source versions.
+
+**Never edit these files by hand.** They are regenerated by `pnpm build:compendium`.
 
 ---
 
 ## Scripts Structure
 
 ```
-scripts/
-├── compendium/
-│   ├── fetch-data.ts          # Read from 5etools
-│   ├── transform-data.ts      # Normalize data structure
-│   ├── generate-json.ts       # Output static JSON
-│   ├── generate-index.ts      # Build search index
-│   └── validate.ts            # Verify data integrity
-├── build/
-│   ├── build.ts               # Production build script
-│   └── optimize.ts            # Asset optimization
-└── utils/
-    └── logger.ts              # Build logging utilities
+scripts/compendium/
+├── allowed-sources/         # Permitted 5etools sources
+├── build/                   # Build orchestration
+├── entries/                 # Per-category entry generation
+├── generate-index/          # Search index generation
+├── generate-related-index/  # Relationship index generation
+├── categories/              # Per-category transforms + validation
+│   ├── action/              # (also condition, equipment, feat, magic-item, monster, spell)
+├── id/                      # Canonical id generation
+├── identity/                # Identity / version dedup
+└── ...                      # shared helpers
 ```
 
 ---
@@ -140,33 +149,10 @@ scripts/
 
 ```
 external/
-└── 5etools/                   # Read-only D&D 5e data source
-    ├── data/
-    │   ├── spells.json
-    │   ├── monsters.json
-    │   ├── equipment.json
-    │   ├── conditions.json
-    │   └── ...
-    └── ...
+└── 5etools/                 # Read-only D&D 5e data source
 ```
 
-**Important:** Never modify files in `external/`. This directory is read-only.
-
----
-
-## Generated Data
-
-```
-data/
-├── compendium/
-│   ├── spells.json            # Processed spell data
-│   ├── conditions.json        # Processed condition data
-│   ├── actions.json           # Processed action data
-│   ├── equipment.json         # Processed equipment data
-│   └── index.json             # Search index
-└── build/
-    └── manifest.json          # Build metadata
-```
+**Important:** Never modify files in `external/`. This directory is read-only and is only consumed at build time.
 
 ---
 
@@ -174,88 +160,52 @@ data/
 
 ```
 docs/
-├── architecture.md            # Technical architecture
-├── product-philosophy.md      # Product principles and values
-├── navigation.md              # Navigation patterns
-├── search-architecture.md     # Search system design
-├── compendium-architecture.md # Compendium system design
-├── data-architecture.md       # Database schema and patterns
-├── coding-guidelines.md       # Development standards
-├── mobile-first.md            # Mobile-specific patterns
-├── anti-features.md           # Excluded product categories
-├── folder-structure.md        # This document
-└── roadmap.md                 # Development phases
+├── architecture.md          # Technical architecture
+├── product-philosophy.md    # Product vision and principles
+├── navigation.md            # Navigation model
+├── roadmap.md               # Priorities
+├── anti-features.md         # Explicit non-goals
+├── folder-structure.md      # This document
+├── glossary.md              # Shared vocabulary
+├── success-metrics.md       # Product KPIs
+├── user-questions.md        # What the app answers
+├── mobile-first.md          # Mobile design principles
+├── search-architecture.md   # Search system
+├── compendium-architecture.md # Compendium system
+├── engineering-contract.md  # Engineering commitments
+├── coding-guidelines.md     # Code standards
+├── design-principles.md     # Design principles
+├── architecture-review-iteration3.md # Phase 20 architecture review report
+└── architecture-decisions/  # ADRs (README + ADR-001..005)
 ```
 
 ---
 
-## Feature Modules
+## Import Boundaries
 
-Feature modules are organized by product area:
+Dependencies flow one direction only:
 
-### Compendium Module
 ```
-src/
-├── screens/Compendium/
-├── components/compendium/
-├── hooks/useCompendium.ts
-├── services/compendiumService.ts
-└── types/compendium.ts
-```
-
-### Adventure Module
-```
-src/
-├── screens/Adventure/
-├── components/adventure/
-├── hooks/useAdventure.ts
-├── services/adventureService.ts
-└── types/adventure.ts
+external/5etools/
+  → scripts/compendium/
+    → src/generated/compendium/
+      → src/compendium/
+        → src/adapter/
+          → src/  (features, components)
 ```
 
-### Party Module
-```
-src/
-├── screens/Party/
-├── components/party/
-├── hooks/useParty.ts
-├── services/partyService.ts
-└── types/party.ts
-```
-
-### Search Module
-```
-src/
-├── screens/Search/
-├── components/search/
-├── hooks/useSearch.ts
-├── services/searchService.ts
-└── types/search.ts
-```
-
-### Reveal Module
-```
-src/
-├── components/reveal/
-├── hooks/useReveal.ts
-├── services/revealService.ts
-└── types/reveal.ts
-```
+- Features import from `src/compendium/` (public API) and `src/user-state/`.
+- Only `src/compendium/loader.ts` touches `src/generated/`.
+- Only `src/adapter/` references 5etools types; everything else goes through the adapter.
 
 ---
 
 ## Naming Conventions
 
-### Files
-- **Components:** PascalCase (`SearchBar.tsx`)
-- **Hooks:** camelCase (`useSearch.ts`)
-- **Services:** camelCase (`searchService.ts`)
-- **Types:** PascalCase (`SearchResult.ts`)
-- **Utilities:** camelCase (`formatters.ts`)
+- **Feature pages:** kebab-case (`home-page.tsx`, `adventure-page.tsx`).
+- **Feature dirs:** kebab-case (`compendium/`, `user-state/`).
+- **UI components:** PascalCase files (`FavoriteButton.tsx`, `Badge.tsx`) except legacy kebab-case atoms (they are migrated as touched).
+- **Module internal files:** kebab-case (`category-registry.ts`).
+- **Domain types:** PascalCase (`UserState`, `PartyMember`).
 
-### Directories
-- **Screens:** PascalCase (`Search/`)
-- **Components:** kebab-case (`search/`)
-- **Hooks:** camelCase (`hooks/`)
-- **Services:** camelCase (`services/`)
-- **Types:** camelCase (`types/`)
+When in doubt, follow the conventions of the nearest existing file.

@@ -12,7 +12,7 @@ Never: "What CRUD does this implement?"
 
 ## Player Questions
 
-### Spell Lookup
+### Compendium
 
 - What does this spell do?
 - How long does this spell last?
@@ -23,93 +23,53 @@ Never: "What CRUD does this implement?"
 - What classes can cast this spell?
 - What happens at higher levels?
 - Is this spell a ritual?
-
-### Equipment
-
-- What does this item do?
-- How much does this cost?
-- How much does this weigh?
-- What properties does this weapon have?
-- What is the damage of this weapon?
-- What type of damage does this deal?
-- Do I have proficiency with this?
-- What armor class does this armor provide?
-
-### Conditions
-
 - What does this condition do?
 - What am I unable to do while affected?
 - How does this condition end?
-- What abilities are affected by this?
-- Can I save against this?
-
-### Actions
-
 - What actions can I take?
 - What does the Help action do?
 - How does grappling work?
 - What is the Dodge action?
-- Can I ready an action?
-- What is the Dash action?
+- What does this item do?
+- What properties does this weapon have?
+- What is the damage of this weapon?
+- Do I have proficiency with this?
+- What armor class does this armor provide?
 
-### Characters
+### Own Reference Sheet (Party)
 
-- What are my abilities?
 - What spells do I know?
-- How many spell slots do I have?
-- What items do I have?
-- What are my proficiencies?
-- What is my armor class?
+- What am I carrying / wearing (as references)?
+- What is my passive Perception?
+- What is my level and class?
 
-### Party
-
-- Who is in the party?
-- What does this character do?
-- Which player knows this information?
-- What is the party's current objective?
+These are answered from the player's own lightweight reference sheet — never from a full character sheet (see [anti-features.md](./anti-features.md)).
 
 ---
 
 ## DM Questions
 
-### NPCs
+### Compendium
 
-- Who is this NPC?
-- What does this NPC want?
-- What relationship does this NPC have with the party?
-- Where did the party meet this NPC?
-- What information does this NPC know?
-- What is this NPC's attitude?
+- What does this monster's ability do?
+- What is this monster's CR?
+- What spells does this monster have?
+- What does this magic item do?
 
 ### Adventure
 
-- What happened last session?
-- What quest are we doing?
-- Where did we leave off?
-- What NPCs were introduced?
-- What locations were visited?
-- What loot was distributed?
+- What are we doing? (current adventure title, description, objectives)
+- What's the current objective?
+- What references are important for this adventure?
 
-### Locations
+### Sessions
 
-- Where are we travelling?
-- What is in this location?
-- What hazards are nearby?
-- What is the geography of this area?
+- What did I pin for this encounter? (session list)
+- What happened last session? (session history)
 
-### Loot
+### Party
 
-- Who owns this item?
-- Where did we get this sword?
-- What treasure was found?
-- How is the loot divided?
-
-### World
-
-- What is the political situation?
-- What is the history of this place?
-- What gods are worshipped here?
-- What factions are active?
+- What does each player character have (spells, items, passive senses)?
 
 ---
 
@@ -117,10 +77,7 @@ Never: "What CRUD does this implement?"
 
 ### Before Session
 
-- What happened last time?
-- What NPCs need to be prepared?
-- What locations will be visited?
-- What encounters are planned?
+- What did we leave off on? (session history)
 
 ### During Session
 
@@ -129,13 +86,11 @@ Never: "What CRUD does this implement?"
 - How much damage does this deal?
 - What is the range of this attack?
 - Can I do this?
+- What did I pin for this encounter?
 
 ### After Session
 
-- What happened today?
-- What loot was found?
-- What NPCs were encountered?
-- What quests progressed?
+- What did we use today? (session history)
 
 ---
 
@@ -145,19 +100,34 @@ Never: "What CRUD does this implement?"
 
 "What does the rules say about X?"
 
-These are answered by the Compendium: spells, conditions, actions, equipment, rules.
+Answered by the Compendium: spells, conditions, actions, equipment, monsters, magic items, feats.
 
-### Campaign Questions (Adventure + Party)
+### Context Questions (Adventure + Party + Session)
 
-"What happened in our game?"
+"What is going on in our game?"
 
-These are answered by session notes, NPC records, loot logs, and party information.
+Answered by the adventure's metadata/objectives/notes/references, the party's reference sheets, and the session's pinned entities and history.
 
 ### Lookup Questions (Search)
 
 "Where is that thing I need?"
 
-These are answered by Search: finding any entity across all categories.
+Answered by Search: finding any entity across all categories.
+
+---
+
+## Explicitly Not Answered
+
+These questions are deliberately out of scope:
+
+- "What encounters should I plan?" — no encounter builder.
+- "What does the NPC know?" — no NPC roster.
+- "Who owns this loot?" — no loot system.
+- "What is the history of this world?" — no worldbuilding.
+- "How many spell slots do I have left?" — no full character sheet.
+- "Who has initiative?" — no combat tracker.
+
+These are answered by other tools or by the table itself (see [anti-features.md](./anti-features.md)).
 
 ---
 

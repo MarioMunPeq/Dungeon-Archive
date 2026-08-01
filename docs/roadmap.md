@@ -2,194 +2,111 @@
 
 ## Overview
 
-Phased development with functional milestones. Each phase delivers a working product increment.
+The roadmap reflects the current state of Dungeon Archive and the priorities that follow from the product philosophy. The guiding question for everything on this list:
 
-**Platform:** Mobile-only for product. Desktop for development only.
+> **Does this reduce the time players spend waiting because someone is looking for information?**
 
----
-
-## Phase 1: Foundation (Weeks 1-2)
-
-**Goal:** Core infrastructure and basic compendium search.
-
-### Deliverables
-- [ ] Project setup (Vite, React, TypeScript, Tailwind)
-- [ ] IndexedDB integration (Dexie.js)
-- [ ] Basic search functionality
-- [ ] 5etools adapter layer (build-time)
-- [ ] Static JSON generation for spells
-- [ ] Spell search and detail view
-- [ ] Basic navigation (bottom tabs)
-- [ ] Mobile-first responsive layout
-
-### Milestone
-**Search for any spell by name, see full details.**
+**Platform:** Mobile-first. Desktop exists for development only.
 
 ---
 
-## Phase 2: Compendium Essentials (Weeks 3-4)
+## Current State
 
-**Goal:** Complete MVP compendium categories.
+What Dungeon Archive does today:
 
-### Deliverables
-- [ ] Conditions data and search
-- [ ] Actions data and search
-- [ ] Equipment data and search
-- [ ] Heterogeneous search results
-- [ ] Search result ranking
-- [ ] Recent searches
-- [ ] Favorites system
-
-### Milestone
-**Search across spells, conditions, actions, and equipment with instant results.**
+- **Compendium (7 categories)** — Spells, Conditions, Actions, Equipment, Monsters, Magic Items, and Feats, generated from official data at build time and available offline.
+- **Search** — Instant, synchronous, substring-scored lookup across the entire Compendium, with a category filter and keyboard navigation.
+- **Adventure** — A lightweight campaign container: title, description, objectives, private DM notes, and pinned entity references. One active adventure; previous ones can be archived and restored.
+- **Party** — Lightweight player reference sheets: identity, level, passive senses, known spells, equipped armor/weapons/magic items (stored as Compendium references, never duplicated), and notes.
+- **Session** — A pinned list of entities for the current encounter, with a clear/end action. Session history is kept for the DM.
+- **Favorites & recents** — Quick access to the entities a user cares about.
+- **Entity details** — Full entity views with content rendering, related/referencing entities, and source/edition version selection (2014 vs 2024).
+- **Offline-first** — All data is on-device. No server, no login, no network dependency. PWA for installability.
 
 ---
 
-## Phase 3: Campaign System (Weeks 5-6)
+## Priority: High
 
-**Goal:** Basic campaign management with DM tools.
+These are the next investments. They directly reduce dead time.
 
-### Deliverables
-- [ ] Campaign creation and switching
-- [ ] Single active campaign
-- [ ] Session notes (markdown)
-- [ ] NPC management
-- [ ] Basic Reveal System (DM/Player modes)
-- [ ] Monsters (DM-only by default)
+### Player Reference Sheets
 
-### Milestone
-**DM can create a campaign, manage NPCs, and control what players see.**
+The Party currently stores the repeatedly-consulted combat information. Future work focuses on presenting it as fast reference rather than as a form:
 
----
+- Instant access to a member's spells, armor, weapons, and magic items from the party list.
+- Combat-critical numbers surfaced without opening the editor (AC from armor, spell list, passive senses).
+- Fewer taps between "whose turn — what do they have?" and the answer.
 
-## Phase 4: Character Management (Weeks 7-8)
+### Session History
 
-**Goal:** Party and character sheets.
+Sessions are currently a pinned list of entities. The DM's history of sessions is the "what happened last week?" answer. Future work:
 
-### Deliverables
-- [ ] Character creation
-- [ ] Basic character sheet view
-- [ ] Inventory tracking
-- [ ] Party roster
-- [ ] Character notes
+- Record a session (name/date/summary + the pinned entities) when the session ends.
+- Browse past sessions from the Session screen.
+- Link the adventure to its session history.
 
-### Milestone
-**Players can manage their characters and view party information.**
+### Compendium Improvements
 
----
+The Compendium is the heart. Improvements that speed retrieval:
 
-## Phase 5: Session Tools (Weeks 9-10)
+- Better search relevance and typo tolerance.
+- Faster entity detail rendering.
+- Broader content coverage within the existing categories (more sources/editions, better metadata).
+- Refined cross-references between entities (related entities are already generated; surface them better).
 
-**Goal:** DM session management tools.
+### Search Improvements
 
-### Deliverables
-- [ ] Session logging
-- [ ] Encounter tracker (non-combat)
-- [ ] Loot tracking
-- [ ] Location references
-- [ ] Session summary generation
+Search is the primary interface:
 
-### Milestone
-**DM can track sessions, log encounters, and manage loot.**
+- Smarter ranking (multi-token matching, diacritics, prefix weighting).
+- Search across user data (party members, adventures) in addition to Compendium entities.
+- History and recent-search management.
 
----
+### Performance & Offline
 
-## Phase 6: Polish (Weeks 11-12)
+- Bundle size reduction and faster startup (the entire Compendium ships on-device).
+- Load-time and search-latency budgets (see [success-metrics.md](./success-metrics.md)).
+- PWA hardening: asset caching, update flow.
 
-**Goal:** Refine UX and prepare for release.
+### Navigation Speed
 
-### Deliverables
-- [ ] Search performance optimization
-- [ ] Offline reliability testing
-- [ ] Mobile touch optimization
-- [ ] Accessibility improvements
-- [ ] Error handling and recovery
-- [ ] Data validation and integrity
-
-### Milestone
-**App is reliable, fast, and pleasant to use during sessions.**
+- Quick links from the home screen to the most-used categories.
+- Fewer taps between a question and an answer.
+- Back/navigation behavior tuned for one-handed use.
 
 ---
 
-## Post-MVP (Future Phases)
+## Priority: Lower
 
-### Phase 7: Advanced Compendium
-- Races
-- Classes
-- Feats
-- Magic items
-- Rules
+These are worth doing but come after the high-priority items. They are kept deliberately light to preserve the "quiet" product feel.
 
-### Phase 8: Advanced Tools
-- Initiative tracking (optional)
-- Combat calculator
-- Map integration
-- Cloud sync
+### Campaign Enhancements
 
-### Phase 9: Community
-- Custom content creation
-- Campaign sharing
-- Export/import
-- Print-friendly views
+- Better adventure organization (multiple adventures, reordering, richer objectives).
+- Session history integrated into the adventure view.
+
+### Visual Polish
+
+- Refinement of the dark-first design system, spacing, and typography.
+- Empty states and micro-interactions that never slow retrieval.
+
+### Theme Improvements
+
+- Additional theme variants only if they do not add maintenance burden or cognitive load.
 
 ---
 
-## Technical Dependencies
+## Not on the Roadmap
 
-### External
-- **5etools** — D&D 5e data source (read-only)
-- **Dexie.js** — IndexedDB wrapper
-- **TanStack Query** — Async state management
-- **Zustand** — Client state management
-
-### Internal
-- **Build system** — Vite + TypeScript
-- **Testing** — Vitest + Testing Library
-- **Linting** — ESLint + Prettier
-- **Type checking** — TypeScript strict mode
+Everything in [anti-features.md](./anti-features.md) is a permanent exclusion. In particular: campaign planning/management tools, worldbuilding, encounter builders, initiative/combat trackers, dice rollers, character builders, digital notebooks, and any feature that requires a server.
 
 ---
 
-## Success Criteria
+## Verification
 
-### Phase 1 Success
-- App starts in < 2 seconds
-- Search returns results in < 200ms
-- Works offline for core search
-- Mobile-friendly interface
+Every change ships only if:
 
-### Phase 4 Success
-- Character sheet loads in < 1 second
-- Campaign data persists across sessions
-- Reveal System correctly filters content
-- Search respects DM/Player permissions
-
-### Phase 6 Success
-- Zero data loss during sessions
-- Smooth 60fps interactions
-- Intuitive navigation without instructions
-- Reliable offline performance
-
----
-
-## Risk Mitigation
-
-### Data Complexity
-- Start with simplest categories (spells, conditions)
-- Progressively add complexity
-- Validate data integrity at each phase
-
-### Performance
-- Pre-index all search data
-- Lazy load non-essential features
-- Profile and optimize bottlenecks
-
-### Offline Reliability
-- Test with network disabled
-- Graceful fallback for missing data
-- Regular data integrity checks
-
-### Mobile UX
-- Test on real devices early
-- Optimize for thumb reach zones
-- Minimize text input requirements
+- It reduces (or at least never increases) time-to-answer.
+- It works fully offline.
+- It works one-handed on a phone.
+- It does not add permanent data-entry burden.

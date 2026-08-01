@@ -31,5 +31,5 @@ What becomes easier or more difficult to do because of this change?
 | ADR-001 | React 19 as baseline | Accepted |
 | ADR-002 | Offline-first architecture | Accepted |
 | ADR-003 | Adapter Layer | Accepted |
-| ADR-004 | Single active campaign | Accepted |
+| ADR-004 | Single active adventure | Accepted |
 | ADR-005 | Search-first philosophy | Accepted |

@@ -10,9 +10,10 @@ Development standards for Dungeon Archive. These guidelines ensure consistency, 
 
 1. **Mobile-first** — All code must work on mobile devices
 2. **Offline-first** — No network dependencies for core features
-3. **Performance** — < 200ms search, < 1.5s initial load
+3. **Performance** — < 150ms search, < 1.5s initial load
 4. **Simplicity** — Prefer simple solutions over clever ones
 5. **Type safety** — TypeScript strict mode, no `any` types
+6. **Read-only Compendium** — Application code never writes official data
 
 ---
 
@@ -20,44 +21,34 @@ Development standards for Dungeon Archive. These guidelines ensure consistency, 
 
 ### Configuration
 
-```json
-{
-  "compilerOptions": {
-    "strict": true,
-    "noUncheckedIndexedAccess": true,
-    "noImplicitReturns": true,
-    "noFallthroughCasesInSwitch": true
-  }
-}
-```
+The project runs TypeScript in strict mode across three configs:
+
+- `tsconfig.app.json` — application code
+- `tsconfig.scripts.json` — build scripts
+- `tsconfig.node.json` — tooling
+
+Verified with `pnpm typecheck`.
 
 ### Type Definitions
 
 ```typescript
-// Prefer interfaces over types
-interface Spell {
+// Prefer interfaces for object shapes
+interface PartyMember {
   id: string;
   name: string;
   level: number;
-  school: string;
 }
 
 // Use type aliases for unions
-type SpellSchool = 'Abjuration' | 'Conjuration' | 'Divination' | 'Enchantment';
-
-// Use enums sparingly (prefer const objects)
-const SpellSchool = {
-  Abjuration: 'Abjuration',
-  Conjuration: 'Conjuration',
-} as const;
+type CategoryKey = 'spell' | 'monster' | 'equipment' | 'condition' | 'action' | 'magicitem' | 'feat';
 ```
 
 ### Naming
 
-- **PascalCase** for types, interfaces, classes
+- **PascalCase** for types, interfaces, components
 - **camelCase** for variables, functions, methods
-- **UPPER_SNAKE_CASE** for constants
-- **kebab-case** for file names
+- **UPPER_SNAKE_CASE** for module-level constants (`ROUTES`, `APP_NAME`)
+- **kebab-case** for most files (`home-page.tsx`, `category-registry.ts`); PascalCase for UI atoms (`FavoriteButton.tsx`, `Badge.tsx`)
 
 ---
 
@@ -66,240 +57,101 @@ const SpellSchool = {
 ### Components
 
 ```typescript
-// Functional components only (no class components)
-// Use explicit return type for exported components
-function SearchBar({ onSearch }: SearchBarProps): JSX.Element {
-  return (
-    <div>
-      <input onChange={(e) => onSearch(e.target.value)} />
-    </div>
-  );
+// Functional components only. Explicit return types for exported components.
+function SearchInput({ value, onChange }: SearchInputProps): JSX.Element {
+  return <input value={value} onChange={(e) => onChange(e.target.value)} />;
 }
 
-// Props interface defined in same file
-interface SearchBarProps {
-  onSearch: (query: string) => void;
+// Props interface defined in the same file
+interface SearchInputProps {
+  value: string;
+  onChange: (value: string) => void;
 }
 ```
 
 ### Hooks
 
-```typescript
-// Custom hooks prefixed with 'use'
-function useSearch() {
-  const [query, setQuery] = useState('');
-  const [results, setResults] = useState<SearchResult[]>([]);
-  
-  // ... implementation
-  
-  return { query, setQuery, results };
-}
-```
+Custom hooks are prefixed with `use`. Hooks directory is reserved; so far state access is done directly through the Zustand store (`useUserState`).
 
 ### State Management
 
-```typescript
-// Zustand for client state
-const useAppStore = create<AppState>((set) => ({
-  currentCampaignId: null,
-  setCurrentCampaign: (id) => set({ currentCampaignId: id }),
-}));
+All user state lives in the Zustand store in `src/user-state/`. Components never write to `localStorage` directly; they call store actions.
 
-// TanStack Query for async state
-function useSpells() {
-  return useQuery({
-    queryKey: ['spells'],
-    queryFn: () => fetchSpells(),
-  });
-}
+```typescript
+import { useUserState } from '@/user-state';
+
+const toggleFavorite = useUserState((s) => s.toggleFavorite);
 ```
+
+There is no async state layer. There are no server queries. TanStack Query is present as a provider baseline only and must not be used for Compendium or user data.
 
 ---
 
 ## Styling
 
-### Tailwind CSS
+### Tailwind CSS v4 with Design Tokens
 
-```typescript
-// Prefer Tailwind classes over custom CSS
-function SearchResultCard({ result }: Props) {
+Design tokens (colors, spacing, fonts, radii) are defined once in the `@theme` block of `src/index.css`.
+
+```tsx
+function EntityCard() {
   return (
-    <div className="p-4 border rounded-lg hover:bg-gray-50">
-      <h3 className="text-lg font-semibold">{result.name}</h3>
-      <p className="text-sm text-gray-600">{result.description}</p>
+    <div className="rounded-card bg-card border-card p-md">
+      <h3 className="text-lg font-semibold">{name}</h3>
     </div>
   );
 }
 ```
 
-### Responsive Design
+### Dark-First, Not Dark Mode
 
-```typescript
-// Mobile-first responsive classes
-function App() {
-  return (
-    <div className="min-h-screen bg-gray-100">
-      {/* Mobile: full width, Tablet: 640px, Desktop: 1024px */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Content */}
-      </div>
-    </div>
-  );
-}
-```
+The app is **dark by default**. Do not write light-first styles with `dark:` variants. Use the semantic tokens (`background`, `surface`, `card`, `primary`, `text-...`) directly.
 
-### Dark Mode
+### Responsive
 
-```typescript
-// Use Tailwind's dark mode
-function Component() {
-  return (
-    <div className="bg-white dark:bg-gray-900 text-black dark:text-white">
-      {/* Content */}
-    </div>
-  );
-}
-```
-
----
-
-## Testing
-
-### Unit Tests
-
-```typescript
-// Use Vitest for unit tests
-import { describe, it, expect } from 'vitest';
-import { formatSpellLevel } from './formatters';
-
-describe('formatSpellLevel', () => {
-  it('formats cantrip correctly', () => {
-    expect(formatSpellLevel(0)).toBe('Cantrip');
-  });
-
-  it('formats spell level correctly', () => {
-    expect(formatSpellLevel(3)).toBe('3rd Level');
-  });
-});
-```
-
-### Component Tests
-
-```typescript
-// Use React Testing Library
-import { render, screen } from '@testing-library/react';
-import { SpellCard } from './SpellCard';
-
-it('renders spell name', () => {
-  const spell = { id: '1', name: 'Fireball', level: 3 };
-  render(<SpellCard spell={spell} />);
-  expect(screen.getByText('Fireball')).toBeInTheDocument();
-});
-```
-
-### Integration Tests
-
-```typescript
-// Test search functionality
-import { render, screen, fireEvent } from '@testing-library/react';
-import { SearchScreen } from './SearchScreen';
-
-it('searches for spells', async () => {
-  render(<SearchScreen />);
-  fireEvent.change(screen.getByPlaceholderText('Search'), {
-    target: { value: 'fireball' },
-  });
-  expect(await screen.findByText('Fireball')).toBeInTheDocument();
-});
-```
+Layout is a single column, constrained to `max-w-xl` in the app shell. Do not design multi-column desktop layouts.
 
 ---
 
 ## Data Patterns
 
-### IndexedDB (Dexie.js)
+### Accessing the Compendium
+
+Use the public API in `src/compendium/`:
 
 ```typescript
-// Define schema clearly
-const db = new Dexie('DungeonArchive');
-db.version(1).stores({
-  spells: 'id, name, level, school',
-  conditions: 'id, name',
-  actions: 'id, name, type',
-  equipment: 'id, name, type',
-});
+import { getEntity, search } from '@/compendium';
 
-// Use typed queries
-async function searchSpells(query: string): Promise<Spell[]> {
-  return db.spells
-    .where('name')
-    .startsWithIgnoreCase(query)
-    .toArray();
-}
+const spell = getEntity('spell', 'fireball');
+const results = search('fireball');
 ```
 
-### Static JSON
+Never import `src/generated/` files outside `src/compendium/loader.ts`.
+
+### User State
 
 ```typescript
-// Import compendium data
-import spellsData from '../data/compendium/spells.json';
-
-// Type-safe access
-const spells: Spell[] = spellsData;
+// Always go through the store
+const addObjective = useUserState((s) => s.addObjective);
+addObjective(adventureId, 'Defeat the goblin chief');
 ```
+
+Persisted shape changes require a **version bump and a migration** in `src/user-state/migrations.ts`. Never silently change the persisted shape.
 
 ---
 
 ## Performance
 
-### Lazy Loading
+### Search
 
-```typescript
-// Lazy load non-critical components
-const CharacterEditor = lazy(() => import('./CharacterEditor'));
+- Search is synchronous and in-memory. Do not introduce async or debounced network calls.
+- Result cap and 150ms debounce live in the search page; scoring lives in `src/compendium/search.ts`.
 
-// Use Suspense
-<Suspense fallback={<Loading />}>
-  <CharacterEditor />
-</Suspense>
-```
+### Rendering
 
-### Memoization
-
-```typescript
-// Memoize expensive calculations
-const filteredSpells = useMemo(() => {
-  return spells.filter(spell => spell.level <= maxLevel);
-}, [spells, maxLevel]);
-
-// Memoize callbacks
-const handleSearch = useCallback((query: string) => {
-  setSearchQuery(query);
-}, []);
-```
-
-### Virtual Scrolling
-
-```typescript
-// For long lists, use virtual scrolling
-import { useVirtualizer } from '@tanstack/react-virtual';
-
-function SpellList({ spells }: { spells: Spell[] }) {
-  const parentRef = useRef<HTMLDivElement>(null);
-  
-  const virtualizer = useVirtualizer({
-    count: spells.length,
-    getScrollElement: () => parentRef.current,
-    estimateSize: () => 80,
-  });
-  
-  return (
-    <div ref={parentRef} className="h-96 overflow-auto">
-      {/* Virtual list */}
-    </div>
-  );
-}
-```
+- Memoize derived data with `useMemo` where recomputation is measurable.
+- Avoid re-rendering the whole list on every keystroke; keep search results computed from the query, not from state mutations.
+- No virtual scrolling is used today; long category lists render plainly. Only add it if profiling shows it necessary.
 
 ---
 
@@ -307,79 +159,49 @@ function SpellList({ spells }: { spells: Spell[] }) {
 
 ### File Structure
 
+See [folder-structure.md](./folder-structure.md) for the canonical layout:
+
 ```
 src/
-├── components/     # Reusable UI
-├── hooks/          # Custom React hooks
-├── screens/        # Page components
-├── services/       # Business logic
-├── stores/         # State management
-├── types/          # TypeScript types
-└── utils/          # Utility functions
+├── app/           # Router, layout, shell
+├── features/      # Pages by area (home, search, adventure, party, session, compendium, debug)
+├── components/    # Shared UI (layout/, entity/, content/, ui/)
+├── compendium/    # Read-only Compendium API
+├── user-state/    # Zustand store + persistence + migrations
+├── adapter/       # External-source types boundary
+├── generated/     # Build output (never hand-edited)
+├── types/         # Domain types
+├── config/        # Constants and tokens
+├── lib/           # Utilities
+└── shared/        # Shared primitives
 ```
 
 ### Imports
 
+Import order: external libraries, then internal modules.
+
 ```typescript
-// Group imports: external, internal, types
-import React from 'react';
-import { useQuery } from '@tanstack/react-query';
+import { useState } from 'react';
 
-import { SearchBar } from '../components/search/SearchBar';
-import { useSearch } from '../hooks/useSearch';
-
-import type { SearchResult } from '../types/search';
+import { search } from '@/compendium';
+import { useUserState } from '@/user-state';
 ```
+
+Prefer path aliases (`@/...`) over deep relative imports where the project already uses them.
 
 ---
 
-## Naming Conventions
+## Testing
 
-### Files
+### Test Scripts
 
-- **Components:** `PascalCase.tsx` (e.g., `SearchBar.tsx`)
-- **Hooks:** `camelCase.ts` (e.g., `useSearch.ts`)
-- **Services:** `camelCase.ts` (e.g., `searchService.ts`)
-- **Types:** `PascalCase.ts` (e.g., `SearchResult.ts`)
-- **Utils:** `camelCase.ts` (e.g., `formatters.ts`)
+The project runs script-based tests via `pnpm test` (11 suites covering compendium building, search, ids, identity, migrations, and utilities). Each script is registered in `package.json`.
 
-### Variables
+### Writing Tests
 
-```typescript
-// camelCase for variables and functions
-const searchQuery = '';
-const performSearch = () => {};
-
-// PascalCase for components and types
-function SearchBar() {}
-interface SearchResult {}
-
-// UPPER_SNAKE_CASE for constants
-const MAX_SEARCH_RESULTS = 20;
-```
-
-### Feature Modules
-
-```
-src/
-├── screens/
-│   ├── Adventure/        # Adventure module (not Journal)
-│   ├── Party/            # Party module (not Character)
-│   ├── Search/           # Search module
-│   └── Compendium/       # Compendium module
-├── components/
-│   ├── adventure/        # Adventure components
-│   ├── party/            # Party components
-│   ├── search/           # Search components
-│   ├── compendium/       # Compendium components
-│   └── reveal/           # Reveal System components
-└── hooks/
-    ├── useAdventure.ts   # Adventure hook
-    ├── useParty.ts       # Party hook
-    ├── useSearch.ts      # Search hook
-    ├── useReveal.ts      # Reveal System hook
-    └── useCompendium.ts  # Compendium hook
-```
+- Tests are node scripts (no vitest/jsdom) that assert on generated data, compendium behavior, and pure functions.
+- Pure logic (search scoring, slug/id generation, migrations) should be covered.
+- Component rendering is not unit-tested today; keep logic extractable so it stays testable.
 
 ---
 
@@ -409,12 +231,14 @@ docs/architecture-update
 
 Before merging:
 
-- [ ] TypeScript compiles without errors
-- [ ] All tests pass
-- [ ] ESLint shows no warnings
-- [ ] No console.log statements
+- [ ] TypeScript compiles without errors (`pnpm typecheck`)
+- [ ] All tests pass (`pnpm test`)
+- [ ] ESLint shows no warnings (`pnpm lint`)
+- [ ] No `console.log` statements
 - [ ] No commented-out code
-- [ ] Mobile-first responsive design
+- [ ] Mobile-first, single-column layout
 - [ ] Touch targets are 44x44px minimum
 - [ ] Search works offline
 - [ ] No network dependencies for core features
+- [ ] No new Compendium data duplication
+- [ ] No direct access to 5etools or generated data outside the allowed boundaries

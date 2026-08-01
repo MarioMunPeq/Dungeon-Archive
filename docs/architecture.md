@@ -2,7 +2,9 @@
 
 ## Overview
 
-Dungeon Archive is a **client-side SPA** with **offline-first** architecture. All data lives on-device. No backend server for MVP.
+Dungeon Archive is a **client-side SPA** with **offline-first** architecture. All data lives on-device. There is no backend server.
+
+The architecture follows a strict rule: **the Compendium is read-only official content, and user data is lightweight state that references it.** Official content and user data never mix.
 
 ---
 
@@ -10,173 +12,117 @@ Dungeon Archive is a **client-side SPA** with **offline-first** architecture. Al
 
 | Layer | Technology | Purpose |
 |-------|-----------|---------|
-| **UI** | React 18+ | Component framework |
-| **Language** | TypeScript | Type safety |
+| **UI** | React 19 | Component framework |
+| **Language** | TypeScript (strict) | Type safety |
 | **Bundler** | Vite | Build tooling |
-| **Styling** | Tailwind CSS | Utility-first CSS |
+| **Styling** | Tailwind CSS (v4, design tokens) | Utility-first CSS |
 | **State** | Zustand | Client state management |
-| **Server State** | TanStack Query | Async state, caching |
-| **Database** | IndexedDB via Dexie.js | Structured offline storage |
-| **Data Source** | 5etools | D&D 5e compendium data |
+| **Persistence** | localStorage (versioned, migrated) | User state storage |
+| **Routing** | React Router | SPA routing |
+| **Offline** | PWA (service worker) | Installability and asset caching |
+| **Data Source** | 5etools | D&D 5e compendium data (build-time only) |
 | **Desktop** | Development only | Not a product platform |
+
+Notes:
+
+- **TanStack Query** is installed and wired as a provider baseline, but the application makes no server requests and uses no query hooks. It is not part of the data path.
+- **No database layer.** The Compendium lives in memory as read-only Maps. User state lives in `localStorage`.
+- Every technology has a concrete responsibility. No dependencies exist for trend reasons.
 
 ---
 
 ## System Architecture
 
 ```
-┌─────────────────────────────────────────────────────┐
-│                   Client (Browser)                  │
-├─────────────────────────────────────────────────────┤
-│  React Components                                  │
-│  ├── Screens (pages)                               │
-│  ├── Components (reusable UI)                      │
-│  └── Hooks (state, data access)                    │
-├─────────────────────────────────────────────────────┤
-│  State Management                                  │
-│  ├── Zustand Store (app state, UI state)           │
-│  └── TanStack Query (server state, caching)        │
-├─────────────────────────────────────────────────────┤
-│  Data Layer                                        │
-│  ├── Dexie.js (IndexedDB wrapper)                  │
-│  ├── IndexedDB Database                            │
-│  └── Static JSON Files (compendium)                │
-├─────────────────────────────────────────────────────┤
-│  External Data                                     │
-│  └── 5etools (read-only, build-time adapter)       │
-└─────────────────────────────────────────────────────┘
+┌──────────────────────────────────────────────┐
+│                  Client (Browser)             │
+├──────────────────────────────────────────────┤
+│  React Components                            │
+│  ├── Features (pages per area)               │
+│  ├── Shared UI components                    │
+│  └── Entity components (detail, cards)       │
+├──────────────────────────────────────────────┤
+│  Compendium API (read-only)                  │
+│  ├── In-memory repository (Map lookups)      │
+│  └── Search (synchronous, in-memory)         │
+├──────────────────────────────────────────────┤
+│  User State (Zustand + localStorage)         │
+│  ├── Favorites / recents / searches          │
+│  ├── Adventure + objectives + notes          │
+│  ├── Party reference sheets                  │
+│  └── Session list + history                  │
+├──────────────────────────────────────────────┤
+│  Static JSON (generated compendium)          │
+│  └── src/generated/compendium/               │
+└──────────────────────────────────────────────┘
+                        │  build-time only
+                        ▼
+              external/5etools/ (read-only)
 ```
 
 ---
 
 ## Core Systems
 
-### 1. Search System
-
-**Search is the core interface of the application.**
-
-- **Search Everywhere** — Global search accessible from any screen
-- **Contextual Search** — Each section has its own search scope
-- **Heterogeneous Results** — Mixed types in relevance order
-- **Instant Results** — < 200ms response time
-- **Offline-First** — All search works without internet
-
-**Architecture:**
-- Pre-indexed static JSON for compendium data
-- In-memory search index loaded at startup
-- Dexie.js queries for user data (campaigns, characters)
-- Fuzzy matching for typo tolerance
-
-**See:** [search-architecture.md](./search-architecture.md) for detailed implementation.
-
----
-
-### 2. Compendium System
+### 1. Compendium System
 
 **Read-only reference data from D&D 5e.**
 
-- **Immutable** — User-generated content never mixes with official data
-- **Pre-indexed** — Built at application build time
-- **Static JSON** — No runtime parsing of 5etools data
-- **Progressive Categories** — Start with essentials, add more over time
+- **Seven categories:** Spells, Conditions, Actions, Equipment, Monsters, Magic Items, Feats.
+- **Immutable** — User content never mixes with official data.
+- **Pre-built** — Generated from 5etools at build time into static JSON.
+- **In-memory** — Loaded once at startup; all access is synchronous Map lookups.
 
-**MVP Categories:**
-- Spells
-- Conditions
-- Actions
-- Equipment
-
-**Later Categories:**
-- Monsters (DM-only by default)
-- Races
-- Classes
-- Feats
-- Magic Items
-- Rules
-
-**Architecture:**
+**Pipeline:**
 ```
-5etools/ (external dependency)
+external/5etools/ (read-only)
     ↓
-Build-time Adapter (scripts/compendium/)
+scripts/compendium/ (build-time transforms + validation)
     ↓
-Static JSON (data/compendium/)
+src/generated/compendium/ (static JSON, shipped)
     ↓
-IndexedDB (Dexie.js)
+src/compendium/ (API: loadCompendium, search, getEntity, resolveEntity, ...)
     ↓
-React Components
+Application code (via public API only)
 ```
 
-**See:** [compendium-architecture.md](./compendium-architecture.md) for detailed implementation.
+**See:** [compendium-architecture.md](./compendium-architecture.md)
 
----
+### 2. Search System
 
-### 3. Reveal System
+**Search is the primary interface.**
 
-**Generic, first-class feature for progressive information disclosure.**
+- **Global scope** — Spans the entire Compendium.
+- **Synchronous** — Computed against the in-memory index, no round-trips.
+- **Instant** — < 150ms target, results appear as the user types.
+- **Scored** — Exact = 100, starts-with = 80, includes = 60; sorted by score then name.
+- **Offline** — Works without internet by construction.
 
-The Reveal System protects information that should only be visible to certain roles. It is not limited to monsters — it applies to any content where information asymmetry is needed.
+**See:** [search-architecture.md](./search-architecture.md)
 
-**Default Reveal Rules:**
-- **Monsters** — DM-only by default (players see name + image only)
-- **NPC Details** — Configurable per NPC
-- **Loot** — Configurable (hidden until revealed)
-- **Locations** — Configurable (fog of war)
-- **Quest Details** — Configurable (hidden until discovered)
+### 3. User State System
 
-**User Roles:**
-- **DM** — Sees all content by default
-- **Player** — Sees only revealed content
+**Lightweight context, persisted on-device.**
 
-**Reveal Mechanisms:**
-- **Global toggle** — DM can reveal/hide categories
-- **Per-entity toggle** — DM can reveal specific NPCs, locations, items
-- **Session-based** — DM can reveal during session, auto-hide after
-- **Bulk reveal** — DM can reveal all monsters for a specific encounter
+- **Favorites** — Pinned Compendium entities.
+- **Recents** — Recently viewed entities and recent searches.
+- **Adventure** — Title, description, objectives, private DM notes, pinned entity references. One active adventure; archive/restore.
+- **Party** — Player reference sheets: identity, passive senses, known spells, equipped items (as entity references), notes.
+- **Session** — Pinned entities for the current encounter, session history.
 
-**Architecture:**
-- Reveal state stored in Dexie.js (per campaign)
-- Reveal checks applied at render time (not data level)
-- Search results respect reveal settings (hidden content not shown to players)
-- Reveal state syncs across devices (future: optional sync)
+**Persistence:**
 
----
+- Stored in `localStorage` under a single key (`dungeon:userState:v1`).
+- The persisted shape has a **version**. On load, migrations run forward until the shape matches the current version.
+- Migration v6 removed the legacy `scenes` field. Every migration is a pure function; persisted data is always normalized on load.
 
-### 4. Campaign System
+### 4. Offline System
 
-**Single active campaign with archived history.**
-
-- **One active campaign** — Only one campaign is "live" at a time
-- **Previous campaigns archived** — Read-only access to past campaigns
-- **No multi-campaign abstractions** — No "campaign selector" in UI
-- **Campaign switching** — Archive current, start new
-
-**Campaign Data:**
-- Campaign metadata (name, system, dates)
-- Characters (party members)
-- NPCs (independent of characters)
-- Session notes
-- Loot tracking
-- Location references
-- Reveal settings
-
-**See:** [data-architecture.md](./data-architecture.md) for schema details.
-
----
-
-### 5. Offline System
-
-**Core functionality works without internet.**
-
-- **Compendium data** — Pre-downloaded at build time
-- **Campaign data** — Stored in IndexedDB
-- **Search** — All search works offline
-- **No runtime network requests** for core features
-
-**Future Enhancements:**
-- Service worker for asset caching
-- Optional cloud sync (future)
-- Background data updates
+- **Compendium data** — Shipped with the app; no network needed.
+- **User state** — `localStorage`; no network needed.
+- **Search** — In-memory; no network needed.
+- **PWA** — Service worker caches app assets; the app is installable.
+- **No runtime network requests** for any core feature.
 
 ---
 
@@ -184,20 +130,19 @@ The Reveal System protects information that should only be visible to certain ro
 
 ### Zustand Store
 
-**Client-side state:**
-- Current campaign ID
-- User preferences (theme, settings)
-- UI state (active tab, modal states)
-- Reveal settings
-- Search state
+Holds all user state and exposes typed actions:
 
-### TanStack Query
+- `toggleFavorite`, `addRecentEntity`, `addRecentSearch`, `clearRecentSearches`, `clearRecentEntities`
+- `createAdventure`, `updateAdventure`, `addObjective`, `removeObjective`, `toggleAdventureEntity`, `clearAdventureEntities`, `archiveAdventure`, `restoreAdventure`, `setActiveAdventure`
+- `addPartyMember`, `updatePartyMember`, `removePartyMember`
+- `toggleSession`, `clearSession`
+- `_replace`, `_reset` (persistence/internal)
 
-**Server-side state (async):**
-- Compendium data loading
-- IndexedDB queries
-- Data transformation
-- Cache management
+Mutations are centralized; components never write to `localStorage` directly.
+
+### Compendium Module
+
+Stateless, read-only, module-level maps populated by `loadCompendium()`. Application code accesses it only through the public API in `src/compendium/`.
 
 ---
 
@@ -206,45 +151,65 @@ The Reveal System protects information that should only be visible to certain ro
 ```
 User Action
     ↓
-React Component
+React Component (feature page)
     ↓
-Hook (useSearch, useCampaign, etc.)
+Compendium API  or  Zustand action
     ↓
-Zustand Store (client state)
+In-memory Maps  or  localStorage (persisted state)
     ↓
-TanStack Query (async operations)
-    ↓
-Dexie.js (IndexedDB) or Static JSON
-    ↓
-Response
-    ↓
-React Component Update
+Re-render
 ```
+
+There is no async data layer. Rendering reads directly from the in-memory Compendium and the Zustand store.
 
 ---
 
 ## Build System
 
 ### Development
-- Vite dev server
-- Hot Module Replacement (HMR)
-- TypeScript type checking
-- ESLint + Prettier
+- Vite dev server with HMR
+- TypeScript type checking (`pnpm typecheck`)
+- ESLint + Prettier (`pnpm lint`, `pnpm format`)
 
 ### Production
-- Vite build
-- Bundle splitting
-- Asset optimization
-- Static JSON generation
+- `pnpm build` (runs `build:compendium` then Vite build)
+- Bundle splitting and asset optimization (Vite)
+- PWA asset generation (vite-plugin-pwa)
+- Static JSON generation (`scripts/compendium/`)
 
 ### Build-Time Compendium Processing
 ```
 scripts/compendium/
-    ├── fetch-data.ts        # Fetch from 5etools
-    ├── transform-data.ts    # Normalize and index
-    ├── generate-json.ts     # Output static JSON
-    └── validate.ts          # Verify data integrity
+    ├── allowed-sources        # Which 5etools sources are permitted
+    ├── build                  # Build orchestration
+    ├── entries                # Per-category entry generation
+    ├── generate-index         # Search index generation
+    ├── generate-related-index # Cross-reference generation
+    ├── categories/            # Per-category transforms + validation
+    │   ├── action, condition, equipment, feat,
+    │   └── magic-item, monster, spell
+    ├── id                     # Canonical id generation
+    ├── identity               # Deduplication / version identity
+    └── ...                    # shared utilities
 ```
+
+---
+
+## Import Boundaries
+
+Dependencies flow one direction only:
+
+```
+external/5etools/
+  → scripts/compendium/
+    → src/generated/compendium/
+      → src/compendium/
+        → src/adapter/
+          → src/  (features, components)
+```
+
+- **`src/adapter/`** owns the types of external sources and re-exports the application-facing types. App code imports types through the adapter, never directly from 5etools.
+- No layer may reach into a layer two or more steps above it.
 
 ---
 
@@ -253,17 +218,27 @@ scripts/compendium/
 | Metric | Target |
 |--------|--------|
 | **First Contentful Paint** | < 1.5s |
-| **Search Response** | < 200ms |
-| **Bundle Size (initial)** | < 200KB gzipped |
+| **Search Response** | < 150ms |
+| **Compendium entry open** | < 100ms |
 | **Time to Interactive** | < 3s |
 | **Offline Ready** | Core features always available |
 
 ---
 
-## Security Considerations
+## Security & Privacy
 
-- **No authentication** — Local-only application
-- **No network requests** — Core features are offline-only
-- **No secrets** — No API keys, no sensitive data
-- **Read-only compendium** — No modification of official data
-- **User data isolation** — Campaign data stays on device
+- **No authentication** — Local-only application.
+- **No network requests** — Core features are offline-only.
+- **No secrets** — No API keys, no sensitive data.
+- **Read-only compendium** — No modification of official data.
+- **User data on-device** — State never leaves the device.
+
+---
+
+## Related Documents
+
+- [compendium-architecture.md](./compendium-architecture.md)
+- [search-architecture.md](./search-architecture.md)
+- [folder-structure.md](./folder-structure.md)
+- [engineering-contract.md](./engineering-contract.md)
+- [architecture-decisions/](./architecture-decisions/README.md)

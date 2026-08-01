@@ -9,32 +9,34 @@ Accepted
 Dungeon Archive consumes D&D 5e data from 5etools. The internal data model must be decoupled from 5etools' data structure to:
 
 1. Prevent external data structure changes from breaking the application
-2. Allow multiple data sources in the future
-3. Keep the application layer clean of external dependencies
+2. Keep the application layer clean of external dependencies
+3. Give the build pipeline a stable target
 
 ## Decision
 
-The adapter layer is a first-class architectural concept at `src/adapter/`. It is NOT a service.
+The adapter layer is a first-class architectural concept at `src/adapter/`. It is the **only** place that owns the types of external sources.
 
 **Rules:**
-1. The adapter is the only place allowed to know how external sources work
+1. The adapter is the only place allowed to know how external sources are shaped
 2. Everything else communicates only with Dungeon Archive models
-3. External data never leaks past the adapter boundary
-4. The adapter exports only Dungeon Archive types, never external types
+3. External types never leak past the adapter boundary
+4. The adapter exports only application-facing types, never external types
 
-**Structure:**
+**Structure (actual):**
 ```
 src/adapter/
-├── 5etools/
-└── future-source/
+├── 5etools-raw-types.ts   # Types mirroring the 5etools JSON shape
+├── index.ts               # Re-exports of the application-facing types
+└── README.md              # Adapter contract
 ```
+
+**Related:** the build-time transforms under `scripts/compendium/` also read 5etools data, but they run at build time and emit `src/generated/compendium/`. The runtime never touches 5etools data; only the adapter's types describe it.
 
 ## Consequences
 
 **Positive:**
 - Application code is decoupled from 5etools
 - External data structure changes only affect the adapter
-- Multiple data sources can be supported
 - Clear architectural boundary
 
 **Negative:**
@@ -43,6 +45,6 @@ src/adapter/
 - Build-time processing adds complexity
 
 **Mitigation:**
-- Adapter is simple translation code
-- Types are generated from the data model
+- Adapter is simple type mapping, not business logic
+- Runtime never parses 5etools; only generated JSON
 - Build-time processing is a one-time setup cost

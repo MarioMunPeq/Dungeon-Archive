@@ -15,27 +15,31 @@ Every metric answers one question: **"How fast can a user get the information th
 | Action | Target | Why |
 |--------|--------|-----|
 | Find any spell | < 3 seconds | Spells are the most common lookup |
-| Find any NPC | < 3 seconds | NPCs appear in every session |
+| Find any monster | < 3 seconds | Monsters are the most common DM lookup |
+| Find any magic item | < 3 seconds | DMs hand out items mid-session |
 | Find any equipment | < 3 seconds | Players check items constantly |
 | Find any condition | < 3 seconds | Conditions slow combat |
 | Find any action | < 3 seconds | New players forget their options |
+| Find any feat | < 3 seconds | Feats come up at level-up and play |
 | Search any entity | < 5 seconds | Upper bound for any lookup |
 
 ### Navigation Speed
 
 | Action | Target | Why |
 |--------|--------|-----|
-| Open previous session notes | < 2 seconds | DMs review before each session |
-| Open Party view | < 2 seconds | Players check character info |
-| Open current Adventure | < 2 seconds | DMs access session data |
-| Switch between sections | < 200ms | Tab switching must feel instant |
+| Open party reference sheet | < 2 seconds | Players check their sheet mid-combat |
+| Open the current adventure | < 2 seconds | DMs access campaign context |
+| Open the current session list | < 2 seconds | DMs and players check pinned entities |
+| Open a favorite entity | < 2 seconds | Favorites exist to be fast |
+| Open a recent entity | < 2 seconds | Recents exist to be fast |
+| Switch between tabs | < 200ms | Tab switching must feel instant |
 
 ### System Performance
 
 | Metric | Target | Why |
 |--------|--------|-----|
 | Search latency | < 150ms | Results must appear instantly |
-| App startup | < 2 seconds | First impression matters |
+| App startup (cold) | < 2 seconds | First impression matters |
 | Compendium entry open | < 100ms | Detail views must feel instant |
 | Offline availability | 100% | Core features never require internet |
 
@@ -47,7 +51,7 @@ Every metric answers one question: **"How fast can a user get the information th
 
 | Metric | Target | Why |
 |--------|--------|-----|
-| Data integrity | 100% | Campaign data must never be lost |
+| Data integrity | 100% | User state must never be lost |
 | Offline success rate | 100% | Core features always work |
 | Search success rate | > 95% | Users should find what they need |
 | Error recovery | < 5 seconds | Errors must not block sessions |
@@ -59,6 +63,7 @@ Every metric answers one question: **"How fast can a user get the information th
 | First-time usability | No instruction needed | New users should be immediately productive |
 | One-handed operation | 100% of core features | Users hold dice in the other hand |
 | Task completion rate | > 90% | Users should succeed without confusion |
+| Data-entry burden | Near zero | Consultation over administration |
 
 ---
 
@@ -100,7 +105,18 @@ Before Dungeon Archive, users rely on:
 |--------|-------------|----------|
 | Look up spell in PHB | 30-60 seconds | < 3 seconds |
 | Look up condition online | 10-20 seconds | < 3 seconds |
-| Check NPC notes | 5-10 seconds | < 3 seconds |
-| Review previous session | 10-30 seconds | < 2 seconds |
+| Look up monster online | 15-30 seconds | < 3 seconds |
+| Check player reference info | 5-10 seconds | < 2 seconds |
+| Open a favorite/recent entity | 10-30 seconds | < 2 seconds |
 
 The product must beat these baselines by at least 10x to justify its existence.
+
+---
+
+## Non-Goals
+
+These are explicitly **not** success metrics:
+
+- Number of campaigns managed, NPCs recorded, loot logs written.
+- Time spent **inside** the app. Longer engagement is a failure, not a success.
+- Feature adoption beyond search, favorites, session pins, and reference sheets.

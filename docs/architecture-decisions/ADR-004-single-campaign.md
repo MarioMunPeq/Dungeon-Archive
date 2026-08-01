@@ -1,4 +1,4 @@
-# ADR-004: Single Active Campaign
+# ADR-004: Single Active Adventure
 
 ## Status
 
@@ -6,21 +6,23 @@ Accepted
 
 ## Context
 
-Dungeon Archive manages campaign data. The question is whether to support multiple simultaneous campaigns or a single active campaign.
+Dungeon Archive stores lightweight campaign context. The question is whether to support multiple simultaneous campaigns or a single active one.
 
-Multiple campaigns add complexity:
+Multiple simultaneous campaigns add complexity:
 - Campaign switching UI
 - Cross-campaign data isolation
 - Increased storage requirements
 - Confusing UX for the primary use case
 
+The product is a reference companion, not a campaign manager. The campaign container ("adventure") exists to give context — title, objectives, notes, pinned references — not to administer multiple campaigns.
+
 ## Decision
 
-One active campaign at a time. Previous campaigns are archived (read-only).
+One active adventure at a time. Previous adventures are archived and can be restored.
 
 - No "campaign selector" in the UI
-- Archive current campaign → start new one
-- Archived campaigns are accessible but not editable
+- Archive the current adventure, then create or restore another
+- Archived adventures remain accessible; `restoreAdventure` makes one active again
 - No multi-campaign abstractions
 
 ## Consequences
@@ -29,14 +31,12 @@ One active campaign at a time. Previous campaigns are archived (read-only).
 - Simpler UI (no campaign switching)
 - Clear data model (one active, rest archived)
 - Reduced cognitive load
-- Matches typical usage pattern
+- Matches the product's lightweight-context role
 
 **Negative:**
-- DMs running multiple campaigns must switch between them
-- No cross-campaign data sharing
-- Archive management requires future work
+- DMs running several campaigns must switch the active adventure
+- No cross-adventure data sharing
 
 **Mitigation:**
-- Campaign switching is fast (archive → create)
-- Cross-campaign sharing is not a common use case
-- Archive viewing is a read-only operation
+- Switching is fast (archive → create, or archive → restore)
+- Cross-campaign sharing is not the product's purpose; user state stays small

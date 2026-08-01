@@ -2,96 +2,103 @@
 
 ## North Star
 
-> **Designed for people sitting around a table with a phone in one hand and dice in the other.**
+> **Dungeon Archive is a mobile-first table companion for D&D 5e.**
+> **Its sole purpose is reducing dead time during play.**
 
-Dungeon Archive is a **companion app** for D&D 5e tabletop sessions. It exists to reduce the dead time between turns — the moments when a player looks up a spell, a DM checks a condition, or someone tries to remember what an item does.
+The dead time is the gap between a question and its answer: a player needs a spell, a DM needs a stat block, someone forgot what a condition does. That gap is what the app exists to close.
 
-It is **not** a VTT, a campaign manager, a digital rulebook, a character builder, a combat tracker, a dice roller, or a wiki engine. It is a tool that lives in the gaps of gameplay, disappears when it's done its job, and never becomes the center of attention.
+Fast information retrieval is always prioritized over feature richness.
 
----
+## Core Problem
+
+During a session, information lives in books, PDFs, and spreadsheets. Finding something takes seconds or minutes. While someone looks, the table waits.
+
+Dungeon Archive puts the reference data and the lightweight context of the game on the phone that is already on the table. When a question comes up, the answer is a tap away.
+
+Every feature, screen, and screen element must pass one test:
+
+> **Does this reduce the time players spend waiting because someone is looking for information?**
+
+If the answer is no, the feature does not belong in this project.
+
+## Primary Users
+
+### The Dungeon Master
+
+Uses Dungeon Archive to:
+
+- Look up spells, conditions, actions, equipment, monsters, magic items, and feats without opening a book.
+- Keep lightweight campaign context: an adventure title, description, objectives, notes, and pinned references.
+- Answer "what happened last session?" from session history.
+
+The DM is the main consumer of the Compendium. Fast retrieval matters most during combat and encounters.
+
+### The Player
+
+Uses Dungeon Archive to:
+
+- Look up their own spells and equipment (via the party's lightweight player reference sheets).
+- Find rules references without asking the DM.
+
+Players are secondary users. The app never requires players to create or maintain anything.
+
+## The Mental Model
+
+The application is a **second screen that sits next to the table**. It answers questions. It does not ask users to do work.
+
+- The app is opened when a question appears.
+- The answer is found.
+- The phone is put down.
+
+There is no dashboard to manage, no status to update, no workflow to complete. The app does not want to be used; it wants to be looked up.
+
+## What Dungeon Archive Is Today
+
+A client-side mobile web app that ships with:
+
+- **The Compendium** — the complete reference database for D&D 5e (spells, conditions, actions, equipment, monsters, magic items, feats), built from official data at build time and available offline.
+- **Search** — instant lookup across the entire Compendium.
+- **Campaign context** — an adventure with a title, description, objectives, private DM notes, and pinned entity references. One active adventure, previous ones archived.
+- **Player reference** — lightweight party sheets holding only what is consulted at the table: passive senses, known spells, equipped armor/weapons/magic items, and notes. References point into the Compendium; nothing is duplicated.
+- **Session** — a pinned list of entities for the current encounter, and the session history kept by the DM.
+
+Nothing in the app requires a server, a login, or an internet connection.
 
 ## Product Principles
 
-These 14 principles guide every product decision:
+### 1. Speed Over Completeness
 
-1. **Utility over aesthetics.** Every screen exists to solve a specific problem. Visual polish is secondary to functional clarity.
+The Compendium returns results in milliseconds. Search is synchronous over a prebuilt in-memory index. Everything a feature adds must justify its cost in retrieval time. If completeness slows the answer, completeness loses.
 
-2. **Speed over animations.** A fast result beats a beautiful transition. 200ms search is the minimum standard.
+### 2. Consultation Over Administration
 
-3. **Reduce downtime.** The core metric: how many seconds of gameplay does each interaction cost? Every feature must justify its impact on session flow.
+The app is consulted, not maintained. Data entry is the enemy: the less the user must type, the better. Campaign state is kept deliberately minimal (adventure metadata, objectives, notes, references). Anything that turns the app into a project-management tool is rejected.
 
-4. **One-handed first.** The primary interface is a phone held in one hand. Thumb reach zones dictate layout. No feature requires two hands.
+### 3. The Compendium Is the Heart
 
-5. **Offline-first.** Core functionality (compendium search, campaign data) works without internet. Network adds extras, never blocks essentials.
+The Compendium is the single source of truth for rules. User data stores **references** (canonical IDs), never copies of rules text. If a piece of information exists in the Compendium, the app never stores a second version of it. This keeps official data immutable and user data tiny.
 
-6. **Search-first.** The search bar is the primary interface. Users find things by asking, not by navigating hierarchies.
+### 4. Combat Is Where Dead Time Matters Most
 
-7. **Question-oriented.** Every screen answers a question. "What spell should I use?" "What does this condition do?" "How much does this cost?" If a screen doesn't answer a question, it doesn't exist.
+During combat, waits are felt in rounds. Stat blocks, conditions, and spell lookups during a fight are the highest-value moments of the app. These flows are optimized first and never regressed.
 
-8. **Everything is searchable.** Spells, monsters, equipment, conditions, actions, rules — all findable from a single search. Search spans every category.
+### 5. Minimal State
 
-9. **Compendium is immutable.** User-generated content never mixes with official data. The compendium is read-only, authoritative, and consistent.
+The user layer holds only lightweight context:
 
-10. **Campaign data is living.** Session notes, character sheets, and DM preparations are the user's own content — created, edited, and organized within the app.
+- Adventure: title, description, objectives, notes, pinned references, archive status.
+- Party member: name, class, level, race, subclass, passive senses, known spells, equipped items (as references), notes.
+- Session: a list of pinned entity references and the DM's session history.
 
-11. **Never duplicate D&D content.** The app doesn't reproduce the Player's Handbook. It indexes, links, and surfaces — it never quotes at length.
+Nothing heavier. No inventories, no XP tracking, no worldbuilding.
 
-12. **Players never see spoilers.** The Reveal System protects DM content. Players see only what the DM allows.
+### 6. Everything Immediately Accessible
 
-13. **Every screen answers one question.** A single purpose per screen. If a screen tries to do two things, split it.
+Open the app, open the player, and everything needed for combat is visible. No navigation through hierarchies to reach a stat block. Search is a tap away from every screen. The path from question to answer is as short as possible.
 
-14. **Every interaction disappears into gameplay.** The app is a tool, not entertainment. The best interaction is the one the user forgets they had.
+### 7. The App Should Feel Quiet
 
----
-
-## Core Values
-
-### Companion, Not Commander
-
-The app supports the session — it doesn't run it. A DM uses their own methods for encounter design, world-building, and campaign planning. The app handles the moment-to-moment lookups and data management that slow things down.
-
-### Simplicity Over Completeness
-
-Every feature added increases cognitive load. Every option added increases decision time. The app is intentionally incomplete — it covers the essentials and deliberately omits the rest.
-
-### Progressive Disclosure
-
-Start with the simplest version of every interaction. Add complexity only when the user needs it. The app should be immediately usable without reading a manual.
-
-### Data Integrity
-
-Official D&D content stays pure. User content stays separate. The boundary is never ambiguous.
-
----
-
-## Success Criteria
-
-The app is successful when:
-
-- A player looks up a spell in under 3 seconds
-- A DM finds a monster's stat block in under 5 seconds
-- The app is never the reason a session slows down
-- The app is forgotten during gameplay (used, then set aside)
-- New users understand core functionality without instruction
-- Core functionality works without internet connection
-
----
-
-## Anti-Features (Excluded Product Categories)
-
-See [anti-features.md](./anti-features.md) for the full list of excluded product categories and the reasoning behind each exclusion.
-
-Core exclusions:
-- Virtual Tabletop (VTT)
-- Character builder
-- Combat tracker / Initiative tracker
-- Campaign manager / Worldbuilder
-- Dice roller
-- Map editor
-- Rule automation / macros
-- AI-powered DM assistance
-
----
+No dashboards, no analytics, no project management, no workflows, no "workspace". The app is a reference shelf. It should not compete for attention, and it should never interrupt play.
 
 ## Disappearing Software
 
@@ -99,34 +106,33 @@ Core exclusions:
 
 The best experience is:
 
-1. Player asks a question.
-2. Player finds the answer.
-3. Player immediately returns attention to the table.
+1. A question comes up at the table.
+2. The answer is found.
+3. Attention returns to the game.
 
-Dungeon Archive should disappear into the gameplay. The moment a user notices the app — admires its design, explores its features, or spends time adjusting settings — the product has failed.
+The moment a user notices the app — admires its design, explores its features, or spends time in settings — the product has failed. The app serves its purpose and is set aside.
 
-This is the opposite of most software. Most applications compete for attention. Dungeon Archive surrenders it.
+- No onboarding.
+- No exploration for fun.
+- No notifications.
+- No gamification.
+- No suggestions ("Did you know?").
+- No social features.
+- No customization for its own sake.
 
-### What This Means
+After a session, the user should barely remember using the app. They should remember the game — not the interface.
 
-- **No onboarding.** The app should be immediately usable without instruction.
-- **No exploration.** Every screen answers a question; there is nothing to browse for fun.
-- **No notifications.** The app never interrupts gameplay.
-- **No gamification.** No achievements, streaks, or rewards for using the app.
-- **No suggestions.** The app never says "Did you know?" or "You might also like..."
-- **No social features.** The app is not a community; it is a tool.
-- **No customization for its own sake.** Themes, wallpapers, and personalization add complexity without reducing downtime.
+## Success Criteria
 
-### The Test
+The product succeeds when:
 
-After a session, the user should barely remember using the app. They should remember the game, the dice rolls, the laughter — not the interface. The app served its purpose and vanished.
+- A spell is found in under 3 seconds.
+- A monster stat block is found in under 5 seconds.
+- The app is never the reason a session slows down.
+- The app works with no internet connection.
+- New users understand it without instruction.
+- The app is forgotten during gameplay: used, then set aside.
 
-That is disappearing software.
+## Anti-Features
 
-### Why It Matters
-
-The tabletop experience is social, physical, and immediate. A phone in hand is already a compromise — it pulls attention away from the table. The app must minimize that compromise by being as fast and invisible as possible.
-
-Every second spent in the app is a second not spent playing. The goal is to make that time as close to zero as possible.
-
-The application should disappear. The game should remain.
+The project explicitly excludes entire categories of features. See [anti-features.md](./anti-features.md) for the full list. In short: Dungeon Archive is **not** a campaign manager, a VTT, a character builder, a combat tracker, a digital notebook, or a worldbuilding tool.
