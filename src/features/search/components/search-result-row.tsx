@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import type { SearchResultItem } from "@/components/entity";
-import { CATEGORY_REGISTRY, formatSource } from "@/compendium";
+import { CATEGORY_REGISTRY } from "@/compendium";
 import { badgeVariantForCategory } from "@/components/entity";
 import { Badge } from "@/components/ui/Badge";
 import { SearchHighlight } from "./search-highlight";
@@ -20,7 +20,6 @@ export function SearchResultRow({
   title,
   subtitle,
   category,
-  source,
   to,
   query,
   isSelected,
@@ -28,7 +27,6 @@ export function SearchResultRow({
 }: SearchResultRowProps) {
   const cat = CATEGORY_REGISTRY[category];
   const variant = badgeVariantForCategory(category);
-  const displaySource = formatSource(source);
 
   return (
     <Link
@@ -46,7 +44,6 @@ export function SearchResultRow({
         <p className="truncate text-xs text-muted-foreground">{subtitle}</p>
       </div>
 
-      <span className="shrink-0 text-xs text-muted-foreground">{displaySource}</span>
       <FavoriteButton canonicalId={canonicalId} />
       <SessionButton canonicalId={canonicalId} />
       <AdventureButton canonicalId={canonicalId} />

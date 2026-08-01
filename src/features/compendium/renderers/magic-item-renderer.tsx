@@ -17,7 +17,7 @@ export function MagicItemRenderer({ entity }: MagicItemRendererProps) {
   return (
     <div className="flex flex-col gap-6">
       <EntityMetadataGrid>
-        <EntityProperty label="Rarity" value={entity.rarity} />
+        <EntityProperty label="Rarity" value={entity.rarity} stat />
         <EntityProperty label="Type" value={entity.itemType} />
         {entity.requiresAttunement && (
           <EntityProperty label="Attunement" value={attunementLabel(entity.requiresAttunement)} />

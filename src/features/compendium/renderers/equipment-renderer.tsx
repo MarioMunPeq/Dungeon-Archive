@@ -14,9 +14,9 @@ export function EquipmentRenderer({ entity }: EquipmentRendererProps) {
         <EntityProperty label="Type" value={entity.type} />
         {entity.cost && <EntityProperty label="Cost" value={entity.cost} />}
         {entity.weight && <EntityProperty label="Weight" value={entity.weight} />}
-        {entity.damage && <EntityProperty label="Damage" value={entity.damage} />}
+        {entity.damage && <EntityProperty label="Damage" value={entity.damage} stat />}
         {entity.damageType && <EntityProperty label="Damage Type" value={entity.damageType} />}
-        {entity.ac !== undefined && <EntityProperty label="AC" value={String(entity.ac)} />}
+        {entity.ac !== undefined && <EntityProperty label="AC" value={String(entity.ac)} stat />}
         {entity.strength && <EntityProperty label="Strength" value={entity.strength} />}
         {entity.stealth && <EntityProperty label="Stealth" value={entity.stealth} />}
         {entity.properties && entity.properties.length > 0 && (

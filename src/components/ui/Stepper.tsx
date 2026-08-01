@@ -10,6 +10,8 @@ interface StepperProps {
   readonly onChange: (value: number) => void;
   readonly label: string;
   readonly format?: (value: number) => string;
+  readonly variant?: "bordered" | "ghost";
+  readonly valueClassName?: string;
   readonly className?: string;
 }
 
@@ -23,6 +25,8 @@ export function Stepper({
   onChange,
   label,
   format = (v) => String(v),
+  variant = "bordered",
+  valueClassName = "",
   className = "",
 }: StepperProps) {
   const [editing, setEditing] = useState(false);
@@ -77,7 +81,19 @@ export function Stepper({
   }, [draft, min, max, onChange]);
 
   const controlClass =
-    "flex h-9 w-9 shrink-0 select-none items-center justify-center rounded-md border border-border bg-background text-base font-semibold text-foreground transition-all duration-100 active:scale-90 disabled:cursor-default disabled:bg-disabled disabled:text-disabled-foreground disabled:active:scale-100 hover:border-border-strong";
+    variant === "ghost"
+      ? "hitbox-expand flex h-7 w-7 shrink-0 select-none items-center justify-center rounded-md text-muted-foreground transition-all duration-100 active:scale-90 active:text-foreground disabled:cursor-default disabled:text-disabled-foreground disabled:active:scale-100 hover:text-foreground"
+      : "flex h-9 w-9 shrink-0 select-none items-center justify-center rounded-md border border-border bg-background text-base font-semibold text-foreground transition-all duration-100 active:scale-90 disabled:cursor-default disabled:bg-disabled disabled:text-disabled-foreground disabled:active:scale-100 hover:border-border-strong";
+
+  const iconClass = variant === "ghost" ? "h-3.5 w-3.5" : "h-4 w-4";
+
+  const valueButtonClass =
+    variant === "ghost"
+      ? cn(
+          "flex h-9 min-w-0 flex-1 select-none items-center justify-center rounded-md font-bold tabular-nums text-foreground transition-all duration-100 active:scale-95 hover:bg-accent/60",
+          valueClassName,
+        )
+      : "flex h-9 min-w-0 flex-1 select-none items-center justify-center rounded-md border border-border bg-background px-1 text-base font-semibold tabular-nums text-foreground transition-all duration-100 active:scale-95 hover:border-border-strong";
 
   return (
     <div className={cn("flex w-full items-center gap-1", className)}>
@@ -97,7 +113,7 @@ export function Stepper({
           fill="none"
           stroke="currentColor"
           strokeWidth={2.5}
-          className="h-4 w-4"
+          className={iconClass}
         >
           <line x1="5" y1="12" x2="19" y2="12" />
         </svg>
@@ -108,7 +124,10 @@ export function Stepper({
           onChange={setDraft}
           onSave={commitDraft}
           onCancel={() => setEditing(false)}
-          className="h-9 w-14 px-2 text-center text-base font-semibold"
+          className={cn(
+            "h-9 w-14 px-2 text-center font-semibold",
+            valueClassName,
+          )}
         />
       ) : (
         <button
@@ -118,7 +137,7 @@ export function Stepper({
             setEditing(true);
           }}
           aria-label={`Edit ${label}`}
-          className="flex h-9 min-w-0 flex-1 select-none items-center justify-center rounded-md border border-border bg-background px-1 text-base font-semibold tabular-nums text-foreground transition-all duration-100 active:scale-95 hover:border-border-strong"
+          className={valueButtonClass}
         >
           {format(value)}
         </button>
@@ -139,7 +158,7 @@ export function Stepper({
           fill="none"
           stroke="currentColor"
           strokeWidth={2.5}
-          className="h-4 w-4"
+          className={iconClass}
         >
           <line x1="12" y1="5" x2="12" y2="19" />
           <line x1="5" y1="12" x2="19" y2="12" />

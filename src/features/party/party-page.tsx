@@ -8,7 +8,7 @@ import { ReferencePicker } from "@/components/ui/ReferencePicker";
 import type { PickerCandidate } from "@/components/ui/ReferencePicker";
 import { InlineTextEditor } from "@/components/ui/InlineTextEditor";
 import { InlineTextareaEditor } from "@/components/ui/InlineTextareaEditor";
-import { Divider, SelectField, Stepper } from "@/components/ui";
+import { SelectField, Stepper } from "@/components/ui";
 import { cn } from "@/lib/utils";
 
 type PickerKind = "spell" | "weapon" | "magicitem";
@@ -266,6 +266,7 @@ function NumberCell({
   format,
   onChange,
   onClear,
+  valueClassName,
 }: {
   label: string;
   value: number;
@@ -274,17 +275,20 @@ function NumberCell({
   format?: (value: number) => string;
   onChange: (value: number) => void;
   onClear?: () => void;
+  valueClassName?: string;
 }) {
   return (
-    <div className="flex min-w-0 flex-col gap-1.5 rounded-lg border border-border bg-background px-1.5 py-2">
+    <div className="flex min-w-0 flex-col items-center gap-0.5">
       <ValueLabel onClear={onClear}>{label}</ValueLabel>
       <Stepper
+        variant="ghost"
         value={value}
         min={min}
         max={max}
         onChange={onChange}
         label={label}
         format={format}
+        valueClassName={valueClassName}
       />
     </div>
   );
@@ -298,6 +302,7 @@ function OptionalNumberCell({
   format,
   initial,
   onCommit,
+  valueClassName,
 }: {
   label: string;
   value: number | undefined;
@@ -306,16 +311,17 @@ function OptionalNumberCell({
   format?: (value: number) => string;
   initial: number;
   onCommit: (value: number | undefined) => void;
+  valueClassName?: string;
 }) {
   if (value === undefined) {
     return (
-      <div className="flex min-w-0 flex-col items-center gap-1.5 rounded-lg border border-dashed border-border bg-background px-1.5 py-2">
+      <div className="flex min-w-0 flex-col items-center gap-0.5">
         <ValueLabel>{label}</ValueLabel>
         <button
           type="button"
           onClick={() => onCommit(initial)}
           aria-label={`Set ${label}`}
-          className="flex h-9 w-full select-none items-center justify-center rounded-md border border-border bg-background text-base font-semibold text-muted-foreground transition-all duration-100 hover:border-border-strong hover:text-foreground active:scale-95"
+          className="hitbox-expand flex h-9 w-full select-none items-center justify-center rounded-md text-muted-foreground transition-all duration-100 hover:text-foreground active:scale-95"
         >
           <svg
             aria-hidden="true"
@@ -341,6 +347,7 @@ function OptionalNumberCell({
       format={format}
       onChange={(next) => onCommit(next)}
       onClear={() => onCommit(undefined)}
+      valueClassName={valueClassName}
     />
   );
 }
@@ -350,7 +357,7 @@ function AddButton({ onClick, label }: { onClick: () => void; label: string }) {
     <button
       type="button"
       onClick={onClick}
-      className="touch-target inline-flex items-center justify-center gap-1 rounded-lg border border-dashed border-border px-2.5 py-1 text-xs text-muted-foreground transition-all duration-150 hover:bg-accent active:bg-accent/80 active:scale-95"
+      className="hitbox-expand inline-flex items-center gap-1 rounded-md px-2 py-1 text-xs font-medium text-muted-foreground transition-all duration-150 hover:bg-accent/60 hover:text-foreground active:bg-accent active:scale-95"
     >
       <svg
         aria-hidden="true"
@@ -358,7 +365,7 @@ function AddButton({ onClick, label }: { onClick: () => void; label: string }) {
         fill="none"
         stroke="currentColor"
         strokeWidth={2}
-        className="h-3 w-3"
+        className="h-3.5 w-3.5"
       >
         <line x1="12" y1="5" x2="12" y2="19" />
         <line x1="5" y1="12" x2="19" y2="12" />
@@ -383,7 +390,7 @@ function ReferenceRow({
         canonicalId={canonicalId}
         subtitle={ref.subtitle}
         showBadge={false}
-        className="border-b border-border py-2"
+        className="py-1"
         action={
           <RowRemoveButton label={`Remove ${ref.name}`} onClick={() => onRemove(canonicalId)} />
         }
@@ -404,7 +411,7 @@ function ReferenceGroup({
   onRemove: (canonicalId: string) => void;
 }) {
   return (
-    <div className="flex flex-col gap-1.5">
+    <div className="flex flex-col gap-1">
       <div className="flex items-center justify-between gap-2">
         <span className="text-[10px] font-semibold uppercase tracking-wide text-muted-foreground">
           {title}
@@ -412,7 +419,7 @@ function ReferenceGroup({
         <AddButton label="Add" onClick={onAdd} />
       </div>
       {ids.length === 0 ? (
-        <p className="text-xs text-foreground-subtle">None</p>
+        <p className="px-1 text-xs text-foreground-subtle">None</p>
       ) : (
         <div className="flex flex-col">
           {ids.map((canonicalId) => (
@@ -550,12 +557,13 @@ function PlayerReferenceCard({
                 Lv
               </span>
               <Stepper
+                variant="ghost"
                 value={reference.level}
                 min={1}
                 max={20}
                 onChange={(value) => update({ level: value })}
                 label="Level"
-                className="w-32"
+                className="w-28"
               />
             </div>
           </div>
@@ -583,53 +591,60 @@ function PlayerReferenceCard({
         </button>
       </div>
 
-      <div className={cn("grid gap-2", hasSpell ? "grid-cols-3 sm:grid-cols-5" : "grid-cols-3")}>
-        <NumberCell
-          label="AC"
-          value={reference.combatValues.armorClass}
-          min={0}
-          max={40}
-          onChange={(value) => update({ combatValues: { armorClass: value } })}
-        />
-        <NumberCell
-          label="Init"
-          value={reference.combatValues.initiativeModifier}
-          min={-5}
-          max={20}
-          format={formatSigned}
-          onChange={(value) => update({ combatValues: { initiativeModifier: value } })}
-        />
-        <NumberCell
-          label="Perc"
-          value={reference.combatValues.passivePerception}
-          min={0}
-          max={40}
-          onChange={(value) => update({ combatValues: { passivePerception: value } })}
-        />
-        {hasSpell && (
-          <>
-            <OptionalNumberCell
-              label="DC"
-              value={reference.combatValues.spellSaveDc}
-              min={0}
-              max={40}
-              initial={10}
-              onCommit={(value) => update({ combatValues: { spellSaveDc: value } })}
-            />
-            <OptionalNumberCell
-              label="Atk"
-              value={reference.combatValues.spellAttackBonus}
-              min={-5}
-              max={20}
-              format={formatSigned}
-              initial={0}
-              onCommit={(value) => update({ combatValues: { spellAttackBonus: value } })}
-            />
-          </>
-        )}
+      <div className="flex flex-col gap-2 rounded-xl bg-card px-3 py-3">
+        <div className={cn("grid gap-1.5", hasSpell ? "grid-cols-3 sm:grid-cols-5" : "grid-cols-3")}>
+          <NumberCell
+            label="AC"
+            value={reference.combatValues.armorClass}
+            min={0}
+            max={40}
+            onChange={(value) => update({ combatValues: { armorClass: value } })}
+            valueClassName="text-2xl"
+          />
+          <NumberCell
+            label="Init"
+            value={reference.combatValues.initiativeModifier}
+            min={-5}
+            max={20}
+            format={formatSigned}
+            onChange={(value) => update({ combatValues: { initiativeModifier: value } })}
+            valueClassName="text-2xl"
+          />
+          <NumberCell
+            label="Perc"
+            value={reference.combatValues.passivePerception}
+            min={0}
+            max={40}
+            onChange={(value) => update({ combatValues: { passivePerception: value } })}
+            valueClassName="text-2xl"
+          />
+          {hasSpell && (
+            <>
+              <OptionalNumberCell
+                label="DC"
+                value={reference.combatValues.spellSaveDc}
+                min={0}
+                max={40}
+                initial={10}
+                onCommit={(value) => update({ combatValues: { spellSaveDc: value } })}
+                valueClassName="text-2xl"
+              />
+              <OptionalNumberCell
+                label="Atk"
+                value={reference.combatValues.spellAttackBonus}
+                min={-5}
+                max={20}
+                format={formatSigned}
+                initial={0}
+                onCommit={(value) => update({ combatValues: { spellAttackBonus: value } })}
+                valueClassName="text-2xl"
+              />
+            </>
+          )}
+        </div>
       </div>
 
-      <div className="grid grid-cols-3 gap-2 sm:grid-cols-6">
+      <div className="grid grid-cols-3 gap-1.5 sm:grid-cols-6">
         {ABILITY_KEYS.map((key) => (
           <NumberCell
             key={key}
@@ -639,13 +654,12 @@ function PlayerReferenceCard({
             max={10}
             format={formatSigned}
             onChange={(value) => update({ abilityModifiers: { [key]: value } })}
+            valueClassName="text-lg"
           />
         ))}
       </div>
 
-      <Divider className="my-1" />
-
-      <div className="flex flex-col gap-4">
+      <div className="flex flex-col gap-5">
         <ReferenceGroup
           title="Known Spells"
           ids={reference.knownSpellCanonicalIds}
@@ -665,8 +679,6 @@ function PlayerReferenceCard({
           onRemove={(canonicalId) => removeReference("magicitem", canonicalId)}
         />
       </div>
-
-      <Divider className="my-1" />
 
       <div className="flex flex-col gap-1">
         <span className="text-[10px] font-semibold uppercase tracking-wide text-muted-foreground">
@@ -728,8 +740,8 @@ export function PartyPage() {
           <h1 className="text-xl font-bold text-foreground">Party</h1>
           <p className="text-xs text-muted-foreground">
             {players.length === 0
-              ? "Quick access for the values you consult every session"
-              : `${players.length} reference${players.length === 1 ? "" : "s"} \u00B7 tap a value to edit`}
+              ? "The values you consult every session"
+              : `${players.length} reference${players.length === 1 ? "" : "s"}`}
           </p>
         </div>
         <button
@@ -742,11 +754,10 @@ export function PartyPage() {
       </div>
 
       {players.length === 0 ? (
-        <div className="flex flex-col items-center gap-4 rounded-lg border border-border bg-surface p-6 text-center">
-          <p className="text-sm text-muted-foreground">
-            Create player quick-access references: identity, combat numbers, ability modifiers, and
-            links to the spells, weapons, and magic items you use most. Nothing else — no inventory,
-            no tracking.
+        <div className="flex flex-col items-center gap-4 px-2 py-10 text-center">
+          <p className="max-w-xs text-sm text-muted-foreground">
+            Quick-access references: combat numbers, ability modifiers, and links to the spells,
+            weapons, and magic items you use most. Nothing else — no inventory, no tracking.
           </p>
           <button
             type="button"

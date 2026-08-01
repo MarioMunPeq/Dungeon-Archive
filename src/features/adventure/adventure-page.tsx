@@ -122,8 +122,8 @@ export function AdventurePage() {
     return (
       <div className="flex flex-col px-4 py-6">
         <h1 className="mb-6 text-xl font-bold text-foreground">Adventure</h1>
-        <div className="flex flex-col items-center gap-4 rounded-lg border border-border bg-surface p-6 text-center">
-          <p className="text-sm text-muted-foreground">
+        <div className="flex flex-col items-center gap-4 px-2 py-10 text-center">
+          <p className="max-w-xs text-sm text-muted-foreground">
             No active adventure yet. Create one to track your campaign notes, objectives, and
             important references.
           </p>

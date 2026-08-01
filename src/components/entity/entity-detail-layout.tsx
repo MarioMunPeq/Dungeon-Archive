@@ -29,7 +29,7 @@ export function EntityDetailLayout({
     <Stack as="article" gap="lg" className="px-4 py-6">
       {breadcrumbs && <EntityBreadcrumbs crumbs={breadcrumbs} />}
 
-      <EntityHeader name={name} subtitle={subtitle} source={source} />
+      <EntityHeader name={name} subtitle={subtitle} />
 
       {versions.length > 1 && (
         <Inline gap="xs">

@@ -31,10 +31,10 @@ export function SpellRenderer({ entity }: SpellRendererProps) {
       </Subtitle>
 
       <EntityMetadataGrid>
-        <EntityProperty label="Casting Time" value={entity.castingTime} />
-        <EntityProperty label="Range" value={entity.range} />
+        <EntityProperty label="Casting Time" value={entity.castingTime} stat />
+        <EntityProperty label="Range" value={entity.range} stat />
+        <EntityProperty label="Duration" value={entity.duration} stat />
         <EntityProperty label="Components" value={entity.components.join(", ")} />
-        <EntityProperty label="Duration" value={entity.duration} />
         {entity.ritual && <EntityProperty label="Ritual" value="Yes" />}
         {entity.concentration && <EntityProperty label="Concentration" value="Yes" />}
         <EntityProperty label="Classes" value={entity.classes.join(", ")} />

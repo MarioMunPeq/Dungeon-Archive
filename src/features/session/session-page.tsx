@@ -73,8 +73,8 @@ export function SessionPage() {
       </div>
 
       {entries.length === 0 ? (
-        <div className="flex flex-col items-center gap-4 rounded-lg border border-border bg-surface p-6 text-center">
-          <p className="text-sm text-muted-foreground">
+        <div className="flex flex-col items-center gap-4 px-2 py-10 text-center">
+          <p className="max-w-xs text-sm text-muted-foreground">
             Session is empty. Search for entities and pin what you need for your encounter.
           </p>
           <Link

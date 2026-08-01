@@ -18,8 +18,8 @@ export function EntityBreadcrumbs({ crumbs }: EntityBreadcrumbsProps) {
           return (
             <li key={crumb.to ?? crumb.label} className="flex items-center gap-1.5">
               {i > 0 && (
-                <span>
-                  <span aria-hidden="true">/</span>
+                <span aria-hidden="true" className="text-muted-foreground/60">
+                  /
                 </span>
               )}
               {crumb.to && !isLast ? (

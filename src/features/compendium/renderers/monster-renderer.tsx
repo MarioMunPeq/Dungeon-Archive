@@ -13,12 +13,12 @@ export function MonsterRenderer({ entity }: MonsterRendererProps) {
   return (
     <Stack gap="lg">
       <EntityMetadataGrid>
-        <EntityProperty label="Armor Class" value={entity.armorClass} />
-        <EntityProperty label="Hit Points" value={entity.hitPoints} />
-        <EntityProperty label="Speed" value={entity.speed} />
+        <EntityProperty label="Armor Class" value={entity.armorClass} stat />
+        <EntityProperty label="Hit Points" value={entity.hitPoints} stat />
+        <EntityProperty label="Speed" value={entity.speed} stat />
+        <EntityProperty label="Challenge Rating" value={entity.challengeRating} stat />
         <EntityProperty label="Size / Type" value={`${entity.size} ${entity.monsterType}`} />
         <EntityProperty label="Alignment" value={entity.alignment.join(" ")} />
-        <EntityProperty label="Challenge Rating" value={entity.challengeRating} />
       </EntityMetadataGrid>
 
       <section>

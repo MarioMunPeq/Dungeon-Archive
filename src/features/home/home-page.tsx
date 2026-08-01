@@ -30,6 +30,47 @@ function entityCardFromCanonicalId(canonicalId: string): EntityCardData | null {
   };
 }
 
+function SectionHeader({
+  title,
+  note,
+  to,
+}: {
+  title: string;
+  note?: string;
+  to?: string;
+}) {
+  const content = (
+    <span className="flex items-center gap-1">
+      {title}
+      {to && (
+        <svg
+          aria-hidden="true"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth={2}
+          className="h-3 w-3"
+        >
+          <path d="M9 18l6-6-6-6" />
+        </svg>
+      )}
+      {note && <span className="ml-1 font-normal normal-case tracking-normal">· {note}</span>}
+    </span>
+  );
+  return to ? (
+    <Link
+      to={to}
+      className="flex items-center gap-1 text-xs font-semibold uppercase tracking-wide text-muted-foreground transition-colors hover:text-foreground"
+    >
+      {content}
+    </Link>
+  ) : (
+    <h2 className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+      {content}
+    </h2>
+  );
+}
+
 export function HomePage() {
   const adventure = useActiveAdventure();
   const sessionIds = useSessionIds(10);
@@ -57,32 +98,63 @@ export function HomePage() {
   const players = usePlayerReferences();
   const shownPlayers = players.slice(0, 5);
 
-  return (
-    <div className="flex flex-col gap-8 px-4 py-8">
-      <div className="text-center">
-        <h1 className="mb-2 text-3xl font-bold text-foreground">Dungeon Archive</h1>
-        <p className="text-sm text-muted-foreground">Your tabletop companion</p>
-      </div>
+  const hasContent = sessionCards.length > 0 || recentCards.length > 0 || favoriteCards.length > 0;
 
-      {adventure && (
-        <div className="flex flex-col gap-3">
+  return (
+    <div className="flex flex-col gap-10 px-4 py-6">
+      {players.length > 0 ? (
+        <section className="flex flex-col gap-3">
+          <SectionHeader title="Party" to="/party" note={`${players.length} player${players.length === 1 ? "" : "s"}`} />
+          <div className="flex flex-col gap-1 rounded-lg border border-border bg-surface px-4 py-2">
+            {shownPlayers.map((player) => (
+              <div
+                key={player.id}
+                className="flex items-center justify-between gap-2 py-2"
+              >
+                <span className="truncate text-sm font-semibold text-foreground">
+                  {player.name}
+                </span>
+                <span className="shrink-0 text-xs text-muted-foreground">
+                  {player.class ? `${player.class} \u00B7 ` : ""}Lv {player.level}
+                </span>
+              </div>
+            ))}
+            {players.length > shownPlayers.length && (
+              <p className="pb-1 text-xs text-foreground-subtle">
+                +{players.length - shownPlayers.length} more
+              </p>
+            )}
+          </div>
+        </section>
+      ) : (
+        <Link
+          to="/party"
+          className="flex items-center gap-2 rounded-lg border border-dashed border-border p-4 text-sm text-muted-foreground transition-colors hover:bg-accent active:bg-accent/80"
+        >
+          <svg
+            aria-hidden="true"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth={2}
+            className="h-4 w-4"
+          >
+            <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+            <circle cx="9" cy="7" r="4" />
+            <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
+            <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+          </svg>
+          <span>Add Party Members</span>
+        </Link>
+      )}
+
+      {adventure ? (
+        <section className="flex flex-col gap-3">
+          <SectionHeader title="Current Adventure" to="/adventure" />
           <Link
             to="/adventure"
-            className="flex items-center gap-1 text-sm font-semibold text-foreground hover:text-primary-muted"
+            className="flex flex-col gap-2 rounded-lg border border-border bg-surface p-4 transition-colors hover:bg-accent active:bg-accent/80"
           >
-            Current Adventure
-            <svg
-              aria-hidden="true"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth={2}
-              className="h-3.5 w-3.5"
-            >
-              <path d="M9 18l6-6-6-6" />
-            </svg>
-          </Link>
-          <div className="flex flex-col gap-2 rounded-lg border border-border bg-surface p-4">
             <div className="flex items-center justify-between">
               <span className="text-sm font-medium text-foreground">{adventure.title}</span>
               {adventure.archived && (
@@ -100,19 +172,10 @@ export function HomePage() {
                 {adventure.objectives.length} objective
                 {adventure.objectives.length === 1 ? "" : "s"}
               </span>
-              <span className="ml-auto">
-                Updated{" "}
-                {new Date(adventure.updatedAt).toLocaleDateString(undefined, {
-                  month: "short",
-                  day: "numeric",
-                })}
-              </span>
             </div>
-          </div>
-        </div>
-      )}
-
-      {!adventure && (
+          </Link>
+        </section>
+      ) : (
         <Link
           to="/adventure"
           className="flex items-center gap-2 rounded-lg border border-dashed border-border p-4 text-sm text-muted-foreground transition-colors hover:bg-accent active:bg-accent/80"
@@ -132,80 +195,9 @@ export function HomePage() {
         </Link>
       )}
 
-      {players.length > 0 ? (
-        <div className="flex flex-col gap-3">
-          <Link
-            to="/party"
-            className="flex items-center gap-1 text-sm font-semibold text-foreground hover:text-primary-muted"
-          >
-            Party
-            <svg
-              aria-hidden="true"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth={2}
-              className="h-3.5 w-3.5"
-            >
-              <path d="M9 18l6-6-6-6" />
-            </svg>
-          </Link>
-          <div className="flex flex-col gap-2 rounded-lg border border-border bg-surface p-4">
-            {shownPlayers.map((player) => (
-              <div key={player.id} className="flex items-center justify-between gap-2">
-                <span className="truncate text-sm font-medium text-foreground">{player.name}</span>
-                <span className="shrink-0 text-xs text-muted-foreground">
-                  {player.class ? `${player.class} \u00B7 ` : ""}Lv {player.level}
-                </span>
-              </div>
-            ))}
-            {players.length > shownPlayers.length && (
-              <p className="text-xs text-foreground-subtle">
-                +{players.length - shownPlayers.length} more
-              </p>
-            )}
-          </div>
-        </div>
-      ) : (
-        <Link
-          to="/party"
-          className="flex items-center gap-2 rounded-lg border border-dashed border-border p-4 text-sm text-muted-foreground transition-colors hover:bg-accent active:bg-accent/80"
-        >
-          <svg
-            aria-hidden="true"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth={2}
-            className="h-4 w-4"
-          >
-            <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
-            <circle cx="9" cy="7" r="4" />
-            <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
-            <path d="M16 3.13a4 4 0 0 1 0 7.75" />
-          </svg>
-          <span>Add Party Member</span>
-        </Link>
-      )}
-
       {sessionCards.length > 0 && (
-        <div className="flex flex-col gap-3">
-          <Link
-            to="/session"
-            className="flex items-center gap-1 text-sm font-semibold text-foreground hover:text-primary-muted"
-          >
-            Continue Session
-            <svg
-              aria-hidden="true"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth={2}
-              className="h-3.5 w-3.5"
-            >
-              <path d="M9 18l6-6-6-6" />
-            </svg>
-          </Link>
+        <section className="flex flex-col gap-3">
+          <SectionHeader title="Continue Session" to="/session" />
           <div className="-mx-4 flex gap-3 overflow-x-auto px-4 pb-2">
             {sessionCards.map((card) => (
               <div key={card.href} className="w-56 shrink-0">
@@ -213,12 +205,12 @@ export function HomePage() {
               </div>
             ))}
           </div>
-        </div>
+        </section>
       )}
 
       {recentCards.length > 0 && (
-        <div className="flex flex-col gap-3">
-          <h2 className="text-sm font-semibold text-foreground">Continue Reading</h2>
+        <section className="flex flex-col gap-3">
+          <SectionHeader title="Continue Reading" />
           {recentCards.length <= 3 ? (
             <div className="grid grid-cols-1 gap-2 sm:grid-cols-2 lg:grid-cols-3">
               {recentCards.map((card) => (
@@ -234,56 +226,44 @@ export function HomePage() {
               ))}
             </div>
           )}
-        </div>
+        </section>
       )}
 
       {favoriteCards.length > 0 && (
-        <div className="flex flex-col gap-3">
-          <h2 className="text-sm font-semibold text-foreground">Favorites</h2>
+        <section className="flex flex-col gap-3">
+          <SectionHeader title="Favorites" />
           <div className="grid grid-cols-1 gap-2 sm:grid-cols-2 lg:grid-cols-3">
             {favoriteCards.map((card) => (
               <EntityCard key={card.href} {...card} />
             ))}
           </div>
-        </div>
+        </section>
       )}
 
-      {sessionCards.length === 0 && recentCards.length === 0 && favoriteCards.length === 0 && (
-        <div className="flex flex-col items-center gap-4 rounded-lg border border-border bg-surface p-6 text-center">
-          <p className="text-sm text-muted-foreground">
-            Browse entities, search for something, or tap the heart, pin, and flag icons to save
-            favorites, build your session, and track your adventure.
-          </p>
-        </div>
+      {!hasContent && (
+        <p className="text-sm text-muted-foreground">
+          Search or browse the compendium to save favorites, build your session, and track your
+          adventure.
+        </p>
       )}
 
-      <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
-        {CATEGORIES.map((cat) => (
-          <Link
-            key={cat}
-            to={`/${cat}`}
-            className="flex flex-col gap-1 rounded-lg border border-border bg-surface p-4 transition-colors hover:bg-accent active:bg-accent/80"
-          >
-            <span className="text-base font-semibold text-foreground">{categoryLabel(cat)}</span>
-            <span className="text-sm text-muted-foreground">{getCategoryCount(cat)} entries</span>
-          </Link>
-        ))}
-      </div>
-
-      <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
-        <Link
-          to="/search"
-          className="rounded-lg border border-border bg-surface p-4 text-center transition-colors hover:bg-accent active:bg-accent/80"
-        >
-          <span className="text-sm font-medium text-foreground">Search</span>
-        </Link>
-        <Link
-          to="/adventure"
-          className="rounded-lg border border-border bg-surface p-4 text-center transition-colors hover:bg-accent active:bg-accent/80"
-        >
-          <span className="text-sm font-medium text-foreground">Adventure</span>
-        </Link>
-      </div>
+      <section className="flex flex-col gap-3">
+        <h2 className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+          Browse the Compendium
+        </h2>
+        <div className="grid grid-cols-2 gap-x-6 gap-y-1 sm:grid-cols-3">
+          {CATEGORIES.map((cat) => (
+            <Link
+              key={cat}
+              to={`/${cat}`}
+              className="flex items-baseline justify-between gap-2 border-b border-transparent py-2 transition-colors hover:border-border hover:text-foreground"
+            >
+              <span className="text-sm font-medium text-foreground">{categoryLabel(cat)}</span>
+              <span className="text-xs text-foreground-subtle">{getCategoryCount(cat)}</span>
+            </Link>
+          ))}
+        </div>
+      </section>
     </div>
   );
 }
