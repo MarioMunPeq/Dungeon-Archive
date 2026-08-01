@@ -30,15 +30,7 @@ function entityCardFromCanonicalId(canonicalId: string): EntityCardData | null {
   };
 }
 
-function SectionHeader({
-  title,
-  note,
-  to,
-}: {
-  title: string;
-  note?: string;
-  to?: string;
-}) {
+function SectionHeader({ title, note, to }: { title: string; note?: string; to?: string }) {
   const content = (
     <span className="flex items-center gap-1">
       {title}
@@ -104,13 +96,14 @@ export function HomePage() {
     <div className="flex flex-col gap-10 px-4 py-6">
       {players.length > 0 ? (
         <section className="flex flex-col gap-3">
-          <SectionHeader title="Party" to="/party" note={`${players.length} player${players.length === 1 ? "" : "s"}`} />
+          <SectionHeader
+            title="Party"
+            to="/party"
+            note={`${players.length} player${players.length === 1 ? "" : "s"}`}
+          />
           <div className="flex flex-col gap-1 rounded-lg border border-border bg-surface px-4 py-2">
             {shownPlayers.map((player) => (
-              <div
-                key={player.id}
-                className="flex items-center justify-between gap-2 py-2"
-              >
+              <div key={player.id} className="flex items-center justify-between gap-2 py-2">
                 <span className="truncate text-sm font-semibold text-foreground">
                   {player.name}
                 </span>

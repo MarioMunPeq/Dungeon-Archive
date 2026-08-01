@@ -124,10 +124,7 @@ export function Stepper({
           onChange={setDraft}
           onSave={commitDraft}
           onCancel={() => setEditing(false)}
-          className={cn(
-            "h-9 w-14 px-2 text-center font-semibold",
-            valueClassName,
-          )}
+          className={cn("h-9 w-14 px-2 text-center font-semibold", valueClassName)}
         />
       ) : (
         <button

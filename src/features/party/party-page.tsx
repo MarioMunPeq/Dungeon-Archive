@@ -592,7 +592,9 @@ function PlayerReferenceCard({
       </div>
 
       <div className="flex flex-col gap-2 rounded-xl bg-card px-3 py-3">
-        <div className={cn("grid gap-1.5", hasSpell ? "grid-cols-3 sm:grid-cols-5" : "grid-cols-3")}>
+        <div
+          className={cn("grid gap-1.5", hasSpell ? "grid-cols-3 sm:grid-cols-5" : "grid-cols-3")}
+        >
           <NumberCell
             label="AC"
             value={reference.combatValues.armorClass}
