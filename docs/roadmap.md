@@ -31,7 +31,7 @@ These are the next investments. They directly reduce dead time.
 
 ### Player Reference Sheets
 
-The Party currently stores the repeatedly-consulted combat information. Future work focuses on presenting it as fast reference rather than as a form:
+The Party tab is now a fast-consultation HUD of player references (identity, ability modifiers, quick combat values, entity references to spells/weapons/magic items, one quick note), built to minimize dead time at the table. Possible follow-ups:
 
 - Instant access to a member's spells, armor, weapons, and magic items from the party list.
 - Combat-critical numbers surfaced without opening the editor (AC from armor, spell list, passive senses).

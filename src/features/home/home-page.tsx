@@ -6,7 +6,7 @@ import {
   CATEGORY_REGISTRY,
 } from "@/compendium";
 import type { EntityCategory, EntityCardData } from "@/compendium";
-import { useFavoriteIds, useRecentEntities, useSessionIds, useActiveAdventure, usePartyMembers } from "@/user-state";
+import { useFavoriteIds, useRecentEntities, useSessionIds, useActiveAdventure, usePlayerReferences } from "@/user-state";
 import { entityRefFromCanonicalId, EntityCard } from "@/components/entity";
 
 const CATEGORIES = Object.keys(CATEGORY_REGISTRY) as EntityCategory[];
@@ -48,8 +48,8 @@ export function HomePage() {
     if (card) favoriteCards.push(card);
   }
 
-  const party = usePartyMembers();
-  const shownMembers = party.slice(0, 5);
+  const players = usePlayerReferences();
+  const shownPlayers = players.slice(0, 5);
 
   return (
     <div className="flex flex-col gap-8 px-4 py-8">
@@ -101,7 +101,7 @@ export function HomePage() {
         </Link>
       )}
 
-      {party.length > 0 ? (
+      {players.length > 0 ? (
         <div className="flex flex-col gap-3">
           <Link
             to="/party"
@@ -113,16 +113,16 @@ export function HomePage() {
             </svg>
           </Link>
           <div className="flex flex-col gap-2 rounded-lg border border-border bg-surface p-4">
-            {shownMembers.map((member) => (
-              <div key={member.id} className="flex items-center justify-between gap-2">
-                <span className="truncate text-sm font-medium text-foreground">{member.name}</span>
+            {shownPlayers.map((player) => (
+              <div key={player.id} className="flex items-center justify-between gap-2">
+                <span className="truncate text-sm font-medium text-foreground">{player.name}</span>
                 <span className="shrink-0 text-xs text-muted-foreground">
-                  {member.class} {"\u00B7"} Lv {member.level}
+                  {player.class ? `${player.class} \u00B7 ` : ""}Lv {player.level}
                 </span>
               </div>
             ))}
-            {party.length > shownMembers.length && (
-              <p className="text-xs text-foreground-subtle">+{party.length - shownMembers.length} more</p>
+            {players.length > shownPlayers.length && (
+              <p className="text-xs text-foreground-subtle">+{players.length - shownPlayers.length} more</p>
             )}
           </div>
         </div>

@@ -1,4 +1,4 @@
-import { CATEGORY_REGISTRY, getEntity, referenceToUrl } from "@/compendium";
+import { CATEGORY_REGISTRY, referenceToUrl, resolveEntity } from "@/compendium";
 import type { EntityCategory } from "@/compendium";
 
 export type BadgeVariant = "default" | "accent" | "outline" | "subtle";
@@ -27,12 +27,10 @@ export interface EntityRef {
 }
 
 export function entityRefFromCanonicalId(canonicalId: string): EntityRef | null {
-  const dot = canonicalId.indexOf(".");
-  if (dot === -1) return null;
-  const category = canonicalId.substring(0, dot) as EntityCategory;
-  const entityId = canonicalId.substring(dot + 1);
-  const entity = getEntity(category, entityId);
-  if (!entity) return null;
+  const resolved = resolveEntity(canonicalId);
+  if (!resolved) return null;
+  const entity = resolved.selected;
+  const category = entity.category;
   return {
     canonicalId,
     category,

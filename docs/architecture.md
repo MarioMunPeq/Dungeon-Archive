@@ -107,14 +107,14 @@ Application code (via public API only)
 - **Favorites** — Pinned Compendium entities.
 - **Recents** — Recently viewed entities and recent searches.
 - **Adventure** — Title, description, objectives, private DM notes, pinned entity references. One active adventure; archive/restore.
-- **Party** — Player reference sheets: identity, passive senses, known spells, equipped items (as entity references), notes.
+- **Party** — Player reference sheets: identity, ability modifiers, quick combat values (AC, initiative, passive perception, spell DC/attack), known spells, weapons, magic items (as entity references), one quick note.
 - **Session** — Pinned entities for the current encounter, session history.
 
 **Persistence:**
 
 - Stored in `localStorage` under a single key (`dungeon:userState:v1`).
 - The persisted shape has a **version**. On load, migrations run forward until the shape matches the current version.
-- Migration v6 removed the legacy `scenes` field. Every migration is a pure function; persisted data is always normalized on load.
+- Migration v6 removed the legacy `scenes` field; migration v7 replaced `PartyMember`/`party` with `PlayerReference`/`players`. Every migration is a pure function; persisted data is always normalized on load.
 
 ### 4. Offline System
 
@@ -134,7 +134,7 @@ Holds all user state and exposes typed actions:
 
 - `toggleFavorite`, `addRecentEntity`, `addRecentSearch`, `clearRecentSearches`, `clearRecentEntities`
 - `createAdventure`, `updateAdventure`, `addObjective`, `removeObjective`, `toggleAdventureEntity`, `clearAdventureEntities`, `archiveAdventure`, `restoreAdventure`, `setActiveAdventure`
-- `addPartyMember`, `updatePartyMember`, `removePartyMember`
+- `addPlayerReference`, `updatePlayerReference`, `removePlayerReference`
 - `toggleSession`, `clearSession`
 - `_replace`, `_reset` (persistence/internal)
 

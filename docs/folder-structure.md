@@ -66,9 +66,9 @@ src/
 │
 ├── user-state/              # Persisted user state (Zustand + localStorage)
 │   ├── store.ts             # Zustand store + actions
-│   ├── types.ts             # UserState, PartyMember, Adventure, ...
+│   ├── types.ts             # UserState, PlayerReference, Adventure, ...
 │   ├── persistence.ts       # localStorage read/write + versioning
-│   ├── migrations.ts        # Versioned forward migrations (current: v6)
+│   ├── migrations.ts        # Versioned forward migrations (current: v7)
 │   ├── normalize.ts         # Normalize persisted data on load
 │   └── index.ts             # Public API (useUserState, selectors)
 │
@@ -206,6 +206,6 @@ external/5etools/
 - **Feature dirs:** kebab-case (`compendium/`, `user-state/`).
 - **UI components:** PascalCase files (`FavoriteButton.tsx`, `Badge.tsx`) except legacy kebab-case atoms (they are migrated as touched).
 - **Module internal files:** kebab-case (`category-registry.ts`).
-- **Domain types:** PascalCase (`UserState`, `PartyMember`).
+- **Domain types:** PascalCase (`UserState`, `PlayerReference`).
 
 When in doubt, follow the conventions of the nearest existing file.

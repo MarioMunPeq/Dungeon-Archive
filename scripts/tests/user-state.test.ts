@@ -57,7 +57,7 @@ const { migrate } = await import("../../src/user-state/migrations");
 const { read, write } = await import("../../src/user-state/persistence");
 const { loadCompendium } = await import("../../src/compendium/loader");
 const { hydrate, userStore } = await import("../../src/user-state/store");
-import type { Adventure, PartyMember, UserState } from "../../src/user-state/types";
+import type { Adventure, PlayerReference, UserState } from "../../src/user-state/types";
 const { normalize, validateIds } = await import("../../src/user-state/normalize");
 const { getEntity, getSpells, getEquipmentList, getMagicItems } = await import("../../src/compendium/repository");
 
@@ -77,11 +77,11 @@ test("STORAGE_KEY equals dungeon:userState:v1", () => {
   strictEqual(STORAGE_KEY, "dungeon:userState:v1");
 });
 
-test("CURRENT_VERSION equals 6", () => {
-  strictEqual(CURRENT_VERSION, 6);
+test("CURRENT_VERSION equals 7", () => {
+  strictEqual(CURRENT_VERSION, 7);
 });
 
-test("createDefaultState returns valid v6 state", () => {
+test("createDefaultState returns valid v7 state", () => {
   const def = createDefaultState();
   strictEqual(def.version, CURRENT_VERSION);
   deepStrictEqual(def.favorites, []);
@@ -90,7 +90,7 @@ test("createDefaultState returns valid v6 state", () => {
   deepStrictEqual(def.session, []);
   deepStrictEqual(def.adventures, []);
   strictEqual(def.activeAdventureId, null);
-  deepStrictEqual(def.party, []);
+  deepStrictEqual(def.players, []);
 });
 
 // ---------------------------------------------------------------------------
@@ -219,6 +219,7 @@ test("migrations.migrate() upgrades v4 adventures without a scenes field", () =>
   strictEqual(result.adventures.length, 1);
   strictEqual(result.adventures[0]!.title, "Legacy");
   ok(!("scenes" in result.adventures[0]!));
+  deepStrictEqual(result.players, []);
 });
 
 test("migrations.migrate() silently discards obsolete scenes at v6", () => {
@@ -252,6 +253,79 @@ test("migrations.migrate() silently discards obsolete scenes at v6", () => {
   strictEqual(adventure.description, "Desc");
   strictEqual(adventure.notes, "Notes");
   deepStrictEqual(adventure.entities, ["spell.fireball"]);
+});
+
+test("migrations.migrate() maps legacy party members to player references at v7", () => {
+  const input = {
+    version: 6,
+    favorites: [],
+    recentEntities: [],
+    recentSearches: [],
+    session: [],
+    adventures: [],
+    activeAdventureId: null,
+    party: [
+      {
+        id: "m1",
+        name: "Lyra",
+        class: "Wizard",
+        level: 5,
+        race: "High Elf",
+        subclass: "Evocation",
+        passivePerception: 15,
+        passiveInsight: 12,
+        passiveInvestigation: 13,
+        notes: "Guild wizard",
+        knownSpellCanonicalIds: ["spell.fireball"],
+        equippedArmorCanonicalId: "equipment.chain-mail",
+        equippedWeaponCanonicalIds: ["equipment.longsword"],
+        equippedMagicItemCanonicalIds: ["magicitem.wand-of-magic-missiles"],
+      },
+    ],
+  };
+  const result = migrate(input);
+  strictEqual(result.version, CURRENT_VERSION);
+  strictEqual(result.players.length, 1);
+  const player = result.players[0]!;
+  strictEqual(player.id, "m1");
+  strictEqual(player.name, "Lyra");
+  strictEqual(player.class, "Wizard");
+  strictEqual(player.level, 5);
+  strictEqual(player.subclass, "Evocation");
+  strictEqual(player.note, "Guild wizard");
+  strictEqual(player.combatValues.passivePerception, 15);
+  strictEqual(player.combatValues.armorClass, 10);
+  deepStrictEqual(player.abilityModifiers, {
+    strength: 0,
+    dexterity: 0,
+    constitution: 0,
+    intelligence: 0,
+    wisdom: 0,
+    charisma: 0,
+  });
+  deepStrictEqual(player.knownSpellCanonicalIds, ["spell.fireball"]);
+  deepStrictEqual(player.weaponCanonicalIds, ["equipment.longsword"]);
+  deepStrictEqual(player.magicItemCanonicalIds, ["magicitem.wand-of-magic-missiles"]);
+  ok(!("party" in result), "legacy party key removed");
+});
+
+test("migrations.migrate() drops legacy party members without a name", () => {
+  const input = {
+    version: 6,
+    favorites: [],
+    recentEntities: [],
+    recentSearches: [],
+    session: [],
+    adventures: [],
+    activeAdventureId: null,
+    party: [
+      { id: "m1", name: "  ", class: "Fighter", level: 3 },
+      { id: "m2", name: "Lyra", class: "Wizard", level: 5 },
+    ],
+  };
+  const result = migrate(input);
+  strictEqual(result.players.length, 1);
+  strictEqual(result.players[0]!.id, "m2");
 });
 
 // ---------------------------------------------------------------------------
@@ -481,7 +555,7 @@ test("favoritesSet rebuilt on _replace", () => {
     session: [],
     adventures: [],
     activeAdventureId: null,
-    party: [],
+    players: [],
   });
   const state = userStore.getState();
   strictEqual(state.favoritesSet.has("x"), true);
@@ -789,7 +863,7 @@ test("safe replace does nothing when state is identical", () => {
     session: [],
     adventures: [],
     activeAdventureId: null,
-    party: [],
+    players: [],
   });
   userStore.getState()._replace({
     version: CURRENT_VERSION,
@@ -799,7 +873,7 @@ test("safe replace does nothing when state is identical", () => {
     session: [],
     adventures: [],
     activeAdventureId: null,
-    party: [],
+    players: [],
   });
   const state2 = userStore.getState();
   deepStrictEqual(state2.favorites, ["a", "b"]);
@@ -1000,7 +1074,7 @@ test("sessionSet stays in sync after _replace", () => {
     session: ["x", "y"],
     adventures: [],
     activeAdventureId: null,
-    party: [],
+    players: [],
   });
   const state = userStore.getState();
   deepStrictEqual(state.session, ["x", "y"]);
@@ -1208,7 +1282,7 @@ test("_replace updates session when content differs", () => {
     session: ["a", "b"],
     adventures: [],
     activeAdventureId: null,
-    party: [],
+    players: [],
   });
   deepStrictEqual(userStore.getState().session, ["a", "b"]);
 });
@@ -1497,7 +1571,7 @@ test("adventureSet rebuilt on _replace", () => {
       archived: false,
     }],
     activeAdventureId: "adv-1",
-    party: [],
+    players: [],
   });
   const state = userStore.getState();
   strictEqual(state.adventures.length, 1);
@@ -1795,7 +1869,7 @@ test("_replace updates adventures when content differs", () => {
       archived: false,
     }],
     activeAdventureId: "adv-1",
-    party: [],
+    players: [],
   });
   const state = userStore.getState();
   strictEqual(state.adventures.length, 1);
@@ -1824,7 +1898,7 @@ test("adventuresEqual prevents unnecessary _replace on identical state", () => {
       archived: false,
     }],
     activeAdventureId: "adv-1",
-    party: [],
+    players: [],
   };
   userStore.getState()._replace(state);
   userStore.getState()._replace(state);
@@ -1877,240 +1951,297 @@ test("useAdventureEntityIds returns entities for active adventure", () => {
 });
 
 // ---------------------------------------------------------------------------
-// Party
+// Player references
 // ---------------------------------------------------------------------------
-console.log("\nuser-state \u2014 party\n");
+console.log("\nuser-state \u2014 player references\n");
 
-test("party initial state is empty", () => {
+test("players initial state is empty", () => {
   resetMock();
   resetStore();
-  deepStrictEqual(userStore.getState().party, []);
+  deepStrictEqual(userStore.getState().players, []);
 });
 
-test("addPartyMember adds a member with defaults", () => {
+test("addPlayerReference adds a reference with defaults", () => {
   resetMock();
   resetStore();
-  userStore.getState().addPartyMember({
+  const id = userStore.getState().addPlayerReference({
     name: "Lyra",
     class: "Wizard",
     level: 5,
+    abilityModifiers: {
+      strength: 0,
+      dexterity: 0,
+      constitution: 0,
+      intelligence: 0,
+      wisdom: 0,
+      charisma: 0,
+    },
+    combatValues: {
+      armorClass: 10,
+      initiativeModifier: 0,
+      passivePerception: 10,
+    },
     knownSpellCanonicalIds: [],
-    equippedWeaponCanonicalIds: [],
-    equippedMagicItemCanonicalIds: [],
+    weaponCanonicalIds: [],
+    magicItemCanonicalIds: [],
   });
   const state = userStore.getState();
-  strictEqual(state.party.length, 1);
-  const member = state.party[0]!;
-  strictEqual(member.name, "Lyra");
-  strictEqual(member.class, "Wizard");
-  strictEqual(member.level, 5);
-  deepStrictEqual(member.knownSpellCanonicalIds, []);
-  strictEqual(member.equippedArmorCanonicalId, undefined);
-  deepStrictEqual(member.equippedWeaponCanonicalIds, []);
-  deepStrictEqual(member.equippedMagicItemCanonicalIds, []);
-  ok(member.id.length > 0);
+  strictEqual(state.players.length, 1);
+  const player = state.players[0]!;
+  strictEqual(player.id, id);
+  strictEqual(player.name, "Lyra");
+  strictEqual(player.class, "Wizard");
+  strictEqual(player.level, 5);
+  strictEqual(player.subclass, undefined);
+  deepStrictEqual(player.abilityModifiers, {
+    strength: 0,
+    dexterity: 0,
+    constitution: 0,
+    intelligence: 0,
+    wisdom: 0,
+    charisma: 0,
+  });
+  deepStrictEqual(player.combatValues, {
+    armorClass: 10,
+    initiativeModifier: 0,
+    passivePerception: 10,
+    spellSaveDc: undefined,
+    spellAttackBonus: undefined,
+  });
+  deepStrictEqual(player.knownSpellCanonicalIds, []);
+  deepStrictEqual(player.weaponCanonicalIds, []);
+  deepStrictEqual(player.magicItemCanonicalIds, []);
+  strictEqual(player.note, undefined);
+  ok(player.id.length > 0);
 });
 
-test("addPartyMember trims name and class", () => {
+test("addPlayerReference trims name and class", () => {
   resetMock();
   resetStore();
-  userStore.getState().addPartyMember({
+  userStore.getState().addPlayerReference({
     name: "  Lyra  ",
     class: "  Wizard ",
     level: 5,
+    abilityModifiers: { strength: 0, dexterity: 0, constitution: 0, intelligence: 0, wisdom: 0, charisma: 0 },
+    combatValues: { armorClass: 10, initiativeModifier: 0, passivePerception: 10 },
     knownSpellCanonicalIds: [],
-    equippedWeaponCanonicalIds: [],
-    equippedMagicItemCanonicalIds: [],
+    weaponCanonicalIds: [],
+    magicItemCanonicalIds: [],
   });
-  const member = userStore.getState().party[0]!;
-  strictEqual(member.name, "Lyra");
-  strictEqual(member.class, "Wizard");
+  const player = userStore.getState().players[0]!;
+  strictEqual(player.name, "Lyra");
+  strictEqual(player.class, "Wizard");
 });
 
-test("addPartyMember clamps level to 1-20", () => {
+test("addPlayerReference clamps level and combat values", () => {
   resetMock();
   resetStore();
-  const s = userStore.getState();
-  s.addPartyMember({
+  userStore.getState().addPlayerReference({
     name: "Low",
     class: "Cleric",
     level: 0,
+    abilityModifiers: { strength: -99, dexterity: 99, constitution: 0, intelligence: 0, wisdom: 0, charisma: 0 },
+    combatValues: { armorClass: 99, initiativeModifier: -99, passivePerception: -3, spellSaveDc: 99, spellAttackBonus: -99 },
     knownSpellCanonicalIds: [],
-    equippedWeaponCanonicalIds: [],
-    equippedMagicItemCanonicalIds: [],
+    weaponCanonicalIds: [],
+    magicItemCanonicalIds: [],
   });
-  s.addPartyMember({
+  userStore.getState().addPlayerReference({
     name: "High",
     class: "Cleric",
     level: 99,
+    abilityModifiers: { strength: 0, dexterity: 0, constitution: 0, intelligence: 0, wisdom: 0, charisma: 0 },
+    combatValues: { armorClass: 10, initiativeModifier: 0, passivePerception: 10 },
     knownSpellCanonicalIds: [],
-    equippedWeaponCanonicalIds: [],
-    equippedMagicItemCanonicalIds: [],
+    weaponCanonicalIds: [],
+    magicItemCanonicalIds: [],
   });
-  const members = userStore.getState().party;
-  strictEqual(members[0]!.level, 1);
-  strictEqual(members[1]!.level, 20);
+  const players = userStore.getState().players;
+  strictEqual(players[0]!.level, 1);
+  strictEqual(players[1]!.level, 20);
+  strictEqual(players[0]!.abilityModifiers.strength, -5);
+  strictEqual(players[0]!.abilityModifiers.dexterity, 10);
+  strictEqual(players[0]!.combatValues.armorClass, 40);
+  strictEqual(players[0]!.combatValues.initiativeModifier, -5);
+  strictEqual(players[0]!.combatValues.passivePerception, 0);
+  strictEqual(players[0]!.combatValues.spellSaveDc, 40);
+  strictEqual(players[0]!.combatValues.spellAttackBonus, -5);
 });
 
-test("addPartyMember accepts references", () => {
+test("addPlayerReference accepts references and note", () => {
   resetMock();
   resetStore();
-  userStore.getState().addPartyMember({
+  userStore.getState().addPlayerReference({
     name: "Lyra",
     class: "Wizard",
     level: 5,
-    race: "High Elf",
     subclass: "Evocation",
-    passivePerception: 15,
-    notes: "Guild wizard",
+    abilityModifiers: { strength: 1, dexterity: 2, constitution: 3, intelligence: 4, wisdom: 5, charisma: 6 },
+    combatValues: { armorClass: 15, initiativeModifier: 3, passivePerception: 17, spellSaveDc: 16, spellAttackBonus: 8 },
     knownSpellCanonicalIds: ["spell.fireball"],
-    equippedArmorCanonicalId: "equipment.chain-mail",
-    equippedWeaponCanonicalIds: ["equipment.longsword"],
-    equippedMagicItemCanonicalIds: ["magicitem.wand-of-magic-missiles"],
+    weaponCanonicalIds: ["equipment.longsword"],
+    magicItemCanonicalIds: ["magicitem.wand-of-magic-missiles"],
+    note: "Guild wizard",
   });
-  const member = userStore.getState().party[0]!;
-  strictEqual(member.race, "High Elf");
-  strictEqual(member.subclass, "Evocation");
-  strictEqual(member.passivePerception, 15);
-  strictEqual(member.notes, "Guild wizard");
-  deepStrictEqual(member.knownSpellCanonicalIds, ["spell.fireball"]);
-  strictEqual(member.equippedArmorCanonicalId, "equipment.chain-mail");
-  deepStrictEqual(member.equippedWeaponCanonicalIds, ["equipment.longsword"]);
-  deepStrictEqual(member.equippedMagicItemCanonicalIds, ["magicitem.wand-of-magic-missiles"]);
+  const player = userStore.getState().players[0]!;
+  strictEqual(player.subclass, "Evocation");
+  deepStrictEqual(player.abilityModifiers, { strength: 1, dexterity: 2, constitution: 3, intelligence: 4, wisdom: 5, charisma: 6 });
+  deepStrictEqual(player.combatValues, { armorClass: 15, initiativeModifier: 3, passivePerception: 17, spellSaveDc: 16, spellAttackBonus: 8 });
+  deepStrictEqual(player.knownSpellCanonicalIds, ["spell.fireball"]);
+  deepStrictEqual(player.weaponCanonicalIds, ["equipment.longsword"]);
+  deepStrictEqual(player.magicItemCanonicalIds, ["magicitem.wand-of-magic-missiles"]);
+  strictEqual(player.note, "Guild wizard");
 });
 
-test("addPartyMember trims optional strings and keeps empty as undefined", () => {
+test("addPlayerReference trims optional strings and keeps empty as undefined", () => {
   resetMock();
   resetStore();
-  userStore.getState().addPartyMember({
+  userStore.getState().addPlayerReference({
     name: "Lyra",
     class: "Wizard",
     level: 5,
-    race: "  ",
-    subclass: "",
-    notes: "",
+    abilityModifiers: { strength: 0, dexterity: 0, constitution: 0, intelligence: 0, wisdom: 0, charisma: 0 },
+    combatValues: { armorClass: 10, initiativeModifier: 0, passivePerception: 10 },
     knownSpellCanonicalIds: [],
-    equippedWeaponCanonicalIds: [],
-    equippedMagicItemCanonicalIds: [],
+    weaponCanonicalIds: [],
+    magicItemCanonicalIds: [],
+    subclass: "  ",
+    note: "",
   });
-  const member = userStore.getState().party[0]!;
-  strictEqual(member.race, undefined);
-  strictEqual(member.subclass, undefined);
-  strictEqual(member.notes, undefined);
+  const player = userStore.getState().players[0]!;
+  strictEqual(player.subclass, undefined);
+  strictEqual(player.note, undefined);
 });
 
-test("addPartyMember persists to localStorage", () => {
+test("addPlayerReference persists to localStorage", () => {
   resetMock();
   resetStore();
-  userStore.getState().addPartyMember({
+  userStore.getState().addPlayerReference({
     name: "Lyra",
     class: "Wizard",
     level: 5,
+    abilityModifiers: { strength: 0, dexterity: 0, constitution: 0, intelligence: 0, wisdom: 0, charisma: 0 },
+    combatValues: { armorClass: 10, initiativeModifier: 0, passivePerception: 10 },
     knownSpellCanonicalIds: [],
-    equippedWeaponCanonicalIds: [],
-    equippedMagicItemCanonicalIds: [],
+    weaponCanonicalIds: [],
+    magicItemCanonicalIds: [],
   });
   const stored = localStorage.getItem(STORAGE_KEY);
   if (stored) {
     const parsed = JSON.parse(stored);
-    ok(parsed.party.length === 1, "party persisted");
+    ok(parsed.players.length === 1, "players persisted");
   } else {
-    ok(userStore.getState().party.length === 1);
+    ok(userStore.getState().players.length === 1);
   }
 });
 
-test("updatePartyMember updates fields", () => {
+test("updatePlayerReference updates fields", () => {
   resetMock();
   resetStore();
-  userStore.getState().addPartyMember({
+  userStore.getState().addPlayerReference({
     name: "Lyra",
     class: "Wizard",
     level: 5,
+    abilityModifiers: { strength: 0, dexterity: 0, constitution: 0, intelligence: 0, wisdom: 0, charisma: 0 },
+    combatValues: { armorClass: 10, initiativeModifier: 0, passivePerception: 10 },
     knownSpellCanonicalIds: [],
-    equippedWeaponCanonicalIds: [],
-    equippedMagicItemCanonicalIds: [],
+    weaponCanonicalIds: [],
+    magicItemCanonicalIds: [],
   });
-  const id = userStore.getState().party[0]!.id;
-  userStore.getState().updatePartyMember(id, {
+  const id = userStore.getState().players[0]!.id;
+  userStore.getState().updatePlayerReference(id, {
     level: 6,
     subclass: "Evocation",
+    note: "New note",
     knownSpellCanonicalIds: ["spell.fireball"],
+    combatValues: { spellSaveDc: 16 },
   });
-  const member = userStore.getState().party[0]!;
-  strictEqual(member.level, 6);
-  strictEqual(member.subclass, "Evocation");
-  deepStrictEqual(member.knownSpellCanonicalIds, ["spell.fireball"]);
-  strictEqual(member.name, "Lyra");
+  const player = userStore.getState().players[0]!;
+  strictEqual(player.level, 6);
+  strictEqual(player.subclass, "Evocation");
+  strictEqual(player.note, "New note");
+  deepStrictEqual(player.knownSpellCanonicalIds, ["spell.fireball"]);
+  strictEqual(player.combatValues.spellSaveDc, 16);
+  strictEqual(player.name, "Lyra");
+  strictEqual(player.combatValues.armorClass, 10);
 });
 
-test("updatePartyMember clamps level", () => {
+test("updatePlayerReference clamps level", () => {
   resetMock();
   resetStore();
-  userStore.getState().addPartyMember({
+  userStore.getState().addPlayerReference({
     name: "Lyra",
     class: "Wizard",
     level: 5,
+    abilityModifiers: { strength: 0, dexterity: 0, constitution: 0, intelligence: 0, wisdom: 0, charisma: 0 },
+    combatValues: { armorClass: 10, initiativeModifier: 0, passivePerception: 10 },
     knownSpellCanonicalIds: [],
-    equippedWeaponCanonicalIds: [],
-    equippedMagicItemCanonicalIds: [],
+    weaponCanonicalIds: [],
+    magicItemCanonicalIds: [],
   });
-  const id = userStore.getState().party[0]!.id;
-  userStore.getState().updatePartyMember(id, { level: 99 });
-  strictEqual(userStore.getState().party[0]!.level, 20);
+  const id = userStore.getState().players[0]!.id;
+  userStore.getState().updatePlayerReference(id, { level: 99 });
+  strictEqual(userStore.getState().players[0]!.level, 20);
 });
 
-test("updatePartyMember converts empty strings to undefined", () => {
+test("updatePlayerReference converts empty strings to undefined", () => {
   resetMock();
   resetStore();
-  userStore.getState().addPartyMember({
+  userStore.getState().addPlayerReference({
     name: "Lyra",
     class: "Wizard",
     level: 5,
-    race: "High Elf",
-    notes: "Keep notes",
+    abilityModifiers: { strength: 0, dexterity: 0, constitution: 0, intelligence: 0, wisdom: 0, charisma: 0 },
+    combatValues: { armorClass: 10, initiativeModifier: 0, passivePerception: 10 },
     knownSpellCanonicalIds: [],
-    equippedWeaponCanonicalIds: [],
-    equippedMagicItemCanonicalIds: [],
+    weaponCanonicalIds: [],
+    magicItemCanonicalIds: [],
+    subclass: "Evocation",
+    note: "Keep notes",
   });
-  const id = userStore.getState().party[0]!.id;
-  userStore.getState().updatePartyMember(id, { race: "  ", notes: "" });
-  const member = userStore.getState().party[0]!;
-  strictEqual(member.race, undefined);
-  strictEqual(member.notes, undefined);
+  const id = userStore.getState().players[0]!.id;
+  userStore.getState().updatePlayerReference(id, { subclass: "  ", note: "" });
+  const player = userStore.getState().players[0]!;
+  strictEqual(player.subclass, undefined);
+  strictEqual(player.note, undefined);
 });
 
-test("updatePartyMember is a no-op for unknown id", () => {
+test("updatePlayerReference is a no-op for unknown id", () => {
   resetMock();
   resetStore();
-  userStore.getState().addPartyMember({
+  userStore.getState().addPlayerReference({
     name: "Lyra",
     class: "Wizard",
     level: 5,
+    abilityModifiers: { strength: 0, dexterity: 0, constitution: 0, intelligence: 0, wisdom: 0, charisma: 0 },
+    combatValues: { armorClass: 10, initiativeModifier: 0, passivePerception: 10 },
     knownSpellCanonicalIds: [],
-    equippedWeaponCanonicalIds: [],
-    equippedMagicItemCanonicalIds: [],
+    weaponCanonicalIds: [],
+    magicItemCanonicalIds: [],
   });
-  userStore.getState().updatePartyMember("nonexistent", { name: "Changed" });
-  strictEqual(userStore.getState().party[0]!.name, "Lyra");
+  userStore.getState().updatePlayerReference("nonexistent", { name: "Changed" });
+  strictEqual(userStore.getState().players[0]!.name, "Lyra");
 });
 
-test("removePartyMember removes by id", () => {
+test("removePlayerReference removes by id", () => {
   resetMock();
   resetStore();
-  userStore.getState().addPartyMember({
+  userStore.getState().addPlayerReference({
     name: "Lyra",
     class: "Wizard",
     level: 5,
+    abilityModifiers: { strength: 0, dexterity: 0, constitution: 0, intelligence: 0, wisdom: 0, charisma: 0 },
+    combatValues: { armorClass: 10, initiativeModifier: 0, passivePerception: 10 },
     knownSpellCanonicalIds: [],
-    equippedWeaponCanonicalIds: [],
-    equippedMagicItemCanonicalIds: [],
+    weaponCanonicalIds: [],
+    magicItemCanonicalIds: [],
   });
-  const id = userStore.getState().party[0]!.id;
-  userStore.getState().removePartyMember(id);
-  deepStrictEqual(userStore.getState().party, []);
+  const id = userStore.getState().players[0]!.id;
+  userStore.getState().removePlayerReference(id);
+  deepStrictEqual(userStore.getState().players, []);
 });
 
-test("_replace updates party when content differs", () => {
+test("_replace updates players when content differs", () => {
   resetMock();
   resetStore();
   userStore.getState()._replace({
@@ -2121,62 +2252,76 @@ test("_replace updates party when content differs", () => {
     session: [],
     adventures: [],
     activeAdventureId: null,
-    party: [
+    players: [
       {
         id: "p1",
         name: "Lyra",
         class: "Wizard",
         level: 5,
+        abilityModifiers: { strength: 0, dexterity: 0, constitution: 0, intelligence: 0, wisdom: 0, charisma: 0 },
+        combatValues: { armorClass: 10, initiativeModifier: 0, passivePerception: 10 },
         knownSpellCanonicalIds: [],
-        equippedWeaponCanonicalIds: [],
-        equippedMagicItemCanonicalIds: [],
+        weaponCanonicalIds: [],
+        magicItemCanonicalIds: [],
       },
     ],
   });
   const state = userStore.getState();
-  strictEqual(state.party.length, 1);
-  strictEqual(state.party[0]?.name, "Lyra");
+  strictEqual(state.players.length, 1);
+  strictEqual(state.players[0]?.name, "Lyra");
 });
 
-test("party cleared on _reset", () => {
+test("players cleared on _reset", () => {
   resetMock();
   resetStore();
   const s = userStore.getState();
-  s.addPartyMember({
+  s.addPlayerReference({
     name: "Lyra",
     class: "Wizard",
     level: 5,
+    abilityModifiers: { strength: 0, dexterity: 0, constitution: 0, intelligence: 0, wisdom: 0, charisma: 0 },
+    combatValues: { armorClass: 10, initiativeModifier: 0, passivePerception: 10 },
     knownSpellCanonicalIds: [],
-    equippedWeaponCanonicalIds: [],
-    equippedMagicItemCanonicalIds: [],
+    weaponCanonicalIds: [],
+    magicItemCanonicalIds: [],
   });
   userStore.getState()._reset();
-  deepStrictEqual(userStore.getState().party, []);
+  deepStrictEqual(userStore.getState().players, []);
 });
 
 // ---------------------------------------------------------------------------
-// Party normalization
+// Player reference normalization
 // ---------------------------------------------------------------------------
-console.log("\nuser-state \u2014 party normalization\n");
+console.log("\nuser-state \u2014 player reference normalization\n");
 
-test("normalize drops invalid party members", () => {
-  const party = [
+test("normalize drops invalid player references", () => {
+  const players = [
     null,
     "bad",
-    { id: "p1", name: "Lyra", class: "Wizard", level: 5, knownSpellCanonicalIds: [], equippedWeaponCanonicalIds: [], equippedMagicItemCanonicalIds: [] },
+    {
+      id: "p1",
+      name: "Lyra",
+      class: "Wizard",
+      level: 5,
+      abilityModifiers: { strength: 0, dexterity: 0, constitution: 0, intelligence: 0, wisdom: 0, charisma: 0 },
+      combatValues: { armorClass: 10, initiativeModifier: 0, passivePerception: 10 },
+      knownSpellCanonicalIds: [],
+      weaponCanonicalIds: [],
+      magicItemCanonicalIds: [],
+    },
     { id: "", name: "NoId", class: "Cleric", level: 5 },
     { id: "p2", name: "  ", class: "Fighter", level: 3 },
-  ] as unknown as PartyMember[];
+  ] as unknown as PlayerReference[];
   const result = normalize({
     version: CURRENT_VERSION,
     favorites: [],
     recentEntities: [],
     recentSearches: [],
     session: [],
-    party,
+    players,
   });
-  strictEqual(result.party.length, 1);
-  strictEqual(result.party[0]?.id, "p1");
+  strictEqual(result.players.length, 1);
+  strictEqual(result.players[0]?.id, "p1");
 });
 
 test("normalize trims name and class", () => {
@@ -2186,83 +2331,112 @@ test("normalize trims name and class", () => {
     recentEntities: [],
     recentSearches: [],
     session: [],
-    party: [
-      { id: "p1", name: "  Lyra  ", class: " Wizard ", level: 5, knownSpellCanonicalIds: [], equippedWeaponCanonicalIds: [], equippedMagicItemCanonicalIds: [] },
-    ],
+    players: [
+      { id: "p1", name: "  Lyra  ", class: " Wizard ", level: 5 },
+    ] as unknown as PlayerReference[],
   });
-  strictEqual(result.party[0]?.name, "Lyra");
-  strictEqual(result.party[0]?.class, "Wizard");
+  strictEqual(result.players[0]?.name, "Lyra");
+  strictEqual(result.players[0]?.class, "Wizard");
 });
 
-test("normalize clamps party member level", () => {
+test("normalize clamps player reference level and fills defaults", () => {
   const result = normalize({
     version: CURRENT_VERSION,
     favorites: [],
     recentEntities: [],
     recentSearches: [],
     session: [],
-    party: [
-      { id: "p1", name: "Low", class: "Cleric", level: 0, knownSpellCanonicalIds: [], equippedWeaponCanonicalIds: [], equippedMagicItemCanonicalIds: [] },
-      { id: "p2", name: "High", class: "Cleric", level: 99, knownSpellCanonicalIds: [], equippedWeaponCanonicalIds: [], equippedMagicItemCanonicalIds: [] },
-    ],
+    players: [
+      { id: "p1", name: "Low", class: "Cleric", level: 0 },
+      { id: "p2", name: "High", class: "Cleric", level: 99 },
+    ] as unknown as PlayerReference[],
   });
-  strictEqual(result.party[0]?.level, 1);
-  strictEqual(result.party[1]?.level, 20);
+  strictEqual(result.players[0]?.level, 1);
+  strictEqual(result.players[1]?.level, 20);
+  const player = result.players[0]!;
+  deepStrictEqual(player.abilityModifiers, { strength: 0, dexterity: 0, constitution: 0, intelligence: 0, wisdom: 0, charisma: 0 });
+  deepStrictEqual(player.combatValues, { armorClass: 10, initiativeModifier: 0, passivePerception: 10, spellSaveDc: undefined, spellAttackBonus: undefined });
 });
 
-test("normalize removes stale reference IDs from party members", () => {
+test("normalize clamps ability modifiers and combat values", () => {
   const result = normalize({
     version: CURRENT_VERSION,
     favorites: [],
     recentEntities: [],
     recentSearches: [],
     session: [],
-    party: [
+    players: [
+      {
+        id: "p1",
+        name: "Lyra",
+        class: "Wizard",
+        level: 5,
+        abilityModifiers: { strength: -99, dexterity: 99, constitution: 0, intelligence: 0, wisdom: 0, charisma: 0 },
+        combatValues: { armorClass: 99, initiativeModifier: -99, passivePerception: -3, spellSaveDc: 99, spellAttackBonus: -99 },
+        knownSpellCanonicalIds: [],
+        weaponCanonicalIds: [],
+        magicItemCanonicalIds: [],
+      },
+    ],
+  });
+  const player = result.players[0]!;
+  strictEqual(player.abilityModifiers.strength, -5);
+  strictEqual(player.abilityModifiers.dexterity, 10);
+  strictEqual(player.combatValues.armorClass, 40);
+  strictEqual(player.combatValues.initiativeModifier, -5);
+  strictEqual(player.combatValues.passivePerception, 0);
+  strictEqual(player.combatValues.spellSaveDc, 40);
+  strictEqual(player.combatValues.spellAttackBonus, -5);
+});
+
+test("normalize removes stale reference IDs from player references", () => {
+  const result = normalize({
+    version: CURRENT_VERSION,
+    favorites: [],
+    recentEntities: [],
+    recentSearches: [],
+    session: [],
+    players: [
       {
         id: "p1",
         name: "Lyra",
         class: "Wizard",
         level: 5,
         knownSpellCanonicalIds: ["spell.fireball", "nonexistent.entity"],
-        equippedArmorCanonicalId: "nonexistent.armor",
-        equippedWeaponCanonicalIds: ["equipment.longsword", "nonexistent.weapon"],
-        equippedMagicItemCanonicalIds: ["magicitem.wand-of-magic-missiles", "nonexistent.item"],
+        weaponCanonicalIds: ["equipment.longsword", "nonexistent.weapon"],
+        magicItemCanonicalIds: ["magicitem.wand-of-magic-missiles", "nonexistent.item"],
       },
-    ],
+    ] as unknown as PlayerReference[],
   });
-  const member = result.party[0]!;
-  deepStrictEqual(member.knownSpellCanonicalIds, ["spell.fireball"]);
-  strictEqual(member.equippedArmorCanonicalId, undefined);
-  deepStrictEqual(member.equippedWeaponCanonicalIds, ["equipment.longsword"]);
-  deepStrictEqual(member.equippedMagicItemCanonicalIds, ["magicitem.wand-of-magic-missiles"]);
+  const player = result.players[0]!;
+  deepStrictEqual(player.knownSpellCanonicalIds, ["spell.fireball"]);
+  deepStrictEqual(player.weaponCanonicalIds, ["equipment.longsword"]);
+  deepStrictEqual(player.magicItemCanonicalIds, ["magicitem.wand-of-magic-missiles"]);
 });
 
-test("normalize converts empty optional strings to undefined", () => {
+test("normalize converts empty optional strings to undefined and truncates note", () => {
+  const longNote = "x".repeat(300);
   const result = normalize({
     version: CURRENT_VERSION,
     favorites: [],
     recentEntities: [],
     recentSearches: [],
     session: [],
-    party: [
-      { id: "p1", name: "Lyra", class: "Wizard", level: 5, race: "  ", subclass: "", notes: "  ", knownSpellCanonicalIds: [], equippedWeaponCanonicalIds: [], equippedMagicItemCanonicalIds: [] },
-    ],
+    players: [
+      { id: "p1", name: "Lyra", class: "Wizard", level: 5, subclass: "  ", note: `  ${longNote}  ` },
+    ] as unknown as PlayerReference[],
   });
-  const member = result.party[0]!;
-  strictEqual(member.race, undefined);
-  strictEqual(member.subclass, undefined);
-  strictEqual(member.notes, undefined);
+  const player = result.players[0]!;
+  strictEqual(player.subclass, undefined);
+  strictEqual(player.note?.length, 280);
 });
 
-test("normalize caps party at 12 members", () => {
-  const party = Array.from({ length: 15 }, (_, i) => ({
+test("normalize caps players at 12", () => {
+  const players = Array.from({ length: 15 }, (_, i) => ({
     id: `p${i}`,
-    name: `Member ${i}`,
+    name: `Player ${i}`,
     class: "Fighter",
     level: 1,
-    knownSpellCanonicalIds: [],
-    equippedWeaponCanonicalIds: [],
-    equippedMagicItemCanonicalIds: [],
   }));
   const result = normalize({
     version: CURRENT_VERSION,
@@ -2270,12 +2444,12 @@ test("normalize caps party at 12 members", () => {
     recentEntities: [],
     recentSearches: [],
     session: [],
-    party,
+    players: players as unknown as PlayerReference[],
   });
-  strictEqual(result.party.length, 12);
+  strictEqual(result.players.length, 12);
 });
 
-test("normalize caps party reference lists", () => {
+test("normalize caps player reference lists", () => {
   const distinct = (items: readonly { canonicalId: string }[], max: number): string[] => {
     const seen = new Set<string>();
     const result: string[] = [];
@@ -2299,42 +2473,42 @@ test("normalize caps party reference lists", () => {
     recentEntities: [],
     recentSearches: [],
     session: [],
-    party: [
+    players: [
       {
         id: "p1",
         name: "Lyra",
         class: "Wizard",
         level: 5,
         knownSpellCanonicalIds: spellIds,
-        equippedWeaponCanonicalIds: weaponIds,
-        equippedMagicItemCanonicalIds: magicItemIds,
+        weaponCanonicalIds: weaponIds,
+        magicItemCanonicalIds: magicItemIds,
       },
-    ],
+    ] as unknown as PlayerReference[],
   });
-  const member = result.party[0]!;
-  strictEqual(member.knownSpellCanonicalIds.length, 50);
-  strictEqual(member.equippedWeaponCanonicalIds.length, 10);
-  strictEqual(member.equippedMagicItemCanonicalIds.length, 30);
+  const player = result.players[0]!;
+  strictEqual(player.knownSpellCanonicalIds.length, 50);
+  strictEqual(player.weaponCanonicalIds.length, 10);
+  strictEqual(player.magicItemCanonicalIds.length, 30);
 });
 
-test("normalize handles non-array party gracefully", () => {
+test("normalize handles non-array players gracefully", () => {
   const result = normalize({
     version: CURRENT_VERSION,
     favorites: [],
     recentEntities: [],
     recentSearches: [],
     session: [],
-    party: "not-an-array" as unknown as PartyMember[],
+    players: "not-an-array" as unknown as PlayerReference[],
   });
-  deepStrictEqual(result.party, []);
+  deepStrictEqual(result.players, []);
 });
 
 // ---------------------------------------------------------------------------
-// Party hydration
+// Player reference hydration
 // ---------------------------------------------------------------------------
-console.log("\nuser-state \u2014 party hydration\n");
+console.log("\nuser-state \u2014 player reference hydration\n");
 
-test("hydrate() loads party from persisted state", () => {
+test("hydrate() loads players from persisted state", () => {
   resetMock();
   resetStore();
   const data = {
@@ -2343,27 +2517,27 @@ test("hydrate() loads party from persisted state", () => {
     recentEntities: [],
     recentSearches: [],
     session: [],
-    party: [
+    players: [
       {
         id: "p1",
         name: "Lyra",
         class: "Wizard",
         level: 5,
         knownSpellCanonicalIds: ["spell.fireball"],
-        equippedWeaponCanonicalIds: ["equipment.longsword"],
-        equippedMagicItemCanonicalIds: [],
+        weaponCanonicalIds: ["equipment.longsword"],
+        magicItemCanonicalIds: [],
       },
     ],
   };
   localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
   hydrate();
   const state = userStore.getState();
-  strictEqual(state.party.length, 1);
-  strictEqual(state.party[0]?.name, "Lyra");
-  deepStrictEqual(state.party[0]?.knownSpellCanonicalIds, ["spell.fireball"]);
+  strictEqual(state.players.length, 1);
+  strictEqual(state.players[0]?.name, "Lyra");
+  deepStrictEqual(state.players[0]?.knownSpellCanonicalIds, ["spell.fireball"]);
 });
 
-test("hydrate() removes stale reference IDs from persisted party", () => {
+test("hydrate() removes stale reference IDs from persisted players", () => {
   resetMock();
   resetStore();
   const data = {
@@ -2372,22 +2546,22 @@ test("hydrate() removes stale reference IDs from persisted party", () => {
     recentEntities: [],
     recentSearches: [],
     session: [],
-    party: [
+    players: [
       {
         id: "p1",
         name: "Lyra",
         class: "Wizard",
         level: 5,
         knownSpellCanonicalIds: ["spell.fireball", "nonexistent.entity"],
-        equippedWeaponCanonicalIds: [],
-        equippedMagicItemCanonicalIds: [],
+        weaponCanonicalIds: [],
+        magicItemCanonicalIds: [],
       },
     ],
   };
   localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
   hydrate();
   const state = userStore.getState();
-  deepStrictEqual(state.party[0]?.knownSpellCanonicalIds, ["spell.fireball"]);
+  deepStrictEqual(state.players[0]?.knownSpellCanonicalIds, ["spell.fireball"]);
 });
 
 console.log(

@@ -1,26 +1,47 @@
-import { useState, useCallback, useMemo, type FormEvent, type ReactNode } from "react";
-import { usePartyMembers, userStore } from "@/user-state";
-import type { PartyMember } from "@/user-state";
-import { getEntity, getEntitiesForCategory, slugFromCanonicalId, SCHOOL_NAMES } from "@/compendium";
-import type { Equipment, Spell, MagicItem } from "@/compendium";
+import { useState, useCallback, useMemo } from "react";
+import { usePlayerReferences, userStore } from "@/user-state";
+import type { PlayerReference, PlayerReferenceUpdate } from "@/user-state";
+import { getEntitiesForCategory, SCHOOL_NAMES } from "@/compendium";
+import type { Equipment, MagicItem, Spell } from "@/compendium";
 import { entityRefFromCanonicalId, EntityReferenceRow, RowRemoveButton } from "@/components/entity";
 import { ReferencePicker } from "@/components/ui/ReferencePicker";
 import type { PickerCandidate } from "@/components/ui/ReferencePicker";
+import { InlineTextEditor } from "@/components/ui/InlineTextEditor";
+import { InlineTextareaEditor } from "@/components/ui/InlineTextareaEditor";
+import { Divider, SelectField, Stepper } from "@/components/ui";
+import { cn } from "@/lib/utils";
 
-type PickerKind = "spell" | "armor" | "weapon" | "magicitem";
+type PickerKind = "spell" | "weapon" | "magicitem";
 
 const PICKER_TITLES: Record<PickerKind, string> = {
   spell: "Known Spells",
-  armor: "Armor",
   weapon: "Weapons",
   magicitem: "Magic Items",
 };
 
-const ARMOR_TYPES = new Set(["Light Armor", "Medium Armor", "Heavy Armor", "Shield"]);
 const WEAPON_TYPES = new Set(["Melee Weapon", "Ranged Weapon"]);
 
-const CLASS_OPTIONS = [
-  "Artificer",
+type AbilityKey = keyof PlayerReference["abilityModifiers"];
+
+const ABILITY_LABELS: Record<AbilityKey, string> = {
+  strength: "STR",
+  dexterity: "DEX",
+  constitution: "CON",
+  intelligence: "INT",
+  wisdom: "WIS",
+  charisma: "CHA",
+};
+
+const ABILITY_KEYS: AbilityKey[] = [
+  "strength",
+  "dexterity",
+  "constitution",
+  "intelligence",
+  "wisdom",
+  "charisma",
+];
+
+const CLASSES = [
   "Barbarian",
   "Bard",
   "Cleric",
@@ -33,161 +54,184 @@ const CLASS_OPTIONS = [
   "Sorcerer",
   "Warlock",
   "Wizard",
-];
+  "Artificer",
+] as const;
 
-const RACE_OPTIONS = [
-  "Aarakocra",
-  "Aasimar",
-  "Bugbear",
-  "Centaur",
-  "Dragonborn",
-  "Dwarf",
-  "Elf",
-  "Firbolg",
-  "Genasi",
-  "Gnome",
-  "Goblin",
-  "Goliath",
-  "Half-Elf",
-  "Half-Orc",
-  "Halfling",
-  "Human",
-  "Kenku",
-  "Kobold",
-  "Lizardfolk",
-  "Minotaur",
-  "Orc",
-  "Tabaxi",
-  "Tiefling",
-  "Tortle",
-  "Triton",
-  "Warforged",
-];
-
-interface MemberDraft {
-  name: string;
-  class: string;
-  level: string;
-  race: string;
-  subclass: string;
-  passivePerception: string;
-  passiveInsight: string;
-  passiveInvestigation: string;
-  notes: string;
-  knownSpellCanonicalIds: string[];
-  equippedArmorCanonicalId?: string;
-  equippedWeaponCanonicalIds: string[];
-  equippedMagicItemCanonicalIds: string[];
-}
-
-const EMPTY_DRAFT: MemberDraft = {
-  name: "",
-  class: "",
-  level: "1",
-  race: "",
-  subclass: "",
-  passivePerception: "",
-  passiveInsight: "",
-  passiveInvestigation: "",
-  notes: "",
-  knownSpellCanonicalIds: [],
-  equippedArmorCanonicalId: undefined,
-  equippedWeaponCanonicalIds: [],
-  equippedMagicItemCanonicalIds: [],
+const SUBCLASSES: Record<string, readonly string[]> = {
+  Barbarian: ["Berserker", "Wild Heart", "World Tree", "Zealot"],
+  Bard: ["College of Dance", "College of Glamour", "College of Lore", "College of Valor", "College of Whispers", "College of Swords"],
+  Cleric: ["Life Domain", "Light Domain", "Trickery Domain", "War Domain", "Knowledge Domain", "Nature Domain", "Tempest Domain", "Twilight Domain", "Forge Domain"],
+  Druid: ["Circle of the Land", "Circle of the Moon", "Circle of the Sea", "Circle of the Stars", "Circle of Wildfire"],
+  Fighter: ["Battle Master", "Champion", "Eldritch Knight", "Psi Warrior", "Arcane Archer", "Samurai"],
+  Monk: ["Way of the Open Hand", "Way of Shadow", "Way of the Four Elements", "Way of Mercy", "Way of the Astral Self", "Way of the Kensei"],
+  Paladin: ["Oath of Devotion", "Oath of the Ancients", "Oath of Vengeance", "Oath of Conquest", "Oath of Redemption", "Oath of Glory", "Oath of the Watchers"],
+  Ranger: ["Hunter", "Beast Master", "Fey Wanderer", "Gloom Stalker", "Horizon Walker", "Swarmkeeper", "Drakewarden"],
+  Rogue: ["Thief", "Assassin", "Arcane Trickster", "Soulknife", "Phantom", "Inquisitive", "Swashbuckler"],
+  Sorcerer: ["Draconic Bloodline", "Wild Magic", "Aberrant Mind", "Clockwork Soul", "Divine Soul", "Shadow Magic"],
+  Warlock: ["The Archfey", "The Fiend", "The Great Old One", "The Celestial", "The Hexblade", "The Genie", "The Undead", "The Fathomless"],
+  Wizard: ["Evocation", "Abjuration", "Conjuration", "Divination", "Enchantment", "Illusion", "Necromancy", "Transmutation", "Bladesinging", "War Magic"],
+  Artificer: ["Alchemist", "Artillerist", "Battle Smith", "Armorer"],
 };
 
-const inputClass =
-  "w-full rounded-lg border border-border bg-background px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground focus:border-focus focus:outline-none focus:ring-1 focus:ring-focus";
-
-function armorLabel(armorId: string | undefined): string | null {
-  if (!armorId || !armorId.startsWith("equipment.")) return null;
-  const item = getEntity("equipment", slugFromCanonicalId(armorId)) as Equipment | undefined;
-  if (!item) return null;
-  return item.ac !== undefined ? `${item.type} \u00B7 AC ${item.ac}` : item.type;
-}
-
 function buildCandidates(kind: PickerKind): PickerCandidate[] {
+  const seen = new Set<string>();
+  const out: PickerCandidate[] = [];
+  const push = (candidate: PickerCandidate): void => {
+    if (seen.has(candidate.canonicalId)) return;
+    seen.add(candidate.canonicalId);
+    out.push(candidate);
+  };
   switch (kind) {
     case "spell": {
-      const spells = getEntitiesForCategory("spell") as readonly Spell[];
-      return spells.map((s) => ({
-        canonicalId: s.canonicalId,
-        name: s.name,
-        subtitle: `${s.level === 0 ? "Cantrip" : `Level ${s.level}`} \u00B7 ${SCHOOL_NAMES[s.school] ?? s.school}`,
-      }));
-    }
-    case "armor": {
-      const items = getEntitiesForCategory("equipment") as readonly Equipment[];
-      return items
-        .filter((e) => ARMOR_TYPES.has(e.type))
-        .map((e) => ({
-          canonicalId: e.canonicalId,
-          name: e.name,
-          subtitle: `${e.type} \u00B7 AC ${e.ac ?? ""}`,
-        }));
+      for (const s of getEntitiesForCategory("spell") as readonly Spell[]) {
+        push({
+          canonicalId: s.canonicalId,
+          name: s.name,
+          subtitle: `${s.level === 0 ? "Cantrip" : `Level ${s.level}`} \u00B7 ${SCHOOL_NAMES[s.school] ?? s.school}`,
+        });
+      }
+      break;
     }
     case "weapon": {
-      const items = getEntitiesForCategory("equipment") as readonly Equipment[];
-      return items
-        .filter((e) => WEAPON_TYPES.has(e.type))
-        .map((e) => {
-          const dmg = [e.damage, e.damageType].filter(Boolean).join(" ");
-          return { canonicalId: e.canonicalId, name: e.name, subtitle: dmg ? `${e.type} \u00B7 ${dmg}` : e.type };
+      for (const e of getEntitiesForCategory("equipment") as readonly Equipment[]) {
+        if (!WEAPON_TYPES.has(e.type)) continue;
+        const dmg = [e.damage, e.damageType].filter(Boolean).join(" ");
+        push({
+          canonicalId: e.canonicalId,
+          name: e.name,
+          subtitle: dmg ? `${e.type} \u00B7 ${dmg}` : e.type,
         });
+      }
+      break;
     }
     case "magicitem": {
-      const items = getEntitiesForCategory("magicitem") as readonly MagicItem[];
-      return items.map((m) => ({
-        canonicalId: m.canonicalId,
-        name: m.name,
-        subtitle: m.rarity,
-      }));
+      for (const m of getEntitiesForCategory("magicitem") as readonly MagicItem[]) {
+        push({ canonicalId: m.canonicalId, name: m.name, subtitle: m.rarity });
+      }
+      break;
     }
   }
+  return out.sort((a, b) => a.name.localeCompare(b.name));
 }
 
-function draftFromMember(m: PartyMember): MemberDraft {
+function formatSigned(value: number): string {
+  return value > 0 ? `+${value}` : `${value}`;
+}
+
+function createEmptyReference(): Omit<PlayerReference, "id"> {
   return {
-    name: m.name,
-    class: m.class,
-    level: String(m.level),
-    race: m.race ?? "",
-    subclass: m.subclass ?? "",
-    passivePerception: m.passivePerception !== undefined ? String(m.passivePerception) : "",
-    passiveInsight: m.passiveInsight !== undefined ? String(m.passiveInsight) : "",
-    passiveInvestigation: m.passiveInvestigation !== undefined ? String(m.passiveInvestigation) : "",
-    notes: m.notes ?? "",
-    knownSpellCanonicalIds: [...m.knownSpellCanonicalIds],
-    equippedArmorCanonicalId: m.equippedArmorCanonicalId,
-    equippedWeaponCanonicalIds: [...m.equippedWeaponCanonicalIds],
-    equippedMagicItemCanonicalIds: [...m.equippedMagicItemCanonicalIds],
+    name: "New Player",
+    class: "",
+    level: 1,
+    subclass: undefined,
+    abilityModifiers: {
+      strength: 0,
+      dexterity: 0,
+      constitution: 0,
+      intelligence: 0,
+      wisdom: 0,
+      charisma: 0,
+    },
+    combatValues: { armorClass: 10, initiativeModifier: 0, passivePerception: 10 },
+    knownSpellCanonicalIds: [],
+    weaponCanonicalIds: [],
+    magicItemCanonicalIds: [],
+    note: undefined,
   };
 }
 
-function Field({ label, children }: { label: string; children: ReactNode }) {
+function ValueLabel({ children, onClear }: { children: string; onClear?: () => void }) {
   return (
-    <label className="flex flex-col gap-1">
-      <span className="text-xs font-medium text-muted-foreground">{label}</span>
-      {children}
-    </label>
+    <div className={cn("flex w-full items-center", onClear ? "justify-between" : "justify-center")}>
+      <span className="min-w-0 truncate text-[10px] font-semibold uppercase tracking-wide text-muted-foreground">
+        {children}
+      </span>
+      {onClear && (
+        <button
+          type="button"
+          onClick={onClear}
+          aria-label={`Clear ${children}`}
+          className="inline-flex h-5 w-5 shrink-0 items-center justify-center rounded text-muted-foreground transition-colors duration-100 hover:bg-accent hover:text-foreground active:scale-90"
+        >
+          <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.5} className="h-3 w-3">
+            <line x1="18" y1="6" x2="6" y2="18" />
+            <line x1="6" y1="6" x2="18" y2="18" />
+          </svg>
+        </button>
+      )}
+    </div>
   );
 }
 
-function SectionTitle({ children }: { children: ReactNode }) {
-  return <h2 className="text-sm font-semibold text-foreground">{children}</h2>;
+function NumberCell({
+  label,
+  value,
+  min,
+  max,
+  format,
+  onChange,
+  onClear,
+}: {
+  label: string;
+  value: number;
+  min: number;
+  max: number;
+  format?: (value: number) => string;
+  onChange: (value: number) => void;
+  onClear?: () => void;
+}) {
+  return (
+    <div className="flex min-w-0 flex-col gap-1.5 rounded-lg border border-border bg-background px-1.5 py-2">
+      <ValueLabel onClear={onClear}>{label}</ValueLabel>
+      <Stepper value={value} min={min} max={max} onChange={onChange} label={label} format={format} />
+    </div>
+  );
 }
 
-function RefRow({ canonicalId, onRemove }: { canonicalId: string; onRemove: (id: string) => void }) {
-  const ref = entityRefFromCanonicalId(canonicalId);
-  if (!ref) return null;
+function OptionalNumberCell({
+  label,
+  value,
+  min,
+  max,
+  format,
+  initial,
+  onCommit,
+}: {
+  label: string;
+  value: number | undefined;
+  min: number;
+  max: number;
+  format?: (value: number) => string;
+  initial: number;
+  onCommit: (value: number | undefined) => void;
+}) {
+  if (value === undefined) {
+    return (
+      <div className="flex min-w-0 flex-col items-center gap-1.5 rounded-lg border border-dashed border-border bg-background px-1.5 py-2">
+        <ValueLabel>{label}</ValueLabel>
+        <button
+          type="button"
+          onClick={() => onCommit(initial)}
+          aria-label={`Set ${label}`}
+          className="flex h-9 w-full select-none items-center justify-center rounded-md border border-border bg-background text-base font-semibold text-muted-foreground transition-all duration-100 hover:border-border-strong hover:text-foreground active:scale-95"
+        >
+          <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.5} className="h-4 w-4">
+            <line x1="12" y1="5" x2="12" y2="19" />
+            <line x1="5" y1="12" x2="19" y2="12" />
+          </svg>
+        </button>
+      </div>
+    );
+  }
   return (
-    <EntityReferenceRow
-      canonicalId={canonicalId}
-      subtitle={ref.subtitle}
-      showBadge={false}
-      asLink={false}
-      className="border-b border-border py-2"
-      action={<RowRemoveButton label={`Remove ${ref.name}`} onClick={() => onRemove(canonicalId)} />}
+    <NumberCell
+      label={label}
+      value={value}
+      min={min}
+      max={max}
+      format={format}
+      onChange={(next) => onCommit(next)}
+      onClear={() => onCommit(undefined)}
     />
   );
 }
@@ -197,9 +241,9 @@ function AddButton({ onClick, label }: { onClick: () => void; label: string }) {
     <button
       type="button"
       onClick={onClick}
-      className="touch-target flex items-center justify-center gap-1 rounded-lg border border-dashed border-border px-3 py-2 text-xs text-muted-foreground transition-all duration-150 hover:bg-accent active:bg-accent/80 active:scale-95"
+      className="touch-target inline-flex items-center justify-center gap-1 rounded-lg border border-dashed border-border px-2.5 py-1 text-xs text-muted-foreground transition-all duration-150 hover:bg-accent active:bg-accent/80 active:scale-95"
     >
-      <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} className="h-3.5 w-3.5">
+      <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} className="h-3 w-3">
         <line x1="12" y1="5" x2="12" y2="19" />
         <line x1="5" y1="12" x2="19" y2="12" />
       </svg>
@@ -208,358 +252,325 @@ function AddButton({ onClick, label }: { onClick: () => void; label: string }) {
   );
 }
 
-function memberChips(member: PartyMember): string[] {
-  const chips: string[] = [];
-  const armor = armorLabel(member.equippedArmorCanonicalId);
-  if (armor) chips.push(armor);
-  if (member.knownSpellCanonicalIds.length > 0) {
-    chips.push(`${member.knownSpellCanonicalIds.length} spell${member.knownSpellCanonicalIds.length === 1 ? "" : "s"}`);
-  }
-  if (member.equippedWeaponCanonicalIds.length > 0) {
-    chips.push(`${member.equippedWeaponCanonicalIds.length} weapon${member.equippedWeaponCanonicalIds.length === 1 ? "" : "s"}`);
-  }
-  if (member.equippedMagicItemCanonicalIds.length > 0) {
-    chips.push(`${member.equippedMagicItemCanonicalIds.length} magic item${member.equippedMagicItemCanonicalIds.length === 1 ? "" : "s"}`);
-  }
-  return chips;
+function ReferenceRow({ canonicalId, onRemove }: { canonicalId: string; onRemove: (id: string) => void }) {
+  const ref = entityRefFromCanonicalId(canonicalId);
+  if (!ref) return null;
+  return (
+    <div className="animate-fade-in">
+      <EntityReferenceRow
+        canonicalId={canonicalId}
+        subtitle={ref.subtitle}
+        showBadge={false}
+        className="border-b border-border py-2"
+        action={<RowRemoveButton label={`Remove ${ref.name}`} onClick={() => onRemove(canonicalId)} />}
+      />
+    </div>
+  );
 }
 
-export function PartyPage() {
-  const party = usePartyMembers();
-  const [editingId, setEditingId] = useState<string | null>(null);
-  const [draft, setDraft] = useState<MemberDraft>(EMPTY_DRAFT);
+function ReferenceGroup({
+  title,
+  ids,
+  onAdd,
+  onRemove,
+}: {
+  title: string;
+  ids: string[];
+  onAdd: () => void;
+  onRemove: (canonicalId: string) => void;
+}) {
+  return (
+    <div className="flex flex-col gap-1.5">
+      <div className="flex items-center justify-between gap-2">
+        <span className="text-[10px] font-semibold uppercase tracking-wide text-muted-foreground">{title}</span>
+        <AddButton label="Add" onClick={onAdd} />
+      </div>
+      {ids.length === 0 ? (
+        <p className="text-xs text-foreground-subtle">None</p>
+      ) : (
+        <div className="flex flex-col">
+          {ids.map((canonicalId) => (
+            <ReferenceRow key={canonicalId} canonicalId={canonicalId} onRemove={onRemove} />
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
+function PlayerReferenceCard({ reference, autoEditName }: { reference: PlayerReference; autoEditName: boolean }) {
+  const [editing, setEditing] = useState<"name" | "note" | null>(autoEditName ? "name" : null);
+  const [draft, setDraft] = useState("");
   const [picker, setPicker] = useState<PickerKind | null>(null);
 
   const candidates = useMemo(() => (picker ? buildCandidates(picker) : []), [picker]);
-  const editingMember = editingId ? party.find((m) => m.id === editingId) : undefined;
-  const canSave = draft.name.trim().length > 0 && draft.class.trim().length > 0;
 
-  const handleStartCreate = useCallback(() => {
-    setEditingId(null);
-    setDraft(EMPTY_DRAFT);
-  }, []);
-
-  const handleEdit = useCallback((member: PartyMember) => {
-    setEditingId(member.id);
-    setDraft(draftFromMember(member));
-  }, []);
-
-  const handleCancel = useCallback(() => {
-    setEditingId(null);
-    setDraft(EMPTY_DRAFT);
-  }, []);
-
-  const handleDelete = useCallback(() => {
-    if (!editingId) return;
-    userStore.getState().removePartyMember(editingId);
-    setEditingId(null);
-    setDraft(EMPTY_DRAFT);
-  }, [editingId]);
-
-  const handleSave = useCallback(
-    (e: FormEvent) => {
-      e.preventDefault();
-      if (!canSave) return;
-      const parsePassive = (s: string): number | undefined => {
-        const t = s.trim();
-        if (t === "") return undefined;
-        const n = Math.floor(Number(t));
-        return Number.isFinite(n) ? Math.max(0, n) : undefined;
-      };
-      const data: Omit<PartyMember, "id"> = {
-        name: draft.name.trim(),
-        class: draft.class.trim(),
-        level: Math.max(1, Math.min(20, Math.floor(Number(draft.level) || 1))),
-        race: draft.race.trim() || undefined,
-        subclass: draft.subclass.trim() || undefined,
-        passivePerception: parsePassive(draft.passivePerception),
-        passiveInsight: parsePassive(draft.passiveInsight),
-        passiveInvestigation: parsePassive(draft.passiveInvestigation),
-        notes: draft.notes.trim() || undefined,
-        knownSpellCanonicalIds: [...draft.knownSpellCanonicalIds],
-        equippedArmorCanonicalId: draft.equippedArmorCanonicalId,
-        equippedWeaponCanonicalIds: [...draft.equippedWeaponCanonicalIds],
-        equippedMagicItemCanonicalIds: [...draft.equippedMagicItemCanonicalIds],
-      };
-      if (editingId) {
-        userStore.getState().updatePartyMember(editingId, data);
-      } else {
-        userStore.getState().addPartyMember(data);
-      }
-      setEditingId(null);
-      setDraft(EMPTY_DRAFT);
+  const update = useCallback(
+    (data: PlayerReferenceUpdate) => {
+      userStore.getState().updatePlayerReference(reference.id, data);
     },
-    [draft, editingId, canSave],
+    [reference.id],
   );
 
-  const handlePickerSelect = useCallback(
-    (canonicalId: string) => {
-      if (!picker) return;
-      setDraft((d) => {
-        switch (picker) {
-          case "spell":
-            if (d.knownSpellCanonicalIds.includes(canonicalId)) return d;
-            return { ...d, knownSpellCanonicalIds: [...d.knownSpellCanonicalIds, canonicalId] };
-          case "armor":
-            return { ...d, equippedArmorCanonicalId: canonicalId };
-          case "weapon":
-            if (d.equippedWeaponCanonicalIds.includes(canonicalId)) return d;
-            return { ...d, equippedWeaponCanonicalIds: [...d.equippedWeaponCanonicalIds, canonicalId] };
-          case "magicitem":
-            if (d.equippedMagicItemCanonicalIds.includes(canonicalId)) return d;
-            return { ...d, equippedMagicItemCanonicalIds: [...d.equippedMagicItemCanonicalIds, canonicalId] };
+  const startEdit = useCallback(
+    (field: "name" | "note") => {
+      setDraft(field === "name" ? reference.name : reference.note ?? "");
+      setEditing(field);
+    },
+    [reference],
+  );
+
+  const commitText = useCallback(
+    (field: "name" | "note", raw: string) => {
+      update(field === "name" ? { name: raw } : { note: raw });
+      setEditing(null);
+    },
+    [update],
+  );
+
+  const addReference = useCallback(
+    (kind: PickerKind, canonicalId: string) => {
+      if (kind === "spell") {
+        if (!reference.knownSpellCanonicalIds.includes(canonicalId)) {
+          update({ knownSpellCanonicalIds: [...reference.knownSpellCanonicalIds, canonicalId] });
         }
-      });
+      } else if (kind === "weapon") {
+        if (!reference.weaponCanonicalIds.includes(canonicalId)) {
+          update({ weaponCanonicalIds: [...reference.weaponCanonicalIds, canonicalId] });
+        }
+      } else if (!reference.magicItemCanonicalIds.includes(canonicalId)) {
+        update({ magicItemCanonicalIds: [...reference.magicItemCanonicalIds, canonicalId] });
+      }
       setPicker(null);
     },
-    [picker],
+    [reference, update],
   );
 
-  const handleRemoveSpell = useCallback((id: string) => {
-    setDraft((d) => ({ ...d, knownSpellCanonicalIds: d.knownSpellCanonicalIds.filter((x) => x !== id) }));
-  }, []);
+  const removeReference = useCallback(
+    (kind: PickerKind, canonicalId: string) => {
+      if (kind === "spell") {
+        update({ knownSpellCanonicalIds: reference.knownSpellCanonicalIds.filter((x) => x !== canonicalId) });
+      } else if (kind === "weapon") {
+        update({ weaponCanonicalIds: reference.weaponCanonicalIds.filter((x) => x !== canonicalId) });
+      } else {
+        update({ magicItemCanonicalIds: reference.magicItemCanonicalIds.filter((x) => x !== canonicalId) });
+      }
+    },
+    [reference, update],
+  );
 
-  const handleRemoveWeapon = useCallback((id: string) => {
-    setDraft((d) => ({ ...d, equippedWeaponCanonicalIds: d.equippedWeaponCanonicalIds.filter((x) => x !== id) }));
-  }, []);
+  const removePlayer = useCallback(() => {
+    userStore.getState().removePlayerReference(reference.id);
+  }, [reference.id]);
 
-  const handleRemoveMagicItem = useCallback((id: string) => {
-    setDraft((d) => ({ ...d, equippedMagicItemCanonicalIds: d.equippedMagicItemCanonicalIds.filter((x) => x !== id) }));
-  }, []);
+  const hasSpell =
+    reference.knownSpellCanonicalIds.length > 0 ||
+    reference.combatValues.spellSaveDc !== undefined ||
+    reference.combatValues.spellAttackBonus !== undefined;
 
-  if (editingId || editingMember) {
-    return (
-      <div className="flex flex-col px-4 py-6">
-        <div className="mb-6 flex items-center justify-between">
-          <div>
-            <h1 className="text-xl font-bold text-foreground">{editingId ? "Edit Member" : "Add Member"}</h1>
-            <p className="text-xs text-muted-foreground">Reference compendium entries, never duplicated.</p>
-          </div>
-          <button
-            type="button"
-            onClick={handleCancel}
-            className="touch-target rounded-lg border border-border px-3 py-1.5 text-xs text-muted-foreground transition-all duration-150 hover:bg-accent active:scale-90"
-          >
-            Cancel
-          </button>
-        </div>
+  const subclassOptions = reference.class ? (SUBCLASSES[reference.class] ?? []) : [];
 
-        <form onSubmit={handleSave} className="flex flex-col gap-6">
-          <section className="flex flex-col gap-3">
-            <SectionTitle>Identity</SectionTitle>
-            <div className="grid grid-cols-1 gap-3">
-              <Field label="Name *">
-                <input
-                  type="text"
-                  value={draft.name}
-                  onChange={(e) => setDraft((d) => ({ ...d, name: e.target.value }))}
-                  placeholder="e.g. Lyra"
-                  autoComplete="off"
-                  className={inputClass}
-                />
-              </Field>
-              <div className="grid grid-cols-2 gap-3">
-                <Field label="Class *">
-                  <input
-                    type="text"
-                    list="class-options"
-                    value={draft.class}
-                    onChange={(e) => setDraft((d) => ({ ...d, class: e.target.value }))}
-                    placeholder="e.g. Wizard"
-                    autoComplete="off"
-                    className={inputClass}
-                  />
-                </Field>
-                <Field label="Level">
-                  <input
-                    type="number"
-                    min={1}
-                    max={20}
-                    value={draft.level}
-                    onChange={(e) => setDraft((d) => ({ ...d, level: e.target.value }))}
-                    className={inputClass}
-                  />
-                </Field>
-              </div>
-              <div className="grid grid-cols-2 gap-3">
-                <Field label="Race">
-                  <input
-                    type="text"
-                    list="race-options"
-                    value={draft.race}
-                    onChange={(e) => setDraft((d) => ({ ...d, race: e.target.value }))}
-                    placeholder="e.g. High Elf"
-                    autoComplete="off"
-                    className={inputClass}
-                  />
-                </Field>
-                <Field label="Subclass">
-                  <input
-                    type="text"
-                    value={draft.subclass}
-                    onChange={(e) => setDraft((d) => ({ ...d, subclass: e.target.value }))}
-                    placeholder="e.g. Evocation"
-                    autoComplete="off"
-                    className={inputClass}
-                  />
-                </Field>
-              </div>
-            </div>
-            <datalist id="class-options">
-              {CLASS_OPTIONS.map((c) => (
-                <option key={c} value={c} />
-              ))}
-            </datalist>
-            <datalist id="race-options">
-              {RACE_OPTIONS.map((r) => (
-                <option key={r} value={r} />
-              ))}
-            </datalist>
-          </section>
-
-          <section className="flex flex-col gap-3">
-            <SectionTitle>Passive Senses</SectionTitle>
-            <div className="grid grid-cols-3 gap-3">
-              <Field label="Perception">
-                <input
-                  type="number"
-                  min={0}
-                  value={draft.passivePerception}
-                  onChange={(e) => setDraft((d) => ({ ...d, passivePerception: e.target.value }))}
-                  className={inputClass}
-                />
-              </Field>
-              <Field label="Insight">
-                <input
-                  type="number"
-                  min={0}
-                  value={draft.passiveInsight}
-                  onChange={(e) => setDraft((d) => ({ ...d, passiveInsight: e.target.value }))}
-                  className={inputClass}
-                />
-              </Field>
-              <Field label="Investigation">
-                <input
-                  type="number"
-                  min={0}
-                  value={draft.passiveInvestigation}
-                  onChange={(e) => setDraft((d) => ({ ...d, passiveInvestigation: e.target.value }))}
-                  className={inputClass}
-                />
-              </Field>
-            </div>
-          </section>
-
-          <section className="flex flex-col gap-3">
-            <SectionTitle>Known Spells</SectionTitle>
-            {draft.knownSpellCanonicalIds.length === 0 ? (
-              <p className="text-xs text-muted-foreground">None</p>
-            ) : (
-              <div className="flex flex-col">
-                {draft.knownSpellCanonicalIds.map((id) => (
-                  <RefRow key={id} canonicalId={id} onRemove={handleRemoveSpell} />
-                ))}
-              </div>
-            )}
-            <AddButton label="Add Spell" onClick={() => setPicker("spell")} />
-          </section>
-
-          <section className="flex flex-col gap-3">
-            <SectionTitle>Armor</SectionTitle>
-            {draft.equippedArmorCanonicalId ? (() => {
-              const armorId = draft.equippedArmorCanonicalId;
-              const ref = entityRefFromCanonicalId(armorId);
-              if (!ref) return <p className="text-xs text-muted-foreground">None</p>;
-              return (
-                <EntityReferenceRow
-                  canonicalId={armorId}
-                  subtitle={armorLabel(armorId) ?? ref.subtitle}
-                  showBadge={false}
-                  asLink={false}
-                  className="rounded-lg border border-border bg-surface p-3"
-                  action={
-                    <RowRemoveButton
-                      label={`Remove ${ref.name}`}
-                      onClick={() => setDraft((d) => ({ ...d, equippedArmorCanonicalId: undefined }))}
-                    />
-                  }
-                />
-              );
-            })() : (
-              <p className="text-xs text-muted-foreground">None</p>
-            )}
-            <AddButton label={draft.equippedArmorCanonicalId ? "Change Armor" : "Add Armor"} onClick={() => setPicker("armor")} />
-          </section>
-
-          <section className="flex flex-col gap-3">
-            <SectionTitle>Weapons</SectionTitle>
-            {draft.equippedWeaponCanonicalIds.length === 0 ? (
-              <p className="text-xs text-muted-foreground">None</p>
-            ) : (
-              <div className="flex flex-col">
-                {draft.equippedWeaponCanonicalIds.map((id) => (
-                  <RefRow key={id} canonicalId={id} onRemove={handleRemoveWeapon} />
-                ))}
-              </div>
-            )}
-            <AddButton label="Add Weapon" onClick={() => setPicker("weapon")} />
-          </section>
-
-          <section className="flex flex-col gap-3">
-            <SectionTitle>Magic Items</SectionTitle>
-            {draft.equippedMagicItemCanonicalIds.length === 0 ? (
-              <p className="text-xs text-muted-foreground">None</p>
-            ) : (
-              <div className="flex flex-col">
-                {draft.equippedMagicItemCanonicalIds.map((id) => (
-                  <RefRow key={id} canonicalId={id} onRemove={handleRemoveMagicItem} />
-                ))}
-              </div>
-            )}
-            <AddButton label="Add Magic Item" onClick={() => setPicker("magicitem")} />
-          </section>
-
-          <section className="flex flex-col gap-3">
-            <SectionTitle>Notes</SectionTitle>
-            <textarea
-              value={draft.notes}
-              onChange={(e) => setDraft((d) => ({ ...d, notes: e.target.value }))}
-              placeholder="Anything you want to remember about this character."
-              rows={3}
-              className={inputClass}
+  return (
+    <div className="flex flex-col gap-4 rounded-lg border border-border bg-surface p-4 animate-slide-up">
+      <div className="flex items-start justify-between gap-2">
+        <div className="min-w-0 flex-1">
+          {editing === "name" ? (
+            <InlineTextEditor
+              value={draft}
+              onChange={setDraft}
+              onSave={(value) => commitText("name", value)}
+              onCancel={() => setEditing(null)}
+              className="text-base font-bold"
             />
-          </section>
-
-          {editingId && (
+          ) : (
             <button
               type="button"
-              onClick={handleDelete}
-              className="touch-target rounded-lg border border-destructive/50 px-3 py-2 text-xs text-destructive transition-all duration-150 hover:bg-destructive/10 active:scale-95"
+              onClick={() => startEdit("name")}
+              className="-mx-1 rounded-md px-1 text-base font-bold text-foreground transition-colors duration-150 hover:bg-accent/50 active:bg-accent/80"
             >
-              Remove Member
+              {reference.name}
             </button>
           )}
+          <div className="mt-1.5 flex flex-wrap items-center gap-x-2 gap-y-2">
+            <SelectField
+              value={reference.class}
+              options={CLASSES}
+              onChange={(value) => update({ class: value })}
+              ariaLabel="Class"
+              placeholder="Class"
+            />
+            <SelectField
+              value={reference.subclass ?? ""}
+              options={subclassOptions}
+              onChange={(value) => update({ subclass: value || undefined })}
+              ariaLabel="Subclass"
+              placeholder="Subclass"
+              className="max-w-44"
+            />
+            <div className="flex items-center gap-1">
+              <span className="text-xs font-medium uppercase tracking-wide text-muted-foreground">Lv</span>
+              <Stepper
+                value={reference.level}
+                min={1}
+                max={20}
+                onChange={(value) => update({ level: value })}
+                label="Level"
+                className="w-32"
+              />
+            </div>
+          </div>
+        </div>
+        <button
+          type="button"
+          onClick={removePlayer}
+          aria-label={`Remove ${reference.name}`}
+          className="hitbox-expand inline-flex h-8 w-8 shrink-0 items-center justify-center rounded text-muted-foreground transition-all duration-150 hover:bg-accent hover:text-foreground active:scale-90 active:bg-accent/80"
+        >
+          <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} className="h-4 w-4">
+            <path d="M3 6h18" />
+            <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6" />
+            <path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />
+            <line x1="10" y1="11" x2="10" y2="17" />
+            <line x1="14" y1="11" x2="14" y2="17" />
+          </svg>
+        </button>
+      </div>
 
-          <button
-            type="submit"
-            disabled={!canSave}
-            className="sticky bottom-4 rounded-lg bg-primary py-3 text-sm font-medium text-primary-foreground transition-all duration-150 hover:bg-primary/90 active:scale-95 disabled:opacity-40 disabled:hover:bg-primary"
-          >
-            {editingId ? "Save Changes" : "Add Member"}
-          </button>
-        </form>
-
-        {picker && (
-          <ReferencePicker
-            title={PICKER_TITLES[picker]}
-            candidates={candidates}
-            onSelect={handlePickerSelect}
-            onClose={() => setPicker(null)}
-          />
+      <div className={cn("grid gap-2", hasSpell ? "grid-cols-3 sm:grid-cols-5" : "grid-cols-3")}>
+        <NumberCell
+          label="AC"
+          value={reference.combatValues.armorClass}
+          min={0}
+          max={40}
+          onChange={(value) => update({ combatValues: { armorClass: value } })}
+        />
+        <NumberCell
+          label="Init"
+          value={reference.combatValues.initiativeModifier}
+          min={-5}
+          max={20}
+          format={formatSigned}
+          onChange={(value) => update({ combatValues: { initiativeModifier: value } })}
+        />
+        <NumberCell
+          label="Perc"
+          value={reference.combatValues.passivePerception}
+          min={0}
+          max={40}
+          onChange={(value) => update({ combatValues: { passivePerception: value } })}
+        />
+        {hasSpell && (
+          <>
+            <OptionalNumberCell
+              label="DC"
+              value={reference.combatValues.spellSaveDc}
+              min={0}
+              max={40}
+              initial={10}
+              onCommit={(value) => update({ combatValues: { spellSaveDc: value } })}
+            />
+            <OptionalNumberCell
+              label="Atk"
+              value={reference.combatValues.spellAttackBonus}
+              min={-5}
+              max={20}
+              format={formatSigned}
+              initial={0}
+              onCommit={(value) => update({ combatValues: { spellAttackBonus: value } })}
+            />
+          </>
         )}
       </div>
-    );
-  }
+
+      <div className="grid grid-cols-3 gap-2 sm:grid-cols-6">
+        {ABILITY_KEYS.map((key) => (
+          <NumberCell
+            key={key}
+            label={ABILITY_LABELS[key]}
+            value={reference.abilityModifiers[key]}
+            min={-5}
+            max={10}
+            format={formatSigned}
+            onChange={(value) => update({ abilityModifiers: { [key]: value } })}
+          />
+        ))}
+      </div>
+
+      <Divider className="my-1" />
+
+      <div className="flex flex-col gap-4">
+        <ReferenceGroup
+          title="Known Spells"
+          ids={reference.knownSpellCanonicalIds}
+          onAdd={() => setPicker("spell")}
+          onRemove={(canonicalId) => removeReference("spell", canonicalId)}
+        />
+        <ReferenceGroup
+          title="Weapons"
+          ids={reference.weaponCanonicalIds}
+          onAdd={() => setPicker("weapon")}
+          onRemove={(canonicalId) => removeReference("weapon", canonicalId)}
+        />
+        <ReferenceGroup
+          title="Magic Items"
+          ids={reference.magicItemCanonicalIds}
+          onAdd={() => setPicker("magicitem")}
+          onRemove={(canonicalId) => removeReference("magicitem", canonicalId)}
+        />
+      </div>
+
+      <Divider className="my-1" />
+
+      <div className="flex flex-col gap-1">
+        <span className="text-[10px] font-semibold uppercase tracking-wide text-muted-foreground">Quick Note</span>
+        {editing === "note" ? (
+          <InlineTextareaEditor
+            value={draft}
+            onChange={setDraft}
+            onSave={(value) => commitText("note", value)}
+            onCancel={() => setEditing(null)}
+            rows={2}
+            placeholder="One quick reminder…"
+          />
+        ) : reference.note ? (
+          <button
+            type="button"
+            onClick={() => startEdit("note")}
+            className="rounded-md text-left text-sm text-foreground transition-colors duration-150 hover:bg-accent/50"
+          >
+            {reference.note}
+          </button>
+        ) : (
+          <button
+            type="button"
+            onClick={() => startEdit("note")}
+            className="rounded-md text-left text-xs text-muted-foreground transition-colors duration-150 hover:bg-accent/50"
+          >
+            Add a quick note…
+          </button>
+        )}
+      </div>
+
+      {picker && (
+        <ReferencePicker
+          title={PICKER_TITLES[picker]}
+          candidates={candidates}
+          onSelect={(canonicalId) => addReference(picker, canonicalId)}
+          onClose={() => setPicker(null)}
+        />
+      )}
+    </div>
+  );
+}
+
+export function PartyPage() {
+  const players = usePlayerReferences();
+  const [creatingId, setCreatingId] = useState<string | null>(null);
+
+  const handleAdd = useCallback(() => {
+    const id = userStore.getState().addPlayerReference(createEmptyReference());
+    setCreatingId(id);
+  }, []);
 
   return (
     <div className="flex flex-col px-4 py-6">
@@ -567,60 +578,38 @@ export function PartyPage() {
         <div>
           <h1 className="text-xl font-bold text-foreground">Party</h1>
           <p className="text-xs text-muted-foreground">
-            {party.length === 0 ? "No party members" : `${party.length} member${party.length === 1 ? "" : "s"}`}
+            {players.length === 0
+              ? "Quick access for the values you consult every session"
+              : `${players.length} reference${players.length === 1 ? "" : "s"} \u00B7 tap a value to edit`}
           </p>
         </div>
         <button
           type="button"
-          onClick={handleStartCreate}
+          onClick={handleAdd}
           className="touch-target rounded-lg bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-all duration-150 hover:bg-primary/90 active:scale-95"
         >
-          Add Member
+          Add Player
         </button>
       </div>
 
-      {party.length === 0 ? (
+      {players.length === 0 ? (
         <div className="flex flex-col items-center gap-4 rounded-lg border border-border bg-surface p-6 text-center">
           <p className="text-sm text-muted-foreground">
-            Your party is empty. Add a member and reference the spells, armor, weapons, and magic items they carry.
+            Create player quick-access references: identity, combat numbers, ability modifiers, and links to the spells, weapons, and magic items you use most. Nothing else — no inventory, no tracking.
           </p>
+          <button
+            type="button"
+            onClick={handleAdd}
+            className="touch-target rounded-lg bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-all duration-150 hover:bg-primary/90 active:scale-95"
+          >
+            Create your first reference
+          </button>
         </div>
       ) : (
-        <div className="flex flex-col">
-          {party.map((member) => {
-            const chips = memberChips(member);
-            return (
-              <button
-                key={member.id}
-                type="button"
-                onClick={() => handleEdit(member)}
-                className="flex flex-col gap-2 rounded-lg border border-border bg-surface p-4 text-left transition-all duration-150 hover:bg-accent/50 active:bg-accent/80 active:scale-[0.99]"
-              >
-                <div className="flex items-start justify-between gap-2">
-                  <div className="min-w-0">
-                    <p className="truncate text-base font-semibold text-foreground">{member.name}</p>
-                    <p className="truncate text-xs text-muted-foreground">
-                      {member.class}
-                      {member.subclass ? ` (${member.subclass})` : ""} {"\u00B7"} Level {member.level}
-                      {member.race ? ` \u00B7 ${member.race}` : ""}
-                    </p>
-                  </div>
-                  <span className="shrink-0 rounded-full border border-border px-2 py-0.5 text-xs text-muted-foreground">
-                    Lv {member.level}
-                  </span>
-                </div>
-                {chips.length > 0 && (
-                  <div className="flex flex-wrap gap-1.5">
-                    {chips.map((chip) => (
-                      <span key={chip} className="rounded-full border border-border bg-accent/50 px-2 py-0.5 text-xs text-muted-foreground">
-                        {chip}
-                      </span>
-                    ))}
-                  </div>
-                )}
-              </button>
-            );
-          })}
+        <div className="flex flex-col gap-4">
+          {players.map((player) => (
+            <PlayerReferenceCard key={player.id} reference={player} autoEditName={player.id === creatingId} />
+          ))}
         </div>
       )}
     </div>

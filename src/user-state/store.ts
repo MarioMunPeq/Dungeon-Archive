@@ -1,6 +1,6 @@
 import { create } from "zustand";
 import { useMemo } from "react";
-import type { Adventure, PartyMember, UserState } from "./types";
+import type { AbilityModifiers, Adventure, CombatValues, PlayerReference, UserState } from "./types";
 import { STORAGE_KEY, CURRENT_VERSION } from "./types";
 import { read, write } from "./persistence";
 import { migrate } from "./migrations";
@@ -18,10 +18,17 @@ interface AdventureActions {
   setActiveAdventure: (id: string | null) => void;
 }
 
-interface PartyActions {
-  addPartyMember: (data: Omit<PartyMember, "id">) => void;
-  updatePartyMember: (id: string, data: Partial<Omit<PartyMember, "id">>) => void;
-  removePartyMember: (id: string) => void;
+export type PlayerReferenceUpdate = Partial<
+  Omit<PlayerReference, "id" | "abilityModifiers" | "combatValues">
+> & {
+  abilityModifiers?: Partial<AbilityModifiers>;
+  combatValues?: Partial<CombatValues>;
+};
+
+interface PlayerActions {
+  addPlayerReference: (data: Omit<PlayerReference, "id">) => string;
+  updatePlayerReference: (id: string, data: PlayerReferenceUpdate) => void;
+  removePlayerReference: (id: string) => void;
 }
 
 interface UserActions {
@@ -36,12 +43,42 @@ interface UserActions {
   _reset: () => void;
 }
 
-export type UserStore = UserState & UserActions & AdventureActions & PartyActions & {
+export type UserStore = UserState & UserActions & AdventureActions & PlayerActions & {
   favoritesSet: Set<string>;
   sessionSet: Set<string>;
   adventureEntitySet: Set<string>;
   _hasHydrated: boolean;
 };
+
+function clampInt(value: number, min: number, max: number): number {
+  return Math.max(min, Math.min(max, Math.floor(value)));
+}
+
+const clampLevel = (value: number): number => clampInt(value, 1, 20);
+const clampModifier = (value: number): number => clampInt(value, -5, 10);
+const clampCombat = (value: number): number => clampInt(value, 0, 40);
+const clampInitiative = (value: number): number => clampInt(value, -5, 20);
+
+function clampAbilityModifiers(mods: AbilityModifiers): AbilityModifiers {
+  return {
+    strength: clampModifier(mods.strength),
+    dexterity: clampModifier(mods.dexterity),
+    constitution: clampModifier(mods.constitution),
+    intelligence: clampModifier(mods.intelligence),
+    wisdom: clampModifier(mods.wisdom),
+    charisma: clampModifier(mods.charisma),
+  };
+}
+
+function clampCombatValues(values: CombatValues): CombatValues {
+  return {
+    armorClass: clampCombat(values.armorClass),
+    initiativeModifier: clampInitiative(values.initiativeModifier),
+    passivePerception: clampCombat(values.passivePerception),
+    spellSaveDc: values.spellSaveDc !== undefined ? clampCombat(values.spellSaveDc) : undefined,
+    spellAttackBonus: values.spellAttackBonus !== undefined ? clampInitiative(values.spellAttackBonus) : undefined,
+  };
+}
 
 function moveToFront<T>(arr: T[], item: T, max: number): T[] {
   const filtered = arr.filter((x) => x !== item);
@@ -78,8 +115,8 @@ function schedulePersist(getState: () => UserStore): void {
   if (debounceTimer !== null) clearTimeout(debounceTimer);
   debounceTimer = setTimeout(() => {
     debounceTimer = null;
-    const { version, favorites, recentEntities, recentSearches, session, adventures, activeAdventureId, party } = getState();
-    write({ version, favorites, recentEntities, recentSearches, session, adventures, activeAdventureId, party });
+    const { version, favorites, recentEntities, recentSearches, session, adventures, activeAdventureId, players } = getState();
+    write({ version, favorites, recentEntities, recentSearches, session, adventures, activeAdventureId, players });
   }, 150);
 }
 
@@ -111,7 +148,7 @@ export const userStore = create<UserStore>((set, get) => ({
   adventures: [],
   activeAdventureId: null,
   adventureEntitySet: new Set<string>(),
-  party: [],
+  players: [],
   _hasHydrated: false,
 
   toggleFavorite: (canonicalId) => {
@@ -324,53 +361,65 @@ export const userStore = create<UserStore>((set, get) => ({
     schedulePersist(get);
   },
 
-  addPartyMember: (data) => {
+  addPlayerReference: (data) => {
+    const id = generateId();
     set((s) => {
-      const member: PartyMember = {
-        id: generateId(),
+      const reference: PlayerReference = {
+        id,
         name: data.name.trim(),
         class: data.class.trim(),
-        level: Math.max(1, Math.min(20, Math.floor(data.level))),
-        race: data.race?.trim() || undefined,
+        level: clampLevel(data.level),
         subclass: data.subclass?.trim() || undefined,
-        passivePerception: data.passivePerception,
-        passiveInsight: data.passiveInsight,
-        passiveInvestigation: data.passiveInvestigation,
-        notes: data.notes?.trim() || undefined,
+        abilityModifiers: clampAbilityModifiers(data.abilityModifiers),
+        combatValues: clampCombatValues(data.combatValues),
         knownSpellCanonicalIds: [...data.knownSpellCanonicalIds],
-        equippedArmorCanonicalId: data.equippedArmorCanonicalId,
-        equippedWeaponCanonicalIds: [...data.equippedWeaponCanonicalIds],
-        equippedMagicItemCanonicalIds: [...data.equippedMagicItemCanonicalIds],
+        weaponCanonicalIds: [...data.weaponCanonicalIds],
+        magicItemCanonicalIds: [...data.magicItemCanonicalIds],
+        note: data.note?.trim() || undefined,
       };
-      return { party: [...s.party, member] };
+      return { players: [...s.players, reference] };
     });
     schedulePersist(get);
+    return id;
   },
 
-  updatePartyMember: (id, data) => {
+  updatePlayerReference: (id, data) => {
     set((s) => {
-      const idx = s.party.findIndex((m) => m.id === id);
+      const idx = s.players.findIndex((p) => p.id === id);
       if (idx === -1) return s;
-      const current = s.party[idx]!;
-      const updated: PartyMember = {
+      const current = s.players[idx]!;
+      const updated: PlayerReference = {
         ...current,
         ...data,
-        level: data.level !== undefined ? Math.max(1, Math.min(20, Math.floor(data.level))) : current.level,
         name: data.name !== undefined ? data.name.trim() || current.name : current.name,
         class: data.class !== undefined ? data.class.trim() || current.class : current.class,
-        race: data.race !== undefined ? data.race.trim() || undefined : current.race,
+        level: data.level !== undefined ? clampLevel(data.level) : current.level,
         subclass: data.subclass !== undefined ? data.subclass.trim() || undefined : current.subclass,
-        notes: data.notes !== undefined ? data.notes.trim() || undefined : current.notes,
+        abilityModifiers:
+          data.abilityModifiers !== undefined
+            ? clampAbilityModifiers({ ...current.abilityModifiers, ...data.abilityModifiers })
+            : current.abilityModifiers,
+        combatValues:
+          data.combatValues !== undefined
+            ? clampCombatValues({ ...current.combatValues, ...data.combatValues })
+            : current.combatValues,
+        knownSpellCanonicalIds:
+          data.knownSpellCanonicalIds !== undefined ? [...data.knownSpellCanonicalIds] : current.knownSpellCanonicalIds,
+        weaponCanonicalIds:
+          data.weaponCanonicalIds !== undefined ? [...data.weaponCanonicalIds] : current.weaponCanonicalIds,
+        magicItemCanonicalIds:
+          data.magicItemCanonicalIds !== undefined ? [...data.magicItemCanonicalIds] : current.magicItemCanonicalIds,
+        note: data.note !== undefined ? data.note.trim() || undefined : current.note,
       };
-      const party = [...s.party];
-      party[idx] = updated;
-      return { party };
+      const players = [...s.players];
+      players[idx] = updated;
+      return { players };
     });
     schedulePersist(get);
   },
 
-  removePartyMember: (id) => {
-    set((s) => ({ party: s.party.filter((m) => m.id !== id) }));
+  removePlayerReference: (id) => {
+    set((s) => ({ players: s.players.filter((p) => p.id !== id) }));
     schedulePersist(get);
   },
 
@@ -386,7 +435,7 @@ export const userStore = create<UserStore>((set, get) => ({
       adventures: state.adventures,
       activeAdventureId: state.activeAdventureId,
       adventureEntitySet: updateActiveAdventureSet(state.adventures, state.activeAdventureId),
-      party: state.party,
+      players: state.players,
     });
   },
 
@@ -402,7 +451,7 @@ export const userStore = create<UserStore>((set, get) => ({
       adventures: [],
       activeAdventureId: null,
       adventureEntitySet: new Set<string>(),
-      party: [],
+      players: [],
       _hasHydrated: false,
     });
   },
@@ -457,8 +506,8 @@ export function useRecentSearches(limit = 5): string[] {
   return useMemo(() => recentSearches.slice(0, limit), [recentSearches, limit]);
 }
 
-export function usePartyMembers(): PartyMember[] {
-  return userStore((s) => s.party);
+export function usePlayerReferences(): PlayerReference[] {
+  return userStore((s) => s.players);
 }
 
 function processPersistedState(state: UserState): UserState {
@@ -470,7 +519,7 @@ function processPersistedState(state: UserState): UserState {
     session: validateIds(state.session),
     adventures: state.adventures,
     activeAdventureId: state.activeAdventureId,
-    party: state.party,
+    players: state.players,
   };
   return normalize(validated);
 }
@@ -492,7 +541,7 @@ function adventuresEqual(a: Adventure[], b: Adventure[]): boolean {
   return true;
 }
 
-function partyEqual(a: PartyMember[], b: PartyMember[]): boolean {
+function playersEqual(a: PlayerReference[], b: PlayerReference[]): boolean {
   if (a.length !== b.length) return false;
   for (let i = 0; i < a.length; i++) {
     if (a[i]!.id !== b[i]!.id || a[i]!.name !== b[i]!.name || a[i]!.level !== b[i]!.level) return false;
@@ -510,7 +559,7 @@ function replaceState(state: UserState): void {
     arraysEqual(current.session, state.session) &&
     current.activeAdventureId === state.activeAdventureId &&
     adventuresEqual(current.adventures, state.adventures) &&
-    partyEqual(current.party, state.party)
+    playersEqual(current.players, state.players)
   ) {
     return;
   }

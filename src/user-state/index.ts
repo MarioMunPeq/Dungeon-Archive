@@ -17,9 +17,9 @@ export {
   useSessionIds,
   useRecentEntities,
   useRecentSearches,
-  usePartyMembers,
+  usePlayerReferences,
 } from "./store";
-export type { UserStore } from "./store";
-export type { UserState, Adventure, PartyMember } from "./types";
+export type { UserStore, PlayerReferenceUpdate } from "./store";
+export type { UserState, Adventure, PlayerReference, AbilityModifiers, CombatValues } from "./types";
 export { STORAGE_KEY, CURRENT_VERSION } from "./types";
 export { normalize } from "./normalize";

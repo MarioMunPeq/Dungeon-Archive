@@ -1,5 +1,39 @@
-import type { Adventure, PartyMember, UserState } from "./types";
+import type { Adventure, PlayerReference, UserState } from "./types";
 import { CURRENT_VERSION, createDefaultState } from "./types";
+
+function legacyMemberToPlayerReference(raw: unknown): Record<string, unknown> | null {
+  if (!raw || typeof raw !== "object") return null;
+  const m = raw as Record<string, unknown>;
+  const name = typeof m.name === "string" ? m.name.trim() : "";
+  if (!name) return null;
+
+  return {
+    id: typeof m.id === "string" && m.id ? m.id : undefined,
+    name,
+    class: typeof m.class === "string" ? m.class.trim() : "",
+    level: typeof m.level === "number" ? m.level : 1,
+    subclass:
+      typeof m.subclass === "string" && m.subclass.trim() ? m.subclass.trim() : undefined,
+    abilityModifiers: {
+      strength: 0,
+      dexterity: 0,
+      constitution: 0,
+      intelligence: 0,
+      wisdom: 0,
+      charisma: 0,
+    },
+    combatValues: {
+      armorClass: 10,
+      initiativeModifier: 0,
+      passivePerception:
+        typeof m.passivePerception === "number" ? m.passivePerception : 10,
+    },
+    knownSpellCanonicalIds: Array.isArray(m.knownSpellCanonicalIds) ? m.knownSpellCanonicalIds : [],
+    weaponCanonicalIds: Array.isArray(m.equippedWeaponCanonicalIds) ? m.equippedWeaponCanonicalIds : [],
+    magicItemCanonicalIds: Array.isArray(m.equippedMagicItemCanonicalIds) ? m.equippedMagicItemCanonicalIds : [],
+    note: typeof m.notes === "string" && m.notes.trim() ? m.notes.trim() : undefined,
+  };
+}
 
 const migrations: Record<number, (state: Record<string, unknown>) => Record<string, unknown>> = {
   1: (raw) => ({
@@ -49,6 +83,18 @@ const migrations: Record<number, (state: Record<string, unknown>) => Record<stri
       adventures,
     };
   },
+  7: (raw) => {
+    const party = Array.isArray(raw.party) ? raw.party : [];
+    const players = party
+      .map(legacyMemberToPlayerReference)
+      .filter((p): p is Record<string, unknown> => p !== null);
+    const { party: _legacy, ...rest } = raw;
+    return {
+      ...rest,
+      version: 7,
+      players,
+    };
+  },
 };
 
 export function migrate(raw: unknown): UserState {
@@ -76,6 +122,9 @@ export function migrate(raw: unknown): UserState {
   if (version < 6) {
     migrated = migrations[6]!(migrated);
   }
+  if (version < 7) {
+    migrated = migrations[7]!(migrated);
+  }
 
   const result = migrated as unknown as Record<string, unknown>;
   if (
@@ -95,6 +144,6 @@ export function migrate(raw: unknown): UserState {
     session: result.session as string[],
     adventures: Array.isArray(result.adventures) ? (result.adventures as Adventure[]) : [],
     activeAdventureId: typeof result.activeAdventureId === "string" ? result.activeAdventureId : null,
-    party: Array.isArray(result.party) ? (result.party as PartyMember[]) : [],
+    players: Array.isArray(result.players) ? (result.players as PlayerReference[]) : [],
   };
 }

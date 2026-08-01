@@ -87,7 +87,7 @@ During combat, waits are felt in rounds. Stat blocks, conditions, and spell look
 The user layer holds only lightweight context:
 
 - Adventure: title, description, objectives, notes, pinned references, archive status.
-- Party member: name, class, level, race, subclass, passive senses, known spells, equipped items (as references), notes.
+- Party (player reference): name, class, level, subclass, ability modifiers, quick combat values (AC, initiative, passive perception, spell DC/attack), known spells, weapons, magic items (as references), one quick note.
 - Session: a list of pinned entity references and the DM's session history.
 
 Nothing heavier. No inventories, no XP tracking, no worldbuilding.

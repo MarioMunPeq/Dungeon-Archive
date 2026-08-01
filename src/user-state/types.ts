@@ -1,22 +1,38 @@
 /**
+ * Player Quick Access — a fast-consultation reference, not a character sheet.
+ * Only repeatedly-consulted combat values and references are stored.
  * Only canonical IDs are stored, never full entity data.
  * The Compendium is the source of truth for entity resolution.
  */
-export interface PartyMember {
+export interface AbilityModifiers {
+  readonly strength: number;
+  readonly dexterity: number;
+  readonly constitution: number;
+  readonly intelligence: number;
+  readonly wisdom: number;
+  readonly charisma: number;
+}
+
+export interface CombatValues {
+  readonly armorClass: number;
+  readonly initiativeModifier: number;
+  readonly passivePerception: number;
+  readonly spellSaveDc?: number;
+  readonly spellAttackBonus?: number;
+}
+
+export interface PlayerReference {
   readonly id: string;
   readonly name: string;
   readonly class: string;
   readonly level: number;
-  readonly race?: string;
   readonly subclass?: string;
-  readonly passivePerception?: number;
-  readonly passiveInsight?: number;
-  readonly passiveInvestigation?: number;
-  readonly notes?: string;
+  readonly abilityModifiers: AbilityModifiers;
+  readonly combatValues: CombatValues;
   readonly knownSpellCanonicalIds: string[];
-  readonly equippedArmorCanonicalId?: string;
-  readonly equippedWeaponCanonicalIds: string[];
-  readonly equippedMagicItemCanonicalIds: string[];
+  readonly weaponCanonicalIds: string[];
+  readonly magicItemCanonicalIds: string[];
+  readonly note?: string;
 }
 
 export interface Adventure {
@@ -39,11 +55,11 @@ export interface UserState {
   readonly session: string[];
   readonly adventures: Adventure[];
   readonly activeAdventureId: string | null;
-  readonly party: PartyMember[];
+  readonly players: PlayerReference[];
 }
 
 export const STORAGE_KEY = "dungeon:userState:v1";
-export const CURRENT_VERSION = 6;
+export const CURRENT_VERSION = 7;
 
 export function createDefaultState(): UserState {
   return {
@@ -54,6 +70,6 @@ export function createDefaultState(): UserState {
     session: [],
     adventures: [],
     activeAdventureId: null,
-    party: [],
+    players: [],
   };
 }

@@ -1,4 +1,4 @@
-import type { Adventure, PartyMember, UserState } from "./types";
+import type { AbilityModifiers, Adventure, CombatValues, PlayerReference, UserState } from "./types";
 import { CURRENT_VERSION } from "./types";
 import { isRegistered } from "../compendium/registry/entity-registry";
 
@@ -82,63 +82,105 @@ function normalizeAdventures(raw: unknown): Adventure[] {
   return valid;
 }
 
-const MAX_PARTY_MEMBERS = 12;
+const MAX_PLAYER_REFERENCES = 12;
 const MAX_SPELL_IDS = 50;
 const MAX_WEAPON_IDS = 10;
 const MAX_MAGIC_ITEM_IDS = 30;
+const MAX_NOTE_LENGTH = 280;
 
-function normalizePartyMember(raw: unknown): PartyMember | null {
-  if (!raw || typeof raw !== "object") return null;
-  const m = raw as Record<string, unknown>;
-  if (typeof m.id !== "string" || !m.id) return null;
-  if (typeof m.name !== "string" || !m.name.trim()) return null;
+const MIN_MODIFIER = -5;
+const MAX_MODIFIER = 10;
+const MIN_COMBAT = 0;
+const MAX_COMBAT = 40;
+const MIN_INITIATIVE = -5;
+const MAX_INITIATIVE = 20;
 
-  const level = typeof m.level === "number" ? Math.max(1, Math.min(20, Math.floor(m.level))) : 1;
+const DEFAULT_ABILITY_MODIFIERS: AbilityModifiers = {
+  strength: 0,
+  dexterity: 0,
+  constitution: 0,
+  intelligence: 0,
+  wisdom: 0,
+  charisma: 0,
+};
 
-  const knownSpellCanonicalIds = validateIds(uniqueStrings(m.knownSpellCanonicalIds, true));
-  if (knownSpellCanonicalIds.length > MAX_SPELL_IDS) knownSpellCanonicalIds.length = MAX_SPELL_IDS;
+function clampInt(value: unknown, min: number, max: number, fallback: number): number {
+  if (typeof value !== "number" || !Number.isFinite(value)) return fallback;
+  return Math.max(min, Math.min(max, Math.floor(value)));
+}
 
-  const equippedWeaponCanonicalIds = validateIds(uniqueStrings(m.equippedWeaponCanonicalIds, true));
-  if (equippedWeaponCanonicalIds.length > MAX_WEAPON_IDS) equippedWeaponCanonicalIds.length = MAX_WEAPON_IDS;
+function clampOptInt(value: unknown, min: number, max: number): number | undefined {
+  if (typeof value !== "number" || !Number.isFinite(value)) return undefined;
+  return Math.max(min, Math.min(max, Math.floor(value)));
+}
 
-  const equippedMagicItemCanonicalIds = validateIds(uniqueStrings(m.equippedMagicItemCanonicalIds, true));
-  if (equippedMagicItemCanonicalIds.length > MAX_MAGIC_ITEM_IDS) equippedMagicItemCanonicalIds.length = MAX_MAGIC_ITEM_IDS;
-
-  const equippedArmorCanonicalId =
-    typeof m.equippedArmorCanonicalId === "string" && isRegistered(m.equippedArmorCanonicalId)
-      ? m.equippedArmorCanonicalId
-      : undefined;
-
+function normalizeAbilityModifiers(raw: unknown): AbilityModifiers {
+  const mods = (raw && typeof raw === "object" ? raw : {}) as Record<string, unknown>;
   return {
-    id: m.id,
-    name: m.name.trim(),
-    class: typeof m.class === "string" ? m.class.trim() : "",
-    level,
-    race: typeof m.race === "string" ? m.race.trim() || undefined : undefined,
-    subclass: typeof m.subclass === "string" ? m.subclass.trim() || undefined : undefined,
-    passivePerception: typeof m.passivePerception === "number" ? m.passivePerception : undefined,
-    passiveInsight: typeof m.passiveInsight === "number" ? m.passiveInsight : undefined,
-    passiveInvestigation: typeof m.passiveInvestigation === "number" ? m.passiveInvestigation : undefined,
-    notes: typeof m.notes === "string" ? m.notes.trim() || undefined : undefined,
-    knownSpellCanonicalIds,
-    equippedArmorCanonicalId,
-    equippedWeaponCanonicalIds,
-    equippedMagicItemCanonicalIds,
+    strength: clampInt(mods.strength, MIN_MODIFIER, MAX_MODIFIER, DEFAULT_ABILITY_MODIFIERS.strength),
+    dexterity: clampInt(mods.dexterity, MIN_MODIFIER, MAX_MODIFIER, DEFAULT_ABILITY_MODIFIERS.dexterity),
+    constitution: clampInt(mods.constitution, MIN_MODIFIER, MAX_MODIFIER, DEFAULT_ABILITY_MODIFIERS.constitution),
+    intelligence: clampInt(mods.intelligence, MIN_MODIFIER, MAX_MODIFIER, DEFAULT_ABILITY_MODIFIERS.intelligence),
+    wisdom: clampInt(mods.wisdom, MIN_MODIFIER, MAX_MODIFIER, DEFAULT_ABILITY_MODIFIERS.wisdom),
+    charisma: clampInt(mods.charisma, MIN_MODIFIER, MAX_MODIFIER, DEFAULT_ABILITY_MODIFIERS.charisma),
   };
 }
 
-function normalizeParty(raw: unknown): PartyMember[] {
+function normalizeCombatValues(raw: unknown): CombatValues {
+  const values = (raw && typeof raw === "object" ? raw : {}) as Record<string, unknown>;
+  return {
+    armorClass: clampInt(values.armorClass, MIN_COMBAT, MAX_COMBAT, 10),
+    initiativeModifier: clampInt(values.initiativeModifier, MIN_INITIATIVE, MAX_INITIATIVE, 0),
+    passivePerception: clampInt(values.passivePerception, MIN_COMBAT, MAX_COMBAT, 10),
+    spellSaveDc: clampOptInt(values.spellSaveDc, MIN_COMBAT, MAX_COMBAT),
+    spellAttackBonus: clampOptInt(values.spellAttackBonus, MIN_INITIATIVE, MAX_INITIATIVE),
+  };
+}
+
+function normalizePlayerReference(raw: unknown): PlayerReference | null {
+  if (!raw || typeof raw !== "object") return null;
+  const p = raw as Record<string, unknown>;
+  if (typeof p.id !== "string" || !p.id) return null;
+  if (typeof p.name !== "string" || !p.name.trim()) return null;
+
+  const knownSpellCanonicalIds = validateIds(uniqueStrings(p.knownSpellCanonicalIds, true));
+  if (knownSpellCanonicalIds.length > MAX_SPELL_IDS) knownSpellCanonicalIds.length = MAX_SPELL_IDS;
+
+  const weaponCanonicalIds = validateIds(uniqueStrings(p.weaponCanonicalIds, true));
+  if (weaponCanonicalIds.length > MAX_WEAPON_IDS) weaponCanonicalIds.length = MAX_WEAPON_IDS;
+
+  const magicItemCanonicalIds = validateIds(uniqueStrings(p.magicItemCanonicalIds, true));
+  if (magicItemCanonicalIds.length > MAX_MAGIC_ITEM_IDS) magicItemCanonicalIds.length = MAX_MAGIC_ITEM_IDS;
+
+  const note = typeof p.note === "string" ? p.note.trim() : "";
+
+  return {
+    id: p.id,
+    name: p.name.trim(),
+    class: typeof p.class === "string" ? p.class.trim() : "",
+    level: clampInt(p.level, 1, 20, 1),
+    subclass: typeof p.subclass === "string" ? p.subclass.trim() || undefined : undefined,
+    abilityModifiers: normalizeAbilityModifiers(p.abilityModifiers),
+    combatValues: normalizeCombatValues(p.combatValues),
+    knownSpellCanonicalIds,
+    weaponCanonicalIds,
+    magicItemCanonicalIds,
+    note: note.length > MAX_NOTE_LENGTH ? note.slice(0, MAX_NOTE_LENGTH) : note || undefined,
+  };
+}
+
+function normalizePlayers(raw: unknown): PlayerReference[] {
   if (!Array.isArray(raw)) return [];
-  const valid: PartyMember[] = [];
+  const valid: PlayerReference[] = [];
   for (const item of raw) {
-    const member = normalizePartyMember(item);
-    if (member) valid.push(member);
+    const reference = normalizePlayerReference(item);
+    if (reference) valid.push(reference);
   }
-  if (valid.length > MAX_PARTY_MEMBERS) valid.length = MAX_PARTY_MEMBERS;
+  if (valid.length > MAX_PLAYER_REFERENCES) valid.length = MAX_PLAYER_REFERENCES;
   return valid;
 }
 
-export function normalize(state: Omit<UserState, "adventures" | "activeAdventureId" | "party"> & { adventures?: Adventure[]; activeAdventureId?: string | null; party?: PartyMember[] }): UserState {
+export function normalize(state: Omit<UserState, "adventures" | "activeAdventureId" | "players"> & { adventures?: Adventure[]; activeAdventureId?: string | null; players?: PlayerReference[] }): UserState {
   const adventures = normalizeAdventures(state.adventures ?? []);
   const activeAdventureId =
     state.activeAdventureId && adventures.some((a) => a.id === state.activeAdventureId)
@@ -153,6 +195,6 @@ export function normalize(state: Omit<UserState, "adventures" | "activeAdventure
     session: normalizeSession(state.session),
     adventures,
     activeAdventureId,
-    party: normalizeParty(state.party ?? []),
+    players: normalizePlayers(state.players ?? []),
   };
 }

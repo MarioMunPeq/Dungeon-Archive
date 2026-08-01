@@ -33,7 +33,7 @@ Verified with `pnpm typecheck`.
 
 ```typescript
 // Prefer interfaces for object shapes
-interface PartyMember {
+interface PlayerReference {
   id: string;
   name: string;
   level: number;

@@ -138,7 +138,7 @@ A previously used query, kept for quick re-use. Stored in user state.
 
 ### User State
 
-Everything the user creates: favorites, recent entities, recent searches, the session list, adventures, the active adventure id, and party members. Persisted in `localStorage`.
+Everything the user creates: favorites, recent entities, recent searches, the session list, adventures, the active adventure id, and player references. Persisted in `localStorage`.
 
 ### User State Version
 

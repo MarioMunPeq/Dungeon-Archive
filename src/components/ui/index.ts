@@ -5,4 +5,7 @@ export { Badge } from "./Badge";
 export { Divider } from "./Divider";
 export { Stack } from "./Stack";
 export { Inline } from "./Inline";
+export { InlineNumberEditor } from "./InlineNumberEditor";
+export { Stepper } from "./Stepper";
+export { SelectField } from "./SelectField";
 export { Title, Subtitle, Heading, Body, Caption } from "./Typography";
