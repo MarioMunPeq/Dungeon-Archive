@@ -22,7 +22,10 @@ function PinIcon({ filled }: { filled: boolean }) {
   );
 }
 
-export const SessionButton = memo(function SessionButton({ canonicalId, className = "" }: SessionButtonProps) {
+export const SessionButton = memo(function SessionButton({
+  canonicalId,
+  className = "",
+}: SessionButtonProps) {
   const inSession = useIsInSession(canonicalId);
 
   function handleClick(e: React.MouseEvent) {

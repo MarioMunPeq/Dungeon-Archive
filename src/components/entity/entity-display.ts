@@ -10,12 +10,7 @@ import type {
   EntityVersion,
   EntityCategory,
 } from "@/compendium";
-import {
-  getEntity,
-  sourcePriority,
-  referenceToUrl,
-  CATEGORY_REGISTRY,
-} from "@/compendium";
+import { getEntity, sourcePriority, referenceToUrl, CATEGORY_REGISTRY } from "@/compendium";
 
 export interface EntityDisplayInfo {
   readonly title: string;

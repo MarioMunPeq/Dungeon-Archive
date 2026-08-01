@@ -1673,9 +1673,7 @@
       },
       {
         "type": "list",
-        "items": [
-          "You gain proficiency with heavy armor."
-        ]
+        "items": ["You gain proficiency with heavy armor."]
       }
     ]
   },
@@ -1885,9 +1883,7 @@
       },
       {
         "type": "list",
-        "items": [
-          "You gain proficiency with light armor."
-        ]
+        "items": ["You gain proficiency with light armor."]
       }
     ]
   },
@@ -2271,9 +2267,7 @@
       },
       {
         "type": "list",
-        "items": [
-          "You gain proficiency with medium armor and shields."
-        ]
+        "items": ["You gain proficiency with medium armor and shields."]
       }
     ]
   },
@@ -2676,9 +2670,7 @@
       },
       {
         "type": "list",
-        "items": [
-          "You gain proficiency in saving throws using the chosen ability."
-        ]
+        "items": ["You gain proficiency in saving throws using the chosen ability."]
       }
     ]
   },

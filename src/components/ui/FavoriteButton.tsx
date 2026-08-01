@@ -21,7 +21,10 @@ function HeartIcon({ filled }: { filled: boolean }) {
   );
 }
 
-export const FavoriteButton = memo(function FavoriteButton({ canonicalId, className = "" }: FavoriteButtonProps) {
+export const FavoriteButton = memo(function FavoriteButton({
+  canonicalId,
+  className = "",
+}: FavoriteButtonProps) {
   const isFavorite = useIsFavorite(canonicalId);
 
   function handleClick(e: React.MouseEvent) {

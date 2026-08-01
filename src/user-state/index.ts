@@ -20,6 +20,12 @@ export {
   usePlayerReferences,
 } from "./store";
 export type { UserStore, PlayerReferenceUpdate } from "./store";
-export type { UserState, Adventure, PlayerReference, AbilityModifiers, CombatValues } from "./types";
+export type {
+  UserState,
+  Adventure,
+  PlayerReference,
+  AbilityModifiers,
+  CombatValues,
+} from "./types";
 export { STORAGE_KEY, CURRENT_VERSION } from "./types";
 export { normalize } from "./normalize";

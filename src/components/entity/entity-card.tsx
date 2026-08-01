@@ -6,7 +6,14 @@ import { FavoriteButton } from "@/components/ui/FavoriteButton";
 import { SessionButton } from "@/components/ui/SessionButton";
 import { AdventureButton } from "@/components/ui/AdventureButton";
 
-export const EntityCard = memo(function EntityCard({ name, href, categoryLabel, metadata, source, canonicalId }: EntityCardData) {
+export const EntityCard = memo(function EntityCard({
+  name,
+  href,
+  categoryLabel,
+  metadata,
+  source,
+  canonicalId,
+}: EntityCardData) {
   return (
     <Link
       to={href}

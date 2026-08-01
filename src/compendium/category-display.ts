@@ -1,16 +1,12 @@
-import type {
-  EntityCategory,
-  Spell,
-  Monster,
-  MagicItem,
-  Feat,
-} from "@/types/compendium";
+import type { EntityCategory, Spell, Monster, MagicItem, Feat } from "@/types/compendium";
 import type { EntityCardData, FilterDefinition } from "./types";
 import { CATEGORY_REGISTRY, SOURCE_ORDER } from "./category-registry";
 export type { AnyEntity } from "./category-registry";
 export { SCHOOL_NAMES, formatMonsterType } from "./category-registry";
 
-export function getEntitiesForCategory(category: EntityCategory): readonly import("./category-registry").AnyEntity[] {
+export function getEntitiesForCategory(
+  category: EntityCategory,
+): readonly import("./category-registry").AnyEntity[] {
   return CATEGORY_REGISTRY[category].getList();
 }
 
@@ -101,6 +97,9 @@ export function applyFilters(
   });
 }
 
-export function toCardData(category: EntityCategory, entity: import("./category-registry").AnyEntity): EntityCardData {
+export function toCardData(
+  category: EntityCategory,
+  entity: import("./category-registry").AnyEntity,
+): EntityCardData {
   return CATEGORY_REGISTRY[category].toCardData(entity);
 }

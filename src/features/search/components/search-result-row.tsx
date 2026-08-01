@@ -13,8 +13,7 @@ interface SearchResultRowProps extends SearchResultItem {
   readonly isSelected: boolean;
 }
 
-const ROW_BASE =
-  "flex items-center gap-3 px-4 py-3 transition-colors";
+const ROW_BASE = "flex items-center gap-3 px-4 py-3 transition-colors";
 const ROW_SELECTED = "bg-accent";
 
 export function SearchResultRow({

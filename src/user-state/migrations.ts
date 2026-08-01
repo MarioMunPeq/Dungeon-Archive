@@ -12,8 +12,7 @@ function legacyMemberToPlayerReference(raw: unknown): Record<string, unknown> | 
     name,
     class: typeof m.class === "string" ? m.class.trim() : "",
     level: typeof m.level === "number" ? m.level : 1,
-    subclass:
-      typeof m.subclass === "string" && m.subclass.trim() ? m.subclass.trim() : undefined,
+    subclass: typeof m.subclass === "string" && m.subclass.trim() ? m.subclass.trim() : undefined,
     abilityModifiers: {
       strength: 0,
       dexterity: 0,
@@ -25,12 +24,15 @@ function legacyMemberToPlayerReference(raw: unknown): Record<string, unknown> | 
     combatValues: {
       armorClass: 10,
       initiativeModifier: 0,
-      passivePerception:
-        typeof m.passivePerception === "number" ? m.passivePerception : 10,
+      passivePerception: typeof m.passivePerception === "number" ? m.passivePerception : 10,
     },
     knownSpellCanonicalIds: Array.isArray(m.knownSpellCanonicalIds) ? m.knownSpellCanonicalIds : [],
-    weaponCanonicalIds: Array.isArray(m.equippedWeaponCanonicalIds) ? m.equippedWeaponCanonicalIds : [],
-    magicItemCanonicalIds: Array.isArray(m.equippedMagicItemCanonicalIds) ? m.equippedMagicItemCanonicalIds : [],
+    weaponCanonicalIds: Array.isArray(m.equippedWeaponCanonicalIds)
+      ? m.equippedWeaponCanonicalIds
+      : [],
+    magicItemCanonicalIds: Array.isArray(m.equippedMagicItemCanonicalIds)
+      ? m.equippedMagicItemCanonicalIds
+      : [],
     note: typeof m.notes === "string" && m.notes.trim() ? m.notes.trim() : undefined,
   };
 }
@@ -143,7 +145,8 @@ export function migrate(raw: unknown): UserState {
     recentSearches: result.recentSearches as string[],
     session: result.session as string[],
     adventures: Array.isArray(result.adventures) ? (result.adventures as Adventure[]) : [],
-    activeAdventureId: typeof result.activeAdventureId === "string" ? result.activeAdventureId : null,
+    activeAdventureId:
+      typeof result.activeAdventureId === "string" ? result.activeAdventureId : null,
     players: Array.isArray(result.players) ? (result.players as PlayerReference[]) : [],
   };
 }

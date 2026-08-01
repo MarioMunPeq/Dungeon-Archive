@@ -62,7 +62,10 @@ export function DebugContentPage() {
     <div className="mx-auto max-w-2xl space-y-8 p-4">
       <h1 className="text-xl font-bold text-foreground">Debug: Content Rendering</h1>
       {entities.map((entity) => (
-        <section key={entity.id} className="space-y-2 rounded-lg border border-border bg-surface p-4">
+        <section
+          key={entity.id}
+          className="space-y-2 rounded-lg border border-border bg-surface p-4"
+        >
           <p className="text-xs font-medium text-muted-foreground">
             {entity.category} · {entity.id}
           </p>

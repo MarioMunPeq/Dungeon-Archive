@@ -65,11 +65,15 @@ function formatWeight(weight: number | undefined): string | undefined {
   return `${weight} lb`;
 }
 
-function mapProperties(props: readonly (string | { uid?: string })[] | undefined): string[] | undefined {
+function mapProperties(
+  props: readonly (string | { uid?: string })[] | undefined,
+): string[] | undefined {
   if (!props || props.length === 0) return undefined;
   return props.map((p) => {
     const code = (typeof p === "string" ? p : p.uid)?.split("|")[0] as string | undefined;
-    return (code && WEAPON_PROPERTY_MAP[code]) || (typeof p === "string" ? p : p.uid ?? "Special");
+    return (
+      (code && WEAPON_PROPERTY_MAP[code]) || (typeof p === "string" ? p : (p.uid ?? "Special"))
+    );
   });
 }
 

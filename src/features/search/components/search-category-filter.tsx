@@ -12,7 +12,10 @@ const BUTTON_ACTIVE = "border-foreground bg-accent font-medium text-foreground";
 const BUTTON_INACTIVE = "border-border text-muted-foreground hover:bg-accent hover:text-foreground";
 
 export function SearchCategoryFilter({ selected, onChange }: SearchCategoryFilterProps) {
-  const entries = Object.entries(CATEGORY_REGISTRY) as [EntityCategory, (typeof CATEGORY_REGISTRY)[EntityCategory]][];
+  const entries = Object.entries(CATEGORY_REGISTRY) as [
+    EntityCategory,
+    (typeof CATEGORY_REGISTRY)[EntityCategory],
+  ][];
 
   return (
     <div className="flex gap-2 overflow-x-auto px-4 pt-3 pb-1 scrollbar-none">

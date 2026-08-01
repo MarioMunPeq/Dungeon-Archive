@@ -17,10 +17,7 @@ export function SearchPage() {
   const navigate = useNavigate();
 
   const rawResults = search(query);
-  const results = useMemo(
-    () => createSearchResultItems(query, rawResults),
-    [query, rawResults],
-  );
+  const results = useMemo(() => createSearchResultItems(query, rawResults), [query, rawResults]);
 
   const filtered = useMemo(() => {
     if (!categoryFilter) return results;
@@ -68,25 +65,14 @@ export function SearchPage() {
 
   return (
     <div className="flex flex-col pb-4">
-      <SearchInput
-        ref={inputRef}
-        value={query}
-        onChange={setQuery}
-        onKeyDown={handleKeyDown}
-      />
+      <SearchInput ref={inputRef} value={query} onChange={setQuery} onKeyDown={handleKeyDown} />
 
-      {hasQuery && (
-        <SearchCategoryFilter selected={categoryFilter} onChange={setCategoryFilter} />
-      )}
+      {hasQuery && <SearchCategoryFilter selected={categoryFilter} onChange={setCategoryFilter} />}
 
       {!hasQuery && <SearchEmptyState />}
       {hasQuery && !hasResults && <SearchNoResults query={query} />}
       {hasResults && (
-        <SearchResults
-          results={filtered}
-          query={query}
-          selectedIndex={selectedIndex}
-        />
+        <SearchResults results={filtered} query={query} selectedIndex={selectedIndex} />
       )}
     </div>
   );

@@ -391,7 +391,8 @@ async function main() {
   test("toCardData produces correct feat card", () => {
     const featsData = getEntitiesForCategory("feat");
     const asi = featsData.find(
-      (f: { name: string; source: string }) => f.name === "Ability Score Improvement" && f.source === "XPHB",
+      (f: { name: string; source: string }) =>
+        f.name === "Ability Score Improvement" && f.source === "XPHB",
     );
     ok(asi, "ASI XPHB should exist");
     const card = toCardData("feat", asi!);

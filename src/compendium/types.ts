@@ -1,4 +1,12 @@
-import type { Spell, Condition, Equipment, Action, Monster, MagicItem, Feat } from "@/types/compendium";
+import type {
+  Spell,
+  Condition,
+  Equipment,
+  Action,
+  Monster,
+  MagicItem,
+  Feat,
+} from "@/types/compendium";
 
 export interface CompendiumState {
   spells: Map<string, Spell>;

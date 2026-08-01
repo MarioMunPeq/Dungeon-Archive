@@ -50,16 +50,16 @@ function resetMock(): void {
 // ---------------------------------------------------------------------------
 // Imports
 // ---------------------------------------------------------------------------
-const { STORAGE_KEY, CURRENT_VERSION, createDefaultState } = await import(
-  "../../src/user-state/types"
-);
+const { STORAGE_KEY, CURRENT_VERSION, createDefaultState } =
+  await import("../../src/user-state/types");
 const { migrate } = await import("../../src/user-state/migrations");
 const { read, write } = await import("../../src/user-state/persistence");
 const { loadCompendium } = await import("../../src/compendium/loader");
 const { hydrate, userStore } = await import("../../src/user-state/store");
 import type { Adventure, PlayerReference, UserState } from "../../src/user-state/types";
 const { normalize, validateIds } = await import("../../src/user-state/normalize");
-const { getEntity, getSpells, getEquipmentList, getMagicItems } = await import("../../src/compendium/repository");
+const { getEntity, getSpells, getEquipmentList, getMagicItems } =
+  await import("../../src/compendium/repository");
 
 function resetStore(): void {
   userStore.getState()._reset();
@@ -200,17 +200,19 @@ test("migrations.migrate() upgrades v4 adventures without a scenes field", () =>
     recentEntities: [],
     recentSearches: [],
     session: [],
-    adventures: [{
-      id: "adv-1",
-      title: "Legacy",
-      description: "",
-      objectives: [],
-      notes: "",
-      entities: [],
-      createdAt: 1000,
-      updatedAt: 2000,
-      archived: false,
-    }],
+    adventures: [
+      {
+        id: "adv-1",
+        title: "Legacy",
+        description: "",
+        objectives: [],
+        notes: "",
+        entities: [],
+        createdAt: 1000,
+        updatedAt: 2000,
+        archived: false,
+      },
+    ],
     activeAdventureId: "adv-1",
     party: [],
   };
@@ -229,18 +231,28 @@ test("migrations.migrate() silently discards obsolete scenes at v6", () => {
     recentEntities: [],
     recentSearches: [],
     session: [],
-    adventures: [{
-      id: "adv-1",
-      title: "Current",
-      description: "Desc",
-      objectives: [],
-      notes: "Notes",
-      entities: ["spell.fireball"],
-      scenes: [{ id: "sc-1", title: "Tavern", description: "Intro", note: "Hook", entities: ["monster.goblin"] }],
-      createdAt: 1000,
-      updatedAt: 2000,
-      archived: false,
-    }],
+    adventures: [
+      {
+        id: "adv-1",
+        title: "Current",
+        description: "Desc",
+        objectives: [],
+        notes: "Notes",
+        entities: ["spell.fireball"],
+        scenes: [
+          {
+            id: "sc-1",
+            title: "Tavern",
+            description: "Intro",
+            note: "Hook",
+            entities: ["monster.goblin"],
+          },
+        ],
+        createdAt: 1000,
+        updatedAt: 2000,
+        archived: false,
+      },
+    ],
     activeAdventureId: "adv-1",
     party: [],
   };
@@ -748,7 +760,12 @@ test("hydrate() recovers from corrupted localStorage without throwing", () => {
 test("hydrate() loads valid persisted state", () => {
   resetMock();
   resetStore();
-  const data = { version: 1, favorites: ["spell.fireball"], recentEntities: [], recentSearches: [] };
+  const data = {
+    version: 1,
+    favorites: ["spell.fireball"],
+    recentEntities: [],
+    recentSearches: [],
+  };
   localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
   hydrate();
   deepStrictEqual(userStore.getState().favorites, ["spell.fireball"]);
@@ -764,7 +781,12 @@ test("hydrate() sets _hasHydrated to true", () => {
 test("hydrate() rebuilds favoritesSet", () => {
   resetMock();
   resetStore();
-  const data = { version: 1, favorites: ["spell.fireball", "monster.goblin"], recentEntities: [], recentSearches: [] };
+  const data = {
+    version: 1,
+    favorites: ["spell.fireball", "monster.goblin"],
+    recentEntities: [],
+    recentSearches: [],
+  };
   localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
   hydrate();
   const state = userStore.getState();
@@ -776,7 +798,12 @@ test("hydrate() rebuilds favoritesSet", () => {
 test("hydrate() removes stale favorite IDs", () => {
   resetMock();
   resetStore();
-  const data = { version: 1, favorites: ["nonexistent.entity"], recentEntities: [], recentSearches: [] };
+  const data = {
+    version: 1,
+    favorites: ["nonexistent.entity"],
+    recentEntities: [],
+    recentSearches: [],
+  };
   localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
   hydrate();
   deepStrictEqual(userStore.getState().favorites, [], "stale favorite removed");
@@ -786,7 +813,12 @@ test("hydrate() removes stale favorite IDs", () => {
 test("hydrate() removes stale recent entity IDs", () => {
   resetMock();
   resetStore();
-  const data = { version: 1, favorites: [], recentEntities: ["nonexistent.entity"], recentSearches: [] };
+  const data = {
+    version: 1,
+    favorites: [],
+    recentEntities: ["nonexistent.entity"],
+    recentSearches: [],
+  };
   localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
   hydrate();
   deepStrictEqual(userStore.getState().recentEntities, [], "stale recent entity removed");
@@ -795,25 +827,48 @@ test("hydrate() removes stale recent entity IDs", () => {
 test("hydrate() removes duplicate favorites from persistence", () => {
   resetMock();
   resetStore();
-  const data = { version: 1, favorites: ["spell.fireball", "spell.fireball", "monster.goblin", "spell.fireball"], recentEntities: [], recentSearches: [] };
+  const data = {
+    version: 1,
+    favorites: ["spell.fireball", "spell.fireball", "monster.goblin", "spell.fireball"],
+    recentEntities: [],
+    recentSearches: [],
+  };
   localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
   hydrate();
-  deepStrictEqual(userStore.getState().favorites, ["spell.fireball", "monster.goblin"], "duplicates removed");
+  deepStrictEqual(
+    userStore.getState().favorites,
+    ["spell.fireball", "monster.goblin"],
+    "duplicates removed",
+  );
 });
 
 test("hydrate() removes duplicate searches from persistence", () => {
   resetMock();
   resetStore();
-  const data = { version: 1, favorites: [], recentEntities: [], recentSearches: ["fireball", "fireball", "shield", "fireball"] };
+  const data = {
+    version: 1,
+    favorites: [],
+    recentEntities: [],
+    recentSearches: ["fireball", "fireball", "shield", "fireball"],
+  };
   localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
   hydrate();
-  deepStrictEqual(userStore.getState().recentSearches, ["fireball", "shield"], "duplicate searches removed");
+  deepStrictEqual(
+    userStore.getState().recentSearches,
+    ["fireball", "shield"],
+    "duplicate searches removed",
+  );
 });
 
 test("hydrate() preserves valid entity IDs and removes stale ones", () => {
   resetMock();
   resetStore();
-  const data = { version: 1, favorites: ["spell.fireball", "nonexistent.entity"], recentEntities: ["monster.goblin"], recentSearches: [] };
+  const data = {
+    version: 1,
+    favorites: ["spell.fireball", "nonexistent.entity"],
+    recentEntities: ["monster.goblin"],
+    recentSearches: [],
+  };
 
   const fireball = getEntity("spell", "fireball");
   const goblin = getEntity("monster", "goblin");
@@ -821,8 +876,16 @@ test("hydrate() preserves valid entity IDs and removes stale ones", () => {
   if (fireball && goblin) {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
     hydrate();
-    deepStrictEqual(userStore.getState().favorites, ["spell.fireball"], "valid favorite preserved, stale removed");
-    deepStrictEqual(userStore.getState().recentEntities, ["monster.goblin"], "valid recent entity preserved");
+    deepStrictEqual(
+      userStore.getState().favorites,
+      ["spell.fireball"],
+      "valid favorite preserved, stale removed",
+    );
+    deepStrictEqual(
+      userStore.getState().recentEntities,
+      ["monster.goblin"],
+      "valid recent entity preserved",
+    );
   } else {
     hydrate();
     ok(true, "hydrate did not throw with mixed valid/invalid IDs");
@@ -837,7 +900,13 @@ console.log("\nuser-state \u2014 cross-tab\n");
 test("cross-tab listener ignores identical state", () => {
   resetMock();
   resetStore();
-  const data = { version: CURRENT_VERSION, favorites: ["spell.fireball"], recentEntities: [], recentSearches: [], session: [] };
+  const data = {
+    version: CURRENT_VERSION,
+    favorites: ["spell.fireball"],
+    recentEntities: [],
+    recentSearches: [],
+    session: [],
+  };
   localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
   hydrate();
 
@@ -886,7 +955,12 @@ test("safe replace does nothing when state is identical", () => {
 console.log("\nuser-state \u2014 pipeline\n");
 
 test("migrate + normalize pipeline recovers gracefully from malformed object", () => {
-  const migrated = migrate({ version: 1, favorites: "bad", recentEntities: null, recentSearches: [1, 2, 3] });
+  const migrated = migrate({
+    version: 1,
+    favorites: "bad",
+    recentEntities: null,
+    recentSearches: [1, 2, 3],
+  });
   const result = normalize(migrated);
   deepStrictEqual(result.favorites, []);
   deepStrictEqual(result.recentEntities, []);
@@ -924,7 +998,12 @@ test("favoritesSet provides O(1) lookup", () => {
 test("favoritesSet O(1) lookup works after hydrate", () => {
   resetMock();
   resetStore();
-  const data = { version: 1, favorites: ["spell.fireball", "monster.goblin"], recentEntities: [], recentSearches: [] };
+  const data = {
+    version: 1,
+    favorites: ["spell.fireball", "monster.goblin"],
+    recentEntities: [],
+    recentSearches: [],
+  };
   localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
   hydrate();
   const state = userStore.getState();
@@ -1193,7 +1272,13 @@ console.log("\nuser-state \u2014 session hydration\n");
 test("hydrate() loads session from persisted state", () => {
   resetMock();
   resetStore();
-  const data = { version: CURRENT_VERSION, favorites: [], recentEntities: [], recentSearches: [], session: ["spell.fireball", "monster.goblin"] };
+  const data = {
+    version: CURRENT_VERSION,
+    favorites: [],
+    recentEntities: [],
+    recentSearches: [],
+    session: ["spell.fireball", "monster.goblin"],
+  };
   localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
   hydrate();
   deepStrictEqual(userStore.getState().session, ["spell.fireball", "monster.goblin"]);
@@ -1202,7 +1287,13 @@ test("hydrate() loads session from persisted state", () => {
 test("hydrate() rebuilds sessionSet from persisted session", () => {
   resetMock();
   resetStore();
-  const data = { version: CURRENT_VERSION, favorites: [], recentEntities: [], recentSearches: [], session: ["spell.fireball", "monster.goblin"] };
+  const data = {
+    version: CURRENT_VERSION,
+    favorites: [],
+    recentEntities: [],
+    recentSearches: [],
+    session: ["spell.fireball", "monster.goblin"],
+  };
   localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
   hydrate();
   const state = userStore.getState();
@@ -1214,7 +1305,13 @@ test("hydrate() rebuilds sessionSet from persisted session", () => {
 test("hydrate() removes stale session IDs", () => {
   resetMock();
   resetStore();
-  const data = { version: CURRENT_VERSION, favorites: [], recentEntities: [], recentSearches: [], session: ["nonexistent.entity"] };
+  const data = {
+    version: CURRENT_VERSION,
+    favorites: [],
+    recentEntities: [],
+    recentSearches: [],
+    session: ["nonexistent.entity"],
+  };
   localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
   hydrate();
   deepStrictEqual(userStore.getState().session, [], "stale session ID removed");
@@ -1224,16 +1321,32 @@ test("hydrate() removes stale session IDs", () => {
 test("hydrate() removes duplicate session IDs from persistence", () => {
   resetMock();
   resetStore();
-  const data = { version: CURRENT_VERSION, favorites: [], recentEntities: [], recentSearches: [], session: ["spell.fireball", "spell.fireball", "monster.goblin"] };
+  const data = {
+    version: CURRENT_VERSION,
+    favorites: [],
+    recentEntities: [],
+    recentSearches: [],
+    session: ["spell.fireball", "spell.fireball", "monster.goblin"],
+  };
   localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
   hydrate();
-  deepStrictEqual(userStore.getState().session, ["spell.fireball", "monster.goblin"], "duplicate session IDs removed");
+  deepStrictEqual(
+    userStore.getState().session,
+    ["spell.fireball", "monster.goblin"],
+    "duplicate session IDs removed",
+  );
 });
 
 test("hydrate() preserves valid session IDs and removes stale", () => {
   resetMock();
   resetStore();
-  const data = { version: CURRENT_VERSION, favorites: [], recentEntities: [], recentSearches: [], session: ["spell.fireball", "nonexistent.entity", "monster.goblin"] };
+  const data = {
+    version: CURRENT_VERSION,
+    favorites: [],
+    recentEntities: [],
+    recentSearches: [],
+    session: ["spell.fireball", "nonexistent.entity", "monster.goblin"],
+  };
 
   const fireball = getEntity("spell", "fireball");
   const goblin = getEntity("monster", "goblin");
@@ -1241,7 +1354,11 @@ test("hydrate() preserves valid session IDs and removes stale", () => {
   if (fireball && goblin) {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
     hydrate();
-    deepStrictEqual(userStore.getState().session, ["spell.fireball", "monster.goblin"], "valid preserved, stale removed");
+    deepStrictEqual(
+      userStore.getState().session,
+      ["spell.fireball", "monster.goblin"],
+      "valid preserved, stale removed",
+    );
   } else {
     hydrate();
     ok(true, "hydrate did not throw with mixed valid/invalid session IDs");
@@ -1256,7 +1373,13 @@ console.log("\nuser-state \u2014 session cross-tab\n");
 test("cross-tab session replace ignores identical state", () => {
   resetMock();
   resetStore();
-  const data = { version: CURRENT_VERSION, favorites: [], recentEntities: [], recentSearches: [], session: ["spell.fireball"] };
+  const data = {
+    version: CURRENT_VERSION,
+    favorites: [],
+    recentEntities: [],
+    recentSearches: [],
+    session: ["spell.fireball"],
+  };
   localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
   hydrate();
 
@@ -1297,7 +1420,11 @@ test("useIsInSession returns true for session member", () => {
   resetStore();
   const s = userStore.getState();
   s.toggleSession("spell.fireball");
-  strictEqual(userStore.getState().sessionSet.has("spell.fireball"), true, "sessionSet O(1) lookup");
+  strictEqual(
+    userStore.getState().sessionSet.has("spell.fireball"),
+    true,
+    "sessionSet O(1) lookup",
+  );
 });
 
 test("useIsInSession returns false for non-member", () => {
@@ -1309,7 +1436,13 @@ test("useIsInSession returns false for non-member", () => {
 test("sessionSet O(1) lookup works after hydrate", () => {
   resetMock();
   resetStore();
-  const data = { version: CURRENT_VERSION, favorites: [], recentEntities: [], recentSearches: [], session: ["spell.fireball"] };
+  const data = {
+    version: CURRENT_VERSION,
+    favorites: [],
+    recentEntities: [],
+    recentSearches: [],
+    session: ["spell.fireball"],
+  };
   localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
   hydrate();
   strictEqual(userStore.getState().sessionSet.has("spell.fireball"), true, "O(1) after hydrate");
@@ -1559,17 +1692,19 @@ test("adventureSet rebuilt on _replace", () => {
     recentEntities: [],
     recentSearches: [],
     session: [],
-    adventures: [{
-      id: "adv-1",
-      title: "Test",
-      description: "",
-      objectives: [],
-      notes: "",
-      entities: ["x", "y"],
-      createdAt: Date.now(),
-      updatedAt: Date.now(),
-      archived: false,
-    }],
+    adventures: [
+      {
+        id: "adv-1",
+        title: "Test",
+        description: "",
+        objectives: [],
+        notes: "",
+        entities: ["x", "y"],
+        createdAt: Date.now(),
+        updatedAt: Date.now(),
+        archived: false,
+      },
+    ],
     activeAdventureId: "adv-1",
     players: [],
   });
@@ -1619,17 +1754,19 @@ test("normalize trims adventure title and description", () => {
     recentEntities: [],
     recentSearches: [],
     session: [],
-    adventures: [{
-      id: "adv-1",
-      title: "  My Quest  ",
-      description: "  Desc  ",
-      objectives: [],
-      notes: "  Notes  ",
-      entities: [],
-      createdAt: 1000,
-      updatedAt: 2000,
-      archived: false,
-    }],
+    adventures: [
+      {
+        id: "adv-1",
+        title: "  My Quest  ",
+        description: "  Desc  ",
+        objectives: [],
+        notes: "  Notes  ",
+        entities: [],
+        createdAt: 1000,
+        updatedAt: 2000,
+        archived: false,
+      },
+    ],
     activeAdventureId: null,
   });
   strictEqual(result.adventures[0]!.title, "My Quest");
@@ -1644,17 +1781,19 @@ test("normalize deduplicates adventure objectives", () => {
     recentEntities: [],
     recentSearches: [],
     session: [],
-    adventures: [{
-      id: "adv-1",
-      title: "Test",
-      description: "",
-      objectives: ["a", "a", "b", "c", "b"],
-      notes: "",
-      entities: [],
-      createdAt: 1000,
-      updatedAt: 2000,
-      archived: false,
-    }],
+    adventures: [
+      {
+        id: "adv-1",
+        title: "Test",
+        description: "",
+        objectives: ["a", "a", "b", "c", "b"],
+        notes: "",
+        entities: [],
+        createdAt: 1000,
+        updatedAt: 2000,
+        archived: false,
+      },
+    ],
     activeAdventureId: null,
   });
   deepStrictEqual(result.adventures[0]!.objectives, ["a", "b", "c"]);
@@ -1667,17 +1806,19 @@ test("normalize removes empty objective strings", () => {
     recentEntities: [],
     recentSearches: [],
     session: [],
-    adventures: [{
-      id: "adv-1",
-      title: "Test",
-      description: "",
-      objectives: ["a", "", "b", "  "],
-      notes: "",
-      entities: [],
-      createdAt: 1000,
-      updatedAt: 2000,
-      archived: false,
-    }],
+    adventures: [
+      {
+        id: "adv-1",
+        title: "Test",
+        description: "",
+        objectives: ["a", "", "b", "  "],
+        notes: "",
+        entities: [],
+        createdAt: 1000,
+        updatedAt: 2000,
+        archived: false,
+      },
+    ],
     activeAdventureId: null,
   });
   deepStrictEqual(result.adventures[0]!.objectives, ["a", "b"]);
@@ -1690,17 +1831,19 @@ test("normalize removes stale entity IDs from adventures", () => {
     recentEntities: [],
     recentSearches: [],
     session: [],
-    adventures: [{
-      id: "adv-1",
-      title: "Test",
-      description: "",
-      objectives: [],
-      notes: "",
-      entities: ["spell.fireball", "nonexistent.entity"],
-      createdAt: 1000,
-      updatedAt: 2000,
-      archived: false,
-    }],
+    adventures: [
+      {
+        id: "adv-1",
+        title: "Test",
+        description: "",
+        objectives: [],
+        notes: "",
+        entities: ["spell.fireball", "nonexistent.entity"],
+        createdAt: 1000,
+        updatedAt: 2000,
+        archived: false,
+      },
+    ],
     activeAdventureId: null,
   };
   const result = normalize(raw);
@@ -1763,17 +1906,19 @@ test("hydrate() loads adventures from persisted state", () => {
     recentEntities: [],
     recentSearches: [],
     session: [],
-    adventures: [{
-      id: "adv-1",
-      title: "Saved Adventure",
-      description: "Desc",
-      objectives: ["Goal 1"],
-      notes: "Notes here",
-      entities: ["spell.fireball"],
-      createdAt: 1000,
-      updatedAt: 2000,
-      archived: false,
-    }],
+    adventures: [
+      {
+        id: "adv-1",
+        title: "Saved Adventure",
+        description: "Desc",
+        objectives: ["Goal 1"],
+        notes: "Notes here",
+        entities: ["spell.fireball"],
+        createdAt: 1000,
+        updatedAt: 2000,
+        archived: false,
+      },
+    ],
     activeAdventureId: "adv-1",
   };
   localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
@@ -1794,17 +1939,19 @@ test("hydrate() removes stale entity IDs from persisted adventures", () => {
     recentEntities: [],
     recentSearches: [],
     session: [],
-    adventures: [{
-      id: "adv-1",
-      title: "Test",
-      description: "",
-      objectives: [],
-      notes: "",
-      entities: ["nonexistent.entity"],
-      createdAt: 1000,
-      updatedAt: 2000,
-      archived: false,
-    }],
+    adventures: [
+      {
+        id: "adv-1",
+        title: "Test",
+        description: "",
+        objectives: [],
+        notes: "",
+        entities: ["nonexistent.entity"],
+        createdAt: 1000,
+        updatedAt: 2000,
+        archived: false,
+      },
+    ],
     activeAdventureId: "adv-1",
   };
   localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
@@ -1823,17 +1970,19 @@ test("hydrate() with duplicate adventures removes duplicates via normalize", () 
     recentEntities: [],
     recentSearches: [],
     session: [],
-    adventures: [{
-      id: "adv-1",
-      title: "Test",
-      description: "",
-      objectives: ["a", "a", "b"],
-      notes: "",
-      entities: ["spell.fireball", "spell.fireball"],
-      createdAt: 1000,
-      updatedAt: 2000,
-      archived: false,
-    }],
+    adventures: [
+      {
+        id: "adv-1",
+        title: "Test",
+        description: "",
+        objectives: ["a", "a", "b"],
+        notes: "",
+        entities: ["spell.fireball", "spell.fireball"],
+        createdAt: 1000,
+        updatedAt: 2000,
+        archived: false,
+      },
+    ],
     activeAdventureId: "adv-1",
   };
   localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
@@ -1857,17 +2006,19 @@ test("_replace updates adventures when content differs", () => {
     recentEntities: [],
     recentSearches: [],
     session: [],
-    adventures: [{
-      id: "adv-1",
-      title: "Cross Tab",
-      description: "",
-      objectives: [],
-      notes: "",
-      entities: ["spell.fireball"],
-      createdAt: 1000,
-      updatedAt: 2000,
-      archived: false,
-    }],
+    adventures: [
+      {
+        id: "adv-1",
+        title: "Cross Tab",
+        description: "",
+        objectives: [],
+        notes: "",
+        entities: ["spell.fireball"],
+        createdAt: 1000,
+        updatedAt: 2000,
+        archived: false,
+      },
+    ],
     activeAdventureId: "adv-1",
     players: [],
   });
@@ -1886,17 +2037,19 @@ test("adventuresEqual prevents unnecessary _replace on identical state", () => {
     recentEntities: [],
     recentSearches: [],
     session: [],
-    adventures: [{
-      id: "adv-1",
-      title: "Same",
-      description: "",
-      objectives: [],
-      notes: "",
-      entities: ["x"],
-      createdAt: 1000,
-      updatedAt: 2000,
-      archived: false,
-    }],
+    adventures: [
+      {
+        id: "adv-1",
+        title: "Same",
+        description: "",
+        objectives: [],
+        notes: "",
+        entities: ["x"],
+        createdAt: 1000,
+        updatedAt: 2000,
+        archived: false,
+      },
+    ],
     activeAdventureId: "adv-1",
     players: [],
   };
@@ -2022,7 +2175,14 @@ test("addPlayerReference trims name and class", () => {
     name: "  Lyra  ",
     class: "  Wizard ",
     level: 5,
-    abilityModifiers: { strength: 0, dexterity: 0, constitution: 0, intelligence: 0, wisdom: 0, charisma: 0 },
+    abilityModifiers: {
+      strength: 0,
+      dexterity: 0,
+      constitution: 0,
+      intelligence: 0,
+      wisdom: 0,
+      charisma: 0,
+    },
     combatValues: { armorClass: 10, initiativeModifier: 0, passivePerception: 10 },
     knownSpellCanonicalIds: [],
     weaponCanonicalIds: [],
@@ -2040,8 +2200,21 @@ test("addPlayerReference clamps level and combat values", () => {
     name: "Low",
     class: "Cleric",
     level: 0,
-    abilityModifiers: { strength: -99, dexterity: 99, constitution: 0, intelligence: 0, wisdom: 0, charisma: 0 },
-    combatValues: { armorClass: 99, initiativeModifier: -99, passivePerception: -3, spellSaveDc: 99, spellAttackBonus: -99 },
+    abilityModifiers: {
+      strength: -99,
+      dexterity: 99,
+      constitution: 0,
+      intelligence: 0,
+      wisdom: 0,
+      charisma: 0,
+    },
+    combatValues: {
+      armorClass: 99,
+      initiativeModifier: -99,
+      passivePerception: -3,
+      spellSaveDc: 99,
+      spellAttackBonus: -99,
+    },
     knownSpellCanonicalIds: [],
     weaponCanonicalIds: [],
     magicItemCanonicalIds: [],
@@ -2050,7 +2223,14 @@ test("addPlayerReference clamps level and combat values", () => {
     name: "High",
     class: "Cleric",
     level: 99,
-    abilityModifiers: { strength: 0, dexterity: 0, constitution: 0, intelligence: 0, wisdom: 0, charisma: 0 },
+    abilityModifiers: {
+      strength: 0,
+      dexterity: 0,
+      constitution: 0,
+      intelligence: 0,
+      wisdom: 0,
+      charisma: 0,
+    },
     combatValues: { armorClass: 10, initiativeModifier: 0, passivePerception: 10 },
     knownSpellCanonicalIds: [],
     weaponCanonicalIds: [],
@@ -2076,8 +2256,21 @@ test("addPlayerReference accepts references and note", () => {
     class: "Wizard",
     level: 5,
     subclass: "Evocation",
-    abilityModifiers: { strength: 1, dexterity: 2, constitution: 3, intelligence: 4, wisdom: 5, charisma: 6 },
-    combatValues: { armorClass: 15, initiativeModifier: 3, passivePerception: 17, spellSaveDc: 16, spellAttackBonus: 8 },
+    abilityModifiers: {
+      strength: 1,
+      dexterity: 2,
+      constitution: 3,
+      intelligence: 4,
+      wisdom: 5,
+      charisma: 6,
+    },
+    combatValues: {
+      armorClass: 15,
+      initiativeModifier: 3,
+      passivePerception: 17,
+      spellSaveDc: 16,
+      spellAttackBonus: 8,
+    },
     knownSpellCanonicalIds: ["spell.fireball"],
     weaponCanonicalIds: ["equipment.longsword"],
     magicItemCanonicalIds: ["magicitem.wand-of-magic-missiles"],
@@ -2085,8 +2278,21 @@ test("addPlayerReference accepts references and note", () => {
   });
   const player = userStore.getState().players[0]!;
   strictEqual(player.subclass, "Evocation");
-  deepStrictEqual(player.abilityModifiers, { strength: 1, dexterity: 2, constitution: 3, intelligence: 4, wisdom: 5, charisma: 6 });
-  deepStrictEqual(player.combatValues, { armorClass: 15, initiativeModifier: 3, passivePerception: 17, spellSaveDc: 16, spellAttackBonus: 8 });
+  deepStrictEqual(player.abilityModifiers, {
+    strength: 1,
+    dexterity: 2,
+    constitution: 3,
+    intelligence: 4,
+    wisdom: 5,
+    charisma: 6,
+  });
+  deepStrictEqual(player.combatValues, {
+    armorClass: 15,
+    initiativeModifier: 3,
+    passivePerception: 17,
+    spellSaveDc: 16,
+    spellAttackBonus: 8,
+  });
   deepStrictEqual(player.knownSpellCanonicalIds, ["spell.fireball"]);
   deepStrictEqual(player.weaponCanonicalIds, ["equipment.longsword"]);
   deepStrictEqual(player.magicItemCanonicalIds, ["magicitem.wand-of-magic-missiles"]);
@@ -2100,7 +2306,14 @@ test("addPlayerReference trims optional strings and keeps empty as undefined", (
     name: "Lyra",
     class: "Wizard",
     level: 5,
-    abilityModifiers: { strength: 0, dexterity: 0, constitution: 0, intelligence: 0, wisdom: 0, charisma: 0 },
+    abilityModifiers: {
+      strength: 0,
+      dexterity: 0,
+      constitution: 0,
+      intelligence: 0,
+      wisdom: 0,
+      charisma: 0,
+    },
     combatValues: { armorClass: 10, initiativeModifier: 0, passivePerception: 10 },
     knownSpellCanonicalIds: [],
     weaponCanonicalIds: [],
@@ -2120,7 +2333,14 @@ test("addPlayerReference persists to localStorage", () => {
     name: "Lyra",
     class: "Wizard",
     level: 5,
-    abilityModifiers: { strength: 0, dexterity: 0, constitution: 0, intelligence: 0, wisdom: 0, charisma: 0 },
+    abilityModifiers: {
+      strength: 0,
+      dexterity: 0,
+      constitution: 0,
+      intelligence: 0,
+      wisdom: 0,
+      charisma: 0,
+    },
     combatValues: { armorClass: 10, initiativeModifier: 0, passivePerception: 10 },
     knownSpellCanonicalIds: [],
     weaponCanonicalIds: [],
@@ -2142,7 +2362,14 @@ test("updatePlayerReference updates fields", () => {
     name: "Lyra",
     class: "Wizard",
     level: 5,
-    abilityModifiers: { strength: 0, dexterity: 0, constitution: 0, intelligence: 0, wisdom: 0, charisma: 0 },
+    abilityModifiers: {
+      strength: 0,
+      dexterity: 0,
+      constitution: 0,
+      intelligence: 0,
+      wisdom: 0,
+      charisma: 0,
+    },
     combatValues: { armorClass: 10, initiativeModifier: 0, passivePerception: 10 },
     knownSpellCanonicalIds: [],
     weaponCanonicalIds: [],
@@ -2173,7 +2400,14 @@ test("updatePlayerReference clamps level", () => {
     name: "Lyra",
     class: "Wizard",
     level: 5,
-    abilityModifiers: { strength: 0, dexterity: 0, constitution: 0, intelligence: 0, wisdom: 0, charisma: 0 },
+    abilityModifiers: {
+      strength: 0,
+      dexterity: 0,
+      constitution: 0,
+      intelligence: 0,
+      wisdom: 0,
+      charisma: 0,
+    },
     combatValues: { armorClass: 10, initiativeModifier: 0, passivePerception: 10 },
     knownSpellCanonicalIds: [],
     weaponCanonicalIds: [],
@@ -2191,7 +2425,14 @@ test("updatePlayerReference converts empty strings to undefined", () => {
     name: "Lyra",
     class: "Wizard",
     level: 5,
-    abilityModifiers: { strength: 0, dexterity: 0, constitution: 0, intelligence: 0, wisdom: 0, charisma: 0 },
+    abilityModifiers: {
+      strength: 0,
+      dexterity: 0,
+      constitution: 0,
+      intelligence: 0,
+      wisdom: 0,
+      charisma: 0,
+    },
     combatValues: { armorClass: 10, initiativeModifier: 0, passivePerception: 10 },
     knownSpellCanonicalIds: [],
     weaponCanonicalIds: [],
@@ -2213,7 +2454,14 @@ test("updatePlayerReference is a no-op for unknown id", () => {
     name: "Lyra",
     class: "Wizard",
     level: 5,
-    abilityModifiers: { strength: 0, dexterity: 0, constitution: 0, intelligence: 0, wisdom: 0, charisma: 0 },
+    abilityModifiers: {
+      strength: 0,
+      dexterity: 0,
+      constitution: 0,
+      intelligence: 0,
+      wisdom: 0,
+      charisma: 0,
+    },
     combatValues: { armorClass: 10, initiativeModifier: 0, passivePerception: 10 },
     knownSpellCanonicalIds: [],
     weaponCanonicalIds: [],
@@ -2230,7 +2478,14 @@ test("removePlayerReference removes by id", () => {
     name: "Lyra",
     class: "Wizard",
     level: 5,
-    abilityModifiers: { strength: 0, dexterity: 0, constitution: 0, intelligence: 0, wisdom: 0, charisma: 0 },
+    abilityModifiers: {
+      strength: 0,
+      dexterity: 0,
+      constitution: 0,
+      intelligence: 0,
+      wisdom: 0,
+      charisma: 0,
+    },
     combatValues: { armorClass: 10, initiativeModifier: 0, passivePerception: 10 },
     knownSpellCanonicalIds: [],
     weaponCanonicalIds: [],
@@ -2258,7 +2513,14 @@ test("_replace updates players when content differs", () => {
         name: "Lyra",
         class: "Wizard",
         level: 5,
-        abilityModifiers: { strength: 0, dexterity: 0, constitution: 0, intelligence: 0, wisdom: 0, charisma: 0 },
+        abilityModifiers: {
+          strength: 0,
+          dexterity: 0,
+          constitution: 0,
+          intelligence: 0,
+          wisdom: 0,
+          charisma: 0,
+        },
         combatValues: { armorClass: 10, initiativeModifier: 0, passivePerception: 10 },
         knownSpellCanonicalIds: [],
         weaponCanonicalIds: [],
@@ -2279,7 +2541,14 @@ test("players cleared on _reset", () => {
     name: "Lyra",
     class: "Wizard",
     level: 5,
-    abilityModifiers: { strength: 0, dexterity: 0, constitution: 0, intelligence: 0, wisdom: 0, charisma: 0 },
+    abilityModifiers: {
+      strength: 0,
+      dexterity: 0,
+      constitution: 0,
+      intelligence: 0,
+      wisdom: 0,
+      charisma: 0,
+    },
     combatValues: { armorClass: 10, initiativeModifier: 0, passivePerception: 10 },
     knownSpellCanonicalIds: [],
     weaponCanonicalIds: [],
@@ -2303,7 +2572,14 @@ test("normalize drops invalid player references", () => {
       name: "Lyra",
       class: "Wizard",
       level: 5,
-      abilityModifiers: { strength: 0, dexterity: 0, constitution: 0, intelligence: 0, wisdom: 0, charisma: 0 },
+      abilityModifiers: {
+        strength: 0,
+        dexterity: 0,
+        constitution: 0,
+        intelligence: 0,
+        wisdom: 0,
+        charisma: 0,
+      },
       combatValues: { armorClass: 10, initiativeModifier: 0, passivePerception: 10 },
       knownSpellCanonicalIds: [],
       weaponCanonicalIds: [],
@@ -2354,8 +2630,21 @@ test("normalize clamps player reference level and fills defaults", () => {
   strictEqual(result.players[0]?.level, 1);
   strictEqual(result.players[1]?.level, 20);
   const player = result.players[0]!;
-  deepStrictEqual(player.abilityModifiers, { strength: 0, dexterity: 0, constitution: 0, intelligence: 0, wisdom: 0, charisma: 0 });
-  deepStrictEqual(player.combatValues, { armorClass: 10, initiativeModifier: 0, passivePerception: 10, spellSaveDc: undefined, spellAttackBonus: undefined });
+  deepStrictEqual(player.abilityModifiers, {
+    strength: 0,
+    dexterity: 0,
+    constitution: 0,
+    intelligence: 0,
+    wisdom: 0,
+    charisma: 0,
+  });
+  deepStrictEqual(player.combatValues, {
+    armorClass: 10,
+    initiativeModifier: 0,
+    passivePerception: 10,
+    spellSaveDc: undefined,
+    spellAttackBonus: undefined,
+  });
 });
 
 test("normalize clamps ability modifiers and combat values", () => {
@@ -2371,8 +2660,21 @@ test("normalize clamps ability modifiers and combat values", () => {
         name: "Lyra",
         class: "Wizard",
         level: 5,
-        abilityModifiers: { strength: -99, dexterity: 99, constitution: 0, intelligence: 0, wisdom: 0, charisma: 0 },
-        combatValues: { armorClass: 99, initiativeModifier: -99, passivePerception: -3, spellSaveDc: 99, spellAttackBonus: -99 },
+        abilityModifiers: {
+          strength: -99,
+          dexterity: 99,
+          constitution: 0,
+          intelligence: 0,
+          wisdom: 0,
+          charisma: 0,
+        },
+        combatValues: {
+          armorClass: 99,
+          initiativeModifier: -99,
+          passivePerception: -3,
+          spellSaveDc: 99,
+          spellAttackBonus: -99,
+        },
         knownSpellCanonicalIds: [],
         weaponCanonicalIds: [],
         magicItemCanonicalIds: [],
@@ -2423,7 +2725,14 @@ test("normalize converts empty optional strings to undefined and truncates note"
     recentSearches: [],
     session: [],
     players: [
-      { id: "p1", name: "Lyra", class: "Wizard", level: 5, subclass: "  ", note: `  ${longNote}  ` },
+      {
+        id: "p1",
+        name: "Lyra",
+        class: "Wizard",
+        level: 5,
+        subclass: "  ",
+        note: `  ${longNote}  `,
+      },
     ] as unknown as PlayerReference[],
   });
   const player = result.players[0]!;

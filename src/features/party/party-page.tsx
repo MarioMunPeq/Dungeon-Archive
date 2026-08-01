@@ -59,17 +59,105 @@ const CLASSES = [
 
 const SUBCLASSES: Record<string, readonly string[]> = {
   Barbarian: ["Berserker", "Wild Heart", "World Tree", "Zealot"],
-  Bard: ["College of Dance", "College of Glamour", "College of Lore", "College of Valor", "College of Whispers", "College of Swords"],
-  Cleric: ["Life Domain", "Light Domain", "Trickery Domain", "War Domain", "Knowledge Domain", "Nature Domain", "Tempest Domain", "Twilight Domain", "Forge Domain"],
-  Druid: ["Circle of the Land", "Circle of the Moon", "Circle of the Sea", "Circle of the Stars", "Circle of Wildfire"],
-  Fighter: ["Battle Master", "Champion", "Eldritch Knight", "Psi Warrior", "Arcane Archer", "Samurai"],
-  Monk: ["Way of the Open Hand", "Way of Shadow", "Way of the Four Elements", "Way of Mercy", "Way of the Astral Self", "Way of the Kensei"],
-  Paladin: ["Oath of Devotion", "Oath of the Ancients", "Oath of Vengeance", "Oath of Conquest", "Oath of Redemption", "Oath of Glory", "Oath of the Watchers"],
-  Ranger: ["Hunter", "Beast Master", "Fey Wanderer", "Gloom Stalker", "Horizon Walker", "Swarmkeeper", "Drakewarden"],
-  Rogue: ["Thief", "Assassin", "Arcane Trickster", "Soulknife", "Phantom", "Inquisitive", "Swashbuckler"],
-  Sorcerer: ["Draconic Bloodline", "Wild Magic", "Aberrant Mind", "Clockwork Soul", "Divine Soul", "Shadow Magic"],
-  Warlock: ["The Archfey", "The Fiend", "The Great Old One", "The Celestial", "The Hexblade", "The Genie", "The Undead", "The Fathomless"],
-  Wizard: ["Evocation", "Abjuration", "Conjuration", "Divination", "Enchantment", "Illusion", "Necromancy", "Transmutation", "Bladesinging", "War Magic"],
+  Bard: [
+    "College of Dance",
+    "College of Glamour",
+    "College of Lore",
+    "College of Valor",
+    "College of Whispers",
+    "College of Swords",
+  ],
+  Cleric: [
+    "Life Domain",
+    "Light Domain",
+    "Trickery Domain",
+    "War Domain",
+    "Knowledge Domain",
+    "Nature Domain",
+    "Tempest Domain",
+    "Twilight Domain",
+    "Forge Domain",
+  ],
+  Druid: [
+    "Circle of the Land",
+    "Circle of the Moon",
+    "Circle of the Sea",
+    "Circle of the Stars",
+    "Circle of Wildfire",
+  ],
+  Fighter: [
+    "Battle Master",
+    "Champion",
+    "Eldritch Knight",
+    "Psi Warrior",
+    "Arcane Archer",
+    "Samurai",
+  ],
+  Monk: [
+    "Way of the Open Hand",
+    "Way of Shadow",
+    "Way of the Four Elements",
+    "Way of Mercy",
+    "Way of the Astral Self",
+    "Way of the Kensei",
+  ],
+  Paladin: [
+    "Oath of Devotion",
+    "Oath of the Ancients",
+    "Oath of Vengeance",
+    "Oath of Conquest",
+    "Oath of Redemption",
+    "Oath of Glory",
+    "Oath of the Watchers",
+  ],
+  Ranger: [
+    "Hunter",
+    "Beast Master",
+    "Fey Wanderer",
+    "Gloom Stalker",
+    "Horizon Walker",
+    "Swarmkeeper",
+    "Drakewarden",
+  ],
+  Rogue: [
+    "Thief",
+    "Assassin",
+    "Arcane Trickster",
+    "Soulknife",
+    "Phantom",
+    "Inquisitive",
+    "Swashbuckler",
+  ],
+  Sorcerer: [
+    "Draconic Bloodline",
+    "Wild Magic",
+    "Aberrant Mind",
+    "Clockwork Soul",
+    "Divine Soul",
+    "Shadow Magic",
+  ],
+  Warlock: [
+    "The Archfey",
+    "The Fiend",
+    "The Great Old One",
+    "The Celestial",
+    "The Hexblade",
+    "The Genie",
+    "The Undead",
+    "The Fathomless",
+  ],
+  Wizard: [
+    "Evocation",
+    "Abjuration",
+    "Conjuration",
+    "Divination",
+    "Enchantment",
+    "Illusion",
+    "Necromancy",
+    "Transmutation",
+    "Bladesinging",
+    "War Magic",
+  ],
   Artificer: ["Alchemist", "Artillerist", "Battle Smith", "Armorer"],
 };
 
@@ -153,7 +241,14 @@ function ValueLabel({ children, onClear }: { children: string; onClear?: () => v
           aria-label={`Clear ${children}`}
           className="inline-flex h-5 w-5 shrink-0 items-center justify-center rounded text-muted-foreground transition-colors duration-100 hover:bg-accent hover:text-foreground active:scale-90"
         >
-          <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.5} className="h-3 w-3">
+          <svg
+            aria-hidden="true"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth={2.5}
+            className="h-3 w-3"
+          >
             <line x1="18" y1="6" x2="6" y2="18" />
             <line x1="6" y1="6" x2="18" y2="18" />
           </svg>
@@ -183,7 +278,14 @@ function NumberCell({
   return (
     <div className="flex min-w-0 flex-col gap-1.5 rounded-lg border border-border bg-background px-1.5 py-2">
       <ValueLabel onClear={onClear}>{label}</ValueLabel>
-      <Stepper value={value} min={min} max={max} onChange={onChange} label={label} format={format} />
+      <Stepper
+        value={value}
+        min={min}
+        max={max}
+        onChange={onChange}
+        label={label}
+        format={format}
+      />
     </div>
   );
 }
@@ -215,7 +317,14 @@ function OptionalNumberCell({
           aria-label={`Set ${label}`}
           className="flex h-9 w-full select-none items-center justify-center rounded-md border border-border bg-background text-base font-semibold text-muted-foreground transition-all duration-100 hover:border-border-strong hover:text-foreground active:scale-95"
         >
-          <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.5} className="h-4 w-4">
+          <svg
+            aria-hidden="true"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth={2.5}
+            className="h-4 w-4"
+          >
             <line x1="12" y1="5" x2="12" y2="19" />
             <line x1="5" y1="12" x2="19" y2="12" />
           </svg>
@@ -243,7 +352,14 @@ function AddButton({ onClick, label }: { onClick: () => void; label: string }) {
       onClick={onClick}
       className="touch-target inline-flex items-center justify-center gap-1 rounded-lg border border-dashed border-border px-2.5 py-1 text-xs text-muted-foreground transition-all duration-150 hover:bg-accent active:bg-accent/80 active:scale-95"
     >
-      <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} className="h-3 w-3">
+      <svg
+        aria-hidden="true"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth={2}
+        className="h-3 w-3"
+      >
         <line x1="12" y1="5" x2="12" y2="19" />
         <line x1="5" y1="12" x2="19" y2="12" />
       </svg>
@@ -252,7 +368,13 @@ function AddButton({ onClick, label }: { onClick: () => void; label: string }) {
   );
 }
 
-function ReferenceRow({ canonicalId, onRemove }: { canonicalId: string; onRemove: (id: string) => void }) {
+function ReferenceRow({
+  canonicalId,
+  onRemove,
+}: {
+  canonicalId: string;
+  onRemove: (id: string) => void;
+}) {
   const ref = entityRefFromCanonicalId(canonicalId);
   if (!ref) return null;
   return (
@@ -262,7 +384,9 @@ function ReferenceRow({ canonicalId, onRemove }: { canonicalId: string; onRemove
         subtitle={ref.subtitle}
         showBadge={false}
         className="border-b border-border py-2"
-        action={<RowRemoveButton label={`Remove ${ref.name}`} onClick={() => onRemove(canonicalId)} />}
+        action={
+          <RowRemoveButton label={`Remove ${ref.name}`} onClick={() => onRemove(canonicalId)} />
+        }
       />
     </div>
   );
@@ -282,7 +406,9 @@ function ReferenceGroup({
   return (
     <div className="flex flex-col gap-1.5">
       <div className="flex items-center justify-between gap-2">
-        <span className="text-[10px] font-semibold uppercase tracking-wide text-muted-foreground">{title}</span>
+        <span className="text-[10px] font-semibold uppercase tracking-wide text-muted-foreground">
+          {title}
+        </span>
         <AddButton label="Add" onClick={onAdd} />
       </div>
       {ids.length === 0 ? (
@@ -298,7 +424,13 @@ function ReferenceGroup({
   );
 }
 
-function PlayerReferenceCard({ reference, autoEditName }: { reference: PlayerReference; autoEditName: boolean }) {
+function PlayerReferenceCard({
+  reference,
+  autoEditName,
+}: {
+  reference: PlayerReference;
+  autoEditName: boolean;
+}) {
   const [editing, setEditing] = useState<"name" | "note" | null>(autoEditName ? "name" : null);
   const [draft, setDraft] = useState("");
   const [picker, setPicker] = useState<PickerKind | null>(null);
@@ -314,7 +446,7 @@ function PlayerReferenceCard({ reference, autoEditName }: { reference: PlayerRef
 
   const startEdit = useCallback(
     (field: "name" | "note") => {
-      setDraft(field === "name" ? reference.name : reference.note ?? "");
+      setDraft(field === "name" ? reference.name : (reference.note ?? ""));
       setEditing(field);
     },
     [reference],
@@ -349,11 +481,17 @@ function PlayerReferenceCard({ reference, autoEditName }: { reference: PlayerRef
   const removeReference = useCallback(
     (kind: PickerKind, canonicalId: string) => {
       if (kind === "spell") {
-        update({ knownSpellCanonicalIds: reference.knownSpellCanonicalIds.filter((x) => x !== canonicalId) });
+        update({
+          knownSpellCanonicalIds: reference.knownSpellCanonicalIds.filter((x) => x !== canonicalId),
+        });
       } else if (kind === "weapon") {
-        update({ weaponCanonicalIds: reference.weaponCanonicalIds.filter((x) => x !== canonicalId) });
+        update({
+          weaponCanonicalIds: reference.weaponCanonicalIds.filter((x) => x !== canonicalId),
+        });
       } else {
-        update({ magicItemCanonicalIds: reference.magicItemCanonicalIds.filter((x) => x !== canonicalId) });
+        update({
+          magicItemCanonicalIds: reference.magicItemCanonicalIds.filter((x) => x !== canonicalId),
+        });
       }
     },
     [reference, update],
@@ -408,7 +546,9 @@ function PlayerReferenceCard({ reference, autoEditName }: { reference: PlayerRef
               className="max-w-44"
             />
             <div className="flex items-center gap-1">
-              <span className="text-xs font-medium uppercase tracking-wide text-muted-foreground">Lv</span>
+              <span className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
+                Lv
+              </span>
               <Stepper
                 value={reference.level}
                 min={1}
@@ -426,7 +566,14 @@ function PlayerReferenceCard({ reference, autoEditName }: { reference: PlayerRef
           aria-label={`Remove ${reference.name}`}
           className="hitbox-expand inline-flex h-8 w-8 shrink-0 items-center justify-center rounded text-muted-foreground transition-all duration-150 hover:bg-accent hover:text-foreground active:scale-90 active:bg-accent/80"
         >
-          <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} className="h-4 w-4">
+          <svg
+            aria-hidden="true"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth={2}
+            className="h-4 w-4"
+          >
             <path d="M3 6h18" />
             <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6" />
             <path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />
@@ -522,7 +669,9 @@ function PlayerReferenceCard({ reference, autoEditName }: { reference: PlayerRef
       <Divider className="my-1" />
 
       <div className="flex flex-col gap-1">
-        <span className="text-[10px] font-semibold uppercase tracking-wide text-muted-foreground">Quick Note</span>
+        <span className="text-[10px] font-semibold uppercase tracking-wide text-muted-foreground">
+          Quick Note
+        </span>
         {editing === "note" ? (
           <InlineTextareaEditor
             value={draft}
@@ -595,7 +744,9 @@ export function PartyPage() {
       {players.length === 0 ? (
         <div className="flex flex-col items-center gap-4 rounded-lg border border-border bg-surface p-6 text-center">
           <p className="text-sm text-muted-foreground">
-            Create player quick-access references: identity, combat numbers, ability modifiers, and links to the spells, weapons, and magic items you use most. Nothing else — no inventory, no tracking.
+            Create player quick-access references: identity, combat numbers, ability modifiers, and
+            links to the spells, weapons, and magic items you use most. Nothing else — no inventory,
+            no tracking.
           </p>
           <button
             type="button"
@@ -608,7 +759,11 @@ export function PartyPage() {
       ) : (
         <div className="flex flex-col gap-4">
           {players.map((player) => (
-            <PlayerReferenceCard key={player.id} reference={player} autoEditName={player.id === creatingId} />
+            <PlayerReferenceCard
+              key={player.id}
+              reference={player}
+              autoEditName={player.id === creatingId}
+            />
           ))}
         </div>
       )}

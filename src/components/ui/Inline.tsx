@@ -36,13 +36,7 @@ export function Inline({
 }: InlineProps) {
   return (
     <div
-      className={cn(
-        "flex",
-        ALIGN_CLASSES[align],
-        GAP_CLASSES[gap],
-        wrap && "flex-wrap",
-        className
-      )}
+      className={cn("flex", ALIGN_CLASSES[align], GAP_CLASSES[gap], wrap && "flex-wrap", className)}
     >
       {children}
     </div>

@@ -22,7 +22,10 @@ function FlagIcon({ filled }: { filled: boolean }) {
   );
 }
 
-export const AdventureButton = memo(function AdventureButton({ canonicalId, className = "" }: AdventureButtonProps) {
+export const AdventureButton = memo(function AdventureButton({
+  canonicalId,
+  className = "",
+}: AdventureButtonProps) {
   const inAdventure = useIsInAdventure(canonicalId);
 
   function handleClick(e: React.MouseEvent) {

@@ -412,9 +412,7 @@
     "description": [
       {
         "type": "list",
-        "items": [
-          "An incapacitated creature can't take actions or reactions."
-        ]
+        "items": ["An incapacitated creature can't take actions or reactions."]
       }
     ]
   },
@@ -724,9 +722,7 @@
     "description": [
       {
         "type": "list",
-        "items": [
-          "A poisoned creature has disadvantage on attack rolls and ability checks."
-        ]
+        "items": ["A poisoned creature has disadvantage on attack rolls and ability checks."]
       }
     ]
   },

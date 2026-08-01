@@ -112,7 +112,11 @@ function sourceFilter(entities: readonly AnyEntity[]): FilterDefinition {
   return {
     key: "source",
     label: "Source",
-    options: buildOptions(collectUnique(entities, (e) => e.source), {}, formatSource),
+    options: buildOptions(
+      collectUnique(entities, (e) => e.source),
+      {},
+      formatSource,
+    ),
   };
 }
 
@@ -153,12 +157,18 @@ export const CATEGORY_REGISTRY: Record<EntityCategory, CategoryRegistration> = {
         {
           key: "level",
           label: "Level",
-          options: buildOptions(collectUnique(spells, (s) => String(s.level)), { "0": "Cantrip" }),
+          options: buildOptions(
+            collectUnique(spells, (s) => String(s.level)),
+            { "0": "Cantrip" },
+          ),
         },
         {
           key: "school",
           label: "School",
-          options: buildOptions(collectUnique(spells, (s) => s.school), SCHOOL_NAMES),
+          options: buildOptions(
+            collectUnique(spells, (s) => s.school),
+            SCHOOL_NAMES,
+          ),
         },
         sourceFilter(spells),
       ];

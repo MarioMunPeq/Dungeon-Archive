@@ -17,7 +17,20 @@ const CATEGORY_LABELS: Record<string, string> = {
 };
 
 function formatPrerequisite(
-  prereqs: readonly { readonly level?: number; readonly campaign?: readonly string[]; readonly ability?: readonly { readonly ability?: readonly string[]; readonly minimum?: number }[]; readonly spellcasting?: boolean; readonly pact?: string; readonly proficiency?: readonly { readonly armor?: boolean; readonly weapon?: boolean }[]; readonly [key: string]: unknown }[] | undefined,
+  prereqs:
+    | readonly {
+        readonly level?: number;
+        readonly campaign?: readonly string[];
+        readonly ability?: readonly {
+          readonly ability?: readonly string[];
+          readonly minimum?: number;
+        }[];
+        readonly spellcasting?: boolean;
+        readonly pact?: string;
+        readonly proficiency?: readonly { readonly armor?: boolean; readonly weapon?: boolean }[];
+        readonly [key: string]: unknown;
+      }[]
+    | undefined,
 ): string | undefined {
   if (!prereqs || prereqs.length === 0) return undefined;
   const parts: string[] = [];

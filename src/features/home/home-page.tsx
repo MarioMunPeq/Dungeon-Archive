@@ -6,7 +6,13 @@ import {
   CATEGORY_REGISTRY,
 } from "@/compendium";
 import type { EntityCategory, EntityCardData } from "@/compendium";
-import { useFavoriteIds, useRecentEntities, useSessionIds, useActiveAdventure, usePlayerReferences } from "@/user-state";
+import {
+  useFavoriteIds,
+  useRecentEntities,
+  useSessionIds,
+  useActiveAdventure,
+  usePlayerReferences,
+} from "@/user-state";
 import { entityRefFromCanonicalId, EntityCard } from "@/components/entity";
 
 const CATEGORIES = Object.keys(CATEGORY_REGISTRY) as EntityCategory[];
@@ -65,23 +71,41 @@ export function HomePage() {
             className="flex items-center gap-1 text-sm font-semibold text-foreground hover:text-primary-muted"
           >
             Current Adventure
-            <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} className="h-3.5 w-3.5">
+            <svg
+              aria-hidden="true"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth={2}
+              className="h-3.5 w-3.5"
+            >
               <path d="M9 18l6-6-6-6" />
             </svg>
           </Link>
           <div className="flex flex-col gap-2 rounded-lg border border-border bg-surface p-4">
             <div className="flex items-center justify-between">
               <span className="text-sm font-medium text-foreground">{adventure.title}</span>
-              {adventure.archived && <span className="text-xs text-foreground-subtle">Archived</span>}
+              {adventure.archived && (
+                <span className="text-xs text-foreground-subtle">Archived</span>
+              )}
             </div>
             {adventure.description && (
               <p className="line-clamp-2 text-xs text-muted-foreground">{adventure.description}</p>
             )}
             <div className="flex items-center gap-3 text-xs text-foreground-subtle">
-              <span>{adventure.entities.length} entr{adventure.entities.length === 1 ? "y" : "ies"}</span>
-              <span>{adventure.objectives.length} objective{adventure.objectives.length === 1 ? "" : "s"}</span>
+              <span>
+                {adventure.entities.length} entr{adventure.entities.length === 1 ? "y" : "ies"}
+              </span>
+              <span>
+                {adventure.objectives.length} objective
+                {adventure.objectives.length === 1 ? "" : "s"}
+              </span>
               <span className="ml-auto">
-                Updated {new Date(adventure.updatedAt).toLocaleDateString(undefined, { month: "short", day: "numeric" })}
+                Updated{" "}
+                {new Date(adventure.updatedAt).toLocaleDateString(undefined, {
+                  month: "short",
+                  day: "numeric",
+                })}
               </span>
             </div>
           </div>
@@ -93,7 +117,14 @@ export function HomePage() {
           to="/adventure"
           className="flex items-center gap-2 rounded-lg border border-dashed border-border p-4 text-sm text-muted-foreground transition-colors hover:bg-accent active:bg-accent/80"
         >
-          <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} className="h-4 w-4">
+          <svg
+            aria-hidden="true"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth={2}
+            className="h-4 w-4"
+          >
             <line x1="4" y1="3" x2="4" y2="21" />
             <polyline points="4 3 20 3 18 7 20 11 4 11" />
           </svg>
@@ -108,7 +139,14 @@ export function HomePage() {
             className="flex items-center gap-1 text-sm font-semibold text-foreground hover:text-primary-muted"
           >
             Party
-            <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} className="h-3.5 w-3.5">
+            <svg
+              aria-hidden="true"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth={2}
+              className="h-3.5 w-3.5"
+            >
               <path d="M9 18l6-6-6-6" />
             </svg>
           </Link>
@@ -122,7 +160,9 @@ export function HomePage() {
               </div>
             ))}
             {players.length > shownPlayers.length && (
-              <p className="text-xs text-foreground-subtle">+{players.length - shownPlayers.length} more</p>
+              <p className="text-xs text-foreground-subtle">
+                +{players.length - shownPlayers.length} more
+              </p>
             )}
           </div>
         </div>
@@ -131,7 +171,14 @@ export function HomePage() {
           to="/party"
           className="flex items-center gap-2 rounded-lg border border-dashed border-border p-4 text-sm text-muted-foreground transition-colors hover:bg-accent active:bg-accent/80"
         >
-          <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} className="h-4 w-4">
+          <svg
+            aria-hidden="true"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth={2}
+            className="h-4 w-4"
+          >
             <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
             <circle cx="9" cy="7" r="4" />
             <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
@@ -148,7 +195,14 @@ export function HomePage() {
             className="flex items-center gap-1 text-sm font-semibold text-foreground hover:text-primary-muted"
           >
             Continue Session
-            <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} className="h-3.5 w-3.5">
+            <svg
+              aria-hidden="true"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth={2}
+              className="h-3.5 w-3.5"
+            >
               <path d="M9 18l6-6-6-6" />
             </svg>
           </Link>
@@ -197,7 +251,8 @@ export function HomePage() {
       {sessionCards.length === 0 && recentCards.length === 0 && favoriteCards.length === 0 && (
         <div className="flex flex-col items-center gap-4 rounded-lg border border-border bg-surface p-6 text-center">
           <p className="text-sm text-muted-foreground">
-            Browse entities, search for something, or tap the heart, pin, and flag icons to save favorites, build your session, and track your adventure.
+            Browse entities, search for something, or tap the heart, pin, and flag icons to save
+            favorites, build your session, and track your adventure.
           </p>
         </div>
       )}

@@ -74,7 +74,9 @@ test("formatPrerequisite handles level", () => {
 });
 
 test("formatPrerequisite handles multiple conditions", () => {
-  const raw = [makeRawFeat("Eldritch Adept", "TCE", { prerequisite: [{ level: 4, spellcasting: true }] })];
+  const raw = [
+    makeRawFeat("Eldritch Adept", "TCE", { prerequisite: [{ level: 4, spellcasting: true }] }),
+  ];
   const result = transformFeats(raw);
   ok(result[0]!.prerequisite!.includes("Level 4"));
   ok(result[0]!.prerequisite!.includes("Spellcasting"));
@@ -106,10 +108,7 @@ test("transforms description with processEntries", () => {
 });
 
 test("filters by allowed source", () => {
-  const raw = [
-    makeRawFeat("Valid Feat", "XPHB"),
-    makeRawFeat("Invalid Feat", "UNKNOWN"),
-  ];
+  const raw = [makeRawFeat("Valid Feat", "XPHB"), makeRawFeat("Invalid Feat", "UNKNOWN")];
   const result = transformFeats(raw);
   strictEqual(result.length, 1);
   strictEqual(result[0]!.name, "Valid Feat");

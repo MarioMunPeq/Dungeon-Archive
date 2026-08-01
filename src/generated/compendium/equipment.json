@@ -6063,10 +6063,7 @@
     "type": "Melee Weapon",
     "damage": "1d6",
     "damageType": "Y",
-    "properties": [
-      "Finesse",
-      "Thrown"
-    ],
+    "properties": ["Finesse", "Thrown"],
     "description": []
   },
   {
@@ -9731,11 +9728,7 @@
     "weight": "10 lb",
     "damage": "6d8",
     "damageType": "N",
-    "properties": [
-      "Autofire",
-      "Reload",
-      "Two-Handed"
-    ],
+    "properties": ["Autofire", "Reload", "Two-Handed"],
     "description": []
   },
   {
@@ -9748,11 +9741,7 @@
     "weight": "10 lb",
     "damage": "6d8",
     "damageType": "N",
-    "properties": [
-      "Autofire",
-      "Reload",
-      "Two-Handed"
-    ],
+    "properties": ["Autofire", "Reload", "Two-Handed"],
     "description": []
   },
   {
@@ -9827,10 +9816,7 @@
     "weight": "3 lb",
     "damage": "2d6",
     "damageType": "P",
-    "properties": [
-      "Autofire",
-      "Reload"
-    ],
+    "properties": ["Autofire", "Reload"],
     "description": []
   },
   {
@@ -9843,12 +9829,7 @@
     "weight": "8 lb",
     "damage": "2d8",
     "damageType": "P",
-    "properties": [
-      "Autofire",
-      "Burst Fire",
-      "Reload",
-      "Two-Handed"
-    ],
+    "properties": ["Autofire", "Burst Fire", "Reload", "Two-Handed"],
     "description": []
   },
   {
@@ -9861,12 +9842,7 @@
     "weight": "8 lb",
     "damage": "2d8",
     "damageType": "P",
-    "properties": [
-      "Autofire",
-      "Burst Fire",
-      "Reload",
-      "Two-Handed"
-    ],
+    "properties": ["Autofire", "Burst Fire", "Reload", "Two-Handed"],
     "description": []
   },
   {
@@ -9929,9 +9905,7 @@
     "weight": "4 lb",
     "damage": "1d8",
     "damageType": "S",
-    "properties": [
-      "Versatile"
-    ],
+    "properties": ["Versatile"],
     "description": []
   },
   {
@@ -9945,9 +9919,7 @@
     "weight": "4 lb",
     "damage": "1d8",
     "damageType": "S",
-    "properties": [
-      "Versatile"
-    ],
+    "properties": ["Versatile"],
     "description": []
   },
   {
@@ -9961,10 +9933,7 @@
     "weight": "1 lb",
     "damage": "1",
     "damageType": "P",
-    "properties": [
-      "Ammunition",
-      "Loading"
-    ],
+    "properties": ["Ammunition", "Loading"],
     "description": []
   },
   {
@@ -9978,10 +9947,7 @@
     "weight": "1 lb",
     "damage": "1",
     "damageType": "P",
-    "properties": [
-      "Ammunition",
-      "Loading"
-    ],
+    "properties": ["Ammunition", "Loading"],
     "description": []
   },
   {
@@ -10384,9 +10350,7 @@
     "weight": "2 lb",
     "damage": "1d4",
     "damageType": "B",
-    "properties": [
-      "Light"
-    ],
+    "properties": ["Light"],
     "description": []
   },
   {
@@ -10400,9 +10364,7 @@
     "weight": "2 lb",
     "damage": "1d4",
     "damageType": "B",
-    "properties": [
-      "Light"
-    ],
+    "properties": ["Light"],
     "description": []
   },
   {
@@ -10578,11 +10540,7 @@
     "weight": "1 lb",
     "damage": "1d4",
     "damageType": "P",
-    "properties": [
-      "Finesse",
-      "Light",
-      "Thrown"
-    ],
+    "properties": ["Finesse", "Light", "Thrown"],
     "description": []
   },
   {
@@ -10596,11 +10554,7 @@
     "weight": "1 lb",
     "damage": "1d4",
     "damageType": "P",
-    "properties": [
-      "Finesse",
-      "Light",
-      "Thrown"
-    ],
+    "properties": ["Finesse", "Light", "Thrown"],
     "description": []
   },
   {
@@ -10614,10 +10568,7 @@
     "weight": "0.25 lb",
     "damage": "1d4",
     "damageType": "P",
-    "properties": [
-      "Finesse",
-      "Thrown"
-    ],
+    "properties": ["Finesse", "Thrown"],
     "description": []
   },
   {
@@ -10631,10 +10582,7 @@
     "weight": "0.25 lb",
     "damage": "1d4",
     "damageType": "P",
-    "properties": [
-      "Finesse",
-      "Thrown"
-    ],
+    "properties": ["Finesse", "Thrown"],
     "description": []
   },
   {
@@ -10873,11 +10821,7 @@
     "weight": "6 lb",
     "damage": "1d10",
     "damageType": "S",
-    "properties": [
-      "Heavy",
-      "Reach",
-      "Two-Handed"
-    ],
+    "properties": ["Heavy", "Reach", "Two-Handed"],
     "description": []
   },
   {
@@ -10891,11 +10835,7 @@
     "weight": "6 lb",
     "damage": "1d10",
     "damageType": "S",
-    "properties": [
-      "Heavy",
-      "Reach",
-      "Two-Handed"
-    ],
+    "properties": ["Heavy", "Reach", "Two-Handed"],
     "description": []
   },
   {
@@ -10968,10 +10908,7 @@
     "weight": "7 lb",
     "damage": "1d12",
     "damageType": "S",
-    "properties": [
-      "Heavy",
-      "Two-Handed"
-    ],
+    "properties": ["Heavy", "Two-Handed"],
     "description": []
   },
   {
@@ -10985,10 +10922,7 @@
     "weight": "7 lb",
     "damage": "1d12",
     "damageType": "S",
-    "properties": [
-      "Heavy",
-      "Two-Handed"
-    ],
+    "properties": ["Heavy", "Two-Handed"],
     "description": []
   },
   {
@@ -11002,9 +10936,7 @@
     "weight": "10 lb",
     "damage": "1d8",
     "damageType": "B",
-    "properties": [
-      "Two-Handed"
-    ],
+    "properties": ["Two-Handed"],
     "description": []
   },
   {
@@ -11018,9 +10950,7 @@
     "weight": "10 lb",
     "damage": "1d8",
     "damageType": "B",
-    "properties": [
-      "Two-Handed"
-    ],
+    "properties": ["Two-Handed"],
     "description": []
   },
   {
@@ -11034,10 +10964,7 @@
     "weight": "6 lb",
     "damage": "2d6",
     "damageType": "S",
-    "properties": [
-      "Heavy",
-      "Two-Handed"
-    ],
+    "properties": ["Heavy", "Two-Handed"],
     "description": []
   },
   {
@@ -11051,10 +10978,7 @@
     "weight": "6 lb",
     "damage": "2d6",
     "damageType": "S",
-    "properties": [
-      "Heavy",
-      "Two-Handed"
-    ],
+    "properties": ["Heavy", "Two-Handed"],
     "description": []
   },
   {
@@ -11068,11 +10992,7 @@
     "weight": "6 lb",
     "damage": "1d10",
     "damageType": "S",
-    "properties": [
-      "Heavy",
-      "Reach",
-      "Two-Handed"
-    ],
+    "properties": ["Heavy", "Reach", "Two-Handed"],
     "description": []
   },
   {
@@ -11086,11 +11006,7 @@
     "weight": "6 lb",
     "damage": "1d10",
     "damageType": "S",
-    "properties": [
-      "Heavy",
-      "Reach",
-      "Two-Handed"
-    ],
+    "properties": ["Heavy", "Reach", "Two-Handed"],
     "description": []
   },
   {
@@ -11135,11 +11051,7 @@
     "weight": "3 lb",
     "damage": "1d6",
     "damageType": "P",
-    "properties": [
-      "Ammunition",
-      "Light",
-      "Loading"
-    ],
+    "properties": ["Ammunition", "Light", "Loading"],
     "description": []
   },
   {
@@ -11153,11 +11065,7 @@
     "weight": "3 lb",
     "damage": "1d6",
     "damageType": "P",
-    "properties": [
-      "Ammunition",
-      "Light",
-      "Loading"
-    ],
+    "properties": ["Ammunition", "Light", "Loading"],
     "description": []
   },
   {
@@ -11171,10 +11079,7 @@
     "weight": "2 lb",
     "damage": "1d6",
     "damageType": "S",
-    "properties": [
-      "Light",
-      "Thrown"
-    ],
+    "properties": ["Light", "Thrown"],
     "description": []
   },
   {
@@ -11188,10 +11093,7 @@
     "weight": "2 lb",
     "damage": "1d6",
     "damageType": "S",
-    "properties": [
-      "Light",
-      "Thrown"
-    ],
+    "properties": ["Light", "Thrown"],
     "description": []
   },
   {
@@ -11205,12 +11107,7 @@
     "weight": "18 lb",
     "damage": "1d10",
     "damageType": "P",
-    "properties": [
-      "Ammunition",
-      "Heavy",
-      "Loading",
-      "Two-Handed"
-    ],
+    "properties": ["Ammunition", "Heavy", "Loading", "Two-Handed"],
     "description": []
   },
   {
@@ -11224,12 +11121,7 @@
     "weight": "18 lb",
     "damage": "1d10",
     "damageType": "P",
-    "properties": [
-      "Ammunition",
-      "Heavy",
-      "Loading",
-      "Two-Handed"
-    ],
+    "properties": ["Ammunition", "Heavy", "Loading", "Two-Handed"],
     "description": []
   },
   {
@@ -11320,11 +11212,7 @@
     "weight": "8 lb",
     "damage": "2d10",
     "damageType": "P",
-    "properties": [
-      "Autofire",
-      "Reload",
-      "Two-Handed"
-    ],
+    "properties": ["Autofire", "Reload", "Two-Handed"],
     "description": []
   },
   {
@@ -11337,11 +11225,7 @@
     "weight": "8 lb",
     "damage": "2d10",
     "damageType": "P",
-    "properties": [
-      "Autofire",
-      "Reload",
-      "Two-Handed"
-    ],
+    "properties": ["Autofire", "Reload", "Two-Handed"],
     "description": []
   },
   {
@@ -11355,9 +11239,7 @@
     "weight": "2 lb",
     "damage": "1d6",
     "damageType": "P",
-    "properties": [
-      "Thrown"
-    ],
+    "properties": ["Thrown"],
     "description": []
   },
   {
@@ -11371,9 +11253,7 @@
     "weight": "2 lb",
     "damage": "1d6",
     "damageType": "P",
-    "properties": [
-      "Thrown"
-    ],
+    "properties": ["Thrown"],
     "description": []
   },
   {
@@ -11446,10 +11326,7 @@
     "weight": "6 lb",
     "damage": "1d12",
     "damageType": "P",
-    "properties": [
-      "Reach",
-      "Special"
-    ],
+    "properties": ["Reach", "Special"],
     "description": [
       {
         "type": "entries",
@@ -11473,11 +11350,7 @@
     "weight": "6 lb",
     "damage": "1d10",
     "damageType": "P",
-    "properties": [
-      "Heavy",
-      "Reach",
-      "Two-Handed"
-    ],
+    "properties": ["Heavy", "Reach", "Two-Handed"],
     "description": [
       {
         "type": "paragraph",
@@ -11495,10 +11368,7 @@
     "weight": "2 lb",
     "damage": "3d6",
     "damageType": "R",
-    "properties": [
-      "Autofire",
-      "Reload"
-    ],
+    "properties": ["Autofire", "Reload"],
     "description": []
   },
   {
@@ -11511,10 +11381,7 @@
     "weight": "2 lb",
     "damage": "3d6",
     "damageType": "R",
-    "properties": [
-      "Autofire",
-      "Reload"
-    ],
+    "properties": ["Autofire", "Reload"],
     "description": []
   },
   {
@@ -11527,11 +11394,7 @@
     "weight": "7 lb",
     "damage": "3d8",
     "damageType": "R",
-    "properties": [
-      "Autofire",
-      "Reload",
-      "Two-Handed"
-    ],
+    "properties": ["Autofire", "Reload", "Two-Handed"],
     "description": []
   },
   {
@@ -11544,11 +11407,7 @@
     "weight": "7 lb",
     "damage": "3d8",
     "damageType": "R",
-    "properties": [
-      "Autofire",
-      "Reload",
-      "Two-Handed"
-    ],
+    "properties": ["Autofire", "Reload", "Two-Handed"],
     "description": []
   },
   {
@@ -11650,11 +11509,7 @@
     "weight": "5 lb",
     "damage": "1d8",
     "damageType": "P",
-    "properties": [
-      "Ammunition",
-      "Loading",
-      "Two-Handed"
-    ],
+    "properties": ["Ammunition", "Loading", "Two-Handed"],
     "description": []
   },
   {
@@ -11668,11 +11523,7 @@
     "weight": "5 lb",
     "damage": "1d8",
     "damageType": "P",
-    "properties": [
-      "Ammunition",
-      "Loading",
-      "Two-Handed"
-    ],
+    "properties": ["Ammunition", "Loading", "Two-Handed"],
     "description": []
   },
   {
@@ -11686,10 +11537,7 @@
     "weight": "2 lb",
     "damage": "1d4",
     "damageType": "B",
-    "properties": [
-      "Light",
-      "Thrown"
-    ],
+    "properties": ["Light", "Thrown"],
     "description": []
   },
   {
@@ -11703,10 +11551,7 @@
     "weight": "2 lb",
     "damage": "1d4",
     "damageType": "B",
-    "properties": [
-      "Light",
-      "Thrown"
-    ],
+    "properties": ["Light", "Thrown"],
     "description": []
   },
   {
@@ -11720,11 +11565,7 @@
     "weight": "2 lb",
     "damage": "1d8",
     "damageType": "P",
-    "properties": [
-      "Ammunition",
-      "Heavy",
-      "Two-Handed"
-    ],
+    "properties": ["Ammunition", "Heavy", "Two-Handed"],
     "description": []
   },
   {
@@ -11738,11 +11579,7 @@
     "weight": "2 lb",
     "damage": "1d8",
     "damageType": "P",
-    "properties": [
-      "Ammunition",
-      "Heavy",
-      "Two-Handed"
-    ],
+    "properties": ["Ammunition", "Heavy", "Two-Handed"],
     "description": []
   },
   {
@@ -11756,9 +11593,7 @@
     "weight": "3 lb",
     "damage": "1d8",
     "damageType": "S",
-    "properties": [
-      "Versatile"
-    ],
+    "properties": ["Versatile"],
     "description": []
   },
   {
@@ -11772,9 +11607,7 @@
     "weight": "3 lb",
     "damage": "1d8",
     "damageType": "S",
-    "properties": [
-      "Versatile"
-    ],
+    "properties": ["Versatile"],
     "description": []
   },
   {
@@ -11971,10 +11804,7 @@
     "weight": "10 lb",
     "damage": "2d6",
     "damageType": "B",
-    "properties": [
-      "Heavy",
-      "Two-Handed"
-    ],
+    "properties": ["Heavy", "Two-Handed"],
     "description": []
   },
   {
@@ -11988,10 +11818,7 @@
     "weight": "10 lb",
     "damage": "2d6",
     "damageType": "B",
-    "properties": [
-      "Heavy",
-      "Two-Handed"
-    ],
+    "properties": ["Heavy", "Two-Handed"],
     "description": []
   },
   {
@@ -12051,11 +11878,7 @@
     "weight": "10 lb",
     "damage": "1d12",
     "damageType": "P",
-    "properties": [
-      "Autofire",
-      "Loading",
-      "Two-Handed"
-    ],
+    "properties": ["Autofire", "Loading", "Two-Handed"],
     "description": []
   },
   {
@@ -12069,11 +11892,7 @@
     "weight": "10 lb",
     "damage": "1d12",
     "damageType": "P",
-    "properties": [
-      "Ammunition",
-      "Loading",
-      "Two-Handed"
-    ],
+    "properties": ["Ammunition", "Loading", "Two-Handed"],
     "description": []
   },
   {
@@ -12125,10 +11944,7 @@
     "type": "Ranged Weapon",
     "cost": "1 gp",
     "weight": "3 lb",
-    "properties": [
-      "Special",
-      "Thrown"
-    ],
+    "properties": ["Special", "Thrown"],
     "description": [
       {
         "type": "entries",
@@ -12313,11 +12129,7 @@
     "weight": "18 lb",
     "damage": "1d10",
     "damageType": "P",
-    "properties": [
-      "Heavy",
-      "Reach",
-      "Two-Handed"
-    ],
+    "properties": ["Heavy", "Reach", "Two-Handed"],
     "description": []
   },
   {
@@ -12331,11 +12143,7 @@
     "weight": "18 lb",
     "damage": "1d10",
     "damageType": "P",
-    "properties": [
-      "Heavy",
-      "Reach",
-      "Two-Handed"
-    ],
+    "properties": ["Heavy", "Reach", "Two-Handed"],
     "description": []
   },
   {
@@ -12349,10 +12157,7 @@
     "weight": "3 lb",
     "damage": "1d10",
     "damageType": "P",
-    "properties": [
-      "Autofire",
-      "Loading"
-    ],
+    "properties": ["Autofire", "Loading"],
     "description": []
   },
   {
@@ -12366,10 +12171,7 @@
     "weight": "3 lb",
     "damage": "1d10",
     "damageType": "P",
-    "properties": [
-      "Ammunition",
-      "Loading"
-    ],
+    "properties": ["Ammunition", "Loading"],
     "description": []
   },
   {
@@ -12475,9 +12277,7 @@
     "weight": "4 lb",
     "damage": "1d6",
     "damageType": "B",
-    "properties": [
-      "Versatile"
-    ],
+    "properties": ["Versatile"],
     "description": []
   },
   {
@@ -12491,9 +12291,7 @@
     "weight": "4 lb",
     "damage": "1d6",
     "damageType": "B",
-    "properties": [
-      "Versatile"
-    ],
+    "properties": ["Versatile"],
     "description": []
   },
   {
@@ -12507,9 +12305,7 @@
     "weight": "2 lb",
     "damage": "1d8",
     "damageType": "P",
-    "properties": [
-      "Finesse"
-    ],
+    "properties": ["Finesse"],
     "description": []
   },
   {
@@ -12523,9 +12319,7 @@
     "weight": "2 lb",
     "damage": "1d8",
     "damageType": "P",
-    "properties": [
-      "Finesse"
-    ],
+    "properties": ["Finesse"],
     "description": []
   },
   {
@@ -12560,10 +12354,7 @@
     "weight": "3 lb",
     "damage": "2d8",
     "damageType": "P",
-    "properties": [
-      "Autofire",
-      "Reload"
-    ],
+    "properties": ["Autofire", "Reload"],
     "description": []
   },
   {
@@ -12576,10 +12367,7 @@
     "weight": "3 lb",
     "damage": "2d8",
     "damageType": "P",
-    "properties": [
-      "Autofire",
-      "Reload"
-    ],
+    "properties": ["Autofire", "Reload"],
     "description": []
   },
   {
@@ -12677,10 +12465,7 @@
     "weight": "3 lb",
     "damage": "1d6",
     "damageType": "S",
-    "properties": [
-      "Finesse",
-      "Light"
-    ],
+    "properties": ["Finesse", "Light"],
     "description": []
   },
   {
@@ -12694,10 +12479,7 @@
     "weight": "3 lb",
     "damage": "1d6",
     "damageType": "S",
-    "properties": [
-      "Finesse",
-      "Light"
-    ],
+    "properties": ["Finesse", "Light"],
     "description": []
   },
   {
@@ -12710,10 +12492,7 @@
     "weight": "3 lb",
     "damage": "2d6",
     "damageType": "P",
-    "properties": [
-      "Autofire",
-      "Reload"
-    ],
+    "properties": ["Autofire", "Reload"],
     "description": []
   },
   {
@@ -12805,10 +12584,7 @@
     "weight": "2 lb",
     "damage": "1d6",
     "damageType": "P",
-    "properties": [
-      "Ammunition",
-      "Two-Handed"
-    ],
+    "properties": ["Ammunition", "Two-Handed"],
     "description": []
   },
   {
@@ -12822,10 +12598,7 @@
     "weight": "2 lb",
     "damage": "1d6",
     "damageType": "P",
-    "properties": [
-      "Ammunition",
-      "Two-Handed"
-    ],
+    "properties": ["Ammunition", "Two-Handed"],
     "description": []
   },
   {
@@ -12839,10 +12612,7 @@
     "weight": "2 lb",
     "damage": "1d6",
     "damageType": "P",
-    "properties": [
-      "Finesse",
-      "Light"
-    ],
+    "properties": ["Finesse", "Light"],
     "description": []
   },
   {
@@ -12856,10 +12626,7 @@
     "weight": "2 lb",
     "damage": "1d6",
     "damageType": "P",
-    "properties": [
-      "Finesse",
-      "Light"
-    ],
+    "properties": ["Finesse", "Light"],
     "description": []
   },
   {
@@ -12872,11 +12639,7 @@
     "weight": "7 lb",
     "damage": "2d8",
     "damageType": "P",
-    "properties": [
-      "Autofire",
-      "Reload",
-      "Two-Handed"
-    ],
+    "properties": ["Autofire", "Reload", "Two-Handed"],
     "description": []
   },
   {
@@ -12889,11 +12652,7 @@
     "weight": "7 lb",
     "damage": "2d8",
     "damageType": "P",
-    "properties": [
-      "Autofire",
-      "Reload",
-      "Two-Handed"
-    ],
+    "properties": ["Autofire", "Reload", "Two-Handed"],
     "description": []
   },
   {
@@ -12907,9 +12666,7 @@
     "weight": "2 lb",
     "damage": "1d4",
     "damageType": "S",
-    "properties": [
-      "Light"
-    ],
+    "properties": ["Light"],
     "description": []
   },
   {
@@ -12923,9 +12680,7 @@
     "weight": "2 lb",
     "damage": "1d4",
     "damageType": "S",
-    "properties": [
-      "Light"
-    ],
+    "properties": ["Light"],
     "description": []
   },
   {
@@ -12938,9 +12693,7 @@
     "cost": "0.1 gp",
     "damage": "1d4",
     "damageType": "B",
-    "properties": [
-      "Ammunition"
-    ],
+    "properties": ["Ammunition"],
     "description": []
   },
   {
@@ -12953,9 +12706,7 @@
     "cost": "0.1 gp",
     "damage": "1d4",
     "damageType": "B",
-    "properties": [
-      "Ammunition"
-    ],
+    "properties": ["Ammunition"],
     "description": []
   },
   {
@@ -13090,10 +12841,7 @@
     "weight": "3 lb",
     "damage": "1d6",
     "damageType": "P",
-    "properties": [
-      "Thrown",
-      "Versatile"
-    ],
+    "properties": ["Thrown", "Versatile"],
     "description": []
   },
   {
@@ -13107,10 +12855,7 @@
     "weight": "3 lb",
     "damage": "1d6",
     "damageType": "P",
-    "properties": [
-      "Thrown",
-      "Versatile"
-    ],
+    "properties": ["Thrown", "Versatile"],
     "description": []
   },
   {
@@ -13157,9 +12902,7 @@
     "weight": "4 lb",
     "damage": "1d6",
     "damageType": "B",
-    "properties": [
-      "Versatile"
-    ],
+    "properties": ["Versatile"],
     "description": []
   },
   {
@@ -13173,9 +12916,7 @@
     "weight": "4 lb",
     "damage": "1d6",
     "damageType": "B",
-    "properties": [
-      "Versatile"
-    ],
+    "properties": ["Versatile"],
     "description": []
   },
   {
@@ -13277,10 +13018,7 @@
     "weight": "4 lb",
     "damage": "1d6",
     "damageType": "P",
-    "properties": [
-      "Thrown",
-      "Versatile"
-    ],
+    "properties": ["Thrown", "Versatile"],
     "description": []
   },
   {
@@ -13294,10 +13032,7 @@
     "weight": "4 lb",
     "damage": "1d8",
     "damageType": "P",
-    "properties": [
-      "Thrown",
-      "Versatile"
-    ],
+    "properties": ["Thrown", "Versatile"],
     "description": []
   },
   {
@@ -13395,9 +13130,7 @@
     "weight": "2 lb",
     "damage": "1d8",
     "damageType": "P",
-    "properties": [
-      "Versatile"
-    ],
+    "properties": ["Versatile"],
     "description": []
   },
   {
@@ -13411,9 +13144,7 @@
     "weight": "2 lb",
     "damage": "1d8",
     "damageType": "B",
-    "properties": [
-      "Versatile"
-    ],
+    "properties": ["Versatile"],
     "description": []
   },
   {
@@ -13427,9 +13158,7 @@
     "weight": "5 lb",
     "damage": "1d8",
     "damageType": "B",
-    "properties": [
-      "Versatile"
-    ],
+    "properties": ["Versatile"],
     "description": []
   },
   {
@@ -13502,10 +13231,7 @@
     "weight": "3 lb",
     "damage": "1d4",
     "damageType": "S",
-    "properties": [
-      "Finesse",
-      "Reach"
-    ],
+    "properties": ["Finesse", "Reach"],
     "description": []
   },
   {
@@ -13519,10 +13245,7 @@
     "weight": "3 lb",
     "damage": "1d4",
     "damageType": "S",
-    "properties": [
-      "Finesse",
-      "Reach"
-    ],
+    "properties": ["Finesse", "Reach"],
     "description": []
   },
   {
@@ -13595,9 +13318,7 @@
     "weight": "4 lb",
     "damage": "1d6",
     "damageType": "B",
-    "properties": [
-      "Versatile"
-    ],
+    "properties": ["Versatile"],
     "description": []
   },
   {
@@ -13611,9 +13332,7 @@
     "weight": "4 lb",
     "damage": "1d6",
     "damageType": "B",
-    "properties": [
-      "Versatile"
-    ],
+    "properties": ["Versatile"],
     "description": []
   }
 ]

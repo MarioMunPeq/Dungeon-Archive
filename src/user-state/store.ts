@@ -1,6 +1,12 @@
 import { create } from "zustand";
 import { useMemo } from "react";
-import type { AbilityModifiers, Adventure, CombatValues, PlayerReference, UserState } from "./types";
+import type {
+  AbilityModifiers,
+  Adventure,
+  CombatValues,
+  PlayerReference,
+  UserState,
+} from "./types";
 import { STORAGE_KEY, CURRENT_VERSION } from "./types";
 import { read, write } from "./persistence";
 import { migrate } from "./migrations";
@@ -8,7 +14,10 @@ import { normalize, validateIds } from "./normalize";
 
 interface AdventureActions {
   createAdventure: (data?: { title?: string; description?: string }) => void;
-  updateAdventure: (id: string, data: { title?: string; description?: string; notes?: string }) => void;
+  updateAdventure: (
+    id: string,
+    data: { title?: string; description?: string; notes?: string },
+  ) => void;
   addObjective: (adventureId: string, objective: string) => void;
   removeObjective: (adventureId: string, index: number) => void;
   toggleAdventureEntity: (canonicalId: string) => void;
@@ -43,12 +52,15 @@ interface UserActions {
   _reset: () => void;
 }
 
-export type UserStore = UserState & UserActions & AdventureActions & PlayerActions & {
-  favoritesSet: Set<string>;
-  sessionSet: Set<string>;
-  adventureEntitySet: Set<string>;
-  _hasHydrated: boolean;
-};
+export type UserStore = UserState &
+  UserActions &
+  AdventureActions &
+  PlayerActions & {
+    favoritesSet: Set<string>;
+    sessionSet: Set<string>;
+    adventureEntitySet: Set<string>;
+    _hasHydrated: boolean;
+  };
 
 function clampInt(value: number, min: number, max: number): number {
   return Math.max(min, Math.min(max, Math.floor(value)));
@@ -76,7 +88,8 @@ function clampCombatValues(values: CombatValues): CombatValues {
     initiativeModifier: clampInitiative(values.initiativeModifier),
     passivePerception: clampCombat(values.passivePerception),
     spellSaveDc: values.spellSaveDc !== undefined ? clampCombat(values.spellSaveDc) : undefined,
-    spellAttackBonus: values.spellAttackBonus !== undefined ? clampInitiative(values.spellAttackBonus) : undefined,
+    spellAttackBonus:
+      values.spellAttackBonus !== undefined ? clampInitiative(values.spellAttackBonus) : undefined,
   };
 }
 
@@ -115,8 +128,26 @@ function schedulePersist(getState: () => UserStore): void {
   if (debounceTimer !== null) clearTimeout(debounceTimer);
   debounceTimer = setTimeout(() => {
     debounceTimer = null;
-    const { version, favorites, recentEntities, recentSearches, session, adventures, activeAdventureId, players } = getState();
-    write({ version, favorites, recentEntities, recentSearches, session, adventures, activeAdventureId, players });
+    const {
+      version,
+      favorites,
+      recentEntities,
+      recentSearches,
+      session,
+      adventures,
+      activeAdventureId,
+      players,
+    } = getState();
+    write({
+      version,
+      favorites,
+      recentEntities,
+      recentSearches,
+      session,
+      adventures,
+      activeAdventureId,
+      players,
+    });
   }, 150);
 }
 
@@ -132,7 +163,10 @@ function generateId(): string {
   return Date.now().toString(36) + Math.random().toString(36).slice(2, 8);
 }
 
-function updateActiveAdventureSet(adventures: Adventure[], activeAdventureId: string | null): Set<string> {
+function updateActiveAdventureSet(
+  adventures: Adventure[],
+  activeAdventureId: string | null,
+): Set<string> {
   const active = activeAdventureId ? adventures.find((a) => a.id === activeAdventureId) : undefined;
   return new Set(active?.entities ?? []);
 }
@@ -233,7 +267,10 @@ export const userStore = create<UserStore>((set, get) => ({
         updatedAt: Date.now(),
       }));
       if (!adventures) return s;
-      return { adventures, adventureEntitySet: updateActiveAdventureSet(adventures, s.activeAdventureId) };
+      return {
+        adventures,
+        adventureEntitySet: updateActiveAdventureSet(adventures, s.activeAdventureId),
+      };
     });
     schedulePersist(get);
   },
@@ -394,7 +431,8 @@ export const userStore = create<UserStore>((set, get) => ({
         name: data.name !== undefined ? data.name.trim() || current.name : current.name,
         class: data.class !== undefined ? data.class.trim() || current.class : current.class,
         level: data.level !== undefined ? clampLevel(data.level) : current.level,
-        subclass: data.subclass !== undefined ? data.subclass.trim() || undefined : current.subclass,
+        subclass:
+          data.subclass !== undefined ? data.subclass.trim() || undefined : current.subclass,
         abilityModifiers:
           data.abilityModifiers !== undefined
             ? clampAbilityModifiers({ ...current.abilityModifiers, ...data.abilityModifiers })
@@ -404,11 +442,17 @@ export const userStore = create<UserStore>((set, get) => ({
             ? clampCombatValues({ ...current.combatValues, ...data.combatValues })
             : current.combatValues,
         knownSpellCanonicalIds:
-          data.knownSpellCanonicalIds !== undefined ? [...data.knownSpellCanonicalIds] : current.knownSpellCanonicalIds,
+          data.knownSpellCanonicalIds !== undefined
+            ? [...data.knownSpellCanonicalIds]
+            : current.knownSpellCanonicalIds,
         weaponCanonicalIds:
-          data.weaponCanonicalIds !== undefined ? [...data.weaponCanonicalIds] : current.weaponCanonicalIds,
+          data.weaponCanonicalIds !== undefined
+            ? [...data.weaponCanonicalIds]
+            : current.weaponCanonicalIds,
         magicItemCanonicalIds:
-          data.magicItemCanonicalIds !== undefined ? [...data.magicItemCanonicalIds] : current.magicItemCanonicalIds,
+          data.magicItemCanonicalIds !== undefined
+            ? [...data.magicItemCanonicalIds]
+            : current.magicItemCanonicalIds,
         note: data.note !== undefined ? data.note.trim() || undefined : current.note,
       };
       const players = [...s.players];
@@ -544,7 +588,8 @@ function adventuresEqual(a: Adventure[], b: Adventure[]): boolean {
 function playersEqual(a: PlayerReference[], b: PlayerReference[]): boolean {
   if (a.length !== b.length) return false;
   for (let i = 0; i < a.length; i++) {
-    if (a[i]!.id !== b[i]!.id || a[i]!.name !== b[i]!.name || a[i]!.level !== b[i]!.level) return false;
+    if (a[i]!.id !== b[i]!.id || a[i]!.name !== b[i]!.name || a[i]!.level !== b[i]!.level)
+      return false;
   }
   return true;
 }

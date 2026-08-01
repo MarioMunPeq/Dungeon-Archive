@@ -1,4 +1,10 @@
-import type { AbilityModifiers, Adventure, CombatValues, PlayerReference, UserState } from "./types";
+import type {
+  AbilityModifiers,
+  Adventure,
+  CombatValues,
+  PlayerReference,
+  UserState,
+} from "./types";
 import { CURRENT_VERSION } from "./types";
 import { isRegistered } from "../compendium/registry/entity-registry";
 
@@ -53,7 +59,8 @@ function normalizeAdventure(raw: unknown): Adventure | null {
   if (typeof a.id !== "string" || !a.id) return null;
 
   const objectives = uniqueStrings(a.objectives, true);
-  if (objectives.length > MAX_OBJECTIVES_PER_ADVENTURE) objectives.length = MAX_OBJECTIVES_PER_ADVENTURE;
+  if (objectives.length > MAX_OBJECTIVES_PER_ADVENTURE)
+    objectives.length = MAX_OBJECTIVES_PER_ADVENTURE;
 
   const entities = validateIds(uniqueStrings(a.entities, true));
   if (entities.length > MAX_ENTITIES_PER_ADVENTURE) entities.length = MAX_ENTITIES_PER_ADVENTURE;
@@ -117,12 +124,37 @@ function clampOptInt(value: unknown, min: number, max: number): number | undefin
 function normalizeAbilityModifiers(raw: unknown): AbilityModifiers {
   const mods = (raw && typeof raw === "object" ? raw : {}) as Record<string, unknown>;
   return {
-    strength: clampInt(mods.strength, MIN_MODIFIER, MAX_MODIFIER, DEFAULT_ABILITY_MODIFIERS.strength),
-    dexterity: clampInt(mods.dexterity, MIN_MODIFIER, MAX_MODIFIER, DEFAULT_ABILITY_MODIFIERS.dexterity),
-    constitution: clampInt(mods.constitution, MIN_MODIFIER, MAX_MODIFIER, DEFAULT_ABILITY_MODIFIERS.constitution),
-    intelligence: clampInt(mods.intelligence, MIN_MODIFIER, MAX_MODIFIER, DEFAULT_ABILITY_MODIFIERS.intelligence),
+    strength: clampInt(
+      mods.strength,
+      MIN_MODIFIER,
+      MAX_MODIFIER,
+      DEFAULT_ABILITY_MODIFIERS.strength,
+    ),
+    dexterity: clampInt(
+      mods.dexterity,
+      MIN_MODIFIER,
+      MAX_MODIFIER,
+      DEFAULT_ABILITY_MODIFIERS.dexterity,
+    ),
+    constitution: clampInt(
+      mods.constitution,
+      MIN_MODIFIER,
+      MAX_MODIFIER,
+      DEFAULT_ABILITY_MODIFIERS.constitution,
+    ),
+    intelligence: clampInt(
+      mods.intelligence,
+      MIN_MODIFIER,
+      MAX_MODIFIER,
+      DEFAULT_ABILITY_MODIFIERS.intelligence,
+    ),
     wisdom: clampInt(mods.wisdom, MIN_MODIFIER, MAX_MODIFIER, DEFAULT_ABILITY_MODIFIERS.wisdom),
-    charisma: clampInt(mods.charisma, MIN_MODIFIER, MAX_MODIFIER, DEFAULT_ABILITY_MODIFIERS.charisma),
+    charisma: clampInt(
+      mods.charisma,
+      MIN_MODIFIER,
+      MAX_MODIFIER,
+      DEFAULT_ABILITY_MODIFIERS.charisma,
+    ),
   };
 }
 
@@ -150,7 +182,8 @@ function normalizePlayerReference(raw: unknown): PlayerReference | null {
   if (weaponCanonicalIds.length > MAX_WEAPON_IDS) weaponCanonicalIds.length = MAX_WEAPON_IDS;
 
   const magicItemCanonicalIds = validateIds(uniqueStrings(p.magicItemCanonicalIds, true));
-  if (magicItemCanonicalIds.length > MAX_MAGIC_ITEM_IDS) magicItemCanonicalIds.length = MAX_MAGIC_ITEM_IDS;
+  if (magicItemCanonicalIds.length > MAX_MAGIC_ITEM_IDS)
+    magicItemCanonicalIds.length = MAX_MAGIC_ITEM_IDS;
 
   const note = typeof p.note === "string" ? p.note.trim() : "";
 
@@ -180,7 +213,13 @@ function normalizePlayers(raw: unknown): PlayerReference[] {
   return valid;
 }
 
-export function normalize(state: Omit<UserState, "adventures" | "activeAdventureId" | "players"> & { adventures?: Adventure[]; activeAdventureId?: string | null; players?: PlayerReference[] }): UserState {
+export function normalize(
+  state: Omit<UserState, "adventures" | "activeAdventureId" | "players"> & {
+    adventures?: Adventure[];
+    activeAdventureId?: string | null;
+    players?: PlayerReference[];
+  },
+): UserState {
   const adventures = normalizeAdventures(state.adventures ?? []);
   const activeAdventureId =
     state.activeAdventureId && adventures.some((a) => a.id === state.activeAdventureId)

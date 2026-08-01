@@ -35,10 +35,7 @@ export function SearchHighlight({ text, query }: SearchHighlightProps) {
     <>
       {parts.map((part, i) =>
         part.type === "match" ? (
-          <mark
-            key={i}
-            className="rounded-sm bg-accent px-0.5 text-accent-foreground"
-          >
+          <mark key={i} className="rounded-sm bg-accent px-0.5 text-accent-foreground">
             {part.value}
           </mark>
         ) : (
