@@ -4,6 +4,7 @@ import { SearchPage } from "@/features/search/search-page";
 import { SessionPage } from "@/features/session/session-page";
 import { AdventurePage } from "@/features/adventure/adventure-page";
 import { PartyPage } from "@/features/party/party-page";
+import { BackupPage } from "@/features/backup/backup-page";
 import { CompendiumPage } from "@/features/compendium/pages/entity-page";
 import { CategoryPage } from "@/features/compendium/pages/category-page";
 import { DebugContentPage } from "@/features/debug/debug-content-page";
@@ -11,8 +12,11 @@ import { DebugSpellPage } from "@/features/debug/debug-spell-page";
 import { NotFoundPage } from "@/features/not-found-page";
 import { CATEGORY_REGISTRY } from "@/compendium";
 import type { EntityCategory } from "@/compendium";
+import { hasCloudConfig } from "@/sync";
 
 const CATEGORIES = Object.keys(CATEGORY_REGISTRY) as EntityCategory[];
+
+const CLOUD_ENABLED = hasCloudConfig();
 
 export function AppRouter() {
   return (
@@ -22,6 +26,7 @@ export function AppRouter() {
       <Route path="/session" element={<SessionPage />} />
       <Route path="/adventure" element={<AdventurePage />} />
       <Route path="/party" element={<PartyPage />} />
+      {CLOUD_ENABLED && <Route path="/backup" element={<BackupPage />} />}
       {CATEGORIES.map((cat) => (
         <Route key={`list-${cat}`} path={`/${cat}`} element={<CategoryPage category={cat} />} />
       ))}

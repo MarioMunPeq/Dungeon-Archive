@@ -11,6 +11,7 @@ import { STORAGE_KEY, CURRENT_VERSION } from "./types";
 import { read, write } from "./persistence";
 import { migrate } from "./migrations";
 import { normalize, validateIds } from "./normalize";
+import { toUserState } from "./serialization";
 
 interface AdventureActions {
   createAdventure: (data?: { title?: string; description?: string }) => void;
@@ -128,26 +129,7 @@ function schedulePersist(getState: () => UserStore): void {
   if (debounceTimer !== null) clearTimeout(debounceTimer);
   debounceTimer = setTimeout(() => {
     debounceTimer = null;
-    const {
-      version,
-      favorites,
-      recentEntities,
-      recentSearches,
-      session,
-      adventures,
-      activeAdventureId,
-      players,
-    } = getState();
-    write({
-      version,
-      favorites,
-      recentEntities,
-      recentSearches,
-      session,
-      adventures,
-      activeAdventureId,
-      players,
-    });
+    write(toUserState(getState()));
   }, 150);
 }
 

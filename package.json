@@ -27,12 +27,15 @@
     "test:magic-item": "tsx scripts/tests/magic-item.test.ts",
     "test:feat": "tsx scripts/tests/feat.test.ts",
     "test:user-state": "tsx scripts/tests/user-state.test.ts",
-    "test": "pnpm run test:identity && pnpm run test:grouping && pnpm run test:resolver && pnpm run test:compendium && pnpm run test:category && pnpm run test:content && pnpm run test:design && pnpm run test:relationships && pnpm run test:magic-item && pnpm run test:feat && pnpm run test:user-state"
+    "test:sync": "tsx scripts/tests/sync.test.ts",
+    "test:firebase-adapter": "tsx scripts/tests/firebase-adapter.test.ts",
+    "test": "pnpm run test:identity && pnpm run test:grouping && pnpm run test:resolver && pnpm run test:compendium && pnpm run test:category && pnpm run test:content && pnpm run test:design && pnpm run test:relationships && pnpm run test:magic-item && pnpm run test:feat && pnpm run test:user-state && pnpm run test:sync && pnpm run test:firebase-adapter"
   },
   "dependencies": {
     "@tanstack/react-query": "^5.84.0",
     "clsx": "^2.1.1",
     "dexie": "^4.0.11",
+    "firebase": "^12.17.0",
     "react": "^19.2.7",
     "react-dom": "^19.2.7",
     "react-router": "^7.7.1",

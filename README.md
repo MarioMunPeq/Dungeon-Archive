@@ -117,6 +117,27 @@ Acceso rápido a las entidades que importan.
 
 Vistas completas con renderizado de contenido, entidades relacionadas y selección de versión/edición (2014 frente a 2024).
 
+## Cloud Backup
+
+Una copia de seguridad opcional del estado local en la nube (Firebase). No es una cuenta obligatoria ni un servicio de sincronización: es un respaldo manual para proteger los datos del usuario o trasladarlos a otro dispositivo.
+
+* **Filosofía local-first.** Los datos del usuario viven siempre en este dispositivo (`localStorage`). La nube es solo una copia; nunca es la fuente de verdad.
+* **Inicio de sesión opcional con Google.** Sin cuenta, la aplicación funciona exactamente igual. El backup desaparece por completo: no se muestra la página, no hay acceso de navegación y no se carga ningún módulo de Firebase.
+* **Subida manual.** Un botón reemplaza la copia en la nube con el estado local actual.
+* **Restauración manual.** Un botón reemplaza el estado local con la copia en la nube. Pide confirmación porque sobrescribe datos locales.
+* **Comportamiento offline.** La subida y la restauración requieren conexión. El resto de la aplicación sigue funcionando sin conexión en todo momento.
+* **Sin sincronización automática.** No hay sincronización, fusión de cambios ni historial. Subida y restauración son acciones explícitas del usuario.
+
+### Configuración de Firebase
+
+El backup se activa solo si el build incluye configuración de Firebase web:
+
+1. Crea un proyecto en [Firebase Console](https://console.firebase.google.com) y añade una app web.
+2. Copia `.env.example` a `.env` y rellena las variables `VITE_FIREBASE_*`.
+3. Compila la aplicación (`pnpm build`).
+
+Si la configuración falta, la característica no existe en el build resultante. El código de Firebase está aislado en `src/sync/firebase.ts` y se carga de forma diferida solo al abrir la pantalla de backup.
+
 ---
 
 # Arquitectura
@@ -140,7 +161,7 @@ Aplicación React
 * Los datos externos se procesan en tiempo de compilación y nunca se acceden directamente en tiempo de ejecución.
 * El Compendio vive en memoria tras una única carga inicial; el acceso es síncrono.
 * El estado del usuario (favoritos, recientes, aventura, grupo, sesión) se guarda en `localStorage` con migraciones versionadas.
-* Toda la aplicación funciona sin conexión. No hay servidor ni login.
+* Toda la aplicación funciona sin conexión. No hay servidor. El inicio de sesión y el backup en la nube son opcionales y están aislados.
 
 ---
 
@@ -156,6 +177,7 @@ Aplicación React
 | Ruteo        | React Router                        |
 | Offline      | PWA (service worker)                |
 | Datos        | JSON estático generado en build     |
+| Backup       | Firebase (App, Auth, Firestore), opcional y de carga diferida |
 
 Cada tecnología tiene una responsabilidad concreta. No existe ninguna dependencia por tendencia o popularidad.
 
@@ -167,10 +189,11 @@ Cada tecnología tiene una responsabilidad concreta. No existe ninguna dependenc
 src/
 │
 ├── app/            # Router, layout, arranque
-├── features/       # Páginas por área (home, search, adventure, party, session, compendium)
+├── features/       # Páginas por área (home, search, adventure, party, session, backup, compendium)
 ├── compendium/     # API de lectura del Compendio (carga, búsqueda, repositorio)
 ├── components/     # Componentes compartidos de UI y de entidad
 ├── user-state/     # Estado persistente del usuario (store, migraciones, normalización)
+├── sync/           # Backup en la nube (config, gateway, servicio, adaptador Firebase)
 ├── adapter/        # Tipos de fuentes externas (5etools)
 ├── generated/      # JSON del Compendio generado en build
 ├── types/          # Tipos del dominio
@@ -205,6 +228,7 @@ Las prioridades están en [docs/roadmap.md](docs/roadmap.md).
 | Grupo              | 🟢 Operativo (referencias)  |
 | Sesión             | 🟢 Operativa                |
 | Offline            | 🟢 Operativo (PWA)          |
+| Backup en la nube  | 🟢 Operativo (opcional)     |
 | Documentación      | 🟢 Activa                   |
 
 ---

@@ -29,3 +29,6 @@ export type {
 } from "./types";
 export { STORAGE_KEY, CURRENT_VERSION } from "./types";
 export { normalize } from "./normalize";
+export { toUserState } from "./serialization";
+export { migrate } from "./migrations";
+export { write } from "./persistence";

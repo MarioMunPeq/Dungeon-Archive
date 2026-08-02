@@ -14,6 +14,7 @@ import {
   usePlayerReferences,
 } from "@/user-state";
 import { entityRefFromCanonicalId, EntityCard } from "@/components/entity";
+import { hasCloudConfig } from "@/sync";
 
 const CATEGORIES = Object.keys(CATEGORY_REGISTRY) as EntityCategory[];
 
@@ -257,6 +258,17 @@ export function HomePage() {
           ))}
         </div>
       </section>
+
+      {hasCloudConfig() && (
+        <div className="flex justify-center pt-2">
+          <Link
+            to="/backup"
+            className="text-xs text-muted-foreground transition-colors hover:text-foreground"
+          >
+            Cloud Backup
+          </Link>
+        </div>
+      )}
     </div>
   );
 }
