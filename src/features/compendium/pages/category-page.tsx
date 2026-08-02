@@ -12,6 +12,7 @@ import {
 import { FilterBar } from "../components/filter-bar";
 import { EntityList } from "../components/entity-list";
 import { Button } from "@/components/ui/Button";
+import { EntityBreadcrumbs } from "@/components/ui/breadcrumbs";
 
 interface CategoryPageProps {
   readonly category: EntityCategory;
@@ -61,6 +62,9 @@ export function CategoryPage({ category }: CategoryPageProps) {
 
   return (
     <div className="space-y-4 px-4 py-6">
+      <EntityBreadcrumbs
+        crumbs={[{ label: "Home", to: "/" }, { label: categoryLabel(category) }]}
+      />
       <div>
         <h1 className="text-xl font-bold text-foreground">{categoryLabel(category)}</h1>
         <p className="text-xs text-muted-foreground">

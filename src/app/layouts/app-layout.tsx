@@ -1,6 +1,7 @@
 import type { ReactNode } from "react";
 import { TopBar } from "@/components/layout/top-bar";
 import { BottomNav } from "@/components/layout/bottom-nav";
+import { Onboarding } from "@/features/onboarding/onboarding";
 import { useScrollRestoration } from "./use-scroll-restoration";
 
 interface AppLayoutProps {
@@ -16,6 +17,7 @@ export function AppLayout({ children }: AppLayoutProps) {
         {children}
       </main>
       <BottomNav />
+      <Onboarding />
     </div>
   );
 }

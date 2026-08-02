@@ -49,6 +49,7 @@ interface UserActions {
   clearRecentEntities: () => void;
   toggleSession: (canonicalId: string) => void;
   clearSession: () => void;
+  completeOnboarding: () => void;
   _replace: (state: UserState) => void;
   _reset: () => void;
 }
@@ -165,6 +166,7 @@ export const userStore = create<UserStore>((set, get) => ({
   activeAdventureId: null,
   adventureEntitySet: new Set<string>(),
   players: [],
+  onboardingComplete: false,
   _hasHydrated: false,
 
   toggleFavorite: (canonicalId) => {
@@ -213,6 +215,11 @@ export const userStore = create<UserStore>((set, get) => ({
 
   clearSession: () => {
     set({ session: [], sessionSet: new Set<string>() });
+    schedulePersist(get);
+  },
+
+  completeOnboarding: () => {
+    set({ onboardingComplete: true });
     schedulePersist(get);
   },
 
@@ -462,6 +469,7 @@ export const userStore = create<UserStore>((set, get) => ({
       activeAdventureId: state.activeAdventureId,
       adventureEntitySet: updateActiveAdventureSet(state.adventures, state.activeAdventureId),
       players: state.players,
+      onboardingComplete: state.onboardingComplete,
     });
   },
 
@@ -478,6 +486,7 @@ export const userStore = create<UserStore>((set, get) => ({
       activeAdventureId: null,
       adventureEntitySet: new Set<string>(),
       players: [],
+      onboardingComplete: false,
       _hasHydrated: false,
     });
   },
@@ -536,6 +545,10 @@ export function usePlayerReferences(): PlayerReference[] {
   return userStore((s) => s.players);
 }
 
+export function useOnboardingComplete(): boolean {
+  return userStore((s) => s.onboardingComplete);
+}
+
 function processPersistedState(state: UserState): UserState {
   const validated: UserState = {
     version: state.version,
@@ -546,6 +559,7 @@ function processPersistedState(state: UserState): UserState {
     adventures: state.adventures,
     activeAdventureId: state.activeAdventureId,
     players: state.players,
+    onboardingComplete: state.onboardingComplete === true,
   };
   return normalize(validated);
 }
@@ -586,7 +600,8 @@ function replaceState(state: UserState): void {
     arraysEqual(current.session, state.session) &&
     current.activeAdventureId === state.activeAdventureId &&
     adventuresEqual(current.adventures, state.adventures) &&
-    playersEqual(current.players, state.players)
+    playersEqual(current.players, state.players) &&
+    current.onboardingComplete === state.onboardingComplete
   ) {
     return;
   }

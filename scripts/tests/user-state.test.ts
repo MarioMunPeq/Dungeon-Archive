@@ -77,11 +77,11 @@ test("STORAGE_KEY equals dungeon:userState:v1", () => {
   strictEqual(STORAGE_KEY, "dungeon:userState:v1");
 });
 
-test("CURRENT_VERSION equals 7", () => {
-  strictEqual(CURRENT_VERSION, 7);
+test("CURRENT_VERSION equals 8", () => {
+  strictEqual(CURRENT_VERSION, 8);
 });
 
-test("createDefaultState returns valid v7 state", () => {
+test("createDefaultState returns valid v8 state", () => {
   const def = createDefaultState();
   strictEqual(def.version, CURRENT_VERSION);
   deepStrictEqual(def.favorites, []);
@@ -91,6 +91,7 @@ test("createDefaultState returns valid v7 state", () => {
   deepStrictEqual(def.adventures, []);
   strictEqual(def.activeAdventureId, null);
   deepStrictEqual(def.players, []);
+  strictEqual(def.onboardingComplete, false);
 });
 
 // ---------------------------------------------------------------------------
@@ -340,6 +341,54 @@ test("migrations.migrate() drops legacy party members without a name", () => {
   strictEqual(result.players[0]!.id, "m2");
 });
 
+test("migrations.migrate() leaves onboarding open for an empty v7 state", () => {
+  const input = {
+    version: 7,
+    favorites: [],
+    recentEntities: [],
+    recentSearches: [],
+    session: [],
+    adventures: [],
+    activeAdventureId: null,
+    players: [],
+  };
+  const result = migrate(input);
+  strictEqual(result.version, CURRENT_VERSION);
+  strictEqual(result.onboardingComplete, false);
+});
+
+test("migrations.migrate() skips onboarding for existing users with data", () => {
+  const input = {
+    version: 7,
+    favorites: ["spell.fireball"],
+    recentEntities: [],
+    recentSearches: [],
+    session: [],
+    adventures: [],
+    activeAdventureId: null,
+    players: [],
+  };
+  const result = migrate(input);
+  strictEqual(result.version, CURRENT_VERSION);
+  strictEqual(result.onboardingComplete, true);
+});
+
+test("migrations.migrate() preserves an explicit onboardingComplete flag", () => {
+  const input = {
+    version: 7,
+    favorites: [],
+    recentEntities: [],
+    recentSearches: [],
+    session: [],
+    adventures: [],
+    activeAdventureId: null,
+    players: [],
+    onboardingComplete: true,
+  };
+  const result = migrate(input);
+  strictEqual(result.onboardingComplete, true);
+});
+
 // ---------------------------------------------------------------------------
 // Normalization
 // ---------------------------------------------------------------------------
@@ -501,6 +550,16 @@ test("normalize sets version to CURRENT_VERSION", () => {
   strictEqual(result.version, CURRENT_VERSION);
 });
 
+test("normalize preserves onboardingComplete when true", () => {
+  const result = normalize({ ...createDefaultState(), onboardingComplete: true });
+  strictEqual(result.onboardingComplete, true);
+});
+
+test("normalize treats missing onboardingComplete as false", () => {
+  const result = normalize({ ...createDefaultState(), onboardingComplete: false });
+  strictEqual(result.onboardingComplete, false);
+});
+
 test("normalize with validateIds removes stale IDs (with compendium loaded)", () => {
   const raw = {
     version: 1,
@@ -568,6 +627,7 @@ test("favoritesSet rebuilt on _replace", () => {
     adventures: [],
     activeAdventureId: null,
     players: [],
+    onboardingComplete: false,
   });
   const state = userStore.getState();
   strictEqual(state.favoritesSet.has("x"), true);
@@ -933,6 +993,7 @@ test("safe replace does nothing when state is identical", () => {
     adventures: [],
     activeAdventureId: null,
     players: [],
+    onboardingComplete: false,
   });
   userStore.getState()._replace({
     version: CURRENT_VERSION,
@@ -943,6 +1004,7 @@ test("safe replace does nothing when state is identical", () => {
     adventures: [],
     activeAdventureId: null,
     players: [],
+    onboardingComplete: false,
   });
   const state2 = userStore.getState();
   deepStrictEqual(state2.favorites, ["a", "b"]);
@@ -1154,6 +1216,7 @@ test("sessionSet stays in sync after _replace", () => {
     adventures: [],
     activeAdventureId: null,
     players: [],
+    onboardingComplete: false,
   });
   const state = userStore.getState();
   deepStrictEqual(state.session, ["x", "y"]);
@@ -1406,6 +1469,7 @@ test("_replace updates session when content differs", () => {
     adventures: [],
     activeAdventureId: null,
     players: [],
+    onboardingComplete: false,
   });
   deepStrictEqual(userStore.getState().session, ["a", "b"]);
 });
@@ -1707,6 +1771,7 @@ test("adventureSet rebuilt on _replace", () => {
     ],
     activeAdventureId: "adv-1",
     players: [],
+    onboardingComplete: false,
   });
   const state = userStore.getState();
   strictEqual(state.adventures.length, 1);
@@ -2021,6 +2086,7 @@ test("_replace updates adventures when content differs", () => {
     ],
     activeAdventureId: "adv-1",
     players: [],
+    onboardingComplete: false,
   });
   const state = userStore.getState();
   strictEqual(state.adventures.length, 1);
@@ -2052,6 +2118,7 @@ test("adventuresEqual prevents unnecessary _replace on identical state", () => {
     ],
     activeAdventureId: "adv-1",
     players: [],
+    onboardingComplete: false,
   };
   userStore.getState()._replace(state);
   userStore.getState()._replace(state);
@@ -2527,6 +2594,7 @@ test("_replace updates players when content differs", () => {
         magicItemCanonicalIds: [],
       },
     ],
+    onboardingComplete: false,
   });
   const state = userStore.getState();
   strictEqual(state.players.length, 1);

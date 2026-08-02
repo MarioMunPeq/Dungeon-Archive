@@ -56,10 +56,11 @@ export interface UserState {
   readonly adventures: Adventure[];
   readonly activeAdventureId: string | null;
   readonly players: PlayerReference[];
+  readonly onboardingComplete: boolean;
 }
 
 export const STORAGE_KEY = "dungeon:userState:v1";
-export const CURRENT_VERSION = 7;
+export const CURRENT_VERSION = 8;
 
 export function createDefaultState(): UserState {
   return {
@@ -71,5 +72,6 @@ export function createDefaultState(): UserState {
     adventures: [],
     activeAdventureId: null,
     players: [],
+    onboardingComplete: false,
   };
 }

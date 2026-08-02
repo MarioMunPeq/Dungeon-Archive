@@ -30,7 +30,7 @@ function entityCardFromCanonicalId(canonicalId: string): EntityCardData | null {
   };
 }
 
-function SectionHeader({ title, note, to }: { title: string; note?: string; to?: string }) {
+function SectionHeader({ title, to }: { title: string; to?: string }) {
   const content = (
     <span className="flex items-center gap-1">
       {title}
@@ -46,7 +46,6 @@ function SectionHeader({ title, note, to }: { title: string; note?: string; to?:
           <path d="M9 18l6-6-6-6" />
         </svg>
       )}
-      {note && <span className="ml-1 font-normal normal-case tracking-normal">· {note}</span>}
     </span>
   );
   return to ? (
@@ -91,126 +90,143 @@ export function HomePage() {
   const shownPlayers = players.slice(0, 5);
 
   const hasContent = sessionCards.length > 0 || recentCards.length > 0 || favoriteCards.length > 0;
+  const emptyWorkspace = players.length === 0 && !adventure && !hasContent;
 
   return (
-    <div className="flex flex-col gap-10 px-4 py-6">
-      {players.length > 0 ? (
-        <section className="flex flex-col gap-3">
-          <SectionHeader
-            title="Party"
-            to="/party"
-            note={`${players.length} player${players.length === 1 ? "" : "s"}`}
-          />
-          <div className="flex flex-col gap-1 rounded-lg border border-border bg-surface px-4 py-2">
-            {shownPlayers.map((player) => (
-              <div key={player.id} className="flex items-center justify-between gap-2 py-2">
-                <span className="truncate text-sm font-semibold text-foreground">
-                  {player.name}
-                </span>
-                <span className="shrink-0 text-xs text-muted-foreground">
-                  {player.class ? `${player.class} \u00B7 ` : ""}Lv {player.level}
-                </span>
-              </div>
-            ))}
-            {players.length > shownPlayers.length && (
-              <p className="pb-1 text-xs text-foreground-subtle">
-                +{players.length - shownPlayers.length} more
-              </p>
-            )}
-          </div>
-        </section>
-      ) : (
-        <Link
-          to="/party"
-          className="flex items-center gap-2 rounded-lg border border-dashed border-border p-4 text-sm text-muted-foreground transition-colors hover:bg-accent active:bg-accent/80"
-        >
-          <svg
-            aria-hidden="true"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth={2}
-            className="h-4 w-4"
-          >
-            <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
-            <circle cx="9" cy="7" r="4" />
-            <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
-            <path d="M16 3.13a4 4 0 0 1 0 7.75" />
-          </svg>
-          <span>Add Party Members</span>
-        </Link>
-      )}
-
-      {adventure ? (
-        <section className="flex flex-col gap-3">
-          <SectionHeader title="Current Adventure" to="/adventure" />
-          <Link
-            to="/adventure"
-            className="flex flex-col gap-2 rounded-lg border border-border bg-surface p-4 transition-colors hover:bg-accent active:bg-accent/80"
-          >
-            <div className="flex items-center justify-between">
-              <span className="text-sm font-medium text-foreground">{adventure.title}</span>
-              {adventure.archived && (
-                <span className="text-xs text-foreground-subtle">Archived</span>
-              )}
-            </div>
-            {adventure.description && (
-              <p className="line-clamp-2 text-xs text-muted-foreground">{adventure.description}</p>
-            )}
-            <div className="flex items-center gap-3 text-xs text-foreground-subtle">
-              <span>
-                {adventure.entities.length} entr{adventure.entities.length === 1 ? "y" : "ies"}
-              </span>
-              <span>
-                {adventure.objectives.length} objective
-                {adventure.objectives.length === 1 ? "" : "s"}
-              </span>
-            </div>
-          </Link>
-        </section>
-      ) : (
-        <Link
-          to="/adventure"
-          className="flex items-center gap-2 rounded-lg border border-dashed border-border p-4 text-sm text-muted-foreground transition-colors hover:bg-accent active:bg-accent/80"
-        >
-          <svg
-            aria-hidden="true"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth={2}
-            className="h-4 w-4"
-          >
-            <line x1="4" y1="3" x2="4" y2="21" />
-            <polyline points="4 3 20 3 18 7 20 11 4 11" />
-          </svg>
-          <span>Create Adventure</span>
-        </Link>
-      )}
-
-      <section className="flex flex-col gap-3">
-        <SectionHeader title="Continue Session" to="/session" />
-        {sessionCards.length > 0 ? (
-          <div className="-mx-4 flex gap-3 overflow-x-auto px-4 pb-2">
-            {sessionCards.map((card) => (
-              <div key={card.href} className="w-56 shrink-0">
-                <EntityCard {...card} />
-              </div>
-            ))}
-          </div>
-        ) : (
+    <div className="flex flex-col gap-8 px-4 py-6">
+      {emptyWorkspace ? (
+        <section className="flex flex-col items-center gap-4 px-2 py-10 text-center">
+          <h2 className="text-xl font-bold text-foreground">Welcome to your workspace</h2>
+          <p className="w-full max-w-md text-sm text-muted-foreground">
+            Search the compendium and pin the spells, monsters, and items you need. Your party,
+            adventure, and session build up here.
+          </p>
           <Link
             to="/search"
-            className="rounded-lg border border-dashed border-border px-4 py-3 text-xs text-muted-foreground transition-colors hover:bg-accent active:bg-accent/80"
+            className="inline-flex items-center justify-center gap-1.5 rounded-lg bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-all duration-150 hover:bg-primary-hover active:scale-95 active:bg-primary-active"
           >
-            Pin entities with the pin icon while browsing to keep them one tap away.
+            Search the Compendium
           </Link>
-        )}
-      </section>
+        </section>
+      ) : (
+        <>
+          {players.length > 0 ? (
+            <section className="flex flex-col gap-3">
+              <SectionHeader title="Party" to="/party" />
+              <div className="flex flex-col gap-1 rounded-lg border border-border bg-surface px-4 py-2">
+                {shownPlayers.map((player) => (
+                  <div key={player.id} className="flex items-center justify-between gap-2 py-2">
+                    <span className="truncate text-sm font-semibold text-foreground">
+                      {player.name}
+                    </span>
+                    <span className="shrink-0 text-xs text-muted-foreground">
+                      {player.class ? `${player.class} \u00B7 ` : ""}Lv {player.level}
+                    </span>
+                  </div>
+                ))}
+                {players.length > shownPlayers.length && (
+                  <p className="pb-1 text-xs text-foreground-subtle">
+                    +{players.length - shownPlayers.length} more
+                  </p>
+                )}
+              </div>
+            </section>
+          ) : (
+            <Link
+              to="/party"
+              className="flex items-center gap-2 rounded-lg border border-dashed border-border p-4 text-sm text-muted-foreground transition-colors hover:bg-accent active:bg-accent/80"
+            >
+              <svg
+                aria-hidden="true"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth={2}
+                className="h-4 w-4"
+              >
+                <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+                <circle cx="9" cy="7" r="4" />
+                <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
+                <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+              </svg>
+              <span>Add Player</span>
+            </Link>
+          )}
+
+          {adventure ? (
+            <section className="flex flex-col gap-3">
+              <SectionHeader title="Current Adventure" to="/adventure" />
+              <Link
+                to="/adventure"
+                className="flex flex-col gap-2 rounded-lg border border-border bg-surface p-4 transition-colors hover:bg-accent active:bg-accent/80"
+              >
+                <div className="flex items-center justify-between">
+                  <span className="text-sm font-medium text-foreground">{adventure.title}</span>
+                  {adventure.archived && (
+                    <span className="text-xs text-foreground-subtle">Archived</span>
+                  )}
+                </div>
+                {adventure.description && (
+                  <p className="line-clamp-2 text-xs text-muted-foreground">
+                    {adventure.description}
+                  </p>
+                )}
+                <div className="flex items-center gap-3 text-xs text-foreground-subtle">
+                  <span>
+                    {adventure.entities.length} entr{adventure.entities.length === 1 ? "y" : "ies"}
+                  </span>
+                  <span>
+                    {adventure.objectives.length} objective
+                    {adventure.objectives.length === 1 ? "" : "s"}
+                  </span>
+                </div>
+              </Link>
+            </section>
+          ) : (
+            <Link
+              to="/adventure"
+              className="flex items-center gap-2 rounded-lg border border-dashed border-border p-4 text-sm text-muted-foreground transition-colors hover:bg-accent active:bg-accent/80"
+            >
+              <svg
+                aria-hidden="true"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth={2}
+                className="h-4 w-4"
+              >
+                <line x1="4" y1="3" x2="4" y2="21" />
+                <polyline points="4 3 20 3 18 7 20 11 4 11" />
+              </svg>
+              <span>Create Adventure</span>
+            </Link>
+          )}
+
+          <section className="flex flex-col gap-3">
+            <SectionHeader title="Session" to="/session" />
+            {sessionCards.length > 0 ? (
+              <div className="-mx-4 flex gap-3 overflow-x-auto px-4 pb-2">
+                {sessionCards.map((card) => (
+                  <div key={card.href} className="w-56 shrink-0">
+                    <EntityCard {...card} />
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <Link
+                to="/search"
+                className="rounded-lg border border-dashed border-border px-4 py-3 text-xs text-muted-foreground transition-colors hover:bg-accent active:bg-accent/80"
+              >
+                Pin entities with the pin icon while browsing to keep them one tap away.
+              </Link>
+            )}
+          </section>
+        </>
+      )}
 
       {recentCards.length > 0 && (
         <section className="flex flex-col gap-3">
-          <SectionHeader title="Continue Reading" />
+          <SectionHeader title="Recently Viewed" />
           {recentCards.length <= 3 ? (
             <div className="grid grid-cols-1 gap-2 sm:grid-cols-2 lg:grid-cols-3">
               {recentCards.map((card) => (
@@ -238,13 +254,6 @@ export function HomePage() {
             ))}
           </div>
         </section>
-      )}
-
-      {!hasContent && (
-        <p className="text-sm text-muted-foreground">
-          Search or browse the compendium to save favorites, build your session, and track your
-          adventure.
-        </p>
       )}
 
       <section className="flex flex-col gap-3">

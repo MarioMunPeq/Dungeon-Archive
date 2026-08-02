@@ -16,5 +16,6 @@ export function toUserState(state: UserState): UserState {
     adventures: state.adventures,
     activeAdventureId: state.activeAdventureId,
     players: state.players,
+    onboardingComplete: state.onboardingComplete,
   };
 }

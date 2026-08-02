@@ -18,6 +18,7 @@ export {
   useRecentEntities,
   useRecentSearches,
   usePlayerReferences,
+  useOnboardingComplete,
 } from "./store";
 export type { UserStore, PlayerReferenceUpdate } from "./store";
 export type {

@@ -214,10 +214,14 @@ function normalizePlayers(raw: unknown): PlayerReference[] {
 }
 
 export function normalize(
-  state: Omit<UserState, "adventures" | "activeAdventureId" | "players"> & {
+  state: Omit<
+    UserState,
+    "adventures" | "activeAdventureId" | "players" | "onboardingComplete"
+  > & {
     adventures?: Adventure[];
     activeAdventureId?: string | null;
     players?: PlayerReference[];
+    onboardingComplete?: boolean;
   },
 ): UserState {
   const adventures = normalizeAdventures(state.adventures ?? []);
@@ -235,5 +239,6 @@ export function normalize(
     adventures,
     activeAdventureId,
     players: normalizePlayers(state.players ?? []),
+    onboardingComplete: state.onboardingComplete === true,
   };
 }

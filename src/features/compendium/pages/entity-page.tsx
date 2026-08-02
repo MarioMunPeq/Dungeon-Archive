@@ -54,6 +54,7 @@ export function CompendiumPage({ category }: CompendiumPageProps) {
       versions={resolved.versions}
       onSourceChange={handleSourceChange}
       breadcrumbs={[
+        { label: "Home", to: "/" },
         { label: categoryLabel(category), to: `/${category}` },
         { label: resolved.selected.name },
       ]}

@@ -907,7 +907,7 @@ export function PartyPage() {
           <p className="text-xs text-muted-foreground">
             {players.length === 0
               ? "The values you consult every session"
-              : `${players.length} reference${players.length === 1 ? "" : "s"}`}
+              : `${players.length} player${players.length === 1 ? "" : "s"}`}
           </p>
         </div>
         <Button onClick={handleAdd}>Add Player</Button>

@@ -97,6 +97,21 @@ const migrations: Record<number, (state: Record<string, unknown>) => Record<stri
       players,
     };
   },
+  8: (raw) => {
+    const hasData =
+      (Array.isArray(raw.favorites) && raw.favorites.length > 0) ||
+      (Array.isArray(raw.recentEntities) && raw.recentEntities.length > 0) ||
+      (Array.isArray(raw.recentSearches) && raw.recentSearches.length > 0) ||
+      (Array.isArray(raw.session) && raw.session.length > 0) ||
+      (Array.isArray(raw.adventures) && raw.adventures.length > 0) ||
+      (Array.isArray(raw.players) && raw.players.length > 0);
+    return {
+      ...raw,
+      version: 8,
+      onboardingComplete:
+        typeof raw.onboardingComplete === "boolean" ? raw.onboardingComplete : hasData,
+    };
+  },
 };
 
 export function migrate(raw: unknown): UserState {
@@ -127,6 +142,9 @@ export function migrate(raw: unknown): UserState {
   if (version < 7) {
     migrated = migrations[7]!(migrated);
   }
+  if (version < 8) {
+    migrated = migrations[8]!(migrated);
+  }
 
   const result = migrated as unknown as Record<string, unknown>;
   if (
@@ -148,5 +166,7 @@ export function migrate(raw: unknown): UserState {
     activeAdventureId:
       typeof result.activeAdventureId === "string" ? result.activeAdventureId : null,
     players: Array.isArray(result.players) ? (result.players as PlayerReference[]) : [],
+    onboardingComplete:
+      typeof result.onboardingComplete === "boolean" ? result.onboardingComplete : false,
   };
 }

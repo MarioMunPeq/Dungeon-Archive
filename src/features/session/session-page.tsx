@@ -64,7 +64,7 @@ export function SessionPage() {
       {entries.length === 0 ? (
         <div className="flex flex-col items-center gap-4 px-2 py-10 text-center">
           <p className="w-full max-w-md text-sm text-muted-foreground">
-            Session is empty. Search for entities and pin what you need for your encounter.
+            Session is empty. Search the compendium and pin what you need for this session.
           </p>
           <Link
             to="/search"
