@@ -223,8 +223,7 @@ function spellSubtitle(entity: Spell | undefined): string | undefined {
 
 function weaponSubtitle(entity: Equipment | undefined): string | undefined {
   if (!entity) return undefined;
-  const damage = [entity.damage, entity.damageType].filter(Boolean).join(" ");
-  return damage ? `${entity.type} \u00B7 ${damage}` : entity.type;
+  return entity.type;
 }
 
 function firstParagraphText(blocks: readonly ContentBlock[]): string | undefined {
@@ -272,10 +271,16 @@ function SpellPreview({ spell, href }: { spell: Spell; href: string }) {
   const flags = [spell.concentration && "Concentration", spell.ritual && "Ritual"].filter(
     Boolean,
   ) as string[];
+  const rest = [spell.castingTime, spell.range, spell.duration].filter(Boolean);
   return (
     <div className="flex flex-col gap-1.5 rounded-lg bg-card px-3 py-2 animate-slide-up">
-      <p className="text-xs leading-relaxed text-foreground-subtle">
-        {[levelText, school, spell.castingTime, spell.range, spell.duration].join(" \u00B7 ")}
+      <p className="text-xs leading-relaxed">
+        <span className="font-semibold text-foreground">
+          {levelText} \u00B7 {school}
+        </span>
+        {rest.length > 0 && (
+          <span className="text-foreground-subtle"> \u00B7 {rest.join(" \u00B7 ")}</span>
+        )}
       </p>
       {flags.length > 0 && (
         <div className="flex items-center gap-1">
@@ -547,7 +552,7 @@ function ReferenceGroup({
   return (
     <div className="flex flex-col gap-1">
       <div className="flex items-center justify-between gap-2">
-        <span className="text-[10px] font-semibold uppercase tracking-wide text-muted-foreground">
+        <span className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
           {title}
         </span>
         <AddButton label="Add" onClick={onAdd} />
@@ -741,7 +746,7 @@ function PlayerReferenceCard({
             min={0}
             max={40}
             onChange={(value) => update({ combatValues: { armorClass: value } })}
-            valueClassName="text-2xl"
+            valueClassName="text-3xl"
           />
           <NumberCell
             label="Init"
@@ -750,7 +755,7 @@ function PlayerReferenceCard({
             max={20}
             format={formatSigned}
             onChange={(value) => update({ combatValues: { initiativeModifier: value } })}
-            valueClassName="text-2xl"
+            valueClassName="text-3xl"
           />
           <NumberCell
             label="Perc"
@@ -758,7 +763,7 @@ function PlayerReferenceCard({
             min={0}
             max={40}
             onChange={(value) => update({ combatValues: { passivePerception: value } })}
-            valueClassName="text-2xl"
+            valueClassName="text-3xl"
           />
           {hasSpell && (
             <>
@@ -769,7 +774,7 @@ function PlayerReferenceCard({
                 max={40}
                 initial={10}
                 onCommit={(value) => update({ combatValues: { spellSaveDc: value } })}
-                valueClassName="text-2xl"
+                valueClassName="text-3xl"
               />
               <OptionalNumberCell
                 label="Atk"
@@ -779,7 +784,7 @@ function PlayerReferenceCard({
                 format={formatSigned}
                 initial={0}
                 onCommit={(value) => update({ combatValues: { spellAttackBonus: value } })}
-                valueClassName="text-2xl"
+                valueClassName="text-3xl"
               />
             </>
           )}
@@ -827,7 +832,7 @@ function PlayerReferenceCard({
       </div>
 
       <div className="flex flex-col gap-1">
-        <span className="text-[10px] font-semibold uppercase tracking-wide text-muted-foreground">
+        <span className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
           Quick Note
         </span>
         {editing === "note" ? (
