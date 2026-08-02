@@ -420,7 +420,7 @@ function OptionalNumberCell({
           type="button"
           onClick={() => onCommit(initial)}
           aria-label={`Set ${label}`}
-          className="hitbox-expand flex h-9 w-full select-none items-center justify-center rounded-md text-muted-foreground transition-all duration-150 hover:text-foreground active:scale-95"
+          className="hitbox-expand flex h-9 w-full select-none items-center justify-center rounded-lg text-muted-foreground transition-all duration-150 hover:text-foreground active:scale-95"
         >
           <svg
             aria-hidden="true"
@@ -676,7 +676,7 @@ function PlayerReferenceCard({
             <button
               type="button"
               onClick={() => startEdit("name")}
-              className="-mx-1 rounded-md px-1 text-base font-bold text-foreground transition-colors duration-150 hover:bg-accent/50 active:bg-accent/80"
+              className="-mx-1 rounded-lg px-1 text-base font-bold text-foreground transition-colors duration-150 hover:bg-accent/50 active:bg-accent/80"
             >
               {reference.name}
             </button>
@@ -849,7 +849,7 @@ function PlayerReferenceCard({
           <button
             type="button"
             onClick={() => startEdit("note")}
-            className="rounded-md text-left text-sm text-foreground transition-colors duration-150 hover:bg-accent/50"
+            className="rounded-lg text-left text-sm text-foreground transition-colors duration-150 hover:bg-accent/50"
           >
             {reference.note}
           </button>
@@ -857,7 +857,7 @@ function PlayerReferenceCard({
           <button
             type="button"
             onClick={() => startEdit("note")}
-            className="rounded-md text-left text-xs text-muted-foreground transition-colors duration-150 hover:bg-accent/50"
+            className="rounded-lg text-left text-xs text-muted-foreground transition-colors duration-150 hover:bg-accent/50"
           >
             Add a quick note…
           </button>

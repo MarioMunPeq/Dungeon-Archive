@@ -57,7 +57,7 @@ export const SessionButton = memo(function SessionButton({
       </span>
       {feedback && (
         <span
-          className="pointer-events-none absolute -top-8 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-md border border-border bg-card px-2 py-0.5 text-[10px] font-medium text-foreground shadow-md animate-slide-up"
+          className="pointer-events-none absolute -top-8 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-sm border border-border bg-card px-2 py-0.5 text-[10px] font-medium text-foreground shadow-md animate-slide-up"
           role="status"
         >
           {feedback === "added" ? "Pinned" : "Removed"}

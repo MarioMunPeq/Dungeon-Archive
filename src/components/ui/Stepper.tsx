@@ -91,13 +91,13 @@ export function Stepper({
   const controlClass =
     variant === "ghost"
       ? cn(
-          "hitbox-expand flex h-7 w-7 shrink-0 select-none items-center justify-center rounded-md text-muted-foreground active:scale-90 disabled:cursor-default disabled:text-disabled-foreground disabled:active:scale-100 hover:text-foreground",
+          "hitbox-expand flex h-7 w-7 shrink-0 select-none items-center justify-center rounded-lg text-muted-foreground active:scale-90 disabled:cursor-default disabled:text-disabled-foreground disabled:active:scale-100 hover:text-foreground",
           controlMotion,
           hiddenControls &&
             "opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto group-focus-within:opacity-100 group-focus-within:pointer-events-auto",
         )
       : cn(
-          "flex h-9 w-9 shrink-0 select-none items-center justify-center rounded-md border border-border bg-background text-base font-semibold text-foreground disabled:cursor-default disabled:bg-disabled disabled:text-disabled-foreground disabled:active:scale-100 hover:border-border-strong",
+          "flex h-9 w-9 shrink-0 select-none items-center justify-center rounded-lg border border-border bg-background text-base font-semibold text-foreground disabled:cursor-default disabled:bg-disabled disabled:text-disabled-foreground disabled:active:scale-100 hover:border-border-strong",
           controlMotion,
         );
 
@@ -106,10 +106,10 @@ export function Stepper({
   const valueButtonClass =
     variant === "ghost"
       ? cn(
-          "flex h-9 min-w-0 flex-1 select-none items-center justify-center rounded-md font-bold tabular-nums text-foreground transition-all duration-150 active:scale-95 hover:bg-accent/60",
+          "flex h-9 min-w-0 flex-1 select-none items-center justify-center rounded-lg font-bold tabular-nums text-foreground transition-all duration-150 active:scale-95 hover:bg-accent/60",
           valueClassName,
         )
-      : "flex h-9 min-w-0 flex-1 select-none items-center justify-center rounded-md border border-border bg-background px-1 text-base font-semibold tabular-nums text-foreground transition-all duration-150 active:scale-95 hover:border-border-strong";
+      : "flex h-9 min-w-0 flex-1 select-none items-center justify-center rounded-lg border border-border bg-background px-1 text-base font-semibold tabular-nums text-foreground transition-all duration-150 active:scale-95 hover:border-border-strong";
 
   return (
     <div className={cn("flex w-full items-center gap-1", className)}>

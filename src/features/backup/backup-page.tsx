@@ -155,7 +155,7 @@ export function BackupPage() {
       </div>
 
       {ready && (
-        <div className="flex flex-col gap-8">
+        <div className="flex flex-col gap-6">
           <Section title="Account">
             <Surface>
               {!signedIn ? (

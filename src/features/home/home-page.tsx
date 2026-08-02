@@ -93,7 +93,7 @@ export function HomePage() {
   const emptyWorkspace = players.length === 0 && !adventure && !hasContent;
 
   return (
-    <div className="flex flex-col gap-8 px-4 py-6">
+    <div className="flex flex-col gap-6 px-4 py-6">
       {emptyWorkspace ? (
         <section className="flex flex-col items-center gap-4 px-2 py-10 text-center">
           <h2 className="text-xl font-bold text-foreground">Welcome to your workspace</h2>
@@ -103,7 +103,7 @@ export function HomePage() {
           </p>
           <Link
             to="/search"
-            className="inline-flex items-center justify-center gap-1.5 rounded-lg bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-all duration-150 hover:bg-primary-hover active:scale-95 active:bg-primary-active"
+            className="inline-flex touch-target items-center justify-center gap-1.5 rounded-lg bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-all duration-150 hover:bg-primary-hover active:scale-95 active:bg-primary-active"
           >
             Search the Compendium
           </Link>
