@@ -36,6 +36,7 @@ export const FavoriteButton = memo(function FavoriteButton({
     <button
       type="button"
       onClick={handleClick}
+      title={isFavorite ? "Remove from favorites" : "Add to favorites"}
       className={`hitbox-expand inline-flex items-center justify-center rounded p-1.5 transition-all duration-150 hover:bg-accent active:scale-90 active:bg-accent/80 ${className} ${
         isFavorite ? "text-destructive" : "text-muted-foreground"
       }`}

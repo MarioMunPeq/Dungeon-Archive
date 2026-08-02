@@ -30,6 +30,8 @@ export { getVersions, isRegistered, registrySize } from "./registry/entity-regis
 export { getSourceInfo, formatSource, formatEdition } from "./source";
 export type { SourceInfo } from "./source";
 
+export { formatDamage, formatDamageType } from "./damage";
+
 export {
   getRelatedEntities,
   getReferencingEntities,

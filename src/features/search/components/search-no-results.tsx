@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/Button";
 
 interface SearchNoResultsProps {
@@ -10,7 +11,10 @@ export function SearchNoResults({ query, onClear }: SearchNoResultsProps) {
     <div className="flex flex-col items-center gap-4 px-4 py-16 text-center">
       <p className="text-sm font-medium text-foreground">No results for &ldquo;{query}&rdquo;</p>
       <p className="text-xs text-foreground-subtle">
-        Try a different search term or browse categories
+        Try a different search term or{" "}
+        <Link to="/" className="text-primary transition-colors duration-150 hover:underline">
+          browse categories
+        </Link>
       </p>
       {onClear && (
         <Button variant="outline" size="sm" onClick={onClear}>

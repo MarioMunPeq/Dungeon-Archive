@@ -2,7 +2,6 @@ import { Link } from "react-router-dom";
 import {
   categoryLabel,
   categoryLabelSingular,
-  getCategoryCount,
   CATEGORY_REGISTRY,
 } from "@/compendium";
 import type { EntityCategory, EntityCardData } from "@/compendium";
@@ -189,9 +188,9 @@ export function HomePage() {
         </Link>
       )}
 
-      {sessionCards.length > 0 && (
-        <section className="flex flex-col gap-3">
-          <SectionHeader title="Continue Session" to="/session" />
+      <section className="flex flex-col gap-3">
+        <SectionHeader title="Continue Session" to="/session" />
+        {sessionCards.length > 0 ? (
           <div className="-mx-4 flex gap-3 overflow-x-auto px-4 pb-2">
             {sessionCards.map((card) => (
               <div key={card.href} className="w-56 shrink-0">
@@ -199,8 +198,15 @@ export function HomePage() {
               </div>
             ))}
           </div>
-        </section>
-      )}
+        ) : (
+          <Link
+            to="/search"
+            className="rounded-lg border border-dashed border-border px-4 py-3 text-xs text-muted-foreground transition-colors hover:bg-accent active:bg-accent/80"
+          >
+            Pin entities with the pin icon while browsing to keep them one tap away.
+          </Link>
+        )}
+      </section>
 
       {recentCards.length > 0 && (
         <section className="flex flex-col gap-3">
@@ -245,15 +251,24 @@ export function HomePage() {
         <h2 className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
           Browse the Compendium
         </h2>
-        <div className="grid grid-cols-2 gap-x-6 gap-y-1 sm:grid-cols-3">
+        <div className="grid grid-cols-2 gap-2 sm:grid-cols-3">
           {CATEGORIES.map((cat) => (
             <Link
               key={cat}
               to={`/${cat}`}
-              className="flex items-baseline justify-between gap-2 border-b border-transparent py-2 transition-colors hover:border-border hover:text-foreground"
+              className="flex items-center justify-between gap-2 rounded-lg border border-border bg-surface px-3 py-3 transition-colors hover:bg-accent active:bg-accent/80"
             >
               <span className="text-sm font-medium text-foreground">{categoryLabel(cat)}</span>
-              <span className="text-xs text-foreground-subtle">{getCategoryCount(cat)}</span>
+              <svg
+                aria-hidden="true"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth={2}
+                className="h-3.5 w-3.5 shrink-0 text-muted-foreground"
+              >
+                <path d="M9 18l6-6-6-6" />
+              </svg>
             </Link>
           ))}
         </div>
@@ -263,8 +278,18 @@ export function HomePage() {
         <div className="flex justify-center pt-2">
           <Link
             to="/backup"
-            className="text-xs text-muted-foreground transition-colors hover:text-foreground"
+            className="inline-flex min-h-11 items-center gap-2 rounded-lg border border-border px-4 text-xs font-medium text-muted-foreground transition-colors hover:bg-accent hover:text-foreground active:bg-accent/80"
           >
+            <svg
+              aria-hidden="true"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth={2}
+              className="h-4 w-4"
+            >
+              <path d="M17.5 19a4.5 4.5 0 1 0-.42-8.98 6 6 0 1 0-11.66 1.48A3.5 3.5 0 0 0 7 19h10.5Z" />
+            </svg>
             Cloud Backup
           </Link>
         </div>

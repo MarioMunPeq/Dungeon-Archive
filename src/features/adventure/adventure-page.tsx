@@ -3,7 +3,7 @@ import { useActiveAdventure, useAdventureEntityIds, userStore } from "@/user-sta
 import { InlineTextEditor } from "@/components/ui/InlineTextEditor";
 import { InlineTextareaEditor } from "@/components/ui/InlineTextareaEditor";
 import { Section } from "@/components/ui/Section";
-import { Button } from "@/components/ui/Button";
+import { Button, ConfirmDialog } from "@/components/ui";
 import { entityRefFromCanonicalId, EntityReferenceRow, RowRemoveButton } from "@/components/entity";
 import type { EntityRef } from "@/components/entity";
 
@@ -19,6 +19,7 @@ export function AdventurePage() {
   const [editingNotes, setEditingNotes] = useState(false);
   const [notesDraft, setNotesDraft] = useState("");
   const [showSwitch, setShowSwitch] = useState(false);
+  const [showClearConfirm, setShowClearConfirm] = useState(false);
 
   const handleCreateAdventure = useCallback(() => {
     userStore.getState().createAdventure();
@@ -45,6 +46,7 @@ export function AdventurePage() {
 
   const handleClearEntities = useCallback(() => {
     userStore.getState().clearAdventureEntities();
+    setShowClearConfirm(false);
   }, []);
 
   const handleAddObjective = useCallback(() => {
@@ -124,7 +126,7 @@ export function AdventurePage() {
       <div className="flex flex-col px-4 py-6">
         <h1 className="mb-6 text-xl font-bold text-foreground">Adventure</h1>
         <div className="flex flex-col items-center gap-4 px-2 py-10 text-center">
-          <p className="max-w-xs text-sm text-muted-foreground">
+          <p className="w-full max-w-md text-sm text-muted-foreground">
             No active adventure yet. Create one to track your campaign notes, objectives, and
             important references.
           </p>
@@ -318,7 +320,7 @@ export function AdventurePage() {
               variant="ghost"
               size="sm"
               className="text-destructive"
-              onClick={handleClearEntities}
+              onClick={() => setShowClearConfirm(true)}
             >
               Remove all
             </Button>
@@ -371,6 +373,17 @@ export function AdventurePage() {
           </button>
         )}
       </Section>
+
+      {showClearConfirm && (
+        <ConfirmDialog
+          title="Remove all references?"
+          message="This will remove every reference from this adventure. You can re-add them anytime."
+          confirmLabel="Remove all"
+          destructive
+          onCancel={() => setShowClearConfirm(false)}
+          onConfirm={handleClearEntities}
+        />
+      )}
     </div>
   );
 }

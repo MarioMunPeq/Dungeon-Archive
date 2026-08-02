@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect, useMemo, type KeyboardEvent } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { search } from "@/compendium";
 import { createSearchResultItems } from "@/components/entity";
 import { SearchInput } from "./components/search-input";
@@ -10,7 +10,9 @@ import { SearchNoResults } from "./components/search-no-results";
 import { SearchCategoryFilter } from "./components/search-category-filter";
 
 export function SearchPage() {
-  const [query, setQuery] = useState("");
+  const [searchParams, setSearchParams] = useSearchParams();
+  const initialQuery = useRef(searchParams.get("q") ?? "").current;
+  const [query, setQuery] = useState(initialQuery);
   const [selectedIndex, setSelectedIndex] = useState(-1);
   const [categoryFilter, setCategoryFilter] = useState("");
   const inputRef = useRef<HTMLInputElement>(null);
@@ -25,8 +27,15 @@ export function SearchPage() {
   }, [results, categoryFilter]);
 
   useEffect(() => {
-    inputRef.current?.focus();
-  }, []);
+    if (initialQuery) inputRef.current?.focus();
+  }, [initialQuery]);
+
+  useEffect(() => {
+    const current = searchParams.get("q") ?? "";
+    if (query !== current) {
+      setSearchParams(query ? { q: query } : {}, { replace: true });
+    }
+  }, [query, searchParams, setSearchParams]);
 
   useEffect(() => {
     setSelectedIndex(-1);

@@ -17,15 +17,15 @@ const SOURCE_MAP: Record<string, SourceInfo> = {
 };
 
 const SOURCE_DISPLAY: Record<string, string> = {
-  XPHB: "PHB24",
-  PHB: "PHB",
+  XPHB: "PHB 2024",
+  PHB: "PHB 2014",
+  XMM: "MM 2025",
+  MM: "MM 2014",
+  XDMG: "DMG 2024",
+  DMG: "DMG 2014",
   TCE: "TCE",
   XGE: "XGE",
-  MM: "MM",
-  XMM: "MM25",
   MPMM: "MPMM",
-  DMG: "DMG",
-  XDMG: "DMG24",
 };
 
 export function getSourceInfo(source: string): SourceInfo | null {

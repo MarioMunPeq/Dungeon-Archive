@@ -63,7 +63,7 @@ export function CategoryPage({ category }: CategoryPageProps) {
     <div className="space-y-4 px-4 py-6">
       <div>
         <h1 className="text-xl font-bold text-foreground">{categoryLabel(category)}</h1>
-        <p className="text-sm text-muted-foreground">
+        <p className="text-xs text-muted-foreground">
           {allEntities.length} {categoryLabelSingular(category).toLowerCase()}
           {filtered.length < allEntities.length ? ` (${filtered.length} filtered)` : ""}
         </p>

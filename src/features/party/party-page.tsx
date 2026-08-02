@@ -2,14 +2,14 @@ import { useState, useCallback, useMemo } from "react";
 import { Link } from "react-router-dom";
 import { usePlayerReferences, userStore } from "@/user-state";
 import type { PlayerReference, PlayerReferenceUpdate } from "@/user-state";
-import { getEntitiesForCategory, SCHOOL_NAMES, resolveEntity } from "@/compendium";
+import { formatDamage, getEntitiesForCategory, SCHOOL_NAMES, resolveEntity } from "@/compendium";
 import type { ContentBlock, Equipment, MagicItem, Spell } from "@/compendium";
 import { entityRefFromCanonicalId, EntityReferenceRow, RowRemoveButton } from "@/components/entity";
 import { ReferencePicker } from "@/components/ui/ReferencePicker";
 import type { PickerCandidate } from "@/components/ui/ReferencePicker";
 import { InlineTextEditor } from "@/components/ui/InlineTextEditor";
 import { InlineTextareaEditor } from "@/components/ui/InlineTextareaEditor";
-import { Button, SelectField, Stepper } from "@/components/ui";
+import { Button, ConfirmDialog, SelectField, Stepper } from "@/components/ui";
 import { cn } from "@/lib/utils";
 
 type PickerKind = "spell" | "weapon" | "magicitem";
@@ -184,7 +184,7 @@ function buildCandidates(kind: PickerKind): PickerCandidate[] {
     case "weapon": {
       for (const e of getEntitiesForCategory("equipment") as readonly Equipment[]) {
         if (!WEAPON_TYPES.has(e.type)) continue;
-        const dmg = [e.damage, e.damageType].filter(Boolean).join(" ");
+        const dmg = formatDamage(e.damage, e.damageType);
         push({
           canonicalId: e.canonicalId,
           name: e.name,
@@ -211,8 +211,7 @@ function weaponStats(canonicalId: string): string | undefined {
   const resolved = resolveEntity(canonicalId);
   if (!resolved || resolved.selected.category !== "equipment") return undefined;
   const item = resolved.selected as Equipment;
-  const damage = [item.damage, item.damageType].filter(Boolean).join(" ");
-  return damage || undefined;
+  return formatDamage(item.damage, item.damageType) || undefined;
 }
 
 function spellSubtitle(entity: Spell | undefined): string | undefined {
@@ -246,7 +245,7 @@ function firstParagraphText(blocks: readonly ContentBlock[]): string | undefined
 }
 
 function WeaponPreview({ item, href }: { item: Equipment; href: string }) {
-  const damage = [item.damage, item.damageType].filter(Boolean).join(" ");
+  const damage = formatDamage(item.damage, item.damageType);
   const properties = item.properties ?? [];
   return (
     <div className="flex flex-col gap-1.5 rounded-lg bg-card px-3 py-2 animate-slide-up">
@@ -586,6 +585,7 @@ function PlayerReferenceCard({
   const [editing, setEditing] = useState<"name" | "note" | null>(autoEditName ? "name" : null);
   const [draft, setDraft] = useState("");
   const [picker, setPicker] = useState<PickerKind | null>(null);
+  const [confirmRemove, setConfirmRemove] = useState(false);
 
   const candidates = useMemo(() => (picker ? buildCandidates(picker) : []), [picker]);
 
@@ -715,7 +715,8 @@ function PlayerReferenceCard({
         </div>
         <button
           type="button"
-          onClick={removePlayer}
+          onClick={() => setConfirmRemove(true)}
+          title={`Remove ${reference.name}`}
           aria-label={`Remove ${reference.name}`}
           className="hitbox-expand inline-flex h-8 w-8 shrink-0 items-center justify-center rounded text-muted-foreground transition-all duration-150 hover:bg-accent hover:text-foreground active:scale-90 active:bg-accent/80"
         >
@@ -736,7 +737,7 @@ function PlayerReferenceCard({
         </button>
       </div>
 
-      <div className="flex flex-col gap-2 rounded-xl bg-card px-3 py-3">
+      <div className="flex flex-col gap-2 rounded-lg bg-card px-3 py-3">
         <div
           className={cn("grid gap-1.5", hasSpell ? "grid-cols-3 sm:grid-cols-5" : "grid-cols-3")}
         >
@@ -871,6 +872,20 @@ function PlayerReferenceCard({
           onClose={() => setPicker(null)}
         />
       )}
+
+      {confirmRemove && (
+        <ConfirmDialog
+          title={`Remove ${reference.name}?`}
+          message="This removes their combat numbers, modifiers, and references. This can't be undone."
+          confirmLabel="Remove"
+          destructive
+          onCancel={() => setConfirmRemove(false)}
+          onConfirm={() => {
+            setConfirmRemove(false);
+            removePlayer();
+          }}
+        />
+      )}
     </div>
   );
 }
@@ -900,7 +915,7 @@ export function PartyPage() {
 
       {players.length === 0 ? (
         <div className="flex flex-col items-center gap-4 px-2 py-10 text-center">
-          <p className="max-w-xs text-sm text-muted-foreground">
+          <p className="w-full max-w-md text-sm text-muted-foreground">
             Quick-access references: combat numbers, ability modifiers, and links to the spells,
             weapons, and magic items you use most. Nothing else — no inventory, no tracking.
           </p>

@@ -1,6 +1,7 @@
 export { Surface } from "./Surface";
 export type { SurfaceVariant } from "@/config/tokens";
 export { Button } from "./Button";
+export { ConfirmDialog } from "./ConfirmDialog";
 export { Section } from "./Section";
 export { Badge } from "./Badge";
 export { Divider } from "./Divider";

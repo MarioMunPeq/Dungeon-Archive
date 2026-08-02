@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
-import { Button, Inline, Section, Surface } from "@/components/ui";
+import { Button, ConfirmDialog, Inline, Section, Surface } from "@/components/ui";
 import { getGateway, restore, upload } from "@/sync";
 import type { CloudGateway, CloudUser } from "@/sync";
 
@@ -81,46 +81,6 @@ function useOnline(): boolean {
   return online;
 }
 
-interface ConfirmDialogProps {
-  readonly title: string;
-  readonly message: string;
-  readonly confirmLabel: string;
-  readonly destructive: boolean;
-  readonly onCancel: () => void;
-  readonly onConfirm: () => void;
-}
-
-function ConfirmDialog({
-  title,
-  message,
-  confirmLabel,
-  destructive,
-  onCancel,
-  onConfirm,
-}: ConfirmDialogProps) {
-  return (
-    <div
-      role="dialog"
-      aria-modal="true"
-      aria-label={title}
-      className="fixed inset-0 z-50 flex items-center justify-center bg-overlay p-4"
-    >
-      <div className="w-full max-w-sm space-y-4 rounded-lg border border-border bg-card p-5 shadow-lg animate-slide-up">
-        <h2 className="text-sm font-semibold text-foreground">{title}</h2>
-        <p className="text-sm text-muted-foreground">{message}</p>
-        <Inline gap="sm" className="w-full justify-end">
-          <Button variant="ghost" onClick={onCancel}>
-            Cancel
-          </Button>
-          <Button variant={destructive ? "danger-solid" : "primary"} onClick={onConfirm}>
-            {confirmLabel}
-          </Button>
-        </Inline>
-      </div>
-    </div>
-  );
-}
-
 export function BackupPage() {
   const gateway = useGateway();
   const online = useOnline();
@@ -188,8 +148,8 @@ export function BackupPage() {
       <div className="mb-6 space-y-1">
         <h1 className="text-xl font-bold text-foreground">Cloud Backup</h1>
         <p className="text-xs text-muted-foreground">
-          Your data is stored locally on this device. Cloud backup is completely optional and
-          allows you to restore your data on another device.
+          Your data lives locally on this device. Cloud backup is optional and lets you restore it
+          on another device.
         </p>
         {!online && <p className="text-xs font-medium text-warning">You are currently offline.</p>}
       </div>
@@ -237,13 +197,23 @@ export function BackupPage() {
                   </span>
                 </div>
               </Surface>
-              <div className="flex flex-col gap-2">
-                <Button onClick={() => setConfirm("upload")} disabled={!canAct}>
-                  {busy === "upload" ? "Uploading…" : "Upload backup"}
-                </Button>
-                <Button variant="outline" onClick={() => setConfirm("restore")} disabled={!canAct}>
-                  {busy === "restore" ? "Restoring…" : "Restore backup"}
-                </Button>
+              <div className="flex flex-col gap-3">
+                <div className="flex flex-col gap-1">
+                  <Button onClick={() => setConfirm("upload")} disabled={!canAct}>
+                    {busy === "upload" ? "Uploading…" : "Upload backup"}
+                  </Button>
+                  <p className="px-1 text-xs text-foreground-subtle">
+                    Replaces the cloud copy with your current data.
+                  </p>
+                </div>
+                <div className="flex flex-col gap-1">
+                  <Button variant="outline" onClick={() => setConfirm("restore")} disabled={!canAct}>
+                    {busy === "restore" ? "Restoring…" : "Restore backup"}
+                  </Button>
+                  <p className="px-1 text-xs text-foreground-subtle">
+                    Replaces your local data with the cloud copy.
+                  </p>
+                </div>
               </div>
               {error && (
                 <p role="alert" className="text-xs font-medium text-destructive">
@@ -258,7 +228,7 @@ export function BackupPage() {
       {confirm === "upload" && (
         <ConfirmDialog
           title="Upload backup?"
-          message="This will replace the current cloud backup."
+          message="This will replace the cloud copy with your current data."
           confirmLabel="Upload"
           destructive={false}
           onCancel={() => setConfirm(null)}
@@ -268,7 +238,7 @@ export function BackupPage() {
       {confirm === "restore" && (
         <ConfirmDialog
           title="Restore backup?"
-          message="This will replace your current local data with the backup stored in the cloud."
+          message="This will replace your local data with the cloud copy. This can't be undone."
           confirmLabel="Restore"
           destructive
           onCancel={() => setConfirm(null)}

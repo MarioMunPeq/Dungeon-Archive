@@ -51,9 +51,10 @@ test("getSourceInfo returns null for unknown source", () => {
   strictEqual(getSourceInfo("AAG"), null);
 });
 
-test("formatSource returns short label", () => {
-  strictEqual(formatSource("XPHB"), "PHB24");
-  strictEqual(formatSource("PHB"), "PHB");
+test("formatSource returns edition-aware label", () => {
+  strictEqual(formatSource("XPHB"), "PHB 2024");
+  strictEqual(formatSource("PHB"), "PHB 2014");
+  strictEqual(formatSource("TCE"), "TCE");
   strictEqual(formatSource("AAG"), "AAG");
 });
 
