@@ -1,5 +1,5 @@
 import type { MagicItem } from "@/compendium";
-import { Section } from "@/components/entity";
+import { Section } from "@/components/ui/Section";
 import { Stack } from "@/components/ui/Stack";
 import { EntityMetadataGrid, EntityProperty } from "@/components/ui/entity-property";
 import { ContentRenderer } from "@/components/content";

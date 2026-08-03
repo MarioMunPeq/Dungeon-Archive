@@ -1,5 +1,5 @@
 import type { Spell } from "@/compendium";
-import { Section } from "@/components/entity";
+import { Section } from "@/components/ui/Section";
 import { ContentRenderer } from "@/components/content";
 import { Subtitle } from "@/components/ui/Typography";
 import { Stack } from "@/components/ui/Stack";

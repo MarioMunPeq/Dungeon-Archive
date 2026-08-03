@@ -1,6 +1,6 @@
 import type { Equipment } from "@/compendium";
 import { formatDamage, formatDamageType } from "@/compendium";
-import { Section } from "@/components/entity";
+import { Section } from "@/components/ui/Section";
 import { ContentRenderer } from "@/components/content";
 import { Stack } from "@/components/ui/Stack";
 import { EntityProperty, EntityMetadataGrid } from "@/components/ui/entity-property";

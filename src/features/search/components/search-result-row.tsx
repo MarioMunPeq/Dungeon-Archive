@@ -1,8 +1,6 @@
 import { Link } from "react-router-dom";
 import type { SearchResultItem } from "@/components/entity";
-import { CATEGORY_REGISTRY } from "@/compendium";
-import { badgeVariantForCategory } from "@/components/entity";
-import { Badge } from "@/components/ui/Badge";
+import { EntityIdentity } from "@/components/entity";
 import { SearchHighlight } from "./search-highlight";
 import { FavoriteButton } from "@/components/ui/FavoriteButton";
 import { SessionButton } from "@/components/ui/SessionButton";
@@ -27,9 +25,6 @@ export function SearchResultRow({
   canonicalId,
   id,
 }: SearchResultRowProps) {
-  const cat = CATEGORY_REGISTRY[category];
-  const variant = badgeVariantForCategory(category);
-
   return (
     <Link
       id={id}
@@ -38,16 +33,11 @@ export function SearchResultRow({
       aria-selected={isSelected}
       className={`${ROW_BASE} ${isSelected ? ROW_SELECTED : "hover:bg-accent/50 active:bg-accent/80"}`}
     >
-      <Badge variant={variant} className="shrink-0">
-        {cat.singular}
-      </Badge>
-
-      <div className="min-w-0 flex-1 space-y-1">
-        <p className="truncate text-sm font-medium text-foreground">
-          <SearchHighlight text={title} query={query} />
-        </p>
-        <p className="truncate text-xs text-muted-foreground">{subtitle}</p>
-      </div>
+      <EntityIdentity
+        category={category}
+        name={<SearchHighlight text={title} query={query} />}
+        subtitle={subtitle}
+      />
 
       <FavoriteButton canonicalId={canonicalId} />
       <SessionButton canonicalId={canonicalId} />

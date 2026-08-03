@@ -1,5 +1,5 @@
 import type { Condition } from "@/compendium";
-import { Section } from "@/components/entity";
+import { Section } from "@/components/ui/Section";
 import { ContentRenderer } from "@/components/content";
 import { Stack } from "@/components/ui/Stack";
 

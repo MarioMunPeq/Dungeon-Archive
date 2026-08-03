@@ -1,5 +1,8 @@
 export { Surface } from "./Surface";
 export type { SurfaceVariant } from "./Surface";
+export { Icon } from "./Icon";
+export type { IconProps, IconSize } from "./Icon";
+export { ChevronRightIcon, CloseIcon } from "./icons";
 export { Button } from "./Button";
 export { ConfirmDialog } from "./ConfirmDialog";
 export { Section } from "./Section";

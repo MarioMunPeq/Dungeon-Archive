@@ -519,7 +519,6 @@ function ReferenceRow({
           ) : undefined
         }
         action={<RowRemoveButton label={`Remove ${ref.name}`} onClick={handleRemove} />}
-        asLink={!previewable}
         onToggle={previewable ? () => setExpanded((v) => !v) : undefined}
         expanded={previewable ? expanded : undefined}
       />

@@ -120,32 +120,6 @@ function sourceFilter(entities: readonly AnyEntity[]): FilterDefinition {
   };
 }
 
-export function categoryLabel(category: string): string {
-  const labels: Record<string, string> = {
-    spell: "Spells",
-    condition: "Conditions",
-    equipment: "Equipment",
-    action: "Actions",
-    monster: "Monsters",
-    magicitem: "Magic Items",
-    feat: "Feats",
-  };
-  return labels[category] ?? category;
-}
-
-export function categoryLabelSingular(category: string): string {
-  const labels: Record<string, string> = {
-    spell: "Spell",
-    condition: "Condition",
-    equipment: "Equipment",
-    action: "Action",
-    monster: "Monster",
-    magicitem: "Magic Item",
-    feat: "Feat",
-  };
-  return labels[category] ?? category;
-}
-
 export const CATEGORY_REGISTRY: Record<EntityCategory, CategoryRegistration> = {
   spell: {
     singular: "Spell",
@@ -180,7 +154,7 @@ export const CATEGORY_REGISTRY: Record<EntityCategory, CategoryRegistration> = {
       return {
         name: spell.name,
         href: referenceToUrl(spell.canonicalId),
-        categoryLabel: "Spell",
+        categoryLabel: categoryLabelSingular("spell"),
         metadata: `${level} \u00B7 ${school}`,
         source: spell.source,
         canonicalId: spell.canonicalId,
@@ -224,7 +198,7 @@ export const CATEGORY_REGISTRY: Record<EntityCategory, CategoryRegistration> = {
       return {
         name: monster.name,
         href: referenceToUrl(monster.canonicalId),
-        categoryLabel: "Monster",
+        categoryLabel: categoryLabelSingular("monster"),
         metadata: `CR ${monster.challengeRating} \u00B7 ${formatMonsterType(monster)}`,
         source: monster.source,
         canonicalId: monster.canonicalId,
@@ -256,7 +230,7 @@ export const CATEGORY_REGISTRY: Record<EntityCategory, CategoryRegistration> = {
       return {
         name: item.name,
         href: referenceToUrl(item.canonicalId),
-        categoryLabel: "Equipment",
+        categoryLabel: categoryLabelSingular("equipment"),
         metadata: item.type,
         source: item.source,
         canonicalId: item.canonicalId,
@@ -276,7 +250,7 @@ export const CATEGORY_REGISTRY: Record<EntityCategory, CategoryRegistration> = {
     toCardData: (entity) => ({
       name: entity.name,
       href: referenceToUrl(entity.canonicalId),
-      categoryLabel: "Condition",
+      categoryLabel: categoryLabelSingular("condition"),
       metadata: "",
       source: entity.source,
       canonicalId: entity.canonicalId,
@@ -294,7 +268,7 @@ export const CATEGORY_REGISTRY: Record<EntityCategory, CategoryRegistration> = {
       return {
         name: action.name,
         href: referenceToUrl(action.canonicalId),
-        categoryLabel: "Action",
+        categoryLabel: categoryLabelSingular("action"),
         metadata: action.actionType,
         source: action.source,
         canonicalId: action.canonicalId,
@@ -338,7 +312,7 @@ export const CATEGORY_REGISTRY: Record<EntityCategory, CategoryRegistration> = {
       return {
         name: magic.name,
         href: referenceToUrl(magic.canonicalId),
-        categoryLabel: "Magic Item",
+        categoryLabel: categoryLabelSingular("magicitem"),
         metadata: `${magic.rarity}${attunement}`,
         source: magic.source,
         canonicalId: magic.canonicalId,
@@ -385,7 +359,7 @@ export const CATEGORY_REGISTRY: Record<EntityCategory, CategoryRegistration> = {
       return {
         name: feat.name,
         href: referenceToUrl(feat.canonicalId),
-        categoryLabel: "Feat",
+        categoryLabel: categoryLabelSingular("feat"),
         metadata: meta,
         source: feat.source,
         canonicalId: feat.canonicalId,
@@ -402,3 +376,11 @@ export const CATEGORY_REGISTRY: Record<EntityCategory, CategoryRegistration> = {
     },
   },
 };
+
+export function categoryLabel(category: string): string {
+  return CATEGORY_REGISTRY[category as EntityCategory]?.plural ?? category;
+}
+
+export function categoryLabelSingular(category: string): string {
+  return CATEGORY_REGISTRY[category as EntityCategory]?.singular ?? category;
+}

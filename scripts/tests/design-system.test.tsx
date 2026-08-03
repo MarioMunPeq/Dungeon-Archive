@@ -208,3 +208,99 @@ test("Caption renders as span with text-xs", () => {
   ok(html.includes("<span"));
   ok(html.includes("text-xs"));
 });
+
+// ---------------------------------------------------------------------------
+// Icon
+// ---------------------------------------------------------------------------
+
+console.log("\nIcon\n");
+
+import { Icon } from "../../src/components/ui/Icon";
+import { ChevronRightIcon, CloseIcon } from "../../src/components/ui/icons";
+
+test("renders a decorative svg by default", () => {
+  const html = renderToString(createElement(Icon, null, createElement("path", null)));
+  ok(html.includes("<svg"));
+  ok(html.includes('viewBox="0 0 24 24"'));
+  ok(html.includes('aria-hidden="true"'));
+  ok(html.includes("h-4 w-4"));
+});
+
+test("renders an accessible svg when labelled", () => {
+  const html = renderToString(
+    createElement(Icon, { label: "Close", children: createElement("line", null) }),
+  );
+  ok(html.includes('role="img"'));
+  ok(html.includes("<title>Close</title>"));
+  ok(!html.includes('aria-hidden="true"'));
+});
+
+test("renders size variants", () => {
+  const xs = renderToString(
+    createElement(Icon, { size: "xs", children: createElement("path", null) }),
+  );
+  const lg = renderToString(
+    createElement(Icon, { size: "lg", children: createElement("path", null) }),
+  );
+  ok(xs.includes("h-3 w-3"));
+  ok(lg.includes("h-6 w-6"));
+});
+
+test("renders with custom className", () => {
+  const html = renderToString(
+    createElement(Icon, {
+      className: "text-destructive",
+      children: createElement("path", null),
+    }),
+  );
+  ok(html.includes("text-destructive"));
+});
+
+test("ChevronRightIcon renders a chevron path", () => {
+  const html = renderToString(createElement(ChevronRightIcon, null));
+  ok(html.includes("m9 18 6-6-6-6"));
+});
+
+test("CloseIcon renders close lines", () => {
+  const html = renderToString(createElement(CloseIcon, null));
+  ok(html.includes("<line"));
+});
+
+// ---------------------------------------------------------------------------
+// EntityIdentity
+// ---------------------------------------------------------------------------
+
+console.log("\nEntityIdentity\n");
+
+import { EntityIdentity } from "../../src/components/entity/entity-identity";
+
+test("renders category badge and name", () => {
+  const html = renderToString(
+    createElement(EntityIdentity, { category: "spell", name: "Fireball" }, null),
+  );
+  ok(html.includes("Spell"));
+  ok(html.includes("Fireball"));
+});
+
+test("renders subtitle when provided", () => {
+  const html = renderToString(
+    createElement(EntityIdentity, { category: "monster", name: "Dragon", subtitle: "Large" }, null),
+  );
+  ok(html.includes("Dragon"));
+  ok(html.includes("Large"));
+});
+
+test("hides badge when showBadge is false", () => {
+  const html = renderToString(
+    createElement(EntityIdentity, { category: "spell", name: "Fireball", showBadge: false }, null),
+  );
+  ok(!html.includes("Spell"));
+  ok(html.includes("Fireball"));
+});
+
+test("omits subtitle when not provided", () => {
+  const html = renderToString(
+    createElement(EntityIdentity, { category: "feat", name: "Sharpshooter" }, null),
+  );
+  ok(!html.includes("undefined"));
+});
