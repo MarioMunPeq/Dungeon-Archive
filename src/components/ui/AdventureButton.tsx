@@ -1,4 +1,4 @@
-import { memo } from "react";
+import { memo, useState } from "react";
 import { useIsInAdventure, userStore } from "@/user-state";
 
 interface AdventureButtonProps {
@@ -27,10 +27,12 @@ export const AdventureButton = memo(function AdventureButton({
   className = "",
 }: AdventureButtonProps) {
   const inAdventure = useIsInAdventure(canonicalId);
+  const [pop, setPop] = useState(0);
 
   function handleClick(e: React.MouseEvent) {
     e.stopPropagation();
     userStore.getState().toggleAdventureEntity(canonicalId);
+    setPop((p) => p + 1);
   }
 
   return (
@@ -38,12 +40,14 @@ export const AdventureButton = memo(function AdventureButton({
       type="button"
       onClick={handleClick}
       title={inAdventure ? "Remove from adventure" : "Add to adventure"}
-      className={`hitbox-expand inline-flex items-center justify-center rounded p-1.5 transition-all duration-150 hover:bg-accent active:scale-90 active:bg-accent/80 ${className} ${
+      className={`hitbox-expand inline-flex items-center justify-center rounded-lg p-1.5 transition-all duration-150 hover:bg-accent active:scale-90 active:bg-accent/80 ${className} ${
         inAdventure ? "text-success" : "text-muted-foreground"
       }`}
       aria-label={inAdventure ? "Remove from adventure" : "Add to adventure"}
     >
-      <FlagIcon filled={inAdventure} />
+      <span key={pop} className={pop > 0 ? "animate-pop" : undefined}>
+        <FlagIcon filled={inAdventure} />
+      </span>
     </button>
   );
 });

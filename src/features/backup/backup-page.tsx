@@ -193,7 +193,9 @@ export function BackupPage() {
                 <div className="flex items-center justify-between gap-3">
                   <span className="text-xs text-muted-foreground">Last cloud backup</span>
                   <span className="text-sm font-medium text-foreground">
-                    {lastCloudBackup !== null ? formatTimestamp(lastCloudBackup) : "No backup found."}
+                    {lastCloudBackup !== null
+                      ? formatTimestamp(lastCloudBackup)
+                      : "No backup found"}
                   </span>
                 </div>
               </Surface>
@@ -207,7 +209,11 @@ export function BackupPage() {
                   </p>
                 </div>
                 <div className="flex flex-col gap-1">
-                  <Button variant="outline" onClick={() => setConfirm("restore")} disabled={!canAct}>
+                  <Button
+                    variant="outline"
+                    onClick={() => setConfirm("restore")}
+                    disabled={!canAct}
+                  >
                     {busy === "restore" ? "Restoring…" : "Restore backup"}
                   </Button>
                   <p className="px-1 text-xs text-foreground-subtle">

@@ -61,7 +61,7 @@ export function ReferencePicker({ title, candidates, onSelect, onClose }: Refere
           type="button"
           onClick={onClose}
           aria-label="Close picker"
-          className="hitbox-expand inline-flex h-8 w-8 items-center justify-center rounded text-muted-foreground transition-all duration-150 hover:bg-accent hover:text-foreground active:scale-90 active:bg-accent/80"
+          className="hitbox-expand inline-flex h-8 w-8 items-center justify-center rounded-lg text-muted-foreground transition-all duration-150 hover:bg-accent hover:text-foreground active:scale-90 active:bg-accent/80"
         >
           <svg
             aria-hidden="true"
@@ -82,10 +82,10 @@ export function ReferencePicker({ title, candidates, onSelect, onClose }: Refere
           type="search"
           value={query}
           onChange={(e) => setQuery(e.target.value)}
-          placeholder={`Search ${title.toLowerCase()}...`}
+          placeholder={`Search ${title.toLowerCase()}\u2026`}
           autoComplete="off"
           spellCheck={false}
-          className="w-full rounded-lg border border-border bg-background px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground focus:border-focus focus:outline-none focus:ring-1 focus:ring-focus"
+          className="w-full rounded-lg border border-border bg-surface px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground focus:border-focus focus:outline-none focus:ring-1 focus:ring-focus"
         />
       </div>
       <div className="flex-1 overflow-y-auto px-4 pb-8 pt-2">

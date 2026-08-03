@@ -1,4 +1,4 @@
-import { memo } from "react";
+import { memo, useState } from "react";
 import { useIsFavorite, userStore } from "@/user-state";
 
 interface FavoriteButtonProps {
@@ -26,10 +26,12 @@ export const FavoriteButton = memo(function FavoriteButton({
   className = "",
 }: FavoriteButtonProps) {
   const isFavorite = useIsFavorite(canonicalId);
+  const [pop, setPop] = useState(0);
 
   function handleClick(e: React.MouseEvent) {
     e.stopPropagation();
     userStore.getState().toggleFavorite(canonicalId);
+    setPop((p) => p + 1);
   }
 
   return (
@@ -37,12 +39,14 @@ export const FavoriteButton = memo(function FavoriteButton({
       type="button"
       onClick={handleClick}
       title={isFavorite ? "Remove from favorites" : "Add to favorites"}
-      className={`hitbox-expand inline-flex items-center justify-center rounded p-1.5 transition-all duration-150 hover:bg-accent active:scale-90 active:bg-accent/80 ${className} ${
+      className={`hitbox-expand inline-flex items-center justify-center rounded-lg p-1.5 transition-all duration-150 hover:bg-accent active:scale-90 active:bg-accent/80 ${className} ${
         isFavorite ? "text-destructive" : "text-muted-foreground"
       }`}
       aria-label={isFavorite ? "Remove from favorites" : "Add to favorites"}
     >
-      <HeartIcon filled={isFavorite} />
+      <span key={pop} className={pop > 0 ? "animate-pop" : undefined}>
+        <HeartIcon filled={isFavorite} />
+      </span>
     </button>
   );
 });

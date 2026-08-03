@@ -9,11 +9,11 @@ interface OnboardingStep {
 
 const STEPS: readonly OnboardingStep[] = [
   {
-    title: "Search the compendium instantly.",
-    body: "Every spell, monster, item, and condition in your library is a few keystrokes away.",
+    title: "Search the Compendium instantly.",
+    body: "Every spell, monster, item, and condition in the Compendium is a few keystrokes away.",
   },
   {
-    title: "Pin anything into your Session.",
+    title: "Pin anything to your Session.",
     body: "Keep the monsters, spells, and items you need right now one tap away during play.",
   },
   {

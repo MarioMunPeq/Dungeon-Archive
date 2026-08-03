@@ -1,7 +1,7 @@
 import type { Monster } from "@/compendium";
 import { AbilityScores } from "./ability-scores";
 import { Stack } from "@/components/ui/Stack";
-import { Section } from "@/components/entity/section";
+import { Section } from "@/components/entity";
 import { EntityProperty, EntityMetadataGrid } from "@/components/ui/entity-property";
 import { ContentRenderer } from "@/components/content/content-renderer";
 

@@ -286,7 +286,7 @@ function SpellPreview({ spell, href }: { spell: Spell; href: string }) {
           {flags.map((flag) => (
             <span
               key={flag}
-              className="rounded-full border border-border bg-muted px-1.5 py-0.5 text-[10px] font-medium uppercase tracking-wide text-muted-foreground"
+              className="rounded-full border border-border bg-muted px-1.5 py-0.5 text-xs font-medium uppercase tracking-wide text-muted-foreground"
             >
               {flag}
             </span>
@@ -329,7 +329,7 @@ function createEmptyReference(): Omit<PlayerReference, "id"> {
 function ValueLabel({ children, onClear }: { children: string; onClear?: () => void }) {
   return (
     <div className={cn("flex w-full items-center", onClear ? "justify-between" : "justify-center")}>
-      <span className="min-w-0 truncate text-[10px] font-semibold uppercase tracking-wide text-muted-foreground">
+      <span className="min-w-0 truncate text-xs font-semibold uppercase tracking-wide text-muted-foreground">
         {children}
       </span>
       {onClear && (
@@ -337,14 +337,14 @@ function ValueLabel({ children, onClear }: { children: string; onClear?: () => v
           type="button"
           onClick={onClear}
           aria-label={`Clear ${children}`}
-          className="inline-flex h-5 w-5 shrink-0 items-center justify-center rounded text-muted-foreground transition-colors duration-150 hover:bg-accent hover:text-foreground active:scale-90"
+          className="inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-lg text-muted-foreground transition-colors duration-150 hover:bg-accent hover:text-foreground active:scale-90"
         >
           <svg
             aria-hidden="true"
             viewBox="0 0 24 24"
             fill="none"
             stroke="currentColor"
-            strokeWidth={2.5}
+            strokeWidth={2}
             className="h-3 w-3"
           >
             <line x1="18" y1="6" x2="6" y2="18" />
@@ -427,7 +427,7 @@ function OptionalNumberCell({
             viewBox="0 0 24 24"
             fill="none"
             stroke="currentColor"
-            strokeWidth={2.5}
+            strokeWidth={2}
             className="h-4 w-4"
           >
             <line x1="12" y1="5" x2="12" y2="19" />
@@ -718,7 +718,7 @@ function PlayerReferenceCard({
           onClick={() => setConfirmRemove(true)}
           title={`Remove ${reference.name}`}
           aria-label={`Remove ${reference.name}`}
-          className="hitbox-expand inline-flex h-8 w-8 shrink-0 items-center justify-center rounded text-muted-foreground transition-all duration-150 hover:bg-accent hover:text-foreground active:scale-90 active:bg-accent/80"
+          className="hitbox-expand inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-lg text-muted-foreground transition-all duration-150 hover:bg-accent hover:text-foreground active:scale-90 active:bg-accent/80"
         >
           <svg
             aria-hidden="true"

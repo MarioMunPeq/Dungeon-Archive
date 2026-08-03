@@ -1,6 +1,7 @@
 import type { Condition } from "@/compendium";
 import { Section } from "@/components/entity";
 import { ContentRenderer } from "@/components/content";
+import { Stack } from "@/components/ui/Stack";
 
 interface ConditionRendererProps {
   readonly entity: Condition;
@@ -8,10 +9,10 @@ interface ConditionRendererProps {
 
 export function ConditionRenderer({ entity }: ConditionRendererProps) {
   return (
-    <div className="space-y-6">
+    <Stack gap="lg">
       <Section title="Description">
         <ContentRenderer blocks={entity.description} />
       </Section>
-    </div>
+    </Stack>
   );
 }

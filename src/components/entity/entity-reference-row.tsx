@@ -134,7 +134,7 @@ export function RowRemoveButton({ label, onClick }: RowRemoveButtonProps) {
         onClick();
       }}
       aria-label={label}
-      className="hitbox-expand inline-flex h-8 w-8 items-center justify-center rounded text-muted-foreground transition-all duration-150 hover:bg-accent hover:text-foreground active:scale-90 active:bg-accent/80"
+      className="hitbox-expand inline-flex h-8 w-8 items-center justify-center rounded-lg text-muted-foreground transition-all duration-150 hover:bg-accent hover:text-foreground active:scale-90 active:bg-accent/80"
     >
       <svg
         aria-hidden="true"

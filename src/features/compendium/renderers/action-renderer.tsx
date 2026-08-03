@@ -1,6 +1,7 @@
 import type { Action } from "@/compendium";
 import { Section } from "@/components/entity";
 import { ContentRenderer } from "@/components/content";
+import { Stack } from "@/components/ui/Stack";
 import { EntityProperty, EntityMetadataGrid } from "@/components/ui/entity-property";
 
 interface ActionRendererProps {
@@ -9,7 +10,7 @@ interface ActionRendererProps {
 
 export function ActionRenderer({ entity }: ActionRendererProps) {
   return (
-    <div className="space-y-6">
+    <Stack gap="lg">
       <EntityMetadataGrid>
         <EntityProperty label="Type" value={entity.actionType} />
       </EntityMetadataGrid>
@@ -17,6 +18,6 @@ export function ActionRenderer({ entity }: ActionRendererProps) {
       <Section title="Description">
         <ContentRenderer blocks={entity.description} />
       </Section>
-    </div>
+    </Stack>
   );
 }

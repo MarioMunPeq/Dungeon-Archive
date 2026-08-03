@@ -44,20 +44,17 @@ export const SessionButton = memo(function SessionButton({
       type="button"
       onClick={handleClick}
       title={inSession ? "Unpin from session" : "Pin to session"}
-      className={`hitbox-expand inline-flex items-center justify-center rounded p-1.5 transition-all duration-150 hover:bg-accent active:scale-90 active:bg-accent/80 ${className} ${
+      className={`hitbox-expand inline-flex items-center justify-center rounded-lg p-1.5 transition-all duration-150 hover:bg-accent active:scale-90 active:bg-accent/80 ${className} ${
         inSession ? "text-info" : "text-muted-foreground"
       }`}
       aria-label={inSession ? "Unpin from session" : "Pin to session"}
     >
-      <span
-        key={feedback ?? "static"}
-        className={feedback === "added" ? "animate-pop" : undefined}
-      >
+      <span key={feedback ?? "static"} className={feedback === "added" ? "animate-pop" : undefined}>
         <PinIcon filled={inSession} />
       </span>
       {feedback && (
         <span
-          className="pointer-events-none absolute -top-8 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-sm border border-border bg-card px-2 py-0.5 text-[10px] font-medium text-foreground shadow-md animate-slide-up"
+          className="pointer-events-none absolute -top-8 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-sm border border-border bg-card px-2 py-0.5 text-xs font-medium text-foreground shadow-md animate-slide-up"
           role="status"
         >
           {feedback === "added" ? "Pinned" : "Removed"}

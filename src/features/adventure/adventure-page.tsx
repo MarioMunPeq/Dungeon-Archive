@@ -171,7 +171,7 @@ export function AdventurePage() {
                 type="button"
                 onClick={handleStartTitleEdit}
                 aria-label="Edit title"
-                className="hitbox-expand inline-flex h-8 w-8 items-center justify-center rounded text-muted-foreground transition-all duration-150 hover:bg-accent hover:text-foreground active:scale-90 active:bg-accent/80"
+                className="hitbox-expand inline-flex h-8 w-8 items-center justify-center rounded-lg text-muted-foreground transition-all duration-150 hover:bg-accent hover:text-foreground active:scale-90 active:bg-accent/80"
               >
                 <svg
                   aria-hidden="true"
@@ -273,7 +273,7 @@ export function AdventurePage() {
                     type="button"
                     onClick={() => handleRemoveObjective(i)}
                     aria-label={`Remove objective: ${obj}`}
-                    className="hitbox-expand inline-flex h-6 w-6 items-center justify-center rounded text-muted-foreground transition-all duration-150 hover:bg-accent hover:text-foreground active:scale-90"
+                    className="hitbox-expand inline-flex h-6 w-6 items-center justify-center rounded-lg text-muted-foreground transition-all duration-150 hover:bg-accent hover:text-foreground active:scale-90"
                   >
                     <svg
                       aria-hidden="true"
@@ -329,8 +329,8 @@ export function AdventurePage() {
       >
         {entities.length === 0 ? (
           <p className="px-3 text-xs text-foreground-subtle">
-            No references yet. Use the flag icon on entity pages or search results to pin entities
-            to this adventure.
+            No references yet. Use the flag icon on entity pages or search results to add them to
+            this adventure.
           </p>
         ) : (
           <div className="flex flex-col">

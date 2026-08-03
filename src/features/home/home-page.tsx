@@ -1,9 +1,5 @@
 import { Link } from "react-router-dom";
-import {
-  categoryLabel,
-  categoryLabelSingular,
-  CATEGORY_REGISTRY,
-} from "@/compendium";
+import { categoryLabel, categoryLabelSingular, CATEGORY_REGISTRY } from "@/compendium";
 import type { EntityCategory, EntityCardData } from "@/compendium";
 import {
   useFavoriteIds,
@@ -98,7 +94,7 @@ export function HomePage() {
         <section className="flex flex-col items-center gap-4 px-2 py-10 text-center">
           <h2 className="text-xl font-bold text-foreground">Welcome to your workspace</h2>
           <p className="w-full max-w-md text-sm text-muted-foreground">
-            Search the compendium and pin the spells, monsters, and items you need. Your party,
+            Search the Compendium and pin the spells, monsters, and items you need. Your party,
             adventure, and session build up here.
           </p>
           <Link
@@ -173,7 +169,8 @@ export function HomePage() {
                 )}
                 <div className="flex items-center gap-3 text-xs text-foreground-subtle">
                   <span>
-                    {adventure.entities.length} entr{adventure.entities.length === 1 ? "y" : "ies"}
+                    {adventure.entities.length} reference
+                    {adventure.entities.length === 1 ? "" : "s"}
                   </span>
                   <span>
                     {adventure.objectives.length} objective
@@ -217,7 +214,7 @@ export function HomePage() {
                 to="/search"
                 className="rounded-lg border border-dashed border-border px-4 py-3 text-xs text-muted-foreground transition-colors hover:bg-accent active:bg-accent/80"
               >
-                Pin entities with the pin icon while browsing to keep them one tap away.
+                Nothing pinned yet. Search the Compendium and pin what you need.
               </Link>
             )}
           </section>
@@ -258,7 +255,7 @@ export function HomePage() {
 
       <section className="flex flex-col gap-3">
         <h2 className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
-          Browse the Compendium
+          Compendium
         </h2>
         <div className="grid grid-cols-2 gap-2 sm:grid-cols-3">
           {CATEGORIES.map((cat) => (

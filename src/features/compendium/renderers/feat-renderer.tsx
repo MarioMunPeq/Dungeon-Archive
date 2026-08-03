@@ -1,5 +1,6 @@
 import type { Feat } from "@/compendium";
-import { Section } from "@/components/entity/section";
+import { Section } from "@/components/entity";
+import { Stack } from "@/components/ui/Stack";
 import { EntityMetadataGrid, EntityProperty } from "@/components/ui/entity-property";
 import { ContentRenderer } from "@/components/content";
 
@@ -9,7 +10,7 @@ interface FeatRendererProps {
 
 export function FeatRenderer({ entity }: FeatRendererProps) {
   return (
-    <div className="flex flex-col gap-6">
+    <Stack gap="lg">
       <EntityMetadataGrid>
         {entity.featCategory && <EntityProperty label="Category" value={entity.featCategory} />}
         {entity.prerequisite && <EntityProperty label="Prerequisite" value={entity.prerequisite} />}
@@ -21,6 +22,6 @@ export function FeatRenderer({ entity }: FeatRendererProps) {
       <Section title="Description">
         <ContentRenderer blocks={entity.description} />
       </Section>
-    </div>
+    </Stack>
   );
 }

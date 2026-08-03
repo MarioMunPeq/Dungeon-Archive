@@ -214,10 +214,7 @@ function normalizePlayers(raw: unknown): PlayerReference[] {
 }
 
 export function normalize(
-  state: Omit<
-    UserState,
-    "adventures" | "activeAdventureId" | "players" | "onboardingComplete"
-  > & {
+  state: Omit<UserState, "adventures" | "activeAdventureId" | "players" | "onboardingComplete"> & {
     adventures?: Adventure[];
     activeAdventureId?: string | null;
     players?: PlayerReference[];

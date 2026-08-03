@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { useSessionIds, userStore } from "@/user-state";
 import { entityRefFromCanonicalId, EntityReferenceRow, RowRemoveButton } from "@/components/entity";
 import type { EntityRef } from "@/components/entity";
-import { Button } from "@/components/ui/Button";
+import { Button, ConfirmDialog } from "@/components/ui";
 
 export function SessionPage() {
   const sessionIds = useSessionIds();
@@ -24,10 +24,6 @@ export function SessionPage() {
     setShowConfirm(true);
   }, []);
 
-  const handleCancelConfirm = useCallback(() => {
-    setShowConfirm(false);
-  }, []);
-
   const handleRemove = useCallback((canonicalId: string) => {
     userStore.getState().toggleSession(canonicalId);
   }, []);
@@ -39,32 +35,21 @@ export function SessionPage() {
           <h1 className="text-xl font-bold text-foreground">Session</h1>
           <p className="text-xs text-muted-foreground">
             {sessionIds.length === 0
-              ? "No entities in session"
-              : `${sessionIds.length} entr${sessionIds.length === 1 ? "y" : "ies"}`}
+              ? "No references in session"
+              : `${sessionIds.length} reference${sessionIds.length === 1 ? "" : "s"}`}
           </p>
         </div>
-        {showConfirm ? (
-          <div className="flex items-center gap-2">
-            <Button variant="outline" size="sm" onClick={handleCancelConfirm}>
-              Cancel
-            </Button>
-            <Button variant="danger-solid" size="sm" onClick={handleClearSession}>
-              End
-            </Button>
-          </div>
-        ) : (
-          sessionIds.length > 0 && (
-            <Button variant="danger" size="sm" onClick={handleShowConfirm}>
-              End Session
-            </Button>
-          )
+        {sessionIds.length > 0 && (
+          <Button variant="danger" size="sm" onClick={handleShowConfirm}>
+            End Session
+          </Button>
         )}
       </div>
 
       {entries.length === 0 ? (
         <div className="flex flex-col items-center gap-4 px-2 py-10 text-center">
           <p className="w-full max-w-md text-sm text-muted-foreground">
-            Session is empty. Search the compendium and pin what you need for this session.
+            Session is empty. Search the Compendium and pin what you need for this session.
           </p>
           <Link
             to="/search"
@@ -89,6 +74,17 @@ export function SessionPage() {
             />
           ))}
         </div>
+      )}
+
+      {showConfirm && (
+        <ConfirmDialog
+          title="End Session?"
+          message="This will remove every reference from your session. You can re-add them anytime."
+          confirmLabel="End Session"
+          destructive
+          onCancel={() => setShowConfirm(false)}
+          onConfirm={handleClearSession}
+        />
       )}
     </div>
   );

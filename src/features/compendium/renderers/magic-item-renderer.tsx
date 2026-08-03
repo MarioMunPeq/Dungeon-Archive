@@ -1,5 +1,6 @@
 import type { MagicItem } from "@/compendium";
-import { Section } from "@/components/entity/section";
+import { Section } from "@/components/entity";
+import { Stack } from "@/components/ui/Stack";
 import { EntityMetadataGrid, EntityProperty } from "@/components/ui/entity-property";
 import { ContentRenderer } from "@/components/content";
 
@@ -15,7 +16,7 @@ function attunementLabel(req: string): string {
 
 export function MagicItemRenderer({ entity }: MagicItemRendererProps) {
   return (
-    <div className="flex flex-col gap-6">
+    <Stack gap="lg">
       <EntityMetadataGrid>
         <EntityProperty label="Rarity" value={entity.rarity} stat />
         <EntityProperty label="Type" value={entity.itemType} />
@@ -29,6 +30,6 @@ export function MagicItemRenderer({ entity }: MagicItemRendererProps) {
       <Section title="Description">
         <ContentRenderer blocks={entity.description} />
       </Section>
-    </div>
+    </Stack>
   );
 }

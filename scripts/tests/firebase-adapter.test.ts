@@ -128,7 +128,9 @@ await test("fetchSnapshot returns null when nothing is stored", async () => {
 
 await test("saveSnapshot then fetchSnapshot round-trips a CloudSnapshot", async () => {
   await gateway.signIn();
-  const snapshot: CloudSnapshot = { state: { favorites: ["a"], recentSearches: ["b"] } } as unknown as CloudSnapshot;
+  const snapshot: CloudSnapshot = {
+    state: { favorites: ["a"], recentSearches: ["b"] },
+  } as unknown as CloudSnapshot;
   await gateway.saveSnapshot("firebase-user", snapshot);
   const fetched = await gateway.fetchSnapshot("firebase-user");
   ok(fetched !== null, "snapshot should exist after save");
@@ -137,7 +139,9 @@ await test("saveSnapshot then fetchSnapshot round-trips a CloudSnapshot", async 
 
 await test("saveSnapshot writes under users/{uid}/backup", async () => {
   await gateway.signIn();
-  await gateway.saveSnapshot("firebase-user", { state: { favorites: ["x"] } } as unknown as CloudSnapshot);
+  await gateway.saveSnapshot("firebase-user", {
+    state: { favorites: ["x"] },
+  } as unknown as CloudSnapshot);
   const stored = fakeFirebaseState.data.get("users/firebase-user/backup") as CloudSnapshot;
   ok(stored !== undefined, "backup doc exists under users/firebase-user/backup");
   deepStrictEqual(stored.state.favorites, ["x"]);

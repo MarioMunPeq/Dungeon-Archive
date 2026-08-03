@@ -17,7 +17,11 @@ export function createFakeGateway(): CloudGateway {
   return {
     getCurrentUser: () => currentUser,
     signIn: async () => {
-      const user: CloudUser = { uid: "fake-user", displayName: "Fake User", email: "fake@example.com" };
+      const user: CloudUser = {
+        uid: "fake-user",
+        displayName: "Fake User",
+        email: "fake@example.com",
+      };
       currentUser = user;
       emit();
       return user;

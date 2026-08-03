@@ -8,12 +8,12 @@ interface SearchNoResultsProps {
 
 export function SearchNoResults({ query, onClear }: SearchNoResultsProps) {
   return (
-    <div className="flex flex-col items-center gap-4 px-4 py-16 text-center">
+    <div className="flex flex-col items-center gap-4 px-4 py-10 text-center">
       <p className="text-sm font-medium text-foreground">No results for &ldquo;{query}&rdquo;</p>
-      <p className="text-xs text-foreground-subtle">
-        Try a different search term or{" "}
+      <p className="w-full max-w-md text-xs text-foreground-subtle">
+        Try a different search term, or{" "}
         <Link to="/" className="text-primary transition-colors duration-150 hover:underline">
-          browse categories
+          look through the Compendium
         </Link>
       </p>
       {onClear && (

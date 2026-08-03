@@ -10,7 +10,11 @@ import { doc, getDoc, getFirestore, setDoc } from "firebase/firestore";
 import type { CloudGateway, CloudSnapshot, CloudUser } from "./types";
 import { firebaseConfig } from "./config";
 
-function toCloudUser(user: { uid: string; displayName: string | null; email: string | null }): CloudUser {
+function toCloudUser(user: {
+  uid: string;
+  displayName: string | null;
+  email: string | null;
+}): CloudUser {
   return { uid: user.uid, displayName: user.displayName, email: user.email };
 }
 

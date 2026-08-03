@@ -61,7 +61,7 @@ export function CategoryPage({ category }: CategoryPageProps) {
   };
 
   return (
-    <div className="space-y-4 px-4 py-6">
+    <div className="space-y-6 px-4 py-6">
       <EntityBreadcrumbs
         crumbs={[{ label: "Home", to: "/" }, { label: categoryLabel(category) }]}
       />

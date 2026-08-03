@@ -28,16 +28,26 @@ export function SearchEmptyState() {
 
       <div>
         <p className="mb-2 text-xs font-medium uppercase tracking-wide text-muted-foreground">
-          Browse Categories
+          Categories
         </p>
         <div className="grid grid-cols-2 gap-2 sm:grid-cols-3">
           {Object.entries(CATEGORY_REGISTRY).map(([key, reg]) => (
             <Link
               key={key}
               to={`/${key}`}
-              className="rounded-lg border border-border bg-surface p-3 text-center transition-colors hover:bg-accent hover:text-foreground"
+              className="flex items-center justify-between gap-2 rounded-lg border border-border bg-surface px-3 py-3 transition-colors hover:bg-accent active:bg-accent/80"
             >
               <span className="text-sm font-medium text-foreground">{reg.plural}</span>
+              <svg
+                aria-hidden="true"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth={2}
+                className="h-3.5 w-3.5 shrink-0 text-muted-foreground"
+              >
+                <path d="M9 18l6-6-6-6" />
+              </svg>
             </Link>
           ))}
         </div>
