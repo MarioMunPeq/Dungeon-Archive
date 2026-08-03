@@ -50,7 +50,7 @@ const store = new Map<string, string>();
 
 // ---------------------------------------------------------------------------
 // Imports (after the mock is installed; sync uses the fake gateway under tsx
-// because hasCloudConfig() is false without a Vite build).
+// because isFirebaseConfigured() is false without a Vite build).
 // ---------------------------------------------------------------------------
 const {
   upload,

@@ -12,11 +12,11 @@ import { DebugSpellPage } from "@/features/debug/debug-spell-page";
 import { NotFoundPage } from "@/features/not-found-page";
 import { CATEGORY_REGISTRY } from "@/compendium";
 import type { EntityCategory } from "@/compendium";
-import { hasCloudConfig } from "@/sync";
+import { isFirebaseConfigured } from "@/lib/firebase/config";
 
 const CATEGORIES = Object.keys(CATEGORY_REGISTRY) as EntityCategory[];
 
-const CLOUD_ENABLED = hasCloudConfig();
+const CLOUD_ENABLED = isFirebaseConfigured();
 
 export function AppRouter() {
   return (

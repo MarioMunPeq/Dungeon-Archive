@@ -19,6 +19,10 @@ export function getAuth(): FakeAuth {
 
 export class GoogleAuthProvider implements FakeProvider {
   readonly providerId = "google.com";
+
+  setCustomParameters(_params: Record<string, string>): FakeProvider {
+    return this;
+  }
 }
 
 export function onAuthStateChanged(

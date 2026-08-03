@@ -1,6 +1,6 @@
 import type { CloudGateway } from "./types";
-import { hasCloudConfig } from "./config";
 import { createFakeGateway } from "./fake-gateway";
+import { isFirebaseConfigured } from "../lib/firebase/config";
 
 let gatewayPromise: Promise<CloudGateway> | null = null;
 
@@ -9,12 +9,12 @@ let gatewayPromise: Promise<CloudGateway> | null = null;
  *
  * Without Firebase configuration the fake gateway is used (feature disabled).
  * Otherwise the Firebase gateway is created lazily via dynamic import so the
- * firebase/* modules never load into the application boot path.
+ * firestore sync adapter never loads into the application boot path.
  */
 export function getGateway(): Promise<CloudGateway> {
   if (gatewayPromise === null) {
     gatewayPromise = (async () => {
-      if (!hasCloudConfig()) {
+      if (!isFirebaseConfigured()) {
         return createFakeGateway();
       }
       const { createFirebaseGateway } = await import("./firebase");

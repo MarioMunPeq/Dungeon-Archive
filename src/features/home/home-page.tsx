@@ -9,7 +9,7 @@ import {
   usePlayerReferences,
 } from "@/user-state";
 import { entityRefFromCanonicalId, EntityCard } from "@/components/entity";
-import { hasCloudConfig } from "@/sync";
+import { isFirebaseConfigured } from "@/lib/firebase/config";
 
 const CATEGORIES = Object.keys(CATEGORY_REGISTRY) as EntityCategory[];
 
@@ -280,7 +280,7 @@ export function HomePage() {
         </div>
       </section>
 
-      {hasCloudConfig() && (
+      {isFirebaseConfigured() && (
         <div className="flex justify-center pt-2">
           <Link
             to="/backup"

@@ -1,4 +1,3 @@
-export { hasCloudConfig } from "./config";
 export { getGateway } from "./gateway";
 export { friendlyErrorMessage } from "./errors";
 export { upload, restore, getBackupStatus, computeMetadata, currentStateHash } from "./service";

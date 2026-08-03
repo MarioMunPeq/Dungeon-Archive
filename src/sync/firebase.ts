@@ -1,28 +1,15 @@
-import { getApp, getApps, initializeApp } from "firebase/app";
-import {
-  getAuth,
-  GoogleAuthProvider,
-  onAuthStateChanged,
-  signInWithPopup,
-  signOut,
-} from "firebase/auth";
-import { doc, getDoc, getFirestore, setDoc } from "firebase/firestore";
+import { doc, getDoc, setDoc } from "firebase/firestore";
 import type { CloudGateway, CloudSnapshot, CloudUser } from "./types";
-import { firebaseConfig } from "./config";
+import { auth } from "../lib/firebase/auth";
+import { db } from "../lib/firebase/firestore";
+import { signInWithGoogle, logout, subscribeToAuth } from "../lib/firebase/auth-service";
+import type { AuthUser } from "../lib/firebase/auth-service";
 
-function toCloudUser(user: {
-  uid: string;
-  displayName: string | null;
-  email: string | null;
-}): CloudUser {
+function toCloudUser(user: AuthUser): CloudUser {
   return { uid: user.uid, displayName: user.displayName, email: user.email };
 }
 
 export function createFirebaseGateway(): CloudGateway {
-  const app = getApps().length > 0 ? getApp() : initializeApp(firebaseConfig);
-  const auth = getAuth(app);
-  const db = getFirestore(app);
-
   /**
    * The owning user is always the authenticated session. The UID never flows
    * through the application and is never trusted from a caller parameter.
@@ -39,19 +26,13 @@ export function createFirebaseGateway(): CloudGateway {
       return user ? toCloudUser(user) : null;
     },
 
-    signIn: async () => {
-      const provider = new GoogleAuthProvider();
-      const result = await signInWithPopup(auth, provider);
-      return toCloudUser(result.user);
-    },
+    signIn: async () => toCloudUser(await signInWithGoogle()),
 
-    signOut: async () => {
-      await signOut(auth);
-    },
+    signOut: () => logout(),
 
     onAuthChange: (listener) => {
-      return onAuthStateChanged(auth, (user) => {
-        listener(user ? toCloudUser(user) : null);
+      return subscribeToAuth((user) => {
+        listener(user === null ? null : toCloudUser(user));
       });
     },
 
