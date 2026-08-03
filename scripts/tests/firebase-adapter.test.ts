@@ -76,7 +76,7 @@ const store = new Map<string, string>();
 // Imports (after the SDK mock and localStorage mock are in place)
 // ---------------------------------------------------------------------------
 const { createFirebaseGateway } = await import("../../src/sync/firebase");
-const { upload, restore } = await import("../../src/sync/index");
+const { upload, restore, friendlyErrorMessage } = await import("../../src/sync/index");
 const { setGatewayForTesting } = await import("../../src/sync/gateway");
 const { userStore } = await import("../../src/user-state/store");
 const { STORAGE_KEY } = await import("../../src/user-state/types");
@@ -87,6 +87,11 @@ const gateway = createFirebaseGateway();
 
 function resetStore(): void {
   userStore.getState()._reset();
+  store.clear();
+}
+
+function errorWithCode(message: string, code: string): Error & { code?: string } {
+  return Object.assign(new Error(message), { code });
 }
 
 await test("adapter starts signed out", () => {
@@ -107,6 +112,12 @@ await test("signIn returns a CloudUser and updates current user", async () => {
   });
 });
 
+await test("signOut clears the current user", async () => {
+  await gateway.signIn();
+  await gateway.signOut();
+  strictEqual(gateway.getCurrentUser(), null);
+});
+
 await test("onAuthChange fires with current user then null on sign out", async () => {
   setFakeUser(null);
   const events: (string | null)[] = [];
@@ -120,9 +131,17 @@ await test("onAuthChange fires with current user then null on sign out", async (
   unsubscribe();
 });
 
+await test("auth state survives a new gateway (session restored on refresh)", async () => {
+  setFakeUser(null);
+  await gateway.signIn();
+  const second = createFirebaseGateway();
+  deepStrictEqual(second.getCurrentUser(), gateway.getCurrentUser());
+  strictEqual(second.getCurrentUser()?.uid, "firebase-user");
+});
+
 await test("fetchSnapshot returns null when nothing is stored", async () => {
   await gateway.signIn();
-  const snapshot = await gateway.fetchSnapshot("firebase-user");
+  const snapshot = await gateway.fetchSnapshot();
   strictEqual(snapshot, null);
 });
 
@@ -130,21 +149,99 @@ await test("saveSnapshot then fetchSnapshot round-trips a CloudSnapshot", async 
   await gateway.signIn();
   const snapshot: CloudSnapshot = {
     state: { favorites: ["a"], recentSearches: ["b"] },
+    metadata: {
+      createdAt: 1,
+      adventureCount: 0,
+      playerCount: 0,
+      favoriteCount: 1,
+      sessionCount: 0,
+      activeAdventureTitle: null,
+    },
+    updatedAt: 2,
+    appVersion: "0.1.0",
   } as unknown as CloudSnapshot;
-  await gateway.saveSnapshot("firebase-user", snapshot);
-  const fetched = await gateway.fetchSnapshot("firebase-user");
+  await gateway.saveSnapshot(snapshot);
+  const fetched = await gateway.fetchSnapshot();
   ok(fetched !== null, "snapshot should exist after save");
   deepStrictEqual(fetched, snapshot);
 });
 
 await test("saveSnapshot writes under users/{uid}/backup", async () => {
   await gateway.signIn();
-  await gateway.saveSnapshot("firebase-user", {
+  await gateway.saveSnapshot({
     state: { favorites: ["x"] },
+    metadata: {
+      createdAt: 1,
+      adventureCount: 0,
+      playerCount: 0,
+      favoriteCount: 1,
+      sessionCount: 0,
+      activeAdventureTitle: null,
+    },
+    updatedAt: 2,
+    appVersion: "0.1.0",
   } as unknown as CloudSnapshot);
   const stored = fakeFirebaseState.data.get("users/firebase-user/backup") as CloudSnapshot;
   ok(stored !== undefined, "backup doc exists under users/firebase-user/backup");
   deepStrictEqual(stored.state.favorites, ["x"]);
+});
+
+await test("saveSnapshot rejects when signed out (UID never trusted)", async () => {
+  setFakeUser(null);
+  await assertRejects(
+    () =>
+      gateway.saveSnapshot({
+        state: { favorites: [] },
+        metadata: {
+          createdAt: 1,
+          adventureCount: 0,
+          playerCount: 0,
+          favoriteCount: 0,
+          sessionCount: 0,
+          activeAdventureTitle: null,
+        },
+        updatedAt: 2,
+        appVersion: "0.1.0",
+      } as unknown as CloudSnapshot),
+    /Not signed in/,
+  );
+});
+
+await test("fetchSnapshot rejects when signed out (UID never trusted)", async () => {
+  setFakeUser(null);
+  await assertRejects(() => gateway.fetchSnapshot(), /Not signed in/);
+});
+
+await test("signIn maps a cancelled popup to a friendly message", async () => {
+  setFakeUser(null);
+  fakeFirebaseState.signInError = errorWithCode("popup closed", "auth/popup-closed-by-user");
+  let caught: unknown;
+  try {
+    await gateway.signIn();
+  } catch (e) {
+    caught = e;
+  }
+  fakeFirebaseState.signInError = null;
+  ok(caught !== undefined, "signIn should reject");
+  strictEqual(friendlyErrorMessage(caught, true), "Sign in was cancelled.");
+});
+
+await test("fetchSnapshot maps permission denied to a friendly message", async () => {
+  await gateway.signIn();
+  fakeFirebaseState.firestoreError = errorWithCode("denied", "permission-denied");
+  let caught: unknown;
+  try {
+    await gateway.fetchSnapshot();
+  } catch (e) {
+    caught = e;
+  }
+  fakeFirebaseState.firestoreError = null;
+  ok(caught !== undefined, "fetchSnapshot should reject");
+  strictEqual(friendlyErrorMessage(caught, true), "You don't have access to this backup.");
+});
+
+await test("offline maps to a friendly message", () => {
+  strictEqual(friendlyErrorMessage(new Error("network"), false), "You're offline.");
 });
 
 await test("service upload rejects through the adapter when signed out", async () => {
@@ -179,6 +276,23 @@ await test("service upload then restore round-trips through the adapter", async 
 
   const persisted = JSON.parse(store.get(STORAGE_KEY) ?? "null") as { favorites: string[] };
   deepStrictEqual(persisted.favorites, ["test-entity"], "restore persisted to localStorage");
+});
+
+await test("service upload stores metadata, updatedAt and appVersion in the doc", async () => {
+  setGatewayForTesting(gateway);
+  await gateway.signIn();
+  resetStore();
+  userStore.getState().toggleFavorite("meta-adapter");
+
+  await upload();
+
+  const stored = fakeFirebaseState.data.get("users/firebase-user/backup") as CloudSnapshot;
+  ok(stored !== undefined, "backup doc exists");
+  deepStrictEqual(stored.state.favorites, ["meta-adapter"]);
+  strictEqual(stored.metadata.favoriteCount, 1);
+  strictEqual(stored.metadata.adventureCount, 0);
+  strictEqual(typeof stored.updatedAt, "number");
+  ok(stored.appVersion.length > 0, "appVersion is stored");
 });
 
 await test("service restore rejects through the adapter when signed out", async () => {

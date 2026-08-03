@@ -122,10 +122,13 @@ Vistas completas con renderizado de contenido, entidades relacionadas y selecci�
 Una copia de seguridad opcional del estado local en la nube (Firebase). No es una cuenta obligatoria ni un servicio de sincronización: es un respaldo manual para proteger los datos del usuario o trasladarlos a otro dispositivo.
 
 * **Filosofía local-first.** Los datos del usuario viven siempre en este dispositivo (`localStorage`). La nube es solo una copia; nunca es la fuente de verdad.
-* **Inicio de sesión opcional con Google.** Sin cuenta, la aplicación funciona exactamente igual. El backup desaparece por completo: no se muestra la página, no hay acceso de navegación y no se carga ningún módulo de Firebase.
-* **Subida manual.** Un botón reemplaza la copia en la nube con el estado local actual.
-* **Restauración manual.** Un botón reemplaza el estado local con la copia en la nube. Pide confirmación porque sobrescribe datos locales.
-* **Comportamiento offline.** La subida y la restauración requieren conexión. El resto de la aplicación sigue funcionando sin conexión en todo momento.
+* **Inicio de sesión opcional con Google.** Sin cuenta, la aplicación funciona exactamente igual. Si el build no incluye configuración de Firebase, la característica no existe: no se muestra la página, no hay acceso de navegación y no se carga ningún módulo de Firebase.
+* **Sesión persistente.** La sesión de Google se restaura automáticamente al recargar; la página nunca muestra un botón de inicio de sesión a un usuario ya autenticado.
+* **Subida manual.** Un botón reemplaza la copia en la nube con el estado local actual. Cada backup guarda la fecha, la versión de la aplicación y un resumen (aventuras, jugadores, favoritos y sesiones).
+* **Detección de cambios.** Si los datos locales no han cambiado desde la última subida, el botón de subida se desactiva y muestra *Already up to date*. Una insignia indica *Backup current* o *Backup outdated* sin descargar nada en cada carga.
+* **Restauración con previsualización.** Antes de restaurar se muestra el contenido del backup (fecha, aventuras, jugadores, favoritos, sesiones) y se pide confirmación porque sobrescribe datos locales.
+* **Comportamiento offline.** La subida y la restauración requieren conexión y se desactivan al estar sin conexión, con un aviso *Offline*. El resto de la aplicación sigue funcionando sin conexión en todo momento.
+* **Errores legibles.** Los errores de Firebase se traducen a mensajes claros (*Sign in was cancelled.*, *You're offline.*, *You don't have access to this backup.*). Los mensajes internos de Firebase nunca se muestran.
 * **Sin sincronización automática.** No hay sincronización, fusión de cambios ni historial. Subida y restauración son acciones explícitas del usuario.
 
 ### Configuración de Firebase
@@ -133,10 +136,23 @@ Una copia de seguridad opcional del estado local en la nube (Firebase). No es un
 El backup se activa solo si el build incluye configuración de Firebase web:
 
 1. Crea un proyecto en [Firebase Console](https://console.firebase.google.com) y añade una app web.
-2. Copia `.env.example` a `.env` y rellena las variables `VITE_FIREBASE_*`.
-3. Compila la aplicación (`pnpm build`).
+2. Activa **Google** como método de inicio de sesión y añade tu dominio desplegado a los dominios autorizados.
+3. Despliega las reglas de Firestore de [docs/firebase.md](docs/firebase.md) (un documento por usuario, solo accesible por `request.auth.uid`).
+4. Copia `.env.example` a `.env` y rellena las variables `VITE_FIREBASE_*`.
+5. Compila la aplicación (`pnpm build`).
 
-Si la configuración falta, la característica no existe en el build resultante. El código de Firebase está aislado en `src/sync/firebase.ts` y se carga de forma diferida solo al abrir la pantalla de backup.
+### Cómo desplegar
+
+1. `pnpm verify` — typecheck, lint, tests y build en verde.
+2. Publica la carpeta `dist/` en GitHub Pages (el workflow de GitHub Actions lo hace automáticamente).
+3. Comprueba en la URL pública: inicio de sesión con Google, restauración de sesión al recargar, subida, y restauración desde otro dispositivo con la misma cuenta.
+
+### Cómo desactivar la nube por completo
+
+* Elimina `.env` (o deja vacías las variables `VITE_FIREBASE_*`) y vuelve a compilar. Sin configuración, la ruta `/backup` no se registra y `firebase/*` nunca se importa.
+* Para eliminar los datos ya subidos, borra los documentos `users/{uid}/backup` en Firestore.
+
+La seguridad del backend está documentada en [docs/firebase.md](docs/firebase.md).
 
 ---
 

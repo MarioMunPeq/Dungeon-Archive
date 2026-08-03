@@ -36,6 +36,9 @@ export async function signInWithPopup(
   _auth: FakeAuth,
   _provider: FakeProvider,
 ): Promise<{ user: FakeAuthUser }> {
+  if (fakeFirebaseState.signInError !== null) {
+    throw fakeFirebaseState.signInError;
+  }
   const user: FakeAuthUser = {
     uid: "firebase-user",
     displayName: "Firebase User",

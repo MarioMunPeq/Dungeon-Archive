@@ -38,7 +38,7 @@ export function createFakeGateway(): CloudGateway {
       };
     },
     fetchSnapshot: async () => snapshot,
-    saveSnapshot: async (_uid, next) => {
+    saveSnapshot: async (next) => {
       snapshot = next;
     },
   };

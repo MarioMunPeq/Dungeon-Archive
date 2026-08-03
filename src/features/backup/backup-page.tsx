@@ -1,34 +1,10 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useReducer, useState } from "react";
 import { Button, ConfirmDialog, Inline, Section, Surface } from "@/components/ui";
-import { getGateway, restore, upload } from "@/sync";
-import type { CloudGateway, CloudUser } from "@/sync";
+import { getBackupStatus, friendlyErrorMessage, getGateway, restore, upload } from "@/sync";
+import type { CloudGateway, CloudSnapshot, CloudUser } from "@/sync";
+import { userStore } from "@/user-state";
 
-const LAST_UPLOAD_KEY = "dungeon:backup:lastUpload:v1";
-
-interface LastUpload {
-  readonly uid: string;
-  readonly at: number;
-}
-
-function readLastUpload(): LastUpload | null {
-  try {
-    const raw = localStorage.getItem(LAST_UPLOAD_KEY);
-    if (raw === null) return null;
-    const parsed = JSON.parse(raw) as { uid?: unknown; at?: unknown };
-    if (typeof parsed.uid !== "string" || typeof parsed.at !== "number") return null;
-    return { uid: parsed.uid, at: parsed.at };
-  } catch {
-    return null;
-  }
-}
-
-function writeLastUpload(uid: string, at: number): void {
-  try {
-    localStorage.setItem(LAST_UPLOAD_KEY, JSON.stringify({ uid, at }));
-  } catch {
-    // storage is best-effort; the backup itself already succeeded
-  }
-}
+type Operation = "signIn" | "signOut" | "upload" | "restore";
 
 function formatTimestamp(at: number): string {
   return new Intl.DateTimeFormat(undefined, {
@@ -37,19 +13,40 @@ function formatTimestamp(at: number): string {
   }).format(new Date(at));
 }
 
-type Operation = "signIn" | "signOut" | "upload" | "restore";
+function formatRelative(at: number, now = Date.now()): string {
+  const time = new Intl.DateTimeFormat(undefined, {
+    hour: "2-digit",
+    minute: "2-digit",
+  }).format(new Date(at));
+  const startOfToday = new Date(now).setHours(0, 0, 0, 0);
+  const startOfDay = new Date(at).setHours(0, 0, 0, 0);
+  const days = Math.round((startOfToday - startOfDay) / 86400000);
+  if (days === 0) return `Today ${time}`;
+  if (days === 1) return `Yesterday ${time}`;
+  return new Intl.DateTimeFormat(undefined, { dateStyle: "medium" }).format(new Date(at));
+}
 
-function operationMessage(op: Operation): string {
-  switch (op) {
-    case "signIn":
-      return "Unable to sign in.";
-    case "signOut":
-      return "Unable to sign out.";
-    case "upload":
-      return "Unable to upload backup.";
-    case "restore":
-      return "Unable to restore backup.";
-  }
+function plural(n: number, singular: string, pluralText: string): string {
+  return `${n} ${n === 1 ? singular : pluralText}`;
+}
+
+interface PreviewCounts {
+  readonly adventureCount: number;
+  readonly playerCount: number;
+  readonly favoriteCount: number;
+  readonly sessionCount: number;
+  readonly activeAdventureTitle: string | null;
+}
+
+function previewCounts(snapshot: CloudSnapshot): PreviewCounts {
+  const meta = snapshot.metadata;
+  return {
+    adventureCount: meta?.adventureCount ?? snapshot.state.adventures.length,
+    playerCount: meta?.playerCount ?? snapshot.state.players.length,
+    favoriteCount: meta?.favoriteCount ?? snapshot.state.favorites.length,
+    sessionCount: meta?.sessionCount ?? snapshot.state.session.length,
+    activeAdventureTitle: meta?.activeAdventureTitle ?? null,
+  };
 }
 
 function useGateway(): CloudGateway | null {
@@ -81,18 +78,32 @@ function useOnline(): boolean {
   return online;
 }
 
+/**
+ * Re-renders whenever the persisted user state changes so the current/outdated
+ * badge updates automatically (no polling).
+ */
+function useUserStateVersion(): void {
+  const [, bump] = useReducer((n: number) => n + 1, 0);
+  useEffect(() => userStore.subscribe(bump), []);
+}
+
 export function BackupPage() {
   const gateway = useGateway();
   const online = useOnline();
+  useUserStateVersion();
   const [user, setUser] = useState<CloudUser | null>(null);
+  const [authReady, setAuthReady] = useState(false);
   const [busy, setBusy] = useState<Operation | null>(null);
+  const [previewLoading, setPreviewLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [confirm, setConfirm] = useState<"upload" | "restore" | null>(null);
-  const [lastUpload, setLastUpload] = useState<LastUpload | null>(() => readLastUpload());
+  const [preview, setPreview] = useState<CloudSnapshot | null>(null);
 
   useEffect(() => {
     if (gateway === null) return;
-    return gateway.onAuthChange((next) => setUser(next));
+    return gateway.onAuthChange((next) => {
+      setUser(next);
+      setAuthReady(true);
+    });
   }, [gateway]);
 
   const run = useCallback(
@@ -101,8 +112,8 @@ export function BackupPage() {
       setBusy(op);
       try {
         await fn();
-      } catch {
-        setError(online ? operationMessage(op) : "Connection failed.");
+      } catch (e) {
+        setError(friendlyErrorMessage(e, online));
       } finally {
         setBusy(null);
       }
@@ -120,28 +131,41 @@ export function BackupPage() {
     void run("signOut", () => gateway.signOut());
   }, [gateway, run]);
 
-  const handleConfirm = useCallback(
-    async (kind: "upload" | "restore") => {
-      setConfirm(null);
-      if (kind === "upload") {
-        if (user === null) return;
-        await run("upload", async () => {
-          await upload();
-          writeLastUpload(user.uid, Date.now());
-          setLastUpload(readLastUpload());
-        });
-      } else {
-        await run("restore", () => restore());
+  const handleUpload = useCallback(() => {
+    if (gateway === null) return;
+    void run("upload", upload);
+  }, [gateway, run]);
+
+  const handleRequestRestore = useCallback(async () => {
+    if (gateway === null || user === null) return;
+    setError(null);
+    setPreviewLoading(true);
+    try {
+      const snapshot = await gateway.fetchSnapshot();
+      if (snapshot === null) {
+        setError("No cloud backup found.");
+        return;
       }
-    },
-    [run, user],
-  );
+      setPreview(snapshot);
+    } catch (e) {
+      setError(friendlyErrorMessage(e, online));
+    } finally {
+      setPreviewLoading(false);
+    }
+  }, [gateway, user, online]);
+
+  const handleConfirmRestore = useCallback(() => {
+    setPreview(null);
+    void run("restore", restore);
+  }, [run]);
 
   const ready = gateway !== null;
   const signedIn = user !== null;
-  const canAct = online && busy === null;
-  const lastCloudBackup =
-    signedIn && lastUpload !== null && lastUpload.uid === user.uid ? lastUpload.at : null;
+  const busyAny = busy !== null || previewLoading;
+  const canAct = !busyAny;
+  const status = signedIn && user !== null ? getBackupStatus(user) : null;
+  const upToDate = status?.upToDate === true;
+  const lastCloudBackupAt = status?.lastUpload?.at ?? null;
 
   return (
     <div className="flex flex-col px-4 py-6">
@@ -151,11 +175,23 @@ export function BackupPage() {
           Your data lives locally on this device. Cloud backup is optional and lets you restore it
           on another device.
         </p>
-        {!online && <p className="text-xs font-medium text-warning">You are currently offline.</p>}
       </div>
 
-      {ready && (
+      {!ready && <p className="text-xs text-muted-foreground">Loading…</p>}
+
+      {ready && !authReady && <p className="text-xs text-muted-foreground">Checking account…</p>}
+
+      {ready && authReady && (
         <div className="flex flex-col gap-6">
+          {!online && (
+            <div className="flex flex-col gap-1 rounded-lg border border-border bg-muted/30 p-3">
+              <p className="text-sm font-semibold text-warning">Offline</p>
+              <p className="text-xs text-muted-foreground">
+                Cloud backup requires an internet connection.
+              </p>
+            </div>
+          )}
+
           <Section title="Account">
             <Surface>
               {!signedIn ? (
@@ -168,18 +204,18 @@ export function BackupPage() {
                       {busy === "signIn" ? "Signing in…" : "Sign in with Google"}
                     </Button>
                   </Inline>
-                  {!signedIn && error && (
-                    <p role="alert" className="text-xs font-medium text-destructive">
-                      {error}
-                    </p>
-                  )}
                 </div>
               ) : (
                 <div className="flex items-center justify-between gap-3">
                   <p className="min-w-0 truncate text-sm text-foreground">
-                    {user.email ?? user.displayName ?? "Signed in"}
+                    {user.email ?? user.displayName ?? "Connected"}
                   </p>
-                  <Button variant="outline" size="sm" onClick={handleSignOut} disabled={!canAct}>
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={handleSignOut}
+                    disabled={!canAct}
+                  >
                     {busy === "signOut" ? "Signing out…" : "Sign out"}
                   </Button>
                 </div>
@@ -187,32 +223,46 @@ export function BackupPage() {
             </Surface>
           </Section>
 
-          {signedIn && (
+          {signedIn && user !== null && (
             <Section title="Backup">
               <Surface>
-                <div className="flex items-center justify-between gap-3">
-                  <span className="text-xs text-muted-foreground">Last cloud backup</span>
-                  <span className="text-sm font-medium text-foreground">
-                    {lastCloudBackup !== null
-                      ? formatTimestamp(lastCloudBackup)
-                      : "No backup found"}
-                  </span>
+                <div className="flex flex-col gap-2">
+                  <div className="flex items-center justify-between gap-3">
+                    <span className="text-xs text-muted-foreground">Last backup</span>
+                    <span className="text-sm font-medium text-foreground">
+                      {lastCloudBackupAt !== null
+                        ? formatTimestamp(lastCloudBackupAt)
+                        : "No backup found"}
+                    </span>
+                  </div>
+                  <div className="flex items-center justify-between gap-3">
+                    <span className="text-xs text-muted-foreground">Local data</span>
+                    {lastCloudBackupAt !== null ? (
+                      upToDate ? (
+                        <span className="text-xs font-medium text-success">Backup current</span>
+                      ) : (
+                        <span className="text-xs font-medium text-warning">Backup outdated</span>
+                      )
+                    ) : (
+                      <span className="text-xs text-muted-foreground">Not uploaded yet</span>
+                    )}
+                  </div>
                 </div>
               </Surface>
               <div className="flex flex-col gap-3">
                 <div className="flex flex-col gap-1">
-                  <Button onClick={() => setConfirm("upload")} disabled={!canAct}>
+                  <Button onClick={handleUpload} disabled={!canAct || !online || upToDate}>
                     {busy === "upload" ? "Uploading…" : "Upload backup"}
                   </Button>
                   <p className="px-1 text-xs text-foreground-subtle">
-                    Replaces the cloud copy with your current data.
+                    {upToDate ? "Already up to date." : "Replaces the cloud copy with your current data."}
                   </p>
                 </div>
                 <div className="flex flex-col gap-1">
                   <Button
                     variant="outline"
-                    onClick={() => setConfirm("restore")}
-                    disabled={!canAct}
+                    onClick={() => void handleRequestRestore()}
+                    disabled={!canAct || !online}
                   >
                     {busy === "restore" ? "Restoring…" : "Restore backup"}
                   </Button>
@@ -231,25 +281,47 @@ export function BackupPage() {
         </div>
       )}
 
-      {confirm === "upload" && (
+      {preview !== null && (
         <ConfirmDialog
-          title="Upload backup?"
-          message="This will replace the cloud copy with your current data."
-          confirmLabel="Upload"
-          destructive={false}
-          onCancel={() => setConfirm(null)}
-          onConfirm={() => void handleConfirm("upload")}
-        />
-      )}
-      {confirm === "restore" && (
-        <ConfirmDialog
-          title="Restore backup?"
-          message="This will replace your local data with the cloud copy. This can't be undone."
+          title="Restore backup"
+          message="This will replace your local data."
           confirmLabel="Restore"
           destructive
-          onCancel={() => setConfirm(null)}
-          onConfirm={() => void handleConfirm("restore")}
-        />
+          onCancel={() => setPreview(null)}
+          onConfirm={handleConfirmRestore}
+        >
+          {(() => {
+            const counts = previewCounts(preview);
+            const updated =
+              typeof preview.updatedAt === "number" ? formatRelative(preview.updatedAt) : "unknown";
+            return (
+              <div className="space-y-2">
+                <div className="flex items-center justify-between gap-3 text-xs">
+                  <span className="text-muted-foreground">Cloud backup</span>
+                  <span className="text-foreground">Last updated {updated}</span>
+                </div>
+                <div className="space-y-1 rounded-lg border border-border bg-muted/30 p-3 text-xs">
+                  <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+                    Contains
+                  </p>
+                  <p className="text-foreground">
+                    {plural(counts.adventureCount, "adventure", "adventures")}
+                  </p>
+                  <p className="text-foreground">{plural(counts.playerCount, "player", "players")}</p>
+                  <p className="text-foreground">
+                    {plural(counts.favoriteCount, "favorite", "favorites")}
+                  </p>
+                  <p className="text-foreground">
+                    {plural(counts.sessionCount, "session item", "session items")}
+                  </p>
+                  {counts.activeAdventureTitle !== null && (
+                    <p className="text-foreground">Adventure: {counts.activeAdventureTitle}</p>
+                  )}
+                </div>
+              </div>
+            );
+          })()}
+        </ConfirmDialog>
       )}
     </div>
   );

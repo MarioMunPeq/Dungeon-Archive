@@ -1,4 +1,5 @@
 import { useRef } from "react";
+import type { ReactNode } from "react";
 import { Button } from "./Button";
 import { Inline } from "./Inline";
 import { useDialog } from "./use-dialog";
@@ -10,6 +11,7 @@ interface ConfirmDialogProps {
   readonly destructive: boolean;
   readonly onCancel: () => void;
   readonly onConfirm: () => void;
+  readonly children?: ReactNode;
 }
 
 export function ConfirmDialog({
@@ -19,6 +21,7 @@ export function ConfirmDialog({
   destructive,
   onCancel,
   onConfirm,
+  children,
 }: ConfirmDialogProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   useDialog({ onClose: onCancel, open: true, containerRef });
@@ -33,6 +36,7 @@ export function ConfirmDialog({
     >
       <div className="w-full max-w-sm space-y-4 rounded-lg border border-border bg-card p-5 shadow-lg animate-slide-up">
         <h2 className="text-sm font-semibold text-foreground">{title}</h2>
+        {children}
         <p className="text-sm text-muted-foreground">{message}</p>
         <Inline gap="sm" className="w-full justify-end">
           <Button variant="ghost" onClick={onCancel}>

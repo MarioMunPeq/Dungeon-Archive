@@ -9,6 +9,8 @@ export const fakeFirebaseState = {
   authListeners: new Set<(user: FakeAuthUser | null) => void>(),
   data: new Map<string, unknown>(),
   apps: [] as unknown[],
+  signInError: null as unknown | null,
+  firestoreError: null as unknown | null,
 };
 
 export function setFakeUser(user: FakeAuthUser | null): void {

@@ -1,4 +1,6 @@
 export { hasCloudConfig } from "./config";
 export { getGateway } from "./gateway";
-export { upload, restore } from "./service";
-export type { CloudUser, CloudSnapshot, CloudGateway } from "./types";
+export { friendlyErrorMessage } from "./errors";
+export { upload, restore, getBackupStatus, computeMetadata, currentStateHash } from "./service";
+export type { CloudUser, CloudSnapshot, CloudMetadata, CloudGateway } from "./types";
+export type { BackupStatus, LastUploadRecord } from "./service";
