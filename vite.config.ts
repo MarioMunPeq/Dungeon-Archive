@@ -4,8 +4,10 @@ import tailwindcss from "@tailwindcss/vite";
 import { VitePWA } from "vite-plugin-pwa";
 import path from "node:path";
 
+const BASE_PATH = "/Dungeon-Archive/";
+
 export default defineConfig({
-  base: "/dungeon-archive/",
+  base: BASE_PATH,
   plugins: [
     react(),
     tailwindcss(),
@@ -19,8 +21,8 @@ export default defineConfig({
         theme_color: "#1a1a2e",
         background_color: "#1a1a2e",
         display: "standalone",
-        scope: "/dungeon-archive/",
-        start_url: "/dungeon-archive/",
+        scope: BASE_PATH,
+        start_url: BASE_PATH,
         orientation: "portrait",
         icons: [
           {

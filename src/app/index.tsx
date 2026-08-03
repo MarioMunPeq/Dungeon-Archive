@@ -18,7 +18,7 @@ export function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <AuthProvider>
-        <BrowserRouter basename="/dungeon-archive/">
+        <BrowserRouter basename="/Dungeon-Archive/">
           <AppLayout>
             <ErrorBoundary>
               <AppRouter />
