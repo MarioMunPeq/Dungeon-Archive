@@ -7,6 +7,7 @@ interface InlineTextEditorProps {
   readonly onChange: (value: string) => void;
   readonly onSave: (value: string) => void;
   readonly onCancel: () => void;
+  readonly ariaLabel?: string;
   readonly className?: string;
 }
 
@@ -15,6 +16,7 @@ export function InlineTextEditor({
   onChange,
   onSave,
   onCancel,
+  ariaLabel,
   className = "",
 }: InlineTextEditorProps) {
   const done = useRef(false);
@@ -48,6 +50,7 @@ export function InlineTextEditor({
       onChange={(e: ChangeEvent<HTMLInputElement>) => onChange(e.target.value)}
       onBlur={commit}
       onKeyDown={handleKeyDown}
+      aria-label={ariaLabel}
       autoFocus
       className={cn(
         "w-full rounded-lg border border-border bg-background px-3 py-2 text-foreground outline-none focus:border-focus focus:ring-1 focus:ring-focus",

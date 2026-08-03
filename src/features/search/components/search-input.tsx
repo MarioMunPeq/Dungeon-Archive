@@ -23,6 +23,7 @@ export const SearchInput = forwardRef<HTMLInputElement, SearchInputProps>(functi
         placeholder="Search spells, equipment, conditions..."
         autoComplete="off"
         spellCheck={false}
+        aria-label="Search"
         role="combobox"
         aria-expanded={hasResults}
         aria-haspopup="listbox"

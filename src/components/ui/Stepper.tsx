@@ -140,6 +140,7 @@ export function Stepper({
           onChange={setDraft}
           onSave={commitDraft}
           onCancel={() => setEditing(false)}
+          aria-label={`Edit ${label}`}
           className={cn("h-9 w-14 px-2 text-center font-semibold", valueClassName)}
         />
       ) : (

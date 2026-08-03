@@ -669,6 +669,7 @@ function PlayerReferenceCard({
               onChange={setDraft}
               onSave={(value) => commitText("name", value)}
               onCancel={() => setEditing(null)}
+              aria-label="Name"
               className="text-base font-bold"
             />
           ) : (
@@ -843,6 +844,7 @@ function PlayerReferenceCard({
             onCancel={() => setEditing(null)}
             rows={2}
             placeholder="One quick reminder…"
+            aria-label="Quick note"
           />
         ) : reference.note ? (
           <button

@@ -8,6 +8,7 @@ interface InlineTextareaEditorProps {
   readonly onCancel: () => void;
   readonly rows?: number;
   readonly placeholder?: string;
+  readonly ariaLabel?: string;
 }
 
 export function InlineTextareaEditor({
@@ -17,6 +18,7 @@ export function InlineTextareaEditor({
   onCancel,
   rows = 2,
   placeholder,
+  ariaLabel,
 }: InlineTextareaEditorProps) {
   const done = useRef(false);
 
@@ -47,6 +49,7 @@ export function InlineTextareaEditor({
       onKeyDown={handleKeyDown}
       rows={rows}
       placeholder={placeholder}
+      aria-label={ariaLabel}
       autoFocus
       className="w-full rounded-lg border border-border bg-background px-3 py-2 text-sm text-foreground outline-none focus:border-focus focus:ring-1 focus:ring-focus"
     />

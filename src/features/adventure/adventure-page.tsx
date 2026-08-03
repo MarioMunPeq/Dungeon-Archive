@@ -154,6 +154,7 @@ export function AdventurePage() {
                 onChange={setTitleDraft}
                 onSave={handleSaveTitle}
                 onCancel={() => setEditingTitle(false)}
+                aria-label="Title"
                 className="text-lg font-bold"
               />
             ) : (
@@ -207,6 +208,7 @@ export function AdventurePage() {
               onCancel={() => setEditingDescription(false)}
               rows={3}
               placeholder="Add a description\u2026"
+              aria-label="Description"
             />
           ) : (
             <button
@@ -302,6 +304,7 @@ export function AdventurePage() {
                 if (e.key === "Enter") handleAddObjective();
               }}
               placeholder="Add objective\u2026"
+              aria-label="New objective"
               className="flex-1 rounded-lg border border-border bg-background px-3 py-2 text-sm text-foreground outline-none placeholder:text-muted-foreground focus:border-focus focus:ring-1 focus:ring-focus"
             />
             <Button size="sm" onClick={handleAddObjective} disabled={!newObjective.trim()}>
@@ -362,6 +365,7 @@ export function AdventurePage() {
             onCancel={() => setEditingNotes(false)}
             rows={6}
             placeholder="Add notes\u2026"
+            aria-label="Notes"
           />
         ) : (
           <button
