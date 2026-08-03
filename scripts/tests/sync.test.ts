@@ -52,14 +52,8 @@ const store = new Map<string, string>();
 // Imports (after the mock is installed; sync uses the fake gateway under tsx
 // because isFirebaseConfigured() is false without a Vite build).
 // ---------------------------------------------------------------------------
-const {
-  upload,
-  restore,
-  getGateway,
-  getBackupStatus,
-  computeMetadata,
-  friendlyErrorMessage,
-} = await import("../../src/sync/index");
+const { upload, restore, getGateway, getBackupStatus, computeMetadata, friendlyErrorMessage } =
+  await import("../../src/sync/index");
 const { userStore } = await import("../../src/user-state/store");
 import type { CloudSnapshot } from "../../src/sync/types";
 
@@ -281,5 +275,8 @@ await test("friendlyErrorMessage maps a network failure", () => {
 
 await test("friendlyErrorMessage falls back for unexpected errors", () => {
   strictEqual(friendlyErrorMessage(new Error("boom"), true), "Something went wrong. Try again.");
-  strictEqual(friendlyErrorMessage("no error object at all", true), "Something went wrong. Try again.");
+  strictEqual(
+    friendlyErrorMessage("no error object at all", true),
+    "Something went wrong. Try again.",
+  );
 });

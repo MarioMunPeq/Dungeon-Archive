@@ -32,7 +32,9 @@ function requireAuth() {
 }
 
 export function signInWithGoogle(): Promise<AuthUser> {
-  return signInWithPopup(requireAuth(), getGoogleProvider()).then((result) => toAuthUser(result.user));
+  return signInWithPopup(requireAuth(), getGoogleProvider()).then((result) =>
+    toAuthUser(result.user),
+  );
 }
 
 export function logout(): Promise<void> {

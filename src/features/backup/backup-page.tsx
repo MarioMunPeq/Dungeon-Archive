@@ -210,12 +210,7 @@ export function BackupPage() {
                   <p className="min-w-0 truncate text-sm text-foreground">
                     {user.email ?? user.displayName ?? "Connected"}
                   </p>
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    onClick={handleSignOut}
-                    disabled={!canAct}
-                  >
+                  <Button variant="outline" size="sm" onClick={handleSignOut} disabled={!canAct}>
                     {busy === "signOut" ? "Signing out…" : "Sign out"}
                   </Button>
                 </div>
@@ -255,7 +250,9 @@ export function BackupPage() {
                     {busy === "upload" ? "Uploading…" : "Upload backup"}
                   </Button>
                   <p className="px-1 text-xs text-foreground-subtle">
-                    {upToDate ? "Already up to date." : "Replaces the cloud copy with your current data."}
+                    {upToDate
+                      ? "Already up to date."
+                      : "Replaces the cloud copy with your current data."}
                   </p>
                 </div>
                 <div className="flex flex-col gap-1">
@@ -307,7 +304,9 @@ export function BackupPage() {
                   <p className="text-foreground">
                     {plural(counts.adventureCount, "adventure", "adventures")}
                   </p>
-                  <p className="text-foreground">{plural(counts.playerCount, "player", "players")}</p>
+                  <p className="text-foreground">
+                    {plural(counts.playerCount, "player", "players")}
+                  </p>
                   <p className="text-foreground">
                     {plural(counts.favoriteCount, "favorite", "favorites")}
                   </p>
