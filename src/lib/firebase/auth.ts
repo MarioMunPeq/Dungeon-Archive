@@ -1,10 +1,27 @@
 import { getAuth, GoogleAuthProvider } from "firebase/auth";
-import { firebaseApp } from "./config";
+import type { Auth } from "firebase/auth";
+import { getFirebaseApp } from "./config";
 
-export const auth = getAuth(firebaseApp);
+let authInstance: Auth | null = null;
+let googleProviderInstance: GoogleAuthProvider | null = null;
 
-export const googleProvider = new GoogleAuthProvider();
+export function getAuthInstance(): Auth | null {
+  const firebaseApp = getFirebaseApp();
+  if (!firebaseApp) {
+    return null;
+  }
+  if (authInstance === null) {
+    authInstance = getAuth(firebaseApp);
+  }
+  return authInstance;
+}
 
-googleProvider.setCustomParameters({
-  prompt: "select_account",
-});
+export function getGoogleProvider(): GoogleAuthProvider {
+  if (googleProviderInstance === null) {
+    googleProviderInstance = new GoogleAuthProvider();
+    googleProviderInstance.setCustomParameters({
+      prompt: "select_account",
+    });
+  }
+  return googleProviderInstance;
+}

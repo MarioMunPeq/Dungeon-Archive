@@ -1,4 +1,5 @@
 import { initializeApp } from "firebase/app";
+import type { FirebaseApp } from "firebase/app";
 
 interface FirebaseConfig {
   readonly apiKey: string;
@@ -40,7 +41,17 @@ const firebaseConfig: FirebaseConfig = {
   appId: env.VITE_FIREBASE_APP_ID ?? "",
 };
 
-export const firebaseApp = initializeApp(firebaseConfig);
+let firebaseAppInstance: FirebaseApp | null = null;
+
+function createFirebaseApp(): FirebaseApp | null {
+  if (!isFirebaseConfigured()) {
+    return null;
+  }
+  if (firebaseAppInstance === null) {
+    firebaseAppInstance = initializeApp(firebaseConfig);
+  }
+  return firebaseAppInstance;
+}
 
 export function isFirebaseConfigured(): boolean {
   return (
@@ -50,4 +61,8 @@ export function isFirebaseConfigured(): boolean {
     firebaseConfig.appId !== "" &&
     firebaseConfig.messagingSenderId !== ""
   );
+}
+
+export function getFirebaseApp(): FirebaseApp | null {
+  return createFirebaseApp();
 }

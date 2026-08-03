@@ -1,6 +1,6 @@
 import { onAuthStateChanged, signInWithPopup, signOut } from "firebase/auth";
 import type { Unsubscribe } from "firebase/auth";
-import { auth, googleProvider } from "./auth";
+import { getAuthInstance, getGoogleProvider } from "./auth";
 
 export interface AuthUser {
   readonly uid: string;
@@ -23,16 +23,24 @@ function toAuthUser(user: {
   };
 }
 
+function requireAuth() {
+  const auth = getAuthInstance();
+  if (auth === null) {
+    throw new Error("Firebase is not configured");
+  }
+  return auth;
+}
+
 export function signInWithGoogle(): Promise<AuthUser> {
-  return signInWithPopup(auth, googleProvider).then((result) => toAuthUser(result.user));
+  return signInWithPopup(requireAuth(), getGoogleProvider()).then((result) => toAuthUser(result.user));
 }
 
 export function logout(): Promise<void> {
-  return signOut(auth);
+  return signOut(requireAuth());
 }
 
 export function subscribeToAuth(callback: (user: AuthUser | null) => void): Unsubscribe {
-  return onAuthStateChanged(auth, (user) => {
+  return onAuthStateChanged(requireAuth(), (user) => {
     callback(user === null ? null : toAuthUser(user));
   });
 }
