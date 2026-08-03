@@ -9,8 +9,75 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
     <meta name="description" content="Offline-first companion app for D&D 5e tabletop sessions" />
     <link rel="apple-touch-icon" href="/icons/icon-192.png" />
-    <link rel="manifest" href="/manifest.webmanifest" />
     <title>Dungeon Archive</title>
+    <script>
+      (function () {
+        var RETRY_KEY = "dungeon-archive:boot-retry-attempted";
+
+        function isModuleLoadFailure(e) {
+          if (e.type !== "error") return false;
+          if (typeof ErrorEvent !== "undefined" && e instanceof ErrorEvent) return false;
+          var t = e.target;
+          return !!t && t.tagName === "SCRIPT" && t.type === "module" && !!t.src;
+        }
+
+        function showBootError(url) {
+          var boot = document.getElementById("boot");
+          if (!boot) return;
+          boot.innerHTML =
+            '<span class="brand">Dungeon Archive</span>' +
+            '<span class="caption" style="max-width:30ch;text-align:center">' +
+            "Failed to load the application. The app shell is outdated and a required file could not be loaded." +
+            "</span>" +
+            '<span class="caption" style="color:#f87171;word-break:break-all;max-width:36ch;text-align:center">' +
+            (url || "unknown file") +
+            "</span>" +
+            '<span class="caption" style="max-width:30ch;text-align:center">Please hard-refresh the page (Ctrl+Shift+R).</span>';
+        }
+
+        window.addEventListener(
+          "error",
+          function (e) {
+            if (!isModuleLoadFailure(e)) return;
+            if (document.getElementById("boot") === null) return;
+
+            var src = e.target.src;
+            var attempted = false;
+            try {
+              attempted = sessionStorage.getItem(RETRY_KEY) === "1";
+            } catch (_) {}
+
+            if (!attempted) {
+              try {
+                sessionStorage.setItem(RETRY_KEY, "1");
+              } catch (_) {}
+              var loc = window.location;
+              var base = loc.pathname + loc.search;
+              var sep = base.indexOf("?") === -1 ? "?" : "&";
+              window.location.replace(base + sep + "bootRetry=1");
+              return;
+            }
+
+            showBootError(src);
+          },
+          true
+        );
+
+        if (typeof MutationObserver !== "undefined") {
+          try {
+            var observer = new MutationObserver(function () {
+              if (document.getElementById("boot") === null) {
+                try {
+                  sessionStorage.removeItem(RETRY_KEY);
+                } catch (_) {}
+                observer.disconnect();
+              }
+            });
+            observer.observe(document.documentElement, { childList: true, subtree: true });
+          } catch (_) {}
+        }
+      })();
+    </script>
     <style>
       #boot {
         position: fixed;
