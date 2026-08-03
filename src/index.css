@@ -72,6 +72,12 @@
   --animate-slide-down: slide-down 0.15s ease-out;
   --animate-pop: pop 0.2s ease-out;
 
+  /* Spacing — 4px grid (spec 07). Semantic scale: xs=4px, sm=8px, md=12px,
+     lg=16px, xl=24px, 2xl=32px, 3xl=48px. Numeric utilities map 1:1
+     (p-1=xs, p-2=sm, p-3=md, p-4=lg, p-6=xl, p-8=2xl, p-12=3xl).
+     Fractional utilities (gap-1.5, py-0.5, …) are off-grid and forbidden. */
+  --spacing: 0.25rem;
+
   /* Touch sizes */
   --size-touch-min: 44px;
   --size-touch-comfortable: 48px;
@@ -222,6 +228,6 @@
   .hitbox-expand::before {
     content: "";
     position: absolute;
-    inset: -10px;
+    inset: -8px;
   }
 }

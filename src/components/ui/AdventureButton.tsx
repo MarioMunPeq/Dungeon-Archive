@@ -40,7 +40,7 @@ export const AdventureButton = memo(function AdventureButton({
       type="button"
       onClick={handleClick}
       title={inAdventure ? "Remove from adventure" : "Add to adventure"}
-      className={`hitbox-expand inline-flex items-center justify-center rounded-lg p-1.5 transition-all duration-150 hover:bg-accent active:scale-90 active:bg-accent/80 ${className} ${
+      className={`hitbox-expand inline-flex items-center justify-center rounded-lg p-2 transition-all duration-150 hover:bg-accent active:scale-90 active:bg-accent/80 ${className} ${
         inAdventure ? "text-success" : "text-muted-foreground"
       }`}
       aria-label={inAdventure ? "Remove from adventure" : "Add to adventure"}

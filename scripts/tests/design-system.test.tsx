@@ -75,7 +75,7 @@ test("renders with correct base classes", () => {
   ok(html.includes("rounded-full"));
   ok(html.includes("border"));
   ok(html.includes("px-2"));
-  ok(html.includes("py-0.5"));
+  ok(html.includes("py-1"));
   ok(html.includes("label"));
 });
 

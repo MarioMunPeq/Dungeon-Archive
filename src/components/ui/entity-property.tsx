@@ -9,7 +9,7 @@ interface EntityPropertyProps {
 
 export function EntityProperty({ label, value, stat = false }: EntityPropertyProps) {
   return (
-    <div className="space-y-0.5">
+    <div className="space-y-1">
       <dt className="text-xs text-muted-foreground">{label}</dt>
       <dd
         className={cn(

@@ -14,7 +14,7 @@ interface SearchResultRowProps extends SearchResultItem {
   readonly id: string;
 }
 
-const ROW_BASE = "flex items-center gap-3 px-4 py-2.5 transition-colors";
+const ROW_BASE = "flex items-center gap-3 px-4 py-3 transition-colors";
 const ROW_SELECTED = "bg-accent";
 
 export function SearchResultRow({
@@ -42,7 +42,7 @@ export function SearchResultRow({
         {cat.singular}
       </Badge>
 
-      <div className="min-w-0 flex-1 space-y-0.5">
+      <div className="min-w-0 flex-1 space-y-1">
         <p className="truncate text-sm font-medium text-foreground">
           <SearchHighlight text={title} query={query} />
         </p>

@@ -5,7 +5,7 @@ type InlineGap = "xs" | "sm" | "md" | "lg";
 type InlineAlign = "start" | "center" | "end" | "baseline" | "stretch";
 
 const GAP_CLASSES: Record<InlineGap, string> = {
-  xs: "gap-1.5",
+  xs: "gap-2",
   sm: "gap-2",
   md: "gap-3",
   lg: "gap-4",

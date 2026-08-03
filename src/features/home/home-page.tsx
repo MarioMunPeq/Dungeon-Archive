@@ -99,7 +99,7 @@ export function HomePage() {
           </p>
           <Link
             to="/search"
-            className="inline-flex touch-target items-center justify-center gap-1.5 rounded-lg bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-all duration-150 hover:bg-primary-hover active:scale-95 active:bg-primary-active"
+            className="inline-flex touch-target items-center justify-center gap-2 rounded-lg bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-all duration-150 hover:bg-primary-hover active:scale-95 active:bg-primary-active"
           >
             Search the Compendium
           </Link>
@@ -271,7 +271,7 @@ export function HomePage() {
                 fill="none"
                 stroke="currentColor"
                 strokeWidth={2}
-                className="h-3.5 w-3.5 shrink-0 text-muted-foreground"
+                className="h-4 w-4 shrink-0 text-muted-foreground"
               >
                 <path d="M9 18l6-6-6-6" />
               </svg>

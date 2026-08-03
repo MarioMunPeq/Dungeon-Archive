@@ -53,7 +53,7 @@ export function SessionPage() {
           </p>
           <Link
             to="/search"
-            className="inline-flex touch-target items-center justify-center gap-1.5 rounded-lg bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-all duration-150 hover:bg-primary-hover active:scale-95 active:bg-primary-active"
+            className="inline-flex touch-target items-center justify-center gap-2 rounded-lg bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-all duration-150 hover:bg-primary-hover active:scale-95 active:bg-primary-active"
           >
             Search
           </Link>

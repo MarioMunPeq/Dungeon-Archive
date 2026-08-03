@@ -248,7 +248,7 @@ function WeaponPreview({ item, href }: { item: Equipment; href: string }) {
   const damage = formatDamage(item.damage, item.damageType);
   const properties = item.properties ?? [];
   return (
-    <div className="flex flex-col gap-1.5 rounded-lg bg-card px-3 py-2 animate-slide-up">
+    <div className="flex flex-col gap-2 rounded-lg bg-card px-3 py-2 animate-slide-up">
       {damage && <p className="text-base font-bold tabular-nums text-foreground">{damage}</p>}
       {properties.length > 0 && (
         <p className="text-xs text-foreground-subtle">{properties.join(" \u00B7 ")}</p>
@@ -272,7 +272,7 @@ function SpellPreview({ spell, href }: { spell: Spell; href: string }) {
   ) as string[];
   const rest = [spell.castingTime, spell.range, spell.duration].filter(Boolean);
   return (
-    <div className="flex flex-col gap-1.5 rounded-lg bg-card px-3 py-2 animate-slide-up">
+    <div className="flex flex-col gap-2 rounded-lg bg-card px-3 py-2 animate-slide-up">
       <p className="text-xs leading-relaxed">
         <span className="font-semibold text-foreground">
           {levelText} \u00B7 {school}
@@ -286,7 +286,7 @@ function SpellPreview({ spell, href }: { spell: Spell; href: string }) {
           {flags.map((flag) => (
             <span
               key={flag}
-              className="rounded-full border border-border bg-muted px-1.5 py-0.5 text-xs font-medium uppercase tracking-wide text-muted-foreground"
+              className="rounded-full border border-border bg-muted px-2 py-1 text-xs font-medium uppercase tracking-wide text-muted-foreground"
             >
               {flag}
             </span>
@@ -376,7 +376,7 @@ function NumberCell({
   valueClassName?: string;
 }) {
   return (
-    <div className="group flex min-w-0 flex-col items-center gap-0.5">
+    <div className="group flex min-w-0 flex-col items-center gap-1">
       <ValueLabel onClear={onClear}>{label}</ValueLabel>
       <Stepper
         variant="ghost"
@@ -414,7 +414,7 @@ function OptionalNumberCell({
 }) {
   if (value === undefined) {
     return (
-      <div className="flex min-w-0 flex-col items-center gap-0.5">
+      <div className="flex min-w-0 flex-col items-center gap-1">
         <ValueLabel>{label}</ValueLabel>
         <button
           type="button"
@@ -460,7 +460,7 @@ function AddButton({ onClick, label }: { onClick: () => void; label: string }) {
         fill="none"
         stroke="currentColor"
         strokeWidth={2}
-        className="h-3.5 w-3.5"
+        className="h-4 w-4"
       >
         <line x1="12" y1="5" x2="12" y2="19" />
         <line x1="5" y1="12" x2="19" y2="12" />
@@ -513,7 +513,7 @@ function ReferenceRow({
         className="py-1"
         trailing={
           quickStats ? (
-            <span className="shrink-0 rounded-md bg-card px-1.5 py-0.5 text-xs font-semibold tabular-nums text-foreground">
+            <span className="shrink-0 rounded-md bg-card px-2 py-1 text-xs font-semibold tabular-nums text-foreground">
               {quickStats}
             </span>
           ) : undefined
@@ -681,7 +681,7 @@ function PlayerReferenceCard({
               {reference.name}
             </button>
           )}
-          <div className="mt-1.5 flex flex-wrap items-center gap-x-2 gap-y-2">
+          <div className="mt-2 flex flex-wrap items-center gap-x-2 gap-y-2">
             <SelectField
               value={reference.class}
               options={CLASSES}
@@ -739,7 +739,7 @@ function PlayerReferenceCard({
 
       <div className="flex flex-col gap-2 rounded-lg bg-card px-3 py-3">
         <div
-          className={cn("grid gap-1.5", hasSpell ? "grid-cols-3 sm:grid-cols-5" : "grid-cols-3")}
+          className={cn("grid gap-2", hasSpell ? "grid-cols-3 sm:grid-cols-5" : "grid-cols-3")}
         >
           <NumberCell
             label="AC"
@@ -792,7 +792,7 @@ function PlayerReferenceCard({
         </div>
       </div>
 
-      <div className="grid grid-cols-3 gap-1.5 sm:grid-cols-6">
+      <div className="grid grid-cols-3 gap-2 sm:grid-cols-6">
         {ABILITY_KEYS.map((key) => (
           <NumberCell
             key={key}

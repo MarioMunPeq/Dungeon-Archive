@@ -69,12 +69,12 @@ export function Onboarding() {
         </div>
       </div>
       <div className="flex flex-col gap-4 border-t border-border px-6 py-5">
-        <div className="flex justify-center gap-1.5" aria-hidden="true">
+        <div className="flex justify-center gap-2" aria-hidden="true">
           {STEPS.map((_, i) => (
             <span
               key={i}
-              className={`h-1.5 rounded-full transition-all duration-150 ${
-                i === step ? "w-6 bg-primary" : "w-1.5 bg-border"
+              className={`h-2 rounded-full transition-all duration-150 ${
+                i === step ? "w-6 bg-primary" : "w-2 bg-border"
               }`}
             />
           ))}

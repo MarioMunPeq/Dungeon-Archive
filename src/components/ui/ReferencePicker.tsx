@@ -98,7 +98,7 @@ export function ReferencePicker({ title, candidates, onSelect, onClose }: Refere
                 <button
                   type="button"
                   onClick={() => onSelect(c.canonicalId)}
-                  className="flex w-full flex-col items-start gap-0.5 border-b border-border py-3 text-left transition-all duration-150 hover:bg-accent/50 active:bg-accent/80"
+                  className="flex w-full flex-col items-start gap-1 border-b border-border py-3 text-left transition-all duration-150 hover:bg-accent/50 active:bg-accent/80"
                 >
                   <span className="text-sm font-medium text-foreground">{c.name}</span>
                   <span className="text-xs text-muted-foreground">{c.subtitle}</span>

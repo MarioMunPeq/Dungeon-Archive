@@ -13,7 +13,7 @@ export function FilterBar({ filters, values, onChange }: FilterBarProps) {
   return (
     <div className="flex flex-wrap gap-3">
       {filters.map((filter) => (
-        <div key={filter.key} className="flex items-center gap-1.5">
+        <div key={filter.key} className="flex items-center gap-2">
           <label className="text-xs font-medium text-muted-foreground">{filter.label}</label>
           <SelectField
             value={values[filter.key] ?? ""}

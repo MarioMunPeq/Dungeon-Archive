@@ -23,8 +23,8 @@ export function BottomNav() {
             end={to === "/"}
             className={({ isActive }) =>
               cn(
-                "flex flex-1 flex-col items-center gap-0.5 py-2 text-xs font-medium transition-all duration-150",
-                "min-h-[56px] justify-center",
+                "flex flex-1 flex-col items-center gap-1 py-2 text-xs font-medium transition-all duration-150",
+                "min-h-14 justify-center",
                 "active:scale-95",
                 isActive ? "text-primary-muted" : "text-muted-foreground",
               )

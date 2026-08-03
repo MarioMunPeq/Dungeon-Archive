@@ -12,11 +12,11 @@ interface EntityBreadcrumbsProps {
 export function EntityBreadcrumbs({ crumbs }: EntityBreadcrumbsProps) {
   return (
     <nav aria-label="Breadcrumb" className="mb-4">
-      <ol className="flex flex-wrap items-center gap-1.5 text-xs text-muted-foreground">
+      <ol className="flex flex-wrap items-center gap-2 text-xs text-muted-foreground">
         {crumbs.map((crumb, i) => {
           const isLast = i === crumbs.length - 1;
           return (
-            <li key={crumb.to ?? crumb.label} className="flex items-center gap-1.5">
+            <li key={crumb.to ?? crumb.label} className="flex items-center gap-2">
               {i > 0 && (
                 <span aria-hidden="true" className="text-muted-foreground/60">
                   /

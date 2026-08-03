@@ -1,6 +1,7 @@
 import type { ElementType, ReactNode } from "react";
-import type { SurfaceVariant } from "@/config/tokens";
 import { cn } from "@/lib/utils";
+
+export type SurfaceVariant = "default" | "outlined" | "subtle" | "interactive";
 
 const VARIANT_CLASSES: Record<SurfaceVariant, string> = {
   default: "rounded-lg border border-border bg-background p-3",

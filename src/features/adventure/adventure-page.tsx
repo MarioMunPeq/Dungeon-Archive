@@ -265,7 +265,7 @@ export function AdventurePage() {
             {adventure.objectives.map((obj, i) => (
               <li
                 key={i}
-                className="flex items-center gap-2 rounded-lg px-3 py-1.5 text-sm text-foreground hover:bg-accent/30"
+                className="flex items-center gap-2 rounded-lg px-3 py-2 text-sm text-foreground hover:bg-accent/30"
               >
                 <span className="flex-1">{obj}</span>
                 {!adventure.archived && (
@@ -281,7 +281,7 @@ export function AdventurePage() {
                       fill="none"
                       stroke="currentColor"
                       strokeWidth={2}
-                      className="h-3.5 w-3.5"
+                      className="h-4 w-4"
                     >
                       <line x1="18" y1="6" x2="6" y2="18" />
                       <line x1="6" y1="6" x2="18" y2="18" />
@@ -302,7 +302,7 @@ export function AdventurePage() {
                 if (e.key === "Enter") handleAddObjective();
               }}
               placeholder="Add objective\u2026"
-              className="flex-1 rounded-lg border border-border bg-background px-3 py-1.5 text-sm text-foreground outline-none placeholder:text-muted-foreground focus:border-focus focus:ring-1 focus:ring-focus"
+              className="flex-1 rounded-lg border border-border bg-background px-3 py-2 text-sm text-foreground outline-none placeholder:text-muted-foreground focus:border-focus focus:ring-1 focus:ring-focus"
             />
             <Button size="sm" onClick={handleAddObjective} disabled={!newObjective.trim()}>
               Add
@@ -367,7 +367,7 @@ export function AdventurePage() {
           <button
             type="button"
             onClick={adventure.archived ? undefined : handleStartNotesEdit}
-            className={`min-h-[6rem] w-full rounded-lg border border-transparent px-3 py-2 text-left text-sm text-muted-foreground ${adventure.archived ? "cursor-default" : "hover:border-border hover:bg-accent/30"}`}
+            className={`min-h-24 w-full rounded-lg border border-transparent px-3 py-2 text-left text-sm text-muted-foreground ${adventure.archived ? "cursor-default" : "hover:border-border hover:bg-accent/30"}`}
           >
             {adventure.notes || "Add notes\u2026"}
           </button>
