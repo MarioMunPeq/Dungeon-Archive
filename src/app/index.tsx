@@ -3,6 +3,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { AppRouter } from "@/app/router";
 import { AppLayout } from "@/app/layouts/app-layout";
 import { ErrorBoundary } from "@/components/ui/error-boundary";
+import { SnackbarProvider } from "@/components/ui";
 import { AuthProvider } from "@/features/auth/auth-provider";
 
 const queryClient = new QueryClient({
@@ -19,11 +20,13 @@ export function App() {
     <QueryClientProvider client={queryClient}>
       <AuthProvider>
         <BrowserRouter basename="/Dungeon-Archive/">
-          <AppLayout>
-            <ErrorBoundary>
-              <AppRouter />
-            </ErrorBoundary>
-          </AppLayout>
+          <SnackbarProvider>
+            <AppLayout>
+              <ErrorBoundary>
+                <AppRouter />
+              </ErrorBoundary>
+            </AppLayout>
+          </SnackbarProvider>
         </BrowserRouter>
       </AuthProvider>
     </QueryClientProvider>

@@ -3,6 +3,7 @@ import { createRoot } from "react-dom/client";
 import { loadCompendium } from "@/compendium";
 import { hydrate } from "@/user-state";
 import { App } from "@/app";
+import { BootScreen } from "@/app/boot-screen";
 import "@fontsource-variable/space-grotesk";
 import "./index.css";
 
@@ -13,12 +14,19 @@ if (!rootElement) {
 
 const container = rootElement;
 
+const root = createRoot(container);
+root.render(
+  <StrictMode>
+    <BootScreen />
+  </StrictMode>,
+);
+
 async function main() {
   try {
     await loadCompendium();
     hydrate();
 
-    createRoot(container).render(
+    root.render(
       <StrictMode>
         <App />
       </StrictMode>,

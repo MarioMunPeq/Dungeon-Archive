@@ -1,5 +1,14 @@
 import { useCallback, useEffect, useReducer, useState } from "react";
-import { Button, ConfirmDialog, Display, Inline, Section, Surface } from "@/components/ui";
+import {
+  Button,
+  ConfirmDialog,
+  Display,
+  Inline,
+  Section,
+  Skeleton,
+  Surface,
+  useSnackbar,
+} from "@/components/ui";
 import { getBackupStatus, friendlyErrorMessage, getGateway, restore, upload } from "@/sync";
 import type { CloudGateway, CloudSnapshot, CloudUser } from "@/sync";
 import { userStore } from "@/user-state";
@@ -91,6 +100,7 @@ export function BackupPage() {
   const gateway = useGateway();
   const online = useOnline();
   useUserStateVersion();
+  const { show } = useSnackbar();
   const [user, setUser] = useState<CloudUser | null>(null);
   const [authReady, setAuthReady] = useState(false);
   const [busy, setBusy] = useState<Operation | null>(null);
@@ -107,18 +117,21 @@ export function BackupPage() {
   }, [gateway]);
 
   const run = useCallback(
-    async (op: Operation, fn: () => Promise<void>) => {
+    async (op: Operation, fn: () => Promise<void>, successMessage?: string) => {
       setError(null);
       setBusy(op);
       try {
         await fn();
+        if (successMessage !== undefined) {
+          show(successMessage, { tone: "success" });
+        }
       } catch (e) {
         setError(friendlyErrorMessage(e, online));
       } finally {
         setBusy(null);
       }
     },
-    [online],
+    [online, show],
   );
 
   const handleSignIn = useCallback(() => {
@@ -133,7 +146,7 @@ export function BackupPage() {
 
   const handleUpload = useCallback(() => {
     if (gateway === null) return;
-    void run("upload", upload);
+    void run("upload", upload, "Backup uploaded.");
   }, [gateway, run]);
 
   const handleRequestRestore = useCallback(async () => {
@@ -156,7 +169,7 @@ export function BackupPage() {
 
   const handleConfirmRestore = useCallback(() => {
     setPreview(null);
-    void run("restore", restore);
+    void run("restore", restore, "Backup restored.");
   }, [run]);
 
   const ready = gateway !== null;
@@ -177,9 +190,20 @@ export function BackupPage() {
         </p>
       </div>
 
-      {!ready && <p className="text-xs text-muted-foreground">Loading…</p>}
+      {!ready && (
+        <div role="status" className="space-y-2">
+          <span className="sr-only">Loading backup…</span>
+          <Skeleton className="h-7 w-44" />
+          <Skeleton className="h-24 w-full" />
+        </div>
+      )}
 
-      {ready && !authReady && <p className="text-xs text-muted-foreground">Checking account…</p>}
+      {ready && !authReady && (
+        <div role="status">
+          <span className="sr-only">Checking account…</span>
+          <Skeleton className="h-11 w-full" />
+        </div>
+      )}
 
       {ready && authReady && (
         <div className="flex flex-col gap-6">
@@ -261,7 +285,11 @@ export function BackupPage() {
                     onClick={() => void handleRequestRestore()}
                     disabled={!canAct || !online}
                   >
-                    {busy === "restore" ? "Restoring…" : "Restore backup"}
+                    {busy === "restore"
+                      ? "Restoring…"
+                      : previewLoading
+                        ? "Checking…"
+                        : "Restore backup"}
                   </Button>
                   <p className="px-1 text-xs text-foreground-subtle">
                     Replaces your local data with the cloud copy.

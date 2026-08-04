@@ -319,3 +319,57 @@ test("omits subtitle when not provided", () => {
   );
   ok(!html.includes("undefined"));
 });
+
+// ---------------------------------------------------------------------------
+// Skeleton
+// ---------------------------------------------------------------------------
+
+console.log("\nSkeleton\n");
+
+import { Skeleton } from "../../src/components/ui/Skeleton";
+
+test("renders a pulsing placeholder block", () => {
+  const html = renderToString(createElement(Skeleton, null));
+  ok(html.includes("animate-pulse"));
+  ok(html.includes("rounded-lg"));
+  ok(html.includes("bg-muted/60"));
+  ok(html.includes('aria-hidden="true"'));
+});
+
+test("merges custom className", () => {
+  const html = renderToString(createElement(Skeleton, { className: "h-24 w-full" }));
+  ok(html.includes("h-24 w-full"));
+  ok(html.includes("animate-pulse"));
+});
+
+// ---------------------------------------------------------------------------
+// Snackbar
+// ---------------------------------------------------------------------------
+
+console.log("\nSnackbar\n");
+
+import { SnackbarProvider } from "../../src/components/ui/Snackbar";
+
+test("SnackbarProvider renders children", () => {
+  const html = renderToString(
+    createElement(SnackbarProvider, null, createElement("p", null, "body")),
+  );
+  ok(html.includes("body"));
+});
+
+import { useSnackbar } from "../../src/components/ui/snackbar-context";
+
+function SnackbarConsumer() {
+  useSnackbar();
+  return null;
+}
+
+test("useSnackbar throws outside a provider", () => {
+  let threw = false;
+  try {
+    renderToString(createElement(SnackbarConsumer, null));
+  } catch {
+    threw = true;
+  }
+  ok(threw, "expected useSnackbar to throw outside a SnackbarProvider");
+});
