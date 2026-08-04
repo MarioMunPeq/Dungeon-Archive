@@ -214,10 +214,14 @@ function normalizePlayers(raw: unknown): PlayerReference[] {
 }
 
 export function normalize(
-  state: Omit<UserState, "adventures" | "activeAdventureId" | "players" | "onboardingComplete"> & {
+  state: Omit<
+    UserState,
+    "adventures" | "activeAdventureId" | "players" | "activePlayerId" | "onboardingComplete"
+  > & {
     adventures?: Adventure[];
     activeAdventureId?: string | null;
     players?: PlayerReference[];
+    activePlayerId?: string | null;
     onboardingComplete?: boolean;
   },
 ): UserState {
@@ -225,6 +229,11 @@ export function normalize(
   const activeAdventureId =
     state.activeAdventureId && adventures.some((a) => a.id === state.activeAdventureId)
       ? state.activeAdventureId
+      : null;
+  const players = normalizePlayers(state.players ?? []);
+  const activePlayerId =
+    state.activePlayerId && players.some((p) => p.id === state.activePlayerId)
+      ? state.activePlayerId
       : null;
 
   return {
@@ -235,7 +244,8 @@ export function normalize(
     session: normalizeSession(state.session),
     adventures,
     activeAdventureId,
-    players: normalizePlayers(state.players ?? []),
+    players,
+    activePlayerId,
     onboardingComplete: state.onboardingComplete === true,
   };
 }

@@ -39,6 +39,7 @@ interface PlayerActions {
   addPlayerReference: (data: Omit<PlayerReference, "id">) => string;
   updatePlayerReference: (id: string, data: PlayerReferenceUpdate) => void;
   removePlayerReference: (id: string) => void;
+  setActivePlayer: (id: string | null) => void;
 }
 
 interface UserActions {
@@ -166,6 +167,7 @@ export const userStore = create<UserStore>((set, get) => ({
   activeAdventureId: null,
   adventureEntitySet: new Set<string>(),
   players: [],
+  activePlayerId: null,
   onboardingComplete: false,
   _hasHydrated: false,
 
@@ -387,6 +389,11 @@ export const userStore = create<UserStore>((set, get) => ({
     schedulePersist(get);
   },
 
+  setActivePlayer: (id) => {
+    set({ activePlayerId: id });
+    schedulePersist(get);
+  },
+
   addPlayerReference: (data) => {
     const id = generateId();
     set((s) => {
@@ -452,7 +459,10 @@ export const userStore = create<UserStore>((set, get) => ({
   },
 
   removePlayerReference: (id) => {
-    set((s) => ({ players: s.players.filter((p) => p.id !== id) }));
+    set((s) => ({
+      players: s.players.filter((p) => p.id !== id),
+      activePlayerId: s.activePlayerId === id ? null : s.activePlayerId,
+    }));
     schedulePersist(get);
   },
 
@@ -469,6 +479,7 @@ export const userStore = create<UserStore>((set, get) => ({
       activeAdventureId: state.activeAdventureId,
       adventureEntitySet: updateActiveAdventureSet(state.adventures, state.activeAdventureId),
       players: state.players,
+      activePlayerId: state.activePlayerId,
       onboardingComplete: state.onboardingComplete,
     });
   },
@@ -486,6 +497,7 @@ export const userStore = create<UserStore>((set, get) => ({
       activeAdventureId: null,
       adventureEntitySet: new Set<string>(),
       players: [],
+      activePlayerId: null,
       onboardingComplete: false,
       _hasHydrated: false,
     });
@@ -508,6 +520,13 @@ export function useActiveAdventure(): Adventure | null {
   return userStore((s) => {
     if (!s.activeAdventureId) return null;
     return s.adventures.find((a) => a.id === s.activeAdventureId) ?? null;
+  });
+}
+
+export function useActivePlayer(): PlayerReference | null {
+  return userStore((s) => {
+    if (!s.activePlayerId) return null;
+    return s.players.find((p) => p.id === s.activePlayerId) ?? null;
   });
 }
 
@@ -559,6 +578,7 @@ function processPersistedState(state: UserState): UserState {
     adventures: state.adventures,
     activeAdventureId: state.activeAdventureId,
     players: state.players,
+    activePlayerId: state.activePlayerId,
     onboardingComplete: state.onboardingComplete === true,
   };
   return normalize(validated);
@@ -601,6 +621,7 @@ function replaceState(state: UserState): void {
     current.activeAdventureId === state.activeAdventureId &&
     adventuresEqual(current.adventures, state.adventures) &&
     playersEqual(current.players, state.players) &&
+    current.activePlayerId === state.activePlayerId &&
     current.onboardingComplete === state.onboardingComplete
   ) {
     return;

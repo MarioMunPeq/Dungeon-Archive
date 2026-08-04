@@ -12,6 +12,7 @@ export {
   useIsInSession,
   useIsInAdventure,
   useActiveAdventure,
+  useActivePlayer,
   useAdventureEntityIds,
   useFavoriteIds,
   useSessionIds,
