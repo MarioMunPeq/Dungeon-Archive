@@ -1,8 +1,79 @@
-import type { EntityCategory, Spell, Monster, MagicItem, Feat } from "@/types/compendium";
+import type {
+  EntityCategory,
+  Spell,
+  Monster,
+  MagicItem,
+  Feat,
+} from "@/types/compendium";
 import type { EntityCardData, FilterDefinition } from "./types";
 import { CATEGORY_REGISTRY, SOURCE_ORDER } from "./category-registry";
 export type { AnyEntity } from "./category-registry";
 export { SCHOOL_NAMES, formatMonsterType } from "./category-registry";
+
+export type CategorySort = "alphabetical" | "recent" | "level" | "cr";
+
+export interface SortOption {
+  readonly value: CategorySort;
+  readonly label: string;
+}
+
+export const SORT_OPTIONS: readonly SortOption[] = [
+  { value: "alphabetical", label: "Alphabetical" },
+  { value: "recent", label: "Recently Added" },
+];
+
+export function getSortOptions(category: EntityCategory): readonly SortOption[] {
+  const options = [...SORT_OPTIONS];
+  if (category === "spell") options.push({ value: "level", label: "Level" });
+  if (category === "monster") options.push({ value: "cr", label: "Challenge Rating" });
+  return options;
+}
+
+function crToNumber(cr: string): number {
+  if (cr.includes("/")) {
+    const [numerator, denominator] = cr.split("/").map(Number);
+    return (numerator ?? 0) / (denominator ?? 1);
+  }
+  const n = Number(cr);
+  return Number.isFinite(n) ? n : 0;
+}
+
+export function sortEntities(
+  _category: EntityCategory,
+  entities: readonly import("./category-registry").AnyEntity[],
+  sort: CategorySort | null,
+): readonly import("./category-registry").AnyEntity[] {
+  if (!sort) return entities;
+
+  const sorted = [...entities];
+  switch (sort) {
+    case "alphabetical":
+      return sorted.sort((a, b) => a.name.localeCompare(b.name));
+    case "recent":
+      return sorted.sort((a, b) => {
+        const pa = SOURCE_ORDER[a.source] ?? 99;
+        const pb = SOURCE_ORDER[b.source] ?? 99;
+        if (pa !== pb) return pb - pa;
+        return a.name.localeCompare(b.name);
+      });
+    case "level":
+      return sorted.sort((a, b) => {
+        const la = (a as Spell).level ?? 0;
+        const lb = (b as Spell).level ?? 0;
+        if (la !== lb) return la - lb;
+        return a.name.localeCompare(b.name);
+      });
+    case "cr":
+      return sorted.sort((a, b) => {
+        const ca = crToNumber((a as Monster).challengeRating);
+        const cb = crToNumber((b as Monster).challengeRating);
+        if (ca !== cb) return ca - cb;
+        return a.name.localeCompare(b.name);
+      });
+    default:
+      return sorted;
+  }
+}
 
 export function getEntitiesForCategory(
   category: EntityCategory,

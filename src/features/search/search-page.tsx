@@ -27,8 +27,8 @@ export function SearchPage() {
   }, [results, categoryFilter]);
 
   useEffect(() => {
-    if (initialQuery) inputRef.current?.focus();
-  }, [initialQuery]);
+    inputRef.current?.focus();
+  }, []);
 
   useEffect(() => {
     const current = searchParams.get("q") ?? "";

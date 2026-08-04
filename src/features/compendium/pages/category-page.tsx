@@ -7,12 +7,16 @@ import {
   getEntitiesForCategory,
   buildFilterDefs,
   applyFilters,
+  getSortOptions,
+  sortEntities,
   toCardData,
 } from "@/compendium";
+import type { CategorySort } from "@/compendium";
 import { FilterBar } from "../components/filter-bar";
 import { EntityList } from "../components/entity-list";
 import { Button } from "@/components/ui/Button";
-import { EntityBreadcrumbs } from "@/components/ui/breadcrumbs";
+import { SelectField } from "@/components/ui/SelectField";
+import { SearchField } from "@/components/ui/SearchField";
 
 interface CategoryPageProps {
   readonly category: EntityCategory;
@@ -23,6 +27,8 @@ export function CategoryPage({ category }: CategoryPageProps) {
 
   const allEntities = useMemo(() => getEntitiesForCategory(category), [category]);
   const filterDefs = useMemo(() => buildFilterDefs(category, allEntities), [category, allEntities]);
+  const sortOptions = useMemo(() => getSortOptions(category), [category]);
+
   const currentFilters = useMemo(() => {
     const filters: Record<string, string> = {};
     for (const def of filterDefs) {
@@ -32,14 +38,28 @@ export function CategoryPage({ category }: CategoryPageProps) {
     return filters;
   }, [searchParams, filterDefs]);
 
+  const query = searchParams.get("q") ?? "";
+  const sort = searchParams.get("sort") ?? "";
+
   const filtered = useMemo(
     () => applyFilters(category, allEntities, currentFilters),
     [category, allEntities, currentFilters],
   );
 
-  const cards = useMemo(() => filtered.map((e) => toCardData(category, e)), [category, filtered]);
+  const searched = useMemo(() => {
+    const q = query.trim().toLowerCase();
+    if (!q) return filtered;
+    return filtered.filter((entity) => entity.name.toLowerCase().includes(q));
+  }, [filtered, query]);
 
-  const handleFilterChange = (key: string, value: string) => {
+  const sorted = useMemo(
+    () => sortEntities(category, searched, (sort || null) as CategorySort | null),
+    [category, searched, sort],
+  );
+
+  const cards = useMemo(() => sorted.map((e) => toCardData(category, e)), [category, sorted]);
+
+  const updateParam = (key: string, value: string) => {
     setSearchParams(
       (prev) => {
         const next = new URLSearchParams(prev);
@@ -54,38 +74,58 @@ export function CategoryPage({ category }: CategoryPageProps) {
     );
   };
 
-  const hasActiveFilters = Object.keys(currentFilters).length > 0;
-
-  const handleClearFilters = () => {
+  const handleClearAll = () => {
     setSearchParams(new URLSearchParams(), { replace: true });
   };
 
+  const hasActiveQuery = query.trim().length > 0;
+  const hasActiveFilters = Object.keys(currentFilters).length > 0;
+  const isFiltered = hasActiveQuery || hasActiveFilters;
+
+  const label = categoryLabel(category);
+  const labelLower = categoryLabelSingular(category).toLowerCase();
+
   return (
-    <div className="space-y-6 px-4 py-6">
-      <EntityBreadcrumbs
-        crumbs={[{ label: "Home", to: "/" }, { label: categoryLabel(category) }]}
-      />
-      <div>
-        <h1 className="text-xl font-bold text-foreground">{categoryLabel(category)}</h1>
-        <p className="text-xs text-muted-foreground">
-          {allEntities.length} {categoryLabelSingular(category).toLowerCase()}
-          {filtered.length < allEntities.length ? ` (${filtered.length} filtered)` : ""}
-        </p>
+    <div>
+      <div className="sticky top-0 z-30 space-y-3 border-b border-border bg-background/95 px-4 pb-3 pt-4 backdrop-blur-sm">
+        <SearchField
+          value={query}
+          onChange={(value) => updateParam("q", value)}
+          ariaLabel={`Search ${label}`}
+          placeholder={`Search ${labelLower}\u2026`}
+        />
+        <FilterBar filters={filterDefs} values={currentFilters} onChange={updateParam} />
       </div>
 
-      <FilterBar filters={filterDefs} values={currentFilters} onChange={handleFilterChange} />
+      <div className="flex items-center justify-between gap-3 px-4 py-4">
+        <p className="text-sm text-muted-foreground">
+          <span className="font-medium text-foreground">{sorted.length}</span>
+          {isFiltered
+            ? ` of ${allEntities.length} ${labelLower}`
+            : ` ${labelLower}`}
+        </p>
+        <SelectField
+          value={sort}
+          options={sortOptions}
+          onChange={(value) => updateParam("sort", value)}
+          ariaLabel="Sort"
+          placeholder="Sort"
+        />
+      </div>
 
-      <EntityList
-        entities={cards}
-        emptyMessage={`No ${categoryLabelSingular(category).toLowerCase()} match your filters`}
-        emptyAction={
-          hasActiveFilters ? (
-            <Button variant="outline" size="sm" onClick={handleClearFilters}>
-              Clear filters
-            </Button>
-          ) : undefined
-        }
-      />
+      <div className="px-4 pb-4">
+        <EntityList
+          entities={cards}
+          emptyMessage={`No ${labelLower} match your search`}
+          emptyAction={
+            isFiltered ? (
+              <Button variant="outline" size="sm" onClick={handleClearAll}>
+                Clear filters
+              </Button>
+            ) : undefined
+          }
+        />
+      </div>
     </div>
   );
 }

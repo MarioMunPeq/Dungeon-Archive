@@ -6,6 +6,8 @@ import {
   buildFilterDefs,
   applyFilters,
   toCardData,
+  getSortOptions,
+  sortEntities,
   SCHOOL_NAMES,
 } from "../../src/compendium/category-display";
 import { loadCompendium } from "../../src/compendium/loader";
@@ -494,6 +496,70 @@ async function main() {
     const spells = getEntitiesForCategory("spell");
     const result = applyFilters("spell", spells, { unknown: "value" });
     strictEqual(result.length, spells.length);
+  });
+
+  test("getSortOptions provides alphabetical and recent for all categories", () => {
+    for (const cat of [
+      "spell",
+      "monster",
+      "equipment",
+      "condition",
+      "action",
+      "magicitem",
+      "feat",
+    ] as const) {
+      const options = getSortOptions(cat);
+      ok(options.some((o: { value: string }) => o.value === "alphabetical"));
+      ok(options.some((o: { value: string }) => o.value === "recent"));
+    }
+  });
+
+  test("getSortOptions adds level only for spells", () => {
+    const options = getSortOptions("spell");
+    ok(options.some((o: { value: string }) => o.value === "level"));
+    ok(!options.some((o: { value: string }) => o.value === "cr"));
+  });
+
+  test("getSortOptions adds cr only for monsters", () => {
+    const options = getSortOptions("monster");
+    ok(options.some((o: { value: string }) => o.value === "cr"));
+    ok(!options.some((o: { value: string }) => o.value === "level"));
+  });
+
+  test("sortEntities returns original order when sort is null", () => {
+    const spells = getEntitiesForCategory("spell");
+    const result = sortEntities("spell", spells, null);
+    deepEqual(result, spells);
+  });
+
+  test("sortEntities sorts alphabetically", () => {
+    const spells = getEntitiesForCategory("spell");
+    const result = sortEntities("spell", spells, "alphabetical");
+    for (let i = 1; i < result.length; i++) {
+      ok(result[i - 1]!.name.localeCompare(result[i]!.name) <= 0);
+    }
+  });
+
+  test("sortEntities sorts spells by level then name", () => {
+    const spells = getEntitiesForCategory("spell");
+    const result = sortEntities("spell", spells, "level");
+    for (let i = 1; i < result.length; i++) {
+      const prev = result[i - 1]! as import("../../src/types/compendium").Spell;
+      const curr = result[i]! as import("../../src/types/compendium").Spell;
+      ok(prev.level <= curr.level);
+    }
+  });
+
+  test("sortEntities sorts monsters by challenge rating", () => {
+    const monsters = getEntitiesForCategory("monster");
+    const result = sortEntities("monster", monsters, "cr");
+    const crValue = (m: import("../../src/types/compendium").Monster): number =>
+      m.challengeRating.includes("/")
+        ? Number(m.challengeRating.split("/")[0]) / Number(m.challengeRating.split("/")[1])
+        : Number(m.challengeRating);
+    for (let i = 1; i < result.length; i++) {
+      ok(crValue(result[i - 1]! as import("../../src/types/compendium").Monster) <= crValue(result[i]! as import("../../src/types/compendium").Monster));
+    }
   });
 
   console.log(

@@ -1,4 +1,6 @@
-import { forwardRef, type KeyboardEvent } from "react";
+import { forwardRef } from "react";
+import type { KeyboardEvent } from "react";
+import { SearchField } from "@/components/ui/SearchField";
 
 interface SearchInputProps {
   readonly value: string;
@@ -14,22 +16,18 @@ export const SearchInput = forwardRef<HTMLInputElement, SearchInputProps>(functi
 ) {
   return (
     <div className="px-4 pt-4">
-      <input
+      <SearchField
         ref={ref}
-        type="search"
         value={value}
-        onChange={(e) => onChange(e.target.value)}
+        onChange={onChange}
         onKeyDown={onKeyDown}
         placeholder="Search spells, equipment, conditions..."
-        autoComplete="off"
-        spellCheck={false}
-        aria-label="Search"
         role="combobox"
         aria-expanded={hasResults}
         aria-haspopup="listbox"
         aria-controls="search-results-listbox"
         aria-activedescendant={activeDescendantId}
-        className="w-full rounded-lg border border-border bg-surface px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground focus:border-focus focus:outline-none focus:ring-1 focus:ring-focus"
+        ariaLabel="Search"
       />
     </div>
   );

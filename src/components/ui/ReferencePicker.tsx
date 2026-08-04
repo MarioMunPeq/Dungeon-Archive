@@ -1,5 +1,6 @@
 import { useMemo, useRef, useEffect, useState } from "react";
 import { useDialog } from "./use-dialog";
+import { SearchField } from "./SearchField";
 
 export interface PickerCandidate {
   readonly canonicalId: string;
@@ -77,16 +78,12 @@ export function ReferencePicker({ title, candidates, onSelect, onClose }: Refere
         </button>
       </div>
       <div className="px-4 pt-3">
-        <input
+        <SearchField
           ref={inputRef}
-          type="search"
           value={query}
-          onChange={(e) => setQuery(e.target.value)}
+          onChange={setQuery}
           placeholder={`Search ${title.toLowerCase()}\u2026`}
-          autoComplete="off"
-          spellCheck={false}
-          aria-label={`Search ${title}`}
-          className="w-full rounded-lg border border-border bg-surface px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground focus:border-focus focus:outline-none focus:ring-1 focus:ring-focus"
+          ariaLabel={`Search ${title}`}
         />
       </div>
       <div className="flex-1 overflow-y-auto px-4 pb-8 pt-2">

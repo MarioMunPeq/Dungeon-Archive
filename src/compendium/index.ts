@@ -61,7 +61,10 @@ export {
   buildFilterDefs,
   applyFilters,
   toCardData,
+  getSortOptions,
+  sortEntities,
 } from "./category-display";
+export type { CategorySort, SortOption } from "./category-display";
 
 export type {
   Spell,
