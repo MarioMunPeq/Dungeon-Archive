@@ -38,6 +38,7 @@
   /* Typography scale */
   --font-family-sans: "Inter", ui-sans-serif, system-ui, -apple-system, sans-serif;
   --font-family-mono: "JetBrains Mono", ui-monospace, monospace;
+  --font-family-display: "Space Grotesk Variable", "Inter", ui-sans-serif, system-ui, sans-serif;
 
   --font-size-xs: 0.75rem;
   --font-size-sm: 0.875rem;
@@ -220,6 +221,11 @@
   .touch-comfortable {
     min-width: var(--size-touch-comfortable);
     min-height: var(--size-touch-comfortable);
+  }
+
+  /* Display family: first-level page titles only (spec 08). */
+  .font-display {
+    font-family: var(--font-family-display);
   }
 
   .hitbox-expand {

@@ -1,5 +1,6 @@
 import { getSpell, getCondition } from "@/compendium";
 import { ContentRenderer } from "@/components/content";
+import { Display } from "@/components/ui";
 
 const entities = [
   { category: "spell" as const, id: "phb|fireball", label: "Fireball" },
@@ -60,7 +61,7 @@ function ConditionSection({ id }: { id: string }) {
 export function DebugContentPage() {
   return (
     <div className="mx-auto max-w-2xl space-y-8 p-4">
-      <h1 className="text-xl font-bold text-foreground">Debug: Content Rendering</h1>
+      <Display className="text-xl font-bold">Debug: Content Rendering</Display>
       {entities.map((entity) => (
         <section
           key={entity.id}

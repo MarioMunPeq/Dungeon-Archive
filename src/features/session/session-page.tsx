@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { useSessionIds, userStore } from "@/user-state";
 import { entityRefFromCanonicalId, EntityReferenceRow, RowRemoveButton } from "@/components/entity";
 import type { EntityRef } from "@/components/entity";
-import { Button, ConfirmDialog } from "@/components/ui";
+import { Button, ConfirmDialog, Display } from "@/components/ui";
 
 export function SessionPage() {
   const sessionIds = useSessionIds();
@@ -32,7 +32,7 @@ export function SessionPage() {
     <div className="flex flex-col px-4 py-6">
       <div className="mb-6 flex items-center justify-between">
         <div>
-          <h1 className="text-xl font-bold text-foreground">Session</h1>
+          <Display className="text-xl font-bold">Session</Display>
           <p className="text-xs text-muted-foreground">
             {sessionIds.length === 0
               ? "No references in session"

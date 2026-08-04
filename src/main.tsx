@@ -3,6 +3,7 @@ import { createRoot } from "react-dom/client";
 import { loadCompendium } from "@/compendium";
 import { hydrate } from "@/user-state";
 import { App } from "@/app";
+import "@fontsource-variable/space-grotesk";
 import "./index.css";
 
 const rootElement = document.getElementById("root");

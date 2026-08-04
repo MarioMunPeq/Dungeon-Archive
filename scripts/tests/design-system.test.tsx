@@ -177,12 +177,27 @@ test("renders without wrapping", () => {
 
 console.log("\nTypography\n");
 
-import { Title, Subtitle, Heading, Body, Caption } from "../../src/components/ui/Typography";
+import { Title, Subtitle, Heading, Body, Caption, Display } from "../../src/components/ui/Typography";
 
 test("Title renders as h1 with text-2xl font-bold", () => {
   const html = renderToString(createElement(Title, null, "Big"));
   ok(html.includes("<h1"));
   ok(html.includes("text-2xl font-bold"));
+});
+
+test("Display renders as h1 with font-display", () => {
+  const html = renderToString(createElement(Display, null, "Page Title"));
+  ok(html.includes("<h1"));
+  ok(html.includes("font-display"));
+  ok(html.includes("text-2xl font-bold"));
+});
+
+test("Display merges className overrides", () => {
+  const html = renderToString(createElement(Display, { className: "text-xl font-semibold" }, "T"));
+  ok(html.includes("font-display"));
+  ok(html.includes("text-xl"));
+  ok(html.includes("font-semibold"));
+  ok(!html.includes("text-2xl"));
 });
 
 test("Subtitle renders as p with text-sm text-muted-foreground", () => {

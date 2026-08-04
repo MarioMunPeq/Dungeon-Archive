@@ -9,7 +9,7 @@ import { ReferencePicker } from "@/components/ui/ReferencePicker";
 import type { PickerCandidate } from "@/components/ui/ReferencePicker";
 import { InlineTextEditor } from "@/components/ui/InlineTextEditor";
 import { InlineTextareaEditor } from "@/components/ui/InlineTextareaEditor";
-import { Button, ChevronRightIcon, ConfirmDialog, SelectField, Stepper } from "@/components/ui";
+import { Button, ChevronRightIcon, ConfirmDialog, Display, SelectField, Stepper } from "@/components/ui";
 import { cn } from "@/lib/utils";
 
 type PickerKind = "spell" | "weapon" | "magicitem";
@@ -972,7 +972,7 @@ export function PartyPage() {
     <div className="flex flex-col px-4 py-6">
       <div className="mb-6 flex items-center justify-between">
         <div>
-          <h1 className="text-xl font-bold text-foreground">Party</h1>
+          <Display className="text-xl font-bold">Party</Display>
           <p className="text-xs text-muted-foreground">
             {players.length === 0
               ? "The values you consult every session"

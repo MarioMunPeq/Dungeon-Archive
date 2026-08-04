@@ -1,5 +1,5 @@
 import { useLocation, useNavigate } from "react-router-dom";
-import { Button, ChevronLeftIcon, SearchIcon } from "@/components/ui";
+import { Button, ChevronLeftIcon, Display, SearchIcon } from "@/components/ui";
 import { ROUTES } from "@/config/constants";
 import { getTopBarState } from "./top-bar-route";
 
@@ -25,7 +25,7 @@ export function TopBar() {
             <ChevronLeftIcon />
           </Button>
         )}
-        <h1 className="truncate text-lg font-semibold">{state.title}</h1>
+        <Display className="truncate text-lg font-semibold">{state.title}</Display>
       </div>
       <Button
         variant="ghost"

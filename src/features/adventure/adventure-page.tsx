@@ -3,7 +3,7 @@ import { useActiveAdventure, useAdventureEntityIds, userStore } from "@/user-sta
 import { InlineTextEditor } from "@/components/ui/InlineTextEditor";
 import { InlineTextareaEditor } from "@/components/ui/InlineTextareaEditor";
 import { Section } from "@/components/ui/Section";
-import { Button, ConfirmDialog } from "@/components/ui";
+import { Button, ConfirmDialog, Display } from "@/components/ui";
 import { entityRefFromCanonicalId, EntityReferenceRow, RowRemoveButton } from "@/components/entity";
 import type { EntityRef } from "@/components/entity";
 
@@ -124,7 +124,7 @@ export function AdventurePage() {
   if (!adventure) {
     return (
       <div className="flex flex-col px-4 py-6">
-        <h1 className="mb-6 text-xl font-bold text-foreground">Adventure</h1>
+        <Display className="mb-6 text-xl font-bold">Adventure</Display>
         <div className="flex flex-col items-center gap-4 px-2 py-10 text-center">
           <p className="w-full max-w-md text-sm text-muted-foreground">
             No active adventure yet. Create one to track your campaign notes, objectives, and
@@ -158,7 +158,7 @@ export function AdventurePage() {
                 className="text-lg font-bold"
               />
             ) : (
-              <h1 className="text-xl font-bold text-foreground">{adventure.title}</h1>
+              <Display className="text-xl font-bold">{adventure.title}</Display>
             )}
             <p className="mt-1 text-xs text-muted-foreground">
               {entities.length} reference

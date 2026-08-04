@@ -7,6 +7,14 @@ interface TypographyProps {
   readonly children?: ReactNode;
 }
 
+export function Display({ as: Tag = "h1", className, children }: TypographyProps) {
+  return (
+    <Tag className={cn("font-display text-2xl font-bold text-foreground", className)}>
+      {children}
+    </Tag>
+  );
+}
+
 export function Title({ as: Tag = "h1", className, children }: TypographyProps) {
   return <Tag className={cn("text-2xl font-bold text-foreground", className)}>{children}</Tag>;
 }

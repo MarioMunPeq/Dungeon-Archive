@@ -15,4 +15,4 @@ export { Stepper } from "./Stepper";
 export { SelectField } from "./SelectField";
 export type { SelectFieldOption } from "./SelectField";
 export { SearchField } from "./SearchField";
-export { Title, Subtitle, Heading, Body, Caption } from "./Typography";
+export { Title, Subtitle, Heading, Body, Caption, Display } from "./Typography";

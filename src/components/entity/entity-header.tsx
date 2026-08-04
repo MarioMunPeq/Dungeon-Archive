@@ -1,5 +1,5 @@
 import type { ReactNode } from "react";
-import { Title, Subtitle } from "@/components/ui/Typography";
+import { Display, Subtitle } from "@/components/ui/Typography";
 
 interface EntityHeaderProps {
   readonly name: string;
@@ -9,7 +9,7 @@ interface EntityHeaderProps {
 export function EntityHeader({ name, subtitle }: EntityHeaderProps) {
   return (
     <div className="space-y-1">
-      <Title>{name}</Title>
+      <Display>{name}</Display>
       <Subtitle>{subtitle}</Subtitle>
     </div>
   );
