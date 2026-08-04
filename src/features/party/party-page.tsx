@@ -9,7 +9,7 @@ import { ReferencePicker } from "@/components/ui/ReferencePicker";
 import type { PickerCandidate } from "@/components/ui/ReferencePicker";
 import { InlineTextEditor } from "@/components/ui/InlineTextEditor";
 import { InlineTextareaEditor } from "@/components/ui/InlineTextareaEditor";
-import { Button, ConfirmDialog, SelectField, Stepper } from "@/components/ui";
+import { Button, ChevronRightIcon, ConfirmDialog, SelectField, Stepper } from "@/components/ui";
 import { cn } from "@/lib/utils";
 
 type PickerKind = "spell" | "weapon" | "magicitem";
@@ -587,6 +587,7 @@ function PlayerReferenceCard({
   const [draft, setDraft] = useState("");
   const [picker, setPicker] = useState<PickerKind | null>(null);
   const [confirmRemove, setConfirmRemove] = useState(false);
+  const [detailsOpen, setDetailsOpen] = useState(autoEditName);
 
   const candidates = useMemo(() => (picker ? buildCandidates(picker) : []), [picker]);
 
@@ -662,7 +663,12 @@ function PlayerReferenceCard({
   const subclassOptions = reference.class ? (SUBCLASSES[reference.class] ?? []) : [];
 
   return (
-    <div className="flex flex-col gap-4 rounded-lg border border-border bg-surface p-4 animate-slide-up">
+    <div
+      className={cn(
+        "flex flex-col gap-4 rounded-lg border p-4 animate-slide-up",
+        current ? "border-primary/40 bg-primary/5" : "border-border bg-surface",
+      )}
+    >
       <div className="flex items-start justify-between gap-2">
         <div className="min-w-0 flex-1">
           {editing === "name" ? (
@@ -825,78 +831,99 @@ function PlayerReferenceCard({
         </div>
       </div>
 
-      <div className="grid grid-cols-3 gap-2 sm:grid-cols-6">
-        {ABILITY_KEYS.map((key) => (
-          <NumberCell
-            key={key}
-            label={ABILITY_LABELS[key]}
-            value={reference.abilityModifiers[key]}
-            min={-5}
-            max={10}
-            format={formatSigned}
-            onChange={(value) => update({ abilityModifiers: { [key]: value } })}
-            valueClassName="text-lg"
-          />
-        ))}
-      </div>
+      <button
+        type="button"
+        onClick={() => {
+          setPicker(null);
+          setDetailsOpen((open) => !open);
+        }}
+        aria-expanded={detailsOpen}
+        aria-controls={`details-${reference.id}`}
+        className="flex min-h-11 items-center justify-center gap-1.5 rounded-lg border border-border py-2 text-xs font-medium text-muted-foreground transition-colors duration-150 hover:bg-accent hover:text-foreground active:bg-accent/80"
+      >
+        <ChevronRightIcon
+          size="sm"
+          className={cn("transition-transform duration-150", detailsOpen && "rotate-90")}
+        />
+        {detailsOpen ? "Hide details" : "Edit details"}
+      </button>
 
-      <div className="flex flex-col gap-5">
-        <ReferenceGroup
-          title="Known Spells"
-          kind="spell"
-          ids={reference.knownSpellCanonicalIds}
-          onAdd={() => setPicker("spell")}
-          onRemove={(canonicalId) => removeReference("spell", canonicalId)}
-        />
-        <ReferenceGroup
-          title="Weapons"
-          kind="weapon"
-          ids={reference.weaponCanonicalIds}
-          onAdd={() => setPicker("weapon")}
-          onRemove={(canonicalId) => removeReference("weapon", canonicalId)}
-          getQuickStats={weaponStats}
-        />
-        <ReferenceGroup
-          title="Magic Items"
-          kind="magicitem"
-          ids={reference.magicItemCanonicalIds}
-          onAdd={() => setPicker("magicitem")}
-          onRemove={(canonicalId) => removeReference("magicitem", canonicalId)}
-        />
-      </div>
+      {detailsOpen && (
+        <div id={`details-${reference.id}`} className="flex flex-col gap-4">
+          <div className="grid grid-cols-3 gap-2 sm:grid-cols-6">
+            {ABILITY_KEYS.map((key) => (
+              <NumberCell
+                key={key}
+                label={ABILITY_LABELS[key]}
+                value={reference.abilityModifiers[key]}
+                min={-5}
+                max={10}
+                format={formatSigned}
+                onChange={(value) => update({ abilityModifiers: { [key]: value } })}
+                valueClassName="text-lg"
+              />
+            ))}
+          </div>
 
-      <div className="flex flex-col gap-1">
-        <span className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
-          Quick Note
-        </span>
-        {editing === "note" ? (
-          <InlineTextareaEditor
-            value={draft}
-            onChange={setDraft}
-            onSave={(value) => commitText("note", value)}
-            onCancel={() => setEditing(null)}
-            rows={2}
-            placeholder="One quick reminder…"
-            aria-label="Quick note"
-          />
-        ) : reference.note ? (
-          <button
-            type="button"
-            onClick={() => startEdit("note")}
-            className="rounded-lg text-left text-sm text-foreground transition-colors duration-150 hover:bg-accent/50"
-          >
-            {reference.note}
-          </button>
-        ) : (
-          <button
-            type="button"
-            onClick={() => startEdit("note")}
-            className="rounded-lg text-left text-xs text-muted-foreground transition-colors duration-150 hover:bg-accent/50"
-          >
-            Add a quick note…
-          </button>
-        )}
-      </div>
+          <div className="flex flex-col gap-5">
+            <ReferenceGroup
+              title="Known Spells"
+              kind="spell"
+              ids={reference.knownSpellCanonicalIds}
+              onAdd={() => setPicker("spell")}
+              onRemove={(canonicalId) => removeReference("spell", canonicalId)}
+            />
+            <ReferenceGroup
+              title="Weapons"
+              kind="weapon"
+              ids={reference.weaponCanonicalIds}
+              onAdd={() => setPicker("weapon")}
+              onRemove={(canonicalId) => removeReference("weapon", canonicalId)}
+              getQuickStats={weaponStats}
+            />
+            <ReferenceGroup
+              title="Magic Items"
+              kind="magicitem"
+              ids={reference.magicItemCanonicalIds}
+              onAdd={() => setPicker("magicitem")}
+              onRemove={(canonicalId) => removeReference("magicitem", canonicalId)}
+            />
+          </div>
+
+          <div className="flex flex-col gap-1">
+            <span className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+              Quick Note
+            </span>
+            {editing === "note" ? (
+              <InlineTextareaEditor
+                value={draft}
+                onChange={setDraft}
+                onSave={(value) => commitText("note", value)}
+                onCancel={() => setEditing(null)}
+                rows={2}
+                placeholder="One quick reminder…"
+                aria-label="Quick note"
+              />
+            ) : reference.note ? (
+              <button
+                type="button"
+                onClick={() => startEdit("note")}
+                className="rounded-lg text-left text-sm text-foreground transition-colors duration-150 hover:bg-accent/50"
+              >
+                {reference.note}
+              </button>
+            ) : (
+              <button
+                type="button"
+                onClick={() => startEdit("note")}
+                className="rounded-lg text-left text-xs text-muted-foreground transition-colors duration-150 hover:bg-accent/50"
+              >
+                Add a quick note…
+              </button>
+            )}
+          </div>
+        </div>
+      )}
 
       {picker && (
         <ReferencePicker
@@ -929,6 +956,13 @@ export function PartyPage() {
   const activePlayerId = userStore((s) => s.activePlayerId);
   const [creatingId, setCreatingId] = useState<string | null>(null);
 
+  const orderedPlayers = useMemo(() => {
+    if (!activePlayerId) return players;
+    const current = players.find((p) => p.id === activePlayerId);
+    if (!current) return players;
+    return [current, ...players.filter((p) => p.id !== activePlayerId)];
+  }, [players, activePlayerId]);
+
   const handleAdd = useCallback(() => {
     const id = userStore.getState().addPlayerReference(createEmptyReference());
     setCreatingId(id);
@@ -958,7 +992,7 @@ export function PartyPage() {
         </div>
       ) : (
         <div className="flex flex-col gap-4">
-          {players.map((player) => (
+          {orderedPlayers.map((player) => (
             <PlayerReferenceCard
               key={player.id}
               reference={player}
