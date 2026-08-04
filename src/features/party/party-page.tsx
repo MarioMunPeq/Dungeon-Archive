@@ -577,9 +577,11 @@ function ReferenceGroup({
 function PlayerReferenceCard({
   reference,
   autoEditName,
+  current,
 }: {
   reference: PlayerReference;
   autoEditName: boolean;
+  current: boolean;
 }) {
   const [editing, setEditing] = useState<"name" | "note" | null>(autoEditName ? "name" : null);
   const [draft, setDraft] = useState("");
@@ -713,34 +715,65 @@ function PlayerReferenceCard({
             </div>
           </div>
         </div>
-        <button
-          type="button"
-          onClick={() => setConfirmRemove(true)}
-          title={`Remove ${reference.name}`}
-          aria-label={`Remove ${reference.name}`}
-          className="hitbox-expand inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-lg text-muted-foreground transition-all duration-150 hover:bg-accent hover:text-foreground active:scale-90 active:bg-accent/80"
-        >
-          <svg
-            aria-hidden="true"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth={2}
-            className="h-4 w-4"
+        <div className="flex shrink-0 items-center gap-1">
+          <button
+            type="button"
+            onClick={() => userStore.getState().setActivePlayer(current ? null : reference.id)}
+            title={
+              current ? `Clear ${reference.name} as current` : `Set ${reference.name} as current`
+            }
+            aria-pressed={current}
+            className={cn(
+              "hitbox-expand inline-flex h-8 shrink-0 items-center rounded-lg border px-2 text-xs font-medium transition-all duration-150 active:scale-90",
+              current
+                ? "border-primary/40 bg-primary/10 text-primary hover:bg-primary/15"
+                : "border-border text-muted-foreground hover:bg-accent hover:text-foreground active:bg-accent/80",
+            )}
           >
-            <path d="M3 6h18" />
-            <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6" />
-            <path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />
-            <line x1="10" y1="11" x2="10" y2="17" />
-            <line x1="14" y1="11" x2="14" y2="17" />
-          </svg>
-        </button>
+            <svg
+              aria-hidden="true"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth={2}
+              className="h-3.5 w-3.5"
+            >
+              <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6" />
+              <path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18" />
+              <path d="M4 22h16" />
+              <path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22" />
+              <path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22" />
+              <path d="M18 2H6v7a6 6 0 0 0 12 0V2Z" />
+            </svg>
+            {current ? "Current" : "Set current"}
+          </button>
+          <button
+            type="button"
+            onClick={() => setConfirmRemove(true)}
+            title={`Remove ${reference.name}`}
+            aria-label={`Remove ${reference.name}`}
+            className="hitbox-expand inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-lg text-muted-foreground transition-all duration-150 hover:bg-accent hover:text-foreground active:scale-90 active:bg-accent/80"
+          >
+            <svg
+              aria-hidden="true"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth={2}
+              className="h-4 w-4"
+            >
+              <path d="M3 6h18" />
+              <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6" />
+              <path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />
+              <line x1="10" y1="11" x2="10" y2="17" />
+              <line x1="14" y1="11" x2="14" y2="17" />
+            </svg>
+          </button>
+        </div>
       </div>
 
       <div className="flex flex-col gap-2 rounded-lg bg-card px-3 py-3">
-        <div
-          className={cn("grid gap-2", hasSpell ? "grid-cols-3 sm:grid-cols-5" : "grid-cols-3")}
-        >
+        <div className={cn("grid gap-2", hasSpell ? "grid-cols-3 sm:grid-cols-5" : "grid-cols-3")}>
           <NumberCell
             label="AC"
             value={reference.combatValues.armorClass}
@@ -893,6 +926,7 @@ function PlayerReferenceCard({
 
 export function PartyPage() {
   const players = usePlayerReferences();
+  const activePlayerId = userStore((s) => s.activePlayerId);
   const [creatingId, setCreatingId] = useState<string | null>(null);
 
   const handleAdd = useCallback(() => {
@@ -929,6 +963,7 @@ export function PartyPage() {
               key={player.id}
               reference={player}
               autoEditName={player.id === creatingId}
+              current={player.id === activePlayerId}
             />
           ))}
         </div>

@@ -6,6 +6,7 @@ import {
   useRecentEntities,
   useSessionIds,
   useActiveAdventure,
+  useActivePlayer,
   usePlayerReferences,
 } from "@/user-state";
 import { entityRefFromCanonicalId, EntityCard } from "@/components/entity";
@@ -60,6 +61,7 @@ function SectionHeader({ title, to }: { title: string; to?: string }) {
 
 export function HomePage() {
   const adventure = useActiveAdventure();
+  const activePlayer = useActivePlayer();
   const sessionIds = useSessionIds(10);
   const recentIds = useRecentEntities(10);
 
@@ -106,14 +108,51 @@ export function HomePage() {
         </section>
       ) : (
         <>
+          {players.length > 0 && (
+            <section className="flex flex-col gap-3">
+              <SectionHeader title="Current Character" to="/party" />
+              {activePlayer ? (
+                <Link
+                  to="/party"
+                  className="flex items-center justify-between gap-2 rounded-lg border border-border bg-surface px-4 py-3 transition-colors hover:bg-accent active:bg-accent/80"
+                >
+                  <div className="flex min-w-0 flex-col gap-1">
+                    <span className="truncate text-sm font-semibold text-foreground">
+                      {activePlayer.name}
+                    </span>
+                    <span className="truncate text-xs text-muted-foreground">
+                      {activePlayer.class ? `${activePlayer.class} \u00B7 ` : ""}Lv{" "}
+                      {activePlayer.level}
+                    </span>
+                  </div>
+                  <span className="shrink-0 text-xs font-medium text-foreground-subtle">
+                    Current
+                  </span>
+                </Link>
+              ) : (
+                <Link
+                  to="/party"
+                  className="rounded-lg border border-dashed border-border px-4 py-3 text-xs text-muted-foreground transition-colors hover:bg-accent active:bg-accent/80"
+                >
+                  Choose a current character
+                </Link>
+              )}
+            </section>
+          )}
+
           {players.length > 0 ? (
             <section className="flex flex-col gap-3">
               <SectionHeader title="Party" to="/party" />
               <div className="flex flex-col gap-1 rounded-lg border border-border bg-surface px-4 py-2">
                 {shownPlayers.map((player) => (
                   <div key={player.id} className="flex items-center justify-between gap-2 py-2">
-                    <span className="truncate text-sm font-semibold text-foreground">
-                      {player.name}
+                    <span className="flex min-w-0 items-center gap-2 truncate text-sm font-semibold text-foreground">
+                      <span className="truncate">{player.name}</span>
+                      {player.id === activePlayer?.id && (
+                        <span className="shrink-0 rounded-full border border-border bg-muted px-2 py-0.5 text-[10px] font-medium uppercase tracking-wide text-muted-foreground">
+                          Current
+                        </span>
+                      )}
                     </span>
                     <span className="shrink-0 text-xs text-muted-foreground">
                       {player.class ? `${player.class} \u00B7 ` : ""}Lv {player.level}
