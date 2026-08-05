@@ -7,6 +7,7 @@ import {
   canonicalIdFromSlug,
   categoryLabel,
   categoryLabelSingular,
+  METADATA_SEPARATOR,
 } from "@/compendium";
 import type { EntityCategory } from "@/compendium";
 import { EntityDetailLayout } from "@/components/entity";
@@ -49,7 +50,7 @@ export function CompendiumPage({ category }: CompendiumPageProps) {
   return (
     <EntityDetailLayout
       name={resolved.selected.name}
-      subtitle={`${categoryLabelSingular(category)} \u00B7 ${formatSource(resolved.selected.source)}`}
+      subtitle={`${categoryLabelSingular(category)} ${METADATA_SEPARATOR} ${formatSource(resolved.selected.source)}`}
       source={resolved.selected.source}
       versions={resolved.versions}
       onSourceChange={handleSourceChange}

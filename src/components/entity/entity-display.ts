@@ -10,7 +10,7 @@ import type {
   EntityVersion,
   EntityCategory,
 } from "@/compendium";
-import { getEntity, sourcePriority, referenceToUrl, CATEGORY_REGISTRY } from "@/compendium";
+import { getEntity, sourcePriority, referenceToUrl, CATEGORY_REGISTRY, METADATA_SEPARATOR } from "@/compendium";
 
 interface EntityDisplayInfo {
   readonly title: string;
@@ -101,7 +101,7 @@ export function createSearchResultItems(
       category: preferred.entity.category,
       title: display.title,
       subtitle:
-        versionCount > 1 ? `${display.subtitle} \u00B7 ${versionCount} versions` : display.subtitle,
+        versionCount > 1 ? `${display.subtitle} ${METADATA_SEPARATOR} ${versionCount} versions` : display.subtitle,
       source: preferred.entity.source,
       to: referenceToUrl(preferred.entity.canonicalId),
       versions:

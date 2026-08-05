@@ -24,6 +24,8 @@ export type { SourceInfo } from "./source";
 
 export { formatDamage, formatDamageType } from "./damage";
 
+export { METADATA_SEPARATOR } from "./separator";
+
 export {
   getRelatedEntities,
   getRelatedEntityIds,

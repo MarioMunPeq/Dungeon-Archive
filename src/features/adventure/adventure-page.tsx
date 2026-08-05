@@ -1,5 +1,6 @@
 import { useState, useCallback } from "react";
 import { useActiveAdventure, useAdventureEntityIds, userStore } from "@/user-state";
+import { METADATA_SEPARATOR } from "@/compendium";
 import { InlineTextEditor } from "@/components/ui/InlineTextEditor";
 import { InlineTextareaEditor } from "@/components/ui/InlineTextareaEditor";
 import { Section } from "@/components/ui/Section";
@@ -162,8 +163,8 @@ export function AdventurePage() {
             )}
             <p className="mt-1 text-xs text-muted-foreground">
               {entities.length} reference
-              {entities.length === 1 ? "" : "s"} &middot; Updated {lastUpdated}
-              {adventure.archived && " \u00B7 Archived"}
+              {entities.length === 1 ? "" : "s"} {METADATA_SEPARATOR} Updated {lastUpdated}
+              {adventure.archived && ` ${METADATA_SEPARATOR} Archived`}
             </p>
           </div>
           <div className="flex shrink-0 items-center gap-1">

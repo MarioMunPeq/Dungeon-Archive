@@ -1,4 +1,4 @@
-import { SCHOOL_NAMES } from "@/compendium";
+import { SCHOOL_NAMES, METADATA_SEPARATOR } from "@/compendium";
 import type { Spell } from "@/compendium";
 import { Section } from "@/components/ui/Section";
 import { ContentRenderer } from "@/components/content";
@@ -17,7 +17,7 @@ export function SpellRenderer({ entity }: SpellRendererProps) {
   return (
     <Stack gap="lg">
       <Subtitle>
-        {levelText} &middot; {schoolName}
+        {levelText} {METADATA_SEPARATOR} {schoolName}
       </Subtitle>
 
       <EntityMetadataGrid>

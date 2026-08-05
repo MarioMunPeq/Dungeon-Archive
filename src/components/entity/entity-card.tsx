@@ -1,6 +1,6 @@
 import { memo } from "react";
 import { Link } from "react-router-dom";
-import { formatSource } from "@/compendium";
+import { formatSource, METADATA_SEPARATOR } from "@/compendium";
 import type { EntityCardData } from "@/compendium";
 import { FavoriteButton } from "@/components/ui/FavoriteButton";
 import { SessionButton } from "@/components/ui/SessionButton";
@@ -29,7 +29,7 @@ export const EntityCard = memo(function EntityCard({
       </div>
       <span className="text-xs text-muted-foreground">
         {categoryLabel}
-        {metadata ? ` \u00B7 ${metadata}` : ""}
+        {metadata ? ` ${METADATA_SEPARATOR} ${metadata}` : ""}
       </span>
       <span className="text-xs text-foreground-subtle">{formatSource(source)}</span>
     </Link>

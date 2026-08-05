@@ -19,6 +19,7 @@ import {
   getFeats,
 } from "./repository";
 import { formatSource } from "./source";
+import { METADATA_SEPARATOR } from "./separator";
 import { referenceToUrl } from "./reference";
 
 export type AnyEntity = Spell | Condition | Equipment | Action | Monster | MagicItem | Feat;
@@ -155,7 +156,7 @@ export const CATEGORY_REGISTRY: Record<EntityCategory, CategoryRegistration> = {
         name: spell.name,
         href: referenceToUrl(spell.canonicalId),
         categoryLabel: categoryLabelSingular("spell"),
-        metadata: `${level} \u00B7 ${school}`,
+        metadata: `${level} ${METADATA_SEPARATOR} ${school}`,
         source: spell.source,
         canonicalId: spell.canonicalId,
       };
@@ -164,7 +165,7 @@ export const CATEGORY_REGISTRY: Record<EntityCategory, CategoryRegistration> = {
       const spell = entity as Spell;
       const levelText = spell.level === 0 ? "Cantrip" : `Level ${spell.level}`;
       const schoolName = SCHOOL_NAMES[spell.school] ?? spell.school;
-      return `Spell \u00B7 ${levelText} \u00B7 ${schoolName} \u00B7 ${formatSource(spell.source)}`;
+      return `Spell ${METADATA_SEPARATOR} ${levelText} ${METADATA_SEPARATOR} ${schoolName} ${METADATA_SEPARATOR} ${formatSource(spell.source)}`;
     },
   },
 
@@ -199,14 +200,14 @@ export const CATEGORY_REGISTRY: Record<EntityCategory, CategoryRegistration> = {
         name: monster.name,
         href: referenceToUrl(monster.canonicalId),
         categoryLabel: categoryLabelSingular("monster"),
-        metadata: `CR ${monster.challengeRating} \u00B7 ${formatMonsterType(monster)}`,
+        metadata: `CR ${monster.challengeRating} ${METADATA_SEPARATOR} ${formatMonsterType(monster)}`,
         source: monster.source,
         canonicalId: monster.canonicalId,
       };
     },
     getSubtitle: (entity) => {
       const monster = entity as Monster;
-      return `Monster \u00B7 CR ${monster.challengeRating} \u00B7 ${formatMonsterType(monster)} \u00B7 ${formatSource(monster.source)}`;
+      return `Monster ${METADATA_SEPARATOR} CR ${monster.challengeRating} ${METADATA_SEPARATOR} ${formatMonsterType(monster)} ${METADATA_SEPARATOR} ${formatSource(monster.source)}`;
     },
   },
 
@@ -238,7 +239,7 @@ export const CATEGORY_REGISTRY: Record<EntityCategory, CategoryRegistration> = {
     },
     getSubtitle: (entity) => {
       const item = entity as Equipment;
-      return `Equipment \u00B7 ${formatEquipmentType(item.type)} \u00B7 ${formatSource(item.source)}`;
+      return `Equipment ${METADATA_SEPARATOR} ${formatEquipmentType(item.type)} ${METADATA_SEPARATOR} ${formatSource(item.source)}`;
     },
   },
 
@@ -255,7 +256,7 @@ export const CATEGORY_REGISTRY: Record<EntityCategory, CategoryRegistration> = {
       source: entity.source,
       canonicalId: entity.canonicalId,
     }),
-    getSubtitle: (entity) => `Condition \u00B7 ${formatSource(entity.source)}`,
+    getSubtitle: (entity) => `Condition ${METADATA_SEPARATOR} ${formatSource(entity.source)}`,
   },
 
   action: {
@@ -274,7 +275,7 @@ export const CATEGORY_REGISTRY: Record<EntityCategory, CategoryRegistration> = {
         canonicalId: action.canonicalId,
       };
     },
-    getSubtitle: (entity) => `Action \u00B7 ${formatSource(entity.source)}`,
+    getSubtitle: (entity) => `Action ${METADATA_SEPARATOR} ${formatSource(entity.source)}`,
   },
 
   magicitem: {
@@ -308,7 +309,7 @@ export const CATEGORY_REGISTRY: Record<EntityCategory, CategoryRegistration> = {
     },
     toCardData: (entity) => {
       const magic = entity as MagicItem;
-      const attunement = magic.requiresAttunement ? " \u00B7 Attunement" : "";
+      const attunement = magic.requiresAttunement ? ` ${METADATA_SEPARATOR} Attunement` : "";
       return {
         name: magic.name,
         href: referenceToUrl(magic.canonicalId),
@@ -320,8 +321,8 @@ export const CATEGORY_REGISTRY: Record<EntityCategory, CategoryRegistration> = {
     },
     getSubtitle: (entity) => {
       const magic = entity as MagicItem;
-      const attune = magic.requiresAttunement ? " \u00B7 Requires Attunement" : "";
-      return `Magic Item \u00B7 ${magic.rarity}${attune} \u00B7 ${formatSource(magic.source)}`;
+      const attune = magic.requiresAttunement ? ` ${METADATA_SEPARATOR} Requires Attunement` : "";
+      return `Magic Item ${METADATA_SEPARATOR} ${magic.rarity}${attune} ${METADATA_SEPARATOR} ${formatSource(magic.source)}`;
     },
   },
 
@@ -369,10 +370,10 @@ export const CATEGORY_REGISTRY: Record<EntityCategory, CategoryRegistration> = {
       const feat = entity as Feat;
       const prereq = feat.prerequisite ? `Prerequisite: ${feat.prerequisite}` : undefined;
       const repeatable = feat.repeatable ? "Repeatable" : undefined;
-      const extras = [prereq, repeatable].filter(Boolean).join(" \u00B7 ");
+      const extras = [prereq, repeatable].filter(Boolean).join(` ${METADATA_SEPARATOR} `);
       return extras
-        ? `Feat \u00B7 ${extras} \u00B7 ${formatSource(feat.source)}`
-        : `Feat \u00B7 ${formatSource(feat.source)}`;
+        ? `Feat ${METADATA_SEPARATOR} ${extras} ${METADATA_SEPARATOR} ${formatSource(feat.source)}`
+        : `Feat ${METADATA_SEPARATOR} ${formatSource(feat.source)}`;
     },
   },
 };

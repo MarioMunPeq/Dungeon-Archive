@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { categoryLabel, categoryLabelSingular, CATEGORY_REGISTRY } from "@/compendium";
+import { categoryLabel, categoryLabelSingular, CATEGORY_REGISTRY, METADATA_SEPARATOR } from "@/compendium";
 import type { EntityCategory, EntityCardData } from "@/compendium";
 import {
   useFavoriteIds,
@@ -121,7 +121,7 @@ export function HomePage() {
                       {activePlayer.name}
                     </span>
                     <span className="truncate text-xs text-muted-foreground">
-                      {activePlayer.class ? `${activePlayer.class} \u00B7 ` : ""}Lv{" "}
+                      {activePlayer.class ? `${activePlayer.class} ${METADATA_SEPARATOR} ` : ""}Lv{" "}
                       {activePlayer.level}
                     </span>
                   </div>
@@ -155,7 +155,7 @@ export function HomePage() {
                       )}
                     </span>
                     <span className="shrink-0 text-xs text-muted-foreground">
-                      {player.class ? `${player.class} \u00B7 ` : ""}Lv {player.level}
+                      {player.class ? `${player.class} ${METADATA_SEPARATOR} ` : ""}Lv {player.level}
                     </span>
                   </div>
                 ))}

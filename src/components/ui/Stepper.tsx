@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from "react";
-import type { PointerEvent } from "react";
+import type { ReactNode, PointerEvent } from "react";
 import { cn } from "@/lib/utils";
 import { InlineNumberEditor } from "./InlineNumberEditor";
 
@@ -57,7 +57,9 @@ export function Stepper({
   const applyDelta = useCallback(
     (delta: number) => {
       const next = Math.max(min, Math.min(max, valueRef.current + delta));
-      if (next !== valueRef.current) onChange(next);
+      if (next === valueRef.current) return;
+      setDraft(String(next));
+      onChange(next);
     },
     [min, max, onChange],
   );
@@ -82,58 +84,93 @@ export function Stepper({
     setEditing(false);
   }, [draft, min, max, onChange]);
 
-  const controlMotion = hiddenControls
-    ? "transition-opacity duration-150 ease-out"
-    : variant === "ghost"
-      ? "transition-all duration-150 active:scale-90 active:text-foreground"
-      : "transition-all duration-150 active:scale-90";
-
   const controlClass =
     variant === "ghost"
-      ? cn(
-          "hitbox-expand flex h-7 w-7 shrink-0 select-none items-center justify-center rounded-lg text-muted-foreground active:scale-90 disabled:cursor-default disabled:text-disabled-foreground disabled:active:scale-100 hover:text-foreground",
-          controlMotion,
-          hiddenControls &&
-            "opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto group-focus-within:opacity-100 group-focus-within:pointer-events-auto",
-        )
-      : cn(
-          "hitbox-expand flex h-9 w-9 shrink-0 select-none items-center justify-center rounded-lg border border-border bg-background text-base font-semibold text-foreground disabled:cursor-default disabled:bg-disabled disabled:text-disabled-foreground disabled:active:scale-100 hover:border-border-strong",
-          controlMotion,
-        );
+      ? "hitbox-expand flex h-8 w-8 shrink-0 select-none items-center justify-center rounded-lg text-muted-foreground transition-all duration-150 active:scale-90 active:text-foreground disabled:cursor-default disabled:text-disabled-foreground disabled:active:scale-100 hover:text-foreground"
+      : "hitbox-expand flex h-9 w-9 shrink-0 select-none items-center justify-center rounded-lg border border-border bg-background text-base font-semibold text-foreground transition-all duration-150 active:scale-90 disabled:cursor-default disabled:bg-disabled disabled:text-disabled-foreground disabled:active:scale-100 hover:border-border-strong";
 
   const iconClass = "h-4 w-4";
 
-  const valueButtonClass =
-    variant === "ghost"
-      ? cn(
-          "flex h-11 min-w-0 flex-1 select-none items-center justify-center rounded-lg font-bold tabular-nums text-foreground transition-all duration-150 active:scale-95 hover:bg-accent/60",
+  const stepButton = (delta: number, key: string, icon: ReactNode) => (
+    <button
+      key={key}
+      type="button"
+      onPointerDown={beginRepeat(delta)}
+      onPointerUp={stopRepeat}
+      onPointerLeave={stopRepeat}
+      onPointerCancel={stopRepeat}
+      disabled={delta < 0 ? value <= min : value >= max}
+      aria-label={delta < 0 ? `Decrease ${label}` : `Increase ${label}`}
+      className={controlClass}
+    >
+      <svg
+        aria-hidden="true"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth={2.5}
+        className={iconClass}
+      >
+        {icon}
+      </svg>
+    </button>
+  );
+
+  const minusIcon = <line x1="5" y1="12" x2="19" y2="12" />;
+  const plusIcon = (
+    <>
+      <line x1="12" y1="5" x2="12" y2="19" />
+      <line x1="5" y1="12" x2="19" y2="12" />
+    </>
+  );
+
+  const openEditor = () => {
+    setDraft(String(value));
+    setEditing(true);
+  };
+
+  if (hiddenControls && !editing) {
+    return (
+      <button
+        type="button"
+        onClick={openEditor}
+        aria-label={`Edit ${label}`}
+        className={cn(
+          "flex h-11 w-full min-w-0 select-none items-center justify-center rounded-lg font-bold tabular-nums text-foreground transition-all duration-150 active:scale-95 hover:bg-accent/60",
+          className,
           valueClassName,
-        )
-      : "flex h-11 min-w-0 flex-1 select-none items-center justify-center rounded-lg border border-border bg-background px-1 text-base font-semibold tabular-nums text-foreground transition-all duration-150 active:scale-95 hover:border-border-strong";
+        )}
+      >
+        {format(value)}
+      </button>
+    );
+  }
+
+  if (hiddenControls && editing) {
+    return (
+      <div className={cn("flex w-full flex-col items-center gap-1", className)}>
+        <InlineNumberEditor
+          value={draft}
+          onChange={setDraft}
+          onSave={commitDraft}
+          onCancel={() => setEditing(false)}
+          aria-label={`Edit ${label}`}
+          className={cn(
+            "h-10 w-full px-2 text-center text-lg font-bold tabular-nums",
+            valueClassName,
+          )}
+        />
+        <div className="flex items-center gap-2">
+          {stepButton(-1, "decrease", minusIcon)}
+          {stepButton(1, "increase", plusIcon)}
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className={cn("flex w-full items-center gap-1", className)}>
-      <button
-        type="button"
-        onPointerDown={beginRepeat(-1)}
-        onPointerUp={stopRepeat}
-        onPointerLeave={stopRepeat}
-        onPointerCancel={stopRepeat}
-        disabled={value <= min}
-        aria-label={`Decrease ${label}`}
-        className={controlClass}
-      >
-        <svg
-          aria-hidden="true"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth={2.5}
-          className={iconClass}
-        >
-          <line x1="5" y1="12" x2="19" y2="12" />
-        </svg>
-      </button>
+      {stepButton(-1, "decrease", minusIcon)}
       {editing ? (
         <InlineNumberEditor
           value={draft}
@@ -146,38 +183,19 @@ export function Stepper({
       ) : (
         <button
           type="button"
-          onClick={() => {
-            setDraft(String(value));
-            setEditing(true);
-          }}
+          onClick={openEditor}
           aria-label={`Edit ${label}`}
-          className={valueButtonClass}
+          className={cn(
+            "flex h-11 min-w-0 flex-1 select-none items-center justify-center rounded-lg font-bold tabular-nums text-foreground transition-all duration-150 active:scale-95 hover:bg-accent/60",
+            variant === "bordered" &&
+              "border border-border bg-background px-1 text-base font-semibold hover:border-border-strong",
+            valueClassName,
+          )}
         >
           {format(value)}
         </button>
       )}
-      <button
-        type="button"
-        onPointerDown={beginRepeat(1)}
-        onPointerUp={stopRepeat}
-        onPointerLeave={stopRepeat}
-        onPointerCancel={stopRepeat}
-        disabled={value >= max}
-        aria-label={`Increase ${label}`}
-        className={controlClass}
-      >
-        <svg
-          aria-hidden="true"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth={2.5}
-          className={iconClass}
-        >
-          <line x1="12" y1="5" x2="12" y2="19" />
-          <line x1="5" y1="12" x2="19" y2="12" />
-        </svg>
-      </button>
+      {stepButton(1, "increase", plusIcon)}
     </div>
   );
 }

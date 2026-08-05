@@ -2,14 +2,20 @@ import { useState, useCallback, useMemo } from "react";
 import { Link } from "react-router-dom";
 import { usePlayerReferences, userStore } from "@/user-state";
 import type { PlayerReference, PlayerReferenceUpdate } from "@/user-state";
-import { formatDamage, getEntitiesForCategory, SCHOOL_NAMES, resolveEntity } from "@/compendium";
+import {
+  formatDamage,
+  getEntitiesForCategory,
+  SCHOOL_NAMES,
+  resolveEntity,
+  METADATA_SEPARATOR,
+} from "@/compendium";
 import type { ContentBlock, Equipment, MagicItem, Spell } from "@/compendium";
 import { entityRefFromCanonicalId, EntityReferenceRow, RowRemoveButton } from "@/components/entity";
 import { ReferencePicker } from "@/components/ui/ReferencePicker";
 import type { PickerCandidate } from "@/components/ui/ReferencePicker";
 import { InlineTextEditor } from "@/components/ui/InlineTextEditor";
 import { InlineTextareaEditor } from "@/components/ui/InlineTextareaEditor";
-import { Button, ChevronRightIcon, ConfirmDialog, Display, SelectField, Stepper } from "@/components/ui";
+import { Button, ConfirmDialog, Display, SelectField, Stepper } from "@/components/ui";
 import { cn } from "@/lib/utils";
 
 type PickerKind = "spell" | "weapon" | "magicitem";
@@ -176,7 +182,7 @@ function buildCandidates(kind: PickerKind): PickerCandidate[] {
         push({
           canonicalId: s.canonicalId,
           name: s.name,
-          subtitle: `${s.level === 0 ? "Cantrip" : `Level ${s.level}`} \u00B7 ${SCHOOL_NAMES[s.school] ?? s.school}`,
+          subtitle: `${s.level === 0 ? "Cantrip" : `Level ${s.level}`} ${METADATA_SEPARATOR} ${SCHOOL_NAMES[s.school] ?? s.school}`,
         });
       }
       break;
@@ -188,7 +194,7 @@ function buildCandidates(kind: PickerKind): PickerCandidate[] {
         push({
           canonicalId: e.canonicalId,
           name: e.name,
-          subtitle: dmg ? `${e.type} \u00B7 ${dmg}` : e.type,
+          subtitle: dmg ? `${e.type} ${METADATA_SEPARATOR} ${dmg}` : e.type,
         });
       }
       break;
@@ -204,7 +210,7 @@ function buildCandidates(kind: PickerKind): PickerCandidate[] {
 }
 
 function formatSigned(value: number): string {
-  return value > 0 ? `+${value}` : `${value}`;
+  return value >= 0 ? `+${value}` : `${value}`;
 }
 
 function weaponStats(canonicalId: string): string | undefined {
@@ -217,7 +223,7 @@ function weaponStats(canonicalId: string): string | undefined {
 function spellSubtitle(entity: Spell | undefined): string | undefined {
   if (!entity) return undefined;
   const levelText = entity.level === 0 ? "Cantrip" : `Level ${entity.level}`;
-  return `${levelText} \u00B7 ${SCHOOL_NAMES[entity.school] ?? entity.school}`;
+  return `${levelText} ${METADATA_SEPARATOR} ${SCHOOL_NAMES[entity.school] ?? entity.school}`;
 }
 
 function weaponSubtitle(entity: Equipment | undefined): string | undefined {
@@ -251,7 +257,9 @@ function WeaponPreview({ item, href }: { item: Equipment; href: string }) {
     <div className="flex flex-col gap-2 rounded-lg bg-card px-3 py-2 animate-slide-up">
       {damage && <p className="text-base font-bold tabular-nums text-foreground">{damage}</p>}
       {properties.length > 0 && (
-        <p className="text-xs text-foreground-subtle">{properties.join(" \u00B7 ")}</p>
+        <p className="text-xs text-foreground-subtle">
+          {properties.join(` ${METADATA_SEPARATOR} `)}
+        </p>
       )}
       <Link
         to={href}
@@ -270,17 +278,15 @@ function SpellPreview({ spell, href }: { spell: Spell; href: string }) {
   const flags = [spell.concentration && "Concentration", spell.ritual && "Ritual"].filter(
     Boolean,
   ) as string[];
-  const rest = [spell.castingTime, spell.range, spell.duration].filter(Boolean);
+  const details = [spell.castingTime, spell.range, spell.duration].filter(Boolean);
   return (
     <div className="flex flex-col gap-2 rounded-lg bg-card px-3 py-2 animate-slide-up">
-      <p className="text-xs leading-relaxed">
-        <span className="font-semibold text-foreground">
-          {levelText} \u00B7 {school}
-        </span>
-        {rest.length > 0 && (
-          <span className="text-foreground-subtle"> \u00B7 {rest.join(" \u00B7 ")}</span>
-        )}
+      <p className="text-xs font-semibold text-foreground">
+        {levelText} {METADATA_SEPARATOR} {school}
       </p>
+      {details.length > 0 && (
+        <p className="text-xs text-foreground-subtle">{details.join(` ${METADATA_SEPARATOR} `)}</p>
+      )}
       {flags.length > 0 && (
         <div className="flex items-center gap-1">
           {flags.map((flag) => (
@@ -376,7 +382,7 @@ function NumberCell({
   valueClassName?: string;
 }) {
   return (
-    <div className="group flex min-w-0 flex-col items-center gap-1">
+    <div className="flex min-w-0 flex-col items-center gap-1">
       <ValueLabel onClear={onClear}>{label}</ValueLabel>
       <Stepper
         variant="ghost"
@@ -420,7 +426,7 @@ function OptionalNumberCell({
           type="button"
           onClick={() => onCommit(initial)}
           aria-label={`Set ${label}`}
-          className="hitbox-expand flex h-9 w-full select-none items-center justify-center rounded-lg text-muted-foreground transition-all duration-150 hover:text-foreground active:scale-95"
+          className="hitbox-expand flex h-11 w-full select-none items-center justify-center rounded-lg text-muted-foreground transition-all duration-150 hover:text-foreground active:scale-95"
         >
           <svg
             aria-hidden="true"
@@ -574,6 +580,14 @@ function ReferenceGroup({
   );
 }
 
+function SectionLabel({ children }: { children: string }) {
+  return (
+    <span className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+      {children}
+    </span>
+  );
+}
+
 function PlayerReferenceCard({
   reference,
   autoEditName,
@@ -587,7 +601,6 @@ function PlayerReferenceCard({
   const [draft, setDraft] = useState("");
   const [picker, setPicker] = useState<PickerKind | null>(null);
   const [confirmRemove, setConfirmRemove] = useState(false);
-  const [detailsOpen, setDetailsOpen] = useState(autoEditName);
 
   const candidates = useMemo(() => (picker ? buildCandidates(picker) : []), [picker]);
 
@@ -663,12 +676,7 @@ function PlayerReferenceCard({
   const subclassOptions = reference.class ? (SUBCLASSES[reference.class] ?? []) : [];
 
   return (
-    <div
-      className={cn(
-        "flex flex-col gap-4 rounded-lg border p-4 animate-slide-up",
-        current ? "border-primary/40 bg-primary/5" : "border-border bg-surface",
-      )}
-    >
+    <div className="flex flex-col gap-4 rounded-lg border border-border bg-surface p-4 animate-slide-up">
       <div className="flex items-start justify-between gap-2">
         <div className="min-w-0 flex-1">
           {editing === "name" ? (
@@ -681,13 +689,20 @@ function PlayerReferenceCard({
               className="text-base font-bold"
             />
           ) : (
-            <button
-              type="button"
-              onClick={() => startEdit("name")}
-              className="-mx-1 rounded-lg px-1 text-base font-bold text-foreground transition-colors duration-150 hover:bg-accent/50 active:bg-accent/80"
-            >
-              {reference.name}
-            </button>
+            <div className="flex flex-wrap items-center gap-x-2 gap-y-2">
+              <button
+                type="button"
+                onClick={() => startEdit("name")}
+                className="-mx-1 rounded-lg px-1 text-base font-bold text-foreground transition-colors duration-150 hover:bg-accent/50 active:bg-accent/80"
+              >
+                {reference.name}
+              </button>
+              {current && (
+                <span className="rounded-full border border-border bg-muted px-2 py-1 text-xs font-medium uppercase tracking-wide text-muted-foreground">
+                  Current
+                </span>
+              )}
+            </div>
           )}
           <div className="mt-2 flex flex-wrap items-center gap-x-2 gap-y-2">
             <SelectField
@@ -710,12 +725,13 @@ function PlayerReferenceCard({
               </span>
               <Stepper
                 variant="ghost"
+                hiddenControls
                 value={reference.level}
                 min={1}
                 max={20}
                 onChange={(value) => update({ level: value })}
                 label="Level"
-                className="w-28"
+                className="w-20"
               />
             </div>
           </div>
@@ -729,10 +745,10 @@ function PlayerReferenceCard({
             }
             aria-pressed={current}
             className={cn(
-              "hitbox-expand inline-flex h-8 shrink-0 items-center rounded-lg border px-2 text-xs font-medium transition-all duration-150 active:scale-90",
+              "hitbox-expand inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-lg transition-all duration-150 active:scale-90",
               current
-                ? "border-primary/40 bg-primary/10 text-primary hover:bg-primary/15"
-                : "border-border text-muted-foreground hover:bg-accent hover:text-foreground active:bg-accent/80",
+                ? "text-primary hover:bg-primary/10"
+                : "text-muted-foreground hover:bg-accent hover:text-foreground active:bg-accent/80",
             )}
           >
             <svg
@@ -750,7 +766,6 @@ function PlayerReferenceCard({
               <path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22" />
               <path d="M18 2H6v7a6 6 0 0 0 12 0V2Z" />
             </svg>
-            {current ? "Current" : "Set current"}
           </button>
           <button
             type="button"
@@ -797,7 +812,7 @@ function PlayerReferenceCard({
             valueClassName="text-3xl"
           />
           <NumberCell
-            label="Perc"
+            label="Passive"
             value={reference.combatValues.passivePerception}
             min={0}
             max={40}
@@ -830,99 +845,79 @@ function PlayerReferenceCard({
         </div>
       </div>
 
-      <button
-        type="button"
-        onClick={() => {
-          setPicker(null);
-          setDetailsOpen((open) => !open);
-        }}
-        aria-expanded={detailsOpen}
-        aria-controls={`details-${reference.id}`}
-        className="flex min-h-11 items-center justify-center gap-2 rounded-lg border border-border py-2 text-xs font-medium text-muted-foreground transition-colors duration-150 hover:bg-accent hover:text-foreground active:bg-accent/80"
-      >
-        <ChevronRightIcon
-          size="sm"
-          className={cn("transition-transform duration-150", detailsOpen && "rotate-90")}
-        />
-        {detailsOpen ? "Hide details" : "Edit details"}
-      </button>
-
-      {detailsOpen && (
-        <div id={`details-${reference.id}`} className="flex flex-col gap-4">
-          <div className="grid grid-cols-3 gap-2 sm:grid-cols-6">
-            {ABILITY_KEYS.map((key) => (
-              <NumberCell
-                key={key}
-                label={ABILITY_LABELS[key]}
-                value={reference.abilityModifiers[key]}
-                min={-5}
-                max={10}
-                format={formatSigned}
-                onChange={(value) => update({ abilityModifiers: { [key]: value } })}
-                valueClassName="text-lg"
-              />
-            ))}
-          </div>
-
-          <div className="flex flex-col gap-5">
-            <ReferenceGroup
-              title="Known Spells"
-              kind="spell"
-              ids={reference.knownSpellCanonicalIds}
-              onAdd={() => setPicker("spell")}
-              onRemove={(canonicalId) => removeReference("spell", canonicalId)}
+      <div className="flex flex-col gap-2">
+        <SectionLabel>Ability Modifiers</SectionLabel>
+        <div className="grid grid-cols-3 gap-2 sm:grid-cols-6">
+          {ABILITY_KEYS.map((key) => (
+            <NumberCell
+              key={key}
+              label={ABILITY_LABELS[key]}
+              value={reference.abilityModifiers[key]}
+              min={-5}
+              max={10}
+              format={formatSigned}
+              onChange={(value) => update({ abilityModifiers: { [key]: value } })}
+              valueClassName="text-lg"
             />
-            <ReferenceGroup
-              title="Weapons"
-              kind="weapon"
-              ids={reference.weaponCanonicalIds}
-              onAdd={() => setPicker("weapon")}
-              onRemove={(canonicalId) => removeReference("weapon", canonicalId)}
-              getQuickStats={weaponStats}
-            />
-            <ReferenceGroup
-              title="Magic Items"
-              kind="magicitem"
-              ids={reference.magicItemCanonicalIds}
-              onAdd={() => setPicker("magicitem")}
-              onRemove={(canonicalId) => removeReference("magicitem", canonicalId)}
-            />
-          </div>
-
-          <div className="flex flex-col gap-1">
-            <span className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
-              Quick Note
-            </span>
-            {editing === "note" ? (
-              <InlineTextareaEditor
-                value={draft}
-                onChange={setDraft}
-                onSave={(value) => commitText("note", value)}
-                onCancel={() => setEditing(null)}
-                rows={2}
-                placeholder="One quick reminder…"
-                aria-label="Quick note"
-              />
-            ) : reference.note ? (
-              <button
-                type="button"
-                onClick={() => startEdit("note")}
-                className="rounded-lg text-left text-sm text-foreground transition-colors duration-150 hover:bg-accent/50"
-              >
-                {reference.note}
-              </button>
-            ) : (
-              <button
-                type="button"
-                onClick={() => startEdit("note")}
-                className="rounded-lg text-left text-xs text-muted-foreground transition-colors duration-150 hover:bg-accent/50"
-              >
-                Add a quick note…
-              </button>
-            )}
-          </div>
+          ))}
         </div>
-      )}
+      </div>
+
+      <div className="flex flex-col gap-5">
+        <ReferenceGroup
+          title="Known Spells"
+          kind="spell"
+          ids={reference.knownSpellCanonicalIds}
+          onAdd={() => setPicker("spell")}
+          onRemove={(canonicalId) => removeReference("spell", canonicalId)}
+        />
+        <ReferenceGroup
+          title="Weapons"
+          kind="weapon"
+          ids={reference.weaponCanonicalIds}
+          onAdd={() => setPicker("weapon")}
+          onRemove={(canonicalId) => removeReference("weapon", canonicalId)}
+          getQuickStats={weaponStats}
+        />
+        <ReferenceGroup
+          title="Magic Items"
+          kind="magicitem"
+          ids={reference.magicItemCanonicalIds}
+          onAdd={() => setPicker("magicitem")}
+          onRemove={(canonicalId) => removeReference("magicitem", canonicalId)}
+        />
+      </div>
+
+      <div className="flex flex-col gap-1">
+        <SectionLabel>Quick Note</SectionLabel>
+        {editing === "note" ? (
+          <InlineTextareaEditor
+            value={draft}
+            onChange={setDraft}
+            onSave={(value) => commitText("note", value)}
+            onCancel={() => setEditing(null)}
+            rows={2}
+            placeholder="One quick reminder…"
+            aria-label="Quick note"
+          />
+        ) : reference.note ? (
+          <button
+            type="button"
+            onClick={() => startEdit("note")}
+            className="rounded-lg text-left text-sm text-foreground transition-colors duration-150 hover:bg-accent/50"
+          >
+            {reference.note}
+          </button>
+        ) : (
+          <button
+            type="button"
+            onClick={() => startEdit("note")}
+            className="rounded-lg text-left text-xs text-muted-foreground transition-colors duration-150 hover:bg-accent/50"
+          >
+            Add a quick note…
+          </button>
+        )}
+      </div>
 
       {picker && (
         <ReferencePicker

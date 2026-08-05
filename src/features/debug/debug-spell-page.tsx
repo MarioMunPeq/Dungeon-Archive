@@ -1,4 +1,4 @@
-import { getSpell, getVersions, formatSource } from "@/compendium";
+import { getSpell, getVersions, formatSource, METADATA_SEPARATOR } from "@/compendium";
 import { EntityDetailLayout } from "@/components/entity";
 import { SpellRenderer } from "@/features/compendium/renderers/spell-renderer";
 
@@ -12,7 +12,7 @@ export function DebugSpellPage() {
   return (
     <EntityDetailLayout
       name={spell.name}
-      subtitle={`${levelText} \u00B7 ${formatSource(spell.source)}`}
+      subtitle={`${levelText} ${METADATA_SEPARATOR} ${formatSource(spell.source)}`}
       source={spell.source}
       versions={versions}
       onSourceChange={() => {}}
