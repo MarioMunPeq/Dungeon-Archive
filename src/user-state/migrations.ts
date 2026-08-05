@@ -117,6 +117,45 @@ const migrations: Record<number, (state: Record<string, unknown>) => Record<stri
     version: 9,
     activePlayerId: typeof raw.activePlayerId === "string" ? raw.activePlayerId : null,
   }),
+  10: (raw) => {
+    const players = Array.isArray(raw.players)
+      ? raw.players.map((p) => {
+          if (!p || typeof p !== "object") return p;
+          const player = { ...p } as Record<string, unknown>;
+          const scores = (player.abilityScores && typeof player.abilityScores === "object"
+            ? player.abilityScores
+            : {}) as Record<string, unknown>;
+          const mods = (player.abilityModifiers && typeof player.abilityModifiers === "object"
+            ? player.abilityModifiers
+            : {}) as Record<string, unknown>;
+          const scoreOf = (key: string): number => {
+            if (typeof scores[key] === "number") return scores[key];
+            const mod =
+              typeof mods[key] === "number" ? Math.floor(mods[key] as number) : 0;
+            return Math.max(1, Math.min(30, mod * 2 + 10));
+          };
+          player.abilityScores = {
+            strength: scoreOf("strength"),
+            dexterity: scoreOf("dexterity"),
+            constitution: scoreOf("constitution"),
+            intelligence: scoreOf("intelligence"),
+            wisdom: scoreOf("wisdom"),
+            charisma: scoreOf("charisma"),
+          };
+          delete player.abilityModifiers;
+          if (!player.hitPoints || typeof player.hitPoints !== "object") {
+            player.hitPoints = { current: 10, max: 10 };
+          }
+          return player;
+        })
+      : [];
+    return {
+      ...raw,
+      version: 10,
+      players,
+      beginnerMode: typeof raw.beginnerMode === "boolean" ? raw.beginnerMode : true,
+    };
+  },
 };
 
 export function migrate(raw: unknown): UserState {
@@ -153,6 +192,9 @@ export function migrate(raw: unknown): UserState {
   if (version < 9) {
     migrated = migrations[9]!(migrated);
   }
+  if (version < 10) {
+    migrated = migrations[10]!(migrated);
+  }
 
   const result = migrated as unknown as Record<string, unknown>;
   if (
@@ -176,6 +218,8 @@ export function migrate(raw: unknown): UserState {
     players: Array.isArray(result.players) ? (result.players as PlayerReference[]) : [],
     activePlayerId:
       typeof result.activePlayerId === "string" ? result.activePlayerId : null,
+    beginnerMode:
+      typeof result.beginnerMode === "boolean" ? result.beginnerMode : true,
     onboardingComplete:
       typeof result.onboardingComplete === "boolean" ? result.onboardingComplete : false,
   };

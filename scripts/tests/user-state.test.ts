@@ -77,11 +77,11 @@ test("STORAGE_KEY equals dungeon:userState:v1", () => {
   strictEqual(STORAGE_KEY, "dungeon:userState:v1");
 });
 
-test("CURRENT_VERSION equals 9", () => {
-  strictEqual(CURRENT_VERSION, 9);
+test("CURRENT_VERSION equals 10", () => {
+  strictEqual(CURRENT_VERSION, 10);
 });
 
-test("createDefaultState returns valid v9 state", () => {
+test("createDefaultState returns valid v10 state", () => {
   const def = createDefaultState();
   strictEqual(def.version, CURRENT_VERSION);
   deepStrictEqual(def.favorites, []);
@@ -92,6 +92,7 @@ test("createDefaultState returns valid v9 state", () => {
   strictEqual(def.activeAdventureId, null);
   deepStrictEqual(def.players, []);
   strictEqual(def.activePlayerId, null);
+  strictEqual(def.beginnerMode, true);
   strictEqual(def.onboardingComplete, false);
 });
 
@@ -309,14 +310,15 @@ test("migrations.migrate() maps legacy party members to player references at v7"
   strictEqual(player.note, "Guild wizard");
   strictEqual(player.combatValues.passivePerception, 15);
   strictEqual(player.combatValues.armorClass, 10);
-  deepStrictEqual(player.abilityModifiers, {
-    strength: 0,
-    dexterity: 0,
-    constitution: 0,
-    intelligence: 0,
-    wisdom: 0,
-    charisma: 0,
+  deepStrictEqual(player.abilityScores, {
+    strength: 10,
+    dexterity: 10,
+    constitution: 10,
+    intelligence: 10,
+    wisdom: 10,
+    charisma: 10,
   });
+  deepStrictEqual(player.hitPoints, { current: 10, max: 10 });
   deepStrictEqual(player.knownSpellCanonicalIds, ["spell.fireball"]);
   deepStrictEqual(player.weaponCanonicalIds, ["equipment.longsword"]);
   deepStrictEqual(player.magicItemCanonicalIds, ["magicitem.wand-of-magic-missiles"]);
@@ -424,6 +426,137 @@ test("migrations.migrate() preserves an existing activePlayerId", () => {
   const result = migrate(input);
   strictEqual(result.version, CURRENT_VERSION);
   strictEqual(result.activePlayerId, "p1");
+});
+
+test("migrations.migrate() defaults beginnerMode to true", () => {
+  const input = {
+    version: 9,
+    favorites: [],
+    recentEntities: [],
+    recentSearches: [],
+    session: [],
+    adventures: [],
+    activeAdventureId: null,
+    players: [],
+    activePlayerId: null,
+    onboardingComplete: true,
+  };
+  const result = migrate(input);
+  strictEqual(result.version, CURRENT_VERSION);
+  strictEqual(result.beginnerMode, true);
+});
+
+test("migrations.migrate() preserves an explicit beginnerMode", () => {
+  const input = {
+    version: 9,
+    favorites: [],
+    recentEntities: [],
+    recentSearches: [],
+    session: [],
+    adventures: [],
+    activeAdventureId: null,
+    players: [],
+    activePlayerId: null,
+    beginnerMode: false,
+    onboardingComplete: true,
+  };
+  const result = migrate(input);
+  strictEqual(result.version, CURRENT_VERSION);
+  strictEqual(result.beginnerMode, false);
+});
+
+test("migrations.migrate() derives abilityScores from legacy abilityModifiers at v10", () => {
+  const input = {
+    version: 9,
+    favorites: [],
+    recentEntities: [],
+    recentSearches: [],
+    session: [],
+    adventures: [],
+    activeAdventureId: null,
+    players: [
+      {
+        id: "p1",
+        name: "Lyra",
+        class: "Wizard",
+        level: 5,
+        abilityModifiers: {
+          strength: -5,
+          dexterity: 10,
+          constitution: 0,
+          intelligence: 3,
+          wisdom: 0,
+          charisma: 0,
+        },
+        combatValues: { armorClass: 10, initiativeModifier: 0, passivePerception: 10 },
+        knownSpellCanonicalIds: [],
+        weaponCanonicalIds: [],
+        magicItemCanonicalIds: [],
+      },
+    ],
+    activePlayerId: null,
+    onboardingComplete: true,
+  };
+  const result = migrate(input);
+  const player = result.players[0]!;
+  deepStrictEqual(player.abilityScores, {
+    strength: 1,
+    dexterity: 30,
+    constitution: 10,
+    intelligence: 16,
+    wisdom: 10,
+    charisma: 10,
+  });
+  deepStrictEqual(player.hitPoints, { current: 10, max: 10 });
+  ok(!("abilityModifiers" in player), "legacy abilityModifiers removed");
+});
+
+test("migrations.migrate() preserves explicit abilityScores and hitPoints", () => {
+  const input = {
+    version: 10,
+    favorites: [],
+    recentEntities: [],
+    recentSearches: [],
+    session: [],
+    adventures: [],
+    activeAdventureId: null,
+    players: [
+      {
+        id: "p1",
+        name: "Lyra",
+        class: "Wizard",
+        level: 5,
+        abilityScores: {
+          strength: 8,
+          dexterity: 14,
+          constitution: 12,
+          intelligence: 18,
+          wisdom: 10,
+          charisma: 11,
+        },
+        hitPoints: { current: 32, max: 40 },
+        combatValues: { armorClass: 10, initiativeModifier: 0, passivePerception: 10 },
+        knownSpellCanonicalIds: [],
+        weaponCanonicalIds: [],
+        magicItemCanonicalIds: [],
+      },
+    ],
+    activePlayerId: null,
+    beginnerMode: false,
+    onboardingComplete: true,
+  };
+  const result = migrate(input);
+  const player = result.players[0]!;
+  deepStrictEqual(player.abilityScores, {
+    strength: 8,
+    dexterity: 14,
+    constitution: 12,
+    intelligence: 18,
+    wisdom: 10,
+    charisma: 11,
+  });
+  deepStrictEqual(player.hitPoints, { current: 32, max: 40 });
+  strictEqual(result.beginnerMode, false);
 });
 
 // ---------------------------------------------------------------------------
@@ -665,6 +798,7 @@ test("favoritesSet rebuilt on _replace", () => {
     activeAdventureId: null,
     players: [],
     activePlayerId: null,
+    beginnerMode: true,
     onboardingComplete: false,
   });
   const state = userStore.getState();
@@ -680,6 +814,68 @@ test("favoritesSet rebuilt on _reset", () => {
   s.toggleFavorite("a");
   userStore.getState()._reset();
   strictEqual(userStore.getState().favoritesSet.size, 0);
+});
+
+// ---------------------------------------------------------------------------
+// Beginner mode
+// ---------------------------------------------------------------------------
+console.log("\nuser-state \u2014 beginner mode\n");
+
+test("beginnerMode defaults to true in default state", () => {
+  strictEqual(createDefaultState().beginnerMode, true);
+});
+
+test("normalize defaults beginnerMode to true when missing", () => {
+  const result = normalize(createDefaultState());
+  strictEqual(result.beginnerMode, true);
+});
+
+test("normalize preserves beginnerMode false", () => {
+  const result = normalize({ ...createDefaultState(), beginnerMode: false });
+  strictEqual(result.beginnerMode, false);
+});
+
+test("setBeginnerMode updates the flag", () => {
+  resetMock();
+  resetStore();
+  userStore.getState().setBeginnerMode(false);
+  strictEqual(userStore.getState().beginnerMode, false);
+  userStore.getState().setBeginnerMode(true);
+  strictEqual(userStore.getState().beginnerMode, true);
+});
+
+test("setBeginnerMode persists to localStorage", () => {
+  resetMock();
+  resetStore();
+  userStore.getState().setBeginnerMode(false);
+  const stored = localStorage.getItem(STORAGE_KEY);
+  if (stored) {
+    const parsed = JSON.parse(stored);
+    strictEqual(parsed.beginnerMode, false);
+  } else {
+    strictEqual(userStore.getState().beginnerMode, false);
+  }
+});
+
+test("hydrate() loads persisted beginnerMode", () => {
+  resetMock();
+  resetStore();
+  const data = {
+    version: CURRENT_VERSION,
+    favorites: [],
+    recentEntities: [],
+    recentSearches: [],
+    session: [],
+    adventures: [],
+    activeAdventureId: null,
+    players: [],
+    activePlayerId: null,
+    beginnerMode: false,
+    onboardingComplete: false,
+  };
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+  hydrate();
+  strictEqual(userStore.getState().beginnerMode, false);
 });
 
 // ---------------------------------------------------------------------------
@@ -1032,6 +1228,7 @@ test("safe replace does nothing when state is identical", () => {
     activeAdventureId: null,
     players: [],
     activePlayerId: null,
+    beginnerMode: true,
     onboardingComplete: false,
   });
   userStore.getState()._replace({
@@ -1044,6 +1241,7 @@ test("safe replace does nothing when state is identical", () => {
     activeAdventureId: null,
     players: [],
     activePlayerId: null,
+    beginnerMode: true,
     onboardingComplete: false,
   });
   const state2 = userStore.getState();
@@ -1257,6 +1455,7 @@ test("sessionSet stays in sync after _replace", () => {
     activeAdventureId: null,
     players: [],
     activePlayerId: null,
+    beginnerMode: true,
     onboardingComplete: false,
   });
   const state = userStore.getState();
@@ -1511,6 +1710,7 @@ test("_replace updates session when content differs", () => {
     activeAdventureId: null,
     players: [],
     activePlayerId: null,
+    beginnerMode: true,
     onboardingComplete: false,
   });
   deepStrictEqual(userStore.getState().session, ["a", "b"]);
@@ -1814,6 +2014,7 @@ test("adventureSet rebuilt on _replace", () => {
     activeAdventureId: "adv-1",
     players: [],
     activePlayerId: null,
+    beginnerMode: true,
     onboardingComplete: false,
   });
   const state = userStore.getState();
@@ -1996,14 +2197,15 @@ test("normalize preserves activePlayerId when the player exists", () => {
         name: "Lyra",
         class: "Wizard",
         level: 5,
-        abilityModifiers: {
-          strength: 0,
-          dexterity: 0,
-          constitution: 0,
-          intelligence: 0,
-          wisdom: 0,
-          charisma: 0,
+        abilityScores: {
+          strength: 10,
+          dexterity: 10,
+          constitution: 10,
+          intelligence: 10,
+          wisdom: 10,
+          charisma: 10,
         },
+        hitPoints: { current: 10, max: 10 },
         combatValues: { armorClass: 10, initiativeModifier: 0, passivePerception: 10 },
         knownSpellCanonicalIds: [],
         weaponCanonicalIds: [],
@@ -2174,6 +2376,7 @@ test("_replace updates adventures when content differs", () => {
     activeAdventureId: "adv-1",
     players: [],
     activePlayerId: null,
+    beginnerMode: true,
     onboardingComplete: false,
   });
   const state = userStore.getState();
@@ -2207,6 +2410,7 @@ test("adventuresEqual prevents unnecessary _replace on identical state", () => {
     activeAdventureId: "adv-1",
     players: [],
     activePlayerId: null,
+    beginnerMode: true,
     onboardingComplete: false,
   };
   userStore.getState()._replace(state);
@@ -2253,14 +2457,15 @@ test("setActivePlayer sets and clears the active player", () => {
     name: "Lyra",
     class: "Wizard",
     level: 5,
-    abilityModifiers: {
-      strength: 0,
-      dexterity: 0,
-      constitution: 0,
-      intelligence: 0,
-      wisdom: 0,
-      charisma: 0,
+    abilityScores: {
+      strength: 10,
+      dexterity: 10,
+      constitution: 10,
+      intelligence: 10,
+      wisdom: 10,
+      charisma: 10,
     },
+    hitPoints: { current: 10, max: 10 },
     combatValues: { armorClass: 10, initiativeModifier: 0, passivePerception: 10 },
     knownSpellCanonicalIds: [],
     weaponCanonicalIds: [],
@@ -2279,14 +2484,15 @@ test("setActivePlayer persists to localStorage", () => {
     name: "Lyra",
     class: "Wizard",
     level: 5,
-    abilityModifiers: {
-      strength: 0,
-      dexterity: 0,
-      constitution: 0,
-      intelligence: 0,
-      wisdom: 0,
-      charisma: 0,
+    abilityScores: {
+      strength: 10,
+      dexterity: 10,
+      constitution: 10,
+      intelligence: 10,
+      wisdom: 10,
+      charisma: 10,
     },
+    hitPoints: { current: 10, max: 10 },
     combatValues: { armorClass: 10, initiativeModifier: 0, passivePerception: 10 },
     knownSpellCanonicalIds: [],
     weaponCanonicalIds: [],
@@ -2309,14 +2515,15 @@ test("useActivePlayer returns the active player", () => {
     name: "Lyra",
     class: "Wizard",
     level: 5,
-    abilityModifiers: {
-      strength: 0,
-      dexterity: 0,
-      constitution: 0,
-      intelligence: 0,
-      wisdom: 0,
-      charisma: 0,
+    abilityScores: {
+      strength: 10,
+      dexterity: 10,
+      constitution: 10,
+      intelligence: 10,
+      wisdom: 10,
+      charisma: 10,
     },
+    hitPoints: { current: 10, max: 10 },
     combatValues: { armorClass: 10, initiativeModifier: 0, passivePerception: 10 },
     knownSpellCanonicalIds: [],
     weaponCanonicalIds: [],
@@ -2357,14 +2564,15 @@ test("addPlayerReference adds a reference with defaults", () => {
     name: "Lyra",
     class: "Wizard",
     level: 5,
-    abilityModifiers: {
-      strength: 0,
-      dexterity: 0,
-      constitution: 0,
-      intelligence: 0,
-      wisdom: 0,
-      charisma: 0,
+    abilityScores: {
+      strength: 10,
+      dexterity: 10,
+      constitution: 10,
+      intelligence: 10,
+      wisdom: 10,
+      charisma: 10,
     },
+    hitPoints: { current: 10, max: 10 },
     combatValues: {
       armorClass: 10,
       initiativeModifier: 0,
@@ -2382,14 +2590,15 @@ test("addPlayerReference adds a reference with defaults", () => {
   strictEqual(player.class, "Wizard");
   strictEqual(player.level, 5);
   strictEqual(player.subclass, undefined);
-  deepStrictEqual(player.abilityModifiers, {
-    strength: 0,
-    dexterity: 0,
-    constitution: 0,
-    intelligence: 0,
-    wisdom: 0,
-    charisma: 0,
+  deepStrictEqual(player.abilityScores, {
+    strength: 10,
+    dexterity: 10,
+    constitution: 10,
+    intelligence: 10,
+    wisdom: 10,
+    charisma: 10,
   });
+  deepStrictEqual(player.hitPoints, { current: 10, max: 10 });
   deepStrictEqual(player.combatValues, {
     armorClass: 10,
     initiativeModifier: 0,
@@ -2411,14 +2620,15 @@ test("addPlayerReference trims name and class", () => {
     name: "  Lyra  ",
     class: "  Wizard ",
     level: 5,
-    abilityModifiers: {
-      strength: 0,
-      dexterity: 0,
-      constitution: 0,
-      intelligence: 0,
-      wisdom: 0,
-      charisma: 0,
+    abilityScores: {
+      strength: 10,
+      dexterity: 10,
+      constitution: 10,
+      intelligence: 10,
+      wisdom: 10,
+      charisma: 10,
     },
+    hitPoints: { current: 10, max: 10 },
     combatValues: { armorClass: 10, initiativeModifier: 0, passivePerception: 10 },
     knownSpellCanonicalIds: [],
     weaponCanonicalIds: [],
@@ -2436,14 +2646,15 @@ test("addPlayerReference clamps level and combat values", () => {
     name: "Low",
     class: "Cleric",
     level: 0,
-    abilityModifiers: {
+    abilityScores: {
       strength: -99,
       dexterity: 99,
-      constitution: 0,
-      intelligence: 0,
-      wisdom: 0,
-      charisma: 0,
+      constitution: 10,
+      intelligence: 10,
+      wisdom: 10,
+      charisma: 10,
     },
+    hitPoints: { current: 20000, max: 5000 },
     combatValues: {
       armorClass: 99,
       initiativeModifier: -99,
@@ -2459,14 +2670,15 @@ test("addPlayerReference clamps level and combat values", () => {
     name: "High",
     class: "Cleric",
     level: 99,
-    abilityModifiers: {
-      strength: 0,
-      dexterity: 0,
-      constitution: 0,
-      intelligence: 0,
-      wisdom: 0,
-      charisma: 0,
+    abilityScores: {
+      strength: 10,
+      dexterity: 10,
+      constitution: 10,
+      intelligence: 10,
+      wisdom: 10,
+      charisma: 10,
     },
+    hitPoints: { current: 10, max: 10 },
     combatValues: { armorClass: 10, initiativeModifier: 0, passivePerception: 10 },
     knownSpellCanonicalIds: [],
     weaponCanonicalIds: [],
@@ -2475,13 +2687,17 @@ test("addPlayerReference clamps level and combat values", () => {
   const players = userStore.getState().players;
   strictEqual(players[0]!.level, 1);
   strictEqual(players[1]!.level, 20);
-  strictEqual(players[0]!.abilityModifiers.strength, -5);
-  strictEqual(players[0]!.abilityModifiers.dexterity, 10);
+  strictEqual(players[0]!.abilityScores.strength, 1);
+  strictEqual(players[0]!.abilityScores.dexterity, 30);
   strictEqual(players[0]!.combatValues.armorClass, 40);
   strictEqual(players[0]!.combatValues.initiativeModifier, -5);
   strictEqual(players[0]!.combatValues.passivePerception, 0);
   strictEqual(players[0]!.combatValues.spellSaveDc, 40);
   strictEqual(players[0]!.combatValues.spellAttackBonus, -5);
+  strictEqual(players[0]!.hitPoints.current, 5000);
+  strictEqual(players[0]!.hitPoints.max, 5000);
+  strictEqual(players[1]!.hitPoints.current, 10);
+  strictEqual(players[1]!.hitPoints.max, 10);
 });
 
 test("addPlayerReference accepts references and note", () => {
@@ -2492,14 +2708,15 @@ test("addPlayerReference accepts references and note", () => {
     class: "Wizard",
     level: 5,
     subclass: "Evocation",
-    abilityModifiers: {
-      strength: 1,
-      dexterity: 2,
-      constitution: 3,
-      intelligence: 4,
-      wisdom: 5,
-      charisma: 6,
+    abilityScores: {
+      strength: 12,
+      dexterity: 14,
+      constitution: 16,
+      intelligence: 18,
+      wisdom: 20,
+      charisma: 22,
     },
+    hitPoints: { current: 35, max: 40 },
     combatValues: {
       armorClass: 15,
       initiativeModifier: 3,
@@ -2514,14 +2731,15 @@ test("addPlayerReference accepts references and note", () => {
   });
   const player = userStore.getState().players[0]!;
   strictEqual(player.subclass, "Evocation");
-  deepStrictEqual(player.abilityModifiers, {
-    strength: 1,
-    dexterity: 2,
-    constitution: 3,
-    intelligence: 4,
-    wisdom: 5,
-    charisma: 6,
+  deepStrictEqual(player.abilityScores, {
+    strength: 12,
+    dexterity: 14,
+    constitution: 16,
+    intelligence: 18,
+    wisdom: 20,
+    charisma: 22,
   });
+  deepStrictEqual(player.hitPoints, { current: 35, max: 40 });
   deepStrictEqual(player.combatValues, {
     armorClass: 15,
     initiativeModifier: 3,
@@ -2542,14 +2760,15 @@ test("addPlayerReference trims optional strings and keeps empty as undefined", (
     name: "Lyra",
     class: "Wizard",
     level: 5,
-    abilityModifiers: {
-      strength: 0,
-      dexterity: 0,
-      constitution: 0,
-      intelligence: 0,
-      wisdom: 0,
-      charisma: 0,
+    abilityScores: {
+      strength: 10,
+      dexterity: 10,
+      constitution: 10,
+      intelligence: 10,
+      wisdom: 10,
+      charisma: 10,
     },
+    hitPoints: { current: 10, max: 10 },
     combatValues: { armorClass: 10, initiativeModifier: 0, passivePerception: 10 },
     knownSpellCanonicalIds: [],
     weaponCanonicalIds: [],
@@ -2569,14 +2788,15 @@ test("addPlayerReference persists to localStorage", () => {
     name: "Lyra",
     class: "Wizard",
     level: 5,
-    abilityModifiers: {
-      strength: 0,
-      dexterity: 0,
-      constitution: 0,
-      intelligence: 0,
-      wisdom: 0,
-      charisma: 0,
+    abilityScores: {
+      strength: 10,
+      dexterity: 10,
+      constitution: 10,
+      intelligence: 10,
+      wisdom: 10,
+      charisma: 10,
     },
+    hitPoints: { current: 10, max: 10 },
     combatValues: { armorClass: 10, initiativeModifier: 0, passivePerception: 10 },
     knownSpellCanonicalIds: [],
     weaponCanonicalIds: [],
@@ -2598,14 +2818,15 @@ test("updatePlayerReference updates fields", () => {
     name: "Lyra",
     class: "Wizard",
     level: 5,
-    abilityModifiers: {
-      strength: 0,
-      dexterity: 0,
-      constitution: 0,
-      intelligence: 0,
-      wisdom: 0,
-      charisma: 0,
+    abilityScores: {
+      strength: 10,
+      dexterity: 10,
+      constitution: 10,
+      intelligence: 10,
+      wisdom: 10,
+      charisma: 10,
     },
+    hitPoints: { current: 10, max: 10 },
     combatValues: { armorClass: 10, initiativeModifier: 0, passivePerception: 10 },
     knownSpellCanonicalIds: [],
     weaponCanonicalIds: [],
@@ -2636,14 +2857,15 @@ test("updatePlayerReference clamps level", () => {
     name: "Lyra",
     class: "Wizard",
     level: 5,
-    abilityModifiers: {
-      strength: 0,
-      dexterity: 0,
-      constitution: 0,
-      intelligence: 0,
-      wisdom: 0,
-      charisma: 0,
+    abilityScores: {
+      strength: 10,
+      dexterity: 10,
+      constitution: 10,
+      intelligence: 10,
+      wisdom: 10,
+      charisma: 10,
     },
+    hitPoints: { current: 10, max: 10 },
     combatValues: { armorClass: 10, initiativeModifier: 0, passivePerception: 10 },
     knownSpellCanonicalIds: [],
     weaponCanonicalIds: [],
@@ -2661,14 +2883,15 @@ test("updatePlayerReference converts empty strings to undefined", () => {
     name: "Lyra",
     class: "Wizard",
     level: 5,
-    abilityModifiers: {
-      strength: 0,
-      dexterity: 0,
-      constitution: 0,
-      intelligence: 0,
-      wisdom: 0,
-      charisma: 0,
+    abilityScores: {
+      strength: 10,
+      dexterity: 10,
+      constitution: 10,
+      intelligence: 10,
+      wisdom: 10,
+      charisma: 10,
     },
+    hitPoints: { current: 10, max: 10 },
     combatValues: { armorClass: 10, initiativeModifier: 0, passivePerception: 10 },
     knownSpellCanonicalIds: [],
     weaponCanonicalIds: [],
@@ -2690,14 +2913,15 @@ test("updatePlayerReference is a no-op for unknown id", () => {
     name: "Lyra",
     class: "Wizard",
     level: 5,
-    abilityModifiers: {
-      strength: 0,
-      dexterity: 0,
-      constitution: 0,
-      intelligence: 0,
-      wisdom: 0,
-      charisma: 0,
+    abilityScores: {
+      strength: 10,
+      dexterity: 10,
+      constitution: 10,
+      intelligence: 10,
+      wisdom: 10,
+      charisma: 10,
     },
+    hitPoints: { current: 10, max: 10 },
     combatValues: { armorClass: 10, initiativeModifier: 0, passivePerception: 10 },
     knownSpellCanonicalIds: [],
     weaponCanonicalIds: [],
@@ -2714,14 +2938,15 @@ test("removePlayerReference removes by id", () => {
     name: "Lyra",
     class: "Wizard",
     level: 5,
-    abilityModifiers: {
-      strength: 0,
-      dexterity: 0,
-      constitution: 0,
-      intelligence: 0,
-      wisdom: 0,
-      charisma: 0,
+    abilityScores: {
+      strength: 10,
+      dexterity: 10,
+      constitution: 10,
+      intelligence: 10,
+      wisdom: 10,
+      charisma: 10,
     },
+    hitPoints: { current: 10, max: 10 },
     combatValues: { armorClass: 10, initiativeModifier: 0, passivePerception: 10 },
     knownSpellCanonicalIds: [],
     weaponCanonicalIds: [],
@@ -2739,14 +2964,15 @@ test("removePlayerReference clears activePlayerId when active is removed", () =>
     name: "Lyra",
     class: "Wizard",
     level: 5,
-    abilityModifiers: {
-      strength: 0,
-      dexterity: 0,
-      constitution: 0,
-      intelligence: 0,
-      wisdom: 0,
-      charisma: 0,
+    abilityScores: {
+      strength: 10,
+      dexterity: 10,
+      constitution: 10,
+      intelligence: 10,
+      wisdom: 10,
+      charisma: 10,
     },
+    hitPoints: { current: 10, max: 10 },
     combatValues: { armorClass: 10, initiativeModifier: 0, passivePerception: 10 },
     knownSpellCanonicalIds: [],
     weaponCanonicalIds: [],
@@ -2776,14 +3002,15 @@ test("_replace updates players when content differs", () => {
         name: "Lyra",
         class: "Wizard",
         level: 5,
-        abilityModifiers: {
-          strength: 0,
-          dexterity: 0,
-          constitution: 0,
-          intelligence: 0,
-          wisdom: 0,
-          charisma: 0,
+        abilityScores: {
+          strength: 10,
+          dexterity: 10,
+          constitution: 10,
+          intelligence: 10,
+          wisdom: 10,
+          charisma: 10,
         },
+        hitPoints: { current: 10, max: 10 },
         combatValues: { armorClass: 10, initiativeModifier: 0, passivePerception: 10 },
         knownSpellCanonicalIds: [],
         weaponCanonicalIds: [],
@@ -2791,6 +3018,7 @@ test("_replace updates players when content differs", () => {
       },
     ],
     activePlayerId: null,
+    beginnerMode: true,
     onboardingComplete: false,
   });
   const state = userStore.getState();
@@ -2806,14 +3034,15 @@ test("players cleared on _reset", () => {
     name: "Lyra",
     class: "Wizard",
     level: 5,
-    abilityModifiers: {
-      strength: 0,
-      dexterity: 0,
-      constitution: 0,
-      intelligence: 0,
-      wisdom: 0,
-      charisma: 0,
+    abilityScores: {
+      strength: 10,
+      dexterity: 10,
+      constitution: 10,
+      intelligence: 10,
+      wisdom: 10,
+      charisma: 10,
     },
+    hitPoints: { current: 10, max: 10 },
     combatValues: { armorClass: 10, initiativeModifier: 0, passivePerception: 10 },
     knownSpellCanonicalIds: [],
     weaponCanonicalIds: [],
@@ -2837,14 +3066,15 @@ test("normalize drops invalid player references", () => {
       name: "Lyra",
       class: "Wizard",
       level: 5,
-      abilityModifiers: {
-        strength: 0,
-        dexterity: 0,
-        constitution: 0,
-        intelligence: 0,
-        wisdom: 0,
-        charisma: 0,
+      abilityScores: {
+        strength: 10,
+        dexterity: 10,
+        constitution: 10,
+        intelligence: 10,
+        wisdom: 10,
+        charisma: 10,
       },
+      hitPoints: { current: 10, max: 10 },
       combatValues: { armorClass: 10, initiativeModifier: 0, passivePerception: 10 },
       knownSpellCanonicalIds: [],
       weaponCanonicalIds: [],
@@ -2895,14 +3125,15 @@ test("normalize clamps player reference level and fills defaults", () => {
   strictEqual(result.players[0]?.level, 1);
   strictEqual(result.players[1]?.level, 20);
   const player = result.players[0]!;
-  deepStrictEqual(player.abilityModifiers, {
-    strength: 0,
-    dexterity: 0,
-    constitution: 0,
-    intelligence: 0,
-    wisdom: 0,
-    charisma: 0,
+  deepStrictEqual(player.abilityScores, {
+    strength: 10,
+    dexterity: 10,
+    constitution: 10,
+    intelligence: 10,
+    wisdom: 10,
+    charisma: 10,
   });
+  deepStrictEqual(player.hitPoints, { current: 10, max: 10 });
   deepStrictEqual(player.combatValues, {
     armorClass: 10,
     initiativeModifier: 0,
@@ -2912,7 +3143,7 @@ test("normalize clamps player reference level and fills defaults", () => {
   });
 });
 
-test("normalize clamps ability modifiers and combat values", () => {
+test("normalize clamps ability scores and combat values", () => {
   const result = normalize({
     version: CURRENT_VERSION,
     favorites: [],
@@ -2925,14 +3156,15 @@ test("normalize clamps ability modifiers and combat values", () => {
         name: "Lyra",
         class: "Wizard",
         level: 5,
-        abilityModifiers: {
+        abilityScores: {
           strength: -99,
           dexterity: 99,
-          constitution: 0,
-          intelligence: 0,
-          wisdom: 0,
-          charisma: 0,
+          constitution: 10,
+          intelligence: 10,
+          wisdom: 10,
+          charisma: 10,
         },
+        hitPoints: { current: 20000, max: 5000 },
         combatValues: {
           armorClass: 99,
           initiativeModifier: -99,
@@ -2947,13 +3179,55 @@ test("normalize clamps ability modifiers and combat values", () => {
     ],
   });
   const player = result.players[0]!;
-  strictEqual(player.abilityModifiers.strength, -5);
-  strictEqual(player.abilityModifiers.dexterity, 10);
+  strictEqual(player.abilityScores.strength, 1);
+  strictEqual(player.abilityScores.dexterity, 30);
+  strictEqual(player.hitPoints.current, 5000);
+  strictEqual(player.hitPoints.max, 5000);
   strictEqual(player.combatValues.armorClass, 40);
   strictEqual(player.combatValues.initiativeModifier, -5);
   strictEqual(player.combatValues.passivePerception, 0);
   strictEqual(player.combatValues.spellSaveDc, 40);
   strictEqual(player.combatValues.spellAttackBonus, -5);
+});
+
+test("normalize derives scores from legacy abilityModifiers", () => {
+  const result = normalize({
+    version: CURRENT_VERSION,
+    favorites: [],
+    recentEntities: [],
+    recentSearches: [],
+    session: [],
+    players: [
+      {
+        id: "p1",
+        name: "Lyra",
+        class: "Wizard",
+        level: 5,
+        abilityModifiers: {
+          strength: -5,
+          dexterity: 10,
+          constitution: 0,
+          intelligence: 3,
+          wisdom: 0,
+          charisma: 0,
+        },
+        combatValues: { armorClass: 10, initiativeModifier: 0, passivePerception: 10 },
+        knownSpellCanonicalIds: [],
+        weaponCanonicalIds: [],
+        magicItemCanonicalIds: [],
+      },
+    ] as unknown as PlayerReference[],
+  });
+  const player = result.players[0]!;
+  deepStrictEqual(player.abilityScores, {
+    strength: 1,
+    dexterity: 30,
+    constitution: 10,
+    intelligence: 16,
+    wisdom: 10,
+    charisma: 10,
+  });
+  deepStrictEqual(player.hitPoints, { current: 10, max: 10 });
 });
 
 test("normalize removes stale reference IDs from player references", () => {

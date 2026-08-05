@@ -1,6 +1,6 @@
 import { useState, useCallback, useMemo } from "react";
 import { Link } from "react-router-dom";
-import { usePlayerReferences, userStore } from "@/user-state";
+import { usePlayerReferences, userStore, abilityModifier } from "@/user-state";
 import type { PlayerReference, PlayerReferenceUpdate } from "@/user-state";
 import {
   formatDamage,
@@ -15,7 +15,7 @@ import { ReferencePicker } from "@/components/ui/ReferencePicker";
 import type { PickerCandidate } from "@/components/ui/ReferencePicker";
 import { InlineTextEditor } from "@/components/ui/InlineTextEditor";
 import { InlineTextareaEditor } from "@/components/ui/InlineTextareaEditor";
-import { Button, ConfirmDialog, Display, SelectField, Stepper } from "@/components/ui";
+import { Button, ConfirmDialog, Display, EmptyState, HelpTip, SelectField, Stepper } from "@/components/ui";
 import { cn } from "@/lib/utils";
 
 type PickerKind = "spell" | "weapon" | "magicitem";
@@ -28,7 +28,7 @@ const PICKER_TITLES: Record<PickerKind, string> = {
 
 const WEAPON_TYPES = new Set(["Melee Weapon", "Ranged Weapon"]);
 
-type AbilityKey = keyof PlayerReference["abilityModifiers"];
+type AbilityKey = keyof PlayerReference["abilityScores"];
 
 const ABILITY_LABELS: Record<AbilityKey, string> = {
   strength: "STR",
@@ -47,6 +47,15 @@ const ABILITY_KEYS: AbilityKey[] = [
   "wisdom",
   "charisma",
 ];
+
+const ABILITY_HELP: Record<AbilityKey, string> = {
+  strength: "Physical power. Used for lifting, pushing, and melee attacks.",
+  dexterity: "Agility and reflexes. Used for sneaking, dodging, and finesse attacks.",
+  constitution: "Toughness and stamina. Raises your hit points.",
+  intelligence: "Reasoning and memory. Used by wizards and for knowledge checks.",
+  wisdom: "Awareness and intuition. Used by clerics and for perception.",
+  charisma: "Force of personality. Used for persuasion, performance, and deception.",
+};
 
 const CLASSES = [
   "Barbarian",
@@ -316,14 +325,15 @@ function createEmptyReference(): Omit<PlayerReference, "id"> {
     class: "",
     level: 1,
     subclass: undefined,
-    abilityModifiers: {
-      strength: 0,
-      dexterity: 0,
-      constitution: 0,
-      intelligence: 0,
-      wisdom: 0,
-      charisma: 0,
+    abilityScores: {
+      strength: 10,
+      dexterity: 10,
+      constitution: 10,
+      intelligence: 10,
+      wisdom: 10,
+      charisma: 10,
     },
+    hitPoints: { current: 10, max: 10 },
     combatValues: { armorClass: 10, initiativeModifier: 0, passivePerception: 10 },
     knownSpellCanonicalIds: [],
     weaponCanonicalIds: [],
@@ -332,37 +342,7 @@ function createEmptyReference(): Omit<PlayerReference, "id"> {
   };
 }
 
-function ValueLabel({ children, onClear }: { children: string; onClear?: () => void }) {
-  return (
-    <div className={cn("flex w-full items-center", onClear ? "justify-between" : "justify-center")}>
-      <span className="min-w-0 truncate text-xs font-semibold uppercase tracking-wide text-muted-foreground">
-        {children}
-      </span>
-      {onClear && (
-        <button
-          type="button"
-          onClick={onClear}
-          aria-label={`Clear ${children}`}
-          className="inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-lg text-muted-foreground transition-colors duration-150 hover:bg-accent hover:text-foreground active:scale-90"
-        >
-          <svg
-            aria-hidden="true"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth={2}
-            className="h-3 w-3"
-          >
-            <line x1="18" y1="6" x2="6" y2="18" />
-            <line x1="6" y1="6" x2="18" y2="18" />
-          </svg>
-        </button>
-      )}
-    </div>
-  );
-}
-
-function NumberCell({
+function StatCard({
   label,
   value,
   min,
@@ -370,7 +350,8 @@ function NumberCell({
   format,
   onChange,
   onClear,
-  valueClassName,
+  help,
+  valueClassName = "text-3xl",
 }: {
   label: string;
   value: number;
@@ -379,11 +360,39 @@ function NumberCell({
   format?: (value: number) => string;
   onChange: (value: number) => void;
   onClear?: () => void;
+  help?: string;
   valueClassName?: string;
 }) {
   return (
-    <div className="flex min-w-0 flex-col items-center gap-1">
-      <ValueLabel onClear={onClear}>{label}</ValueLabel>
+    <div className="flex min-w-0 flex-col items-center gap-1 rounded-lg border border-border bg-card px-2 py-3">
+      <span className="flex w-full items-center justify-between gap-1">
+        <span className="min-w-0 truncate text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+          {label}
+        </span>
+        <span className="flex items-center gap-1">
+          {onClear && (
+            <button
+              type="button"
+              onClick={onClear}
+              aria-label={`Clear ${label}`}
+              className="inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-lg text-muted-foreground transition-colors duration-150 hover:bg-accent hover:text-foreground active:scale-90"
+            >
+              <svg
+                aria-hidden="true"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth={2}
+                className="h-3 w-3"
+              >
+                <line x1="18" y1="6" x2="6" y2="18" />
+                <line x1="6" y1="6" x2="18" y2="18" />
+              </svg>
+            </button>
+          )}
+          {help && <HelpTip label={`More about ${label}`}>{help}</HelpTip>}
+        </span>
+      </span>
       <Stepper
         variant="ghost"
         hiddenControls
@@ -399,7 +408,7 @@ function NumberCell({
   );
 }
 
-function OptionalNumberCell({
+function OptionalStatCard({
   label,
   value,
   min,
@@ -407,7 +416,8 @@ function OptionalNumberCell({
   format,
   initial,
   onCommit,
-  valueClassName,
+  help,
+  valueClassName = "text-3xl",
 }: {
   label: string;
   value: number | undefined;
@@ -416,12 +426,18 @@ function OptionalNumberCell({
   format?: (value: number) => string;
   initial: number;
   onCommit: (value: number | undefined) => void;
+  help?: string;
   valueClassName?: string;
 }) {
   if (value === undefined) {
     return (
-      <div className="flex min-w-0 flex-col items-center gap-1">
-        <ValueLabel>{label}</ValueLabel>
+      <div className="flex min-w-0 flex-col items-center gap-1 rounded-lg border border-dashed border-border bg-card px-2 py-3">
+        <span className="flex w-full items-center justify-between gap-1">
+          <span className="min-w-0 truncate text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+            {label}
+          </span>
+          {help && <HelpTip label={`More about ${label}`}>{help}</HelpTip>}
+        </span>
         <button
           type="button"
           onClick={() => onCommit(initial)}
@@ -444,7 +460,7 @@ function OptionalNumberCell({
     );
   }
   return (
-    <NumberCell
+    <StatCard
       label={label}
       value={value}
       min={min}
@@ -452,8 +468,49 @@ function OptionalNumberCell({
       format={format}
       onChange={(next) => onCommit(next)}
       onClear={() => onCommit(undefined)}
+      help={help}
       valueClassName={valueClassName}
     />
+  );
+}
+
+function AbilityScoreCell({
+  key_,
+  score,
+  onChange,
+}: {
+  key_: AbilityKey;
+  score: number;
+  onChange: (value: number) => void;
+}) {
+  const modifier = abilityModifier(score);
+  return (
+    <div className="flex min-w-0 flex-col items-center gap-1 rounded-lg border border-border bg-card px-2 py-3">
+      <span className="flex w-full items-center justify-between gap-1">
+        <span className="min-w-0 truncate text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+          {ABILITY_LABELS[key_]}
+        </span>
+        <HelpTip label={`What is ${ABILITY_LABELS[key_]}?`}>{ABILITY_HELP[key_]}</HelpTip>
+      </span>
+      <Stepper
+        variant="ghost"
+        hiddenControls
+        value={score}
+        min={1}
+        max={30}
+        onChange={onChange}
+        label={ABILITY_LABELS[key_]}
+        valueClassName="text-2xl"
+      />
+      <span
+        className={cn(
+          "rounded-md px-2 py-0.5 text-xs font-bold tabular-nums",
+          modifier >= 0 ? "bg-success/10 text-success" : "bg-destructive/10 text-destructive",
+        )}
+      >
+        {formatSigned(modifier)}
+      </span>
+    </div>
   );
 }
 
@@ -540,6 +597,7 @@ function ReferenceRow({
 
 function ReferenceGroup({
   title,
+  help,
   kind,
   ids,
   onAdd,
@@ -547,6 +605,7 @@ function ReferenceGroup({
   getQuickStats,
 }: {
   title: string;
+  help: string;
   kind: PickerKind;
   ids: string[];
   onAdd: () => void;
@@ -556,8 +615,9 @@ function ReferenceGroup({
   return (
     <div className="flex flex-col gap-1">
       <div className="flex items-center justify-between gap-2">
-        <span className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+        <span className="flex items-center gap-1 text-xs font-semibold uppercase tracking-wide text-muted-foreground">
           {title}
+          <HelpTip label={`More about ${title}`}>{help}</HelpTip>
         </span>
         <AddButton label="Add" onClick={onAdd} />
       </div>
@@ -676,7 +736,7 @@ function PlayerReferenceCard({
   const subclassOptions = reference.class ? (SUBCLASSES[reference.class] ?? []) : [];
 
   return (
-    <div className="flex flex-col gap-4 rounded-lg border border-border bg-surface p-4 animate-slide-up">
+    <div className="flex flex-col gap-5 rounded-lg border border-border bg-surface p-4 animate-slide-up">
       <div className="flex items-start justify-between gap-2">
         <div className="min-w-0 flex-1">
           {editing === "name" ? (
@@ -792,45 +852,49 @@ function PlayerReferenceCard({
         </div>
       </div>
 
-      <div className="flex flex-col gap-2 rounded-lg bg-card px-3 py-3">
+      <div className="flex flex-col gap-2">
+        <span className="flex items-center gap-1 text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+          Combat Stats
+          <HelpTip label="What are combat stats?">
+            The numbers you check every fight. Armor Class is what enemies must beat to hit you.
+            Initiative decides turn order. Passive Perception notices hidden things.
+          </HelpTip>
+        </span>
         <div className={cn("grid gap-2", hasSpell ? "grid-cols-3 sm:grid-cols-5" : "grid-cols-3")}>
-          <NumberCell
+          <StatCard
             label="AC"
             value={reference.combatValues.armorClass}
             min={0}
             max={40}
             onChange={(value) => update({ combatValues: { armorClass: value } })}
-            valueClassName="text-3xl"
           />
-          <NumberCell
+          <StatCard
             label="Init"
             value={reference.combatValues.initiativeModifier}
             min={-5}
             max={20}
             format={formatSigned}
             onChange={(value) => update({ combatValues: { initiativeModifier: value } })}
-            valueClassName="text-3xl"
           />
-          <NumberCell
+          <StatCard
             label="Passive"
             value={reference.combatValues.passivePerception}
             min={0}
             max={40}
             onChange={(value) => update({ combatValues: { passivePerception: value } })}
-            valueClassName="text-3xl"
           />
           {hasSpell && (
             <>
-              <OptionalNumberCell
+              <OptionalStatCard
                 label="DC"
                 value={reference.combatValues.spellSaveDc}
                 min={0}
                 max={40}
                 initial={10}
                 onCommit={(value) => update({ combatValues: { spellSaveDc: value } })}
-                valueClassName="text-3xl"
+                help="Spell save DC is the number enemies must beat to resist your spells."
               />
-              <OptionalNumberCell
+              <OptionalStatCard
                 label="Atk"
                 value={reference.combatValues.spellAttackBonus}
                 min={-5}
@@ -838,7 +902,7 @@ function PlayerReferenceCard({
                 format={formatSigned}
                 initial={0}
                 onCommit={(value) => update({ combatValues: { spellAttackBonus: value } })}
-                valueClassName="text-3xl"
+                help="Your spell attack bonus is added to a d20 when a spell attacks an enemy directly."
               />
             </>
           )}
@@ -846,18 +910,20 @@ function PlayerReferenceCard({
       </div>
 
       <div className="flex flex-col gap-2">
-        <SectionLabel>Ability Modifiers</SectionLabel>
+        <span className="flex items-center gap-1 text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+          Ability Scores
+          <HelpTip label="What are ability scores?">
+            Six scores describe your character's strengths. The modifier underneath is the bonus you
+            add to rolls — higher scores mean bigger bonuses.
+          </HelpTip>
+        </span>
         <div className="grid grid-cols-3 gap-2 sm:grid-cols-6">
           {ABILITY_KEYS.map((key) => (
-            <NumberCell
+            <AbilityScoreCell
               key={key}
-              label={ABILITY_LABELS[key]}
-              value={reference.abilityModifiers[key]}
-              min={-5}
-              max={10}
-              format={formatSigned}
-              onChange={(value) => update({ abilityModifiers: { [key]: value } })}
-              valueClassName="text-lg"
+              key_={key}
+              score={reference.abilityScores[key]}
+              onChange={(value) => update({ abilityScores: { [key]: value } })}
             />
           ))}
         </div>
@@ -866,6 +932,7 @@ function PlayerReferenceCard({
       <div className="flex flex-col gap-5">
         <ReferenceGroup
           title="Known Spells"
+          help="Spells your character can cast. Add the ones you use most for quick access."
           kind="spell"
           ids={reference.knownSpellCanonicalIds}
           onAdd={() => setPicker("spell")}
@@ -873,6 +940,7 @@ function PlayerReferenceCard({
         />
         <ReferenceGroup
           title="Weapons"
+          help="The weapons your character carries, with their damage at a glance."
           kind="weapon"
           ids={reference.weaponCanonicalIds}
           onAdd={() => setPicker("weapon")}
@@ -881,6 +949,7 @@ function PlayerReferenceCard({
         />
         <ReferenceGroup
           title="Magic Items"
+          help="Magic items your character owns. Add the ones you consult during play."
           kind="magicitem"
           ids={reference.magicItemCanonicalIds}
           onAdd={() => setPicker("magicitem")}
@@ -931,7 +1000,7 @@ function PlayerReferenceCard({
       {confirmRemove && (
         <ConfirmDialog
           title={`Remove ${reference.name}?`}
-          message="This removes their combat numbers, modifiers, and references. This can't be undone."
+          message="This removes their combat numbers, ability scores, and references. This can't be undone."
           confirmLabel="Remove"
           destructive
           onCancel={() => setConfirmRemove(false)}
@@ -950,11 +1019,9 @@ export function PartyPage() {
   const activePlayerId = userStore((s) => s.activePlayerId);
   const [creatingId, setCreatingId] = useState<string | null>(null);
 
-  const orderedPlayers = useMemo(() => {
-    if (!activePlayerId) return players;
-    const current = players.find((p) => p.id === activePlayerId);
-    if (!current) return players;
-    return [current, ...players.filter((p) => p.id !== activePlayerId)];
+  const activePlayer = useMemo(() => {
+    if (!activePlayerId) return players[0] ?? null;
+    return players.find((p) => p.id === activePlayerId) ?? players[0] ?? null;
   }, [players, activePlayerId]);
 
   const handleAdd = useCallback(() => {
@@ -963,38 +1030,71 @@ export function PartyPage() {
   }, []);
 
   return (
-    <div className="flex flex-col px-4 py-6">
-      <div className="mb-6 flex items-center justify-between">
-        <div>
-          <Display>Party</Display>
-          <p className="text-xs text-muted-foreground">
-            {players.length === 0
-              ? "The values you consult every session"
-              : `${players.length} player${players.length === 1 ? "" : "s"}`}
-          </p>
-        </div>
-        <Button onClick={handleAdd}>Add Player</Button>
+    <div className="flex flex-col gap-4 px-4 py-6">
+      <div className="flex flex-col gap-1">
+        <Display>Party</Display>
+        <p className="text-xs text-muted-foreground">
+          Your current character at a glance — edit what you use every session.
+        </p>
       </div>
 
       {players.length === 0 ? (
-        <div className="flex flex-col items-center gap-4 px-2 py-10 text-center">
-          <p className="w-full max-w-md text-sm text-muted-foreground">
-            Quick-access references: combat numbers, ability modifiers, and links to the spells,
-            weapons, and magic items you use most. Nothing else — no inventory, no tracking.
-          </p>
-          <Button onClick={handleAdd}>Create your first reference</Button>
-        </div>
+        <EmptyState
+          title="No character yet"
+          description="Add your character to start tracking ability scores, combat stats, and the spells and items you use most."
+          icon={
+            <svg
+              aria-hidden="true"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth={2}
+              className="h-5 w-5"
+            >
+              <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+              <circle cx="9" cy="7" r="4" />
+              <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
+              <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+            </svg>
+          }
+          action={
+            <Button onClick={handleAdd}>Create your first character</Button>
+          }
+        />
       ) : (
-        <div className="flex flex-col gap-4">
-          {orderedPlayers.map((player) => (
+        <>
+          {players.length > 1 && (
+            <div className="flex flex-wrap gap-2">
+              {players.map((player) => (
+                <button
+                  key={player.id}
+                  type="button"
+                  onClick={() => userStore.getState().setActivePlayer(player.id)}
+                  aria-pressed={player.id === activePlayerId}
+                  className={cn(
+                    "rounded-full border border-border px-3 py-1 text-xs font-medium transition-all duration-150 active:scale-95",
+                    player.id === activePlayerId
+                      ? "bg-primary text-primary-foreground"
+                      : "text-muted-foreground hover:bg-accent hover:text-foreground",
+                  )}
+                >
+                  {player.name}
+                </button>
+              ))}
+              <Button variant="ghost" size="sm" onClick={handleAdd}>
+                + Add
+              </Button>
+            </div>
+          )}
+          {activePlayer && (
             <PlayerReferenceCard
-              key={player.id}
-              reference={player}
-              autoEditName={player.id === creatingId}
-              current={player.id === activePlayerId}
+              key={activePlayer.id}
+              reference={activePlayer}
+              autoEditName={activePlayer.id === creatingId}
+              current={activePlayer.id === activePlayerId}
             />
-          ))}
-        </div>
+          )}
+        </>
       )}
     </div>
   );

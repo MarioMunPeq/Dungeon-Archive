@@ -13,6 +13,8 @@ export { Stepper } from "./Stepper";
 export { SelectField } from "./SelectField";
 export { SearchField } from "./SearchField";
 export { Skeleton } from "./Skeleton";
+export { HelpTip } from "./HelpTip";
+export { EmptyState } from "./EmptyState";
 export { SnackbarProvider } from "./Snackbar";
 export { useSnackbar } from "./snackbar-context";
 export { Title, Subtitle, Heading, Body, Caption, Display } from "./Typography";

@@ -1,7 +1,8 @@
 import type {
-  AbilityModifiers,
+  AbilityScores,
   Adventure,
   CombatValues,
+  HitPoints,
   PlayerReference,
   UserState,
 } from "./types";
@@ -95,20 +96,27 @@ const MAX_WEAPON_IDS = 10;
 const MAX_MAGIC_ITEM_IDS = 30;
 const MAX_NOTE_LENGTH = 280;
 
-const MIN_MODIFIER = -5;
-const MAX_MODIFIER = 10;
+const MIN_SCORE = 1;
+const MAX_SCORE = 30;
 const MIN_COMBAT = 0;
 const MAX_COMBAT = 40;
 const MIN_INITIATIVE = -5;
 const MAX_INITIATIVE = 20;
+const MIN_HP = 0;
+const MAX_HP = 9999;
 
-const DEFAULT_ABILITY_MODIFIERS: AbilityModifiers = {
-  strength: 0,
-  dexterity: 0,
-  constitution: 0,
-  intelligence: 0,
-  wisdom: 0,
-  charisma: 0,
+const DEFAULT_ABILITY_SCORES: AbilityScores = {
+  strength: 10,
+  dexterity: 10,
+  constitution: 10,
+  intelligence: 10,
+  wisdom: 10,
+  charisma: 10,
+};
+
+const DEFAULT_HIT_POINTS: HitPoints = {
+  current: 10,
+  max: 10,
 };
 
 function clampInt(value: unknown, min: number, max: number, fallback: number): number {
@@ -121,40 +129,42 @@ function clampOptInt(value: unknown, min: number, max: number): number | undefin
   return Math.max(min, Math.min(max, Math.floor(value)));
 }
 
-function normalizeAbilityModifiers(raw: unknown): AbilityModifiers {
-  const mods = (raw && typeof raw === "object" ? raw : {}) as Record<string, unknown>;
+/**
+ * Scores are the source of truth. When persisted data predates scores and only
+ * carries `abilityModifiers`, derive scores with the canonical reverse mapping
+ * score = modifier * 2 + 10.
+ */
+function normalizeAbilityScores(raw: unknown, legacyModifiers: unknown): AbilityScores {
+  const scores = (raw && typeof raw === "object" ? raw : {}) as Record<string, unknown>;
+  const mods = (legacyModifiers && typeof legacyModifiers === "object"
+    ? legacyModifiers
+    : {}) as Record<string, unknown>;
+  const fromRaw = (key: keyof AbilityScores, modKey: string): number => {
+    if (typeof scores[key] === "number") {
+      return clampInt(scores[key], MIN_SCORE, MAX_SCORE, DEFAULT_ABILITY_SCORES[key]);
+    }
+    if (typeof mods[modKey] === "number") {
+      const mod = Math.max(-5, Math.min(10, Math.floor(mods[modKey])));
+      return clampInt(mod * 2 + 10, MIN_SCORE, MAX_SCORE, DEFAULT_ABILITY_SCORES[key]);
+    }
+    return DEFAULT_ABILITY_SCORES[key];
+  };
   return {
-    strength: clampInt(
-      mods.strength,
-      MIN_MODIFIER,
-      MAX_MODIFIER,
-      DEFAULT_ABILITY_MODIFIERS.strength,
-    ),
-    dexterity: clampInt(
-      mods.dexterity,
-      MIN_MODIFIER,
-      MAX_MODIFIER,
-      DEFAULT_ABILITY_MODIFIERS.dexterity,
-    ),
-    constitution: clampInt(
-      mods.constitution,
-      MIN_MODIFIER,
-      MAX_MODIFIER,
-      DEFAULT_ABILITY_MODIFIERS.constitution,
-    ),
-    intelligence: clampInt(
-      mods.intelligence,
-      MIN_MODIFIER,
-      MAX_MODIFIER,
-      DEFAULT_ABILITY_MODIFIERS.intelligence,
-    ),
-    wisdom: clampInt(mods.wisdom, MIN_MODIFIER, MAX_MODIFIER, DEFAULT_ABILITY_MODIFIERS.wisdom),
-    charisma: clampInt(
-      mods.charisma,
-      MIN_MODIFIER,
-      MAX_MODIFIER,
-      DEFAULT_ABILITY_MODIFIERS.charisma,
-    ),
+    strength: fromRaw("strength", "strength"),
+    dexterity: fromRaw("dexterity", "dexterity"),
+    constitution: fromRaw("constitution", "constitution"),
+    intelligence: fromRaw("intelligence", "intelligence"),
+    wisdom: fromRaw("wisdom", "wisdom"),
+    charisma: fromRaw("charisma", "charisma"),
+  };
+}
+
+function normalizeHitPoints(raw: unknown): HitPoints {
+  const hp = (raw && typeof raw === "object" ? raw : {}) as Record<string, unknown>;
+  const max = clampInt(hp.max, 1, MAX_HP, DEFAULT_HIT_POINTS.max);
+  return {
+    max,
+    current: Math.min(clampInt(hp.current, MIN_HP, MAX_HP, DEFAULT_HIT_POINTS.current), max),
   };
 }
 
@@ -193,7 +203,8 @@ function normalizePlayerReference(raw: unknown): PlayerReference | null {
     class: typeof p.class === "string" ? p.class.trim() : "",
     level: clampInt(p.level, 1, 20, 1),
     subclass: typeof p.subclass === "string" ? p.subclass.trim() || undefined : undefined,
-    abilityModifiers: normalizeAbilityModifiers(p.abilityModifiers),
+    abilityScores: normalizeAbilityScores(p.abilityScores, p.abilityModifiers),
+    hitPoints: normalizeHitPoints(p.hitPoints),
     combatValues: normalizeCombatValues(p.combatValues),
     knownSpellCanonicalIds,
     weaponCanonicalIds,
@@ -216,12 +227,18 @@ function normalizePlayers(raw: unknown): PlayerReference[] {
 export function normalize(
   state: Omit<
     UserState,
-    "adventures" | "activeAdventureId" | "players" | "activePlayerId" | "onboardingComplete"
+    | "adventures"
+    | "activeAdventureId"
+    | "players"
+    | "activePlayerId"
+    | "beginnerMode"
+    | "onboardingComplete"
   > & {
     adventures?: Adventure[];
     activeAdventureId?: string | null;
     players?: PlayerReference[];
     activePlayerId?: string | null;
+    beginnerMode?: boolean;
     onboardingComplete?: boolean;
   },
 ): UserState {
@@ -246,6 +263,7 @@ export function normalize(
     activeAdventureId,
     players,
     activePlayerId,
+    beginnerMode: state.beginnerMode === true,
     onboardingComplete: state.onboardingComplete === true,
   };
 }

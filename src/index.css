@@ -2,43 +2,44 @@
 
 @theme {
   /* Color tokens — dark-first semantic system */
-  --color-primary: #6366f1;
+  --color-primary: #7c6ff0;
   --color-primary-foreground: #ffffff;
-  --color-primary-hover: #7c80f5;
-  --color-primary-active: #5559e8;
-  --color-primary-muted: #818cf8;
+  --color-primary-hover: #9084f4;
+  --color-primary-active: #6b5fe0;
+  --color-primary-muted: #9186f5;
 
-  --color-background: #0e0f13;
-  --color-surface: #14161b;
-  --color-card: #171921;
-  --color-card-foreground: #f4f4f5;
-  --color-muted: #1b1d24;
-  --color-muted-foreground: #a1a1aa;
-  --color-foreground: #f4f4f5;
-  --color-foreground-subtle: #9497a1;
-  --color-border: #23252e;
-  --color-border-strong: #30323d;
-  --color-input: #23252e;
-  --color-accent: #1f2129;
-  --color-accent-foreground: #f4f4f5;
+  --color-background: #0f0f13;
+  --color-surface: #1a1a20;
+  --color-card: #232329;
+  --color-elevated: #232329;
+  --color-card-foreground: #f2f2f5;
+  --color-muted: #1a1a20;
+  --color-muted-foreground: #6b6b75;
+  --color-foreground: #f2f2f5;
+  --color-foreground-subtle: #9b9ba5;
+  --color-border: #232329;
+  --color-border-strong: #33333d;
+  --color-input: #232329;
+  --color-accent: #232329;
+  --color-accent-foreground: #f2f2f5;
 
-  --color-destructive: #f87171;
+  --color-destructive: #ef4444;
   --color-destructive-foreground: #2a0a0d;
   --color-success: #34d399;
   --color-success-foreground: #062b1d;
   --color-warning: #fbbf24;
   --color-warning-foreground: #331f00;
-  --color-info: #60a5fa;
+  --color-info: #38bdf8;
 
   --color-focus: #a5b4fc;
-  --color-disabled: #1c1e24;
+  --color-disabled: #1a1a20;
   --color-disabled-foreground: #55575f;
   --color-overlay: rgb(0 0 0 / 0.6);
 
   /* Typography scale */
   --font-family-sans: "Inter", ui-sans-serif, system-ui, -apple-system, sans-serif;
   --font-family-mono: "JetBrains Mono", ui-monospace, monospace;
-  --font-family-display: "Space Grotesk Variable", "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-family-display: "Inter", ui-sans-serif, system-ui, -apple-system, sans-serif;
 
   --font-size-xs: 0.75rem;
   --font-size-sm: 0.875rem;

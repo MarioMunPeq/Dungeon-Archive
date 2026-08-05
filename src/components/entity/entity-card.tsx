@@ -4,7 +4,6 @@ import { formatSource, METADATA_SEPARATOR } from "@/compendium";
 import type { EntityCardData } from "@/compendium";
 import { FavoriteButton } from "@/components/ui/FavoriteButton";
 import { SessionButton } from "@/components/ui/SessionButton";
-import { AdventureButton } from "@/components/ui/AdventureButton";
 
 export const EntityCard = memo(function EntityCard({
   name,
@@ -24,7 +23,6 @@ export const EntityCard = memo(function EntityCard({
         <span className="flex items-center gap-1">
           <FavoriteButton canonicalId={canonicalId} />
           <SessionButton canonicalId={canonicalId} />
-          <AdventureButton canonicalId={canonicalId} />
         </span>
       </div>
       <span className="text-xs text-muted-foreground">

@@ -34,7 +34,7 @@ export function SearchIcon({ className }: IconProps) {
   );
 }
 
-export function AdventureIcon({ className }: IconProps) {
+export function RulesIcon({ className }: IconProps) {
   return (
     <svg
       aria-hidden="true"
@@ -44,8 +44,28 @@ export function AdventureIcon({ className }: IconProps) {
       stroke="currentColor"
       strokeWidth={2}
     >
-      <line x1="4" y1="3" x2="4" y2="21" />
-      <polyline points="4 3 20 3 18 7 20 11 4 11" />
+      <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z" />
+      <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z" />
+    </svg>
+  );
+}
+
+export function CombatIcon({ className }: IconProps) {
+  return (
+    <svg
+      aria-hidden="true"
+      className={className}
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth={2}
+    >
+      <path d="M14.5 17.5L3 6V3h3l11.5 11.5" />
+      <path d="M13 19l6-6" />
+      <path d="M16 16l4 4" />
+      <path d="M19 21l2-2" />
+      <path d="M3 3l2 2" />
+      <path d="M14.5 6.5L18 3l3 3-3.5 3.5" />
     </svg>
   );
 }

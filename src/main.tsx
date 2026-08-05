@@ -4,7 +4,6 @@ import { loadCompendium } from "@/compendium";
 import { hydrate } from "@/user-state";
 import { App } from "@/app";
 import { BootScreen } from "@/app/boot-screen";
-import "@fontsource-variable/space-grotesk";
 import "./index.css";
 
 const rootElement = document.getElementById("root");

@@ -17,8 +17,8 @@ const STEPS: readonly OnboardingStep[] = [
     body: "Keep the monsters, spells, and items you need right now one tap away during play.",
   },
   {
-    title: "Organize your campaign with Adventures.",
-    body: "Long-term notes, objectives, and references — separate from the session you're running tonight.",
+    title: "Learn the rules as you play.",
+    body: "New to the game? The Quick Rules tab explains the d20, ability checks, and your turn in combat.",
   },
   {
     title: "You're ready. Start exploring.",

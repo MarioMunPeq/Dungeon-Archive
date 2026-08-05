@@ -20,16 +20,18 @@ export {
   useRecentSearches,
   usePlayerReferences,
   useOnboardingComplete,
+  useBeginnerMode,
 } from "./store";
 export type { UserStore, PlayerReferenceUpdate } from "./store";
 export type {
   UserState,
   Adventure,
   PlayerReference,
-  AbilityModifiers,
+  AbilityScores,
+  HitPoints,
   CombatValues,
 } from "./types";
-export { STORAGE_KEY, CURRENT_VERSION } from "./types";
+export { STORAGE_KEY, CURRENT_VERSION, abilityModifier } from "./types";
 export { normalize } from "./normalize";
 export { toUserState } from "./serialization";
 export { migrate } from "./migrations";

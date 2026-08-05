@@ -16,7 +16,8 @@ export interface TopBarState {
 
 const FIXED_TITLES: Record<string, string> = {
   [ROUTES.HOME]: APP_NAME,
-  [ROUTES.ADVENTURE]: "Adventure",
+  [ROUTES.RULES]: "Quick Rules",
+  [ROUTES.COMBAT]: "Combat",
   [ROUTES.PARTY]: "Party",
   "/session": "Session",
   "/backup": "Backup",

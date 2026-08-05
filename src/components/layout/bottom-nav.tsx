@@ -1,12 +1,20 @@
 import { NavLink } from "react-router-dom";
 import { cn } from "@/lib/utils";
-import { HomeIcon, SearchIcon, AdventureIcon, PartyIcon } from "@/components/layout/nav-icons";
+import { ROUTES } from "@/config/constants";
+import {
+  HomeIcon,
+  SearchIcon,
+  RulesIcon,
+  CombatIcon,
+  PartyIcon,
+} from "@/components/layout/nav-icons";
 
 const NAV_ITEMS = [
-  { to: "/", label: "Home", icon: HomeIcon },
-  { to: "/search", label: "Search", icon: SearchIcon },
-  { to: "/adventure", label: "Adventure", icon: AdventureIcon },
-  { to: "/party", label: "Party", icon: PartyIcon },
+  { to: ROUTES.HOME, label: "Home", icon: HomeIcon },
+  { to: ROUTES.SEARCH, label: "Search", icon: SearchIcon },
+  { to: ROUTES.RULES, label: "Rules", icon: RulesIcon },
+  { to: ROUTES.COMBAT, label: "Combat", icon: CombatIcon },
+  { to: ROUTES.PARTY, label: "Party", icon: PartyIcon },
 ] as const;
 
 export function BottomNav() {

@@ -5,7 +5,6 @@ import {
   useFavoriteIds,
   useRecentEntities,
   useSessionIds,
-  useActiveAdventure,
   useActivePlayer,
   usePlayerReferences,
 } from "@/user-state";
@@ -60,7 +59,6 @@ function SectionHeader({ title, to }: { title: string; to?: string }) {
 }
 
 export function HomePage() {
-  const adventure = useActiveAdventure();
   const activePlayer = useActivePlayer();
   const sessionIds = useSessionIds(10);
   const recentIds = useRecentEntities(10);
@@ -88,7 +86,7 @@ export function HomePage() {
   const shownPlayers = players.slice(0, 5);
 
   const hasContent = sessionCards.length > 0 || recentCards.length > 0 || favoriteCards.length > 0;
-  const emptyWorkspace = players.length === 0 && !adventure && !hasContent;
+  const emptyWorkspace = players.length === 0 && !hasContent;
 
   return (
     <div className="flex flex-col gap-6 px-4 py-6">
@@ -96,8 +94,8 @@ export function HomePage() {
         <section className="flex flex-col items-center gap-4 px-2 py-10 text-center">
           <h2 className="text-2xl font-bold text-foreground">Welcome to your workspace</h2>
           <p className="w-full max-w-md text-sm text-muted-foreground">
-            Search the Compendium and pin the spells, monsters, and items you need. Your party,
-            adventure, and session build up here.
+            Search the Compendium and pin the spells, monsters, and items you need. Your party and
+            session build up here.
           </p>
           <Link
             to="/search"
@@ -188,55 +186,35 @@ export function HomePage() {
             </Link>
           )}
 
-          {adventure ? (
-            <section className="flex flex-col gap-3">
-              <SectionHeader title="Current Adventure" to="/adventure" />
-              <Link
-                to="/adventure"
-                className="flex flex-col gap-2 rounded-lg border border-border bg-surface p-4 transition-colors hover:bg-accent active:bg-accent/80"
-              >
-                <div className="flex items-center justify-between">
-                  <span className="text-sm font-medium text-foreground">{adventure.title}</span>
-                  {adventure.archived && (
-                    <span className="text-xs text-foreground-subtle">Archived</span>
-                  )}
-                </div>
-                {adventure.description && (
-                  <p className="line-clamp-2 text-xs text-muted-foreground">
-                    {adventure.description}
-                  </p>
-                )}
-                <div className="flex items-center gap-3 text-xs text-foreground-subtle">
-                  <span>
-                    {adventure.entities.length} reference
-                    {adventure.entities.length === 1 ? "" : "s"}
-                  </span>
-                  <span>
-                    {adventure.objectives.length} objective
-                    {adventure.objectives.length === 1 ? "" : "s"}
-                  </span>
-                </div>
-              </Link>
-            </section>
-          ) : (
+          <section className="flex flex-col gap-3">
+            <SectionHeader title="Quick Rules" to="/rules" />
             <Link
-              to="/adventure"
-              className="flex items-center gap-2 rounded-lg border border-dashed border-border p-4 text-sm text-muted-foreground transition-colors hover:bg-accent active:bg-accent/80"
+              to="/rules"
+              className="flex items-center gap-3 rounded-lg border border-border bg-surface px-4 py-3 transition-colors hover:bg-accent active:bg-accent/80"
             >
-              <svg
-                aria-hidden="true"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth={2}
-                className="h-4 w-4"
-              >
-                <line x1="4" y1="3" x2="4" y2="21" />
-                <polyline points="4 3 20 3 18 7 20 11 4 11" />
-              </svg>
-              <span>Create Adventure</span>
+              <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border border-border bg-muted text-primary">
+                <svg
+                  aria-hidden="true"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth={2}
+                  className="h-4 w-4"
+                >
+                  <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z" />
+                  <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z" />
+                </svg>
+              </span>
+              <span className="flex min-w-0 flex-col gap-1">
+                <span className="truncate text-sm font-medium text-foreground">
+                  Learn the basics
+                </span>
+                <span className="truncate text-xs text-muted-foreground">
+                  New to D&D? Start with the d20, checks, and your turn in combat.
+                </span>
+              </span>
             </Link>
-          )}
+          </section>
 
           <section className="flex flex-col gap-3">
             <SectionHeader title="Session" to="/session" />

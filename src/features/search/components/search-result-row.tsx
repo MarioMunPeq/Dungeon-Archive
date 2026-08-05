@@ -4,7 +4,6 @@ import { EntityIdentity } from "@/components/entity";
 import { SearchHighlight } from "./search-highlight";
 import { FavoriteButton } from "@/components/ui/FavoriteButton";
 import { SessionButton } from "@/components/ui/SessionButton";
-import { AdventureButton } from "@/components/ui/AdventureButton";
 
 interface SearchResultRowProps extends SearchResultItem {
   readonly query: string;
@@ -41,7 +40,6 @@ export function SearchResultRow({
 
       <FavoriteButton canonicalId={canonicalId} />
       <SessionButton canonicalId={canonicalId} />
-      <AdventureButton canonicalId={canonicalId} />
     </Link>
   );
 }

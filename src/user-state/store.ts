@@ -1,9 +1,10 @@
 import { create } from "zustand";
 import { useMemo } from "react";
 import type {
-  AbilityModifiers,
+  AbilityScores,
   Adventure,
   CombatValues,
+  HitPoints,
   PlayerReference,
   UserState,
 } from "./types";
@@ -29,10 +30,11 @@ interface AdventureActions {
 }
 
 export type PlayerReferenceUpdate = Partial<
-  Omit<PlayerReference, "id" | "abilityModifiers" | "combatValues">
+  Omit<PlayerReference, "id" | "abilityScores" | "combatValues" | "hitPoints">
 > & {
-  abilityModifiers?: Partial<AbilityModifiers>;
+  abilityScores?: Partial<AbilityScores>;
   combatValues?: Partial<CombatValues>;
+  hitPoints?: Partial<HitPoints>;
 };
 
 interface PlayerActions {
@@ -50,6 +52,7 @@ interface UserActions {
   clearRecentEntities: () => void;
   toggleSession: (canonicalId: string) => void;
   clearSession: () => void;
+  setBeginnerMode: (enabled: boolean) => void;
   completeOnboarding: () => void;
   _replace: (state: UserState) => void;
   _reset: () => void;
@@ -70,18 +73,28 @@ function clampInt(value: number, min: number, max: number): number {
 }
 
 const clampLevel = (value: number): number => clampInt(value, 1, 20);
-const clampModifier = (value: number): number => clampInt(value, -5, 10);
 const clampCombat = (value: number): number => clampInt(value, 0, 40);
 const clampInitiative = (value: number): number => clampInt(value, -5, 20);
+const clampScore = (value: number): number => clampInt(value, 1, 30);
+const clampHp = (value: number): number => clampInt(value, 0, 9999);
+const clampHpMax = (value: number): number => clampInt(value, 1, 9999);
 
-function clampAbilityModifiers(mods: AbilityModifiers): AbilityModifiers {
+function clampAbilityScores(scores: AbilityScores): AbilityScores {
   return {
-    strength: clampModifier(mods.strength),
-    dexterity: clampModifier(mods.dexterity),
-    constitution: clampModifier(mods.constitution),
-    intelligence: clampModifier(mods.intelligence),
-    wisdom: clampModifier(mods.wisdom),
-    charisma: clampModifier(mods.charisma),
+    strength: clampScore(scores.strength),
+    dexterity: clampScore(scores.dexterity),
+    constitution: clampScore(scores.constitution),
+    intelligence: clampScore(scores.intelligence),
+    wisdom: clampScore(scores.wisdom),
+    charisma: clampScore(scores.charisma),
+  };
+}
+
+function clampHitPoints(hp: HitPoints): HitPoints {
+  const max = clampHpMax(hp.max);
+  return {
+    max,
+    current: Math.min(clampHp(hp.current), max),
   };
 }
 
@@ -168,6 +181,7 @@ export const userStore = create<UserStore>((set, get) => ({
   adventureEntitySet: new Set<string>(),
   players: [],
   activePlayerId: null,
+  beginnerMode: true,
   onboardingComplete: false,
   _hasHydrated: false,
 
@@ -217,6 +231,11 @@ export const userStore = create<UserStore>((set, get) => ({
 
   clearSession: () => {
     set({ session: [], sessionSet: new Set<string>() });
+    schedulePersist(get);
+  },
+
+  setBeginnerMode: (enabled) => {
+    set({ beginnerMode: enabled });
     schedulePersist(get);
   },
 
@@ -403,7 +422,8 @@ export const userStore = create<UserStore>((set, get) => ({
         class: data.class.trim(),
         level: clampLevel(data.level),
         subclass: data.subclass?.trim() || undefined,
-        abilityModifiers: clampAbilityModifiers(data.abilityModifiers),
+        abilityScores: clampAbilityScores(data.abilityScores),
+        hitPoints: clampHitPoints(data.hitPoints),
         combatValues: clampCombatValues(data.combatValues),
         knownSpellCanonicalIds: [...data.knownSpellCanonicalIds],
         weaponCanonicalIds: [...data.weaponCanonicalIds],
@@ -429,10 +449,14 @@ export const userStore = create<UserStore>((set, get) => ({
         level: data.level !== undefined ? clampLevel(data.level) : current.level,
         subclass:
           data.subclass !== undefined ? data.subclass.trim() || undefined : current.subclass,
-        abilityModifiers:
-          data.abilityModifiers !== undefined
-            ? clampAbilityModifiers({ ...current.abilityModifiers, ...data.abilityModifiers })
-            : current.abilityModifiers,
+        abilityScores:
+          data.abilityScores !== undefined
+            ? clampAbilityScores({ ...current.abilityScores, ...data.abilityScores })
+            : current.abilityScores,
+        hitPoints:
+          data.hitPoints !== undefined
+            ? clampHitPoints({ ...current.hitPoints, ...data.hitPoints })
+            : current.hitPoints,
         combatValues:
           data.combatValues !== undefined
             ? clampCombatValues({ ...current.combatValues, ...data.combatValues })
@@ -480,6 +504,7 @@ export const userStore = create<UserStore>((set, get) => ({
       adventureEntitySet: updateActiveAdventureSet(state.adventures, state.activeAdventureId),
       players: state.players,
       activePlayerId: state.activePlayerId,
+      beginnerMode: state.beginnerMode,
       onboardingComplete: state.onboardingComplete,
     });
   },
@@ -498,6 +523,7 @@ export const userStore = create<UserStore>((set, get) => ({
       adventureEntitySet: new Set<string>(),
       players: [],
       activePlayerId: null,
+      beginnerMode: true,
       onboardingComplete: false,
       _hasHydrated: false,
     });
@@ -568,6 +594,10 @@ export function useOnboardingComplete(): boolean {
   return userStore((s) => s.onboardingComplete);
 }
 
+export function useBeginnerMode(): boolean {
+  return userStore((s) => s.beginnerMode);
+}
+
 function processPersistedState(state: UserState): UserState {
   const validated: UserState = {
     version: state.version,
@@ -579,6 +609,7 @@ function processPersistedState(state: UserState): UserState {
     activeAdventureId: state.activeAdventureId,
     players: state.players,
     activePlayerId: state.activePlayerId,
+    beginnerMode: state.beginnerMode === true,
     onboardingComplete: state.onboardingComplete === true,
   };
   return normalize(validated);
@@ -622,6 +653,7 @@ function replaceState(state: UserState): void {
     adventuresEqual(current.adventures, state.adventures) &&
     playersEqual(current.players, state.players) &&
     current.activePlayerId === state.activePlayerId &&
+    current.beginnerMode === state.beginnerMode &&
     current.onboardingComplete === state.onboardingComplete
   ) {
     return;

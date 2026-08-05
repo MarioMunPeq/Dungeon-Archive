@@ -3,14 +3,26 @@
  * Only repeatedly-consulted combat values and references are stored.
  * Only canonical IDs are stored, never full entity data.
  * The Compendium is the source of truth for entity resolution.
+ *
+ * Ability scores are the source of truth; the modifier is always derived via
+ * `abilityModifier(score)` = floor((score - 10) / 2).
  */
-export interface AbilityModifiers {
+export interface AbilityScores {
   readonly strength: number;
   readonly dexterity: number;
   readonly constitution: number;
   readonly intelligence: number;
   readonly wisdom: number;
   readonly charisma: number;
+}
+
+export function abilityModifier(score: number): number {
+  return Math.floor((score - 10) / 2);
+}
+
+export interface HitPoints {
+  readonly current: number;
+  readonly max: number;
 }
 
 export interface CombatValues {
@@ -27,7 +39,8 @@ export interface PlayerReference {
   readonly class: string;
   readonly level: number;
   readonly subclass?: string;
-  readonly abilityModifiers: AbilityModifiers;
+  readonly abilityScores: AbilityScores;
+  readonly hitPoints: HitPoints;
   readonly combatValues: CombatValues;
   readonly knownSpellCanonicalIds: string[];
   readonly weaponCanonicalIds: string[];
@@ -57,11 +70,12 @@ export interface UserState {
   readonly activeAdventureId: string | null;
   readonly players: PlayerReference[];
   readonly activePlayerId: string | null;
+  readonly beginnerMode: boolean;
   readonly onboardingComplete: boolean;
 }
 
 export const STORAGE_KEY = "dungeon:userState:v1";
-export const CURRENT_VERSION = 9;
+export const CURRENT_VERSION = 10;
 
 export function createDefaultState(): UserState {
   return {
@@ -74,6 +88,7 @@ export function createDefaultState(): UserState {
     activeAdventureId: null,
     players: [],
     activePlayerId: null,
+    beginnerMode: true,
     onboardingComplete: false,
   };
 }

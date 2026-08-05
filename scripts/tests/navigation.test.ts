@@ -29,6 +29,24 @@ async function main() {
     strictEqual(getTopBarState("/search").hidden, true);
   });
 
+  test("quick rules shows fixed title without back", () => {
+    const state = getTopBarState("/rules");
+    strictEqual(state.title, "Quick Rules");
+    strictEqual(state.backTo, undefined);
+  });
+
+  test("combat shows fixed title without back", () => {
+    const state = getTopBarState("/combat");
+    strictEqual(state.title, "Combat");
+    strictEqual(state.backTo, undefined);
+  });
+
+  test("party shows fixed title without back", () => {
+    const state = getTopBarState("/party");
+    strictEqual(state.title, "Party");
+    strictEqual(state.backTo, undefined);
+  });
+
   test("category root shows plural title without back", () => {
     const state = getTopBarState("/spell");
     strictEqual(state.title, "Spells");
