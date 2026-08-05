@@ -91,6 +91,8 @@ function CombatPlayerView({ player }: { player: PlayerReference }) {
 
   const hpLow = player.hitPoints.max > 0 && player.hitPoints.current <= player.hitPoints.max / 2;
 
+  const hpPercent = player.hitPoints.max > 0 ? Math.max(0, Math.min(100, Math.round((player.hitPoints.current / player.hitPoints.max) * 100))) : 0;
+
   return (
     <div className="flex flex-col gap-4">
       <div className="flex flex-col gap-3 rounded-lg border border-border bg-surface p-4">
@@ -142,6 +144,19 @@ function CombatPlayerView({ player }: { player: PlayerReference }) {
               valueClassName="text-3xl font-bold tabular-nums"
             />
           </div>
+        </div>
+        <div className="rounded-full bg-muted p-0.5">
+          <div
+            role="progressbar"
+            aria-valuenow={player.hitPoints.current}
+            aria-valuemin={0}
+            aria-valuemax={player.hitPoints.max}
+            className={cn(
+              "h-2 rounded-full transition-all duration-150",
+              hpLow ? "bg-destructive" : "bg-success",
+            )}
+            style={{ width: `${hpPercent}%` }}
+          />
         </div>
         {hpLow && (
           <p className="text-xs font-medium text-destructive">

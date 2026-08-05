@@ -1,17 +1,9 @@
 import { Link } from "react-router-dom";
-import { categoryLabel, categoryLabelSingular, CATEGORY_REGISTRY, METADATA_SEPARATOR } from "@/compendium";
-import type { EntityCategory, EntityCardData } from "@/compendium";
-import {
-  useFavoriteIds,
-  useRecentEntities,
-  useSessionIds,
-  useActivePlayer,
-  usePlayerReferences,
-} from "@/user-state";
+import { categoryLabelSingular, METADATA_SEPARATOR } from "@/compendium";
+import type { EntityCardData } from "@/compendium";
+import { useRecentEntities, useSessionIds, useActivePlayer, usePlayerReferences } from "@/user-state";
 import { entityRefFromCanonicalId, EntityCard } from "@/components/entity";
-import { isFirebaseConfigured } from "@/lib/firebase/config";
-
-const CATEGORIES = Object.keys(CATEGORY_REGISTRY) as EntityCategory[];
+import { Button, EmptyState } from "@/components/ui";
 
 function entityCardFromCanonicalId(canonicalId: string): EntityCardData | null {
   const ref = entityRefFromCanonicalId(canonicalId);
@@ -62,6 +54,7 @@ export function HomePage() {
   const activePlayer = useActivePlayer();
   const sessionIds = useSessionIds(10);
   const recentIds = useRecentEntities(10);
+  const players = usePlayerReferences();
 
   const sessionCards: EntityCardData[] = [];
   for (const id of sessionIds) {
@@ -75,236 +68,113 @@ export function HomePage() {
     if (card) recentCards.push(card);
   }
 
-  const favoriteIds = useFavoriteIds(10);
-  const favoriteCards: EntityCardData[] = [];
-  for (const id of favoriteIds) {
-    const card = entityCardFromCanonicalId(id);
-    if (card) favoriteCards.push(card);
-  }
-
-  const players = usePlayerReferences();
-  const shownPlayers = players.slice(0, 5);
-
-  const hasContent = sessionCards.length > 0 || recentCards.length > 0 || favoriteCards.length > 0;
-  const emptyWorkspace = players.length === 0 && !hasContent;
+  const player = activePlayer ?? players[0] ?? null;
 
   return (
     <div className="flex flex-col gap-5 px-4 py-6">
-      {emptyWorkspace ? (
-        <section className="flex flex-col items-center gap-4 px-2 py-10 text-center">
-          <h2 className="text-2xl font-bold text-foreground">Welcome to your workspace</h2>
-          <p className="w-full max-w-md text-sm text-muted-foreground">
-            Search the Compendium and pin the spells, monsters, and items you need. Your party and
-            session build up here.
-          </p>
+      <section className="flex flex-col gap-3">
+        <SectionHeader title="Current Character" to="/combat" />
+        {player ? (
           <Link
-            to="/search"
-            className="inline-flex touch-target items-center justify-center gap-2 rounded-lg bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-all duration-150 hover:bg-primary-hover active:scale-95 active:bg-primary-active"
+            to="/combat"
+            className="group flex flex-col gap-3 rounded-lg border border-border bg-surface p-4 transition-colors hover:bg-accent active:bg-accent/80"
           >
-            Search the Compendium
+            <div className="flex items-start justify-between gap-3">
+              <div className="min-w-0">
+                <p className="truncate text-sm font-semibold text-foreground">{player.name}</p>
+                <p className="truncate text-xs text-muted-foreground">
+                  {player.class ? `${player.class} ${METADATA_SEPARATOR} ` : ""}Lv {player.level}
+                </p>
+              </div>
+              <span className="rounded-full border border-border bg-muted px-2 py-1 text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+                Current
+              </span>
+            </div>
+            <p className="text-sm leading-relaxed text-muted-foreground">
+              Quick access to Combat and your current character health without duplicating HP on Home.
+            </p>
           </Link>
-        </section>
-      ) : (
-        <>
-          {players.length > 0 && (
-            <section className="flex flex-col gap-3">
-              <SectionHeader title="Current Character" to="/party" />
-              {activePlayer ? (
-                <Link
-                  to="/party"
-                  className="flex items-center justify-between gap-2 rounded-lg border border-border bg-surface px-4 py-3 transition-colors hover:bg-accent active:bg-accent/80"
-                >
-                  <div className="flex min-w-0 flex-col gap-1">
-                    <span className="truncate text-sm font-semibold text-foreground">
-                      {activePlayer.name}
-                    </span>
-                    <span className="truncate text-xs text-muted-foreground">
-                      {activePlayer.class ? `${activePlayer.class} ${METADATA_SEPARATOR} ` : ""}Lv{" "}
-                      {activePlayer.level}
-                    </span>
-                  </div>
-                  <span className="shrink-0 text-xs font-medium text-foreground-subtle">
-                    Current
-                  </span>
+        ) : (
+          <div className="rounded-lg border border-border bg-surface p-4">
+            <EmptyState
+              title="Create your first character"
+              description="Add a character to start tracking your party and combat state."
+              action={
+                <Link to="/party">
+                  <Button>Create Character</Button>
                 </Link>
-              ) : (
-                <Link
-                  to="/party"
-                  className="rounded-lg border border-dashed border-border px-4 py-3 text-xs text-muted-foreground transition-colors hover:bg-accent active:bg-accent/80"
-                >
-                  Choose a current character
-                </Link>
-              )}
-            </section>
-          )}
-
-          {players.length > 0 ? (
-            <section className="flex flex-col gap-3">
-              <SectionHeader title="Party" to="/party" />
-              <div className="flex flex-col gap-1 rounded-lg border border-border bg-surface px-4 py-2">
-                {shownPlayers.map((player) => (
-                  <div key={player.id} className="flex items-center justify-between gap-2 py-2">
-                    <span className="flex min-w-0 items-center gap-2 truncate text-sm font-semibold text-foreground">
-                      <span className="truncate">{player.name}</span>
-                      {player.id === activePlayer?.id && (
-                        <span className="shrink-0 rounded-full border border-border bg-muted px-2 py-1 text-xs font-medium uppercase tracking-wide text-muted-foreground">
-                          Current
-                        </span>
-                      )}
-                    </span>
-                    <span className="shrink-0 text-xs text-muted-foreground">
-                      {player.class ? `${player.class} ${METADATA_SEPARATOR} ` : ""}Lv {player.level}
-                    </span>
-                  </div>
-                ))}
-                {players.length > shownPlayers.length && (
-                  <p className="pb-1 text-xs text-foreground-subtle">
-                    +{players.length - shownPlayers.length} more
-                  </p>
-                )}
-              </div>
-            </section>
-          ) : (
-            <Link
-              to="/party"
-              className="flex items-center gap-2 rounded-lg border border-dashed border-border p-4 text-sm text-muted-foreground transition-colors hover:bg-accent active:bg-accent/80"
-            >
-              <svg
-                aria-hidden="true"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth={2}
-                className="h-4 w-4"
-              >
-                <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
-                <circle cx="9" cy="7" r="4" />
-                <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
-                <path d="M16 3.13a4 4 0 0 1 0 7.75" />
-              </svg>
-              <span>Add Player</span>
-            </Link>
-          )}
-
-          <section className="flex flex-col gap-3">
-            <SectionHeader title="Quick Rules" to="/rules" />
-            <Link
-              to="/rules"
-              className="flex items-center gap-3 rounded-lg border border-border bg-surface px-4 py-3 transition-colors hover:bg-accent active:bg-accent/80"
-            >
-              <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border border-border bg-muted text-muted-foreground">
-                <svg
-                  aria-hidden="true"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth={2}
-                  className="h-4 w-4"
-                >
-                  <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z" />
-                  <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z" />
-                </svg>
-              </span>
-              <span className="flex min-w-0 flex-col gap-1">
-                <span className="truncate text-sm font-medium text-foreground">
-                  Learn the basics
-                </span>
-                <span className="truncate text-xs text-muted-foreground">
-                  New to D&D? Start with the d20, checks, and your turn in combat.
-                </span>
-              </span>
-            </Link>
-          </section>
-
-          <section className="flex flex-col gap-3">
-            <SectionHeader title="Session" to="/session" />
-            {sessionCards.length > 0 ? (
-              <div className="grid grid-cols-1 gap-2 sm:grid-cols-2 lg:grid-cols-3">
-                {sessionCards.map((card) => (
-                  <EntityCard key={card.href} {...card} />
-                ))}
-              </div>
-            ) : (
-              <Link
-                to="/search"
-                className="rounded-lg border border-dashed border-border px-4 py-3 text-xs text-muted-foreground transition-colors hover:bg-accent active:bg-accent/80"
-              >
-                Nothing pinned yet. Search the Compendium and pin what you need.
-              </Link>
-            )}
-          </section>
-        </>
-      )}
-
-      {recentCards.length > 0 && (
-        <section className="flex flex-col gap-3">
-          <SectionHeader title="Recently Viewed" />
-          <div className="grid grid-cols-1 gap-2 sm:grid-cols-2 lg:grid-cols-3">
-            {recentCards.map((card) => (
-              <EntityCard key={card.href} {...card} />
-            ))}
+              }
+            />
           </div>
-        </section>
-      )}
-
-      {favoriteCards.length > 0 && (
-        <section className="flex flex-col gap-3">
-          <SectionHeader title="Favorites" />
-          <div className="grid grid-cols-1 gap-2 sm:grid-cols-2 lg:grid-cols-3">
-            {favoriteCards.map((card) => (
-              <EntityCard key={card.href} {...card} />
-            ))}
-          </div>
-        </section>
-      )}
+        )}
+      </section>
 
       <section className="flex flex-col gap-3">
-        <h2 className="text-sm font-semibold uppercase tracking-wide text-muted-foreground">
-          Compendium
-        </h2>
-        <div className="grid grid-cols-1 gap-2 sm:grid-cols-2 lg:grid-cols-3">
-          {CATEGORIES.map((cat) => (
-            <Link
-              key={cat}
-              to={`/${cat}`}
-              className="flex items-center justify-between gap-2 rounded-lg border border-border bg-surface px-3 py-3 transition-colors hover:bg-accent active:bg-accent/80"
-            >
-              <span className="text-sm font-medium text-foreground">{categoryLabel(cat)}</span>
-              <svg
-                aria-hidden="true"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth={2}
-                className="h-4 w-4 shrink-0 text-muted-foreground"
-              >
-                <path d="M9 18l6-6-6-6" />
-              </svg>
-            </Link>
-          ))}
+        <SectionHeader title="Session" to="/session" />
+        <div className="rounded-lg border border-border bg-surface p-4">
+          {sessionCards.length > 0 ? (
+            <div className="grid grid-cols-1 gap-2 sm:grid-cols-2 lg:grid-cols-3">
+              {sessionCards.map((card) => (
+                <EntityCard key={card.href} {...card} />
+              ))}
+            </div>
+          ) : (
+            <EmptyState
+              title="No session content yet"
+              description="Pin creatures, spells, and items to build your encounter session."
+              action={
+                <Link to="/search">
+                  <Button>Search the Compendium</Button>
+                </Link>
+              }
+            />
+          )}
         </div>
       </section>
 
-      {isFirebaseConfigured() && (
-        <div className="flex justify-center pt-2">
-          <Link
-            to="/backup"
-            className="inline-flex min-h-11 items-center gap-2 rounded-lg border border-border px-4 text-xs font-medium text-muted-foreground transition-colors hover:bg-accent hover:text-foreground active:bg-accent/80"
-          >
-            <svg
-              aria-hidden="true"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth={2}
-              className="h-4 w-4"
-            >
-              <path d="M17.5 19a4.5 4.5 0 1 0-.42-8.98 6 6 0 1 0-11.66 1.48A3.5 3.5 0 0 0 7 19h10.5Z" />
-            </svg>
-            Cloud Backup
-          </Link>
+      <section className="flex flex-col gap-3">
+        <SectionHeader title="Recently Viewed" />
+        <div className="rounded-lg border border-border bg-surface p-4">
+          {recentCards.length > 0 ? (
+            <div className="grid grid-cols-1 gap-2">
+              {recentCards.map((card) => (
+                <EntityCard key={card.href} {...card} />
+              ))}
+            </div>
+          ) : (
+            <EmptyState
+              title="Nothing viewed yet"
+              description="Browse the Compendium and return here to keep recent items within reach."
+              action={
+                <Link to="/search">
+                  <Button>Browse the Compendium</Button>
+                </Link>
+              }
+            />
+          )}
         </div>
-      )}
+      </section>
+
+      <section className="flex flex-col gap-3">
+        <SectionHeader title="Learn the basics" to="/rules" />
+        <Link
+          to="/rules"
+          className="flex items-start gap-3 rounded-lg border border-border bg-surface px-4 py-3 transition-colors hover:bg-accent active:bg-accent/80"
+        >
+          <span className="mt-1 flex h-8 w-8 items-center justify-center rounded-lg border border-border bg-muted text-muted-foreground">
+            <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} className="h-4 w-4">
+              <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z" />
+              <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z" />
+            </svg>
+          </span>
+          <div className="flex min-w-0 flex-col gap-1">
+            <span className="truncate text-sm font-medium text-foreground">Learn the basics</span>
+            <span className="truncate text-xs text-muted-foreground">
+              New to D&D? Start with the d20, checks, and your turn in combat.
+            </span>
+          </div>
+        </Link>
+      </section>
     </div>
   );
 }
