@@ -159,26 +159,32 @@ export function HomePage() {
                   Add a character to start tracking your party and combat state.
                 </p>
               </div>
-              <div className="flex flex-wrap items-center gap-2">
-                <Link to="/party">
-                  <Button size="sm">Create Character</Button>
-                </Link>
-                {firebaseEnabled && auth && !loadingAuth && !signedIn ? (
-                  <Button size="sm" onClick={handleSignIn} disabled={busy}>
-                    {busy ? "Signing in…" : "Sign in with Google"}
-                  </Button>
-                ) : null}
-              </div>
-              {authError ? <p className="text-xs text-destructive">{authError}</p> : null}
-              {signedIn && auth?.user ? (
-                <p className="text-xs text-success">
-                  Signed in as {auth.user.email ?? auth.user.displayName}
-                </p>
-              ) : null}
+              <Link to="/party">
+                <Button size="sm">Create Character</Button>
+              </Link>
             </div>
           </div>
         )}
       </section>
+
+      {firebaseEnabled && auth && !loadingAuth && !signedIn ? (
+        <section className="flex flex-col gap-3">
+          <div className="rounded-lg border border-border bg-surface p-3">
+            <div className="flex flex-col gap-2">
+              <p className="text-sm font-semibold text-foreground">Sync your character to the cloud</p>
+              <p className="text-xs leading-relaxed text-muted-foreground">
+                Sign in with Google to restore your data on another device.
+              </p>
+              <div className="flex items-center gap-2">
+                <Button variant="outline" size="sm" onClick={handleSignIn} disabled={busy}>
+                  {busy ? "Signing in…" : "Sign in with Google"}
+                </Button>
+                {authError ? <span className="text-xs text-destructive">{authError}</span> : null}
+              </div>
+            </div>
+          </div>
+        </section>
+      ) : null}
 
       <section className="flex flex-col gap-3">
         <SectionHeader title="Session" to="/session" />
@@ -209,7 +215,7 @@ export function HomePage() {
         <SectionHeader title="Recently Viewed" />
         <div className="rounded-lg border border-border bg-surface p-4">
           {recentCards.length > 0 ? (
-            <div className="grid grid-cols-1 gap-2">
+            <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
               {recentCards.map((card) => (
                 <EntityCard key={card.href} {...card} />
               ))}
