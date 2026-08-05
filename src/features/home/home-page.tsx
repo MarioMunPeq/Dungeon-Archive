@@ -1,9 +1,13 @@
+import { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { categoryLabelSingular, METADATA_SEPARATOR } from "@/compendium";
 import type { EntityCardData } from "@/compendium";
 import { useRecentEntities, useSessionIds, useActivePlayer, usePlayerReferences } from "@/user-state";
 import { entityRefFromCanonicalId, EntityCard } from "@/components/entity";
 import { Button, EmptyState } from "@/components/ui";
+import { AuthContext } from "@/features/auth/auth-context";
+import { isFirebaseConfigured } from "@/lib/firebase/config";
+import { friendlyErrorMessage } from "@/sync/errors";
 
 function entityCardFromCanonicalId(canonicalId: string): EntityCardData | null {
   const ref = entityRefFromCanonicalId(canonicalId);
@@ -55,6 +59,9 @@ export function HomePage() {
   const sessionIds = useSessionIds(10);
   const recentIds = useRecentEntities(10);
   const players = usePlayerReferences();
+  const auth = useContext(AuthContext);
+  const [authError, setAuthError] = useState<string | null>(null);
+  const [busy, setBusy] = useState(false);
 
   const sessionCards: EntityCardData[] = [];
   for (const id of sessionIds) {
@@ -69,6 +76,35 @@ export function HomePage() {
   }
 
   const player = activePlayer ?? players[0] ?? null;
+  const firebaseEnabled = isFirebaseConfigured();
+  const signedIn = auth?.user !== null && auth?.status === "ready";
+  const loadingAuth = auth?.status === "loading";
+
+  const handleSignIn = async () => {
+    if (!auth) return;
+    setAuthError(null);
+    setBusy(true);
+    try {
+      await auth.login();
+    } catch (error) {
+      setAuthError(friendlyErrorMessage(error, navigator.onLine));
+    } finally {
+      setBusy(false);
+    }
+  };
+
+  const handleSignOut = async () => {
+    if (!auth) return;
+    setAuthError(null);
+    setBusy(true);
+    try {
+      await auth.logout();
+    } catch (error) {
+      setAuthError(friendlyErrorMessage(error, navigator.onLine));
+    } finally {
+      setBusy(false);
+    }
+  };
 
   return (
     <div className="flex flex-col gap-5 px-4 py-6">
@@ -108,6 +144,46 @@ export function HomePage() {
           </div>
         )}
       </section>
+
+      {firebaseEnabled && auth && (
+        <section className="flex flex-col gap-3">
+          <div className="rounded-lg border border-border bg-surface p-3">
+            {loadingAuth ? (
+              <p className="text-sm text-muted-foreground">Checking sign-in status…</p>
+            ) : signedIn ? (
+              <div className="flex flex-col gap-3">
+                <div className="flex items-center justify-between gap-3">
+                  <div className="min-w-0">
+                    <p className="truncate text-sm font-medium text-foreground">
+                      {auth.user?.email ?? auth.user?.displayName ?? "Connected"}
+                    </p>
+                    <p className="text-xs text-muted-foreground">Signed in to sync your character.</p>
+                  </div>
+                  <Button variant="outline" size="sm" onClick={handleSignOut} disabled={busy}>
+                    {busy ? "Signing out…" : "Sign out"}
+                  </Button>
+                </div>
+                {authError ? <p className="text-xs text-destructive">{authError}</p> : null}
+              </div>
+            ) : (
+              <div className="flex flex-col gap-3">
+                <div>
+                  <p className="text-sm font-medium text-foreground">Sync your character to the cloud</p>
+                  <p className="text-xs text-muted-foreground">
+                    Sign in with Google to restore your data on another device.
+                  </p>
+                </div>
+                <div className="flex items-center justify-between gap-3">
+                  <Button onClick={handleSignIn} disabled={busy}>
+                    {busy ? "Signing in…" : "Sign in with Google"}
+                  </Button>
+                </div>
+                {authError ? <p className="text-xs text-destructive">{authError}</p> : null}
+              </div>
+            )}
+          </div>
+        </section>
+      )}
 
       <section className="flex flex-col gap-3">
         <SectionHeader title="Session" to="/session" />

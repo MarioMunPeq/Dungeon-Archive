@@ -1,4 +1,4 @@
-import { onAuthStateChanged, signInWithPopup, signOut } from "firebase/auth";
+import { onAuthStateChanged, signInWithPopup, signInWithRedirect, signOut } from "firebase/auth";
 import type { Unsubscribe } from "firebase/auth";
 import { getAuthInstance, getGoogleProvider } from "./auth";
 
@@ -31,10 +31,14 @@ function requireAuth() {
   return auth;
 }
 
-export function signInWithGoogle(): Promise<AuthUser> {
-  return signInWithPopup(requireAuth(), getGoogleProvider()).then((result) =>
-    toAuthUser(result.user),
-  );
+export function signInWithGoogle(): Promise<AuthUser | void> {
+  const auth = requireAuth();
+  const provider = getGoogleProvider();
+  if (import.meta.env.PROD) {
+    return signInWithRedirect(auth, provider);
+  }
+
+  return signInWithPopup(auth, provider).then((result) => toAuthUser(result.user));
 }
 
 export function logout(): Promise<void> {

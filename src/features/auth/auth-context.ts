@@ -6,7 +6,7 @@ export type AuthStatus = "loading" | "ready";
 export interface AuthContextValue {
   readonly user: AuthUser | null;
   readonly status: AuthStatus;
-  readonly login: () => Promise<AuthUser>;
+  readonly login: () => Promise<AuthUser | void>;
   readonly logout: () => Promise<void>;
 }
 

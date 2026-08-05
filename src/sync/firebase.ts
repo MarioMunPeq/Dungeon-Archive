@@ -35,7 +35,9 @@ export function createFirebaseGateway(): CloudGateway {
       return user ? toCloudUser(user) : null;
     },
 
-    signIn: async () => toCloudUser(await signInWithGoogle()),
+    signIn: async () => {
+      await signInWithGoogle();
+    },
 
     signOut: () => logout(),
 
