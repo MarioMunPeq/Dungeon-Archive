@@ -510,7 +510,7 @@ function ReferenceRow({
         canonicalId={canonicalId}
         subtitle={subtitle}
         showBadge={false}
-        className="py-1"
+        className="py-2"
         trailing={
           quickStats ? (
             <span className="shrink-0 rounded-md bg-card px-2 py-1 text-xs font-semibold tabular-nums text-foreground">

@@ -6,7 +6,7 @@ interface HeaderBlockProps {
 export function HeaderBlock({ text, level }: HeaderBlockProps) {
   const size =
     level === 1
-      ? "text-lg font-bold"
+      ? "text-xl font-bold"
       : level === 2
         ? "text-base font-semibold"
         : "text-sm font-semibold";

@@ -37,7 +37,7 @@ export function SelectField({
       onChange={(e: ChangeEvent<HTMLSelectElement>) => onChange(e.currentTarget.value)}
       aria-label={ariaLabel}
       className={cn(
-        "touch-target h-9 max-w-full cursor-pointer appearance-none rounded-lg border border-border bg-background px-2 pr-7 text-sm text-foreground outline-none transition-colors duration-150 focus:border-focus focus:ring-1 focus:ring-focus",
+        "touch-target h-11 max-w-full cursor-pointer appearance-none rounded-lg border border-border bg-background px-3 pr-8 text-sm text-foreground outline-none transition-colors duration-150 focus:border-focus focus:ring-1 focus:ring-focus",
         !value && "text-muted-foreground",
         className,
       )}

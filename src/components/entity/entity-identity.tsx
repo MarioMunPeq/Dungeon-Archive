@@ -25,7 +25,7 @@ export function EntityIdentity({
         </Badge>
       )}
       <div className="min-w-0 flex-1 space-y-1">
-        <p className="truncate text-sm font-medium text-foreground">{name}</p>
+        <p className="truncate text-base font-medium text-foreground">{name}</p>
         {subtitle != null && <p className="truncate text-xs text-muted-foreground">{subtitle}</p>}
       </div>
     </>

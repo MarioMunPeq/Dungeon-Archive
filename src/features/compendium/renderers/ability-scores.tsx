@@ -25,7 +25,7 @@ const ABILITIES = [
 
 export function AbilityScores({ abilities }: AbilityScoresProps) {
   return (
-    <div className="grid grid-cols-6 gap-1">
+    <div className="grid grid-cols-3 gap-2 sm:grid-cols-6">
       {ABILITIES.map(({ key, label }) => (
         <div key={key} className="flex flex-col items-center gap-1">
           <span className="text-xs font-semibold uppercase text-muted-foreground">{label}</span>

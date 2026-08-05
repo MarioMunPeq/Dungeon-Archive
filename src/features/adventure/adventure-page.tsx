@@ -267,7 +267,7 @@ export function AdventurePage() {
             {adventure.objectives.map((obj, i) => (
               <li
                 key={i}
-                className="flex items-center gap-2 rounded-lg px-3 py-2 text-sm text-foreground hover:bg-accent/30"
+                className="flex items-center gap-2 rounded-lg px-3 py-3 text-sm text-foreground hover:bg-accent/30"
               >
                 <span className="flex-1">{obj}</span>
                 {!adventure.archived && (

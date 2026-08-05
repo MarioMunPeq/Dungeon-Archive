@@ -24,7 +24,7 @@ export const SearchField = forwardRef<HTMLInputElement, SearchFieldProps>(functi
       autoComplete="off"
       spellCheck={false}
       className={cn(
-        "w-full rounded-lg border border-border bg-surface px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground focus:border-focus focus:outline-none focus:ring-1 focus:ring-focus",
+        "touch-target w-full rounded-lg border border-border bg-surface px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground focus:border-focus focus:outline-none focus:ring-1 focus:ring-focus",
         className,
       )}
       {...rest}

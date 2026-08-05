@@ -57,7 +57,7 @@ export function ReferencePicker({ title, candidates, onSelect, onClose }: Refere
       className="fixed inset-0 z-50 flex flex-col bg-card animate-slide-up"
     >
       <div className="flex items-center gap-2 border-b border-border px-4 py-3">
-        <h2 className="flex-1 text-sm font-semibold text-foreground">{title}</h2>
+        <h2 className="flex-1 text-base font-semibold text-foreground">{title}</h2>
         <button
           type="button"
           onClick={onClose}
