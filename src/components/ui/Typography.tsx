@@ -9,7 +9,7 @@ interface TypographyProps {
 
 export function Display({ as: Tag = "h1", className, children }: TypographyProps) {
   return (
-    <Tag className={cn("font-display text-2xl font-bold text-foreground", className)}>
+    <Tag className={cn("font-display text-3xl font-bold text-foreground", className)}>
       {children}
     </Tag>
   );

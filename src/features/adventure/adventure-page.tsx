@@ -124,7 +124,7 @@ export function AdventurePage() {
   if (!adventure) {
     return (
       <div className="flex flex-col px-4 py-6">
-        <Display className="mb-6 text-xl font-bold">Adventure</Display>
+        <Display className="mb-6">Adventure</Display>
         <div className="flex flex-col items-center gap-4 px-2 py-10 text-center">
           <p className="w-full max-w-md text-sm text-muted-foreground">
             No active adventure yet. Create one to track your campaign notes, objectives, and
@@ -155,10 +155,10 @@ export function AdventurePage() {
                 onSave={handleSaveTitle}
                 onCancel={() => setEditingTitle(false)}
                 aria-label="Title"
-                className="text-lg font-bold"
+                className="text-2xl font-bold"
               />
             ) : (
-              <Display className="text-xl font-bold">{adventure.title}</Display>
+              <Display>{adventure.title}</Display>
             )}
             <p className="mt-1 text-xs text-muted-foreground">
               {entities.length} reference

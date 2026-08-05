@@ -48,12 +48,12 @@ function SectionHeader({ title, to }: { title: string; to?: string }) {
   return to ? (
     <Link
       to={to}
-      className="flex items-center gap-1 text-xs font-semibold uppercase tracking-wide text-muted-foreground transition-colors hover:text-foreground"
+      className="flex items-center gap-1 text-sm font-semibold uppercase tracking-wide text-muted-foreground transition-colors hover:text-foreground"
     >
       {content}
     </Link>
   ) : (
-    <h2 className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+    <h2 className="text-sm font-semibold uppercase tracking-wide text-muted-foreground">
       {content}
     </h2>
   );
@@ -94,7 +94,7 @@ export function HomePage() {
     <div className="flex flex-col gap-6 px-4 py-6">
       {emptyWorkspace ? (
         <section className="flex flex-col items-center gap-4 px-2 py-10 text-center">
-          <h2 className="text-xl font-bold text-foreground">Welcome to your workspace</h2>
+          <h2 className="text-2xl font-bold text-foreground">Welcome to your workspace</h2>
           <p className="w-full max-w-md text-sm text-muted-foreground">
             Search the Compendium and pin the spells, monsters, and items you need. Your party,
             adventure, and session build up here.
@@ -241,11 +241,9 @@ export function HomePage() {
           <section className="flex flex-col gap-3">
             <SectionHeader title="Session" to="/session" />
             {sessionCards.length > 0 ? (
-              <div className="-mx-4 flex gap-3 overflow-x-auto px-4 pb-2">
+              <div className="grid grid-cols-1 gap-2 sm:grid-cols-2 lg:grid-cols-3">
                 {sessionCards.map((card) => (
-                  <div key={card.href} className="w-56 shrink-0">
-                    <EntityCard {...card} />
-                  </div>
+                  <EntityCard key={card.href} {...card} />
                 ))}
               </div>
             ) : (
@@ -263,21 +261,11 @@ export function HomePage() {
       {recentCards.length > 0 && (
         <section className="flex flex-col gap-3">
           <SectionHeader title="Recently Viewed" />
-          {recentCards.length <= 3 ? (
-            <div className="grid grid-cols-1 gap-2 sm:grid-cols-2 lg:grid-cols-3">
-              {recentCards.map((card) => (
-                <EntityCard key={card.href} {...card} />
-              ))}
-            </div>
-          ) : (
-            <div className="-mx-4 flex gap-3 overflow-x-auto px-4 pb-2">
-              {recentCards.map((card) => (
-                <div key={card.href} className="w-56 shrink-0">
-                  <EntityCard {...card} />
-                </div>
-              ))}
-            </div>
-          )}
+          <div className="grid grid-cols-1 gap-2 sm:grid-cols-2 lg:grid-cols-3">
+            {recentCards.map((card) => (
+              <EntityCard key={card.href} {...card} />
+            ))}
+          </div>
         </section>
       )}
 
@@ -293,10 +281,10 @@ export function HomePage() {
       )}
 
       <section className="flex flex-col gap-3">
-        <h2 className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+        <h2 className="text-sm font-semibold uppercase tracking-wide text-muted-foreground">
           Compendium
         </h2>
-        <div className="grid grid-cols-2 gap-2 sm:grid-cols-3">
+        <div className="grid grid-cols-1 gap-2 sm:grid-cols-2 lg:grid-cols-3">
           {CATEGORIES.map((cat) => (
             <Link
               key={cat}

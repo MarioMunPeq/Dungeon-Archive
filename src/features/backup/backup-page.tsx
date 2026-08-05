@@ -183,7 +183,7 @@ export function BackupPage() {
   return (
     <div className="flex flex-col px-4 py-6">
       <div className="mb-6 space-y-1">
-        <Display className="text-xl font-bold">Cloud Backup</Display>
+        <Display>Cloud Backup</Display>
         <p className="text-xs text-muted-foreground">
           Your data lives locally on this device. Cloud backup is optional and lets you restore it
           on another device.

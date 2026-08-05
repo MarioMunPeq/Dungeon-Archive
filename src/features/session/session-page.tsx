@@ -32,7 +32,7 @@ export function SessionPage() {
     <div className="flex flex-col px-4 py-6">
       <div className="mb-6 flex items-center justify-between">
         <div>
-          <Display className="text-xl font-bold">Session</Display>
+          <Display>Session</Display>
           <p className="text-xs text-muted-foreground">
             {sessionIds.length === 0
               ? "No references in session"

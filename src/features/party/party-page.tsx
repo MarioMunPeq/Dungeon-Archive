@@ -703,7 +703,6 @@ function PlayerReferenceCard({
               onChange={(value) => update({ subclass: value || undefined })}
               ariaLabel="Subclass"
               placeholder="Subclass"
-              className="max-w-44"
             />
             <div className="flex items-center gap-1">
               <span className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
@@ -972,7 +971,7 @@ export function PartyPage() {
     <div className="flex flex-col px-4 py-6">
       <div className="mb-6 flex items-center justify-between">
         <div>
-          <Display className="text-xl font-bold">Party</Display>
+          <Display>Party</Display>
           <p className="text-xs text-muted-foreground">
             {players.length === 0
               ? "The values you consult every session"

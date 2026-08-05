@@ -30,7 +30,7 @@ export function SearchEmptyState() {
         <p className="mb-2 text-xs font-medium uppercase tracking-wide text-muted-foreground">
           Categories
         </p>
-        <div className="grid grid-cols-2 gap-2 sm:grid-cols-3">
+        <div className="grid grid-cols-1 gap-2 sm:grid-cols-2 lg:grid-cols-3">
           {Object.entries(CATEGORY_REGISTRY).map(([key, reg]) => (
             <Link
               key={key}

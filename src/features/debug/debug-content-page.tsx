@@ -60,8 +60,8 @@ function ConditionSection({ id }: { id: string }) {
 
 export function DebugContentPage() {
   return (
-    <div className="mx-auto max-w-2xl space-y-8 p-4">
-      <Display className="text-xl font-bold">Debug: Content Rendering</Display>
+    <div className="w-full space-y-8 p-4">
+      <Display>Debug: Content Rendering</Display>
       {entities.map((entity) => (
         <section
           key={entity.id}

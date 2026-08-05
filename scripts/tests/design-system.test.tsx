@@ -109,7 +109,7 @@ test("renders title and children", () => {
   );
   ok(html.includes("My Title"));
   ok(html.includes("body"));
-  ok(html.includes("text-xs font-semibold uppercase tracking-wide text-muted-foreground"));
+  ok(html.includes("text-sm font-semibold uppercase tracking-wide text-muted-foreground"));
 });
 
 test("renders optional subtitle", () => {
@@ -189,7 +189,7 @@ test("Display renders as h1 with font-display", () => {
   const html = renderToString(createElement(Display, null, "Page Title"));
   ok(html.includes("<h1"));
   ok(html.includes("font-display"));
-  ok(html.includes("text-2xl font-bold"));
+  ok(html.includes("text-3xl font-bold"));
 });
 
 test("Display merges className overrides", () => {
@@ -197,7 +197,7 @@ test("Display merges className overrides", () => {
   ok(html.includes("font-display"));
   ok(html.includes("text-xl"));
   ok(html.includes("font-semibold"));
-  ok(!html.includes("text-2xl"));
+  ok(!html.includes("text-3xl"));
 });
 
 test("Subtitle renders as p with text-sm text-muted-foreground", () => {
