@@ -30,14 +30,9 @@ export function AppRouter() {
       <Route path="/party" element={<PartyPage />} />
       {CLOUD_ENABLED && <Route path="/backup" element={<BackupPage />} />}
       {CATEGORIES.map((cat) => (
-        <Route key={`list-${cat}`} path={`/${cat}`} element={<CategoryPage category={cat} />} />
-      ))}
-      {CATEGORIES.map((cat) => (
-        <Route
-          key={`detail-${cat}`}
-          path={`/${cat}/:canonicalId`}
-          element={<CompendiumPage category={cat} />}
-        />
+        <Route key={cat} path={`/${cat}`} element={<CategoryPage category={cat} />}>
+          <Route path=":canonicalId" element={<CompendiumPage category={cat} />} />
+        </Route>
       ))}
       {import.meta.env.DEV && (
         <>

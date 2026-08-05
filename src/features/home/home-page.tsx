@@ -93,19 +93,6 @@ export function HomePage() {
     }
   };
 
-  const handleSignOut = async () => {
-    if (!auth) return;
-    setAuthError(null);
-    setBusy(true);
-    try {
-      await auth.logout();
-    } catch (error) {
-      setAuthError(friendlyErrorMessage(error, navigator.onLine));
-    } finally {
-      setBusy(false);
-    }
-  };
-
   return (
     <div className="flex flex-col gap-5 px-4 py-6">
       <section className="flex flex-col gap-3">

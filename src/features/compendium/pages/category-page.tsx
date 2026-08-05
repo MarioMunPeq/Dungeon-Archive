@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import { useSearchParams } from "react-router-dom";
+import { Outlet, useSearchParams } from "react-router-dom";
 import type { EntityCategory } from "@/compendium";
 import {
   categoryLabel,
@@ -125,6 +125,7 @@ export function CategoryPage({ category }: CategoryPageProps) {
             ) : undefined
           }
         />
+        <Outlet />
       </div>
     </div>
   );
