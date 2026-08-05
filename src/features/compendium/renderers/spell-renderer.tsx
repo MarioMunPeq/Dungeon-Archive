@@ -1,20 +1,10 @@
+import { SCHOOL_NAMES } from "@/compendium";
 import type { Spell } from "@/compendium";
 import { Section } from "@/components/ui/Section";
 import { ContentRenderer } from "@/components/content";
 import { Subtitle } from "@/components/ui/Typography";
 import { Stack } from "@/components/ui/Stack";
 import { EntityProperty, EntityMetadataGrid } from "@/components/ui/entity-property";
-
-const SCHOOL_NAMES: Record<string, string> = {
-  A: "Abjuration",
-  C: "Conjuration",
-  D: "Divination",
-  E: "Enchantment",
-  I: "Illusion",
-  N: "Necromancy",
-  T: "Transmutation",
-  V: "Evocation",
-};
 
 interface SpellRendererProps {
   readonly entity: Spell;

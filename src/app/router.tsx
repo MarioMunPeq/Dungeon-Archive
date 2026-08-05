@@ -37,8 +37,12 @@ export function AppRouter() {
           element={<CompendiumPage category={cat} />}
         />
       ))}
-      <Route path="/debug/content" element={<DebugContentPage />} />
-      <Route path="/debug/spell" element={<DebugSpellPage />} />
+      {import.meta.env.DEV && (
+        <>
+          <Route path="/debug/content" element={<DebugContentPage />} />
+          <Route path="/debug/spell" element={<DebugSpellPage />} />
+        </>
+      )}
       <Route path="*" element={<NotFoundPage />} />
     </Routes>
   );

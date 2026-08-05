@@ -18,7 +18,7 @@ export function SearchCategoryFilter({ selected, onChange }: SearchCategoryFilte
   ][];
 
   return (
-    <div className="flex gap-2 overflow-x-auto px-4 pt-3 pb-1 scrollbar-none">
+    <div className="flex gap-2 overflow-x-auto px-4 pt-3 pb-1">
       <button
         type="button"
         onClick={() => onChange("")}

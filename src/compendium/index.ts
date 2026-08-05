@@ -3,11 +3,6 @@ export { search } from "./search";
 export {
   getSpell,
   getCondition,
-  getEquipment,
-  getAction,
-  getMonster,
-  getMagicItem,
-  getFeat,
   getEntity,
   getSpells,
   getConditions,
@@ -16,12 +11,9 @@ export {
   getMonsters,
   getMagicItems,
   getFeats,
-  getCategoryCount,
-  isInitialized,
 } from "./repository";
 
 export { resolveEntity } from "./resolver/entity-resolver";
-export type { ResolvedEntity } from "./resolver/entity-resolver";
 
 export { sourcePriority, selectPreferredVersion } from "./resolver/version-selector";
 
@@ -34,7 +26,6 @@ export { formatDamage, formatDamageType } from "./damage";
 
 export {
   getRelatedEntities,
-  getReferencingEntities,
   getRelatedEntityIds,
   getReferencingEntityIds,
   getEntityTags,

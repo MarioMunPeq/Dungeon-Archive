@@ -38,26 +38,6 @@ export function getCondition(id: string): Condition | null {
   return state.conditions.get(id) ?? null;
 }
 
-export function getEquipment(id: string): Equipment | null {
-  return state.equipment.get(id) ?? null;
-}
-
-export function getAction(id: string): Action | null {
-  return state.actions.get(id) ?? null;
-}
-
-export function getMonster(id: string): Monster | null {
-  return state.monsters.get(id) ?? null;
-}
-
-export function getMagicItem(id: string): MagicItem | null {
-  return state.magicItems.get(id) ?? null;
-}
-
-export function getFeat(id: string): Feat | null {
-  return state.feats.get(id) ?? null;
-}
-
 export function getEntity(category: EntityCategory, id: string): CategoryMap[CategoryKey] | null {
   const map = resolveMap(category);
   if (!map) return null;
@@ -90,13 +70,4 @@ export function getMagicItems(): readonly MagicItem[] {
 
 export function getFeats(): readonly Feat[] {
   return state.featList;
-}
-
-export function getCategoryCount(category: EntityCategory): number {
-  const map = resolveMap(category);
-  return map ? map.size : 0;
-}
-
-export function isInitialized(): boolean {
-  return state.initialized;
 }

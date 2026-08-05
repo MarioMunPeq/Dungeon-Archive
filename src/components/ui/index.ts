@@ -1,7 +1,5 @@
 export { Surface } from "./Surface";
-export type { SurfaceVariant } from "./Surface";
 export { Icon } from "./Icon";
-export type { IconProps, IconSize } from "./Icon";
 export { ChevronRightIcon, ChevronLeftIcon, CloseIcon, SearchIcon } from "./icons";
 export { Button } from "./Button";
 export { ConfirmDialog } from "./ConfirmDialog";
@@ -13,10 +11,8 @@ export { Inline } from "./Inline";
 export { InlineNumberEditor } from "./InlineNumberEditor";
 export { Stepper } from "./Stepper";
 export { SelectField } from "./SelectField";
-export type { SelectFieldOption } from "./SelectField";
 export { SearchField } from "./SearchField";
 export { Skeleton } from "./Skeleton";
 export { SnackbarProvider } from "./Snackbar";
 export { useSnackbar } from "./snackbar-context";
-export type { SnackbarOptions, SnackbarTone } from "./snackbar-context";
 export { Title, Subtitle, Heading, Body, Caption, Display } from "./Typography";

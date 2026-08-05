@@ -12,7 +12,7 @@ import type {
 } from "@/compendium";
 import { getEntity, sourcePriority, referenceToUrl, CATEGORY_REGISTRY } from "@/compendium";
 
-export interface EntityDisplayInfo {
+interface EntityDisplayInfo {
   readonly title: string;
   readonly subtitle: string;
 }
@@ -52,7 +52,7 @@ function getSubtitle(entity: DisplayEntity): string {
   return CATEGORY_REGISTRY[entity.category].getSubtitle(entity);
 }
 
-export function getEntityDisplayInfo(entity: DisplayEntity): EntityDisplayInfo {
+function getEntityDisplayInfo(entity: DisplayEntity): EntityDisplayInfo {
   return {
     title: entity.name,
     subtitle: getSubtitle(entity),
