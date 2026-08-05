@@ -30,7 +30,7 @@ export interface CloudSnapshot {
  */
 export interface CloudGateway {
   getCurrentUser(): CloudUser | null;
-  signIn(): Promise<void>;
+  signIn(): Promise<CloudUser>;
   signOut(): Promise<void>;
   onAuthChange(listener: (user: CloudUser | null) => void): () => void;
   fetchSnapshot(): Promise<CloudSnapshot | null>;

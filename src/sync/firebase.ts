@@ -36,7 +36,20 @@ export function createFirebaseGateway(): CloudGateway {
     },
 
     signIn: async () => {
-      await signInWithGoogle();
+      const authUser = await signInWithGoogle();
+      if (authUser) {
+        return toCloudUser(authUser);
+      }
+
+      if (!auth) {
+        throw new Error("Firebase is not configured");
+      }
+      const current = auth.currentUser;
+      if (current) {
+        return toCloudUser(current);
+      }
+
+      throw new Error("Sign in did not return a user");
     },
 
     signOut: () => logout(),
