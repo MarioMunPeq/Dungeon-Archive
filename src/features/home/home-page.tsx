@@ -4,7 +4,7 @@ import { categoryLabelSingular, METADATA_SEPARATOR } from "@/compendium";
 import type { EntityCardData } from "@/compendium";
 import { useRecentEntities, useSessionIds, useActivePlayer, usePlayerReferences } from "@/user-state";
 import { entityRefFromCanonicalId, EntityCard } from "@/components/entity";
-import { Button, EmptyState } from "@/components/ui";
+import { Button } from "@/components/ui";
 import { AuthContext } from "@/features/auth/auth-context";
 import { isFirebaseConfigured } from "@/lib/firebase/config";
 import { friendlyErrorMessage } from "@/sync/errors";
@@ -122,68 +122,63 @@ export function HomePage() {
                   {player.class ? `${player.class} ${METADATA_SEPARATOR} ` : ""}Lv {player.level}
                 </p>
               </div>
-              <span className="rounded-full border border-border bg-muted px-2 py-1 text-xs font-semibold uppercase tracking-wide text-muted-foreground">
-                Current
-              </span>
+              <div className="flex flex-col items-end gap-2">
+                <span className="rounded-full border border-border bg-muted px-2 py-1 text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">
+                  Current
+                </span>
+                {signedIn && auth?.user ? (
+                  <span className="inline-flex items-center gap-1 rounded-full border border-success/20 bg-success/10 px-2 py-1 text-[11px] font-semibold uppercase tracking-wide text-success">
+                    <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} className="h-3 w-3">
+                      <path d="M17 8l4 4-4 4M7 12h14" />
+                    </svg>
+                    Connected
+                  </span>
+                ) : null}
+              </div>
             </div>
-            <p className="text-sm leading-relaxed text-muted-foreground">
-              Quick access to Combat and your current character health without duplicating HP on Home.
-            </p>
+            <div className="flex flex-col gap-2">
+              <p className="text-sm leading-relaxed text-muted-foreground">
+                Quick access to Combat and your current character health without duplicating HP on Home.
+              </p>
+              {!loadingAuth && firebaseEnabled && auth && !signedIn ? (
+                <div className="flex items-center gap-2">
+                  <Button size="sm" onClick={handleSignIn} disabled={busy}>
+                    {busy ? "Signing in…" : "Sign in with Google"}
+                  </Button>
+                  {authError ? <span className="text-xs text-destructive">{authError}</span> : null}
+                </div>
+              ) : null}
+            </div>
           </Link>
         ) : (
           <div className="rounded-lg border border-border bg-surface p-4">
-            <EmptyState
-              title="Create your first character"
-              description="Add a character to start tracking your party and combat state."
-              action={
+            <div className="flex flex-col gap-3">
+              <div className="flex flex-col gap-1">
+                <h3 className="text-sm font-semibold text-foreground">Create your first character</h3>
+                <p className="text-xs leading-relaxed text-muted-foreground">
+                  Add a character to start tracking your party and combat state.
+                </p>
+              </div>
+              <div className="flex flex-wrap items-center gap-2">
                 <Link to="/party">
-                  <Button>Create Character</Button>
+                  <Button size="sm">Create Character</Button>
                 </Link>
-              }
-            />
+                {firebaseEnabled && auth && !loadingAuth && !signedIn ? (
+                  <Button size="sm" onClick={handleSignIn} disabled={busy}>
+                    {busy ? "Signing in…" : "Sign in with Google"}
+                  </Button>
+                ) : null}
+              </div>
+              {authError ? <p className="text-xs text-destructive">{authError}</p> : null}
+              {signedIn && auth?.user ? (
+                <p className="text-xs text-success">
+                  Signed in as {auth.user.email ?? auth.user.displayName}
+                </p>
+              ) : null}
+            </div>
           </div>
         )}
       </section>
-
-      {firebaseEnabled && auth && (
-        <section className="flex flex-col gap-3">
-          <div className="rounded-lg border border-border bg-surface p-3">
-            {loadingAuth ? (
-              <p className="text-sm text-muted-foreground">Checking sign-in status…</p>
-            ) : signedIn ? (
-              <div className="flex flex-col gap-3">
-                <div className="flex items-center justify-between gap-3">
-                  <div className="min-w-0">
-                    <p className="truncate text-sm font-medium text-foreground">
-                      {auth.user?.email ?? auth.user?.displayName ?? "Connected"}
-                    </p>
-                    <p className="text-xs text-muted-foreground">Signed in to sync your character.</p>
-                  </div>
-                  <Button variant="outline" size="sm" onClick={handleSignOut} disabled={busy}>
-                    {busy ? "Signing out…" : "Sign out"}
-                  </Button>
-                </div>
-                {authError ? <p className="text-xs text-destructive">{authError}</p> : null}
-              </div>
-            ) : (
-              <div className="flex flex-col gap-3">
-                <div>
-                  <p className="text-sm font-medium text-foreground">Sync your character to the cloud</p>
-                  <p className="text-xs text-muted-foreground">
-                    Sign in with Google to restore your data on another device.
-                  </p>
-                </div>
-                <div className="flex items-center justify-between gap-3">
-                  <Button onClick={handleSignIn} disabled={busy}>
-                    {busy ? "Signing in…" : "Sign in with Google"}
-                  </Button>
-                </div>
-                {authError ? <p className="text-xs text-destructive">{authError}</p> : null}
-              </div>
-            )}
-          </div>
-        </section>
-      )}
 
       <section className="flex flex-col gap-3">
         <SectionHeader title="Session" to="/session" />
@@ -195,15 +190,17 @@ export function HomePage() {
               ))}
             </div>
           ) : (
-            <EmptyState
-              title="No session content yet"
-              description="Pin creatures, spells, and items to build your encounter session."
-              action={
-                <Link to="/search">
-                  <Button>Search the Compendium</Button>
-                </Link>
-              }
-            />
+            <div className="flex flex-col gap-2">
+              <div className="flex flex-col gap-1">
+                <p className="text-sm font-semibold text-foreground">No session content yet</p>
+                <p className="text-xs leading-relaxed text-muted-foreground">
+                  Pin creatures, spells, and items to build your encounter session.
+                </p>
+              </div>
+              <Link to="/search">
+                <Button size="sm">Search the Compendium</Button>
+              </Link>
+            </div>
           )}
         </div>
       </section>
@@ -218,15 +215,17 @@ export function HomePage() {
               ))}
             </div>
           ) : (
-            <EmptyState
-              title="Nothing viewed yet"
-              description="Browse the Compendium and return here to keep recent items within reach."
-              action={
-                <Link to="/search">
-                  <Button>Browse the Compendium</Button>
-                </Link>
-              }
-            />
+            <div className="flex flex-col gap-2">
+              <div className="flex flex-col gap-1">
+                <p className="text-sm font-semibold text-foreground">Nothing viewed yet</p>
+                <p className="text-xs leading-relaxed text-muted-foreground">
+                  Browse the Compendium and return here to keep recent items within reach.
+                </p>
+              </div>
+              <Link to="/search">
+                <Button size="sm">Browse the Compendium</Button>
+              </Link>
+            </div>
           )}
         </div>
       </section>
