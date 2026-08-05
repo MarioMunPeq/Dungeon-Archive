@@ -57,8 +57,7 @@ function populateState(entities: CompendiumEntry[]): void {
           : e.category === "equipment"
             ? state.equipment
             : state.actions;
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    (map as Map<string, any>).set(e.id, e);
+    (map as Map<string, unknown>).set(e.id, e);
   }
 }
 

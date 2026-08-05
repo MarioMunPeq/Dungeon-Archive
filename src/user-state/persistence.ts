@@ -18,6 +18,7 @@ export function write(state: UserState): void {
   try {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
   } catch {
+    // eslint-disable-next-line no-console -- warn when storage is unavailable
     console.warn("user-state: localStorage write failed, state kept in memory only");
   }
 }

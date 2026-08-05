@@ -35,6 +35,7 @@ async function main() {
     container.textContent = "Failed to load compendium data.";
     container.style.padding = "2rem";
     container.style.fontFamily = "system-ui";
+    // eslint-disable-next-line no-console -- fatal boot error must be reported
     console.error("Compendium initialization failed:", error);
   }
 }

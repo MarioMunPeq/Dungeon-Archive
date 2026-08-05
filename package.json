@@ -29,18 +29,17 @@
     "test:feat": "tsx scripts/tests/feat.test.ts",
     "test:user-state": "tsx scripts/tests/user-state.test.ts",
     "test:sync": "tsx scripts/tests/sync.test.ts",
+    "test:firebase-config": "tsx scripts/tests/firebase-config.test.ts",
     "test:firebase-adapter": "tsx scripts/tests/firebase-adapter.test.ts",
-    "test": "pnpm run test:identity && pnpm run test:grouping && pnpm run test:resolver && pnpm run test:compendium && pnpm run test:category && pnpm run test:navigation && pnpm run test:content && pnpm run test:design && pnpm run test:relationships && pnpm run test:magic-item && pnpm run test:feat && pnpm run test:user-state && pnpm run test:sync && pnpm run test:firebase-adapter"
+    "test": "pnpm run test:identity && pnpm run test:grouping && pnpm run test:resolver && pnpm run test:compendium && pnpm run test:category && pnpm run test:navigation && pnpm run test:content && pnpm run test:design && pnpm run test:relationships && pnpm run test:magic-item && pnpm run test:feat && pnpm run test:user-state && pnpm run test:sync && pnpm run test:firebase-config && pnpm run test:firebase-adapter"
   },
   "dependencies": {
     "@fontsource-variable/space-grotesk": "^5.3.0",
     "@tanstack/react-query": "^5.84.0",
     "clsx": "^2.1.1",
-    "dexie": "^4.0.11",
     "firebase": "^12.17.0",
     "react": "^19.2.7",
     "react-dom": "^19.2.7",
-    "react-router": "^7.7.1",
     "react-router-dom": "^7.18.2",
     "tailwind-merge": "^3.6.0",
     "zustand": "^5.0.6"

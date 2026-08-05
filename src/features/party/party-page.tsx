@@ -742,7 +742,7 @@ function PlayerReferenceCard({
               fill="none"
               stroke="currentColor"
               strokeWidth={2}
-              className="h-3.5 w-3.5"
+              className="h-4 w-4"
             >
               <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6" />
               <path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18" />
@@ -839,7 +839,7 @@ function PlayerReferenceCard({
         }}
         aria-expanded={detailsOpen}
         aria-controls={`details-${reference.id}`}
-        className="flex min-h-11 items-center justify-center gap-1.5 rounded-lg border border-border py-2 text-xs font-medium text-muted-foreground transition-colors duration-150 hover:bg-accent hover:text-foreground active:bg-accent/80"
+        className="flex min-h-11 items-center justify-center gap-2 rounded-lg border border-border py-2 text-xs font-medium text-muted-foreground transition-colors duration-150 hover:bg-accent hover:text-foreground active:bg-accent/80"
       >
         <ChevronRightIcon
           size="sm"

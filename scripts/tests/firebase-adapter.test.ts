@@ -42,6 +42,15 @@ registerHooks({
         shortCircuit: true,
       };
     }
+    // The lib/firebase config gate reads env vars, so tests redirect it to a
+    // fake that always yields an app. Everything downstream runs against the
+    // in-memory SDK fakes above.
+    if (specifier === "./config" && (context.parentURL ?? "").includes("src/lib/firebase/")) {
+      return {
+        url: new URL("./_fake-firebase-config.ts", import.meta.url).href,
+        shortCircuit: true,
+      };
+    }
     return nextResolve(specifier, context);
   },
 });

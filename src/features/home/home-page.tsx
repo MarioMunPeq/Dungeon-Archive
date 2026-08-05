@@ -149,7 +149,7 @@ export function HomePage() {
                     <span className="flex min-w-0 items-center gap-2 truncate text-sm font-semibold text-foreground">
                       <span className="truncate">{player.name}</span>
                       {player.id === activePlayer?.id && (
-                        <span className="shrink-0 rounded-full border border-border bg-muted px-2 py-0.5 text-[10px] font-medium uppercase tracking-wide text-muted-foreground">
+                        <span className="shrink-0 rounded-full border border-border bg-muted px-2 py-1 text-xs font-medium uppercase tracking-wide text-muted-foreground">
                           Current
                         </span>
                       )}
