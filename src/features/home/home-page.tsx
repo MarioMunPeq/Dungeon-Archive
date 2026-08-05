@@ -89,7 +89,7 @@ export function HomePage() {
   const emptyWorkspace = players.length === 0 && !hasContent;
 
   return (
-    <div className="flex flex-col gap-6 px-4 py-6">
+    <div className="flex flex-col gap-5 px-4 py-6">
       {emptyWorkspace ? (
         <section className="flex flex-col items-center gap-4 px-2 py-10 text-center">
           <h2 className="text-2xl font-bold text-foreground">Welcome to your workspace</h2>
@@ -192,7 +192,7 @@ export function HomePage() {
               to="/rules"
               className="flex items-center gap-3 rounded-lg border border-border bg-surface px-4 py-3 transition-colors hover:bg-accent active:bg-accent/80"
             >
-              <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border border-border bg-muted text-primary">
+              <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border border-border bg-muted text-muted-foreground">
                 <svg
                   aria-hidden="true"
                   viewBox="0 0 24 24"

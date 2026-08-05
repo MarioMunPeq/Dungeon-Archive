@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { usePlayerReferences, useActivePlayer, userStore } from "@/user-state";
 import type { PlayerReference, PlayerReferenceUpdate } from "@/user-state";
-import { Button, Display, EmptyState, HelpTip, Stepper } from "@/components/ui";
+import { Button, EmptyState, HelpTip, Stepper } from "@/components/ui";
 import { cn } from "@/lib/utils";
 
 interface CombatAction {
@@ -49,7 +49,7 @@ const COMBAT_STATS: readonly {
     help: "Add this to a d20 roll to decide who acts first in combat.",
   },
   {
-    label: "Passive",
+    label: "Passive Perc.",
     value: "passivePerception",
     help: "A score used to notice hidden things without rolling.",
   },
@@ -92,10 +92,10 @@ function CombatPlayerView({ player }: { player: PlayerReference }) {
   const hpLow = player.hitPoints.max > 0 && player.hitPoints.current <= player.hitPoints.max / 2;
 
   return (
-    <div className="flex flex-col gap-5">
+    <div className="flex flex-col gap-4">
       <div className="flex flex-col gap-3 rounded-lg border border-border bg-surface p-4">
         <div className="flex items-center justify-between gap-2">
-          <span className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+          <span className="text-xs font-bold uppercase tracking-wide text-muted-foreground">
             Hit Points
           </span>
           <HelpTip label="What are Hit Points?">
@@ -160,7 +160,7 @@ function CombatPlayerView({ player }: { player: PlayerReference }) {
             to your speed and split the movement however you like.
           </HelpTip>
         </div>
-        <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
+        <div className="grid grid-cols-2 gap-2">
           {TURN_ACTIONS.map((action) => (
             <div
               key={action.title}
@@ -177,7 +177,7 @@ function CombatPlayerView({ player }: { player: PlayerReference }) {
       </div>
 
       <div className="flex flex-col gap-3">
-        <span className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+        <span className="flex items-center gap-2 text-xs font-bold uppercase tracking-wide text-muted-foreground">
           Stats
           <HelpTip label="What are these numbers?">
             These are your combat numbers. Edit them on your character in the Party tab.
@@ -219,14 +219,7 @@ export function CombatPage() {
   const player = activePlayer ?? players[0] ?? null;
 
   return (
-    <div className="flex flex-col gap-4 px-4 py-6">
-      <div className="flex flex-col gap-1">
-        <Display>Combat</Display>
-        <p className="text-xs text-muted-foreground">
-          Track hit points and keep your turn straight mid-fight.
-        </p>
-      </div>
-
+    <div className="flex flex-col gap-3 px-4 py-4">
       {players.length === 0 ? (
         <EmptyState
           title="No character yet"

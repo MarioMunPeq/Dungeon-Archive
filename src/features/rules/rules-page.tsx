@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { cn } from "@/lib/utils";
 import { useBeginnerMode, userStore } from "@/user-state";
-import { Display, HelpTip } from "@/components/ui";
+import { HelpTip } from "@/components/ui";
 
 interface RuleSectionData {
   readonly title: string;
@@ -130,7 +130,7 @@ function RuleSection({ data, defaultOpen = false }: { data: RuleSectionData; def
               <li key={point} className="flex items-start gap-2 text-sm text-foreground">
                 <span
                   aria-hidden="true"
-                  className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-primary"
+                  className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-muted-foreground"
                 />
                 <span>{point}</span>
               </li>
@@ -148,14 +148,7 @@ function RuleSection({ data, defaultOpen = false }: { data: RuleSectionData; def
 export function RulesPage() {
   const beginnerMode = useBeginnerMode();
   return (
-    <div className="flex flex-col gap-4 px-4 py-6">
-      <div className="flex flex-col gap-1">
-        <Display>Quick Rules</Display>
-        <p className="text-xs text-muted-foreground">
-          The essentials for a brand-new adventurer. Tap a card to expand it.
-        </p>
-      </div>
-
+    <div className="flex flex-col gap-3 px-4 py-4">
       <label className="flex items-center justify-between gap-3 rounded-lg border border-border bg-surface px-4 py-3">
         <span className="flex flex-col gap-1">
           <span className="text-sm font-medium text-foreground">Beginner tips</span>

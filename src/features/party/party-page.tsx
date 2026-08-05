@@ -15,7 +15,7 @@ import { ReferencePicker } from "@/components/ui/ReferencePicker";
 import type { PickerCandidate } from "@/components/ui/ReferencePicker";
 import { InlineTextEditor } from "@/components/ui/InlineTextEditor";
 import { InlineTextareaEditor } from "@/components/ui/InlineTextareaEditor";
-import { Button, ConfirmDialog, Display, EmptyState, HelpTip, SelectField, Stepper } from "@/components/ui";
+import { Button, ConfirmDialog, EmptyState, HelpTip, SelectField, Stepper } from "@/components/ui";
 import { cn } from "@/lib/utils";
 
 type PickerKind = "spell" | "weapon" | "magicitem";
@@ -408,72 +408,6 @@ function StatCard({
   );
 }
 
-function OptionalStatCard({
-  label,
-  value,
-  min,
-  max,
-  format,
-  initial,
-  onCommit,
-  help,
-  valueClassName = "text-3xl",
-}: {
-  label: string;
-  value: number | undefined;
-  min: number;
-  max: number;
-  format?: (value: number) => string;
-  initial: number;
-  onCommit: (value: number | undefined) => void;
-  help?: string;
-  valueClassName?: string;
-}) {
-  if (value === undefined) {
-    return (
-      <div className="flex min-w-0 flex-col items-center gap-1 rounded-lg border border-dashed border-border bg-card px-2 py-3">
-        <span className="flex w-full items-center justify-between gap-1">
-          <span className="min-w-0 truncate text-xs font-semibold uppercase tracking-wide text-muted-foreground">
-            {label}
-          </span>
-          {help && <HelpTip label={`More about ${label}`}>{help}</HelpTip>}
-        </span>
-        <button
-          type="button"
-          onClick={() => onCommit(initial)}
-          aria-label={`Set ${label}`}
-          className="hitbox-expand flex h-11 w-full select-none items-center justify-center rounded-lg text-muted-foreground transition-all duration-150 hover:text-foreground active:scale-95"
-        >
-          <svg
-            aria-hidden="true"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth={2}
-            className="h-4 w-4"
-          >
-            <line x1="12" y1="5" x2="12" y2="19" />
-            <line x1="5" y1="12" x2="19" y2="12" />
-          </svg>
-        </button>
-      </div>
-    );
-  }
-  return (
-    <StatCard
-      label={label}
-      value={value}
-      min={min}
-      max={max}
-      format={format}
-      onChange={(next) => onCommit(next)}
-      onClear={() => onCommit(undefined)}
-      help={help}
-      valueClassName={valueClassName}
-    />
-  );
-}
-
 function AbilityScoreCell({
   key_,
   score,
@@ -736,7 +670,7 @@ function PlayerReferenceCard({
   const subclassOptions = reference.class ? (SUBCLASSES[reference.class] ?? []) : [];
 
   return (
-    <div className="flex flex-col gap-5 rounded-lg border border-border bg-surface p-4 animate-slide-up">
+    <div className="flex flex-col gap-4 rounded-lg border border-border bg-surface p-3 animate-slide-up">
       <div className="flex items-start justify-between gap-2">
         <div className="min-w-0 flex-1">
           {editing === "name" ? (
@@ -853,7 +787,7 @@ function PlayerReferenceCard({
       </div>
 
       <div className="flex flex-col gap-2">
-        <span className="flex items-center gap-1 text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+        <span className="flex items-center gap-1 text-xs font-bold uppercase tracking-wide text-muted-foreground">
           Combat Stats
           <HelpTip label="What are combat stats?">
             The numbers you check every fight. Armor Class is what enemies must beat to hit you.
@@ -877,7 +811,7 @@ function PlayerReferenceCard({
             onChange={(value) => update({ combatValues: { initiativeModifier: value } })}
           />
           <StatCard
-            label="Passive"
+            label="Passive Perc."
             value={reference.combatValues.passivePerception}
             min={0}
             max={40}
@@ -885,23 +819,21 @@ function PlayerReferenceCard({
           />
           {hasSpell && (
             <>
-              <OptionalStatCard
+              <StatCard
                 label="DC"
-                value={reference.combatValues.spellSaveDc}
+                value={reference.combatValues.spellSaveDc ?? 10}
                 min={0}
                 max={40}
-                initial={10}
-                onCommit={(value) => update({ combatValues: { spellSaveDc: value } })}
+                onChange={(value) => update({ combatValues: { spellSaveDc: value } })}
                 help="Spell save DC is the number enemies must beat to resist your spells."
               />
-              <OptionalStatCard
+              <StatCard
                 label="Atk"
-                value={reference.combatValues.spellAttackBonus}
+                value={reference.combatValues.spellAttackBonus ?? 0}
                 min={-5}
                 max={20}
                 format={formatSigned}
-                initial={0}
-                onCommit={(value) => update({ combatValues: { spellAttackBonus: value } })}
+                onChange={(value) => update({ combatValues: { spellAttackBonus: value } })}
                 help="Your spell attack bonus is added to a d20 when a spell attacks an enemy directly."
               />
             </>
@@ -910,7 +842,7 @@ function PlayerReferenceCard({
       </div>
 
       <div className="flex flex-col gap-2">
-        <span className="flex items-center gap-1 text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+        <span className="flex items-center gap-1 text-xs font-bold uppercase tracking-wide text-muted-foreground">
           Ability Scores
           <HelpTip label="What are ability scores?">
             Six scores describe your character's strengths. The modifier underneath is the bonus you
@@ -929,7 +861,7 @@ function PlayerReferenceCard({
         </div>
       </div>
 
-      <div className="flex flex-col gap-5">
+      <div className="flex flex-col gap-4">
         <ReferenceGroup
           title="Known Spells"
           help="Spells your character can cast. Add the ones you use most for quick access."
@@ -1030,14 +962,7 @@ export function PartyPage() {
   }, []);
 
   return (
-    <div className="flex flex-col gap-4 px-4 py-6">
-      <div className="flex flex-col gap-1">
-        <Display>Party</Display>
-        <p className="text-xs text-muted-foreground">
-          Your current character at a glance — edit what you use every session.
-        </p>
-      </div>
-
+    <div className="flex flex-col gap-3 px-4 py-4">
       {players.length === 0 ? (
         <EmptyState
           title="No character yet"
