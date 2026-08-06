@@ -40,15 +40,16 @@ The category registry (`src/compendium/category-registry.ts`) drives routes, sea
 external/5etools/ (read-only)
     ↓
 scripts/compendium/
-    ├── allowed-sources/         # Permitted sources
-    ├── build/                   # Orchestration
-    ├── entries/                 # Per-category entry generation
+    ├── allowed-sources.ts         # Permitted sources
+    ├── build.ts                   # Orchestration
+    ├── entries.ts                 # Per-category entry generation
     ├── categories/{action,condition,equipment,feat,magic-item,monster,spell}/
-    │                            #   transform + validate per category
-    ├── id/                      # Canonical id generation
-    ├── identity/                # Version/edition identity
-    ├── generate-index/          # Search index
-    └── generate-related-index/  # Cross-entity relationships
+    │                              #   transform + validate per category
+    ├── id.ts                      # Canonical id generation
+    ├── identity.ts                # Version/edition identity
+    ├── generate-index.ts          # Search index
+    ├── generate-related-index.ts  # Cross-entity relationships
+    └── normalizer/                # Text normalization
     ↓
 src/generated/compendium/
     ├── spells.json
@@ -99,19 +100,20 @@ await loadCompendium();                       // once, before render
 
 getSpell(id)                                  // synchronous, null if not found
 getCondition(id)
-getEquipment(id)
-getAction(id)
 getEntity(category, id)
 getSpells(): readonly Spell[]                 // cached arrays, zero allocation
 getConditions(): readonly Condition[]
 getEquipmentList(): readonly Equipment[]
 getActions(): readonly Action[]
-getCategoryCount(category)
+getMonsters(): readonly Monster[]
+getMagicItems(): readonly MagicItem[]
+getFeats(): readonly Feat[]
 
 search(query): readonly SearchIndexEntry[]    // synchronous, sorted
 
 resolveEntity(canonicalId)                    // id → entity
 getVersions(entity)                           // 2014 vs 2024 editions
+selectPreferredVersion(entity)                // best edition for the context
 getRelatedEntities(entity)                    // cross-references
 referenceToUrl(reference)
 slugFromCanonicalId(canonicalId)
@@ -134,7 +136,7 @@ toCardData(entity)                            // list-card display data
 
 ## Source and Edition Handling
 
-`src/compendium/source.ts` models source codes (PHB, DMG, XGtE, ...) and editions. `src/compendium/identity.ts` (build side) relates 2014 and 2024 versions of the same entity; `getVersions` exposes them on entity detail, where the user picks the edition they play.
+`src/compendium/source.ts` models source codes (PHB, DMG, XGtE, ...) and editions. `scripts/compendium/identity.ts` (build side) relates 2014 and 2024 versions of the same entity; `getVersions` exposes them on entity detail, where the user picks the edition they play. `selectPreferredVersion` chooses a sensible default per category.
 
 ---
 
@@ -168,5 +170,5 @@ Validation happens in the build pipeline (`scripts/compendium/categories/*/valid
 ## Non-Goals
 
 - **No user-created Compendium entries.** Custom content is a permanent anti-feature.
-- **No cloud sync or updates.** Content ships with the app; new sources mean a new build.
+- **No remote compendium updates.** Content ships with the app; new sources mean a new build.
 - **No runtime network requests.** The Compendium is fully offline.

@@ -16,12 +16,14 @@ What Dungeon Archive does today:
 
 - **Compendium (7 categories)** — Spells, Conditions, Actions, Equipment, Monsters, Magic Items, and Feats, generated from official data at build time and available offline.
 - **Search** — Instant, synchronous, substring-scored lookup across the entire Compendium, with a category filter and keyboard navigation.
-- **Adventure** — A lightweight campaign container: title, description, objectives, private DM notes, and pinned entity references. One active adventure; previous ones can be archived and restored.
-- **Party** — Lightweight player reference sheets: identity, level, passive senses, known spells, equipped armor/weapons/magic items (stored as Compendium references, never duplicated), and notes.
+- **Rules** — A quick-rules reference for common game questions.
+- **Combat** — A lightweight combat tracker tied to the active player's hit points, with a Beginner Mode toggle.
+- **Party** — Lightweight player reference sheets: identity, ability scores, hit points, passive senses, known spells, equipped armor/weapons/magic items (stored as Compendium references, never duplicated), and notes. One player can be marked active.
 - **Session** — A pinned list of entities for the current encounter, with a clear/end action. Session history is kept for the DM.
 - **Favorites & recents** — Quick access to the entities a user cares about.
 - **Entity details** — Full entity views with content rendering, related/referencing entities, and source/edition version selection (2014 vs 2024).
-- **Offline-first** — All data is on-device. No server, no login, no network dependency. PWA for installability.
+- **Offline-first** — All core data is on-device. No server, no login, no network dependency for core features. PWA for installability.
+- **Cloud Backup (optional)** — User-initiated save/restore of state to Firebase, for moving between devices. Not a sync engine.
 
 ---
 
@@ -43,7 +45,7 @@ Sessions are currently a pinned list of entities. The DM's history of sessions i
 
 - Record a session (name/date/summary + the pinned entities) when the session ends.
 - Browse past sessions from the Session screen.
-- Link the adventure to its session history.
+- Link a session to the party members who played in it.
 
 ### Compendium Improvements
 
@@ -59,7 +61,7 @@ The Compendium is the heart. Improvements that speed retrieval:
 Search is the primary interface:
 
 - Smarter ranking (multi-token matching, diacritics, prefix weighting).
-- Search across user data (party members, adventures) in addition to Compendium entities.
+- Search across user data (party members, session history) in addition to Compendium entities.
 - History and recent-search management.
 
 ### Performance & Offline
@@ -80,10 +82,13 @@ Search is the primary interface:
 
 These are worth doing but come after the high-priority items. They are kept deliberately light to preserve the "quiet" product feel.
 
-### Campaign Enhancements
+### Combat Tracker
 
-- Better adventure organization (multiple adventures, reordering, richer objectives).
-- Session history integrated into the adventure view.
+The Combat tab is a deliberately lightweight tracker: the active player's hit points, quick combat values, and a Beginner Mode toggle. Possible follow-ups that preserve the "lightweight" promise:
+
+- Simpler hit-point entry and quick +/- adjustment.
+- Cleaner connection between the party list and the combat screen.
+- Nothing that grows into an encounter builder, initiative tracker, or monster tracker (those are exclusions, see [anti-features.md](./anti-features.md)).
 
 ### Visual Polish
 
@@ -98,7 +103,7 @@ These are worth doing but come after the high-priority items. They are kept deli
 
 ## Not on the Roadmap
 
-Everything in [anti-features.md](./anti-features.md) is a permanent exclusion. In particular: campaign planning/management tools, worldbuilding, encounter builders, initiative/combat trackers, dice rollers, character builders, digital notebooks, and any feature that requires a server.
+Everything in [anti-features.md](./anti-features.md) is a permanent exclusion. In particular: campaign planning/management tools, worldbuilding, encounter builders, initiative trackers, dice rollers, character builders, digital notebooks, and any feature that requires a server (with the single documented exception of Cloud Backup, which is a recovery copy, not a sync engine).
 
 ---
 

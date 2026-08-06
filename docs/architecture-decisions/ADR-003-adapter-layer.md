@@ -20,13 +20,13 @@ The adapter layer is a first-class architectural concept at `src/adapter/`. It i
 1. The adapter is the only place allowed to know how external sources are shaped
 2. Everything else communicates only with Dungeon Archive models
 3. External types never leak past the adapter boundary
-4. The adapter exports only application-facing types, never external types
+4. The adapter exposes the external-source types (`5etools-raw-types.ts`); application code that needs them imports them from the adapter, never from 5etools sources
 
 **Structure (actual):**
 ```
 src/adapter/
 ├── 5etools-raw-types.ts   # Types mirroring the 5etools JSON shape
-├── index.ts               # Re-exports of the application-facing types
+├── 5etools/               # Empty placeholder directory
 └── README.md              # Adapter contract
 ```
 

@@ -28,7 +28,7 @@ When evaluating any proposed feature, run it through this filter:
 1. **Does it reduce dead time at the table?** If no, reject.
 2. **Does it require constant data entry or maintenance?** If yes, reject (consultation over administration).
 3. **Does it turn the app from reference into a platform?** If yes, reject.
-4. **Does it need a server or an internet connection?** If yes, reject (offline-first).
+4. **Does it need a server or an internet connection?** If yes, reject (offline-first). The single documented exception is **Cloud Backup**, an optional manual recovery copy that is never a dependency of any core feature.
 5. **Does it duplicate a tool that already does this well?** If yes, reject and point users to that tool.
 6. **Does it duplicate Compendium data?** If yes, reject (the Compendium is the single source of truth).
 
@@ -44,13 +44,13 @@ When evaluating any proposed feature, run it through this filter:
 
 ---
 
-### Combat Tracker
+### Combat Manager
 
-**What it is:** Initiative order, hit points, conditions, and combat round management.
+**What it is:** Full combat management — initiative order, turn automation, encounter pacing, monster HP pools, and positional tracking.
 
-**Why excluded:** Combat tracking demands constant interaction during turns — the opposite of disappearing software. It becomes the focus of the session rather than a companion. DMs already have their own methods.
+**Why excluded:** Full encounter management turns the app into the focus of the session rather than a companion. The app ships a deliberate **lightweight combat tab** — per-player hit points with quick deltas, a condition tray, and a turn checklist — that takes seconds to use and disappears. Everything beyond that (initiative rolls, encounter design, monster tracking, movement/positioning) is excluded.
 
-**Alternative:** Paper, whiteboard, or a dedicated combat app.
+**Alternative:** Paper, a whiteboard, or a dedicated combat/VTT tool.
 
 ---
 
@@ -58,7 +58,7 @@ When evaluating any proposed feature, run it through this filter:
 
 **What it is:** Rolling initiative and managing turn order.
 
-**Why excluded:** Subset of the combat tracker. Requires constant interaction mid-combat. DMs handle this manually.
+**Why excluded:** Requires constant interaction mid-combat — the opposite of a reference companion. DMs handle this manually.
 
 **Alternative:** Roll dice and write on paper.
 
@@ -236,9 +236,9 @@ When evaluating any proposed feature, run it through this filter:
 
 ### Multiplayer / Sync / Social Features
 
-**What it is:** Cloud sync, account systems, shared sessions, chat, community features.
+**What it is:** Real-time sync, shared sessions, chat, community features.
 
-**Why excluded:** Require a server and internet, breaking offline-first. Add accounts and complexity without reducing dead time.
+**Why excluded:** Require a server and internet, breaking offline-first. Add accounts and complexity without reducing dead time. The one exception is **Cloud Backup**: an optional, manual upload/restore of local data (see [cloud-backup.md](./cloud-backup.md)). It is a recovery copy, not a sync engine — there is no live sync, no shared state, and no multiplayer.
 
 **Alternative:** The phone is a personal reference; the table is the shared screen.
 

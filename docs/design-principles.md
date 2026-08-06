@@ -22,7 +22,7 @@ Every extra tap costs time. If a user can reach the same result with one tap ins
 
 - The bottom tab bar provides instant section switching.
 - Search is one tap away (a dedicated tab).
-- Quick actions (Favorite, Session, Adventure) are one tap on entity detail.
+- Quick actions (Favorite, Session) are one tap on entity detail.
 
 ### 2. Prefer Search Over Navigation
 
@@ -130,9 +130,9 @@ The app ships dark: dark surfaces, high-contrast text. Darkness suits low-light 
 
 ### Layout
 
-- Mobile-first, single column, `max-w-xl`.
+- Mobile-first, single column, `max-w-screen-xl`.
 - Thumb-reachable interaction zones.
-- Bottom navigation bar (Home, Search, Adventure, Party).
+- Bottom navigation bar (Home, Search, Rules, Combat, Party).
 - Minimal header complexity (TopBar: title or breadcrumbs).
 
 ### Components
@@ -148,7 +148,7 @@ The app ships dark: dark surfaces, high-contrast text. Darkness suits low-light 
 
 ### Search
 
-- Instant results (< 150ms).
+- Instant results (200ms debounce).
 - No loading states for search.
 - Keyboard appears automatically on focus.
 - Clear button always visible.
@@ -166,7 +166,7 @@ The app ships dark: dark surfaces, high-contrast text. Darkness suits low-light 
 - Minimal typing required (reference pickers instead of free text where possible).
 - Smart defaults.
 - Auto-save on change.
-- Inline editing for notes and objectives.
+- Inline editing for player reference fields.
 
 ---
 

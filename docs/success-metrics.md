@@ -28,7 +28,7 @@ Every metric answers one question: **"How fast can a user get the information th
 | Action | Target | Why |
 |--------|--------|-----|
 | Open party reference sheet | < 2 seconds | Players check their sheet mid-combat |
-| Open the current adventure | < 2 seconds | DMs access campaign context |
+| Open the combat tracker | < 2 seconds | DMs track hit points mid-combat |
 | Open the current session list | < 2 seconds | DMs and players check pinned entities |
 | Open a favorite entity | < 2 seconds | Favorites exist to be fast |
 | Open a recent entity | < 2 seconds | Recents exist to be fast |
@@ -38,7 +38,7 @@ Every metric answers one question: **"How fast can a user get the information th
 
 | Metric | Target | Why |
 |--------|--------|-----|
-| Search latency | < 150ms | Results must appear instantly |
+| Search latency | < 150ms | Results must appear instantly (200ms input debounce) |
 | App startup (cold) | < 2 seconds | First impression matters |
 | Compendium entry open | < 100ms | Detail views must feel instant |
 | Offline availability | 100% | Core features never require internet |
@@ -117,6 +117,6 @@ The product must beat these baselines by at least 10x to justify its existence.
 
 These are explicitly **not** success metrics:
 
-- Number of campaigns managed, NPCs recorded, loot logs written.
+- Number of campaigns managed, NPCs recorded, loot logs written, or other data-entry volume.
 - Time spent **inside** the app. Longer engagement is a failure, not a success.
 - Feature adoption beyond search, favorites, session pins, and reference sheets.

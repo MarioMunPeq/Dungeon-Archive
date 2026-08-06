@@ -10,7 +10,7 @@ Development standards for Dungeon Archive. These guidelines ensure consistency, 
 
 1. **Mobile-first** — All code must work on mobile devices
 2. **Offline-first** — No network dependencies for core features
-3. **Performance** — < 150ms search, < 1.5s initial load
+3. **Performance** — 200ms search debounce, < 150ms search latency, < 1.5s initial load
 4. **Simplicity** — Prefer simple solutions over clever ones
 5. **Type safety** — TypeScript strict mode, no `any` types
 6. **Read-only Compendium** — Application code never writes official data
@@ -71,7 +71,7 @@ interface SearchInputProps {
 
 ### Hooks
 
-Custom hooks are prefixed with `use`. Hooks directory is reserved; so far state access is done directly through the Zustand store (`useUserState`).
+Custom hooks are prefixed with `use` and live in `src/hooks/` (e.g. `useDebouncedValue`). State access is done directly through the Zustand store (`useUserState`).
 
 ### State Management
 
@@ -83,7 +83,7 @@ import { useUserState } from '@/user-state';
 const toggleFavorite = useUserState((s) => s.toggleFavorite);
 ```
 
-There is no async state layer. There are no server queries. TanStack Query is present as a provider baseline only and must not be used for Compendium or user data.
+There is no async state layer. There are no server queries. All reads are synchronous against in-memory data or the Zustand store.
 
 ---
 
@@ -109,7 +109,7 @@ The app is **dark by default**. Do not write light-first styles with `dark:` var
 
 ### Responsive
 
-Layout is a single column, constrained to `max-w-xl` in the app shell. Do not design multi-column desktop layouts.
+Layout is a single column, constrained to `max-w-screen-xl` in the app shell. Do not design multi-column desktop layouts.
 
 ---
 
@@ -132,8 +132,8 @@ Never import `src/generated/` files outside `src/compendium/loader.ts`.
 
 ```typescript
 // Always go through the store
-const addObjective = useUserState((s) => s.addObjective);
-addObjective(adventureId, 'Defeat the goblin chief');
+const setBeginnerMode = useUserState((s) => s.setBeginnerMode);
+setBeginnerMode(false);
 ```
 
 Persisted shape changes require a **version bump and a migration** in `src/user-state/migrations.ts`. Never silently change the persisted shape.
@@ -145,7 +145,7 @@ Persisted shape changes require a **version bump and a migration** in `src/user-
 ### Search
 
 - Search is synchronous and in-memory. Do not introduce async or debounced network calls.
-- Result cap and 150ms debounce live in the search page; scoring lives in `src/compendium/search.ts`.
+- The 200ms input debounce and result cap live in the search page; scoring lives in `src/compendium/search.ts`.
 
 ### Rendering
 
@@ -164,16 +164,18 @@ See [folder-structure.md](./folder-structure.md) for the canonical layout:
 ```
 src/
 ├── app/           # Router, layout, shell
-├── features/      # Pages by area (home, search, adventure, party, session, compendium, debug)
-├── components/    # Shared UI (layout/, entity/, content/, ui/)
+├── features/      # Pages by area (home, search, rules, combat, party, session, compendium, backup, auth, debug)
+├── components/    # Shared UI (layout/, search/, entity/, content/, ui/)
 ├── compendium/    # Read-only Compendium API
 ├── user-state/    # Zustand store + persistence + migrations
+├── sync/          # Cloud sync adapter (gateway, disabled/fake gateways, service)
 ├── adapter/       # External-source types boundary
 ├── generated/     # Build output (never hand-edited)
 ├── types/         # Domain types
-├── config/        # Constants and tokens
-├── lib/           # Utilities
-└── shared/        # Shared primitives
+├── config/        # Constants
+├── lib/           # Utilities (incl. firebase/)
+├── hooks/         # Custom hooks
+└── assets/        # Static assets
 ```
 
 ### Imports
@@ -195,7 +197,7 @@ Prefer path aliases (`@/...`) over deep relative imports where the project alrea
 
 ### Test Scripts
 
-The project runs script-based tests via `pnpm test` (11 suites covering compendium building, search, ids, identity, migrations, and utilities). Each script is registered in `package.json`.
+The project runs script-based tests via `pnpm test` (16 suites covering compendium building, search, ids, identity, migrations, cloud sync, and utilities). Each script is registered in `package.json`.
 
 ### Writing Tests
 

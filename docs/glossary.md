@@ -30,39 +30,23 @@ The time players spend waiting because someone is looking for information. The s
 
 ---
 
-## Campaign Terms
-
-### Campaign
-
-The overall D&D story a group plays across many sessions. Dungeon Archive stores a lightweight container (adventure) for the current play context; it does not manage campaigns.
-
-### Adventure
-
-The active campaign container: title, description, objectives, private DM notes, and pinned entity references. One adventure is active at a time; previous ones can be archived and restored.
-
-### Archive / Restore
-
-The state of a finished adventure. Archived adventures are read-only and can be restored. Archiving is a single action, not a workflow.
+## Game Terms
 
 ### Session
 
-A single gathering where the group plays D&D. In the app, "Session" refers to the pinned list of entities for the current encounter, plus session history.
+A single gathering where the group plays D&D. In the app, "Session" is the pinned list of entities for the current encounter — monsters, spells, items — cleared with a single End Session action. It is not a campaign planner and it is not a history log.
 
 ### Party
 
-The group of player characters in a campaign. The app stores lightweight reference sheets, not full character sheets.
+The group of player characters at the table. The app stores lightweight reference sheets for them, not full character sheets.
 
 ### Player Reference Sheet
 
-The app's replacement for "character sheet": only the repeatedly-consulted information — identity, level, class, subclass, race, passive senses, known spells, equipped armor/weapons/magic items (as Compendium references), and notes. Never a full character sheet.
+The app's term for what other tools call a "character sheet": only the repeatedly-consulted information — name, class, level, subclass, ability scores, hit points, combat values (AC, initiative, passive perception, spell DC/attack), known spells, weapons, magic items (as Compendium references), active conditions, and one note. Never a full character sheet.
 
 ### Player Character (PC)
 
 A character controlled by a player. Stored in the Party section as a reference sheet.
-
-### Objectives
-
-Actionable goals of the active adventure. Stored as lightweight items with completion state.
 
 ---
 
@@ -114,7 +98,7 @@ Search that spans the entire Compendium. Accessible as a dedicated tab.
 
 ### Instant Results
 
-Results appear as the user types (150ms debounce), computed synchronously against the in-memory Compendium. No round-trips.
+Results appear as the user types (200ms debounce), computed synchronously against the in-memory Compendium. No round-trips.
 
 ### Relevance Score
 
@@ -138,7 +122,11 @@ A previously used query, kept for quick re-use. Stored in user state.
 
 ### User State
 
-Everything the user creates: favorites, recent entities, recent searches, the session list, adventures, the active adventure id, and player references. Persisted in `localStorage`.
+Everything the user creates: favorites, recently viewed entities, recent searches, the session's pinned entities, player references (party) and the active player, beginner mode, and the onboarding flag. Persisted in `localStorage`. Note: the persisted shape still carries legacy campaign data for migration safety; it has no UI.
+
+### Cloud Backup
+
+The optional, manual recovery feature. Signs in with Google and stores a snapshot of user state in Firestore. A recovery copy, not a sync engine. See [cloud-backup.md](./cloud-backup.md).
 
 ### User State Version
 
@@ -170,23 +158,31 @@ The app ships as a service-worker-backed installable web app so it behaves like 
 
 ### Tab Bar
 
-The bottom navigation bar with 4 tabs: Home, Search, Adventure, Party. Always visible, thumb-reachable.
+The bottom navigation bar with 5 tabs: Home, Search, Rules, Combat, Party. Always visible, thumb-reachable.
 
 ### Home
 
-The landing screen. Shows the current adventure, party, continue-session, recents, favorites, and the Compendium category list.
+The landing screen. Shows the current character (with a link to Combat), the session's pinned entities, recently viewed entities, and a link to the rules for newcomers.
 
 ### Search Tab
 
 The tab dedicated to global search. The primary path to any entity.
 
-### Adventure Tab
+### Rules Tab
 
-The tab for the active campaign container (metadata, objectives, notes, references).
+Quick Rules for the game: the d20, ability checks, saving throws, combat turns, attacks & damage, hit points & resting, and spellcasting — plus How to Play and a glossary. Contains the Beginner Mode toggle.
+
+### Combat Tab
+
+The lightweight combat tracker for the active player: hit points with quick deltas, a condition tray, a turn checklist, and combat stats.
 
 ### Party Tab
 
 The tab for the group's player reference sheets.
+
+### Session Screen
+
+The pinned-entities screen for the current encounter, with End Session.
 
 ### Screen
 
@@ -198,11 +194,11 @@ The full view of any entity (spell, monster, equipment, etc.). Shows all informa
 
 ### Quick Action
 
-A one-tap action on an entity detail: Favorite, Session (pin to the current encounter), or Adventure (pin as a reference).
+A one-tap action on an entity detail: Favorite, or pin to the current Session.
 
 ### Route
 
-A URL path (e.g., `/search`, `/spell/fireball`). Routes exist for the tab screens and for every Compendium category and entity.
+A URL path (e.g., `/search`, `/spell/fireball`). Routes exist for the tab screens, for every Compendium category and entity, and for Backup (when enabled).
 
 ---
 
@@ -236,10 +232,9 @@ The Zustand store that holds and mutates user state, with `localStorage` persist
 
 ## Usage Notes
 
-- **"Adventure"** refers to the active campaign container. Use "archived adventure" for completed ones.
-- **"Session"** refers to the current encounter's pinned list and session history. It is not a campaign planner.
+- **"Session"** refers to the current encounter's pinned list. It is not a campaign planner.
 - **"Search"** is always capitalized when referring to the feature. Lowercase for the action.
 - **"Entity"** is the generic term for any Compendium item. Use specific terms (spell, condition, etc.) when possible.
 - **"Compendium"** refers to official content only. User-created content is "User State".
 - **"Reference Sheet"** is the correct term for party data. Never call it a character sheet.
-- Avoid the term "character sheet", "inventory", "loot", "NPC roster", and "worldbuilding" — these refer to anti-features, not features.
+- Avoid the term "character sheet", "inventory", "loot", "NPC roster", "campaign manager", and "worldbuilding" — these refer to anti-features, not features.

@@ -8,7 +8,7 @@ This document describes the **actual** layout of the repository. Keep it in sync
 
 ```
 dungeon-archive/
-├── public/                  # Static assets
+├── public/                  # Static assets (favicon, PWA manifest, service worker)
 ├── src/                     # Application source code
 ├── scripts/compendium/      # Build-time Compendium generation
 ├── external/5etools/        # Read-only external data source
@@ -20,7 +20,9 @@ dungeon-archive/
 ├── tsconfig.scripts.json    # Scripts typecheck config
 ├── eslint.config.js         # ESLint configuration
 ├── package.json             # Dependencies and scripts
-└── pnpm-lock.yaml           # Lock file
+├── pnpm-lock.yaml           # Lock file
+├── LICENSE                  # MIT license
+└── README.md                # Product landing page
 ```
 
 ---
@@ -33,21 +35,28 @@ src/
 ├── index.css                # Global styles + Tailwind v4 design tokens (@theme)
 │
 ├── app/                     # Application shell
-│   ├── index.tsx            # Router provider, query client provider, layout
-│   ├── router.tsx           # All routes (tabs, categories, entities, debug)
-│   └── app-layout.tsx       # TopBar + main + BottomNav (max-w-xl)
+│   ├── index.tsx            # App providers (Snackbar, Auth, Router) + layout + ErrorBoundary
+│   ├── router.tsx           # All routes (tabs, categories, entities, session, backup, debug)
+│   ├── boot-screen.tsx      # Loading screen while the Compendium loads
+│   └── layouts/
+│       ├── app-layout.tsx   # TopBar + main + BottomNav (max-w-screen-xl)
+│       └── use-scroll-restoration.ts
 │
 ├── features/                # Pages by product area
-│   ├── home/                # home-page.tsx — landing (categories, favorites, recents, session, adventure, party)
-│   ├── search/              # search-page.tsx + components/ (input, results, filter, empty states)
-│   ├── adventure/           # adventure-page.tsx — campaign container (metadata, objectives, notes, references)
-│   ├── party/               # party-page.tsx — player reference sheets
+│   ├── home/                # home-page.tsx, section-header.tsx — character, session, recents, rules
+│   ├── search/              # search-page.tsx + components/ (input, results, highlight, empty state)
 │   ├── session/             # session-page.tsx — pinned entities + history + clear
-│   ├── compendium/          # Category + entity pages, renderers
-│   │   ├── pages/           #   category-page.tsx, entity-page.tsx
-│   │   ├── components/      #   entity-list, filter-bar, related-entities
-│   │   └── renderers/       #   per-category content renderers (spell, monster, ...)
-│   ├── debug/               # debug-content-page.tsx, debug-spell-page.tsx (dev)
+│   ├── rules/               # rules-page.tsx — quick rules reference
+│   ├── combat/              # combat-page.tsx — combat tracker
+│   ├── party/               # party-page.tsx — player reference sheets
+│   ├── onboarding/          # onboarding.tsx — first-run walkthrough (4 steps)
+│   ├── backup/              # backup-page.tsx — Cloud Backup (Firebase)
+│   ├── auth/                # auth-provider.tsx, auth-context.ts — Firebase auth session
+│   ├── compendium/          # Category + entity pages and renderers
+│   │   ├── category-page.tsx, entity-page.tsx
+│   │   ├── entity-list.tsx, filter-bar.tsx, related-entities.tsx
+│   │   └── renderers/       # per-category content renderers (spell, monster, ...)
+│   ├── debug/               # debug-content-page.tsx, debug-spell-page.tsx (dev only)
 │   └── not-found-page.tsx   # 404 route
 │
 ├── compendium/              # Read-only Compendium API (in-memory)
@@ -55,8 +64,8 @@ src/
 │   ├── repository.ts        # Map-based lookups
 │   ├── search.ts            # Synchronous scoring search
 │   ├── index.ts             # Public API (loadCompendium, search, getEntity, ...)
-│   ├── category-registry.ts # 7 category registry
-│   ├── category-display.ts  # Category display metadata
+│   ├── category-registry.ts # 7-category registry with filters + card stats
+│   ├── category-display.ts  # Category display metadata (labels, order, icons)
 │   ├── source.ts            # Source/edition info
 │   ├── reference.ts         # Entity reference helpers
 │   ├── relationships.ts     # Cross-entity relationships
@@ -66,22 +75,24 @@ src/
 │
 ├── user-state/              # Persisted user state (Zustand + localStorage)
 │   ├── store.ts             # Zustand store + actions
-│   ├── types.ts             # UserState, PlayerReference, Adventure, ...
+│   ├── types.ts             # UserState, PlayerReference, Session, ...
 │   ├── persistence.ts       # localStorage read/write + versioning
-│   ├── migrations.ts        # Versioned forward migrations (current: v7)
+│   ├── migrations.ts        # Versioned forward migrations
 │   ├── normalize.ts         # Normalize persisted data on load
+│   ├── serialization.ts     # Cloud backup serialization
 │   └── index.ts             # Public API (useUserState, selectors)
 │
 ├── components/              # Shared UI
-│   ├── layout/              #   bottom-nav.tsx, top-bar.tsx, nav-icons.tsx
+│   ├── layout/              #   bottom-nav.tsx, top-bar.tsx, top-bar-route.ts,
+│   │                        #   nav-icons.tsx, cloud-status-icon.tsx
+│   ├── search/              #   search-input.tsx (focused search field)
 │   ├── entity/              #   entity-card, entity-header, metadata-grid, reference rows
-│   ├── content/             #   content-renderer + blocks/ (paragraph, list, table, dice, ...)
-│   └── ui/                  #   Button-like atoms: FavoriteButton, SessionButton,
-│                            #   AdventureButton, ReferencePicker, Inline editors, Badge, ...
+│   ├── content/             #   content-renderer.tsx + blocks/ (paragraph, list, table, dice, ...)
+│   └── ui/                  #   FavoriteButton, SessionButton, ReferencePicker, Badge, ...
 │
 ├── adapter/                 # External-source types boundary
 │   ├── 5etools-raw-types.ts # Types mirroring 5etools JSON shape
-│   ├── index.ts             # Re-export of application-facing types
+│   ├── 5etools/             # (empty placeholder directory)
 │   └── README.md            # Adapter contract
 │
 ├── generated/compendium/    # Generated data (do not edit by hand)
@@ -97,18 +108,32 @@ src/
 │   └── manifest.json
 │
 ├── types/                   # Domain type definitions
-│   ├── compendium.ts
+│   ├── compendium.ts        # Entity types (Spell, Monster, ...)
 │   ├── content-block.ts     # Renderable content blocks
 │   ├── relationships.ts
 │   └── index.ts
 │
 ├── config/                  # App-wide constants
-│   ├── constants.ts         # ROUTES, APP_NAME, category keys
-│   └── tokens.ts            # Design tokens (spacing, etc.)
+│   └── constants.ts         # ROUTES, APP_NAME, category keys, storage keys
 │
-├── lib/                     # Utilities (utils.ts)
-├── hooks/                   # Custom hooks (reserved)
-├── shared/                  # Shared primitives (README.md)
+├── sync/                    # Cloud sync adapter layer
+│   ├── gateway.ts           # Gateway selection (real or disabled)
+│   ├── disabled-gateway.ts  # No-op gateway when Firebase is not configured
+│   ├── fake-gateway.ts      # In-memory gateway used by tests
+│   ├── service.ts           # Cloud snapshot save/load logic
+│   ├── firebase.ts          # Firebase gateway implementation
+│   ├── errors.ts            # Friendly error mapping
+│   ├── status.ts            # Cloud status helpers
+│   ├── types.ts             # CloudGateway, CloudStatus types
+│   └── index.ts             # Public API (useCloudStatus, ...)
+│
+├── lib/                     # Utilities
+│   ├── utils.ts             # General helpers
+│   └── firebase/            #   config.ts, auth.ts, auth-service.ts, firestore.ts
+│
+├── hooks/                   # Custom hooks
+│   └── use-debounced-value.ts
+│
 └── assets/                  # Static assets
 ```
 
@@ -131,16 +156,18 @@ src/
 
 ```
 scripts/compendium/
-├── allowed-sources/         # Permitted 5etools sources
-├── build/                   # Build orchestration
-├── entries/                 # Per-category entry generation
-├── generate-index/          # Search index generation
-├── generate-related-index/  # Relationship index generation
-├── categories/              # Per-category transforms + validation
-│   ├── action/              # (also condition, equipment, feat, magic-item, monster, spell)
-├── id/                      # Canonical id generation
-├── identity/                # Identity / version dedup
-└── ...                      # shared helpers
+├── build.ts                 # Build orchestration
+├── entries.ts               # Per-category entry generation
+├── generate-index.ts        # Search index generation
+├── generate-related-index.ts# Relationship index generation
+├── id.ts                    # Canonical id generation
+├── identity.ts              # Identity / version dedup
+├── allowed-sources.ts       # Permitted 5etools sources
+├── normalizer/              # Text normalization (tags, whitespace)
+└── categories/              # Per-category transforms + validation
+    ├── action/              # (also condition, equipment, feat, magic-item, monster, spell)
+    ├── ...
+    └── each has transform.ts + validate.ts
 ```
 
 ---
@@ -152,7 +179,7 @@ external/
 └── 5etools/                 # Read-only D&D 5e data source
 ```
 
-**Important:** Never modify files in `external/`. This directory is read-only and is only consumed at build time.
+**Important:** Never modify files in `external/`. This directory is read-only and is only consumed at build time. It is gitignored and fetched during setup.
 
 ---
 
@@ -160,6 +187,7 @@ external/
 
 ```
 docs/
+├── README.md                # Docs index
 ├── architecture.md          # Technical architecture
 ├── product-philosophy.md    # Product vision and principles
 ├── navigation.md            # Navigation model
@@ -175,8 +203,10 @@ docs/
 ├── engineering-contract.md  # Engineering commitments
 ├── coding-guidelines.md     # Code standards
 ├── design-principles.md     # Design principles
-├── architecture-review-iteration3.md # Phase 20 architecture review report
-└── architecture-decisions/  # ADRs (README + ADR-001..005)
+├── cloud-backup.md          # Cloud Backup feature (Firebase)
+├── screenshots/             # Product screenshots (used by README)
+├── architecture-decisions/  # ADRs (README + ADR-001..005)
+└── history/                 # Archived historical reports
 ```
 
 ---
@@ -197,12 +227,13 @@ external/5etools/
 - Features import from `src/compendium/` (public API) and `src/user-state/`.
 - Only `src/compendium/loader.ts` touches `src/generated/`.
 - Only `src/adapter/` references 5etools types; everything else goes through the adapter.
+- Cloud code (`src/sync/`, `src/lib/firebase/`, `src/features/auth/`, `src/features/backup/`) is isolated behind the gateway interface so the app works without Firebase.
 
 ---
 
 ## Naming Conventions
 
-- **Feature pages:** kebab-case (`home-page.tsx`, `adventure-page.tsx`).
+- **Feature pages:** kebab-case (`home-page.tsx`, `combat-page.tsx`).
 - **Feature dirs:** kebab-case (`compendium/`, `user-state/`).
 - **UI components:** PascalCase files (`FavoriteButton.tsx`, `Badge.tsx`) except legacy kebab-case atoms (they are migrated as touched).
 - **Module internal files:** kebab-case (`category-registry.ts`).

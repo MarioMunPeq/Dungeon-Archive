@@ -14,12 +14,12 @@ Users find things by asking, not by browsing:
 
 - **Search tab** — A dedicated bottom-nav tab, one tap away from every screen.
 - **Category pages are fallbacks** — browsable, but not the primary path.
-- **Search from user data** (roadmap) — future work: party members and adventures become searchable too.
+- **Search from user data** (roadmap) — future work: party members and session history become searchable too.
 
 ### Instant Response
 
 - Results appear as the user types.
-- 150ms debounce on keystroke input.
+- 200ms debounce on keystroke input.
 - Synchronous in-memory scoring — no network, no loading states.
 - Latency target < 150ms.
 
@@ -44,7 +44,7 @@ search.ts (src/compendium/search.ts)
 readonly SearchIndexEntry[]
 ```
 
-There is exactly **one search scope**: the Compendium. There is no search of user data yet (adventure notes, party members — roadmap item).
+There is exactly **one search scope**: the Compendium. There is no search of user data yet (party members, session history — roadmap item).
 
 ### Search Index
 
@@ -128,9 +128,9 @@ No swipe actions, no long-press menus. One tap to the answer.
 
 - **Prebuilt index** — no index construction at runtime.
 - **Single startup load** — no lazy index, no async population.
-- **150ms debounce** — prevents excess work during fast typing.
+- **200ms debounce** — prevents excess work during fast typing.
 - **Cap results** — bounded work per keystroke.
-- **No TanStack Query** — search is synchronous; async state machinery is unnecessary.
+- **No async state machinery** — search is synchronous in-memory; nothing is needed beyond the page.
 
 ---
 
@@ -138,7 +138,7 @@ No swipe actions, no long-press menus. One tap to the answer.
 
 - **Better ranking** — multi-token matching, diacritics, prefix weighting.
 - **Typo tolerance** — deliberate fuzzy matching (currently absent by design; scoring is strict substring).
-- **User-data search** — party members, adventures, session history alongside Compendium results.
+- **User-data search** — party members, session history alongside Compendium results.
 
 ---
 

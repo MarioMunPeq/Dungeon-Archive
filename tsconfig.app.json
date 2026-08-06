@@ -32,7 +32,6 @@
       "@/compendium/*": ["./src/compendium/*"],
       "@/components/*": ["./src/components/*"],
       "@/features/*": ["./src/features/*"],
-      "@/shared/*": ["./src/shared/*"],
       "@/hooks/*": ["./src/hooks/*"],
       "@/lib/*": ["./src/lib/*"],
       "@/types/*": ["./src/types/*"],

@@ -1,264 +1,291 @@
 # Dungeon Archive
 
-> *Una aplicación móvil **offline-first** que acompaña a la mesa de Dungeons & Dragons 5ª edición. Su único propósito es reducir el tiempo muerto durante la partida.*
+A fast, mobile-first, offline-first companion for D&D 5e sessions. It puts the entire game reference — spells, monsters, equipment, conditions, actions, magic items, and feats — on the phone that is already on the table, and keeps the lightweight context of the game (your party, your current session, combat state) a tap away.
+
+Its only purpose is reducing the dead time at the table: the gap between a question coming up and its answer being found. Everything in the app is built around closing that gap.
+
+> **Version 0.1.0** — installable PWA, works fully offline, deployed on GitHub Pages.
 
 ---
 
-## La idea
+## Screenshots
 
-Dungeon Archive nace de una observación muy sencilla.
+_Images live in [`docs/screenshots/`](docs/screenshots/) and are linked below. (Placeholders until capture.)_
 
-Durante una partida de rol no se pierde tiempo porque falte información.
-
-Se pierde tiempo porque acceder a ella es lento.
-
-Buscar un hechizo entre varios libros, abrir una página web, navegar hasta una condición concreta o comprobar el efecto de un objeto rompe constantemente el ritmo de la partida.
-
-Dungeon Archive intenta resolver únicamente ese problema.
-
-No pretende sustituir la experiencia de juego.
-
-No pretende añadir más funcionalidades que el resto.
-
-Su único objetivo es que cualquier consulta tarde lo mínimo posible.
+| Screen | File |
+| ------ | ---- |
+| Home | [`docs/screenshots/home.png`](docs/screenshots/home.png) |
+| Search | [`docs/screenshots/search.png`](docs/screenshots/search.png) |
+| Compendium (entity list) | [`docs/screenshots/compendium.png`](docs/screenshots/compendium.png) |
+| Entity detail | [`docs/screenshots/entity-detail.png`](docs/screenshots/entity-detail.png) |
+| Party | [`docs/screenshots/party.png`](docs/screenshots/party.png) |
+| Combat | [`docs/screenshots/combat.png`](docs/screenshots/combat.png) |
+| Session | [`docs/screenshots/session.png`](docs/screenshots/session.png) |
+| Quick Rules | [`docs/screenshots/rules.png`](docs/screenshots/rules.png) |
+| Cloud Backup | [`docs/screenshots/backup.png`](docs/screenshots/backup.png) |
 
 ---
 
-# El problema
+## Key features
 
-En prácticamente cualquier mesa ocurre siempre el mismo patrón.
+| Feature | What it does |
+| ------- | ------------ |
+| **Instant Search** | One search across the whole Compendium. As-you-type results from a prebuilt in-memory index; no network, no server. |
+| **Offline Compendium** | The complete SRD reference for D&D 5e — spells, monsters, equipment, conditions, actions, magic items, and feats — compiled into the app at build time and available offline. |
+| **Entity Relationships** | Entities link to each other. A spell shows its related conditions and spells; a monster shows the spells and equipment it references. |
+| **Party Manager** | Lightweight player reference sheets: name, class, level, subclass, ability scores, AC / passive perception / spell DC, and references to known spells, weapons, and magic items. References point into the Compendium — nothing is duplicated. |
+| **Combat tracker** | Per-character hit points with quick damage/heal deltas, a tap-to-toggle condition tray (13 conditions), a "what can I do on my turn" checklist, and the combat stats you consult most. |
+| **Session pins** | Pin monsters, spells, and items to the current session with one tap, and clear them all with **End Session**. |
+| **Favorites & recents** | Mark entities as favorites and let the app remember what you recently viewed and searched. |
+| **Beginner Mode** | New to the game? Toggle beginner tips that explain the d20, ability checks, and your turn in combat as you go. |
+| **Quick Rules** | A built-in reference for the d20, ability checks, saving throws, combat turns, attacks & damage, hit points & resting, and spellcasting — plus a plain-language glossary. |
+| **Cloud Backup (optional)** | Optional Google Sign-In with manual upload/restore of your local data to Firestore. Everything else works with zero internet. |
+| **Progressive Web App** | Installable, with offline caching via a service worker. |
 
-```text
-Jugador
+---
 
-↓
+## Why offline-first?
 
-"¿Qué hacía exactamente Fireball?"
+During a session, information lives in books, PDFs, and spreadsheets. Finding something takes seconds or minutes, and while someone looks, the table waits.
 
-↓
+A companion app that needs a connection creates a new kind of wait. It also fails at the moment it is needed most — at a table without reliable internet.
 
-Libro
-Google
-5etools
-D&D Beyond
+So Dungeon Archive is offline-first by design:
 
-↓
+- The entire Compendium is shipped inside the app. Lookup never waits on the network.
+- All user data lives in `localStorage` on the device. There is no database, no account, and no login required.
+- Cloud Backup is an optional, manual addition for people who want a recovery copy. It is never a dependency.
 
-30 segundos
+The app is consulted, then set aside. It should never be the reason a session slows down.
 
-↓
+---
 
-La partida continúa
+## Architecture
+
+Dungeon Archive is a single-page client application with three layers:
+
+### 1. The Compendium (read-only reference data)
+
+Official D&D 5e data is pulled from the [5etools](https://github.com/5etools-mirror-1/5etools-mirror-1.github.io) dataset, transformed and validated at **build time**, and emitted as static JSON under `src/generated/compendium/`.
+
+- **7 categories:** spells, monsters, equipment, conditions, actions, magic items, feats.
+- Each entity has a stable **canonical ID** (e.g. `spell.fireball`).
+- A **related-entities index** links entities to each other at build time.
+- The generated data is the single source of truth. User data stores **references** to it, never copies.
+
+### 2. The user state (tiny, versioned, local)
+
+Everything the user creates lives in a single versioned document persisted in `localStorage`:
+
+- favorites, recently viewed entities, recent searches
+- the current session's pinned entities
+- player reference sheets (party) and the active player
+- beginner mode and onboarding flags
+
+State is versioned with forward migrations, so saved data survives app updates. This is what Cloud Backup uploads and restores.
+
+### 3. The app (React views)
+
+A set of feature pages built on the design system, orchestrated by React Router. The route table:
+
+| Path | Screen |
+| ---- | ------ |
+| `/` | Home — current character, session pins, recently viewed, learn-the-basics |
+| `/search` | Search across the entire Compendium |
+| `/rules` | Quick Rules, How to Play, and glossary (Beginner Mode toggle) |
+| `/combat` | Combat tracker for the active player |
+| `/party` | Player reference sheets |
+| `/session` | The pinned session list (End Session) |
+| `/backup` | Cloud Backup (shows a "not available" state when the feature is disabled) |
+| `/:category/:canonicalId` | Entity detail pages (e.g. `/spell/fireball`) |
+| `/debug/*` | Dev-only debugging routes (never shipped) |
+
+The shell is a top bar, a scrollable main area, and a bottom navigation bar with five tabs: **Home, Search, Rules, Combat, Party**. A first-run onboarding overlay introduces the app once.
+
+---
+
+## Tech stack
+
+| Layer | Choice |
+| ----- | ------ |
+| Language | TypeScript (strict) |
+| Framework | React 19 |
+| Build tool | Vite |
+| Styling | Tailwind CSS v4 with design tokens (`@theme`) |
+| Routing | React Router |
+| State | Zustand (persisted, versioned user state) |
+| PWA | `vite-plugin-pwa` (service worker + manifest) |
+| Icons/fonts | Inline SVG icons; Inter Variable and JetBrains Mono Variable |
+| Backend (optional) | Firebase Authentication + Firestore for Cloud Backup only |
+| Hosting | GitHub Pages |
+
+---
+
+## Project structure
+
+```
+Dungeon Archive/
+├── src/
+│   ├── adapter/           # Boundaries around external data shapes (5etools types)
+│   ├── app/               # App shell: index, router, layouts, scroll restoration
+│   ├── compendium/        # Compendium public API, search index, entity registry
+│   ├── components/        # Design-system primitives (ui/, layout/, entity/)
+│   ├── config/            # App constants (name, version)
+│   ├── features/          # Feature pages and components
+│   │   ├── auth/          #   Firebase auth provider
+│   │   ├── backup/        #   Cloud Backup page
+│   │   ├── combat/        #   Combat tracker
+│   │   ├── compendium/    #   Entity list + detail pages
+│   │   ├── debug/         #   Dev-only routes
+│   │   ├── home/          #   Landing screen
+│   │   ├── onboarding/    #   First-run overlay
+│   │   ├── party/         #   Player reference sheets
+│   │   ├── rules/         #   Quick Rules
+│   │   ├── search/        #   Global search
+│   │   └── session/       #   Session pins
+│   ├── generated/         # Build-time generated data (compendium JSON, related index)
+│   ├── hooks/             # Shared hooks
+│   ├── lib/               # Utilities, Firebase wiring
+│   ├── sync/              # Cloud Backup gateway, status, errors
+│   ├── types/             # Cross-cutting types (relationships, etc.)
+│   └── user-state/        # Persisted user state, migrations, serialization
+├── docs/                  # Project documentation (see below)
+├── scripts/               # Build-time data processing (5etools → generated JSON)
+├── .env.example           # Environment variable template
+└── index.html
 ```
 
-Treinta segundos parecen poco.
-
-Durante una campaña completa pueden convertirse en cientos de interrupciones.
-
-Dungeon Archive intenta eliminar ese tiempo.
+The `scripts/` pipeline is the only thing that reads 5etools data. The runtime never touches it.
 
 ---
 
-# Filosofía
+## How data flows
 
-Este proyecto parte de una decisión muy concreta.
+```
+5etools dataset
+      │  scripts/ (build time: validate, transform, index)
+      ▼
+src/generated/compendium/  ──►  loaded once at startup (loadCompendium)
+      │
+      ▼
+src/compendium/  ──►  search / getEntity / resolveEntity / getRelatedEntities
+      │
+      ▼
+Feature pages  ──►  render entity content  ──►  user actions
+                                                   │
+                              reference only       ▼
+                              (canonical IDs)  src/user-state/ (localStorage)
+                                                   │
+                                                   ▼ (optional, manual)
+                                          Cloud Backup (Firestore)
+```
 
-**Hacer una sola cosa. Hacerla muy bien.**
-
-Dungeon Archive es un **acompañante de mesa**. Se abre cuando aparece una pregunta, muestra la respuesta y se aparta. Nunca se convierte en el centro de atención.
-
-Cada funcionalidad debe superar una única prueba:
-
-> **¿Reduce el tiempo que los jugadores esperan porque alguien está buscando información?**
-
-Si la respuesta es no, no pertenece a este proyecto.
-
-Dungeon Archive **no es**:
-
-* Un gestor de campañas.
-* Un tablero virtual (VTT).
-* Un creador de personajes ni un sustituto de la hoja de personaje.
-* Un rastreador de combate o de iniciativa.
-* Un cuaderno digital, una wiki ni una herramienta de worldbuilding.
-
-Es un compendio de referencia con un contexto ligero de campaña.
+- The Compendium is loaded once before first paint (a brief boot screen) and then queried synchronously in memory.
+- Entity detail pages render from the generated JSON; nothing is fetched at runtime.
+- User state stores canonical IDs and lightweight values only. When the Compendium changes, references keep working.
+- On startup, persisted state is rehydrated, normalized, and migrated to the current version.
 
 ---
 
-# Qué es hoy
+## Development
 
-## Compendio
+Requirements: **Node.js** and **pnpm**.
 
-La base de datos de referencia completa de D&D 5e: **hechizos, condiciones, acciones, equipo, monstruos, objetos mágicos y dotes**. Se genera a partir de datos oficiales en tiempo de compilación y queda disponible sin conexión.
+```sh
+pnpm install
+pnpm dev          # start the Vite dev server
+```
 
-El Compendio es la fuente única de verdad de las reglas. Los datos del usuario guardan **referencias** (identificadores canónicos), nunca copias del contenido oficial.
+### Scripts
 
-## Búsqueda
+| Script | Purpose |
+| ------ | ------- |
+| `pnpm dev` | Vite dev server with HMR |
+| `pnpm build` | Type-check, build-time compendium processing, and production build |
+| `pnpm preview` | Preview the production build locally |
+| `pnpm typecheck` | Type-check the app and scripts |
+| `pnpm lint` | ESLint over the project |
+| `pnpm test` | Run the test suite |
+| `pnpm check` / `pnpm verify` | Aggregate checks used in CI |
 
-El interfaz principal. Búsqueda instantánea y síncrona sobre todo el Compendio, con filtro por categoría y navegación con teclado. Resultados en milisegundos.
+Local development runs with no Firebase configuration by default. In development the Cloud Backup UI is exercised against a fake in-memory gateway; in a production build with no configuration the feature is disabled and hidden. Add a `.env` file (see `.env.example`) to enable it for real.
 
-## Aventura (contexto de campaña)
+### Project conventions
 
-Un contenedor ligero: título, descripción, objetivos, notas privadas del máster y referencias importantes ancladas. Una aventura activa; las anteriores pueden archivarse y restaurarse.
+The engineering rules that keep this codebase consistent live in [`docs/engineering-contract.md`](docs/engineering-contract.md). Highlights:
 
-## Grupo (hojas de referencia ligeras)
+- The Compendium is the single source of truth; user data stores references, never copies.
+- Only `src/compendium/` reads generated data; only `src/adapter/` knows external data shapes.
+- Mobile is the primary platform; desktop is for development only.
+- Search must be fast before it is polished.
+- Every screen answers a real user question — see [`docs/user-questions.md`](docs/user-questions.md).
 
-Solo la información que se consulta durante la partida: identidad, nivel, sentidos pasivos, hechizos conocidos, equipo equipado y notas. Todo como referencias al Compendio; nada se duplica.
+---
 
-## Sesión
+## Building and deploying
 
-La lista de entidades ancladas para el encuentro actual, con la opción de cerrarla, y el historial de sesiones del máster.
+```sh
+pnpm build          # produces dist/
+```
 
-## Favoritos y recientes
+Deployment is GitHub Pages via GitHub Actions (`.github/workflows/deploy.yml`). The app is served from the repository's Pages URL with a base path of `/Dungeon-Archive/`. CI (`.github/workflows/ci.yml`) runs typecheck, lint, format check, and the production build on every push.
 
-Acceso rápido a las entidades que importan.
-
-## Detalle de entidad
-
-Vistas completas con renderizado de contenido, entidades relacionadas y selección de versión/edición (2014 frente a 2024).
+---
 
 ## Cloud Backup
 
-Una copia de seguridad opcional del estado local en la nube (Firebase). No es una cuenta obligatoria ni un servicio de sincronización: es un respaldo manual para proteger los datos del usuario o trasladarlos a otro dispositivo.
+Cloud Backup is **optional** and **manual**: sign in with Google, upload a snapshot of your local state to Firestore, and restore it later — for example after losing a device. It is a recovery copy, not a sync engine.
 
-* **Filosofía local-first.** Los datos del usuario viven siempre en este dispositivo (`localStorage`). La nube es solo una copia; nunca es la fuente de verdad.
-* **Inicio de sesión opcional con Google.** Sin cuenta, la aplicación funciona exactamente igual. Si el build no incluye configuración de Firebase, la característica no existe: no se muestra la página, no hay acceso de navegación y no se carga ningún módulo de Firebase.
-* **Sesión persistente.** La sesión de Google se restaura automáticamente al recargar; la página nunca muestra un botón de inicio de sesión a un usuario ya autenticado.
-* **Subida manual.** Un botón reemplaza la copia en la nube con el estado local actual. Cada backup guarda la fecha, la versión de la aplicación y un resumen (aventuras, jugadores, favoritos y sesiones).
-* **Detección de cambios.** Si los datos locales no han cambiado desde la última subida, el botón de subida se desactiva y muestra *Already up to date*. Una insignia indica *Backup current* o *Backup outdated* sin descargar nada en cada carga.
-* **Restauración con previsualización.** Antes de restaurar se muestra el contenido del backup (fecha, aventuras, jugadores, favoritos, sesiones) y se pide confirmación porque sobrescribe datos locales.
-* **Comportamiento offline.** La subida y la restauración requieren conexión y se desactivan al estar sin conexión, con un aviso *Offline*. El resto de la aplicación sigue funcionando sin conexión en todo momento.
-* **Errores legibles.** Los errores de Firebase se traducen a mensajes claros (*Sign in was cancelled.*, *You're offline.*, *You don't have access to this backup.*). Los mensajes internos de Firebase nunca se muestran.
-* **Sin sincronización automática.** No hay sincronización, fusión de cambios ni historial. Subida y restauración son acciones explícitas del usuario.
+It is disabled by default. To enable it:
 
-### Configuración de Firebase
+1. Create a Firebase project and enable Google Sign-In (see [`docs/cloud-backup.md`](docs/cloud-backup.md) for the full guide, including Firestore rules).
+2. Set the `VITE_FIREBASE_*` environment variables (template in `.env.example`).
+3. Rebuild. In a production build, the top-bar backup entry and the Backup page's sign-in appear only when Firebase is configured (development uses a fake gateway to exercise the UI).
 
-El backup se activa solo si el build incluye configuración de Firebase web:
+### Disabling Cloud Backup
 
-1. Crea un proyecto en [Firebase Console](https://console.firebase.google.com) y añade una app web.
-2. Activa **Google** como método de inicio de sesión y añade tu dominio desplegado a los dominios autorizados.
-3. Despliega las reglas de Firestore de [docs/firebase.md](docs/firebase.md) (un documento por usuario, solo accesible por `request.auth.uid`).
-4. Copia `.env.example` a `.env` y rellena las variables `VITE_FIREBASE_*`.
-5. Compila la aplicación (`pnpm build`).
-
-### Cómo desplegar
-
-1. `pnpm verify` — typecheck, lint, tests y build en verde.
-2. Publica la carpeta `dist/` en GitHub Pages (el workflow de GitHub Actions lo hace automáticamente).
-3. Comprueba en la URL pública: inicio de sesión con Google, restauración de sesión al recargar, subida, y restauración desde otro dispositivo con la misma cuenta.
-
-### Cómo desactivar la nube por completo
-
-* Elimina `.env` (o deja vacías las variables `VITE_FIREBASE_*`) y vuelve a compilar. Sin configuración, la ruta `/backup` no se registra y `firebase/*` nunca se importa.
-* Para eliminar los datos ya subidos, borra los documentos `users/{uid}/backup` en Firestore.
-
-La seguridad del backend está documentada en [docs/firebase.md](docs/firebase.md).
+Build with the Firebase variables unset (or empty). In a production build the top-bar backup entry is hidden and the Backup page shows a "Cloud Backup is not available" message. The Firebase SDK sits behind a dynamic import that only loads when Firebase is configured — the app ships and runs with no cloud code executing.
 
 ---
 
-# Arquitectura
+## Future ideas
 
-```
-5etools (datos oficiales, read-only)
-        │
-        ▼
-Scripts de compilación (scripts/compendium)
-        │
-        ▼
-JSON estático (src/generated/compendium)
-        │
-        ▼
-API del Compendio (src/compendium)
-        │
-        ▼
-Aplicación React
-```
+Not commitments — directions the project could grow, in order of current thinking:
 
-* Los datos externos se procesan en tiempo de compilación y nunca se acceden directamente en tiempo de ejecución.
-* El Compendio vive en memoria tras una única carga inicial; el acceso es síncrono.
-* El estado del usuario (favoritos, recientes, aventura, grupo, sesión) se guarda en `localStorage` con migraciones versionadas.
-* Toda la aplicación funciona sin conexión. No hay servidor. El inicio de sesión y el backup en la nube son opcionales y están aislados.
+- **Search across user data** — party members and session pins alongside Compendium results.
+- **Session history** — a lightweight log of past sessions, reachable from the Session screen.
+- **Favorites list** — a dedicated view of favorited entities.
+- **Expanded Compendium content** — additional official sources and categories, still build-time and offline.
+- **Rules deep links** — direct links from entity pages into the relevant Quick Rules sections.
 
 ---
 
-# Stack tecnológico
+## Documentation
 
-| Capa         | Tecnología                          |
-| ------------ | ----------------------------------- |
-| Lenguaje     | TypeScript (strict)                 |
-| Interfaz     | React 19                            |
-| Build Tool   | Vite                                |
-| Estilos      | Tailwind CSS (tokens de diseño)     |
-| Estado       | Zustand + persistencia en localStorage |
-| Ruteo        | React Router                        |
-| Offline      | PWA (service worker)                |
-| Datos        | JSON estático generado en build     |
-| Backup       | Firebase (App, Auth, Firestore), opcional y de carga diferida |
-
-Cada tecnología tiene una responsabilidad concreta. No existe ninguna dependencia por tendencia o popularidad.
-
----
-
-# Organización del proyecto
-
-```text
-src/
-│
-├── app/            # Router, layout, arranque
-├── features/       # Páginas por área (home, search, adventure, party, session, backup, compendium)
-├── compendium/     # API de lectura del Compendio (carga, búsqueda, repositorio)
-├── components/     # Componentes compartidos de UI y de entidad
-├── user-state/     # Estado persistente del usuario (store, migraciones, normalización)
-├── sync/           # Backup en la nube (config, gateway, servicio, adaptador Firebase)
-├── adapter/        # Tipos de fuentes externas (5etools)
-├── generated/      # JSON del Compendio generado en build
-├── types/          # Tipos del dominio
-├── config/         # Constantes de configuración
-└── shared/         # Primitivas compartidas (sin lógica de negocio)
-
-scripts/
-└── compendium/     # Pipeline de generación del Compendio
-
-docs/               # Documentación técnica y de producto
-```
+| Document | What it covers |
+| -------- | -------------- |
+| [`docs/README.md`](docs/README.md) | Index of the documentation set |
+| [`docs/product-philosophy.md`](docs/product-philosophy.md) | The product's north star and principles |
+| [`docs/user-questions.md`](docs/user-questions.md) | The questions every screen answers |
+| [`docs/anti-features.md`](docs/anti-features.md) | What the product deliberately is not |
+| [`docs/architecture.md`](docs/architecture.md) | Architecture and data flow in depth |
+| [`docs/compendium-architecture.md`](docs/compendium-architecture.md) | The Compendium pipeline and search index |
+| [`docs/search-architecture.md`](docs/search-architecture.md) | Search behavior and design |
+| [`docs/navigation.md`](docs/navigation.md) | Routes and navigation model |
+| [`docs/design-principles.md`](docs/design-principles.md) | Design principles |
+| [`docs/mobile-first.md`](docs/mobile-first.md) | Mobile-first UX rules |
+| [`docs/folder-structure.md`](docs/folder-structure.md) | Repository layout in detail |
+| [`docs/engineering-contract.md`](docs/engineering-contract.md) | Immutable engineering rules |
+| [`docs/coding-guidelines.md`](docs/coding-guidelines.md) | Code style and conventions |
+| [`docs/glossary.md`](docs/glossary.md) | Project terminology |
+| [`docs/success-metrics.md`](docs/success-metrics.md) | Performance and UX targets |
+| [`docs/roadmap.md`](docs/roadmap.md) | Current state and future direction |
+| [`docs/cloud-backup.md`](docs/cloud-backup.md) | Firebase setup and security |
+| [`docs/architecture-decisions/`](docs/architecture-decisions/) | Architecture Decision Records |
+| [`docs/screenshots/`](docs/screenshots/) | Product screenshots |
 
 ---
 
-# Roadmap
+## License
 
-Las prioridades están en [docs/roadmap.md](docs/roadmap.md).
-
-* **Alto:** hojas de referencia de jugador, historial de sesiones, mejoras del Compendio y de la búsqueda, rendimiento, offline, velocidad de navegación.
-* **Bajo:** mejoras de campaña, pulido visual, temas.
-* **Excluido permanentemente:** todo lo que aparece en [docs/anti-features.md](docs/anti-features.md).
-
----
-
-# Estado del proyecto
-
-| Área               | Estado                     |
-| ------------------ | -------------------------- |
-| Compendio          | 🟢 Operativo (7 categorías) |
-| Búsqueda           | 🟢 Operativa                |
-| Aventura           | 🟢 Operativa                |
-| Grupo              | 🟢 Operativo (referencias)  |
-| Sesión             | 🟢 Operativa                |
-| Offline            | 🟢 Operativo (PWA)          |
-| Backup en la nube  | 🟢 Operativo (opcional)     |
-| Documentación      | 🟢 Activa                   |
-
----
-
-# Sobre el proyecto
-
-Dungeon Archive no pretende demostrar cuántas tecnologías puede utilizar.
-
-Pretende demostrar que un producto enfocado puede resolver un problema real: **el tiempo que se pierde buscando información en una mesa de D&D**.
-
-Si dentro de unos años cambia la fuente de datos, cambia el framework o cambia la interfaz, la idea central — consulta rápida, contexto ligero, sin servidor — debería seguir intacta.
-
----
-
-## Licencia
-
-Este proyecto se distribuye bajo licencia MIT.
+MIT — see [LICENSE](LICENSE).

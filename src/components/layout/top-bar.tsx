@@ -39,19 +39,21 @@ function TopBarContent({ state }: { state: TopBarState }) {
         )}
         <Display className="truncate text-lg font-semibold">{state.title}</Display>
       </div>
-      <Button
-        variant="ghost"
-        size="md"
-        className="px-2"
-        aria-label="Cloud Backup"
-        onClick={() => navigate("/backup")}
-      >
-        <CloudStatusIcon
-          signedIn={status.signedIn}
-          syncing={status.syncing}
-          failed={status.failed}
-        />
-      </Button>
+      {!status.disabled && (
+        <Button
+          variant="ghost"
+          size="md"
+          className="px-2"
+          aria-label="Cloud Backup"
+          onClick={() => navigate("/backup")}
+        >
+          <CloudStatusIcon
+            signedIn={status.signedIn}
+            syncing={status.syncing}
+            failed={status.failed}
+          />
+        </Button>
+      )}
     </header>
   );
 }

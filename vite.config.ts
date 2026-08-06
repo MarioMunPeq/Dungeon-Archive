@@ -56,7 +56,6 @@ export default defineConfig({
       "@/adapter": path.resolve(__dirname, "./src/adapter"),
       "@/components": path.resolve(__dirname, "./src/components"),
       "@/features": path.resolve(__dirname, "./src/features"),
-      "@/shared": path.resolve(__dirname, "./src/shared"),
       "@/hooks": path.resolve(__dirname, "./src/hooks"),
       "@/lib": path.resolve(__dirname, "./src/lib"),
       "@/types": path.resolve(__dirname, "./src/types"),

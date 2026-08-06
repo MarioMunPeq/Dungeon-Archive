@@ -36,14 +36,32 @@ Never: "What CRUD does this implement?"
 - Do I have proficiency with this?
 - What armor class does this armor provide?
 
+### Rules
+
+- How does the d20 work?
+- What is an ability check? Which ability applies?
+- How do saving throws work?
+- What can I do on my turn in combat?
+- How do attacks and damage work? What is a critical hit?
+- How do hit points and rests work?
+
+These are answered by Quick Rules (with Beginner Mode toggled on for newcomers) and the built-in glossary.
+
 ### Own Reference Sheet (Party)
 
 - What spells do I know?
 - What am I carrying / wearing (as references)?
 - What is my passive Perception?
 - What is my level and class?
+- What is my AC? My spell save DC?
 
 These are answered from the player's own lightweight reference sheet — never from a full character sheet (see [anti-features.md](./anti-features.md)).
+
+### Combat
+
+- How much HP do I have left? (hit points with quick +/- deltas)
+- What conditions am I under? (condition tray)
+- What can I do on my turn? (Action / Bonus Action / Movement / Reaction checklist)
 
 ---
 
@@ -56,20 +74,15 @@ These are answered from the player's own lightweight reference sheet — never f
 - What spells does this monster have?
 - What does this magic item do?
 
-### Adventure
-
-- What are we doing? (current adventure title, description, objectives)
-- What's the current objective?
-- What references are important for this adventure?
-
 ### Sessions
 
 - What did I pin for this encounter? (session list)
-- What happened last session? (session history)
+- Is my session empty? (empty state points back to Search)
 
 ### Party
 
 - What does each player character have (spells, items, passive senses)?
+- Who is the active player right now? (combat/party selector)
 
 ---
 
@@ -77,7 +90,7 @@ These are answered from the player's own lightweight reference sheet — never f
 
 ### Before Session
 
-- What did we leave off on? (session history)
+- What do we need at hand tonight? (build the session by pinning entities in advance)
 
 ### During Session
 
@@ -87,10 +100,11 @@ These are answered from the player's own lightweight reference sheet — never f
 - What is the range of this attack?
 - Can I do this?
 - What did I pin for this encounter?
+- Whose HP is where? (combat tab, per player)
 
 ### After Session
 
-- What did we use today? (session history)
+- Clear the session for next time? (End Session)
 
 ---
 
@@ -102,11 +116,11 @@ These are answered from the player's own lightweight reference sheet — never f
 
 Answered by the Compendium: spells, conditions, actions, equipment, monsters, magic items, feats.
 
-### Context Questions (Adventure + Party + Session)
+### Context Questions (Party + Session)
 
 "What is going on in our game?"
 
-Answered by the adventure's metadata/objectives/notes/references, the party's reference sheets, and the session's pinned entities and history.
+Answered by the party's reference sheets and the session's pinned entities.
 
 ### Lookup Questions (Search)
 
@@ -125,7 +139,7 @@ These questions are deliberately out of scope:
 - "Who owns this loot?" — no loot system.
 - "What is the history of this world?" — no worldbuilding.
 - "How many spell slots do I have left?" — no full character sheet.
-- "Who has initiative?" — no combat tracker.
+- "Whose turn is it / what's the initiative order?" — no initiative tracker.
 
 These are answered by other tools or by the table itself (see [anti-features.md](./anti-features.md)).
 

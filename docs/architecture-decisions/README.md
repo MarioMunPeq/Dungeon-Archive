@@ -29,7 +29,7 @@ What becomes easier or more difficult to do because of this change?
 | ADR | Title | Status |
 |-----|-------|--------|
 | ADR-001 | React 19 as baseline | Accepted |
-| ADR-002 | Offline-first architecture | Accepted |
+| ADR-002 | Offline-first architecture | Accepted (amended: Cloud Backup exception) |
 | ADR-003 | Adapter Layer | Accepted |
-| ADR-004 | Single active adventure | Accepted |
+| ADR-004 | Single active adventure | Superseded (Adventure removed; see [ADR-004](./ADR-004-single-campaign.md)) |
 | ADR-005 | Search-first philosophy | Accepted |

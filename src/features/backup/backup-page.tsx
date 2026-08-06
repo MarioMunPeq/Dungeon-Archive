@@ -156,6 +156,7 @@ export function BackupPage() {
   }, [run]);
 
   const ready = gateway !== null;
+  const disabled = gateway?.disabled === true;
   const signedIn = user !== null;
   const busyAny = busy !== null || previewLoading;
   const canAct = !busyAny;
@@ -181,14 +182,24 @@ export function BackupPage() {
         </div>
       )}
 
-      {ready && !authReady && (
+      {ready && disabled && (
+        <div role="status" className="flex flex-col gap-1 rounded-card border border-border bg-muted/30 p-4">
+          <p className="text-sm font-semibold text-foreground">Cloud Backup is not available</p>
+          <p className="text-xs text-muted-foreground">
+            This build was compiled without Firebase configuration. Cloud Backup is an optional
+            feature; everything else works fully offline.
+          </p>
+        </div>
+      )}
+
+      {ready && !disabled && !authReady && (
         <div role="status">
           <span className="sr-only">Checking account…</span>
           <Skeleton className="h-11 w-full" />
         </div>
       )}
 
-      {ready && authReady && (
+      {ready && !disabled && authReady && (
         <div className="flex flex-col gap-6">
           {!online && (
             <div className="flex flex-col gap-1 rounded-card border border-border bg-muted/30 p-3">

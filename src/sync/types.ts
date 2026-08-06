@@ -29,6 +29,11 @@ export interface CloudSnapshot {
  * caller never supplies a UID.
  */
 export interface CloudGateway {
+  /**
+   * True for the disabled gateway used in production builds without Firebase
+   * configuration. The UI must treat the feature as unavailable.
+   */
+  readonly disabled?: boolean;
   getCurrentUser(): CloudUser | null;
   signIn(): Promise<CloudUser | undefined>;
   signOut(): Promise<void>;

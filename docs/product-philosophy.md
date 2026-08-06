@@ -28,8 +28,9 @@ If the answer is no, the feature does not belong in this project.
 Uses Dungeon Archive to:
 
 - Look up spells, conditions, actions, equipment, monsters, magic items, and feats without opening a book.
-- Keep lightweight campaign context: an adventure title, description, objectives, notes, and pinned references.
-- Answer "what happened last session?" from session history.
+- Run encounters: track player hit points, conditions, and turn flow during combat.
+- Keep the current session's pinned references and the party's reference sheets within reach.
+- Point new players to the Quick Rules instead of explaining the d20 again.
 
 The DM is the main consumer of the Compendium. Fast retrieval matters most during combat and encounters.
 
@@ -37,8 +38,9 @@ The DM is the main consumer of the Compendium. Fast retrieval matters most durin
 
 Uses Dungeon Archive to:
 
-- Look up their own spells and equipment (via the party's lightweight player reference sheets).
+- Look up their own spells, weapons, and magic items (via the party's lightweight player reference sheets).
 - Find rules references without asking the DM.
+- Track their own hit points and conditions during combat.
 
 Players are secondary users. The app never requires players to create or maintain anything.
 
@@ -56,13 +58,14 @@ There is no dashboard to manage, no status to update, no workflow to complete. T
 
 A client-side mobile web app that ships with:
 
-- **The Compendium** — the complete reference database for D&D 5e (spells, conditions, actions, equipment, monsters, magic items, feats), built from official data at build time and available offline.
-- **Search** — instant lookup across the entire Compendium.
-- **Campaign context** — an adventure with a title, description, objectives, private DM notes, and pinned entity references. One active adventure, previous ones archived.
+- **The Compendium** — the complete SRD reference for D&D 5e (spells, conditions, actions, equipment, monsters, magic items, feats), built from official data at build time and available offline.
+- **Search** — instant lookup across the entire Compendium, plus recently viewed entities and recent searches.
+- **Quick Rules** — a built-in reference for the d20, ability checks, saving throws, combat turns, attacks & damage, hit points & resting, and spellcasting, with an optional beginner-tips mode.
 - **Player reference** — lightweight party sheets holding only what is consulted at the table: passive senses, known spells, equipped armor/weapons/magic items, and notes. References point into the Compendium; nothing is duplicated.
-- **Session** — a pinned list of entities for the current encounter, and the session history kept by the DM.
+- **Combat tracker** — per-player hit points with quick deltas, a tap-to-toggle condition tray, and a "what can I do on my turn" checklist.
+- **Session** — a pinned list of entities for the current encounter, cleared with a single End Session action.
 
-Nothing in the app requires a server, a login, or an internet connection.
+Core features require no server, no login, and no internet connection. **Cloud Backup is an optional, manual recovery feature** — sign in with Google and store a snapshot in Firestore — and is never a dependency of anything else in the app.
 
 ## Product Principles
 
@@ -72,7 +75,7 @@ The Compendium returns results in milliseconds. Search is synchronous over a pre
 
 ### 2. Consultation Over Administration
 
-The app is consulted, not maintained. Data entry is the enemy: the less the user must type, the better. Campaign state is kept deliberately minimal (adventure metadata, objectives, notes, references). Anything that turns the app into a project-management tool is rejected.
+The app is consulted, not maintained. Data entry is the enemy: the less the user must type, the better. User state is kept deliberately minimal — references and a handful of combat values. Anything that turns the app into a project-management tool is rejected.
 
 ### 3. The Compendium Is the Heart
 
@@ -86,9 +89,10 @@ During combat, waits are felt in rounds. Stat blocks, conditions, and spell look
 
 The user layer holds only lightweight context:
 
-- Adventure: title, description, objectives, notes, pinned references, archive status.
-- Party (player reference): name, class, level, subclass, ability modifiers, quick combat values (AC, initiative, passive perception, spell DC/attack), known spells, weapons, magic items (as references), one quick note.
-- Session: a list of pinned entity references and the DM's session history.
+- Favorites, recently viewed entities, and recent searches.
+- The session: a list of pinned entity references.
+- Party (player reference): name, class, level, subclass, ability scores, quick combat values (AC, initiative, passive perception, spell DC/attack), known spells, weapons, magic items (as references), hit points, active conditions, one quick note.
+- Beginner mode and onboarding flags.
 
 Nothing heavier. No inventories, no XP tracking, no worldbuilding.
 
@@ -112,7 +116,7 @@ The best experience is:
 
 The moment a user notices the app — admires its design, explores its features, or spends time in settings — the product has failed. The app serves its purpose and is set aside.
 
-- No onboarding.
+- Onboarding is a single, skippable four-step introduction, shown once.
 - No exploration for fun.
 - No notifications.
 - No gamification.
@@ -135,4 +139,4 @@ The product succeeds when:
 
 ## Anti-Features
 
-The project explicitly excludes entire categories of features. See [anti-features.md](./anti-features.md) for the full list. In short: Dungeon Archive is **not** a campaign manager, a VTT, a character builder, a combat tracker, a digital notebook, or a worldbuilding tool.
+The project explicitly excludes entire categories of features. See [anti-features.md](./anti-features.md) for the full list. In short: Dungeon Archive is **not** a campaign manager, a VTT, a character builder, a character-sheet replacement, a digital notebook, or a worldbuilding tool.

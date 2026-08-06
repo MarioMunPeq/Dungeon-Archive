@@ -42,7 +42,7 @@ The app must work with **one thumb** on a phone screen.
 - **Primary actions** in the bottom two-thirds of the screen.
 - **Content** scrolls; navigation never scrolls away.
 - **No hover states** — touch-first; feedback via color and scale on press.
-- **Layout constrained** to a single column, `max-w-xl`, centered — the app never renders wide multi-panel layouts.
+- **Layout constrained** to a single column, centered, capped at `max-w-screen-xl` — the app never renders wide multi-panel layouts.
 
 ---
 
@@ -50,24 +50,24 @@ The app must work with **one thumb** on a phone screen.
 
 ```
 ┌─────────────────────────────┐
-│ TopBar (title, breadcrumbs) │ ← Context, not action
+│ TopBar (title, back, cloud) │ ← Context + one global action
 ├─────────────────────────────┤
 │                             │
 │ Content Area                │ ← Middle (scroll)
 │ (scrollable)                │
 │                             │
 ├─────────────────────────────┤
-│  ⌂     🔍     📜     👥    │ ← Bottom (thumb zone)
-│ Home  Search Adventure Party│
+│ ⌂  🔍  📜  ⚔  👥           │ ← Bottom (thumb zone)
+│ Home Search Rules Combat Party│
 └─────────────────────────────┘
 ```
 
 ### Key Principles
 
-- **TopBar:** Minimal. Shows the app name (home) or breadcrumbs (entity detail). Not a place for primary actions.
+- **TopBar:** Minimal. Shows the app name (home), breadcrumbs/title (entity detail), a back button on nested screens, and the Cloud Backup entry (hidden when the feature is disabled). Search hides the top bar entirely.
 - **Content:** Scrollable, single column, primary content.
-- **BottomNav:** Always visible, four tabs (Home, Search, Adventure, Party), minimum 56px target height.
-- **Session** has no tab: it is reached from Home ("Continue Session") and from the SessionButton on entity detail.
+- **BottomNav:** Always visible, five tabs (Home, Search, Rules, Combat, Party), minimum 56px target height.
+- **Session and Backup** have no tabs: Session is reached from Home and from pin buttons on entity detail; Backup from the top bar.
 
 ---
 
@@ -80,14 +80,14 @@ The app must work with **one thumb** on a phone screen.
 | **Tap tab** | Bottom tab bar | Switch section |
 | **Tap item** | Middle screen | Open entity / edit |
 | **Swipe up/down** | Anywhere | Scroll |
-| **Tap quick action** | Entity detail | Favorite / pin to Session / pin to Adventure |
+| **Tap quick action** | Entity detail | Favorite / pin to Session |
 
 ### Search Interactions
 
 | Interaction | Result |
 |-------------|--------|
 | **Tap Search tab** | Open search, focus input |
-| **Type** | Instant results (150ms debounce) |
+| **Type** | Instant results (200ms debounce) |
 | **Arrow keys / Enter** | Keyboard navigation through results |
 | **Escape** | Clear the query |
 | **Tap result** | Open entity detail |
@@ -105,7 +105,7 @@ Search is the **primary interface**, not a decorative bar. It lives in the botto
 
 - No loading spinner.
 - Results appear as the user types.
-- 150ms debounce, synchronous in-memory scoring.
+- 200ms debounce, synchronous in-memory scoring.
 - Search latency target < 150ms.
 
 ### Keyboard
@@ -120,7 +120,7 @@ Search is the **primary interface**, not a decorative bar. It lives in the botto
 
 - The app is dark-first: dark surfaces, high-contrast text.
 - Semantic color tokens (`primary`, `background`, `surface`, `card`, ...) live in the Tailwind `@theme` block in `src/index.css`.
-- Fonts: Inter for UI, JetBrains Mono for data/code-like content.
+- Fonts: Inter Variable for UI, JetBrains Mono Variable for data/code-like content.
 - No reliance on color alone for meaning.
 
 ---
@@ -161,7 +161,7 @@ Search is the **primary interface**, not a decorative bar. It lives in the botto
 ### Battery Considerations
 
 - No continuous background processes.
-- No network requests.
+- No network requests (Cloud Backup is user-initiated only).
 - Minimal DOM churn.
 
 ---

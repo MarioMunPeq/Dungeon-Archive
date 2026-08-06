@@ -2,7 +2,7 @@
 
 ## Overview
 
-Dungeon Archive is a **client-side SPA** with **offline-first** architecture. All data lives on-device. There is no backend server.
+Dungeon Archive is a **client-side SPA** with **offline-first** architecture. All core data lives on-device. There is no backend server for the core product; Cloud Backup is an optional, user-initiated Firebase feature for moving state between devices.
 
 The architecture follows a strict rule: **the Compendium is read-only official content, and user data is lightweight state that references it.** Official content and user data never mix.
 
@@ -21,12 +21,13 @@ The architecture follows a strict rule: **the Compendium is read-only official c
 | **Routing** | React Router | SPA routing |
 | **Offline** | PWA (service worker) | Installability and asset caching |
 | **Data Source** | 5etools | D&D 5e compendium data (build-time only) |
+| **Cloud (optional)** | Firebase Auth + Firestore | Cloud Backup (user-initiated save/restore only) |
 | **Desktop** | Development only | Not a product platform |
 
 Notes:
 
-- **TanStack Query** is installed and wired as a provider baseline, but the application makes no server requests and uses no query hooks. It is not part of the data path.
 - **No database layer.** The Compendium lives in memory as read-only Maps. User state lives in `localStorage`.
+- **Cloud Backup is optional and isolated.** Without Firebase configuration the app builds and runs fully offline; a disabled gateway stands in for the cloud feature.
 - Every technology has a concrete responsibility. No dependencies exist for trend reasons.
 
 ---
@@ -48,9 +49,9 @@ Notes:
 ├──────────────────────────────────────────────┤
 │  User State (Zustand + localStorage)         │
 │  ├── Favorites / recents / searches          │
-│  ├── Adventure + objectives + notes          │
-│  ├── Party reference sheets                  │
-│  └── Session list + history                  │
+│  ├── Session list + history                  │
+│  ├── Party reference sheets + active player  │
+│  └── Combat values (HP, beginner mode)       │
 ├──────────────────────────────────────────────┤
 │  Static JSON (generated compendium)          │
 │  └── src/generated/compendium/               │
@@ -94,7 +95,7 @@ Application code (via public API only)
 
 - **Global scope** — Spans the entire Compendium.
 - **Synchronous** — Computed against the in-memory index, no round-trips.
-- **Instant** — < 150ms target, results appear as the user types.
+- **Instant** — 200ms debounce, results appear as the user types; latency target < 150ms.
 - **Scored** — Exact = 100, starts-with = 80, includes = 60; sorted by score then name.
 - **Offline** — Works without internet by construction.
 
@@ -106,15 +107,17 @@ Application code (via public API only)
 
 - **Favorites** — Pinned Compendium entities.
 - **Recents** — Recently viewed entities and recent searches.
-- **Adventure** — Title, description, objectives, private DM notes, pinned entity references. One active adventure; archive/restore.
-- **Party** — Player reference sheets: identity, ability modifiers, quick combat values (AC, initiative, passive perception, spell DC/attack), known spells, weapons, magic items (as entity references), one quick note.
+- **Party** — Player reference sheets: identity, ability scores and modifiers, quick combat values (AC, initiative, passive perception, spell DC/attack), hit points, known spells, weapons, magic items (as entity references), one quick note. One player can be set active.
 - **Session** — Pinned entities for the current encounter, session history.
+- **Combat** — The active player's hit points and a lightweight combat tracker; a Beginner Mode toggle that hides non-essential detail.
+- **Onboarding** — First-run walkthrough flag.
 
 **Persistence:**
 
 - Stored in `localStorage` under a single key (`dungeon:userState:v1`).
-- The persisted shape has a **version**. On load, migrations run forward until the shape matches the current version.
-- Migration v6 removed the legacy `scenes` field; migration v7 replaced `PartyMember`/`party` with `PlayerReference`/`players`. Every migration is a pure function; persisted data is always normalized on load.
+- The persisted shape has a **version**. On load, migrations run forward until the shape matches the current version (v11).
+- Notable migrations: v6 removed the legacy `scenes` field; v7 replaced `PartyMember`/`party` with `PlayerReference`/`players`; v10 added ability scores, hit points, and `beginnerMode`. Every migration is a pure function; persisted data is always normalized on load.
+- The persisted shape still carries legacy adventure fields (`adventures`, `activeAdventureId`) for migration safety. They have **no UI** and are not a feature.
 
 ### 4. Offline System
 
@@ -133,9 +136,9 @@ Application code (via public API only)
 Holds all user state and exposes typed actions:
 
 - `toggleFavorite`, `addRecentEntity`, `addRecentSearch`, `clearRecentSearches`, `clearRecentEntities`
-- `createAdventure`, `updateAdventure`, `addObjective`, `removeObjective`, `toggleAdventureEntity`, `clearAdventureEntities`, `archiveAdventure`, `restoreAdventure`, `setActiveAdventure`
-- `addPlayerReference`, `updatePlayerReference`, `removePlayerReference`
+- `addPlayerReference`, `updatePlayerReference`, `removePlayerReference`, `setActivePlayer`
 - `toggleSession`, `clearSession`
+- `setBeginnerMode`, `completeOnboarding`
 - `_replace`, `_reset` (persistence/internal)
 
 Mutations are centralized; components never write to `localStorage` directly.
@@ -208,7 +211,7 @@ external/5etools/
           → src/  (features, components)
 ```
 
-- **`src/adapter/`** owns the types of external sources and re-exports the application-facing types. App code imports types through the adapter, never directly from 5etools.
+- **`src/adapter/`** owns the types of external sources (`5etools-raw-types.ts`). App code imports those raw types directly from the adapter; no application layer depends on 5etools sources outside it.
 - No layer may reach into a layer two or more steps above it.
 
 ---
@@ -227,11 +230,11 @@ external/5etools/
 
 ## Security & Privacy
 
-- **No authentication** — Local-only application.
-- **No network requests** — Core features are offline-only.
-- **No secrets** — No API keys, no sensitive data.
+- **No authentication required** — Local-only by default; sign-in exists solely for optional Cloud Backup.
+- **No network requests** — Core features are offline-only; Cloud Backup uploads/restores only on explicit user action.
+- **No secrets** — Firebase config is runtime env config; no API keys are committed for private services.
 - **Read-only compendium** — No modification of official data.
-- **User data on-device** — State never leaves the device.
+- **User data on-device** — State stays on the device unless the user explicitly uploads a Cloud Backup.
 
 ---
 

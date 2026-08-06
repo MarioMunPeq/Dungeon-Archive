@@ -2,7 +2,9 @@
 
 ## Status
 
-Accepted
+**Superseded** (2026-08). The Adventure workspace was removed from the product. The question this ADR answered (single vs. multiple campaign containers) is now moot: there is no campaign container in the UI at all. Legacy adventure fields remain only in the persisted state shape for migration safety, with no UI. See [docs/history/](../history/README.md) for the archive.
+
+> Historical record preserved below for context.
 
 ## Context
 

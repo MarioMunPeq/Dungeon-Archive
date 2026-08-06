@@ -48,13 +48,13 @@ Every feature must answer a real user question from `user-questions.md`. If the 
 
 ### 7. Never Add an Anti-Feature
 
-Anything listed in `anti-features.md` is a permanent exclusion: campaign planning, worldbuilding, encounter builders, combat/initiative trackers, dice rollers, character builders, full character sheets, notebooks, and anything requiring a server.
+Anything listed in `anti-features.md` is a permanent exclusion: campaign planning, worldbuilding, encounter builders, initiative trackers, dice rollers, character builders, full character sheets, notebooks, and anything requiring a server. Cloud Backup is the single documented exception — it is a recovery copy, not a sync engine.
 
 **Why:** The product's identity is defined as much by what it refuses as by what it does.
 
 ### 8. Offline Is Not Optional
 
-All core features must work with zero network access. No feature may depend on a server, an account, or an internet connection.
+All core features must work with zero network access. No core feature may depend on a server, an account, or an internet connection. The single exception is Cloud Backup, which is explicitly user-initiated and not a core feature.
 
 **Why:** The table is the environment. Interruptions for connectivity are dead time.
 

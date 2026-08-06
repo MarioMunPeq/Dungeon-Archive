@@ -29,6 +29,8 @@ export interface CloudStatus {
   readonly syncing: boolean;
   readonly failed: boolean;
   readonly error: string | null;
+  /** True when the build has no Firebase configuration (feature unavailable). */
+  readonly disabled: boolean;
 }
 
 export function useCloudStatus(): CloudStatus {
@@ -63,5 +65,6 @@ export function useCloudStatus(): CloudStatus {
     syncing: phase === "syncing",
     failed: phase === "failed",
     error,
+    disabled: gateway?.disabled === true,
   };
 }

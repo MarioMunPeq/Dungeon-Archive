@@ -16,7 +16,7 @@ Search is the primary interface. Users find things by asking, not by navigating.
 - Results are heterogeneous (mixed by relevance, not grouped by category)
 - Category pages exist as fallbacks, not as the primary path
 - Search is synchronous, in-memory, and works offline
-- Results appear as the user types (150ms debounce, substring scoring)
+- Results appear as the user types (200ms debounce, substring scoring)
 
 ## Consequences
 
