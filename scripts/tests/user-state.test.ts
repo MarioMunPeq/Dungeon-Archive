@@ -77,11 +77,11 @@ test("STORAGE_KEY equals dungeon:userState:v1", () => {
   strictEqual(STORAGE_KEY, "dungeon:userState:v1");
 });
 
-test("CURRENT_VERSION equals 10", () => {
-  strictEqual(CURRENT_VERSION, 10);
+test("CURRENT_VERSION equals 11", () => {
+  strictEqual(CURRENT_VERSION, 11);
 });
 
-test("createDefaultState returns valid v10 state", () => {
+test("createDefaultState returns valid v11 state", () => {
   const def = createDefaultState();
   strictEqual(def.version, CURRENT_VERSION);
   deepStrictEqual(def.favorites, []);
@@ -2210,6 +2210,7 @@ test("normalize preserves activePlayerId when the player exists", () => {
         knownSpellCanonicalIds: [],
         weaponCanonicalIds: [],
         magicItemCanonicalIds: [],
+        activeConditions: [],
       },
     ],
     activePlayerId: "p1",
@@ -2470,6 +2471,7 @@ test("setActivePlayer sets and clears the active player", () => {
     knownSpellCanonicalIds: [],
     weaponCanonicalIds: [],
     magicItemCanonicalIds: [],
+    activeConditions: [],
   });
   userStore.getState().setActivePlayer(id);
   strictEqual(userStore.getState().activePlayerId, id);
@@ -2497,6 +2499,7 @@ test("setActivePlayer persists to localStorage", () => {
     knownSpellCanonicalIds: [],
     weaponCanonicalIds: [],
     magicItemCanonicalIds: [],
+    activeConditions: [],
   });
   userStore.getState().setActivePlayer(id);
   const stored = localStorage.getItem(STORAGE_KEY);
@@ -2528,6 +2531,7 @@ test("useActivePlayer returns the active player", () => {
     knownSpellCanonicalIds: [],
     weaponCanonicalIds: [],
     magicItemCanonicalIds: [],
+    activeConditions: [],
   });
   userStore.getState().setActivePlayer(id);
   strictEqual(userStore.getState().activePlayerId, id);
@@ -2581,6 +2585,7 @@ test("addPlayerReference adds a reference with defaults", () => {
     knownSpellCanonicalIds: [],
     weaponCanonicalIds: [],
     magicItemCanonicalIds: [],
+    activeConditions: [],
   });
   const state = userStore.getState();
   strictEqual(state.players.length, 1);
@@ -2633,6 +2638,7 @@ test("addPlayerReference trims name and class", () => {
     knownSpellCanonicalIds: [],
     weaponCanonicalIds: [],
     magicItemCanonicalIds: [],
+    activeConditions: [],
   });
   const player = userStore.getState().players[0]!;
   strictEqual(player.name, "Lyra");
@@ -2665,6 +2671,7 @@ test("addPlayerReference clamps level and combat values", () => {
     knownSpellCanonicalIds: [],
     weaponCanonicalIds: [],
     magicItemCanonicalIds: [],
+    activeConditions: [],
   });
   userStore.getState().addPlayerReference({
     name: "High",
@@ -2683,6 +2690,7 @@ test("addPlayerReference clamps level and combat values", () => {
     knownSpellCanonicalIds: [],
     weaponCanonicalIds: [],
     magicItemCanonicalIds: [],
+    activeConditions: [],
   });
   const players = userStore.getState().players;
   strictEqual(players[0]!.level, 1);
@@ -2727,6 +2735,7 @@ test("addPlayerReference accepts references and note", () => {
     knownSpellCanonicalIds: ["spell.fireball"],
     weaponCanonicalIds: ["equipment.longsword"],
     magicItemCanonicalIds: ["magicitem.wand-of-magic-missiles"],
+    activeConditions: [],
     note: "Guild wizard",
   });
   const player = userStore.getState().players[0]!;
@@ -2773,6 +2782,7 @@ test("addPlayerReference trims optional strings and keeps empty as undefined", (
     knownSpellCanonicalIds: [],
     weaponCanonicalIds: [],
     magicItemCanonicalIds: [],
+    activeConditions: [],
     subclass: "  ",
     note: "",
   });
@@ -2801,6 +2811,7 @@ test("addPlayerReference persists to localStorage", () => {
     knownSpellCanonicalIds: [],
     weaponCanonicalIds: [],
     magicItemCanonicalIds: [],
+    activeConditions: [],
   });
   const stored = localStorage.getItem(STORAGE_KEY);
   if (stored) {
@@ -2831,6 +2842,7 @@ test("updatePlayerReference updates fields", () => {
     knownSpellCanonicalIds: [],
     weaponCanonicalIds: [],
     magicItemCanonicalIds: [],
+    activeConditions: [],
   });
   const id = userStore.getState().players[0]!.id;
   userStore.getState().updatePlayerReference(id, {
@@ -2870,6 +2882,7 @@ test("updatePlayerReference clamps level", () => {
     knownSpellCanonicalIds: [],
     weaponCanonicalIds: [],
     magicItemCanonicalIds: [],
+    activeConditions: [],
   });
   const id = userStore.getState().players[0]!.id;
   userStore.getState().updatePlayerReference(id, { level: 99 });
@@ -2896,6 +2909,7 @@ test("updatePlayerReference converts empty strings to undefined", () => {
     knownSpellCanonicalIds: [],
     weaponCanonicalIds: [],
     magicItemCanonicalIds: [],
+    activeConditions: [],
     subclass: "Evocation",
     note: "Keep notes",
   });
@@ -2926,6 +2940,7 @@ test("updatePlayerReference is a no-op for unknown id", () => {
     knownSpellCanonicalIds: [],
     weaponCanonicalIds: [],
     magicItemCanonicalIds: [],
+    activeConditions: [],
   });
   userStore.getState().updatePlayerReference("nonexistent", { name: "Changed" });
   strictEqual(userStore.getState().players[0]!.name, "Lyra");
@@ -2951,6 +2966,7 @@ test("removePlayerReference removes by id", () => {
     knownSpellCanonicalIds: [],
     weaponCanonicalIds: [],
     magicItemCanonicalIds: [],
+    activeConditions: [],
   });
   const id = userStore.getState().players[0]!.id;
   userStore.getState().removePlayerReference(id);
@@ -2977,6 +2993,7 @@ test("removePlayerReference clears activePlayerId when active is removed", () =>
     knownSpellCanonicalIds: [],
     weaponCanonicalIds: [],
     magicItemCanonicalIds: [],
+    activeConditions: [],
   });
   const id = userStore.getState().players[0]!.id;
   userStore.getState().setActivePlayer(id);
@@ -3015,6 +3032,7 @@ test("_replace updates players when content differs", () => {
         knownSpellCanonicalIds: [],
         weaponCanonicalIds: [],
         magicItemCanonicalIds: [],
+        activeConditions: [],
       },
     ],
     activePlayerId: null,
@@ -3047,6 +3065,7 @@ test("players cleared on _reset", () => {
     knownSpellCanonicalIds: [],
     weaponCanonicalIds: [],
     magicItemCanonicalIds: [],
+    activeConditions: [],
   });
   userStore.getState()._reset();
   deepStrictEqual(userStore.getState().players, []);
@@ -3175,6 +3194,7 @@ test("normalize clamps ability scores and combat values", () => {
         knownSpellCanonicalIds: [],
         weaponCanonicalIds: [],
         magicItemCanonicalIds: [],
+        activeConditions: [],
       },
     ],
   });
@@ -3253,6 +3273,112 @@ test("normalize removes stale reference IDs from player references", () => {
   deepStrictEqual(player.knownSpellCanonicalIds, ["spell.fireball"]);
   deepStrictEqual(player.weaponCanonicalIds, ["equipment.longsword"]);
   deepStrictEqual(player.magicItemCanonicalIds, ["magicitem.wand-of-magic-missiles"]);
+});
+
+test("normalize defaults activeConditions to [] and strips unknown condition IDs", () => {
+  const result = normalize({
+    version: CURRENT_VERSION,
+    favorites: [],
+    recentEntities: [],
+    recentSearches: [],
+    session: [],
+    players: [
+      {
+        id: "p1",
+        name: "Lyra",
+        class: "Wizard",
+        level: 5,
+        activeConditions: ["condition.prone", "nonexistent.condition", "condition.prone"],
+      },
+    ] as unknown as PlayerReference[],
+  });
+  const player = result.players[0]!;
+  deepStrictEqual(player.activeConditions, ["condition.prone"]);
+});
+
+test("players without activeConditions get an empty list", () => {
+  const result = normalize({
+    version: CURRENT_VERSION,
+    favorites: [],
+    recentEntities: [],
+    recentSearches: [],
+    session: [],
+    players: [
+      {
+        id: "p1",
+        name: "Lyra",
+        class: "Wizard",
+        level: 5,
+      },
+    ] as unknown as PlayerReference[],
+  });
+  deepStrictEqual(result.players[0]?.activeConditions, []);
+});
+
+test("activeConditions survive a hydrate round-trip", () => {
+  resetMock();
+  resetStore();
+  const id = userStore.getState().addPlayerReference({
+    name: "Lyra",
+    class: "Wizard",
+    level: 5,
+    abilityScores: {
+      strength: 10,
+      dexterity: 10,
+      constitution: 10,
+      intelligence: 10,
+      wisdom: 10,
+      charisma: 10,
+    },
+    hitPoints: { current: 10, max: 10 },
+    combatValues: { armorClass: 10, initiativeModifier: 0, passivePerception: 10 },
+    knownSpellCanonicalIds: [],
+    weaponCanonicalIds: [],
+    magicItemCanonicalIds: [],
+    activeConditions: [],
+    note: undefined,
+  });
+  userStore
+    .getState()
+    .updatePlayerReference(id, { activeConditions: ["condition.blinded", "condition.stunned"] });
+  deepStrictEqual(userStore.getState().players[0]?.activeConditions, [
+    "condition.blinded",
+    "condition.stunned",
+  ]);
+  resetStore();
+  const data = {
+    version: CURRENT_VERSION,
+    favorites: [],
+    recentEntities: [],
+    recentSearches: [],
+    session: [],
+    players: [
+      {
+        id,
+        name: "Lyra",
+        class: "Wizard",
+        level: 5,
+        abilityScores: {
+          strength: 10,
+          dexterity: 10,
+          constitution: 10,
+          intelligence: 10,
+          wisdom: 10,
+          charisma: 10,
+        },
+        hitPoints: { current: 10, max: 10 },
+        combatValues: { armorClass: 10, initiativeModifier: 0, passivePerception: 10 },
+        knownSpellCanonicalIds: [],
+        weaponCanonicalIds: [],
+        magicItemCanonicalIds: [],
+        activeConditions: ["condition.blinded"],
+      },
+    ],
+    activePlayerId: id,
+  };
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+  hydrate();
+  deepStrictEqual(userStore.getState().players[0]?.activeConditions, ["condition.blinded"]);
 });
 
 test("normalize converts empty optional strings to undefined and truncates note", () => {

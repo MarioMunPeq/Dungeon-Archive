@@ -428,6 +428,7 @@ export const userStore = create<UserStore>((set, get) => ({
         knownSpellCanonicalIds: [...data.knownSpellCanonicalIds],
         weaponCanonicalIds: [...data.weaponCanonicalIds],
         magicItemCanonicalIds: [...data.magicItemCanonicalIds],
+        activeConditions: [...data.activeConditions],
         note: data.note?.trim() || undefined,
       };
       return { players: [...s.players, reference] };
@@ -473,6 +474,10 @@ export const userStore = create<UserStore>((set, get) => ({
           data.magicItemCanonicalIds !== undefined
             ? [...data.magicItemCanonicalIds]
             : current.magicItemCanonicalIds,
+        activeConditions:
+          data.activeConditions !== undefined
+            ? [...data.activeConditions]
+            : current.activeConditions,
         note: data.note !== undefined ? data.note.trim() || undefined : current.note,
       };
       const players = [...s.players];

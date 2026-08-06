@@ -94,6 +94,7 @@ const MAX_PLAYER_REFERENCES = 12;
 const MAX_SPELL_IDS = 50;
 const MAX_WEAPON_IDS = 10;
 const MAX_MAGIC_ITEM_IDS = 30;
+const MAX_CONDITION_IDS = 15;
 const MAX_NOTE_LENGTH = 280;
 
 const MIN_SCORE = 1;
@@ -195,6 +196,9 @@ function normalizePlayerReference(raw: unknown): PlayerReference | null {
   if (magicItemCanonicalIds.length > MAX_MAGIC_ITEM_IDS)
     magicItemCanonicalIds.length = MAX_MAGIC_ITEM_IDS;
 
+  const activeConditions = validateIds(uniqueStrings(p.activeConditions, true));
+  if (activeConditions.length > MAX_CONDITION_IDS) activeConditions.length = MAX_CONDITION_IDS;
+
   const note = typeof p.note === "string" ? p.note.trim() : "";
 
   return {
@@ -209,6 +213,7 @@ function normalizePlayerReference(raw: unknown): PlayerReference | null {
     knownSpellCanonicalIds,
     weaponCanonicalIds,
     magicItemCanonicalIds,
+    activeConditions,
     note: note.length > MAX_NOTE_LENGTH ? note.slice(0, MAX_NOTE_LENGTH) : note || undefined,
   };
 }

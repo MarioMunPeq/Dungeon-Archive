@@ -45,6 +45,7 @@ export interface PlayerReference {
   readonly knownSpellCanonicalIds: string[];
   readonly weaponCanonicalIds: string[];
   readonly magicItemCanonicalIds: string[];
+  readonly activeConditions: string[];
   readonly note?: string;
 }
 
@@ -75,7 +76,7 @@ export interface UserState {
 }
 
 export const STORAGE_KEY = "dungeon:userState:v1";
-export const CURRENT_VERSION = 10;
+export const CURRENT_VERSION = 11;
 
 export function createDefaultState(): UserState {
   return {

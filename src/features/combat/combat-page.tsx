@@ -1,37 +1,53 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import { usePlayerReferences, useActivePlayer, userStore } from "@/user-state";
 import type { PlayerReference, PlayerReferenceUpdate } from "@/user-state";
 import { Button, EmptyState, HelpTip, Stepper } from "@/components/ui";
+import { resolveEntity } from "@/compendium";
+import type { Condition, ContentBlock } from "@/compendium";
 import { cn } from "@/lib/utils";
 
-interface CombatAction {
+interface TurnItem {
   readonly title: string;
-  readonly detail: string;
-  readonly help?: string;
+  readonly help: string;
 }
 
-const TURN_ACTIONS: readonly CombatAction[] = [
+const TURN_ITEMS: readonly TurnItem[] = [
   {
     title: "Action",
-    detail: "Attack, cast a spell, dash, dodge, hide, disengage, or use an object.",
-    help: "Your Action is the big thing you do on your turn — you get one.",
+    help: "Attack, cast a spell, dash, dodge, hide, disengage, or use an object.",
   },
   {
     title: "Bonus Action",
-    detail: "A small extra action granted by a feature, spell, or item.",
-    help: "Not everyone has a bonus action available — only if a feature or spell says so.",
+    help: "A small extra action granted by a feature, spell, or item.",
   },
   {
     title: "Movement",
-    detail: "Move up to your speed (usually 30 ft), split any way across your turn.",
-    help: "You can move, attack, and keep moving — movement can be broken up.",
+    help: "Move up to your speed (usually 30 ft), split any way across your turn.",
   },
   {
     title: "Reaction",
-    detail: "A response to something that happens, like an opportunity attack.",
-    help: "You get one reaction per round, and it refreshes at the start of your turn.",
+    help: "A response to something that happens, like an opportunity attack.",
   },
 ];
+
+const CONDITION_IDS: readonly string[] = [
+  "condition.poisoned",
+  "condition.stunned",
+  "condition.prone",
+  "condition.grappled",
+  "condition.blinded",
+  "condition.restrained",
+  "condition.frightened",
+  "condition.paralyzed",
+  "condition.charmed",
+  "condition.deafened",
+  "condition.incapacitated",
+  "condition.invisible",
+  "condition.unconscious",
+];
+
+const QUICK_DELTAS: readonly number[] = [-5, -1, 1, 5];
 
 type CombatStatKey = "armorClass" | "passivePerception" | "spellSaveDc";
 
@@ -68,8 +84,53 @@ function combatStatValue(player: PlayerReference, key: CombatStatKey): number {
   }
 }
 
-function formatSigned(value: number): string {
-  return value >= 0 ? `+${value}` : `${value}`;
+function conditionName(canonicalId: string): string {
+  const resolved = resolveEntity(canonicalId);
+  if (resolved?.selected.category === "condition") return resolved.selected.name;
+  const slug = canonicalId.slice(canonicalId.lastIndexOf(".") + 1);
+  return slug.charAt(0).toUpperCase() + slug.slice(1);
+}
+
+function conditionSummary(condition: Condition): string {
+  const walk = (blocks: readonly ContentBlock[]): string => {
+    for (const block of blocks) {
+      if (block.type === "paragraph") {
+        const text = block.text.trim();
+        if (text) return text;
+      } else if (block.type === "list") {
+        for (const item of block.items) {
+          if (typeof item === "string") {
+            const text = item.trim();
+            if (text) return text;
+          }
+        }
+      } else if (block.type === "entries" || block.type === "inset" || block.type === "quote") {
+        const text = walk(block.blocks);
+        if (text) return text;
+      }
+    }
+    return "";
+  };
+  return walk(condition.description);
+}
+
+function ConditionsHelp() {
+  return (
+    <div className="flex max-h-72 flex-col gap-3 overflow-y-auto pr-1">
+      {CONDITION_IDS.map((id) => {
+        const resolved = resolveEntity(id);
+        if (resolved?.selected.category !== "condition") return null;
+        return (
+          <div key={id}>
+            <span className="text-xs font-semibold text-foreground">{resolved.selected.name}</span>
+            <span className="mt-0.5 block text-xs leading-relaxed text-muted-foreground">
+              {conditionSummary(resolved.selected)}
+            </span>
+          </div>
+        );
+      })}
+    </div>
+  );
 }
 
 function PlayerSelector() {
@@ -98,15 +159,86 @@ function PlayerSelector() {
   );
 }
 
+function TurnChecklist() {
+  const [used, setUsed] = useState<ReadonlySet<string>>(() => new Set());
+
+  const toggle = (title: string) => {
+    setUsed((prev) => {
+      const next = new Set(prev);
+      if (next.has(title)) next.delete(title);
+      else next.add(title);
+      return next;
+    });
+  };
+
+  const reset = () => setUsed(new Set());
+
+  return (
+    <>
+      <div className="flex flex-col gap-2">
+        {TURN_ITEMS.map((item) => {
+          const isUsed = used.has(item.title);
+          return (
+            <div
+              key={item.title}
+              className={cn(
+                "flex items-center gap-2 rounded-control border border-border bg-surface px-3 py-2 transition-all duration-150",
+                isUsed && "border-primary/40",
+              )}
+            >
+              <button
+                type="button"
+                onClick={() => toggle(item.title)}
+                aria-pressed={isUsed}
+                className="flex flex-1 items-center gap-2 text-left"
+              >
+                <span
+                  className={cn(
+                    "flex h-4 w-4 shrink-0 items-center justify-center rounded-stat border transition-all duration-150",
+                    isUsed
+                      ? "border-primary bg-primary text-primary-foreground"
+                      : "border-border bg-card text-transparent",
+                  )}
+                >
+                  <svg
+                    aria-hidden="true"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth={3}
+                    className="h-3 w-3"
+                  >
+                    <path d="M20 6 9 17l-5-5" />
+                  </svg>
+                </span>
+                <span
+                  className={cn(
+                    "text-sm font-medium transition-colors duration-150",
+                    isUsed && "text-muted-foreground line-through",
+                  )}
+                >
+                  {item.title}
+                </span>
+              </button>
+              <HelpTip label={`More about ${item.title}`}>{item.help}</HelpTip>
+            </div>
+          );
+        })}
+      </div>
+      <div className="flex justify-end border-t border-border/60 pt-3">
+        <Button variant="outline" size="sm" onClick={reset}>
+          Next turn
+        </Button>
+      </div>
+    </>
+  );
+}
+
 function CombatPlayerView({ player }: { player: PlayerReference }) {
   const update = (data: PlayerReferenceUpdate) =>
     userStore.getState().updatePlayerReference(player.id, data);
 
   const hpLow = player.hitPoints.max > 0 && player.hitPoints.current <= player.hitPoints.max / 2;
-
-  const hasSpell =
-    player.combatValues.spellSaveDc !== undefined ||
-    player.combatValues.spellAttackBonus !== undefined;
 
   const hpPercent =
     player.hitPoints.max > 0
@@ -115,6 +247,24 @@ function CombatPlayerView({ player }: { player: PlayerReference }) {
           Math.min(100, Math.round((player.hitPoints.current / player.hitPoints.max) * 100)),
         )
       : 0;
+
+  const adjustHp = (delta: number) => {
+    const hp =
+      userStore.getState().players.find((p) => p.id === player.id)?.hitPoints ?? player.hitPoints;
+    update({ hitPoints: { current: Math.min(Math.max(hp.current + delta, 0), hp.max) } });
+  };
+
+  const toggleCondition = (id: string) => {
+    const activeConditions =
+      userStore.getState().players.find((p) => p.id === player.id)?.activeConditions ??
+      player.activeConditions;
+    const active = new Set(activeConditions);
+    if (active.has(id)) active.delete(id);
+    else active.add(id);
+    update({ activeConditions: [...active] });
+  };
+
+  const activeConditions = new Set(player.activeConditions);
 
   return (
     <div className="flex flex-col gap-4">
@@ -184,6 +334,18 @@ function CombatPlayerView({ player }: { player: PlayerReference }) {
             style={{ width: `${hpPercent}%` }}
           />
         </div>
+        <div className="grid grid-cols-4 gap-2">
+          {QUICK_DELTAS.map((delta) => (
+            <button
+              key={delta}
+              type="button"
+              onClick={() => adjustHp(delta)}
+              className="rounded-control border border-border bg-card px-2 py-1 text-xs font-semibold text-muted-foreground transition-all duration-150 hover:bg-accent hover:text-foreground active:scale-95"
+            >
+              {delta > 0 ? `+${delta}` : `${delta}`}
+            </button>
+          ))}
+        </div>
         {hpLow && (
           <p className="text-xs font-medium text-destructive">
             Below half — your character is hurting!
@@ -193,30 +355,48 @@ function CombatPlayerView({ player }: { player: PlayerReference }) {
 
       <div className="flex flex-col gap-3">
         <div className="flex items-center gap-2">
-          <span className="border-l-2 border-primary pl-2 text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+          <span className="border-l-2 border-primary pl-2 text-xs font-bold uppercase tracking-wide text-muted-foreground">
+            Conditions
+          </span>
+          <HelpTip label="What are conditions?">
+            <ConditionsHelp />
+          </HelpTip>
+        </div>
+        <div className="grid grid-cols-2 gap-2">
+          {CONDITION_IDS.map((id) => {
+            const isActive = activeConditions.has(id);
+            return (
+              <button
+                key={id}
+                type="button"
+                onClick={() => toggleCondition(id)}
+                aria-pressed={isActive}
+                className={cn(
+                  "rounded-control border px-3 py-1.5 text-left text-xs font-medium transition-all duration-150 active:scale-95",
+                  isActive
+                    ? "border-primary/60 bg-primary/15 text-foreground"
+                    : "border-border bg-transparent text-muted-foreground hover:bg-accent hover:text-foreground",
+                )}
+              >
+                {conditionName(id)}
+              </button>
+            );
+          })}
+        </div>
+      </div>
+
+      <div className="flex flex-col gap-3">
+        <div className="flex items-center gap-2">
+          <span className="border-l-2 border-primary pl-2 text-xs font-bold uppercase tracking-wide text-muted-foreground">
             On Your Turn
           </span>
           <HelpTip label="What can I do on my turn?">
             Each round you get one Action, one Bonus Action, and one Reaction. You can also move up
-            to your speed and split the movement however you like.
+            to your speed and split the movement however you like. Tap a row once you have used it
+            this turn, then hit “Next turn” when your turn ends.
           </HelpTip>
         </div>
-        <div className="grid grid-cols-2 gap-2">
-          {TURN_ACTIONS.map((action) => (
-            <div
-              key={action.title}
-              className="flex flex-col gap-1 rounded-card border border-border bg-surface px-4 py-3"
-            >
-              <span className="flex items-center gap-1 text-sm font-semibold text-foreground">
-                {action.title}
-                {action.help && (
-                  <HelpTip label={`More about ${action.title}`}>{action.help}</HelpTip>
-                )}
-              </span>
-              <span className="text-xs leading-relaxed text-muted-foreground">{action.detail}</span>
-            </div>
-          ))}
-        </div>
+        <TurnChecklist key={player.id} />
       </div>
 
       <div className="flex flex-col gap-3">
@@ -240,26 +420,6 @@ function CombatPlayerView({ player }: { player: PlayerReference }) {
               </span>
             </div>
           ))}
-        </div>
-        <div className="flex flex-wrap items-center gap-x-4 gap-y-1 border-t border-border/60 pt-2">
-          <span className="flex items-center gap-1.5">
-            <span className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
-              Init
-            </span>
-            <span className="font-mono text-sm font-medium tabular-nums text-foreground-subtle">
-              {formatSigned(player.combatValues.initiativeModifier)}
-            </span>
-          </span>
-          {hasSpell && (
-            <span className="flex items-center gap-1.5">
-              <span className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
-                Spell Atk
-              </span>
-              <span className="font-mono text-sm font-medium tabular-nums text-foreground-subtle">
-                {formatSigned(player.combatValues.spellAttackBonus ?? 0)}
-              </span>
-            </span>
-          )}
         </div>
       </div>
     </div>

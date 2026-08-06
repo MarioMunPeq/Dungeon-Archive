@@ -382,6 +382,7 @@ function createEmptyReference(): Omit<PlayerReference, "id"> {
     knownSpellCanonicalIds: [],
     weaponCanonicalIds: [],
     magicItemCanonicalIds: [],
+    activeConditions: [],
     note: undefined,
   };
 }
