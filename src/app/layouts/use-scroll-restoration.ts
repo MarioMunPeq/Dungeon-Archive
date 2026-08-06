@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useLayoutEffect, useRef } from "react";
 import { useLocation } from "react-router-dom";
 
 const STORAGE_PREFIX = "da:scroll:";
@@ -8,7 +8,7 @@ export function useScrollRestoration() {
   const mainRef = useRef<HTMLElement>(null);
   const seenKeys = useRef(new Set<string>(location.key ? [location.key] : []));
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const main = mainRef.current;
     if (!main || !location.key) return;
     if (seenKeys.current.has(location.key)) {
@@ -23,7 +23,7 @@ export function useScrollRestoration() {
     }
   }, [location.key]);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const main = mainRef.current;
     if (!main || !location.key) return;
     const onScroll = () => {

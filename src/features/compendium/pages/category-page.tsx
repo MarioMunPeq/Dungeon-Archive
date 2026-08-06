@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import { Outlet, useSearchParams } from "react-router-dom";
+import { Outlet, useMatch, useSearchParams } from "react-router-dom";
 import type { EntityCategory } from "@/compendium";
 import {
   categoryLabel,
@@ -24,6 +24,7 @@ interface CategoryPageProps {
 
 export function CategoryPage({ category }: CategoryPageProps) {
   const [searchParams, setSearchParams] = useSearchParams();
+  const detailMatch = useMatch(`/${category}/:canonicalId`);
 
   const allEntities = useMemo(() => getEntitiesForCategory(category), [category]);
   const filterDefs = useMemo(() => buildFilterDefs(category, allEntities), [category, allEntities]);
@@ -87,46 +88,46 @@ export function CategoryPage({ category }: CategoryPageProps) {
 
   return (
     <div>
-      <div className="sticky top-0 z-30 space-y-3 border-b border-border bg-background/95 px-4 pb-3 pt-4 backdrop-blur-sm">
-        <SearchField
-          value={query}
-          onChange={(value) => updateParam("q", value)}
-          ariaLabel={`Search ${label}`}
-          placeholder={`Search ${labelLower}\u2026`}
-        />
-        <FilterBar filters={filterDefs} values={currentFilters} onChange={updateParam} />
-      </div>
+      <div className={detailMatch ? "hidden" : undefined}>
+        <div className="sticky top-0 z-30 space-y-3 border-b border-border bg-background/95 px-4 pb-3 pt-4 backdrop-blur-sm">
+          <SearchField
+            value={query}
+            onChange={(value) => updateParam("q", value)}
+            ariaLabel={`Search ${label}`}
+            placeholder={`Search ${labelLower}\u2026`}
+          />
+          <FilterBar filters={filterDefs} values={currentFilters} onChange={updateParam} />
+        </div>
 
-      <div className="flex items-center justify-between gap-3 px-4 py-4">
-        <p className="text-sm text-muted-foreground">
-          <span className="font-medium text-foreground">{sorted.length}</span>
-          {isFiltered
-            ? ` of ${allEntities.length} ${labelLower}`
-            : ` ${labelLower}`}
-        </p>
-        <SelectField
-          value={sort}
-          options={sortOptions}
-          onChange={(value) => updateParam("sort", value)}
-          ariaLabel="Sort"
-          placeholder="Sort"
-        />
-      </div>
+        <div className="flex items-center justify-between gap-3 px-4 py-4">
+          <p className="text-sm text-muted-foreground">
+            <span className="font-medium text-foreground">{sorted.length}</span>
+            {isFiltered ? ` of ${allEntities.length} ${labelLower}` : ` ${labelLower}`}
+          </p>
+          <SelectField
+            value={sort}
+            options={sortOptions}
+            onChange={(value) => updateParam("sort", value)}
+            ariaLabel="Sort"
+            placeholder="Sort"
+          />
+        </div>
 
-      <div className="px-4 pb-4">
-        <EntityList
-          entities={cards}
-          emptyMessage={`No ${labelLower} match your search`}
-          emptyAction={
-            isFiltered ? (
-              <Button variant="outline" size="sm" onClick={handleClearAll}>
-                Clear filters
-              </Button>
-            ) : undefined
-          }
-        />
-        <Outlet />
+        <div className="px-4 pb-4">
+          <EntityList
+            entities={cards}
+            emptyMessage={`No ${labelLower} match your search`}
+            emptyAction={
+              isFiltered ? (
+                <Button variant="outline" size="sm" onClick={handleClearAll}>
+                  Clear filters
+                </Button>
+              ) : undefined
+            }
+          />
+        </div>
       </div>
+      <Outlet />
     </div>
   );
 }
