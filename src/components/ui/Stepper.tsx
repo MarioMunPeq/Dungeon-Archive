@@ -86,8 +86,8 @@ export function Stepper({
 
   const controlClass =
     variant === "ghost"
-      ? "hitbox-expand flex h-8 w-8 shrink-0 select-none items-center justify-center rounded-lg text-muted-foreground transition-all duration-150 active:scale-90 active:text-foreground disabled:cursor-default disabled:text-disabled-foreground disabled:active:scale-100 hover:text-foreground"
-      : "hitbox-expand flex h-9 w-9 shrink-0 select-none items-center justify-center rounded-lg border border-border bg-background text-base font-semibold text-foreground transition-all duration-150 active:scale-90 disabled:cursor-default disabled:bg-disabled disabled:text-disabled-foreground disabled:active:scale-100 hover:border-border-strong";
+      ? "hitbox-expand flex h-8 w-8 shrink-0 select-none items-center justify-center rounded-control text-muted-foreground transition-all duration-150 active:scale-90 active:text-foreground disabled:cursor-default disabled:text-disabled-foreground disabled:active:scale-100 hover:text-foreground"
+      : "hitbox-expand flex h-9 w-9 shrink-0 select-none items-center justify-center rounded-control border border-border bg-background text-base font-semibold text-foreground transition-all duration-150 active:scale-90 disabled:cursor-default disabled:bg-disabled disabled:text-disabled-foreground disabled:active:scale-100 hover:border-border-strong";
 
   const iconClass = "h-4 w-4";
 
@@ -136,7 +136,7 @@ export function Stepper({
         onClick={openEditor}
         aria-label={`Edit ${label}`}
         className={cn(
-          "flex h-11 w-full min-w-0 select-none items-center justify-center rounded-lg font-bold tabular-nums text-foreground transition-all duration-150 active:scale-95 hover:bg-accent/60",
+          "flex h-11 w-full min-w-0 select-none items-center justify-center rounded-control font-bold tabular-nums text-foreground transition-all duration-150 active:scale-95 hover:bg-accent/60",
           className,
           valueClassName,
         )}
@@ -186,7 +186,7 @@ export function Stepper({
           onClick={openEditor}
           aria-label={`Edit ${label}`}
           className={cn(
-            "flex h-11 min-w-0 flex-1 select-none items-center justify-center rounded-lg font-bold tabular-nums text-foreground transition-all duration-150 active:scale-95 hover:bg-accent/60",
+            "flex h-11 min-w-0 flex-1 select-none items-center justify-center rounded-control font-bold tabular-nums text-foreground transition-all duration-150 active:scale-95 hover:bg-accent/60",
             variant === "bordered" &&
               "border border-border bg-background px-1 text-base font-semibold hover:border-border-strong",
             valueClassName,

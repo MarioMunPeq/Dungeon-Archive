@@ -222,6 +222,50 @@ function formatSigned(value: number): string {
   return value >= 0 ? `+${value}` : `${value}`;
 }
 
+function classLine(reference: PlayerReference): string {
+  if (!reference.class) return "Add class, subclass, and level";
+  const cls = reference.subclass ? `${reference.class} (${reference.subclass})` : reference.class;
+  return `${cls} · Lv ${reference.level}`;
+}
+
+function SecondaryStat({
+  label,
+  value,
+  min,
+  max,
+  format,
+  onChange,
+  help,
+}: {
+  label: string;
+  value: number;
+  min: number;
+  max: number;
+  format?: (value: number) => string;
+  onChange: (value: number) => void;
+  help?: string;
+}) {
+  return (
+    <span className="flex min-w-0 items-center gap-1.5">
+      <span className="shrink-0 text-xs font-medium uppercase tracking-wide text-muted-foreground">
+        {label}
+      </span>
+      {help && <HelpTip label={`More about ${label}`}>{help}</HelpTip>}
+      <Stepper
+        hiddenControls
+        value={value}
+        min={min}
+        max={max}
+        format={format}
+        onChange={onChange}
+        label={label}
+        className="w-auto"
+        valueClassName="h-6 w-auto px-1 font-mono text-xs font-medium text-foreground-subtle hover:bg-accent/60"
+      />
+    </span>
+  );
+}
+
 function weaponStats(canonicalId: string): string | undefined {
   const resolved = resolveEntity(canonicalId);
   if (!resolved || resolved.selected.category !== "equipment") return undefined;
@@ -263,7 +307,7 @@ function WeaponPreview({ item, href }: { item: Equipment; href: string }) {
   const damage = formatDamage(item.damage, item.damageType);
   const properties = item.properties ?? [];
   return (
-    <div className="flex flex-col gap-2 rounded-lg bg-card px-3 py-2 animate-slide-up">
+    <div className="flex flex-col gap-2 rounded-card bg-card px-3 py-2 animate-slide-up">
       {damage && <p className="text-base font-bold tabular-nums text-foreground">{damage}</p>}
       {properties.length > 0 && (
         <p className="text-xs text-foreground-subtle">
@@ -289,7 +333,7 @@ function SpellPreview({ spell, href }: { spell: Spell; href: string }) {
   ) as string[];
   const details = [spell.castingTime, spell.range, spell.duration].filter(Boolean);
   return (
-    <div className="flex flex-col gap-2 rounded-lg bg-card px-3 py-2 animate-slide-up">
+    <div className="flex flex-col gap-2 rounded-card bg-card px-3 py-2 animate-slide-up">
       <p className="text-xs font-semibold text-foreground">
         {levelText} {METADATA_SEPARATOR} {school}
       </p>
@@ -301,7 +345,7 @@ function SpellPreview({ spell, href }: { spell: Spell; href: string }) {
           {flags.map((flag) => (
             <span
               key={flag}
-              className="rounded-full border border-border bg-muted px-2 py-1 text-xs font-medium uppercase tracking-wide text-muted-foreground"
+              className="rounded-control border border-border bg-muted px-2 py-1 text-xs font-medium uppercase tracking-wide text-muted-foreground"
             >
               {flag}
             </span>
@@ -351,7 +395,7 @@ function StatCard({
   onChange,
   onClear,
   help,
-  valueClassName = "text-3xl",
+  valueClassName = "font-mono text-3xl",
 }: {
   label: string;
   value: number;
@@ -364,7 +408,7 @@ function StatCard({
   valueClassName?: string;
 }) {
   return (
-    <div className="flex min-w-0 flex-col items-center gap-1 rounded-lg border border-border bg-card px-2 py-3">
+    <div className="flex min-w-0 flex-col items-center gap-1 rounded-stat border border-border bg-card px-2 py-3">
       <span className="flex w-full items-center justify-between gap-1">
         <span className="min-w-0 truncate text-xs font-semibold uppercase tracking-wide text-muted-foreground">
           {label}
@@ -375,7 +419,7 @@ function StatCard({
               type="button"
               onClick={onClear}
               aria-label={`Clear ${label}`}
-              className="inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-lg text-muted-foreground transition-colors duration-150 hover:bg-accent hover:text-foreground active:scale-90"
+              className="inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-control text-muted-foreground transition-colors duration-150 hover:bg-accent hover:text-foreground active:scale-90"
             >
               <svg
                 aria-hidden="true"
@@ -408,7 +452,7 @@ function StatCard({
   );
 }
 
-function AbilityScoreCell({
+function AbilityScoreRow({
   key_,
   score,
   onChange,
@@ -419,31 +463,29 @@ function AbilityScoreCell({
 }) {
   const modifier = abilityModifier(score);
   return (
-    <div className="flex min-w-0 flex-col items-center gap-1 rounded-lg border border-border bg-card px-2 py-3">
-      <span className="flex w-full items-center justify-between gap-1">
-        <span className="min-w-0 truncate text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+    <div className="flex min-w-0 flex-col gap-1.5 rounded-card border border-border bg-surface px-3 py-2">
+      <div className="flex items-center justify-between gap-2">
+        <span className="flex min-w-0 items-center gap-1 text-xs font-semibold uppercase tracking-wide text-muted-foreground">
           {ABILITY_LABELS[key_]}
+          <HelpTip label={`What is ${ABILITY_LABELS[key_]}?`}>{ABILITY_HELP[key_]}</HelpTip>
         </span>
-        <HelpTip label={`What is ${ABILITY_LABELS[key_]}?`}>{ABILITY_HELP[key_]}</HelpTip>
-      </span>
+        <span
+          className={cn(
+            "font-mono text-lg font-bold tabular-nums leading-none",
+            modifier >= 0 ? "text-success" : "text-destructive",
+          )}
+        >
+          {formatSigned(modifier)}
+        </span>
+      </div>
       <Stepper
-        variant="ghost"
-        hiddenControls
         value={score}
         min={1}
         max={30}
         onChange={onChange}
         label={ABILITY_LABELS[key_]}
-        valueClassName="text-2xl"
+        valueClassName="font-mono text-sm text-foreground-subtle"
       />
-      <span
-        className={cn(
-          "rounded-md px-2 py-0.5 text-xs font-bold tabular-nums",
-          modifier >= 0 ? "bg-success/10 text-success" : "bg-destructive/10 text-destructive",
-        )}
-      >
-        {formatSigned(modifier)}
-      </span>
     </div>
   );
 }
@@ -510,7 +552,7 @@ function ReferenceRow({
         className="py-2"
         trailing={
           quickStats ? (
-            <span className="shrink-0 rounded-md bg-card px-2 py-1 text-xs font-semibold tabular-nums text-foreground">
+            <span className="shrink-0 rounded-stat bg-card px-2 py-1 font-mono text-xs font-semibold tabular-nums text-foreground">
               {quickStats}
             </span>
           ) : undefined
@@ -549,7 +591,7 @@ function ReferenceGroup({
   return (
     <div className="flex flex-col gap-1">
       <div className="flex items-center justify-between gap-2">
-        <span className="flex items-center gap-1 text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+        <span className="flex items-center gap-1 border-l-2 border-primary pl-2 text-xs font-semibold uppercase tracking-wide text-muted-foreground">
           {title}
           <HelpTip label={`More about ${title}`}>{help}</HelpTip>
         </span>
@@ -576,7 +618,7 @@ function ReferenceGroup({
 
 function SectionLabel({ children }: { children: string }) {
   return (
-    <span className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+    <span className="border-l-2 border-primary pl-2 text-xs font-semibold uppercase tracking-wide text-muted-foreground">
       {children}
     </span>
   );
@@ -593,6 +635,7 @@ function PlayerReferenceCard({
 }) {
   const [editing, setEditing] = useState<"name" | "note" | null>(autoEditName ? "name" : null);
   const [draft, setDraft] = useState("");
+  const [subtitleEditing, setSubtitleEditing] = useState(false);
   const [picker, setPicker] = useState<PickerKind | null>(null);
   const [confirmRemove, setConfirmRemove] = useState(false);
 
@@ -670,7 +713,7 @@ function PlayerReferenceCard({
   const subclassOptions = reference.class ? (SUBCLASSES[reference.class] ?? []) : [];
 
   return (
-    <div className="flex flex-col gap-4 rounded-lg border border-border bg-surface p-3 animate-slide-up">
+    <div className="flex flex-col gap-4 rounded-card border border-border bg-surface p-3 animate-slide-up">
       <div className="flex items-start justify-between gap-2">
         <div className="min-w-0 flex-1">
           {editing === "name" ? (
@@ -683,52 +726,60 @@ function PlayerReferenceCard({
               className="text-base font-bold"
             />
           ) : (
-            <div className="flex flex-wrap items-center gap-x-2 gap-y-2">
-              <button
-                type="button"
-                onClick={() => startEdit("name")}
-                className="-mx-1 rounded-lg px-1 text-base font-bold text-foreground transition-colors duration-150 hover:bg-accent/50 active:bg-accent/80"
-              >
-                {reference.name}
-              </button>
-              {current && (
-                <span className="rounded-full border border-border bg-muted px-2 py-1 text-xs font-medium uppercase tracking-wide text-muted-foreground">
-                  Current
-                </span>
-              )}
-            </div>
+            <button
+              type="button"
+              onClick={() => startEdit("name")}
+              className="-mx-1 rounded-control px-1 text-lg font-bold text-foreground transition-colors duration-150 hover:bg-accent/50 active:bg-accent/80"
+            >
+              {reference.name}
+            </button>
           )}
-          <div className="mt-2 flex flex-wrap items-center gap-x-2 gap-y-2">
-            <SelectField
-              value={reference.class}
-              options={CLASSES}
-              onChange={(value) => update({ class: value })}
-              ariaLabel="Class"
-              placeholder="Class"
-            />
-            <SelectField
-              value={reference.subclass ?? ""}
-              options={subclassOptions}
-              onChange={(value) => update({ subclass: value || undefined })}
-              ariaLabel="Subclass"
-              placeholder="Subclass"
-            />
-            <div className="flex items-center gap-1">
-              <span className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
-                Lv
-              </span>
-              <Stepper
-                variant="ghost"
-                hiddenControls
-                value={reference.level}
-                min={1}
-                max={20}
-                onChange={(value) => update({ level: value })}
-                label="Level"
-                className="w-20"
-              />
+          {subtitleEditing ? (
+            <div className="mt-2 flex flex-col gap-2 rounded-card border border-border bg-card p-3">
+              <div className="flex flex-wrap gap-2">
+                <SelectField
+                  value={reference.class}
+                  options={CLASSES}
+                  onChange={(value) => update({ class: value })}
+                  ariaLabel="Class"
+                  placeholder="Class"
+                />
+                <SelectField
+                  value={reference.subclass ?? ""}
+                  options={subclassOptions}
+                  onChange={(value) => update({ subclass: value || undefined })}
+                  ariaLabel="Subclass"
+                  placeholder="Subclass"
+                />
+              </div>
+              <div className="flex items-center justify-between gap-2">
+                <span className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
+                  Level
+                </span>
+                <div className="flex items-center gap-2">
+                  <Stepper
+                    value={reference.level}
+                    min={1}
+                    max={20}
+                    onChange={(value) => update({ level: value })}
+                    label="Level"
+                  />
+                  <Button variant="ghost" size="sm" onClick={() => setSubtitleEditing(false)}>
+                    Done
+                  </Button>
+                </div>
+              </div>
             </div>
-          </div>
+          ) : (
+            <button
+              type="button"
+              onClick={() => setSubtitleEditing(true)}
+              aria-label="Edit class, subclass, and level"
+              className="-mx-1 mt-1 rounded-control px-1 text-xs font-medium text-foreground-subtle transition-colors duration-150 hover:bg-accent/50 hover:text-foreground"
+            >
+              {classLine(reference)}
+            </button>
+          )}
         </div>
         <div className="flex shrink-0 items-center gap-1">
           <button
@@ -739,7 +790,7 @@ function PlayerReferenceCard({
             }
             aria-pressed={current}
             className={cn(
-              "hitbox-expand inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-lg transition-all duration-150 active:scale-90",
+              "hitbox-expand inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-control transition-all duration-150 active:scale-90",
               current
                 ? "text-primary hover:bg-primary/10"
                 : "text-muted-foreground hover:bg-accent hover:text-foreground active:bg-accent/80",
@@ -766,7 +817,7 @@ function PlayerReferenceCard({
             onClick={() => setConfirmRemove(true)}
             title={`Remove ${reference.name}`}
             aria-label={`Remove ${reference.name}`}
-            className="hitbox-expand inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-lg text-muted-foreground transition-all duration-150 hover:bg-accent hover:text-foreground active:scale-90 active:bg-accent/80"
+            className="hitbox-expand inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-control text-muted-foreground transition-all duration-150 hover:bg-accent hover:text-foreground active:scale-90 active:bg-accent/80"
           >
             <svg
               aria-hidden="true"
@@ -787,14 +838,14 @@ function PlayerReferenceCard({
       </div>
 
       <div className="flex flex-col gap-2">
-        <span className="flex items-center gap-1 text-xs font-bold uppercase tracking-wide text-muted-foreground">
+        <span className="flex items-center gap-1 border-l-2 border-primary pl-2 text-xs font-bold uppercase tracking-wide text-muted-foreground">
           Combat Stats
           <HelpTip label="What are combat stats?">
             The numbers you check every fight. Armor Class is what enemies must beat to hit you.
             Initiative decides turn order. Passive Perception notices hidden things.
           </HelpTip>
         </span>
-        <div className={cn("grid gap-2", hasSpell ? "grid-cols-3 sm:grid-cols-5" : "grid-cols-3")}>
+        <div className="grid grid-cols-3 gap-2">
           <StatCard
             label="AC"
             value={reference.combatValues.armorClass}
@@ -803,61 +854,62 @@ function PlayerReferenceCard({
             onChange={(value) => update({ combatValues: { armorClass: value } })}
           />
           <StatCard
-            label="Init"
-            value={reference.combatValues.initiativeModifier}
-            min={-5}
-            max={20}
-            format={formatSigned}
-            onChange={(value) => update({ combatValues: { initiativeModifier: value } })}
-          />
-          <StatCard
-            label="Passive Perc."
+            label="Perception"
             value={reference.combatValues.passivePerception}
             min={0}
             max={40}
             onChange={(value) => update({ combatValues: { passivePerception: value } })}
+            help="Passive Perception is how well you notice hidden things without trying."
           />
-          {hasSpell && (
-            <>
-              <StatCard
-                label="DC"
-                value={reference.combatValues.spellSaveDc ?? 10}
-                min={0}
-                max={40}
-                onChange={(value) => update({ combatValues: { spellSaveDc: value } })}
-                help="Spell save DC is the number enemies must beat to resist your spells."
-              />
-              <StatCard
-                label="Atk"
-                value={reference.combatValues.spellAttackBonus ?? 0}
-                min={-5}
-                max={20}
-                format={formatSigned}
-                onChange={(value) => update({ combatValues: { spellAttackBonus: value } })}
-                help="Your spell attack bonus is added to a d20 when a spell attacks an enemy directly."
-              />
-            </>
-          )}
+          <StatCard
+            label="DC"
+            value={reference.combatValues.spellSaveDc ?? 10}
+            min={0}
+            max={40}
+            onChange={(value) => update({ combatValues: { spellSaveDc: value } })}
+            help="Spell save DC is the number enemies must beat to resist your spells."
+          />
         </div>
       </div>
 
       <div className="flex flex-col gap-2">
-        <span className="flex items-center gap-1 text-xs font-bold uppercase tracking-wide text-muted-foreground">
+        <span className="flex items-center gap-1 border-l-2 border-primary pl-2 text-xs font-bold uppercase tracking-wide text-muted-foreground">
           Ability Scores
           <HelpTip label="What are ability scores?">
             Six scores describe your character's strengths. The modifier underneath is the bonus you
             add to rolls — higher scores mean bigger bonuses.
           </HelpTip>
         </span>
-        <div className="grid grid-cols-3 gap-2 sm:grid-cols-6">
+        <div className="grid grid-cols-2 gap-2">
           {ABILITY_KEYS.map((key) => (
-            <AbilityScoreCell
+            <AbilityScoreRow
               key={key}
               key_={key}
               score={reference.abilityScores[key]}
               onChange={(value) => update({ abilityScores: { [key]: value } })}
             />
           ))}
+        </div>
+        <div className="flex flex-wrap items-center gap-x-4 gap-y-1 border-t border-border/60 pt-2">
+          <SecondaryStat
+            label="Initiative"
+            value={reference.combatValues.initiativeModifier}
+            min={-5}
+            max={20}
+            format={formatSigned}
+            onChange={(value) => update({ combatValues: { initiativeModifier: value } })}
+          />
+          {hasSpell && (
+            <SecondaryStat
+              label="Spell Atk"
+              value={reference.combatValues.spellAttackBonus ?? 0}
+              min={-5}
+              max={20}
+              format={formatSigned}
+              onChange={(value) => update({ combatValues: { spellAttackBonus: value } })}
+              help="Your spell attack bonus is added to a d20 when a spell attacks an enemy directly."
+            />
+          )}
         </div>
       </div>
 
@@ -905,7 +957,7 @@ function PlayerReferenceCard({
           <button
             type="button"
             onClick={() => startEdit("note")}
-            className="rounded-lg text-left text-sm text-foreground transition-colors duration-150 hover:bg-accent/50"
+            className="rounded-control text-left text-sm text-foreground transition-colors duration-150 hover:bg-accent/50"
           >
             {reference.note}
           </button>
@@ -913,7 +965,7 @@ function PlayerReferenceCard({
           <button
             type="button"
             onClick={() => startEdit("note")}
-            className="rounded-lg text-left text-xs text-muted-foreground transition-colors duration-150 hover:bg-accent/50"
+            className="rounded-control text-left text-xs text-muted-foreground transition-colors duration-150 hover:bg-accent/50"
           >
             Add a quick note…
           </button>
@@ -982,9 +1034,7 @@ export function PartyPage() {
               <path d="M16 3.13a4 4 0 0 1 0 7.75" />
             </svg>
           }
-          action={
-            <Button onClick={handleAdd}>Create your first character</Button>
-          }
+          action={<Button onClick={handleAdd}>Create your first character</Button>}
         />
       ) : (
         <>
@@ -997,7 +1047,7 @@ export function PartyPage() {
                   onClick={() => userStore.getState().setActivePlayer(player.id)}
                   aria-pressed={player.id === activePlayerId}
                   className={cn(
-                    "rounded-full border border-border px-3 py-1 text-xs font-medium transition-all duration-150 active:scale-95",
+                    "rounded-control border border-border px-3 py-1 text-xs font-medium transition-all duration-150 active:scale-95",
                     player.id === activePlayerId
                       ? "bg-primary text-primary-foreground"
                       : "text-muted-foreground hover:bg-accent hover:text-foreground",

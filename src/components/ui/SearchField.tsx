@@ -2,8 +2,10 @@ import { forwardRef } from "react";
 import type { ChangeEvent, ComponentPropsWithoutRef } from "react";
 import { cn } from "@/lib/utils";
 
-interface SearchFieldProps
-  extends Omit<ComponentPropsWithoutRef<"input">, "className" | "type" | "value" | "onChange"> {
+interface SearchFieldProps extends Omit<
+  ComponentPropsWithoutRef<"input">,
+  "className" | "type" | "value" | "onChange"
+> {
   readonly value: string;
   readonly onChange: (value: string) => void;
   readonly ariaLabel?: string;
@@ -24,7 +26,7 @@ export const SearchField = forwardRef<HTMLInputElement, SearchFieldProps>(functi
       autoComplete="off"
       spellCheck={false}
       className={cn(
-        "touch-target w-full rounded-lg border border-border bg-surface px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground focus:border-focus focus:outline-none focus:ring-1 focus:ring-focus",
+        "touch-target w-full rounded-control border border-border bg-surface px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground focus:border-focus focus:outline-none focus:ring-1 focus:ring-focus",
         className,
       )}
       {...rest}

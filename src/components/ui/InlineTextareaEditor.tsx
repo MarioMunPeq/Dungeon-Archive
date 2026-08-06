@@ -51,7 +51,7 @@ export function InlineTextareaEditor({
       placeholder={placeholder}
       aria-label={ariaLabel}
       autoFocus
-      className="w-full rounded-lg border border-border bg-background px-3 py-2 text-sm text-foreground outline-none focus:border-focus focus:ring-1 focus:ring-focus"
+      className="w-full rounded-control border border-border bg-background px-3 py-2 text-sm text-foreground outline-none focus:border-focus focus:ring-1 focus:ring-focus"
     />
   );
 }

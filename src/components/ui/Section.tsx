@@ -12,7 +12,7 @@ export function Section({ title, subtitle, action, children }: SectionProps) {
     <section className="space-y-2">
       <div className="flex items-center justify-between gap-3">
         <div className="min-w-0 space-y-1">
-          <h2 className="text-sm font-semibold uppercase tracking-wide text-muted-foreground">
+          <h2 className="border-l-2 border-primary pl-2 text-sm font-semibold uppercase tracking-wide text-muted-foreground">
             {title}
           </h2>
           {subtitle && <p className="text-xs text-muted-foreground">{subtitle}</p>}

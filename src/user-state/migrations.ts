@@ -122,16 +122,19 @@ const migrations: Record<number, (state: Record<string, unknown>) => Record<stri
       ? raw.players.map((p) => {
           if (!p || typeof p !== "object") return p;
           const player = { ...p } as Record<string, unknown>;
-          const scores = (player.abilityScores && typeof player.abilityScores === "object"
-            ? player.abilityScores
-            : {}) as Record<string, unknown>;
-          const mods = (player.abilityModifiers && typeof player.abilityModifiers === "object"
-            ? player.abilityModifiers
-            : {}) as Record<string, unknown>;
+          const scores = (
+            player.abilityScores && typeof player.abilityScores === "object"
+              ? player.abilityScores
+              : {}
+          ) as Record<string, unknown>;
+          const mods = (
+            player.abilityModifiers && typeof player.abilityModifiers === "object"
+              ? player.abilityModifiers
+              : {}
+          ) as Record<string, unknown>;
           const scoreOf = (key: string): number => {
             if (typeof scores[key] === "number") return scores[key];
-            const mod =
-              typeof mods[key] === "number" ? Math.floor(mods[key] as number) : 0;
+            const mod = typeof mods[key] === "number" ? Math.floor(mods[key] as number) : 0;
             return Math.max(1, Math.min(30, mod * 2 + 10));
           };
           player.abilityScores = {
@@ -216,10 +219,8 @@ export function migrate(raw: unknown): UserState {
     activeAdventureId:
       typeof result.activeAdventureId === "string" ? result.activeAdventureId : null,
     players: Array.isArray(result.players) ? (result.players as PlayerReference[]) : [],
-    activePlayerId:
-      typeof result.activePlayerId === "string" ? result.activePlayerId : null,
-    beginnerMode:
-      typeof result.beginnerMode === "boolean" ? result.beginnerMode : true,
+    activePlayerId: typeof result.activePlayerId === "string" ? result.activePlayerId : null,
+    beginnerMode: typeof result.beginnerMode === "boolean" ? result.beginnerMode : true,
     onboardingComplete:
       typeof result.onboardingComplete === "boolean" ? result.onboardingComplete : false,
   };

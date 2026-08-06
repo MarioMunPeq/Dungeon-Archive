@@ -21,7 +21,7 @@ const RULE_SECTIONS: readonly RuleSectionData[] = [
       "Beat or match the difficulty number (DC) to succeed.",
       "Advantage: roll twice, keep the higher. Disadvantage: roll twice, keep the lower.",
     ],
-    help: "A \"1\" on an attack roll is a critical miss and always fails. A \"20\" is a critical hit and always hits, with extra damage!",
+    help: 'A "1" on an attack roll is a critical miss and always fails. A "20" is a critical hit and always hits, with extra damage!',
   },
   {
     title: "Ability Checks",
@@ -40,10 +40,9 @@ const RULE_SECTIONS: readonly RuleSectionData[] = [
   },
   {
     title: "Saving Throws",
-    summary:
-      "When a spell or trap tries to affect you, you roll a saving throw to resist it.",
+    summary: "When a spell or trap tries to affect you, you roll a saving throw to resist it.",
     points: [
-      "The DM tells you which ability to use (e.g. \"make a Dexterity save\").",
+      'The DM tells you which ability to use (e.g. "make a Dexterity save").',
       "Roll the d20 and add that ability's modifier.",
       "If you beat the spell's DC, the effect is reduced or avoided.",
     ],
@@ -107,12 +106,12 @@ const HOW_TO_PLAY_POINTS: readonly HowToPlayPointData[] = [
     body: "Some scenes will center on other characters. That doesn't mean you sit out — react, chime in, support whoever has the spotlight, without taking the scene away from them.",
   },
   {
-    title: "The goal is to have fun, not to \"win.\"",
+    title: 'The goal is to have fun, not to "win."',
     body: "There's no scoreboard. A good session is one where everyone at the table enjoyed themselves, including you, even when things don't go the way you hoped.",
   },
   {
     title: "Participate actively.",
-    body: "Describe what your character does, don't just roll dice. Asking \"what do I see/feel/know about this?\" is always a valid thing to do.",
+    body: 'Describe what your character does, don\'t just roll dice. Asking "what do I see/feel/know about this?" is always a valid thing to do.',
   },
 ];
 
@@ -159,10 +158,16 @@ const TABS: readonly { id: RulesTabId; label: string }[] = [
   { id: "glossary", label: "Glossary" },
 ];
 
-function RuleSection({ data, defaultOpen = false }: { data: RuleSectionData; defaultOpen?: boolean }) {
+function RuleSection({
+  data,
+  defaultOpen = false,
+}: {
+  data: RuleSectionData;
+  defaultOpen?: boolean;
+}) {
   const [open, setOpen] = useState(defaultOpen);
   return (
-    <section className="flex flex-col gap-2 rounded-lg border border-border bg-surface px-4 py-3">
+    <section className="flex flex-col gap-2 rounded-card border border-border bg-surface px-4 py-3">
       <button
         type="button"
         onClick={() => setOpen((v) => !v)}
@@ -264,7 +269,7 @@ function HowToPlayTab() {
       {HOW_TO_PLAY_POINTS.map((point) => (
         <section
           key={point.title}
-          className="flex flex-col gap-1 rounded-lg border border-border bg-surface px-4 py-3"
+          className="flex flex-col gap-1 rounded-card border border-border bg-surface px-4 py-3"
         >
           <h2 className="text-sm font-semibold text-foreground">{point.title}</h2>
           <p className="text-sm leading-relaxed text-muted-foreground">{point.body}</p>
@@ -282,7 +287,7 @@ function RulesTab({ beginnerMode }: { readonly beginnerMode: boolean }) {
       aria-labelledby="rules-tab-rules"
       className="flex flex-col gap-3"
     >
-      <label className="flex items-center justify-between gap-3 rounded-lg border border-border bg-surface px-4 py-3">
+      <label className="flex items-center justify-between gap-3 rounded-card border border-border bg-surface px-4 py-3">
         <span className="flex flex-col gap-1">
           <span className="text-sm font-medium text-foreground">Beginner tips</span>
           <span className="text-xs text-muted-foreground">
@@ -324,7 +329,7 @@ function GlossaryTab() {
       {terms.map((entry) => (
         <section
           key={entry.term}
-          className="flex flex-col gap-1 rounded-lg border border-border bg-surface px-4 py-3"
+          className="flex flex-col gap-1 rounded-card border border-border bg-surface px-4 py-3"
         >
           <h3 className="text-sm font-semibold text-foreground">{entry.term}</h3>
           <p className="text-sm leading-relaxed text-muted-foreground">{entry.definition}</p>

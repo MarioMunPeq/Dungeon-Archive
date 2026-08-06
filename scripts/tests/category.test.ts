@@ -669,11 +669,7 @@ async function main() {
   test("toCardData exposes cantrip stat", () => {
     const spells = getEntitiesForCategory("spell");
     const cantrip = spells.find(
-      (s) =>
-        s.name === "Fire Bolt" &&
-        s.source === "XPHB" &&
-        "level" in s &&
-        s.level === 0,
+      (s) => s.name === "Fire Bolt" && s.source === "XPHB" && "level" in s && s.level === 0,
     );
     ok(cantrip, "Fire Bolt XPHB should exist");
     const card = toCardData("spell", cantrip!);

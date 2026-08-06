@@ -4,6 +4,8 @@ import { loadCompendium } from "@/compendium";
 import { hydrate } from "@/user-state";
 import { App } from "@/app";
 import { BootScreen } from "@/app/boot-screen";
+import "@fontsource-variable/inter";
+import "@fontsource-variable/jetbrains-mono";
 import "./index.css";
 
 const rootElement = document.getElementById("root");

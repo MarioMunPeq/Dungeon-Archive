@@ -26,7 +26,7 @@ import { Surface } from "../../src/components/ui/Surface";
 
 test("renders default variant with correct classes", () => {
   const html = renderToString(createElement(Surface, null, "content"));
-  ok(html.includes("rounded-lg"));
+  ok(html.includes("rounded-card"));
   ok(html.includes("border-border"));
   ok(html.includes("bg-background"));
   ok(html.includes("p-3"));
@@ -35,7 +35,7 @@ test("renders default variant with correct classes", () => {
 
 test("renders outlined variant", () => {
   const html = renderToString(createElement(Surface, { variant: "outlined" }, "content"));
-  ok(html.includes("rounded-lg"));
+  ok(html.includes("rounded-card"));
   ok(html.includes("border-border"));
   ok(!html.includes("bg-background"));
 });
@@ -72,7 +72,7 @@ import { Badge } from "../../src/components/ui/Badge";
 
 test("renders with correct base classes", () => {
   const html = renderToString(createElement(Badge, null, "label"));
-  ok(html.includes("rounded-full"));
+  ok(html.includes("rounded-control"));
   ok(html.includes("border"));
   ok(html.includes("px-2"));
   ok(html.includes("py-1"));
@@ -109,6 +109,7 @@ test("renders title and children", () => {
   );
   ok(html.includes("My Title"));
   ok(html.includes("body"));
+  ok(html.includes("border-l-2 border-primary pl-2"));
   ok(html.includes("text-sm font-semibold uppercase tracking-wide text-muted-foreground"));
 });
 
@@ -177,7 +178,14 @@ test("renders without wrapping", () => {
 
 console.log("\nTypography\n");
 
-import { Title, Subtitle, Heading, Body, Caption, Display } from "../../src/components/ui/Typography";
+import {
+  Title,
+  Subtitle,
+  Heading,
+  Body,
+  Caption,
+  Display,
+} from "../../src/components/ui/Typography";
 
 test("Title renders as h1 with text-2xl font-bold", () => {
   const html = renderToString(createElement(Title, null, "Big"));
@@ -331,7 +339,7 @@ import { Skeleton } from "../../src/components/ui/Skeleton";
 test("renders a pulsing placeholder block", () => {
   const html = renderToString(createElement(Skeleton, null));
   ok(html.includes("animate-pulse"));
-  ok(html.includes("rounded-lg"));
+  ok(html.includes("rounded-card"));
   ok(html.includes("bg-muted/60"));
   ok(html.includes('aria-hidden="true"'));
 });

@@ -34,7 +34,7 @@ export function ConfirmDialog({
       aria-label={title}
       className="fixed inset-0 z-50 flex items-center justify-center bg-overlay p-4"
     >
-      <div className="w-full max-w-sm space-y-4 rounded-lg border border-border bg-card p-5 shadow-lg animate-slide-up">
+      <div className="w-full max-w-sm space-y-4 rounded-card border border-border bg-card p-5 shadow-lg animate-slide-up">
         <h2 className="text-sm font-semibold text-foreground">{title}</h2>
         {children}
         <p className="text-sm text-muted-foreground">{message}</p>

@@ -46,7 +46,7 @@ export function HelpTip({ label, children, className }: HelpTipProps) {
       {open && (
         <span
           role="tooltip"
-          className="absolute left-0 top-full z-20 mt-2 w-64 rounded-lg border border-border bg-elevated px-3 py-2 text-xs leading-relaxed text-foreground shadow-lg animate-pop"
+          className="absolute left-0 top-full z-20 mt-2 w-64 rounded-card border border-border bg-elevated px-3 py-2 text-xs leading-relaxed text-foreground shadow-lg animate-pop"
         >
           {children}
         </span>

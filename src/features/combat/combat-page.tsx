@@ -33,27 +33,40 @@ const TURN_ACTIONS: readonly CombatAction[] = [
   },
 ];
 
+type CombatStatKey = "armorClass" | "passivePerception" | "spellSaveDc";
+
 const COMBAT_STATS: readonly {
   label: string;
-  value: string;
+  key: CombatStatKey;
   help: string;
 }[] = [
   {
     label: "AC",
-    value: "armorClass",
+    key: "armorClass",
     help: "Armor Class is what enemies must beat to hit you.",
   },
   {
-    label: "Init",
-    value: "initiativeModifier",
-    help: "Add this to a d20 roll to decide who acts first in combat.",
-  },
-  {
-    label: "Passive Perc.",
-    value: "passivePerception",
+    label: "Perception",
+    key: "passivePerception",
     help: "A score used to notice hidden things without rolling.",
   },
+  {
+    label: "DC",
+    key: "spellSaveDc",
+    help: "Spell save DC is the number enemies must beat to resist your spells.",
+  },
 ];
+
+function combatStatValue(player: PlayerReference, key: CombatStatKey): number {
+  switch (key) {
+    case "armorClass":
+      return player.combatValues.armorClass;
+    case "passivePerception":
+      return player.combatValues.passivePerception;
+    case "spellSaveDc":
+      return player.combatValues.spellSaveDc ?? 10;
+  }
+}
 
 function formatSigned(value: number): string {
   return value >= 0 ? `+${value}` : `${value}`;
@@ -72,7 +85,7 @@ function PlayerSelector() {
           onClick={() => userStore.getState().setActivePlayer(player.id)}
           aria-pressed={player.id === activePlayerId}
           className={cn(
-            "rounded-full border border-border px-3 py-1 text-xs font-medium transition-all duration-150 active:scale-95",
+            "rounded-control border border-border px-3 py-1 text-xs font-medium transition-all duration-150 active:scale-95",
             player.id === activePlayerId
               ? "bg-primary text-primary-foreground"
               : "text-muted-foreground hover:bg-accent hover:text-foreground",
@@ -91,13 +104,23 @@ function CombatPlayerView({ player }: { player: PlayerReference }) {
 
   const hpLow = player.hitPoints.max > 0 && player.hitPoints.current <= player.hitPoints.max / 2;
 
-  const hpPercent = player.hitPoints.max > 0 ? Math.max(0, Math.min(100, Math.round((player.hitPoints.current / player.hitPoints.max) * 100))) : 0;
+  const hasSpell =
+    player.combatValues.spellSaveDc !== undefined ||
+    player.combatValues.spellAttackBonus !== undefined;
+
+  const hpPercent =
+    player.hitPoints.max > 0
+      ? Math.max(
+          0,
+          Math.min(100, Math.round((player.hitPoints.current / player.hitPoints.max) * 100)),
+        )
+      : 0;
 
   return (
     <div className="flex flex-col gap-4">
-      <div className="flex flex-col gap-3 rounded-lg border border-border bg-surface p-4">
+      <div className="flex flex-col gap-3 rounded-card border border-border bg-surface p-4">
         <div className="flex items-center justify-between gap-2">
-          <span className="text-xs font-bold uppercase tracking-wide text-muted-foreground">
+          <span className="flex items-center gap-2 border-l-2 border-primary pl-2 text-xs font-bold uppercase tracking-wide text-muted-foreground">
             Hit Points
           </span>
           <HelpTip label="What are Hit Points?">
@@ -107,7 +130,7 @@ function CombatPlayerView({ player }: { player: PlayerReference }) {
         </div>
         <div
           className={cn(
-            "flex items-center justify-between gap-4 rounded-lg border border-border bg-card px-4 py-3",
+            "flex items-center justify-between gap-4 rounded-stat border border-border bg-card px-4 py-3",
             hpLow && "border-destructive/40",
           )}
         >
@@ -124,7 +147,10 @@ function CombatPlayerView({ player }: { player: PlayerReference }) {
               onChange={(value) => update({ hitPoints: { current: value } })}
               label="Current HP"
               className="w-24"
-              valueClassName={cn("text-3xl font-bold tabular-nums", hpLow && "text-destructive")}
+              valueClassName={cn(
+                "font-mono text-3xl font-bold tabular-nums",
+                hpLow && "text-destructive",
+              )}
             />
           </div>
           <span className="text-lg font-medium text-foreground-subtle">/</span>
@@ -141,7 +167,7 @@ function CombatPlayerView({ player }: { player: PlayerReference }) {
               onChange={(value) => update({ hitPoints: { max: value } })}
               label="Max HP"
               className="w-24"
-              valueClassName="text-3xl font-bold tabular-nums"
+              valueClassName="font-mono text-3xl font-bold tabular-nums"
             />
           </div>
         </div>
@@ -167,7 +193,7 @@ function CombatPlayerView({ player }: { player: PlayerReference }) {
 
       <div className="flex flex-col gap-3">
         <div className="flex items-center gap-2">
-          <span className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+          <span className="border-l-2 border-primary pl-2 text-xs font-semibold uppercase tracking-wide text-muted-foreground">
             On Your Turn
           </span>
           <HelpTip label="What can I do on my turn?">
@@ -179,11 +205,13 @@ function CombatPlayerView({ player }: { player: PlayerReference }) {
           {TURN_ACTIONS.map((action) => (
             <div
               key={action.title}
-              className="flex flex-col gap-1 rounded-lg border border-border bg-surface px-4 py-3"
+              className="flex flex-col gap-1 rounded-card border border-border bg-surface px-4 py-3"
             >
               <span className="flex items-center gap-1 text-sm font-semibold text-foreground">
                 {action.title}
-                {action.help && <HelpTip label={`More about ${action.title}`}>{action.help}</HelpTip>}
+                {action.help && (
+                  <HelpTip label={`More about ${action.title}`}>{action.help}</HelpTip>
+                )}
               </span>
               <span className="text-xs leading-relaxed text-muted-foreground">{action.detail}</span>
             </div>
@@ -192,7 +220,7 @@ function CombatPlayerView({ player }: { player: PlayerReference }) {
       </div>
 
       <div className="flex flex-col gap-3">
-        <span className="flex items-center gap-2 text-xs font-bold uppercase tracking-wide text-muted-foreground">
+        <span className="flex items-center gap-2 border-l-2 border-primary pl-2 text-xs font-bold uppercase tracking-wide text-muted-foreground">
           Stats
           <HelpTip label="What are these numbers?">
             These are your combat numbers. Edit them on your character in the Party tab.
@@ -201,26 +229,37 @@ function CombatPlayerView({ player }: { player: PlayerReference }) {
         <div className="grid grid-cols-3 gap-2">
           {COMBAT_STATS.map((stat) => (
             <div
-              key={stat.label}
-              className="flex flex-col items-center gap-1 rounded-lg border border-border bg-surface px-2 py-3"
+              key={stat.key}
+              className="flex flex-col items-center gap-1 rounded-stat border border-border bg-card px-2 py-3"
             >
               <span className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
                 {stat.label}
               </span>
-              <span
-                className={cn(
-                  "text-2xl font-bold tabular-nums text-foreground",
-                  stat.value === "initiativeModifier" && "text-foreground",
-                )}
-              >
-                {stat.value === "initiativeModifier"
-                  ? formatSigned(player.combatValues.initiativeModifier)
-                  : stat.value === "armorClass"
-                    ? player.combatValues.armorClass
-                    : player.combatValues.passivePerception}
+              <span className="font-mono text-2xl font-bold tabular-nums text-foreground">
+                {combatStatValue(player, stat.key)}
               </span>
             </div>
           ))}
+        </div>
+        <div className="flex flex-wrap items-center gap-x-4 gap-y-1 border-t border-border/60 pt-2">
+          <span className="flex items-center gap-1.5">
+            <span className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
+              Init
+            </span>
+            <span className="font-mono text-sm font-medium tabular-nums text-foreground-subtle">
+              {formatSigned(player.combatValues.initiativeModifier)}
+            </span>
+          </span>
+          {hasSpell && (
+            <span className="flex items-center gap-1.5">
+              <span className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
+                Spell Atk
+              </span>
+              <span className="font-mono text-sm font-medium tabular-nums text-foreground-subtle">
+                {formatSigned(player.combatValues.spellAttackBonus ?? 0)}
+              </span>
+            </span>
+          )}
         </div>
       </div>
     </div>

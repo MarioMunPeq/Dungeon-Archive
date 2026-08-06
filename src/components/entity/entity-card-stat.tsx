@@ -7,13 +7,13 @@ interface EntityCardStatProps {
 
 export function EntityCardStat({ stat }: EntityCardStatProps) {
   return (
-    <div className="flex shrink-0 items-center gap-1 rounded-md border border-border bg-muted px-2 py-1">
+    <div className="flex shrink-0 items-center gap-1 rounded-stat border border-border bg-muted px-2 py-1">
       <span className="text-[10px] font-medium uppercase tracking-wide text-foreground-subtle">
         {stat.label}
       </span>
       <span
         className={cn(
-          "text-sm font-semibold leading-none text-foreground",
+          "font-mono text-sm font-semibold leading-none text-foreground",
           stat.numeric && "tabular-nums",
         )}
       >

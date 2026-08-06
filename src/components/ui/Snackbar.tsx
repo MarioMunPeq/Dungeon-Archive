@@ -79,7 +79,7 @@ export function SnackbarProvider({ children }: { children: ReactNode }) {
                 key={entry.id}
                 role="status"
                 className={cn(
-                  "pointer-events-auto flex w-full max-w-sm items-center gap-3 rounded-lg border bg-card px-4 py-3 shadow-lg animate-slide-up",
+                  "pointer-events-auto flex w-full max-w-sm items-center gap-3 rounded-card border bg-card px-4 py-3 shadow-lg animate-slide-up",
                   TONE_CLASSES[entry.tone],
                 )}
               >

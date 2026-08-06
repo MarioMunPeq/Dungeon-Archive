@@ -136,9 +136,9 @@ function clampOptInt(value: unknown, min: number, max: number): number | undefin
  */
 function normalizeAbilityScores(raw: unknown, legacyModifiers: unknown): AbilityScores {
   const scores = (raw && typeof raw === "object" ? raw : {}) as Record<string, unknown>;
-  const mods = (legacyModifiers && typeof legacyModifiers === "object"
-    ? legacyModifiers
-    : {}) as Record<string, unknown>;
+  const mods = (
+    legacyModifiers && typeof legacyModifiers === "object" ? legacyModifiers : {}
+  ) as Record<string, unknown>;
   const fromRaw = (key: keyof AbilityScores, modKey: string): number => {
     if (typeof scores[key] === "number") {
       return clampInt(scores[key], MIN_SCORE, MAX_SCORE, DEFAULT_ABILITY_SCORES[key]);

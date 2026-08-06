@@ -7,7 +7,7 @@ interface SectionHeaderProps {
 
 export function SectionHeader({ title, to }: SectionHeaderProps) {
   const content = (
-    <span className="flex items-center gap-1">
+    <span className="flex items-center gap-1 border-l-2 border-primary pl-2">
       {title}
       {to && (
         <svg

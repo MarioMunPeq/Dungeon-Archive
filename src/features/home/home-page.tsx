@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { categoryLabelSingular, METADATA_SEPARATOR } from "@/compendium";
+import { categoryLabelSingular } from "@/compendium";
 import type { EntityCardData } from "@/compendium";
 import {
   useRecentEntities,
@@ -56,17 +56,19 @@ export function HomePage() {
         {player ? (
           <Link
             to="/combat"
-            className="group flex flex-col gap-3 rounded-lg border border-border bg-surface p-4 transition-colors hover:bg-accent active:bg-accent/80"
+            className="group flex flex-col gap-3 rounded-card border border-border bg-surface p-4 transition-colors hover:bg-accent active:bg-accent/80"
           >
             <div className="flex items-start justify-between gap-3">
               <div className="min-w-0">
                 <p className="truncate text-sm font-semibold text-foreground">{player.name}</p>
                 <p className="truncate text-xs text-muted-foreground">
-                  {player.class ? `${player.class} ${METADATA_SEPARATOR} ` : ""}Lv {player.level}
+                  {player.class
+                    ? `${player.subclass ? `${player.class} (${player.subclass})` : player.class} · Lv ${player.level}`
+                    : `Lv ${player.level}`}
                 </p>
               </div>
               <div className="flex flex-col items-end gap-2">
-                <span className="rounded-full border border-border bg-muted px-2 py-1 text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">
+                <span className="rounded-control border border-border bg-muted px-2 py-1 text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">
                   Current
                 </span>
               </div>
@@ -79,7 +81,7 @@ export function HomePage() {
             </div>
           </Link>
         ) : (
-          <div className="rounded-lg border border-border bg-surface p-4">
+          <div className="rounded-card border border-border bg-surface p-4">
             <div className="flex flex-col gap-3">
               <div className="flex flex-col gap-1">
                 <h3 className="text-sm font-semibold text-foreground">
@@ -101,7 +103,7 @@ export function HomePage() {
 
       <section className="flex flex-col gap-3">
         <SectionHeader title="Session" to="/session" />
-        <div className="rounded-lg border border-border bg-surface p-4">
+        <div className="rounded-card border border-border bg-surface p-4">
           {sessionCards.length > 0 ? (
             <div className="grid grid-cols-1 gap-2 sm:grid-cols-2 lg:grid-cols-3">
               {sessionCards.map((card) => (
@@ -126,7 +128,7 @@ export function HomePage() {
 
       <section className="flex flex-col gap-3">
         <SectionHeader title="Recently Viewed" />
-        <div className="rounded-lg border border-border bg-surface p-4">
+        <div className="rounded-card border border-border bg-surface p-4">
           {recentCards.length > 0 ? (
             <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
               {recentCards.map((card) => (
@@ -153,9 +155,9 @@ export function HomePage() {
         <SectionHeader title="Learn the basics" to="/rules" />
         <Link
           to="/rules"
-          className="flex items-start gap-3 rounded-lg border border-border bg-surface px-4 py-3 transition-colors hover:bg-accent active:bg-accent/80"
+          className="flex items-start gap-3 rounded-card border border-border bg-surface px-4 py-3 transition-colors hover:bg-accent active:bg-accent/80"
         >
-          <span className="mt-1 flex h-8 w-8 items-center justify-center rounded-lg border border-border bg-muted text-muted-foreground">
+          <span className="mt-1 flex h-8 w-8 items-center justify-center rounded-control border border-border bg-muted text-muted-foreground">
             <svg
               aria-hidden="true"
               viewBox="0 0 24 24"
