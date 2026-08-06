@@ -634,6 +634,83 @@ async function main() {
     strictEqual(card.category, "spell");
   });
 
+  test("buildFilterDefs sorts CR options numerically with fractions first", () => {
+    const monsters = getEntitiesForCategory("monster");
+    const defs = buildFilterDefs("monster", monsters);
+    const cr = defs.find((d: { key: string }) => d.key === "cr");
+    ok(cr, "monsters should have a CR filter");
+    const values = cr!.options.map((o: { value: string }) => o.value).filter((v) => v !== "");
+    const indexOf = (value: string): number => {
+      const i = values.indexOf(value);
+      ok(i !== -1, `CR ${value} should be an option`);
+      return i;
+    };
+    ok(indexOf("0") < indexOf("1/8"), "0 before 1/8");
+    ok(indexOf("1/8") < indexOf("1/4"), "1/8 before 1/4");
+    ok(indexOf("1/4") < indexOf("1/2"), "1/4 before 1/2");
+    ok(indexOf("1/2") < indexOf("1"), "1/2 before 1");
+    ok(indexOf("1") < indexOf("2"), "1 before 2");
+    ok(indexOf("2") < indexOf("10"), "2 before 10 (not string-sorted)");
+    ok(indexOf("9") < indexOf("10"), "9 before 10");
+    ok(indexOf("19") < indexOf("20"), "19 before 20");
+    ok(indexOf("24") < indexOf("30"), "24 before 30");
+  });
+
+  test("toCardData exposes spell level stat", () => {
+    const spells = getEntitiesForCategory("spell");
+    const fireball = spells.find(
+      (s: { name: string; source: string }) => s.name === "Fireball" && s.source === "XPHB",
+    );
+    ok(fireball, "Fireball XPHB should exist");
+    const card = toCardData("spell", fireball!);
+    deepEqual(card.stat, { label: "Level", value: "3", numeric: true });
+  });
+
+  test("toCardData exposes cantrip stat", () => {
+    const spells = getEntitiesForCategory("spell");
+    const cantrip = spells.find(
+      (s) =>
+        s.name === "Fire Bolt" &&
+        s.source === "XPHB" &&
+        "level" in s &&
+        s.level === 0,
+    );
+    ok(cantrip, "Fire Bolt XPHB should exist");
+    const card = toCardData("spell", cantrip!);
+    deepEqual(card.stat, { label: "Level", value: "Cantrip", numeric: false });
+  });
+
+  test("toCardData exposes monster CR stat", () => {
+    const monsters = getEntitiesForCategory("monster");
+    const ancient = monsters.find(
+      (m: { name: string; source: string }) =>
+        m.name.startsWith("Ancient Red Dragon") && m.source === "XMM",
+    );
+    ok(ancient, "Ancient Red Dragon XMM should exist");
+    const card = toCardData("monster", ancient!);
+    deepEqual(card.stat, { label: "CR", value: "24", numeric: true });
+  });
+
+  test("toCardData exposes weapon damage stat", () => {
+    const equipment = getEntitiesForCategory("equipment");
+    const weapon = equipment.find(
+      (e) => "damage" in e && typeof e.damage === "string" && e.damage.length > 0,
+    );
+    ok(weapon, "at least one weapon with damage should exist");
+    const card = toCardData("equipment", weapon!);
+    ok(card.stat, "weapon card should have a stat");
+    strictEqual(card.stat!.label, "Damage");
+    ok(card.stat!.value.length > 0);
+  });
+
+  test("toCardData omits stat when category has no key stat", () => {
+    const conditions = getEntitiesForCategory("condition");
+    const blinded = conditions.find((c: { name: string }) => c.name === "Blinded");
+    ok(blinded);
+    const card = toCardData("condition", blinded!);
+    strictEqual(card.stat, undefined);
+  });
+
   console.log(
     "\n\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\n",
   );

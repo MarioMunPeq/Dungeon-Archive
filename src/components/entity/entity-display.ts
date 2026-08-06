@@ -10,7 +10,15 @@ import type {
   EntityVersion,
   EntityCategory,
 } from "@/compendium";
-import { getEntity, sourcePriority, referenceToUrl, CATEGORY_REGISTRY, METADATA_SEPARATOR } from "@/compendium";
+import {
+  getEntity,
+  sourcePriority,
+  referenceToUrl,
+  CATEGORY_REGISTRY,
+  METADATA_SEPARATOR,
+  entityCardStat,
+} from "@/compendium";
+import type { CardStat } from "@/compendium";
 
 interface EntityDisplayInfo {
   readonly title: string;
@@ -26,6 +34,7 @@ export interface SearchResultItem {
   readonly source: string;
   readonly to: string;
   readonly versions?: readonly EntityVersion[];
+  readonly stat?: CardStat;
 }
 
 type DisplayEntity = Spell | Condition | Equipment | Action | Monster | MagicItem | Feat;
@@ -101,9 +110,12 @@ export function createSearchResultItems(
       category: preferred.entity.category,
       title: display.title,
       subtitle:
-        versionCount > 1 ? `${display.subtitle} ${METADATA_SEPARATOR} ${versionCount} versions` : display.subtitle,
+        versionCount > 1
+          ? `${display.subtitle} ${METADATA_SEPARATOR} ${versionCount} versions`
+          : display.subtitle,
       source: preferred.entity.source,
       to: referenceToUrl(preferred.entity.canonicalId),
+      stat: entityCardStat(preferred.entity),
       versions:
         versionCount > 1
           ? group.map((g) => ({

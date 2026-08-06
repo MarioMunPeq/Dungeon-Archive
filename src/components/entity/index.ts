@@ -10,3 +10,4 @@ export { EntityReferenceRow, RowRemoveButton } from "./entity-reference-row";
 export { EntityIdentity } from "./entity-identity";
 
 export { EntityCard } from "./entity-card";
+export { EntityCardStat } from "./entity-card-stat";

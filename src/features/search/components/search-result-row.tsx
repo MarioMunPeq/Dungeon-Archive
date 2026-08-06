@@ -1,9 +1,7 @@
 import { Link } from "react-router-dom";
 import type { SearchResultItem } from "@/components/entity";
-import { EntityIdentity } from "@/components/entity";
+import { EntityIdentity, EntityCardStat } from "@/components/entity";
 import { SearchHighlight } from "./search-highlight";
-import { FavoriteButton } from "@/components/ui/FavoriteButton";
-import { SessionButton } from "@/components/ui/SessionButton";
 
 interface SearchResultRowProps extends SearchResultItem {
   readonly query: string;
@@ -21,8 +19,8 @@ export function SearchResultRow({
   to,
   query,
   isSelected,
-  canonicalId,
   id,
+  stat,
 }: SearchResultRowProps) {
   return (
     <Link
@@ -38,8 +36,10 @@ export function SearchResultRow({
         subtitle={subtitle}
       />
 
-      <FavoriteButton canonicalId={canonicalId} />
-      <SessionButton canonicalId={canonicalId} />
+      {stat && <EntityCardStat stat={stat} />}
+      <span aria-hidden className="shrink-0 text-xl leading-none text-muted-foreground">
+        ›
+      </span>
     </Link>
   );
 }

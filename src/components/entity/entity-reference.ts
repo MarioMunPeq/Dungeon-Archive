@@ -1,5 +1,5 @@
-import { CATEGORY_REGISTRY, referenceToUrl, resolveEntity } from "@/compendium";
-import type { EntityCategory } from "@/compendium";
+import { CATEGORY_REGISTRY, referenceToUrl, resolveEntity, entityCardStat } from "@/compendium";
+import type { EntityCategory, CardStat } from "@/compendium";
 
 export type BadgeVariant = "default" | "accent" | "outline" | "subtle";
 
@@ -24,6 +24,7 @@ export interface EntityRef {
   readonly source: string;
   readonly subtitle: string;
   readonly href: string;
+  readonly stat?: CardStat;
 }
 
 export function entityRefFromCanonicalId(canonicalId: string): EntityRef | null {
@@ -38,5 +39,6 @@ export function entityRefFromCanonicalId(canonicalId: string): EntityRef | null 
     source: entity.source,
     subtitle: CATEGORY_REGISTRY[category].getSubtitle(entity),
     href: referenceToUrl(canonicalId),
+    stat: entityCardStat(entity),
   };
 }

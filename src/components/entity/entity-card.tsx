@@ -4,8 +4,7 @@ import { formatSource } from "@/compendium";
 import type { EntityCardData } from "@/compendium";
 import { Badge } from "@/components/ui/Badge";
 import { badgeVariantForCategory } from "./entity-reference";
-import { FavoriteButton } from "@/components/ui/FavoriteButton";
-import { SessionButton } from "@/components/ui/SessionButton";
+import { EntityCardStat } from "./entity-card-stat";
 
 export const EntityCard = memo(function EntityCard({
   name,
@@ -14,8 +13,8 @@ export const EntityCard = memo(function EntityCard({
   categoryLabel,
   metadata,
   source,
-  canonicalId,
   versionCount,
+  stat,
 }: EntityCardData) {
   return (
     <Link
@@ -24,9 +23,11 @@ export const EntityCard = memo(function EntityCard({
     >
       <div className="flex items-center justify-between gap-2">
         <span className="truncate text-base font-medium text-foreground">{name}</span>
-        <span className="flex shrink-0 items-center gap-1">
-          <FavoriteButton canonicalId={canonicalId} />
-          <SessionButton canonicalId={canonicalId} />
+        <span className="flex shrink-0 items-center gap-2">
+          {stat && <EntityCardStat stat={stat} />}
+          <span aria-hidden className="text-xl leading-none text-muted-foreground">
+            ›
+          </span>
         </span>
       </div>
       <div className="flex min-w-0 items-center gap-2">

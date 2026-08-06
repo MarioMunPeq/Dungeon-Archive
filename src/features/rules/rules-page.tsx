@@ -92,6 +92,73 @@ const RULE_SECTIONS: readonly RuleSectionData[] = [
   },
 ];
 
+interface HowToPlayPointData {
+  readonly title: string;
+  readonly body: string;
+}
+
+const HOW_TO_PLAY_POINTS: readonly HowToPlayPointData[] = [
+  {
+    title: "Your character won't be good at everything — and that's fine.",
+    body: "Every class has strengths and weaknesses. Failing a roll now and then is part of the game, not a failure on your part.",
+  },
+  {
+    title: "The session isn't only about you.",
+    body: "Some scenes will center on other characters. That doesn't mean you sit out — react, chime in, support whoever has the spotlight, without taking the scene away from them.",
+  },
+  {
+    title: "The goal is to have fun, not to \"win.\"",
+    body: "There's no scoreboard. A good session is one where everyone at the table enjoyed themselves, including you, even when things don't go the way you hoped.",
+  },
+  {
+    title: "Participate actively.",
+    body: "Describe what your character does, don't just roll dice. Asking \"what do I see/feel/know about this?\" is always a valid thing to do.",
+  },
+];
+
+interface GlossaryEntryData {
+  readonly term: string;
+  readonly definition: string;
+}
+
+const LOREM_A =
+  "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.";
+const LOREM_B =
+  "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.";
+const LOREM_C =
+  "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt.";
+const LOREM_D =
+  "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident.";
+
+const GLOSSARY_TERMS: readonly GlossaryEntryData[] = [
+  { term: "AC", definition: LOREM_A },
+  { term: "Ability Check", definition: LOREM_B },
+  { term: "Action", definition: LOREM_C },
+  { term: "Advantage", definition: LOREM_D },
+  { term: "Bonus Action", definition: LOREM_A },
+  { term: "Cantrip", definition: LOREM_B },
+  { term: "Concentration", definition: LOREM_C },
+  { term: "Critical Hit", definition: LOREM_D },
+  { term: "DC", definition: LOREM_A },
+  { term: "Disadvantage", definition: LOREM_B },
+  { term: "Hit Dice", definition: LOREM_C },
+  { term: "Hit Points", definition: LOREM_D },
+  { term: "Long Rest", definition: LOREM_A },
+  { term: "Reaction", definition: LOREM_B },
+  { term: "Saving Throw", definition: LOREM_C },
+  { term: "Short Rest", definition: LOREM_D },
+  { term: "Spell Attack", definition: LOREM_A },
+  { term: "Spell Save DC", definition: LOREM_B },
+];
+
+type RulesTabId = "how-to-play" | "rules" | "glossary";
+
+const TABS: readonly { id: RulesTabId; label: string }[] = [
+  { id: "how-to-play", label: "How to Play" },
+  { id: "rules", label: "Rules" },
+  { id: "glossary", label: "Glossary" },
+];
+
 function RuleSection({ data, defaultOpen = false }: { data: RuleSectionData; defaultOpen?: boolean }) {
   const [open, setOpen] = useState(defaultOpen);
   return (
@@ -145,10 +212,76 @@ function RuleSection({ data, defaultOpen = false }: { data: RuleSectionData; def
   );
 }
 
-export function RulesPage() {
-  const beginnerMode = useBeginnerMode();
+function RulesTabBar({
+  active,
+  onChange,
+}: {
+  readonly active: RulesTabId;
+  readonly onChange: (tab: RulesTabId) => void;
+}) {
   return (
-    <div className="flex flex-col gap-3 px-4 py-4">
+    <div
+      role="tablist"
+      aria-label="Rules sections"
+      className="sticky top-0 z-30 border-b border-border bg-background/95 backdrop-blur-sm"
+    >
+      <div className="flex gap-1 px-2">
+        {TABS.map((tab) => {
+          const isActive = tab.id === active;
+          return (
+            <button
+              key={tab.id}
+              type="button"
+              role="tab"
+              id={`rules-tab-${tab.id}`}
+              aria-selected={isActive}
+              aria-controls={`rules-panel-${tab.id}`}
+              onClick={() => onChange(tab.id)}
+              className={cn(
+                "-mb-px flex items-center border-b-2 px-3 py-3 text-sm font-medium transition-colors",
+                isActive
+                  ? "border-primary text-foreground"
+                  : "border-transparent text-muted-foreground hover:border-border hover:text-foreground",
+              )}
+            >
+              {tab.label}
+            </button>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
+function HowToPlayTab() {
+  return (
+    <div
+      id="rules-panel-how-to-play"
+      role="tabpanel"
+      aria-labelledby="rules-tab-how-to-play"
+      className="flex flex-col gap-3"
+    >
+      {HOW_TO_PLAY_POINTS.map((point) => (
+        <section
+          key={point.title}
+          className="flex flex-col gap-1 rounded-lg border border-border bg-surface px-4 py-3"
+        >
+          <h2 className="text-sm font-semibold text-foreground">{point.title}</h2>
+          <p className="text-sm leading-relaxed text-muted-foreground">{point.body}</p>
+        </section>
+      ))}
+    </div>
+  );
+}
+
+function RulesTab({ beginnerMode }: { readonly beginnerMode: boolean }) {
+  return (
+    <div
+      id="rules-panel-rules"
+      role="tabpanel"
+      aria-labelledby="rules-tab-rules"
+      className="flex flex-col gap-3"
+    >
       <label className="flex items-center justify-between gap-3 rounded-lg border border-border bg-surface px-4 py-3">
         <span className="flex flex-col gap-1">
           <span className="text-sm font-medium text-foreground">Beginner tips</span>
@@ -174,6 +307,43 @@ export function RulesPage() {
         {RULE_SECTIONS.map((data, index) => (
           <RuleSection key={data.title} data={data} defaultOpen={index === 0} />
         ))}
+      </div>
+    </div>
+  );
+}
+
+function GlossaryTab() {
+  const terms = [...GLOSSARY_TERMS].sort((a, b) => a.term.localeCompare(b.term));
+  return (
+    <div
+      id="rules-panel-glossary"
+      role="tabpanel"
+      aria-labelledby="rules-tab-glossary"
+      className="flex flex-col gap-2"
+    >
+      {terms.map((entry) => (
+        <section
+          key={entry.term}
+          className="flex flex-col gap-1 rounded-lg border border-border bg-surface px-4 py-3"
+        >
+          <h3 className="text-sm font-semibold text-foreground">{entry.term}</h3>
+          <p className="text-sm leading-relaxed text-muted-foreground">{entry.definition}</p>
+        </section>
+      ))}
+    </div>
+  );
+}
+
+export function RulesPage() {
+  const [tab, setTab] = useState<RulesTabId>("rules");
+  const beginnerMode = useBeginnerMode();
+  return (
+    <div>
+      <RulesTabBar active={tab} onChange={setTab} />
+      <div className="flex flex-col gap-3 px-4 py-4">
+        {tab === "how-to-play" && <HowToPlayTab />}
+        {tab === "rules" && <RulesTab beginnerMode={beginnerMode} />}
+        {tab === "glossary" && <GlossaryTab />}
       </div>
     </div>
   );

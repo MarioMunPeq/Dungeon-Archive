@@ -44,6 +44,7 @@ export {
   SCHOOL_NAMES,
   SOURCE_ORDER,
   formatMonsterType,
+  entityCardStat,
 } from "./category-registry";
 export type { AnyEntity, CategoryRegistration } from "./category-registry";
 
@@ -76,4 +77,4 @@ export type {
 
 export type { ContentBlock } from "@/types/content-block";
 
-export type { EntityCardData, FilterOption, FilterDefinition } from "./types";
+export type { EntityCardData, FilterOption, FilterDefinition, CardStat } from "./types";

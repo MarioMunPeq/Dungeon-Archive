@@ -24,6 +24,7 @@ function entityCardFromCanonicalId(canonicalId: string): EntityCardData | null {
     metadata: ref.subtitle,
     source: ref.source,
     canonicalId: ref.canonicalId,
+    stat: ref.stat,
   };
 }
 

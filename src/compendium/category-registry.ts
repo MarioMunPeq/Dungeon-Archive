@@ -8,7 +8,7 @@ import type {
   MagicItem,
   Feat,
 } from "@/types/compendium";
-import type { FilterDefinition, EntityCardData } from "./types";
+import type { FilterDefinition, EntityCardData, CardStat } from "./types";
 import {
   getSpells,
   getMonsters,
@@ -63,6 +63,43 @@ export function formatMonsterType(monster: Monster): string {
   return `${base} (${tags.join(", ")})`;
 }
 
+function crValue(cr: string): number {
+  if (cr.includes("/")) {
+    const [numerator, denominator] = cr.split("/").map(Number);
+    return (numerator ?? 0) / (denominator ?? 1);
+  }
+  const n = Number(cr);
+  return Number.isFinite(n) ? n : 0;
+}
+
+function compareCr(a: string, b: string): number {
+  return crValue(a) - crValue(b);
+}
+
+export function entityCardStat(entity: AnyEntity): CardStat | undefined {
+  switch (entity.category) {
+    case "spell": {
+      const spell = entity as Spell;
+      return {
+        label: "Level",
+        value: spell.level === 0 ? "Cantrip" : String(spell.level),
+        numeric: spell.level > 0,
+      };
+    }
+    case "monster": {
+      const monster = entity as Monster;
+      return { label: "CR", value: monster.challengeRating, numeric: true };
+    }
+    case "equipment": {
+      const item = entity as Equipment;
+      if (item.damage) return { label: "Damage", value: item.damage, numeric: true };
+      return undefined;
+    }
+    default:
+      return undefined;
+  }
+}
+
 const EQUIPMENT_TYPE_DISPLAY: Record<string, string> = {
   $C: "Clothing",
   FD: "Food and Drink",
@@ -83,11 +120,16 @@ function formatEquipmentType(rawType: string): string {
   return EQUIPMENT_TYPE_DISPLAY[clean] ?? clean;
 }
 
-function collectUnique<T>(items: readonly T[], get: (item: T) => string): string[] {
+function collectUnique<T>(
+  items: readonly T[],
+  get: (item: T) => string,
+  compare?: (a: string, b: string) => number,
+): string[] {
   const set = new Set<string>();
   for (const item of items) {
     set.add(get(item));
   }
+  if (compare) return [...set].sort(compare);
   return [...set].sort((a, b) => {
     const pa = SOURCE_ORDER[a] ?? 99;
     const pb = SOURCE_ORDER[b] ?? 99;
@@ -160,6 +202,7 @@ export const CATEGORY_REGISTRY: Record<EntityCategory, CategoryRegistration> = {
         metadata: `${level} ${METADATA_SEPARATOR} ${school}`,
         source: spell.source,
         canonicalId: spell.canonicalId,
+        stat: entityCardStat(spell),
       };
     },
     getSubtitle: (entity) => {
@@ -180,7 +223,7 @@ export const CATEGORY_REGISTRY: Record<EntityCategory, CategoryRegistration> = {
         {
           key: "cr",
           label: "CR",
-          options: buildOptions(collectUnique(monsters, (m) => m.challengeRating)),
+          options: buildOptions(collectUnique(monsters, (m) => m.challengeRating, compareCr)),
         },
         {
           key: "type",
@@ -205,6 +248,7 @@ export const CATEGORY_REGISTRY: Record<EntityCategory, CategoryRegistration> = {
         metadata: `CR ${monster.challengeRating} ${METADATA_SEPARATOR} ${formatMonsterType(monster)}`,
         source: monster.source,
         canonicalId: monster.canonicalId,
+        stat: entityCardStat(monster),
       };
     },
     getSubtitle: (entity) => {
@@ -238,6 +282,7 @@ export const CATEGORY_REGISTRY: Record<EntityCategory, CategoryRegistration> = {
         metadata: item.type,
         source: item.source,
         canonicalId: item.canonicalId,
+        stat: entityCardStat(item),
       };
     },
     getSubtitle: (entity) => {
@@ -259,6 +304,7 @@ export const CATEGORY_REGISTRY: Record<EntityCategory, CategoryRegistration> = {
       metadata: "",
       source: entity.source,
       canonicalId: entity.canonicalId,
+      stat: entityCardStat(entity),
     }),
     getSubtitle: (entity) => `Condition ${METADATA_SEPARATOR} ${formatSource(entity.source)}`,
   },
@@ -278,6 +324,7 @@ export const CATEGORY_REGISTRY: Record<EntityCategory, CategoryRegistration> = {
         metadata: action.actionType,
         source: action.source,
         canonicalId: action.canonicalId,
+        stat: entityCardStat(action),
       };
     },
     getSubtitle: (entity) => `Action ${METADATA_SEPARATOR} ${formatSource(entity.source)}`,
@@ -323,6 +370,7 @@ export const CATEGORY_REGISTRY: Record<EntityCategory, CategoryRegistration> = {
         metadata: `${magic.rarity}${attunement}`,
         source: magic.source,
         canonicalId: magic.canonicalId,
+        stat: entityCardStat(magic),
       };
     },
     getSubtitle: (entity) => {
@@ -371,6 +419,7 @@ export const CATEGORY_REGISTRY: Record<EntityCategory, CategoryRegistration> = {
         metadata: meta,
         source: feat.source,
         canonicalId: feat.canonicalId,
+        stat: entityCardStat(feat),
       };
     },
     getSubtitle: (entity) => {

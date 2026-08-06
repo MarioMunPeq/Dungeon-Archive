@@ -39,6 +39,12 @@ export type CategoryMap = {
 
 export type CategoryKey = keyof CategoryMap;
 
+export interface CardStat {
+  readonly label: string;
+  readonly value: string;
+  readonly numeric?: boolean;
+}
+
 export interface EntityCardData {
   readonly name: string;
   readonly href: string;
@@ -48,6 +54,7 @@ export interface EntityCardData {
   readonly source: string;
   readonly canonicalId: string;
   readonly versionCount?: number;
+  readonly stat?: CardStat;
 }
 
 export interface FilterOption {
