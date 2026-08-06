@@ -35,7 +35,7 @@ export function SearchEmptyState() {
             <Link
               key={key}
               to={`/${key}`}
-              className="flex items-center justify-between gap-2 rounded-lg border border-border bg-surface px-3 py-3 transition-colors hover:bg-accent active:bg-accent/80"
+              className="flex items-center justify-between gap-2 rounded-card border border-border bg-surface px-3 py-3 transition-colors hover:bg-accent active:bg-accent/80"
             >
               <span className="text-sm font-medium text-foreground">{reg.plural}</span>
               <svg

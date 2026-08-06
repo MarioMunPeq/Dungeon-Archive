@@ -208,7 +208,7 @@ export function BackupPage() {
       {ready && authReady && (
         <div className="flex flex-col gap-6">
           {!online && (
-            <div className="flex flex-col gap-1 rounded-lg border border-border bg-muted/30 p-3">
+            <div className="flex flex-col gap-1 rounded-card border border-border bg-muted/30 p-3">
               <p className="text-sm font-semibold text-warning">Offline</p>
               <p className="text-xs text-muted-foreground">
                 Cloud backup requires an internet connection.
@@ -325,7 +325,7 @@ export function BackupPage() {
                   <span className="text-muted-foreground">Cloud backup</span>
                   <span className="text-foreground">Last updated {updated}</span>
                 </div>
-                <div className="space-y-1 rounded-lg border border-border bg-muted/30 p-3 text-xs">
+                <div className="space-y-1 rounded-card border border-border bg-muted/30 p-3 text-xs">
                   <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
                     Contains
                   </p>

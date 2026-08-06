@@ -65,7 +65,7 @@ export function DebugContentPage() {
       {entities.map((entity) => (
         <section
           key={entity.id}
-          className="space-y-2 rounded-lg border border-border bg-surface p-4"
+          className="space-y-2 rounded-card border border-border bg-surface p-4"
         >
           <p className="text-xs font-medium text-muted-foreground">
             {entity.category} · {entity.id}
