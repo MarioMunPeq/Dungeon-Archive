@@ -154,6 +154,44 @@ async function main() {
     ok(type.options.some((o: { value: string }) => o.value !== ""));
   });
 
+  test("equipment type filter uses human-readable labels only", () => {
+    const equipment = getEntitiesForCategory("equipment");
+    const defs = buildFilterDefs("equipment", equipment);
+    const type = defs.find((d: { key: string }) => d.key === "type");
+    ok(type, "equipment should have a type filter");
+    const codes = type!.options.filter((o: { value: string }) => o.value.includes("|"));
+    deepEqual(codes, [], "no internal type codes should be exposed");
+    ok(type!.options.some((o: { value: string }) => o.value === "Mount"), "Mount option exists");
+    ok(type!.options.some((o: { value: string }) => o.value === "Coin"), "Coin option exists");
+    ok(type!.options.some((o: { value: string }) => o.value === "Melee Weapon"), "Melee Weapon exists");
+  });
+
+  test("applyFilters filters equipment by type", () => {
+    const equipment = getEntitiesForCategory("equipment");
+    const result = applyFilters("equipment", equipment, { type: "Coin" });
+    ok(result.length > 0, "coin items should exist");
+    for (const item of result) {
+      ok(
+        (item as import("../../src/types/compendium").Equipment).type.split("|")[0] === "$C",
+        `${item.name} should be a coin`,
+      );
+    }
+  });
+
+  test("applyFilters groups equivalent equipment type codes", () => {
+    const equipment = getEntitiesForCategory("equipment");
+    const result = applyFilters("equipment", equipment, { type: "Mount" });
+    const names = new Set(
+      result.map((e) => (e as import("../../src/types/compendium").Equipment).type),
+    );
+    for (const raw of names) {
+      ok(
+        ["MNT", "MNT|XPHB"].includes(raw),
+        `unexpected type ${raw} matched Mount filter`,
+      );
+    }
+  });
+
   test("buildFilterDefs creates rarity filter for magic items", () => {
     const items = getEntitiesForCategory("magicitem");
     const defs = buildFilterDefs("magicitem", items);

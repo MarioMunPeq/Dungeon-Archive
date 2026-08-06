@@ -1,3 +1,6 @@
+// UI components are PascalCase (Button.tsx, Badge.tsx). A few legacy modules
+// use kebab-case (entity-property.tsx, use-constrained-popover.ts, snackbar-context.ts).
+// New files should use PascalCase; keep the existing names unchanged.
 export { Surface } from "./Surface";
 export { Icon } from "./Icon";
 export { ChevronRightIcon, ChevronLeftIcon, CloseIcon, SearchIcon } from "./icons";
@@ -14,7 +17,9 @@ export { SelectField } from "./SelectField";
 export { SearchField } from "./SearchField";
 export { Skeleton } from "./Skeleton";
 export { HelpTip } from "./HelpTip";
-export { EmptyState } from "./EmptyState";
+export { useConstrainedPopover } from "./use-constrained-popover";
+export { AbilityScores } from "./ability-scores";
+export type { AbilityKey, AbilityScoresProps } from "./ability-scores";export { EmptyState } from "./EmptyState";
 export { SnackbarProvider } from "./Snackbar";
 export { useSnackbar } from "./snackbar-context";
 export { Title, Subtitle, Heading, Body, Caption, Display } from "./Typography";

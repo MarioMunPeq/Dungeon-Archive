@@ -1,6 +1,6 @@
 import { useState, useCallback, useMemo } from "react";
 import { Link } from "react-router-dom";
-import { usePlayerReferences, userStore, abilityModifier } from "@/user-state";
+import { usePlayerReferences, userStore } from "@/user-state";
 import type { PlayerReference, PlayerReferenceUpdate } from "@/user-state";
 import {
   formatDamage,
@@ -15,7 +15,8 @@ import { ReferencePicker } from "@/components/ui/ReferencePicker";
 import type { PickerCandidate } from "@/components/ui/ReferencePicker";
 import { InlineTextEditor } from "@/components/ui/InlineTextEditor";
 import { InlineTextareaEditor } from "@/components/ui/InlineTextareaEditor";
-import { Button, ConfirmDialog, EmptyState, HelpTip, InlineNumberEditor, SelectField, Stepper } from "@/components/ui";
+import { Button, ConfirmDialog, EmptyState, HelpTip, SelectField, Stepper } from "@/components/ui";
+import { AbilityScores } from "@/components/ui/ability-scores";
 import { cn } from "@/lib/utils";
 
 type PickerKind = "spell" | "weapon" | "magicitem";
@@ -27,35 +28,6 @@ const PICKER_TITLES: Record<PickerKind, string> = {
 };
 
 const WEAPON_TYPES = new Set(["Melee Weapon", "Ranged Weapon"]);
-
-type AbilityKey = keyof PlayerReference["abilityScores"];
-
-const ABILITY_LABELS: Record<AbilityKey, string> = {
-  strength: "STR",
-  dexterity: "DEX",
-  constitution: "CON",
-  intelligence: "INT",
-  wisdom: "WIS",
-  charisma: "CHA",
-};
-
-const ABILITY_KEYS: AbilityKey[] = [
-  "strength",
-  "dexterity",
-  "constitution",
-  "intelligence",
-  "wisdom",
-  "charisma",
-];
-
-const ABILITY_HELP: Record<AbilityKey, string> = {
-  strength: "Physical power. Used for lifting, pushing, and melee attacks.",
-  dexterity: "Agility and reflexes. Used for sneaking, dodging, and finesse attacks.",
-  constitution: "Toughness and stamina. Raises your hit points.",
-  intelligence: "Reasoning and memory. Used by wizards and for knowledge checks.",
-  wisdom: "Awareness and intuition. Used by clerics and for perception.",
-  charisma: "Force of personality. Used for persuasion, performance, and deception.",
-};
 
 const CLASSES = [
   "Barbarian",
@@ -218,110 +190,10 @@ function buildCandidates(kind: PickerKind): PickerCandidate[] {
   return out.sort((a, b) => a.name.localeCompare(b.name));
 }
 
-function formatSigned(value: number): string {
-  return value >= 0 ? `+${value}` : `${value}`;
-}
-
 function classLine(reference: PlayerReference): string {
   if (!reference.class) return "Add class, subclass, and level";
   const cls = reference.subclass ? `${reference.class} (${reference.subclass})` : reference.class;
   return `${cls} · Lv ${reference.level}`;
-}
-
-function ScoreControl({
-  value,
-  min,
-  max,
-  onChange,
-  label,
-}: {
-  value: number;
-  min: number;
-  max: number;
-  onChange: (value: number) => void;
-  label: string;
-}) {
-  const [editing, setEditing] = useState(false);
-  const [draft, setDraft] = useState("");
-
-  const applyDelta = (delta: number) => {
-    onChange(Math.max(min, Math.min(max, value + delta)));
-  };
-
-  const commitDraft = () => {
-    const parsed = Math.floor(Number(draft.trim()));
-    if (Number.isFinite(parsed)) onChange(Math.max(min, Math.min(max, parsed)));
-    setEditing(false);
-  };
-
-  const stepClass =
-    "hitbox-expand flex h-6 w-6 shrink-0 select-none items-center justify-center rounded-control text-muted-foreground transition-all duration-150 active:scale-90 hover:text-foreground disabled:cursor-default disabled:text-disabled-foreground disabled:active:scale-100";
-
-  const iconClass = "h-3.5 w-3.5";
-
-  return (
-    <div className="flex shrink-0 items-center gap-0.5">
-      {editing ? (
-        <InlineNumberEditor
-          value={draft}
-          onChange={setDraft}
-          onSave={commitDraft}
-          onCancel={() => setEditing(false)}
-          ariaLabel={`Edit ${label}`}
-          className="h-6 w-12 px-1 text-center font-mono text-xs"
-        />
-      ) : (
-        <button
-          type="button"
-          onClick={() => {
-            setDraft(String(value));
-            setEditing(true);
-          }}
-          aria-label={`Edit ${label}`}
-          className="flex h-6 min-w-5 items-center justify-center rounded-control px-1 font-mono text-xs font-medium text-foreground-subtle transition-colors duration-150 hover:bg-accent/60"
-        >
-          {value}
-        </button>
-      )}
-      <button
-        type="button"
-        onClick={() => applyDelta(-1)}
-        disabled={value <= min}
-        aria-label={`Decrease ${label}`}
-        className={stepClass}
-      >
-        <svg
-          aria-hidden="true"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth={2.5}
-          className={iconClass}
-        >
-          <line x1="5" y1="12" x2="19" y2="12" />
-        </svg>
-      </button>
-      <button
-        type="button"
-        onClick={() => applyDelta(1)}
-        disabled={value >= max}
-        aria-label={`Increase ${label}`}
-        className={stepClass}
-      >
-        <svg
-          aria-hidden="true"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth={2.5}
-          className={iconClass}
-        >
-          <line x1="12" y1="5" x2="12" y2="19" />
-          <line x1="5" y1="12" x2="19" y2="12" />
-        </svg>
-      </button>
-    </div>
-  );
 }
 
 function weaponStats(canonicalId: string): string | undefined {
@@ -450,7 +322,6 @@ function StatCard({
   value,
   min,
   max,
-  format,
   onChange,
   onClear,
   help,
@@ -460,7 +331,6 @@ function StatCard({
   value: number;
   min: number;
   max: number;
-  format?: (value: number) => string;
   onChange: (value: number) => void;
   onClear?: () => void;
   help?: string;
@@ -469,7 +339,7 @@ function StatCard({
   return (
     <div className="flex min-w-0 flex-col items-center gap-1 rounded-stat border border-border bg-card px-2 py-3">
       <span className="flex w-full items-center justify-between gap-1">
-        <span className="min-w-0 truncate text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+        <span className="min-w-0 break-words text-xs font-semibold uppercase tracking-wide text-muted-foreground">
           {label}
         </span>
         <span className="flex items-center gap-1">
@@ -504,43 +374,7 @@ function StatCard({
         max={max}
         onChange={onChange}
         label={label}
-        format={format}
         valueClassName={valueClassName}
-      />
-    </div>
-  );
-}
-
-function AbilityScoreRow({
-  key_,
-  score,
-  onChange,
-}: {
-  key_: AbilityKey;
-  score: number;
-  onChange: (value: number) => void;
-}) {
-  const modifier = abilityModifier(score);
-  return (
-    <div className="flex min-w-0 items-center gap-1.5 rounded-card border border-border bg-surface px-2.5 py-2">
-      <span className="flex shrink-0 items-center gap-1 text-xs font-semibold uppercase tracking-wide text-muted-foreground">
-        {ABILITY_LABELS[key_]}
-        <HelpTip label={`What is ${ABILITY_LABELS[key_]}?`}>{ABILITY_HELP[key_]}</HelpTip>
-      </span>
-      <span
-        className={cn(
-          "shrink-0 font-mono text-lg font-bold tabular-nums leading-none",
-          modifier > 0 ? "text-success" : modifier < 0 ? "text-destructive" : "text-foreground",
-        )}
-      >
-        {formatSigned(modifier)}
-      </span>
-      <ScoreControl
-        value={score}
-        min={1}
-        max={30}
-        onChange={onChange}
-        label={ABILITY_LABELS[key_]}
       />
     </div>
   );
@@ -761,11 +595,6 @@ function PlayerReferenceCard({
     userStore.getState().removePlayerReference(reference.id);
   }, [reference.id]);
 
-  const hasSpell =
-    reference.knownSpellCanonicalIds.length > 0 ||
-    reference.combatValues.spellSaveDc !== undefined ||
-    reference.combatValues.spellAttackBonus !== undefined;
-
   const subclassOptions = reference.class ? (SUBCLASSES[reference.class] ?? []) : [];
 
   return (
@@ -898,7 +727,7 @@ function PlayerReferenceCard({
           Combat Stats
           <HelpTip label="What are combat stats?">
             The numbers you check every fight. Armor Class is what enemies must beat to hit you.
-            Initiative decides turn order. Passive Perception notices hidden things.
+            Passive Perception notices hidden things.
           </HelpTip>
         </span>
         <div className="grid grid-cols-3 gap-2">
@@ -937,38 +766,10 @@ function PlayerReferenceCard({
             add to rolls — higher scores mean bigger bonuses.
           </HelpTip>
         </span>
-        <div className="grid grid-cols-2 gap-2">
-          {ABILITY_KEYS.map((key) => (
-            <AbilityScoreRow
-              key={key}
-              key_={key}
-              score={reference.abilityScores[key]}
-              onChange={(value) => update({ abilityScores: { [key]: value } })}
-            />
-          ))}
-        </div>
-        <div className="grid grid-cols-3 gap-2">
-          <StatCard
-            label="Initiative"
-            value={reference.combatValues.initiativeModifier}
-            min={-5}
-            max={20}
-            format={formatSigned}
-            onChange={(value) => update({ combatValues: { initiativeModifier: value } })}
-            help="Initiative decides turn order in combat. It's usually your Dexterity modifier plus any bonuses."
-          />
-          {hasSpell && (
-            <StatCard
-              label="Spell Atk"
-              value={reference.combatValues.spellAttackBonus ?? 0}
-              min={-5}
-              max={20}
-              format={formatSigned}
-              onChange={(value) => update({ combatValues: { spellAttackBonus: value } })}
-              help="Your spell attack bonus is added to a d20 when a spell attacks an enemy directly."
-            />
-          )}
-        </div>
+        <AbilityScores
+          scores={reference.abilityScores}
+          onChange={(key, value) => update({ abilityScores: { [key]: value } })}
+        />
       </div>
 
       <div className="flex flex-col gap-4">

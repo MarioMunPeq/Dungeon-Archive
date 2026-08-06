@@ -118,12 +118,12 @@ export function SyncCard() {
       {!ready ? (
         <div role="status" className="space-y-1">
           <span className="sr-only">Loading sync…</span>
-          <Skeleton className="h-11 w-full" />
+          <Skeleton className="h-9 w-full" />
         </div>
       ) : !signedIn ? (
-        <div className="rounded-card border border-border bg-surface p-3">
+        <div className="rounded-card border border-border bg-surface px-3 py-2.5">
           <div className="flex flex-col gap-2">
-            <p className="text-sm font-semibold text-foreground">Cloud sync</p>
+            <p className="text-xs font-medium text-foreground">Cloud sync</p>
             <p className="text-xs leading-relaxed text-muted-foreground">
               Sign in with Google to restore your data on another device.
             </p>
@@ -143,10 +143,10 @@ export function SyncCard() {
       ) : (
         <Link
           to="/backup"
-          className="flex items-center justify-between gap-3 rounded-card border border-border bg-surface p-3 transition-colors hover:bg-accent active:bg-accent/80"
+          className="flex items-center justify-between gap-3 rounded-card border border-border bg-surface px-3 py-2.5 transition-colors hover:bg-accent active:bg-accent/80"
         >
           <div className="flex min-w-0 flex-col gap-1">
-            <p className="truncate text-sm font-medium text-foreground">
+            <p className="truncate text-xs font-medium text-foreground">
               {user.displayName?.trim() ? user.displayName : (user.email ?? "Google account")}
             </p>
             {user.email !== null && user.email !== user.displayName ? (

@@ -31,10 +31,18 @@ function requireAuth() {
   return auth;
 }
 
+function isProductionBuild(): boolean {
+  try {
+    return import.meta.env.PROD === true;
+  } catch {
+    return false;
+  }
+}
+
 export function signInWithGoogle(): Promise<AuthUser | void> {
   const auth = requireAuth();
   const provider = getGoogleProvider();
-  if (import.meta.env.PROD) {
+  if (isProductionBuild()) {
     return signInWithRedirect(auth, provider);
   }
 

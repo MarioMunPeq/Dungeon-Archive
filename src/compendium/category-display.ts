@@ -1,9 +1,9 @@
-import type { EntityCategory, Spell, Monster, MagicItem, Feat } from "@/types/compendium";
+import type { EntityCategory, Spell, Monster, Equipment, MagicItem, Feat } from "@/types/compendium";
 import type { EntityCardData, FilterDefinition } from "./types";
-import { CATEGORY_REGISTRY, SOURCE_ORDER } from "./category-registry";
+import { CATEGORY_REGISTRY, SOURCE_ORDER, formatEquipmentType } from "./category-registry";
 import { sourcePriority } from "./resolver/version-selector";
 export type { AnyEntity } from "./category-registry";
-export { SCHOOL_NAMES, formatMonsterType } from "./category-registry";
+export { SCHOOL_NAMES, formatMonsterType, formatEquipmentType } from "./category-registry";
 
 export interface DedupedEntity {
   readonly entity: import("./category-registry").AnyEntity;
@@ -142,7 +142,7 @@ export function buildFilterDefs(
 }
 
 export function applyFilters(
-  _category: EntityCategory,
+  category: EntityCategory,
   entities: readonly import("./category-registry").AnyEntity[],
   filters: Record<string, string>,
 ): readonly import("./category-registry").AnyEntity[] {
@@ -163,7 +163,11 @@ export function applyFilters(
           if ((entity as Monster).challengeRating !== value) return false;
           break;
         case "type":
-          if ((entity as Monster).monsterType !== value) return false;
+          if (category === "equipment") {
+            if (formatEquipmentType((entity as Equipment).type) !== value) return false;
+          } else if ((entity as Monster).monsterType !== value) {
+            return false;
+          }
           break;
         case "size":
           if ((entity as Monster).size !== value) return false;

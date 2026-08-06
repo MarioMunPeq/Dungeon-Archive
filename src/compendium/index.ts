@@ -44,6 +44,7 @@ export {
   SCHOOL_NAMES,
   SOURCE_ORDER,
   formatMonsterType,
+  formatEquipmentType,
   entityCardStat,
 } from "./category-registry";
 export type { AnyEntity, CategoryRegistration } from "./category-registry";

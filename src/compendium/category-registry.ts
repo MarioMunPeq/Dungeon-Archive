@@ -101,21 +101,26 @@ export function entityCardStat(entity: AnyEntity): CardStat | undefined {
 }
 
 const EQUIPMENT_TYPE_DISPLAY: Record<string, string> = {
-  $C: "Clothing",
+  $A: "Art Object",
+  $C: "Coin",
+  $G: "Gemstone",
+  AF: "Firearm Ammunition",
+  AIR: "Airship",
+  EXP: "Explosive",
   FD: "Food and Drink",
   GS: "Gaming Set",
   MNT: "Mount",
   SCF: "Spellcasting Focus",
   SHP: "Ship",
   TAH: "Tack and Harness",
+  TB: "Trade Bar",
   VEH: "Vehicle",
   WD: "Wand",
   G: "Gear",
   T: "Tool",
-  AIR: "Air",
 };
 
-function formatEquipmentType(rawType: string): string {
+export function formatEquipmentType(rawType: string): string {
   const clean = rawType.includes("|") ? rawType.split("|")[0]! : rawType;
   return EQUIPMENT_TYPE_DISPLAY[clean] ?? clean;
 }
@@ -267,7 +272,7 @@ export const CATEGORY_REGISTRY: Record<EntityCategory, CategoryRegistration> = {
         {
           key: "type",
           label: "Type",
-          options: buildOptions(collectUnique(equipment, (e) => e.type)),
+          options: buildOptions(collectUnique(equipment, (e) => formatEquipmentType(e.type))),
         },
         sourceFilter(equipment),
       ];
@@ -279,7 +284,7 @@ export const CATEGORY_REGISTRY: Record<EntityCategory, CategoryRegistration> = {
         href: referenceToUrl(item.canonicalId),
         category: "equipment",
         categoryLabel: categoryLabelSingular("equipment"),
-        metadata: item.type,
+        metadata: formatEquipmentType(item.type),
         source: item.source,
         canonicalId: item.canonicalId,
         stat: entityCardStat(item),

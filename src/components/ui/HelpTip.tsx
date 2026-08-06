@@ -1,7 +1,7 @@
-import { useEffect, useRef, useState } from "react";
 import type { ReactNode } from "react";
 import { useBeginnerMode } from "@/user-state";
 import { cn } from "@/lib/utils";
+import { useConstrainedPopover } from "./use-constrained-popover";
 
 interface HelpTipProps {
   readonly label: string;
@@ -11,24 +11,8 @@ interface HelpTipProps {
 
 export function HelpTip({ label, children, className }: HelpTipProps) {
   const beginnerMode = useBeginnerMode();
-  const [open, setOpen] = useState(false);
-  const containerRef = useRef<HTMLSpanElement>(null);
-
-  useEffect(() => {
-    if (!open) return;
-    const onPointerDown = (e: PointerEvent) => {
-      if (!containerRef.current?.contains(e.target as Node)) setOpen(false);
-    };
-    const onKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "Escape") setOpen(false);
-    };
-    document.addEventListener("pointerdown", onPointerDown);
-    document.addEventListener("keydown", onKeyDown);
-    return () => {
-      document.removeEventListener("pointerdown", onPointerDown);
-      document.removeEventListener("keydown", onKeyDown);
-    };
-  }, [open]);
+  const { open, setOpen, placement, shiftX, containerRef, popoverRef } =
+    useConstrainedPopover<HTMLSpanElement>();
 
   if (!beginnerMode) return null;
 
@@ -45,8 +29,13 @@ export function HelpTip({ label, children, className }: HelpTipProps) {
       </button>
       {open && (
         <span
+          ref={popoverRef}
           role="tooltip"
-          className="absolute left-0 top-full z-20 mt-2 w-64 rounded-card border border-border bg-elevated px-3 py-2 text-xs leading-relaxed text-foreground shadow-lg animate-pop"
+          className={cn(
+            "absolute left-0 z-20 w-64 rounded-card border border-border bg-elevated px-3 py-2 text-xs leading-relaxed text-foreground shadow-lg animate-pop transition-transform duration-150",
+            placement === "below" ? "top-full mt-2" : "bottom-full mb-2",
+          )}
+          style={{ transform: shiftX !== 0 ? `translateX(${shiftX}px)` : undefined }}
         >
           {children}
         </span>

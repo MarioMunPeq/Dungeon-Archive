@@ -3,13 +3,14 @@ import { Link } from "react-router-dom";
 interface SectionHeaderProps {
   readonly title: string;
   readonly to?: string;
+  readonly chevron?: boolean;
 }
 
-export function SectionHeader({ title, to }: SectionHeaderProps) {
+export function SectionHeader({ title, to, chevron = false }: SectionHeaderProps) {
   const content = (
     <span className="flex items-center gap-1 border-l-2 border-primary pl-2">
       {title}
-      {to && (
+      {(to || chevron) && (
         <svg
           aria-hidden="true"
           viewBox="0 0 24 24"

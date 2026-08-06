@@ -52,6 +52,20 @@ export async function signInWithPopup(
   return { user };
 }
 
+export async function signInWithRedirect(
+  _auth: FakeAuth,
+  _provider: FakeProvider,
+): Promise<void> {
+  if (fakeFirebaseState.signInError !== null) {
+    throw fakeFirebaseState.signInError;
+  }
+  setFakeUser({
+    uid: "firebase-user",
+    displayName: "Firebase User",
+    email: "firebase@example.com",
+  });
+}
+
 export async function signOut(_auth: FakeAuth): Promise<void> {
   setFakeUser(null);
 }

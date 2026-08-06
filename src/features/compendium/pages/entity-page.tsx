@@ -13,8 +13,6 @@ import type { EntityCategory } from "@/compendium";
 import { EntityDetailLayout } from "@/components/entity";
 import { EntityRenderer } from "@/features/compendium/renderers/entity-renderer";
 import { RelatedEntities } from "@/features/compendium/components/related-entities";
-import { FavoriteButton } from "@/components/ui/FavoriteButton";
-import { SessionButton } from "@/components/ui/SessionButton";
 import { userStore } from "@/user-state";
 
 interface CompendiumPageProps {
@@ -59,10 +57,6 @@ export function CompendiumPage({ category }: CompendiumPageProps) {
         { label: resolved.selected.name },
       ]}
     >
-      <div className="flex items-center gap-2">
-        <FavoriteButton canonicalId={fullCanonicalId} />
-        <SessionButton canonicalId={fullCanonicalId} />
-      </div>
       <EntityRenderer entity={resolved.selected} />
       <RelatedEntities canonicalId={fullCanonicalId} />
     </EntityDetailLayout>

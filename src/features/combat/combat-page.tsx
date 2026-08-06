@@ -1,8 +1,8 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { usePlayerReferences, useActivePlayer, userStore } from "@/user-state";
 import type { PlayerReference, PlayerReferenceUpdate } from "@/user-state";
-import { Button, EmptyState, HelpTip, Stepper } from "@/components/ui";
+import { Button, EmptyState, HelpTip, Stepper, useConstrainedPopover } from "@/components/ui";
 import { resolveEntity } from "@/compendium";
 import type { Condition, ContentBlock } from "@/compendium";
 import { cn } from "@/lib/utils";
@@ -114,22 +114,100 @@ function conditionSummary(condition: Condition): string {
   return walk(condition.description);
 }
 
-function ConditionsHelp() {
+const LONG_PRESS_MS = 500;
+
+const FALLBACK_SUMMARY =
+  "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.";
+
+function conditionDefinition(id: string): string {
+  const resolved = resolveEntity(id);
+  const summary = resolved?.selected.category === "condition" ? conditionSummary(resolved.selected) : "";
+  return summary || FALLBACK_SUMMARY;
+}
+
+function ConditionChip({
+  id,
+  active,
+  onToggle,
+}: {
+  readonly id: string;
+  readonly active: boolean;
+  readonly onToggle: () => void;
+}) {
+  const { open, setOpen, placement, shiftX, containerRef, popoverRef } =
+    useConstrainedPopover<HTMLSpanElement>();
+  const [longPress, setLongPress] = useState(false);
+  const timerRef = useRef<number | null>(null);
+
+  const clearTimer = () => {
+    if (timerRef.current !== null) {
+      window.clearTimeout(timerRef.current);
+      timerRef.current = null;
+    }
+  };
+
+  const startPress = (e: React.PointerEvent<HTMLButtonElement>) => {
+    if (e.button !== 0) return;
+    clearTimer();
+    setLongPress(false);
+    timerRef.current = window.setTimeout(() => {
+      timerRef.current = null;
+      setLongPress(true);
+      setOpen(true);
+    }, LONG_PRESS_MS);
+  };
+
+  useEffect(() => () => clearTimer(), []);
+
+  const name = conditionName(id);
+
   return (
-    <div className="flex max-h-72 flex-col gap-3 overflow-y-auto pr-1">
-      {CONDITION_IDS.map((id) => {
-        const resolved = resolveEntity(id);
-        if (resolved?.selected.category !== "condition") return null;
-        return (
-          <div key={id}>
-            <span className="text-xs font-semibold text-foreground">{resolved.selected.name}</span>
-            <span className="mt-0.5 block text-xs leading-relaxed text-muted-foreground">
-              {conditionSummary(resolved.selected)}
-            </span>
-          </div>
-        );
-      })}
-    </div>
+    <span ref={containerRef} className="relative block">
+      <button
+        type="button"
+        onClick={() => {
+          if (longPress) {
+            setLongPress(false);
+            return;
+          }
+          if (open) {
+            setOpen(false);
+            return;
+          }
+          onToggle();
+        }}
+        onPointerDown={startPress}
+        onPointerUp={clearTimer}
+        onPointerLeave={clearTimer}
+        onPointerCancel={clearTimer}
+        aria-pressed={active}
+        aria-expanded={open}
+        className={cn(
+          "w-full rounded-control border px-3 py-1.5 text-left text-xs font-medium transition-all duration-150 active:scale-95",
+          active
+            ? "border-primary/60 bg-primary/15 text-foreground"
+            : "border-border bg-transparent text-muted-foreground hover:bg-accent hover:text-foreground",
+        )}
+      >
+        {name}
+      </button>
+      {open && (
+        <span
+          ref={popoverRef}
+          role="tooltip"
+          className={cn(
+            "absolute left-1/2 z-20 w-64 rounded-card border border-border bg-elevated px-3 py-2 text-xs leading-relaxed text-foreground shadow-lg animate-pop transition-transform duration-150",
+            placement === "below" ? "top-full mt-2" : "bottom-full mb-2",
+          )}
+          style={{ transform: `translateX(calc(-50% + ${shiftX}px))` }}
+        >
+          <span className="block text-xs font-semibold text-foreground">{name}</span>
+          <span className="mt-0.5 block text-xs leading-relaxed text-muted-foreground">
+            {conditionDefinition(id)}
+          </span>
+        </span>
+      )}
+    </span>
   );
 }
 
@@ -354,34 +432,18 @@ function CombatPlayerView({ player }: { player: PlayerReference }) {
       </div>
 
       <div className="flex flex-col gap-3">
-        <div className="flex items-center gap-2">
-          <span className="border-l-2 border-primary pl-2 text-xs font-bold uppercase tracking-wide text-muted-foreground">
-            Conditions
-          </span>
-          <HelpTip label="What are conditions?">
-            <ConditionsHelp />
-          </HelpTip>
-        </div>
+        <span className="border-l-2 border-primary pl-2 text-xs font-bold uppercase tracking-wide text-muted-foreground">
+          Conditions
+        </span>
         <div className="grid grid-cols-2 gap-2">
-          {CONDITION_IDS.map((id) => {
-            const isActive = activeConditions.has(id);
-            return (
-              <button
-                key={id}
-                type="button"
-                onClick={() => toggleCondition(id)}
-                aria-pressed={isActive}
-                className={cn(
-                  "rounded-control border px-3 py-1.5 text-left text-xs font-medium transition-all duration-150 active:scale-95",
-                  isActive
-                    ? "border-primary/60 bg-primary/15 text-foreground"
-                    : "border-border bg-transparent text-muted-foreground hover:bg-accent hover:text-foreground",
-                )}
-              >
-                {conditionName(id)}
-              </button>
-            );
-          })}
+          {CONDITION_IDS.map((id) => (
+            <ConditionChip
+              key={id}
+              id={id}
+              active={activeConditions.has(id)}
+              onToggle={() => toggleCondition(id)}
+            />
+          ))}
         </div>
       </div>
 

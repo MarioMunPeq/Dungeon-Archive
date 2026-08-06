@@ -1,6 +1,5 @@
 import { useLocation, useNavigate } from "react-router-dom";
-import { Button, ChevronLeftIcon, Display, SearchIcon } from "@/components/ui";
-import { ROUTES } from "@/config/constants";
+import { Button, ChevronLeftIcon, Display } from "@/components/ui";
 import { getTopBarState } from "./top-bar-route";
 
 export function TopBar() {
@@ -31,15 +30,6 @@ export function TopBar() {
         )}
         <Display className="truncate text-lg font-semibold">{state.title}</Display>
       </div>
-      <Button
-        variant="ghost"
-        size="md"
-        className="px-2"
-        aria-label="Search"
-        onClick={() => navigate(ROUTES.SEARCH)}
-      >
-        <SearchIcon />
-      </Button>
     </header>
   );
 }

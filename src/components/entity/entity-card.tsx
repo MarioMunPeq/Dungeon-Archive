@@ -39,7 +39,9 @@ export const EntityCard = memo(function EntityCard({
           <span className="shrink-0 text-xs text-foreground-subtle">{versionCount} versions</span>
         )}
       </div>
-      <span className="text-xs text-foreground-subtle">{formatSource(source)}</span>
+      {!metadata?.includes(formatSource(source)) && (
+        <span className="text-xs text-foreground-subtle">{formatSource(source)}</span>
+      )}
     </Link>
   );
 });

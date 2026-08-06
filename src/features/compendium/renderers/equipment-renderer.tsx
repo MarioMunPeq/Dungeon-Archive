@@ -1,5 +1,5 @@
 import type { Equipment } from "@/compendium";
-import { formatDamage, formatDamageType } from "@/compendium";
+import { formatDamage, formatDamageType, formatEquipmentType } from "@/compendium";
 import { Section } from "@/components/ui/Section";
 import { ContentRenderer } from "@/components/content";
 import { Stack } from "@/components/ui/Stack";
@@ -13,7 +13,7 @@ export function EquipmentRenderer({ entity }: EquipmentRendererProps) {
   return (
     <Stack gap="lg">
       <EntityMetadataGrid>
-        <EntityProperty label="Type" value={entity.type} />
+        <EntityProperty label="Type" value={formatEquipmentType(entity.type)} />
         {entity.cost && <EntityProperty label="Cost" value={entity.cost} />}
         {entity.weight && <EntityProperty label="Weight" value={entity.weight} />}
         {entity.damage && (

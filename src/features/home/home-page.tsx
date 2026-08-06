@@ -75,8 +75,7 @@ export function HomePage() {
             </div>
             <div className="flex flex-col gap-2">
               <p className="text-sm leading-relaxed text-muted-foreground">
-                Quick access to Combat and your current character health without duplicating HP on
-                Home.
+                Open Combat to track hit points, conditions, and what you do on your turn.
               </p>
             </div>
           </Link>
@@ -127,7 +126,7 @@ export function HomePage() {
       </section>
 
       <section className="flex flex-col gap-3">
-        <SectionHeader title="Recently Viewed" />
+        <SectionHeader title="Recently Viewed" chevron />
         <div className="rounded-card border border-border bg-surface p-4">
           {recentCards.length > 0 ? (
             <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
