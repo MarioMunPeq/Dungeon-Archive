@@ -1,14 +1,23 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import { Button, ChevronLeftIcon, Display } from "@/components/ui";
+import { useCloudStatus } from "@/sync";
 import { getTopBarState } from "./top-bar-route";
+import type { TopBarState } from "./top-bar-route";
+import { CloudStatusIcon } from "./cloud-status-icon";
 
 export function TopBar() {
   const { pathname } = useLocation();
-  const navigate = useNavigate();
   const state = getTopBarState(pathname);
-  const backTo = state.backTo;
 
   if (state.hidden) return null;
+
+  return <TopBarContent state={state} />;
+}
+
+function TopBarContent({ state }: { state: TopBarState }) {
+  const navigate = useNavigate();
+  const status = useCloudStatus();
+  const backTo = state.backTo;
 
   const handleBack = () => {
     if (backTo === undefined) return;
@@ -30,6 +39,19 @@ export function TopBar() {
         )}
         <Display className="truncate text-lg font-semibold">{state.title}</Display>
       </div>
+      <Button
+        variant="ghost"
+        size="md"
+        className="px-2"
+        aria-label="Cloud Backup"
+        onClick={() => navigate("/backup")}
+      >
+        <CloudStatusIcon
+          signedIn={status.signedIn}
+          syncing={status.syncing}
+          failed={status.failed}
+        />
+      </Button>
     </header>
   );
 }

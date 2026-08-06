@@ -9,8 +9,8 @@ import {
   Surface,
   useSnackbar,
 } from "@/components/ui";
-import { getBackupStatus, friendlyErrorMessage, getGateway, restore, upload } from "@/sync";
-import type { CloudGateway, CloudSnapshot, CloudUser } from "@/sync";
+import { getBackupStatus, friendlyErrorMessage, restore, upload, useCloudStatus, useCloudSync } from "@/sync";
+import type { CloudSnapshot } from "@/sync";
 import { userStore } from "@/user-state";
 
 type Operation = "signIn" | "signOut" | "upload" | "restore";
@@ -58,20 +58,6 @@ function previewCounts(snapshot: CloudSnapshot): PreviewCounts {
   };
 }
 
-function useGateway(): CloudGateway | null {
-  const [gateway, setGateway] = useState<CloudGateway | null>(null);
-  useEffect(() => {
-    let cancelled = false;
-    void getGateway().then((next) => {
-      if (!cancelled) setGateway(next);
-    });
-    return () => {
-      cancelled = true;
-    };
-  }, []);
-  return gateway;
-}
-
 function useOnline(): boolean {
   const [online, setOnline] = useState<boolean>(() => navigator.onLine);
   useEffect(() => {
@@ -97,41 +83,38 @@ function useUserStateVersion(): void {
 }
 
 export function BackupPage() {
-  const gateway = useGateway();
+  const { gateway, user, ready: authReady } = useCloudStatus();
+  const markSyncing = useCloudSync((s) => s.markSyncing);
+  const markFailed = useCloudSync((s) => s.markFailed);
+  const markIdle = useCloudSync((s) => s.markIdle);
   const online = useOnline();
   useUserStateVersion();
   const { show } = useSnackbar();
-  const [user, setUser] = useState<CloudUser | null>(null);
-  const [authReady, setAuthReady] = useState(false);
   const [busy, setBusy] = useState<Operation | null>(null);
   const [previewLoading, setPreviewLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [preview, setPreview] = useState<CloudSnapshot | null>(null);
 
-  useEffect(() => {
-    if (gateway === null) return;
-    return gateway.onAuthChange((next) => {
-      setUser(next);
-      setAuthReady(true);
-    });
-  }, [gateway]);
-
   const run = useCallback(
     async (op: Operation, fn: () => Promise<void>, successMessage?: string) => {
       setError(null);
       setBusy(op);
+      markSyncing();
       try {
         await fn();
+        markIdle();
         if (successMessage !== undefined) {
           show(successMessage, { tone: "success" });
         }
       } catch (e) {
-        setError(friendlyErrorMessage(e, online));
+        const message = friendlyErrorMessage(e, online);
+        markFailed(message);
+        setError(message);
       } finally {
         setBusy(null);
       }
     },
-    [online, show],
+    [markSyncing, markFailed, markIdle, online, show],
   );
 
   const handleSignIn = useCallback(() => {

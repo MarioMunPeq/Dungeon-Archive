@@ -3,7 +3,16 @@
 // New files should use PascalCase; keep the existing names unchanged.
 export { Surface } from "./Surface";
 export { Icon } from "./Icon";
-export { ChevronRightIcon, ChevronLeftIcon, CloseIcon, SearchIcon } from "./icons";
+export {
+  ChevronRightIcon,
+  ChevronLeftIcon,
+  CloseIcon,
+  SearchIcon,
+  CloudIcon,
+  CloudCheckIcon,
+  CloudWarningIcon,
+  SyncIcon,
+} from "./icons";
 export { Button } from "./Button";
 export { ConfirmDialog } from "./ConfirmDialog";
 export { Section } from "./Section";

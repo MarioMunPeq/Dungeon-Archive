@@ -239,7 +239,14 @@ test("Caption renders as span with text-xs", () => {
 console.log("\nIcon\n");
 
 import { Icon } from "../../src/components/ui/Icon";
-import { ChevronRightIcon, CloseIcon } from "../../src/components/ui/icons";
+import {
+  ChevronRightIcon,
+  CloseIcon,
+  CloudIcon,
+  CloudCheckIcon,
+  CloudWarningIcon,
+  SyncIcon,
+} from "../../src/components/ui/icons";
 
 test("renders a decorative svg by default", () => {
   const html = renderToString(createElement(Icon, null, createElement("path", null)));
@@ -287,6 +294,26 @@ test("ChevronRightIcon renders a chevron path", () => {
 test("CloseIcon renders close lines", () => {
   const html = renderToString(createElement(CloseIcon, null));
   ok(html.includes("<line"));
+});
+
+test("CloudIcon renders a cloud outline", () => {
+  const html = renderToString(createElement(CloudIcon, null));
+  ok(html.includes("M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"));
+});
+
+test("CloudCheckIcon renders a cloud with a checkmark", () => {
+  const html = renderToString(createElement(CloudCheckIcon, null));
+  ok(html.includes("m10 15 2 2 4-4"));
+});
+
+test("CloudWarningIcon renders a cloud with an exclamation", () => {
+  const html = renderToString(createElement(CloudWarningIcon, null));
+  ok(html.includes("M12 12v3"));
+});
+
+test("SyncIcon renders sync arrows", () => {
+  const html = renderToString(createElement(SyncIcon, null));
+  ok(html.includes("M21 3v5h-5"));
 });
 
 // ---------------------------------------------------------------------------

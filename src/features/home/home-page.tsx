@@ -9,9 +9,7 @@ import {
 } from "@/user-state";
 import { entityRefFromCanonicalId, EntityCard } from "@/components/entity";
 import { Button } from "@/components/ui";
-import { isFirebaseConfigured } from "@/lib/firebase/config";
 import { SectionHeader } from "./section-header";
-import { SyncCard } from "./sync-card";
 
 function entityCardFromCanonicalId(canonicalId: string): EntityCardData | null {
   const ref = entityRefFromCanonicalId(canonicalId);
@@ -47,7 +45,6 @@ export function HomePage() {
   }
 
   const player = activePlayer ?? players[0] ?? null;
-  const firebaseEnabled = isFirebaseConfigured();
 
   return (
     <div className="flex flex-col gap-5 px-4 py-6">
@@ -97,8 +94,6 @@ export function HomePage() {
           </div>
         )}
       </section>
-
-      {firebaseEnabled && <SyncCard />}
 
       <section className="flex flex-col gap-3">
         <SectionHeader title="Session" to="/session" />

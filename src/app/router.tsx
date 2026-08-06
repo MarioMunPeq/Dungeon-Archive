@@ -13,11 +13,8 @@ import { DebugSpellPage } from "@/features/debug/debug-spell-page";
 import { NotFoundPage } from "@/features/not-found-page";
 import { CATEGORY_REGISTRY } from "@/compendium";
 import type { EntityCategory } from "@/compendium";
-import { isFirebaseConfigured } from "@/lib/firebase/config";
 
 const CATEGORIES = Object.keys(CATEGORY_REGISTRY) as EntityCategory[];
-
-const CLOUD_ENABLED = isFirebaseConfigured();
 
 export function AppRouter() {
   return (
@@ -28,7 +25,7 @@ export function AppRouter() {
       <Route path="/rules" element={<RulesPage />} />
       <Route path="/combat" element={<CombatPage />} />
       <Route path="/party" element={<PartyPage />} />
-      {CLOUD_ENABLED && <Route path="/backup" element={<BackupPage />} />}
+      <Route path="/backup" element={<BackupPage />} />
       {CATEGORIES.map((cat) => (
         <Route key={cat} path={`/${cat}`} element={<CategoryPage category={cat} />}>
           <Route path=":canonicalId" element={<CompendiumPage category={cat} />} />
