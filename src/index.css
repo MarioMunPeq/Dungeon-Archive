@@ -77,12 +77,19 @@
   --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
   --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
 
-  /* Animation tokens */
-  --animate-fade-in: fade-in 0.15s ease-out;
-  --animate-fade-out: fade-out 0.15s ease-out;
-  --animate-slide-up: slide-up 0.15s ease-out;
-  --animate-slide-down: slide-down 0.15s ease-out;
-  --animate-pop: pop 0.2s ease-out;
+  /* Animation tokens — shared motion system (spec 09).
+     Durations: primary interactions 180–220ms, secondary 120–160ms,
+     screen transitions 220–260ms. Never exceed 300ms. */
+  --animate-fade-in: fade-in 160ms cubic-bezier(0.2, 0.8, 0.2, 1);
+  --animate-fade-out: fade-out 160ms cubic-bezier(0.2, 0.8, 0.2, 1);
+  --animate-slide-up: slide-up 200ms cubic-bezier(0.16, 1, 0.3, 1);
+  --animate-slide-down: slide-down 200ms cubic-bezier(0.16, 1, 0.3, 1);
+  --animate-pop: pop 240ms cubic-bezier(0.2, 0.8, 0.2, 1);
+  --animate-tip-in: tip-in 200ms cubic-bezier(0.16, 1, 0.3, 1);
+  --animate-value-tick: value-tick 180ms cubic-bezier(0.16, 1, 0.3, 1);
+  --animate-stagger-in: stagger-in 220ms cubic-bezier(0.16, 1, 0.3, 1) backwards;
+  --animate-page-enter: page-enter 240ms cubic-bezier(0.16, 1, 0.3, 1) both;
+  --animate-overlay-in: overlay-in 200ms cubic-bezier(0.16, 1, 0.3, 1);
 
   /* Spacing — 4px grid (spec 07). Semantic scale: xs=4px, sm=8px, md=12px,
      lg=16px, xl=24px, 2xl=32px, 3xl=48px. Numeric utilities map 1:1
@@ -145,11 +152,67 @@
   0% {
     transform: scale(1);
   }
-  50% {
-    transform: scale(1.25);
+  40% {
+    transform: scale(1.18);
+  }
+  70% {
+    transform: scale(0.97);
   }
   100% {
     transform: scale(1);
+  }
+}
+
+@keyframes tip-in {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes value-tick {
+  from {
+    opacity: 0.25;
+    transform: translateY(2px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes stagger-in {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes page-enter {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes overlay-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
   }
 }
 
@@ -246,5 +309,28 @@
     content: "";
     position: absolute;
     inset: -8px;
+  }
+
+  /* Motion language — shared duration + easing classes (spec 09).
+     Every interactive transition should use exactly one duration and one
+     ease so the whole app moves with a single rhythm. */
+  .duration-secondary {
+    transition-duration: 140ms;
+  }
+  .duration-primary {
+    transition-duration: 200ms;
+  }
+  .duration-screen {
+    transition-duration: 240ms;
+  }
+
+  .ease-standard {
+    transition-timing-function: cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+  .ease-emphasized {
+    transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .ease-spring {
+    transition-timing-function: cubic-bezier(0.34, 1.56, 0.64, 1);
   }
 }
