@@ -49,7 +49,7 @@ export function createFirebaseGateway(): CloudGateway {
         return toCloudUser(current);
       }
 
-      throw new Error("Sign in did not return a user");
+      return undefined;
     },
 
     signOut: () => logout(),

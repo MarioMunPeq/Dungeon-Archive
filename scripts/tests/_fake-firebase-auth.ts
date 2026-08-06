@@ -69,3 +69,9 @@ export async function signInWithRedirect(
 export async function signOut(_auth: FakeAuth): Promise<void> {
   setFakeUser(null);
 }
+
+export async function getRedirectResult(
+  _auth: FakeAuth,
+): Promise<{ user: FakeAuthUser } | null> {
+  return null;
+}

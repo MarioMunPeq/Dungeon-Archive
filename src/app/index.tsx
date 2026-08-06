@@ -18,17 +18,17 @@ const queryClient = new QueryClient({
 export function App() {
   return (
     <QueryClientProvider client={queryClient}>
-      <AuthProvider>
-        <BrowserRouter basename="/Dungeon-Archive/">
-          <SnackbarProvider>
+      <SnackbarProvider>
+        <AuthProvider>
+          <BrowserRouter basename="/Dungeon-Archive/">
             <AppLayout>
               <ErrorBoundary>
                 <AppRouter />
               </ErrorBoundary>
             </AppLayout>
-          </SnackbarProvider>
-        </BrowserRouter>
-      </AuthProvider>
+          </BrowserRouter>
+        </AuthProvider>
+      </SnackbarProvider>
     </QueryClientProvider>
   );
 }

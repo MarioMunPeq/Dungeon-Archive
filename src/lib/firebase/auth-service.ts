@@ -1,4 +1,10 @@
-import { onAuthStateChanged, signInWithPopup, signInWithRedirect, signOut } from "firebase/auth";
+import {
+  getRedirectResult,
+  onAuthStateChanged,
+  signInWithPopup,
+  signInWithRedirect,
+  signOut,
+} from "firebase/auth";
 import type { Unsubscribe } from "firebase/auth";
 import { getAuthInstance, getGoogleProvider } from "./auth";
 
@@ -47,6 +53,19 @@ export function signInWithGoogle(): Promise<AuthUser | void> {
   }
 
   return signInWithPopup(auth, provider).then((result) => toAuthUser(result.user));
+}
+
+export async function resolveRedirectResult(): Promise<AuthUser | null> {
+  const auth = requireAuth();
+  try {
+    const result = await getRedirectResult(auth);
+    return result === null ? null : toAuthUser(result.user);
+  } catch (error) {
+    if ((error as { code?: unknown }).code === "auth/null-user") {
+      return null;
+    }
+    throw error;
+  }
 }
 
 export function logout(): Promise<void> {

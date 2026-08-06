@@ -111,6 +111,7 @@ await test("adapter starts signed out", () => {
 await test("signIn returns a CloudUser and updates current user", async () => {
   setFakeUser(null);
   const user = await gateway.signIn();
+  ok(user !== undefined, "popup signIn resolves with a user");
   strictEqual(user.uid, "firebase-user");
   strictEqual(user.displayName, "Firebase User");
   strictEqual(user.email, "firebase@example.com");
