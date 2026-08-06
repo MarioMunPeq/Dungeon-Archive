@@ -1,14 +1,41 @@
-import type {
-  EntityCategory,
-  Spell,
-  Monster,
-  MagicItem,
-  Feat,
-} from "@/types/compendium";
+import type { EntityCategory, Spell, Monster, MagicItem, Feat } from "@/types/compendium";
 import type { EntityCardData, FilterDefinition } from "./types";
 import { CATEGORY_REGISTRY, SOURCE_ORDER } from "./category-registry";
+import { sourcePriority } from "./resolver/version-selector";
 export type { AnyEntity } from "./category-registry";
 export { SCHOOL_NAMES, formatMonsterType } from "./category-registry";
+
+export interface DedupedEntity {
+  readonly entity: import("./category-registry").AnyEntity;
+  readonly versionCount: number;
+}
+
+export function dedupeEntities(
+  entities: readonly import("./category-registry").AnyEntity[],
+): readonly DedupedEntity[] {
+  const groups = new Map<string, import("./category-registry").AnyEntity[]>();
+  for (const entity of entities) {
+    const key = entity.canonicalId;
+    const group = groups.get(key);
+    if (group) {
+      group.push(entity);
+    } else {
+      groups.set(key, [entity]);
+    }
+  }
+
+  const result: DedupedEntity[] = [];
+  for (const group of groups.values()) {
+    let best = group[0]!;
+    for (const candidate of group) {
+      if (sourcePriority(candidate.source) < sourcePriority(best.source)) {
+        best = candidate;
+      }
+    }
+    result.push({ entity: best, versionCount: group.length });
+  }
+  return result;
+}
 
 export type CategorySort = "alphabetical" | "recent" | "level" | "cr";
 

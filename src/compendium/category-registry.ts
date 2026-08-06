@@ -155,6 +155,7 @@ export const CATEGORY_REGISTRY: Record<EntityCategory, CategoryRegistration> = {
       return {
         name: spell.name,
         href: referenceToUrl(spell.canonicalId),
+        category: "spell",
         categoryLabel: categoryLabelSingular("spell"),
         metadata: `${level} ${METADATA_SEPARATOR} ${school}`,
         source: spell.source,
@@ -199,6 +200,7 @@ export const CATEGORY_REGISTRY: Record<EntityCategory, CategoryRegistration> = {
       return {
         name: monster.name,
         href: referenceToUrl(monster.canonicalId),
+        category: "monster",
         categoryLabel: categoryLabelSingular("monster"),
         metadata: `CR ${monster.challengeRating} ${METADATA_SEPARATOR} ${formatMonsterType(monster)}`,
         source: monster.source,
@@ -231,6 +233,7 @@ export const CATEGORY_REGISTRY: Record<EntityCategory, CategoryRegistration> = {
       return {
         name: item.name,
         href: referenceToUrl(item.canonicalId),
+        category: "equipment",
         categoryLabel: categoryLabelSingular("equipment"),
         metadata: item.type,
         source: item.source,
@@ -251,6 +254,7 @@ export const CATEGORY_REGISTRY: Record<EntityCategory, CategoryRegistration> = {
     toCardData: (entity) => ({
       name: entity.name,
       href: referenceToUrl(entity.canonicalId),
+      category: "condition",
       categoryLabel: categoryLabelSingular("condition"),
       metadata: "",
       source: entity.source,
@@ -269,6 +273,7 @@ export const CATEGORY_REGISTRY: Record<EntityCategory, CategoryRegistration> = {
       return {
         name: action.name,
         href: referenceToUrl(action.canonicalId),
+        category: "action",
         categoryLabel: categoryLabelSingular("action"),
         metadata: action.actionType,
         source: action.source,
@@ -313,6 +318,7 @@ export const CATEGORY_REGISTRY: Record<EntityCategory, CategoryRegistration> = {
       return {
         name: magic.name,
         href: referenceToUrl(magic.canonicalId),
+        category: "magicitem",
         categoryLabel: categoryLabelSingular("magicitem"),
         metadata: `${magic.rarity}${attunement}`,
         source: magic.source,
@@ -360,6 +366,7 @@ export const CATEGORY_REGISTRY: Record<EntityCategory, CategoryRegistration> = {
       return {
         name: feat.name,
         href: referenceToUrl(feat.canonicalId),
+        category: "feat",
         categoryLabel: categoryLabelSingular("feat"),
         metadata: meta,
         source: feat.source,

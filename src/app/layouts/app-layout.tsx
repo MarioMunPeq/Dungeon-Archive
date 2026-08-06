@@ -13,7 +13,10 @@ export function AppLayout({ children }: AppLayoutProps) {
   return (
     <div className="mx-auto flex h-dvh w-full max-w-screen-xl flex-col bg-background">
       <TopBar />
-      <main ref={mainRef} className="flex-1 overflow-y-auto pb-[calc(5rem_+_env(safe-area-inset-bottom))]">
+      <main
+        ref={mainRef}
+        className="flex-1 overflow-y-auto pb-[calc(5rem_+_env(safe-area-inset-bottom))]"
+      >
         {children}
       </main>
       <BottomNav />

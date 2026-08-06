@@ -10,13 +10,15 @@ import {
   getSortOptions,
   sortEntities,
   toCardData,
+  dedupeEntities,
 } from "@/compendium";
 import type { CategorySort } from "@/compendium";
+import { useDebouncedValue } from "@/hooks/use-debounced-value";
 import { FilterBar } from "../components/filter-bar";
 import { EntityList } from "../components/entity-list";
+import { SearchInput } from "@/components/search";
 import { Button } from "@/components/ui/Button";
 import { SelectField } from "@/components/ui/SelectField";
-import { SearchField } from "@/components/ui/SearchField";
 
 interface CategoryPageProps {
   readonly category: EntityCategory;
@@ -40,6 +42,7 @@ export function CategoryPage({ category }: CategoryPageProps) {
   }, [searchParams, filterDefs]);
 
   const query = searchParams.get("q") ?? "";
+  const debouncedQuery = useDebouncedValue(query, 200);
   const sort = searchParams.get("sort") ?? "";
 
   const filtered = useMemo(
@@ -48,17 +51,24 @@ export function CategoryPage({ category }: CategoryPageProps) {
   );
 
   const searched = useMemo(() => {
-    const q = query.trim().toLowerCase();
+    const q = debouncedQuery.trim().toLowerCase();
     if (!q) return filtered;
     return filtered.filter((entity) => entity.name.toLowerCase().includes(q));
-  }, [filtered, query]);
+  }, [filtered, debouncedQuery]);
 
   const sorted = useMemo(
     () => sortEntities(category, searched, (sort || null) as CategorySort | null),
     [category, searched, sort],
   );
 
-  const cards = useMemo(() => sorted.map((e) => toCardData(category, e)), [category, sorted]);
+  const cards = useMemo(
+    () =>
+      dedupeEntities(sorted).map(({ entity, versionCount }) => ({
+        ...toCardData(category, entity),
+        versionCount,
+      })),
+    [category, sorted],
+  );
 
   const updateParam = (key: string, value: string) => {
     setSearchParams(
@@ -79,7 +89,7 @@ export function CategoryPage({ category }: CategoryPageProps) {
     setSearchParams(new URLSearchParams(), { replace: true });
   };
 
-  const hasActiveQuery = query.trim().length > 0;
+  const hasActiveQuery = debouncedQuery.trim().length > 0;
   const hasActiveFilters = Object.keys(currentFilters).length > 0;
   const isFiltered = hasActiveQuery || hasActiveFilters;
 
@@ -90,7 +100,7 @@ export function CategoryPage({ category }: CategoryPageProps) {
     <div>
       <div className={detailMatch ? "hidden" : undefined}>
         <div className="sticky top-0 z-30 space-y-3 border-b border-border bg-background/95 px-4 pb-3 pt-4 backdrop-blur-sm">
-          <SearchField
+          <SearchInput
             value={query}
             onChange={(value) => updateParam("q", value)}
             ariaLabel={`Search ${label}`}
@@ -101,7 +111,7 @@ export function CategoryPage({ category }: CategoryPageProps) {
 
         <div className="flex items-center justify-between gap-3 px-4 py-4">
           <p className="text-sm text-muted-foreground">
-            <span className="font-medium text-foreground">{sorted.length}</span>
+            <span className="font-medium text-foreground">{cards.length}</span>
             {isFiltered ? ` of ${allEntities.length} ${labelLower}` : ` ${labelLower}`}
           </p>
           <SelectField

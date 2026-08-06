@@ -1,13 +1,22 @@
 import { useState, useRef, useEffect, useMemo, type KeyboardEvent } from "react";
-import { useNavigate, useSearchParams } from "react-router-dom";
+import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import { search } from "@/compendium";
 import { createSearchResultItems } from "@/components/entity";
-import { SearchInput } from "./components/search-input";
+import { SearchInput, FilterChips, EmptyResults } from "@/components/search";
 import { SearchResults } from "./components/search-results";
 import { SearchEmptyState } from "./components/search-empty-state";
 import { userStore } from "@/user-state";
-import { SearchNoResults } from "./components/search-no-results";
-import { SearchCategoryFilter } from "./components/search-category-filter";
+import { useDebouncedValue } from "@/hooks/use-debounced-value";
+import { CATEGORY_REGISTRY } from "@/compendium";
+import { Button } from "@/components/ui/Button";
+
+const CATEGORY_OPTIONS = [
+  { value: "", label: "All" },
+  ...Object.entries(CATEGORY_REGISTRY).map(([key, reg]) => ({
+    value: key,
+    label: reg.plural,
+  })),
+];
 
 export function SearchPage() {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -18,8 +27,12 @@ export function SearchPage() {
   const inputRef = useRef<HTMLInputElement>(null);
   const navigate = useNavigate();
 
-  const rawResults = search(query);
-  const results = useMemo(() => createSearchResultItems(query, rawResults), [query, rawResults]);
+  const debouncedQuery = useDebouncedValue(query, 200);
+  const rawResults = search(debouncedQuery);
+  const results = useMemo(
+    () => createSearchResultItems(debouncedQuery, rawResults),
+    [debouncedQuery, rawResults],
+  );
 
   const filtered = useMemo(() => {
     if (!categoryFilter) return results;
@@ -39,7 +52,7 @@ export function SearchPage() {
 
   useEffect(() => {
     setSelectedIndex(-1);
-  }, [query, categoryFilter]);
+  }, [debouncedQuery, categoryFilter]);
 
   function handleKeyDown(e: KeyboardEvent<HTMLInputElement>) {
     switch (e.key) {
@@ -69,27 +82,64 @@ export function SearchPage() {
     }
   }
 
-  const hasQuery = query.trim().length > 0;
+  const hasQuery = debouncedQuery.trim().length > 0;
   const hasResults = filtered.length > 0;
   const activeDescendantId = selectedIndex >= 0 ? `search-result-${selectedIndex}` : undefined;
 
   return (
     <div className="flex flex-col pb-4">
-      <SearchInput
-        ref={inputRef}
-        value={query}
-        onChange={setQuery}
-        onKeyDown={handleKeyDown}
-        activeDescendantId={activeDescendantId}
-        hasResults={hasResults}
-      />
+      <div className="px-4 pt-4">
+        <SearchInput
+          ref={inputRef}
+          value={query}
+          onChange={setQuery}
+          onKeyDown={handleKeyDown}
+          placeholder="Search spells, equipment, conditions..."
+          ariaLabel="Search"
+          role="combobox"
+          ariaExpanded={hasResults}
+          ariaControls="search-results-listbox"
+          activeDescendantId={activeDescendantId}
+        />
+      </div>
 
-      {hasQuery && <SearchCategoryFilter selected={categoryFilter} onChange={setCategoryFilter} />}
+      {hasQuery && (
+        <div className="px-4 pt-3 pb-1">
+          <FilterChips
+            options={CATEGORY_OPTIONS}
+            selected={categoryFilter}
+            onChange={setCategoryFilter}
+            ariaLabel="Filter by category"
+          />
+        </div>
+      )}
 
       {!hasQuery && <SearchEmptyState />}
-      {hasQuery && !hasResults && <SearchNoResults query={query} onClear={() => setQuery("")} />}
+      {hasQuery && !hasResults && (
+        <div className="px-4">
+          <EmptyResults
+            title={`No results for \u201c${debouncedQuery}\u201d`}
+            description={
+              <>
+                Try a different search term, or{" "}
+                <Link
+                  to="/"
+                  className="text-primary transition-colors duration-150 hover:underline"
+                >
+                  look through the Compendium
+                </Link>
+              </>
+            }
+            action={
+              <Button variant="outline" size="sm" onClick={() => setQuery("")}>
+                Clear search
+              </Button>
+            }
+          />
+        </div>
+      )}
       {hasResults && (
-        <SearchResults results={filtered} query={query} selectedIndex={selectedIndex} />
+        <SearchResults results={filtered} query={debouncedQuery} selectedIndex={selectedIndex} />
       )}
     </div>
   );

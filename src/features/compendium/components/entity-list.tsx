@@ -1,5 +1,6 @@
 import type { ReactNode } from "react";
 import { EntityCard } from "@/components/entity";
+import { EmptyResults } from "@/components/search";
 import type { EntityCardData } from "@/compendium";
 
 interface EntityListProps {
@@ -14,12 +15,7 @@ export function EntityList({
   emptyAction,
 }: EntityListProps) {
   if (entities.length === 0) {
-    return (
-      <div className="flex flex-col items-center gap-4 px-4 py-16 text-center">
-        <p className="text-sm font-medium text-foreground">{emptyMessage}</p>
-        {emptyAction}
-      </div>
-    );
+    return <EmptyResults title={emptyMessage} action={emptyAction} />;
   }
 
   return (

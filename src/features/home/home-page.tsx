@@ -19,6 +19,7 @@ function entityCardFromCanonicalId(canonicalId: string): EntityCardData | null {
   return {
     name: ref.name,
     href: ref.href,
+    category: ref.category,
     categoryLabel: categoryLabelSingular(ref.category),
     metadata: ref.subtitle,
     source: ref.source,

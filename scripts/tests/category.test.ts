@@ -8,8 +8,10 @@ import {
   toCardData,
   getSortOptions,
   sortEntities,
+  dedupeEntities,
   SCHOOL_NAMES,
 } from "../../src/compendium/category-display";
+import { sourcePriority } from "../../src/compendium/resolver/version-selector";
 import { loadCompendium } from "../../src/compendium/loader";
 
 function test(description: string, fn: () => void): void {
@@ -558,8 +560,78 @@ async function main() {
         ? Number(m.challengeRating.split("/")[0]) / Number(m.challengeRating.split("/")[1])
         : Number(m.challengeRating);
     for (let i = 1; i < result.length; i++) {
-      ok(crValue(result[i - 1]! as import("../../src/types/compendium").Monster) <= crValue(result[i]! as import("../../src/types/compendium").Monster));
+      ok(
+        crValue(result[i - 1]! as import("../../src/types/compendium").Monster) <=
+          crValue(result[i]! as import("../../src/types/compendium").Monster),
+      );
     }
+  });
+
+  test("dedupeEntities removes duplicate canonicalIds", () => {
+    const spells = getEntitiesForCategory("spell");
+    const deduped = dedupeEntities(spells);
+    const ids = new Set(deduped.map((d) => d.entity.canonicalId));
+    strictEqual(deduped.length, ids.size, "each canonicalId appears once");
+    ok(deduped.length < spells.length, "spells contain duplicate versions");
+  });
+
+  test("dedupeEntities keeps preferred source version", () => {
+    const fireball = getEntitiesForCategory("spell").filter(
+      (s: { name: string }) => s.name === "Fireball",
+    );
+    const versionSources = fireball.map((s: { source: string }) => s.source);
+    ok(versionSources.includes("XPHB"), "Fireball has XPHB version");
+    ok(versionSources.includes("PHB"), "Fireball has PHB version");
+    const deduped = dedupeEntities(fireball);
+    strictEqual(deduped.length, 1);
+    strictEqual(deduped[0]!.entity.source, "XPHB", "prefers 2024 source");
+    strictEqual(deduped[0]!.versionCount, 2);
+  });
+
+  test("dedupeEntities reports versionCount matching source frequency", () => {
+    const spells = getEntitiesForCategory("spell");
+    const frequency = new Map<string, number>();
+    for (const s of spells) {
+      frequency.set(s.canonicalId, (frequency.get(s.canonicalId) ?? 0) + 1);
+    }
+    const deduped = dedupeEntities(spells);
+    for (const entry of deduped) {
+      strictEqual(
+        entry.versionCount,
+        frequency.get(entry.entity.canonicalId),
+        `${entry.entity.name} versionCount`,
+      );
+    }
+  });
+
+  test("dedupeEntities picks lowest-priority source per canonicalId", () => {
+    const items = getEntitiesForCategory("magicitem");
+    const deduped = dedupeEntities(items);
+    for (const entry of deduped) {
+      const candidates = items.filter((i) => i.canonicalId === entry.entity.canonicalId);
+      const bestPriority = Math.min(...candidates.map((c) => sourcePriority(c.source)));
+      strictEqual(
+        sourcePriority(entry.entity.source),
+        bestPriority,
+        `${entry.entity.name} should prefer best source`,
+      );
+    }
+  });
+
+  test("dedupeEntities produces unique card hrefs", () => {
+    const spells = getEntitiesForCategory("spell");
+    const cards = dedupeEntities(spells).map(({ entity, versionCount }) => ({
+      ...toCardData("spell", entity),
+      versionCount,
+    }));
+    const hrefs = new Set(cards.map((c) => c.href));
+    strictEqual(cards.length, hrefs.size, "every card has a unique href key");
+  });
+
+  test("toCardData includes the entity category", () => {
+    const spells = getEntitiesForCategory("spell");
+    const card = toCardData("spell", spells[0]!);
+    strictEqual(card.category, "spell");
   });
 
   console.log(

@@ -56,8 +56,9 @@ export {
   toCardData,
   getSortOptions,
   sortEntities,
+  dedupeEntities,
 } from "./category-display";
-export type { CategorySort, SortOption } from "./category-display";
+export type { CategorySort, SortOption, DedupedEntity } from "./category-display";
 
 export type {
   Spell,

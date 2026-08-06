@@ -6,6 +6,7 @@ import type {
   Monster,
   MagicItem,
   Feat,
+  EntityCategory,
 } from "@/types/compendium";
 
 export interface CompendiumState {
@@ -41,10 +42,12 @@ export type CategoryKey = keyof CategoryMap;
 export interface EntityCardData {
   readonly name: string;
   readonly href: string;
+  readonly category: EntityCategory;
   readonly categoryLabel: string;
   readonly metadata: string;
   readonly source: string;
   readonly canonicalId: string;
+  readonly versionCount?: number;
 }
 
 export interface FilterOption {

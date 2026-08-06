@@ -1,6 +1,6 @@
 import { useState } from "react";
 import type { FilterDefinition } from "@/compendium";
-import { SelectField } from "@/components/ui/SelectField";
+import { FilterChips } from "@/components/search";
 import { Button } from "@/components/ui/Button";
 
 interface FilterBarProps {
@@ -19,17 +19,14 @@ export function FilterBar({ filters, values, onChange }: FilterBarProps) {
   const hasAdvanced = advanced.length > 0;
 
   return (
-    <div>
-      <div className="flex flex-wrap items-center gap-3">
-        <FilterSelect
-          filter={primary}
-          value={values[primary.key] ?? ""}
-          onChange={onChange}
-        />
+    <div className="space-y-3">
+      <div className="flex items-start justify-between gap-3">
+        <FilterGroup filter={primary} value={values[primary.key] ?? ""} onChange={onChange} />
         {hasAdvanced && (
           <Button
             variant="ghost"
             size="sm"
+            className="shrink-0"
             onClick={() => setAdvancedOpen((open) => !open)}
             aria-expanded={advancedOpen}
             aria-controls="advanced-filters"
@@ -39,9 +36,9 @@ export function FilterBar({ filters, values, onChange }: FilterBarProps) {
         )}
       </div>
       {hasAdvanced && advancedOpen && (
-        <div id="advanced-filters" className="mt-3 flex flex-wrap gap-3">
+        <div id="advanced-filters" className="space-y-3">
           {advanced.map((filter) => (
-            <FilterSelect
+            <FilterGroup
               key={filter.key}
               filter={filter}
               value={values[filter.key] ?? ""}
@@ -54,7 +51,7 @@ export function FilterBar({ filters, values, onChange }: FilterBarProps) {
   );
 }
 
-function FilterSelect({
+function FilterGroup({
   filter,
   value,
   onChange,
@@ -64,13 +61,14 @@ function FilterSelect({
   readonly onChange: (key: string, value: string) => void;
 }) {
   return (
-    <div className="flex items-center gap-2">
-      <label className="text-xs font-medium text-muted-foreground">{filter.label}</label>
-      <SelectField
-        value={value}
+    <div className="flex min-w-0 flex-col gap-1.5">
+      <span className="text-xs font-medium text-muted-foreground">{filter.label}</span>
+      <FilterChips
         options={filter.options}
+        selected={value}
         onChange={(next) => onChange(filter.key, next)}
         ariaLabel={filter.label}
+        wrap
       />
     </div>
   );
