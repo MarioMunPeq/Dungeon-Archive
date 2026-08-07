@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import type { Dispatch, RefObject, SetStateAction } from "react";
 
 const EDGE_MARGIN = 8;
@@ -18,6 +18,8 @@ export function useConstrainedPopover<T extends HTMLElement>(): ConstrainedPopov
   const [shiftX, setShiftX] = useState(0);
   const containerRef = useRef<T>(null);
   const popoverRef = useRef<T>(null);
+  const shiftXRef = useRef(0);
+  shiftXRef.current = shiftX;
 
   useEffect(() => {
     if (!open) return;
@@ -35,18 +37,25 @@ export function useConstrainedPopover<T extends HTMLElement>(): ConstrainedPopov
     };
   }, [open]);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (!open || !popoverRef.current) return;
     const measure = () => {
       const popover = popoverRef.current;
       if (!popover) return;
       const rect = popover.getBoundingClientRect();
-      const overLeft = EDGE_MARGIN - rect.left;
-      const overRight = rect.right - (window.innerWidth - EDGE_MARGIN);
-      if (overLeft > 0) setShiftX(overLeft);
-      else if (overRight > 0) setShiftX(-Math.min(overRight, Math.max(0, rect.left - EDGE_MARGIN)));
-      else setShiftX(0);
-      if (placement === "below" && rect.bottom > window.innerHeight - EDGE_MARGIN) {
+      const vw = window.innerWidth;
+      const vh = window.innerHeight;
+      // Recompute from the anchor position (measured rect minus the current clamp
+      // shift) so re-measures on scroll/resize stay idempotent.
+      const baseLeft = rect.left - shiftXRef.current;
+      const width = rect.width;
+      const minLeft = EDGE_MARGIN;
+      const maxRight = vw - EDGE_MARGIN;
+      let nextShift = 0;
+      if (baseLeft < minLeft) nextShift = minLeft - baseLeft;
+      else if (baseLeft + width > maxRight) nextShift = maxRight - (baseLeft + width);
+      if (nextShift !== shiftXRef.current) setShiftX(nextShift);
+      if (placement === "below" && rect.bottom > vh - EDGE_MARGIN) {
         setPlacement("above");
       } else if (placement === "above" && rect.top < EDGE_MARGIN) {
         setPlacement("below");

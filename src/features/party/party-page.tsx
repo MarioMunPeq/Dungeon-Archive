@@ -10,7 +10,8 @@ import {
   METADATA_SEPARATOR,
 } from "@/compendium";
 import type { ContentBlock, Equipment, MagicItem, Spell } from "@/compendium";
-import { entityRefFromCanonicalId, EntityReferenceRow, RowRemoveButton } from "@/components/entity";
+import { entityRefFromCanonicalId } from "@/components/entity";
+import { CloseIcon } from "@/components/ui/icons";
 import { ReferencePicker } from "@/components/ui/ReferencePicker";
 import type { PickerCandidate } from "@/components/ui/ReferencePicker";
 import { InlineTextEditor } from "@/components/ui/InlineTextEditor";
@@ -337,9 +338,9 @@ function StatCard({
   valueClassName?: string;
 }) {
   return (
-    <div className="flex min-w-0 flex-col items-center gap-1 rounded-stat border border-border-amber bg-card readout-card px-2 py-3">
-      <span className="flex w-full items-center justify-between gap-1">
-        <span className="min-w-0 break-words text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+    <div className="flex min-w-0 flex-col items-center gap-1 rounded-stat border border-border-amber bg-card readout-card px-1 py-3">
+      <span className="flex w-full items-center justify-between gap-0.5">
+        <span className="min-w-0 text-[11px] font-semibold uppercase tracking-tight text-muted-foreground">
           {label}
         </span>
         <span className="flex items-center gap-1">
@@ -399,7 +400,7 @@ function AddButton({ onClick, label }: { onClick: () => void; label: string }) {
   );
 }
 
-function ReferenceRow({
+function ReferenceCell({
   canonicalId,
   kind,
   onRemove,
@@ -411,7 +412,6 @@ function ReferenceRow({
   quickStats?: string;
 }) {
   const [expanded, setExpanded] = useState(false);
-  const [leaving, setLeaving] = useState(false);
   const resolved = useMemo(() => resolveEntity(canonicalId), [canonicalId]);
   const ref = entityRefFromCanonicalId(canonicalId);
   if (!ref) return null;
@@ -428,35 +428,72 @@ function ReferenceRow({
           ? selected.rarity
           : undefined;
 
-  const handleRemove = () => {
-    setLeaving(true);
-    window.setTimeout(() => onRemove(canonicalId), 150);
-  };
+  const remove = (
+    <button
+      type="button"
+      onClick={(e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        onRemove(canonicalId);
+      }}
+      aria-label={`Remove ${ref.name}`}
+      className="hitbox-expand absolute right-1 top-1 inline-flex h-6 w-6 items-center justify-center rounded-control text-muted-foreground transition-all duration-150 hover:bg-accent hover:text-foreground active:scale-90 active:bg-accent/80"
+    >
+      <CloseIcon />
+    </button>
+  );
+
+  const content = (
+    <>
+      <span className="flex w-full min-w-0 flex-col items-center gap-0.5 text-center">
+        <span className="min-w-0 max-w-full truncate text-xs font-semibold text-foreground">
+          {ref.name}
+        </span>
+        {subtitle && (
+          <span className="min-w-0 max-w-full truncate text-[10px] text-foreground-subtle">
+            {subtitle}
+          </span>
+        )}
+      </span>
+      {quickStats && (
+        <span className="shrink-0 rounded-stat bg-card px-1.5 py-0.5 font-mono text-[10px] font-semibold tabular-nums text-foreground">
+          {quickStats}
+        </span>
+      )}
+    </>
+  );
+
+  const base =
+    "flex min-w-0 flex-1 flex-col items-center gap-1.5 rounded-card border border-border-amber bg-surface readout-card p-1.5 pr-2.5 transition-all duration-150 hover:bg-accent/50 active:bg-accent/80 animate-fade-in";
+
+  if (previewable) {
+    return (
+      <div className="relative flex flex-col animate-fade-in">
+        <button
+          type="button"
+          onClick={() => setExpanded((v) => !v)}
+          aria-expanded={expanded}
+          className={cn(base, expanded && "bg-accent/40")}
+        >
+          {content}
+        </button>
+        {remove}
+        {expanded && selected?.category === "spell" && (
+          <SpellPreview spell={selected} href={ref.href} />
+        )}
+        {expanded && selected?.category === "equipment" && (
+          <WeaponPreview item={selected} href={ref.href} />
+        )}
+      </div>
+    );
+  }
 
   return (
-    <div className={cn("flex flex-col", leaving ? "animate-fade-out" : "animate-fade-in")}>
-      <EntityReferenceRow
-        canonicalId={canonicalId}
-        subtitle={subtitle}
-        showBadge={false}
-        className="py-2"
-        trailing={
-          quickStats ? (
-            <span className="shrink-0 rounded-stat bg-card px-2 py-1 font-mono text-xs font-semibold tabular-nums text-foreground">
-              {quickStats}
-            </span>
-          ) : undefined
-        }
-        action={<RowRemoveButton label={`Remove ${ref.name}`} onClick={handleRemove} />}
-        onToggle={previewable ? () => setExpanded((v) => !v) : undefined}
-        expanded={previewable ? expanded : undefined}
-      />
-      {previewable && expanded && selected?.category === "spell" && (
-        <SpellPreview spell={selected} href={ref.href} />
-      )}
-      {previewable && expanded && selected?.category === "equipment" && (
-        <WeaponPreview item={selected} href={ref.href} />
-      )}
+    <div className="relative flex flex-col animate-fade-in">
+      <Link to={ref.href} className={base}>
+        {content}
+      </Link>
+      {remove}
     </div>
   );
 }
@@ -490,9 +527,9 @@ function ReferenceGroup({
       {ids.length === 0 ? (
         <p className="px-1 text-xs text-foreground-subtle">None</p>
       ) : (
-        <div className="flex flex-col">
+        <div className="grid grid-cols-3 gap-2">
           {ids.map((canonicalId) => (
-            <ReferenceRow
+            <ReferenceCell
               key={canonicalId}
               canonicalId={canonicalId}
               kind={kind}
@@ -769,6 +806,7 @@ function PlayerReferenceCard({
         <AbilityScores
           scores={reference.abilityScores}
           onChange={(key, value) => update({ abilityScores: { [key]: value } })}
+          columns={3}
         />
       </div>
 

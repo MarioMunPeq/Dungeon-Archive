@@ -197,14 +197,16 @@ function ConditionChip({
           ref={popoverRef}
           role="tooltip"
           className={cn(
-            "absolute left-1/2 z-20 w-64 rounded-card border border-border bg-elevated px-3 py-2 text-xs leading-relaxed text-foreground shadow-lg animate-pop transition-transform duration-150",
+            "absolute left-1/2 z-20 transition-transform duration-150",
             placement === "below" ? "top-full mt-2" : "bottom-full mb-2",
           )}
           style={{ transform: `translateX(calc(-50% + ${shiftX}px))` }}
         >
-          <span className="block text-xs font-semibold text-foreground">{name}</span>
-          <span className="mt-0.5 block text-xs leading-relaxed text-muted-foreground">
-            {conditionDefinition(id)}
+          <span className="block w-64 rounded-card border border-border bg-elevated px-3 py-2 text-xs leading-relaxed text-foreground shadow-lg animate-pop">
+            <span className="block text-xs font-semibold text-foreground">{name}</span>
+            <span className="mt-0.5 block text-xs leading-relaxed text-muted-foreground">
+              {conditionDefinition(id)}
+            </span>
           </span>
         </span>
       )}
@@ -484,7 +486,7 @@ function CombatPlayerView({ player }: { player: PlayerReference }) {
               key={stat.key}
               className="flex flex-col items-center gap-1 rounded-stat border border-border-amber bg-card readout-card px-2 py-3"
             >
-              <span className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
+              <span className="text-xs font-medium uppercase tracking-tight text-muted-foreground">
                 {stat.label}
               </span>
               <span className="font-mono text-2xl font-bold tabular-nums text-foreground">

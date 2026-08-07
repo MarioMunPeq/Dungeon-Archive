@@ -32,12 +32,14 @@ export function HelpTip({ label, children, className }: HelpTipProps) {
           ref={popoverRef}
           role="tooltip"
           className={cn(
-            "absolute left-0 z-20 w-64 rounded-card border border-border bg-elevated px-3 py-2 text-xs leading-relaxed text-foreground shadow-lg animate-pop transition-transform duration-150",
+            "absolute left-0 z-20 transition-transform duration-150",
             placement === "below" ? "top-full mt-2" : "bottom-full mb-2",
           )}
           style={{ transform: shiftX !== 0 ? `translateX(${shiftX}px)` : undefined }}
         >
-          {children}
+          <span className="block w-64 rounded-card border border-border bg-elevated px-3 py-2 text-xs leading-relaxed text-foreground shadow-lg animate-pop">
+            {children}
+          </span>
         </span>
       )}
     </span>

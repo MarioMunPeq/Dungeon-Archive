@@ -44,12 +44,14 @@ function ScoreControl({
   max,
   onChange,
   label,
+  compact = false,
 }: {
   value: number;
   min: number;
   max: number;
   onChange: (value: number) => void;
   label: string;
+  compact?: boolean;
 }) {
   const [editing, setEditing] = useState(false);
   const [draft, setDraft] = useState("");
@@ -64,10 +66,12 @@ function ScoreControl({
     setEditing(false);
   };
 
-  const stepClass =
-    "hitbox-expand flex h-6 w-6 shrink-0 select-none items-center justify-center rounded-control text-muted-foreground transition-all duration-150 active:scale-90 hover:text-foreground disabled:cursor-default disabled:text-disabled-foreground disabled:active:scale-100";
+  const stepClass = cn(
+    "hitbox-expand flex shrink-0 select-none items-center justify-center rounded-control text-muted-foreground transition-all duration-150 active:scale-90 hover:text-foreground disabled:cursor-default disabled:text-disabled-foreground disabled:active:scale-100",
+    compact ? "h-5 w-5" : "h-6 w-6",
+  );
 
-  const iconClass = "h-3.5 w-3.5";
+  const iconClass = compact ? "h-3 w-3" : "h-3.5 w-3.5";
 
   return (
     <div className="flex shrink-0 items-center gap-0.5">
@@ -78,7 +82,10 @@ function ScoreControl({
           onSave={commitDraft}
           onCancel={() => setEditing(false)}
           ariaLabel={`Edit ${label}`}
-          className="h-6 w-12 px-1 text-center font-mono text-xs"
+          className={cn(
+            "px-1 text-center font-mono",
+            compact ? "h-5 w-10 text-[11px]" : "h-6 w-12 text-xs",
+          )}
         />
       ) : (
         <button
@@ -88,7 +95,10 @@ function ScoreControl({
             setEditing(true);
           }}
           aria-label={`Edit ${label}`}
-          className="flex h-6 min-w-5 items-center justify-center rounded-control px-1 font-mono text-xs font-medium text-foreground-subtle transition-colors duration-150 hover:bg-accent/60"
+          className={cn(
+            "flex items-center justify-center rounded-control px-1 font-mono font-medium text-foreground-subtle transition-colors duration-150 hover:bg-accent/60",
+            compact ? "h-5 min-w-4 text-[11px]" : "h-6 min-w-5 text-xs",
+          )}
         >
           {value}
         </button>
@@ -137,44 +147,63 @@ function ScoreControl({
 export interface AbilityScoresProps {
   readonly scores: Record<AbilityKey, number>;
   readonly onChange?: (key: AbilityKey, value: number) => void;
+  readonly columns?: 2 | 3;
 }
 
-export function AbilityScores({ scores, onChange }: AbilityScoresProps) {
+export function AbilityScores({ scores, onChange, columns = 2 }: AbilityScoresProps) {
+  const compact = columns === 3;
   return (
-    <div className="grid grid-cols-2 gap-2">
+    <div className={cn("grid gap-2", compact ? "grid-cols-3" : "grid-cols-2")}>
       {ABILITY_KEYS.map((key) => {
         const score = scores[key];
         const modifier = abilityModifier(score);
         return (
           <div
             key={key}
-            className="flex min-w-0 items-center gap-1.5 rounded-card border border-border-amber bg-surface readout-card px-2.5 py-2"
+            className={cn(
+              "flex min-w-0 items-center gap-1.5 rounded-card border border-border-amber bg-surface readout-card px-2.5 py-2",
+              compact && "flex-col gap-1 px-1.5 py-1.5",
+            )}
           >
-            <span className="flex shrink-0 items-center gap-1 text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+            <span
+              className={cn(
+                "flex shrink-0 items-center gap-1 text-xs font-semibold uppercase text-muted-foreground",
+                compact ? "tracking-normal" : "tracking-wide",
+              )}
+            >
               {ABILITY_LABELS[key]}
               <HelpTip label={`What is ${ABILITY_LABELS[key]}?`}>{ABILITY_HELP[key]}</HelpTip>
             </span>
-            <span
-              className={cn(
-                "shrink-0 font-mono text-lg font-bold tabular-nums leading-none",
-                modifier > 0 ? "text-success" : modifier < 0 ? "text-destructive" : "text-gold",
-              )}
-            >
-              {formatSigned(modifier)}
-            </span>
-            {onChange ? (
-              <ScoreControl
-                value={score}
-                min={1}
-                max={30}
-                onChange={(value) => onChange(key, value)}
-                label={ABILITY_LABELS[key]}
-              />
-            ) : (
-              <span className="shrink-0 font-mono text-xs font-medium tabular-nums text-foreground-subtle">
-                {score}
+            <span className={cn("flex items-center", compact ? "gap-1" : "gap-1.5")}>
+              <span
+                className={cn(
+                  "shrink-0 font-mono font-bold tabular-nums leading-none",
+                  compact ? "text-sm" : "text-lg",
+                  modifier > 0 ? "text-success" : modifier < 0 ? "text-destructive" : "text-gold",
+                )}
+              >
+                {formatSigned(modifier)}
               </span>
-            )}
+              {onChange ? (
+                <ScoreControl
+                  value={score}
+                  min={1}
+                  max={30}
+                  onChange={(value) => onChange(key, value)}
+                  label={ABILITY_LABELS[key]}
+                  compact={compact}
+                />
+              ) : (
+                <span
+                  className={cn(
+                    "shrink-0 font-mono font-medium tabular-nums text-foreground-subtle",
+                    compact ? "text-[11px]" : "text-xs",
+                  )}
+                >
+                  {score}
+                </span>
+              )}
+            </span>
           </div>
         );
       })}

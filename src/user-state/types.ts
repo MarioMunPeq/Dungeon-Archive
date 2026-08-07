@@ -80,7 +80,7 @@ export interface UserState {
 
 export const STORAGE_KEY = "dungeon:userState:v1";
 export const CURRENT_VERSION = 12;
-export const DEFAULT_THEME: Theme = "jade";
+export const DEFAULT_THEME: Theme = "teal";
 export const THEMES: readonly Theme[] = ["jade", "amber", "teal"];
 
 export function isTheme(value: unknown): value is Theme {

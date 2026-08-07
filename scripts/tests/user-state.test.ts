@@ -94,7 +94,7 @@ test("createDefaultState returns valid v12 state", () => {
   strictEqual(def.activePlayerId, null);
   strictEqual(def.beginnerMode, true);
   strictEqual(def.onboardingComplete, false);
-  strictEqual(def.theme, "jade");
+  strictEqual(def.theme, "teal");
 });
 
 // ---------------------------------------------------------------------------
@@ -885,13 +885,13 @@ test("hydrate() loads persisted beginnerMode", () => {
 // ---------------------------------------------------------------------------
 console.log("\nuser-state \u2014 theme\n");
 
-test("theme defaults to jade in default state", () => {
-  strictEqual(createDefaultState().theme, "jade");
+test("theme defaults to teal in default state", () => {
+  strictEqual(createDefaultState().theme, "teal");
 });
 
-test("normalize defaults theme to jade when missing", () => {
+test("normalize defaults theme to teal when missing", () => {
   const result = normalize(createDefaultState());
-  strictEqual(result.theme, "jade");
+  strictEqual(result.theme, "teal");
 });
 
 test("normalize preserves a non-default theme", () => {
@@ -899,12 +899,12 @@ test("normalize preserves a non-default theme", () => {
   strictEqual(result.theme, "amber");
 });
 
-test("normalize falls back to jade for an invalid theme", () => {
+test("normalize falls back to teal for an invalid theme", () => {
   const result = normalize({ ...createDefaultState(), theme: "red" as never });
-  strictEqual(result.theme, "jade");
+  strictEqual(result.theme, "teal");
 });
 
-test("migrate defaults theme to jade for a v11 state", () => {
+test("migrate defaults theme to teal for a v11 state", () => {
   const input = {
     version: 11,
     favorites: [],
@@ -920,7 +920,7 @@ test("migrate defaults theme to jade for a v11 state", () => {
   };
   const result = migrate(input);
   strictEqual(result.version, CURRENT_VERSION);
-  strictEqual(result.theme, "jade");
+  strictEqual(result.theme, "teal");
 });
 
 test("migrate preserves a persisted theme", () => {
@@ -958,7 +958,7 @@ test("migrate rejects an invalid theme value", () => {
     theme: "neon",
   };
   const result = migrate(input);
-  strictEqual(result.theme, "jade");
+  strictEqual(result.theme, "teal");
 });
 
 test("setTheme updates the theme", () => {
@@ -974,7 +974,7 @@ test("setTheme ignores invalid themes", () => {
   resetMock();
   resetStore();
   userStore.getState().setTheme("neon" as never);
-  strictEqual(userStore.getState().theme, "jade");
+  strictEqual(userStore.getState().theme, "teal");
 });
 
 test("setTheme persists to localStorage", () => {
@@ -1012,7 +1012,7 @@ test("hydrate() loads persisted theme", () => {
   strictEqual(userStore.getState().theme, "teal");
 });
 
-test("hydrate() falls back to jade for an invalid persisted theme", () => {
+test("hydrate() falls back to teal for an invalid persisted theme", () => {
   resetMock();
   resetStore();
   const data = {
@@ -1031,7 +1031,7 @@ test("hydrate() falls back to jade for an invalid persisted theme", () => {
   };
   localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
   hydrate();
-  strictEqual(userStore.getState().theme, "jade");
+  strictEqual(userStore.getState().theme, "teal");
 });
 
 test("_reset restores the default theme", () => {
@@ -1039,7 +1039,7 @@ test("_reset restores the default theme", () => {
   resetStore();
   userStore.getState().setTheme("amber");
   userStore.getState()._reset();
-  strictEqual(userStore.getState().theme, "jade");
+  strictEqual(userStore.getState().theme, "teal");
 });
 
 test("_replace carries the theme field", () => {

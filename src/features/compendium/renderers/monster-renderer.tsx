@@ -14,7 +14,7 @@ interface MonsterRendererProps {
 function StatCard({ label, value }: { label: string; value: ReactNode }) {
   return (
     <div className="flex min-w-0 flex-col items-center gap-1 rounded-stat border border-border bg-card px-2 py-3">
-      <span className="w-full break-words text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+      <span className="w-full text-xs font-semibold uppercase tracking-tight text-muted-foreground">
         {label}
       </span>
       <span className="font-mono text-2xl font-bold tabular-nums leading-none text-foreground">
