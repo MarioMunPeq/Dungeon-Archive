@@ -9,6 +9,9 @@ export interface FakeProvider {
   providerId: string;
 }
 
+/** Records which sign-in flow the app actually invoked. */
+export const authCalls: string[] = [];
+
 export function getAuth(): FakeAuth {
   return {
     get currentUser() {
@@ -40,6 +43,7 @@ export async function signInWithPopup(
   _auth: FakeAuth,
   _provider: FakeProvider,
 ): Promise<{ user: FakeAuthUser }> {
+  authCalls.push("signInWithPopup");
   if (fakeFirebaseState.signInError !== null) {
     throw fakeFirebaseState.signInError;
   }
@@ -52,21 +56,6 @@ export async function signInWithPopup(
   return { user };
 }
 
-export async function signInWithRedirect(_auth: FakeAuth, _provider: FakeProvider): Promise<void> {
-  if (fakeFirebaseState.signInError !== null) {
-    throw fakeFirebaseState.signInError;
-  }
-  setFakeUser({
-    uid: "firebase-user",
-    displayName: "Firebase User",
-    email: "firebase@example.com",
-  });
-}
-
 export async function signOut(_auth: FakeAuth): Promise<void> {
   setFakeUser(null);
-}
-
-export async function getRedirectResult(_auth: FakeAuth): Promise<{ user: FakeAuthUser } | null> {
-  return null;
 }

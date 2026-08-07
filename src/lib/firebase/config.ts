@@ -1,7 +1,5 @@
 import { initializeApp } from "firebase/app";
 import type { FirebaseApp } from "firebase/app";
-// TEMP DEBUG
-import { authDebug, maskSecret } from "./auth-debug";
 
 interface FirebaseConfig {
   readonly apiKey: string;
@@ -51,13 +49,6 @@ function createFirebaseApp(): FirebaseApp | null {
   }
   if (firebaseAppInstance === null) {
     firebaseAppInstance = initializeApp(firebaseConfig);
-    // TEMP DEBUG — Phase 3: log the effective Firebase config (apiKey masked).
-    authDebug("Firebase initialized", {
-      authDomain: firebaseConfig.authDomain,
-      projectId: firebaseConfig.projectId,
-      apiKey: maskSecret(firebaseConfig.apiKey),
-      currentUser: "auth not yet created — see 'Auth instance created' log",
-    });
   }
   return firebaseAppInstance;
 }
