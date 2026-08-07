@@ -446,7 +446,7 @@ function ReferenceCell({
   const content = (
     <>
       <span className="flex w-full min-w-0 flex-col items-center gap-0.5 text-center">
-        <span className="min-w-0 max-w-full truncate text-xs font-semibold text-foreground">
+        <span className="min-w-0 max-w-full truncate text-xs font-bold text-foreground">
           {ref.name}
         </span>
         {subtitle && (
@@ -516,9 +516,9 @@ function ReferenceGroup({
   getQuickStats?: (canonicalId: string) => string | undefined;
 }) {
   return (
-    <div className="flex flex-col gap-1">
+    <div className="flex flex-col gap-2">
       <div className="flex items-center justify-between gap-2">
-        <span className="flex items-center gap-1 border-l-2 border-primary pl-2 text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+        <span className="flex items-center gap-1 border-l-2 border-primary pl-2 text-xs font-bold uppercase tracking-wide text-muted-foreground">
           {title}
           <HelpTip label={`More about ${title}`}>{help}</HelpTip>
         </span>
@@ -527,7 +527,7 @@ function ReferenceGroup({
       {ids.length === 0 ? (
         <p className="px-1 text-xs text-foreground-subtle">None</p>
       ) : (
-        <div className="grid grid-cols-3 gap-2">
+        <div className="grid grid-cols-2 gap-2">
           {ids.map((canonicalId) => (
             <ReferenceCell
               key={canonicalId}
@@ -545,7 +545,7 @@ function ReferenceGroup({
 
 function SectionLabel({ children }: { children: string }) {
   return (
-    <span className="border-l-2 border-primary pl-2 text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+    <span className="border-l-2 border-primary pl-2 text-xs font-bold uppercase tracking-wide text-muted-foreground">
       {children}
     </span>
   );
@@ -554,11 +554,9 @@ function SectionLabel({ children }: { children: string }) {
 function PlayerReferenceCard({
   reference,
   autoEditName,
-  current,
 }: {
   reference: PlayerReference;
   autoEditName: boolean;
-  current: boolean;
 }) {
   const [editing, setEditing] = useState<"name" | "note" | null>(autoEditName ? "name" : null);
   const [draft, setDraft] = useState("");
@@ -706,36 +704,6 @@ function PlayerReferenceCard({
         <div className="flex shrink-0 items-center gap-1">
           <button
             type="button"
-            onClick={() => userStore.getState().setActivePlayer(current ? null : reference.id)}
-            title={
-              current ? `Clear ${reference.name} as current` : `Set ${reference.name} as current`
-            }
-            aria-pressed={current}
-            className={cn(
-              "hitbox-expand relative inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-control transition-all duration-150 active:scale-90",
-              current
-                ? "text-primary hover:bg-primary/10"
-                : "text-muted-foreground hover:bg-accent hover:text-foreground active:bg-accent/80",
-            )}
-          >
-            <svg
-              aria-hidden="true"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth={2}
-              className="h-4 w-4"
-            >
-              <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6" />
-              <path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18" />
-              <path d="M4 22h16" />
-              <path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22" />
-              <path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22" />
-              <path d="M18 2H6v7a6 6 0 0 0 12 0V2Z" />
-            </svg>
-          </button>
-          <button
-            type="button"
             onClick={() => setConfirmRemove(true)}
             title={`Remove ${reference.name}`}
             aria-label={`Remove ${reference.name}`}
@@ -838,7 +806,7 @@ function PlayerReferenceCard({
         />
       </div>
 
-      <div className="flex flex-col gap-1">
+      <div className="flex flex-col gap-2">
         <SectionLabel>Quick Note</SectionLabel>
         {editing === "note" ? (
           <InlineTextareaEditor
@@ -963,7 +931,6 @@ export function PartyPage() {
               key={activePlayer.id}
               reference={activePlayer}
               autoEditName={activePlayer.id === creatingId}
-              current={activePlayer.id === activePlayerId}
             />
           )}
         </>

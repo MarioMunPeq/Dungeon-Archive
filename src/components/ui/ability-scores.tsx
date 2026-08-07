@@ -71,7 +71,7 @@ function ScoreControl({
     compact ? "h-5 w-5" : "h-6 w-6",
   );
 
-  const iconClass = compact ? "h-3 w-3" : "h-3.5 w-3.5";
+  const iconClass = "h-3.5 w-3.5";
 
   return (
     <div className="flex shrink-0 items-center gap-0.5">
@@ -162,13 +162,13 @@ export function AbilityScores({ scores, onChange, columns = 2 }: AbilityScoresPr
             key={key}
             className={cn(
               "flex min-w-0 items-center gap-1.5 rounded-card border border-border-amber bg-surface readout-card px-2.5 py-2",
-              compact && "flex-col gap-1 px-1.5 py-1.5",
+              compact && "flex-col gap-0 px-1.5 py-1",
             )}
           >
             <span
               className={cn(
                 "flex shrink-0 items-center gap-1 text-xs font-semibold uppercase text-muted-foreground",
-                compact ? "tracking-normal" : "tracking-wide",
+                compact ? "tracking-normal leading-tight" : "tracking-wide",
               )}
             >
               {ABILITY_LABELS[key]}
