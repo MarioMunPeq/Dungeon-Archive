@@ -1,3 +1,4 @@
+import { memo } from "react";
 import { Link } from "react-router-dom";
 import type { SearchResultItem } from "@/components/entity";
 import { EntityIdentity, EntityCardStat } from "@/components/entity";
@@ -12,7 +13,7 @@ interface SearchResultRowProps extends SearchResultItem {
 const ROW_BASE = "flex items-center gap-3 px-4 py-3 transition-colors";
 const ROW_SELECTED = "bg-accent";
 
-export function SearchResultRow({
+export const SearchResultRow = memo(function SearchResultRow({
   title,
   subtitle,
   category,
@@ -42,4 +43,4 @@ export function SearchResultRow({
       </span>
     </Link>
   );
-}
+});

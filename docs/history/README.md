@@ -12,6 +12,7 @@ This folder contains point-in-time records of completed work. The files here des
 | `product-final-polish-report.md` | Verification-driven polish pass across twelve UI areas |
 | `boot-hang-report.md` | Root-cause investigation of a stale-shell boot failure |
 | `layout-root-cause-report.md` | Root-cause of a layout regression caused by shadowed theme tokens |
+| `performance-pass.md` | Native-performance pass: list virtualization, render audit, Zustand selectors |
 
 ## The Redesign Campaign
 

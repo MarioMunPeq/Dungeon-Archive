@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import { useLayoutEffect, useMemo, useState } from "react";
 import type { ReactNode } from "react";
 import { useVirtualizer } from "@tanstack/react-virtual";
 import { useScrollElementRef } from "./scroll-element-context";
@@ -45,6 +45,16 @@ export function VirtualGrid<T>({
 }: VirtualGridProps<T>) {
   const scrollRef = useScrollElementRef();
   const scrollElement = scrollRef?.current ?? null;
+
+  // The scroll element ref is attached during commit, after the first render,
+  // so the first render always falls back to rendering everything. Ref writes
+  // never trigger re-renders, so without this the component would stay in the
+  // fallback forever. Layout effects run after refs are attached, so one
+  // re-render here flips into virtual mode before the browser paints.
+  const [, setScrollReady] = useState(0);
+  useLayoutEffect(() => {
+    if (scrollRef?.current) setScrollReady((n) => n + 1);
+  }, [scrollRef]);
 
   const rows = useMemo(() => {
     const rowCount = Math.ceil(items.length / columnCount);
