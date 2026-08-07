@@ -14,10 +14,7 @@ export function AppLayout({ children }: AppLayoutProps) {
   return (
     <div className="mx-auto flex h-dvh w-full max-w-screen-xl flex-col overflow-hidden">
       <TopBar />
-      <main
-        ref={mainRef}
-        className="min-h-0 flex-1 overflow-y-auto overscroll-contain pb-4"
-      >
+      <main ref={mainRef} className="min-h-0 flex-1 overflow-y-auto overscroll-contain pb-4">
         <RouteTransition>{children}</RouteTransition>
       </main>
       <BottomNav />

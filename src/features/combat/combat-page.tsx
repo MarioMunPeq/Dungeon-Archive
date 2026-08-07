@@ -121,7 +121,8 @@ const FALLBACK_SUMMARY =
 
 function conditionDefinition(id: string): string {
   const resolved = resolveEntity(id);
-  const summary = resolved?.selected.category === "condition" ? conditionSummary(resolved.selected) : "";
+  const summary =
+    resolved?.selected.category === "condition" ? conditionSummary(resolved.selected) : "";
   return summary || FALLBACK_SUMMARY;
 }
 

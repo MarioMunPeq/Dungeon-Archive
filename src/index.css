@@ -268,13 +268,7 @@
     background-image:
       radial-gradient(130% 100% at 50% 0%, rgb(245 241 236 / 0.025) 0%, transparent 55%),
       radial-gradient(150% 135% at 50% 45%, transparent 50%, rgb(0 0 0 / 0.26) 100%),
-      repeating-linear-gradient(
-        115deg,
-        #12100e 0px,
-        #12100e 3px,
-        #141210 3px,
-        #141210 6px
-      );
+      repeating-linear-gradient(115deg, #12100e 0px, #12100e 3px, #141210 3px, #141210 6px);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
@@ -323,12 +317,7 @@
 @layer utilities {
   /* Protagonist stat/readout panels — soft radial depth, light falling from above. */
   .readout-card {
-    background-image: radial-gradient(
-      240% 260% at 50% 0%,
-      #221d18 0%,
-      #1c1917 50%,
-      #171311 100%
-    );
+    background-image: radial-gradient(240% 260% at 50% 0%, #221d18 0%, #1c1917 50%, #171311 100%);
   }
 
   .touch-target {

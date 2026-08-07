@@ -52,10 +52,7 @@ export async function signInWithPopup(
   return { user };
 }
 
-export async function signInWithRedirect(
-  _auth: FakeAuth,
-  _provider: FakeProvider,
-): Promise<void> {
+export async function signInWithRedirect(_auth: FakeAuth, _provider: FakeProvider): Promise<void> {
   if (fakeFirebaseState.signInError !== null) {
     throw fakeFirebaseState.signInError;
   }
@@ -70,8 +67,6 @@ export async function signOut(_auth: FakeAuth): Promise<void> {
   setFakeUser(null);
 }
 
-export async function getRedirectResult(
-  _auth: FakeAuth,
-): Promise<{ user: FakeAuthUser } | null> {
+export async function getRedirectResult(_auth: FakeAuth): Promise<{ user: FakeAuthUser } | null> {
   return null;
 }

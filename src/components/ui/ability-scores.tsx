@@ -5,12 +5,7 @@ import { HelpTip } from "./HelpTip";
 import { InlineNumberEditor } from "./InlineNumberEditor";
 
 export type AbilityKey =
-  | "strength"
-  | "dexterity"
-  | "constitution"
-  | "intelligence"
-  | "wisdom"
-  | "charisma";
+  "strength" | "dexterity" | "constitution" | "intelligence" | "wisdom" | "charisma";
 
 const ABILITY_KEYS: readonly AbilityKey[] = [
   "strength",
@@ -157,9 +152,7 @@ export function AbilityScores({ scores, onChange }: AbilityScoresProps) {
           >
             <span className="flex shrink-0 items-center gap-1 text-xs font-semibold uppercase tracking-wide text-muted-foreground">
               {ABILITY_LABELS[key]}
-              <HelpTip label={`What is ${ABILITY_LABELS[key]}?`}>
-                {ABILITY_HELP[key]}
-              </HelpTip>
+              <HelpTip label={`What is ${ABILITY_LABELS[key]}?`}>{ABILITY_HELP[key]}</HelpTip>
             </span>
             <span
               className={cn(

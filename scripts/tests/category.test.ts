@@ -161,9 +161,18 @@ async function main() {
     ok(type, "equipment should have a type filter");
     const codes = type!.options.filter((o: { value: string }) => o.value.includes("|"));
     deepEqual(codes, [], "no internal type codes should be exposed");
-    ok(type!.options.some((o: { value: string }) => o.value === "Mount"), "Mount option exists");
-    ok(type!.options.some((o: { value: string }) => o.value === "Coin"), "Coin option exists");
-    ok(type!.options.some((o: { value: string }) => o.value === "Melee Weapon"), "Melee Weapon exists");
+    ok(
+      type!.options.some((o: { value: string }) => o.value === "Mount"),
+      "Mount option exists",
+    );
+    ok(
+      type!.options.some((o: { value: string }) => o.value === "Coin"),
+      "Coin option exists",
+    );
+    ok(
+      type!.options.some((o: { value: string }) => o.value === "Melee Weapon"),
+      "Melee Weapon exists",
+    );
   });
 
   test("applyFilters filters equipment by type", () => {
@@ -185,10 +194,7 @@ async function main() {
       result.map((e) => (e as import("../../src/types/compendium").Equipment).type),
     );
     for (const raw of names) {
-      ok(
-        ["MNT", "MNT|XPHB"].includes(raw),
-        `unexpected type ${raw} matched Mount filter`,
-      );
+      ok(["MNT", "MNT|XPHB"].includes(raw), `unexpected type ${raw} matched Mount filter`);
     }
   });
 

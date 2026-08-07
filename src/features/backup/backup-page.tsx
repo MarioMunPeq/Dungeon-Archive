@@ -9,7 +9,14 @@ import {
   Surface,
   useSnackbar,
 } from "@/components/ui";
-import { getBackupStatus, friendlyErrorMessage, restore, upload, useCloudStatus, useCloudSync } from "@/sync";
+import {
+  getBackupStatus,
+  friendlyErrorMessage,
+  restore,
+  upload,
+  useCloudStatus,
+  useCloudSync,
+} from "@/sync";
 import type { CloudSnapshot } from "@/sync";
 import { userStore } from "@/user-state";
 
@@ -183,7 +190,10 @@ export function BackupPage() {
       )}
 
       {ready && disabled && (
-        <div role="status" className="flex flex-col gap-1 rounded-card border border-border bg-muted/30 p-4">
+        <div
+          role="status"
+          className="flex flex-col gap-1 rounded-card border border-border bg-muted/30 p-4"
+        >
           <p className="text-sm font-semibold text-foreground">Cloud Backup is not available</p>
           <p className="text-xs text-muted-foreground">
             This build was compiled without Firebase configuration. Cloud Backup is an optional

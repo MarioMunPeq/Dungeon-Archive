@@ -44,8 +44,7 @@ export function useConstrainedPopover<T extends HTMLElement>(): ConstrainedPopov
       const overLeft = EDGE_MARGIN - rect.left;
       const overRight = rect.right - (window.innerWidth - EDGE_MARGIN);
       if (overLeft > 0) setShiftX(overLeft);
-      else if (overRight > 0)
-        setShiftX(-Math.min(overRight, Math.max(0, rect.left - EDGE_MARGIN)));
+      else if (overRight > 0) setShiftX(-Math.min(overRight, Math.max(0, rect.left - EDGE_MARGIN)));
       else setShiftX(0);
       if (placement === "below" && rect.bottom > window.innerHeight - EDGE_MARGIN) {
         setPlacement("above");

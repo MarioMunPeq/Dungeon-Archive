@@ -1,4 +1,11 @@
-import type { EntityCategory, Spell, Monster, Equipment, MagicItem, Feat } from "@/types/compendium";
+import type {
+  EntityCategory,
+  Spell,
+  Monster,
+  Equipment,
+  MagicItem,
+  Feat,
+} from "@/types/compendium";
 import type { EntityCardData, FilterDefinition } from "./types";
 import { CATEGORY_REGISTRY, SOURCE_ORDER, formatEquipmentType } from "./category-registry";
 import { sourcePriority } from "./resolver/version-selector";
