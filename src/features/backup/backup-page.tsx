@@ -2,7 +2,6 @@ import { useCallback, useEffect, useReducer, useState } from "react";
 import {
   Button,
   ConfirmDialog,
-  Display,
   Inline,
   Section,
   Skeleton,
@@ -174,7 +173,6 @@ export function BackupPage() {
   return (
     <div className="flex flex-col px-4 py-6">
       <div className="mb-6 space-y-1">
-        <Display>Cloud Backup</Display>
         <p className="text-xs text-muted-foreground">
           Your data lives locally on this device. Cloud backup is optional and lets you restore it
           on another device.
@@ -228,7 +226,7 @@ export function BackupPage() {
                     Sign in with Google to back up your local data.
                   </p>
                   <Inline>
-                    <Button onClick={handleSignIn} disabled={!canAct}>
+                    <Button variant="outline" onClick={handleSignIn} disabled={!canAct}>
                       {busy === "signIn" ? "Signing in…" : "Sign in with Google"}
                     </Button>
                   </Inline>
