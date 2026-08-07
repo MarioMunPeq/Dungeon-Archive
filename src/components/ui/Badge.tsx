@@ -6,8 +6,8 @@ type BadgeVariant = "default" | "accent" | "outline" | "subtle";
 const VARIANT_CLASSES: Record<BadgeVariant, string> = {
   default: "border-foreground bg-accent font-medium text-foreground",
   accent: "border-accent-foreground/30 bg-accent/50 text-accent-foreground",
-  outline: "border-border text-muted-foreground",
-  subtle: "border-transparent bg-muted text-muted-foreground",
+  outline: "border-gold/25 text-gold",
+  subtle: "border-transparent bg-gold/10 text-gold",
 };
 
 interface BadgeProps {

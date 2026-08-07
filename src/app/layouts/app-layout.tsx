@@ -11,7 +11,7 @@ interface AppLayoutProps {
 export function AppLayout({ children }: AppLayoutProps) {
   const mainRef = useScrollRestoration();
   return (
-    <div className="mx-auto flex h-dvh w-full max-w-screen-xl flex-col overflow-hidden bg-background">
+    <div className="mx-auto flex h-dvh w-full max-w-screen-xl flex-col overflow-hidden">
       <TopBar />
       <main
         ref={mainRef}

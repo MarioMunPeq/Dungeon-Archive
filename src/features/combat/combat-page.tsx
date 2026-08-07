@@ -260,7 +260,7 @@ function TurnChecklist() {
             <div
               key={item.title}
               className={cn(
-                "flex items-center gap-2 rounded-control border border-border bg-surface px-3 py-2 transition-all duration-150",
+                "flex items-center gap-2 rounded-control border border-border-amber bg-surface readout-card px-3 py-2 transition-all duration-150",
                 isUsed && "border-primary/40",
               )}
             >
@@ -346,7 +346,7 @@ function CombatPlayerView({ player }: { player: PlayerReference }) {
 
   return (
     <div className="flex flex-col gap-4">
-      <div className="flex flex-col gap-3 rounded-card border border-border bg-surface p-4">
+      <div className="flex flex-col gap-3 rounded-card border border-border-amber bg-surface readout-card p-4">
         <div className="flex items-center justify-between gap-2">
           <span className="flex items-center gap-2 border-l-2 border-primary pl-2 text-xs font-bold uppercase tracking-wide text-muted-foreground">
             Hit Points
@@ -358,7 +358,7 @@ function CombatPlayerView({ player }: { player: PlayerReference }) {
         </div>
         <div
           className={cn(
-            "flex items-center justify-between gap-4 rounded-stat border border-border bg-card px-4 py-3",
+            "flex items-center justify-between gap-4 rounded-stat border border-border-amber bg-card readout-card px-4 py-3",
             hpLow && "border-destructive/40",
           )}
         >
@@ -472,7 +472,7 @@ function CombatPlayerView({ player }: { player: PlayerReference }) {
           {COMBAT_STATS.map((stat) => (
             <div
               key={stat.key}
-              className="flex flex-col items-center gap-1 rounded-stat border border-border bg-card px-2 py-3"
+              className="flex flex-col items-center gap-1 rounded-stat border border-border-amber bg-card readout-card px-2 py-3"
             >
               <span className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
                 {stat.label}

@@ -337,7 +337,7 @@ function StatCard({
   valueClassName?: string;
 }) {
   return (
-    <div className="flex min-w-0 flex-col items-center gap-1 rounded-stat border border-border bg-card px-2 py-3">
+    <div className="flex min-w-0 flex-col items-center gap-1 rounded-stat border border-border-amber bg-card readout-card px-2 py-3">
       <span className="flex w-full items-center justify-between gap-1">
         <span className="min-w-0 break-words text-xs font-semibold uppercase tracking-wide text-muted-foreground">
           {label}

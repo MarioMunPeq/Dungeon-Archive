@@ -86,13 +86,14 @@ test("renders accent variant", () => {
 
 test("renders outline variant", () => {
   const html = renderToString(createElement(Badge, { variant: "outline" }, "outline"));
-  ok(html.includes("text-muted-foreground"));
-  ok(html.includes("border-border"));
+  ok(html.includes("text-gold"));
+  ok(html.includes("border-gold/25"));
 });
 
 test("renders subtle variant", () => {
   const html = renderToString(createElement(Badge, { variant: "subtle" }, "subtle"));
-  ok(html.includes("bg-muted"));
+  ok(html.includes("bg-gold/10"));
+  ok(html.includes("text-gold"));
 });
 
 // ---------------------------------------------------------------------------

@@ -153,7 +153,7 @@ export function AbilityScores({ scores, onChange }: AbilityScoresProps) {
         return (
           <div
             key={key}
-            className="flex min-w-0 items-center gap-1.5 rounded-card border border-border bg-surface px-2.5 py-2"
+            className="flex min-w-0 items-center gap-1.5 rounded-card border border-border-amber bg-surface readout-card px-2.5 py-2"
           >
             <span className="flex shrink-0 items-center gap-1 text-xs font-semibold uppercase tracking-wide text-muted-foreground">
               {ABILITY_LABELS[key]}
@@ -164,7 +164,7 @@ export function AbilityScores({ scores, onChange }: AbilityScoresProps) {
             <span
               className={cn(
                 "shrink-0 font-mono text-lg font-bold tabular-nums leading-none",
-                modifier > 0 ? "text-success" : modifier < 0 ? "text-destructive" : "text-foreground",
+                modifier > 0 ? "text-success" : modifier < 0 ? "text-destructive" : "text-gold",
               )}
             >
               {formatSigned(modifier)}
