@@ -572,6 +572,21 @@ export function useActivePlayer(): PlayerReference | null {
   });
 }
 
+/**
+ * The player featured on the home screen: the active player when set,
+ * otherwise the first player. Returns a stable object reference so the
+ * subscriber only re-renders when the featured player itself changes.
+ */
+export function usePrimaryPlayer(): PlayerReference | null {
+  return userStore((s) => {
+    if (s.activePlayerId) {
+      const active = s.players.find((p) => p.id === s.activePlayerId);
+      if (active) return active;
+    }
+    return s.players[0] ?? null;
+  });
+}
+
 export function useAdventureEntityIds(): string[] {
   const activeAdventureId = userStore((s) => s.activeAdventureId);
   const adventures = userStore((s) => s.adventures);

@@ -1,6 +1,6 @@
-import { useEffect, useRef, useState } from "react";
+import { memo, useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { Link } from "react-router-dom";
-import { usePlayerReferences, useActivePlayer, userStore } from "@/user-state";
+import { usePlayerReferences, usePrimaryPlayer, userStore } from "@/user-state";
 import type { PlayerReference, PlayerReferenceUpdate } from "@/user-state";
 import { Button, EmptyState, HelpTip, Stepper, useConstrainedPopover } from "@/components/ui";
 import { resolveEntity } from "@/compendium";
@@ -126,7 +126,7 @@ function conditionDefinition(id: string): string {
   return summary || FALLBACK_SUMMARY;
 }
 
-function ConditionChip({
+const ConditionChip = memo(function ConditionChip({
   id,
   active,
   onToggle,
@@ -212,7 +212,7 @@ function ConditionChip({
       )}
     </span>
   );
-}
+});
 
 function PlayerSelector() {
   const players = usePlayerReferences();
@@ -325,8 +325,12 @@ function TurnChecklist() {
 }
 
 function CombatPlayerView({ player }: { player: PlayerReference }) {
-  const update = (data: PlayerReferenceUpdate) =>
-    userStore.getState().updatePlayerReference(player.id, data);
+  const update = useCallback(
+    (data: PlayerReferenceUpdate) => {
+      userStore.getState().updatePlayerReference(player.id, data);
+    },
+    [player.id],
+  );
 
   const hpLow = player.hitPoints.max > 0 && player.hitPoints.current <= player.hitPoints.max / 2;
 
@@ -338,21 +342,32 @@ function CombatPlayerView({ player }: { player: PlayerReference }) {
         )
       : 0;
 
-  const adjustHp = (delta: number) => {
-    const hp =
-      userStore.getState().players.find((p) => p.id === player.id)?.hitPoints ?? player.hitPoints;
-    update({ hitPoints: { current: Math.min(Math.max(hp.current + delta, 0), hp.max) } });
-  };
+  const adjustHp = useCallback(
+    (delta: number) => {
+      const hp =
+        userStore.getState().players.find((p) => p.id === player.id)?.hitPoints ?? player.hitPoints;
+      update({ hitPoints: { current: Math.min(Math.max(hp.current + delta, 0), hp.max) } });
+    },
+    [player.id, player.hitPoints, update],
+  );
 
-  const toggleCondition = (id: string) => {
-    const activeConditions =
-      userStore.getState().players.find((p) => p.id === player.id)?.activeConditions ??
-      player.activeConditions;
-    const active = new Set(activeConditions);
-    if (active.has(id)) active.delete(id);
-    else active.add(id);
-    update({ activeConditions: [...active] });
-  };
+  const toggleCondition = useCallback(
+    (id: string) => {
+      const current = userStore.getState().players.find((p) => p.id === player.id);
+      if (!current) return;
+      const activeConditions = current.activeConditions;
+      const active = new Set(activeConditions);
+      if (active.has(id)) active.delete(id);
+      else active.add(id);
+      update({ activeConditions: [...active] });
+    },
+    [player.id, update],
+  );
+
+  const toggleHandlers = useMemo(
+    () => Object.fromEntries(CONDITION_IDS.map((id) => [id, () => toggleCondition(id)])),
+    [toggleCondition],
+  );
 
   const activeConditions = new Set(player.activeConditions);
 
@@ -453,7 +468,7 @@ function CombatPlayerView({ player }: { player: PlayerReference }) {
               key={id}
               id={id}
               active={activeConditions.has(id)}
-              onToggle={() => toggleCondition(id)}
+              onToggle={toggleHandlers[id]!}
             />
           ))}
         </div>
@@ -501,14 +516,11 @@ function CombatPlayerView({ player }: { player: PlayerReference }) {
 }
 
 export function CombatPage() {
-  const players = usePlayerReferences();
-  const activePlayer = useActivePlayer();
-
-  const player = activePlayer ?? players[0] ?? null;
+  const player = usePrimaryPlayer();
 
   return (
     <div className="flex flex-col gap-3 px-4 py-4">
-      {players.length === 0 ? (
+      {player === null ? (
         <EmptyState
           title="No character yet"
           description="Add your character in the Party tab, then come back here to track hit points during combat."
@@ -533,12 +545,12 @@ export function CombatPage() {
             </Link>
           }
         />
-      ) : player ? (
+      ) : (
         <>
           <PlayerSelector />
           <CombatPlayerView player={player} />
         </>
-      ) : null}
+      )}
     </div>
   );
 }

@@ -1,3 +1,4 @@
+import { memo } from "react";
 import type { ReactNode } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui";
@@ -47,7 +48,7 @@ function BookIcon() {
   );
 }
 
-export function QuickTiles({ sessionCount }: QuickTilesProps) {
+export const QuickTiles = memo(function QuickTiles({ sessionCount }: QuickTilesProps) {
   const navigate = useNavigate();
 
   return (
@@ -89,4 +90,4 @@ export function QuickTiles({ sessionCount }: QuickTilesProps) {
       </div>
     </div>
   );
-}
+});

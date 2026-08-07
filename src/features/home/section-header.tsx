@@ -1,3 +1,4 @@
+import { memo } from "react";
 import { Link } from "react-router-dom";
 
 interface SectionHeaderProps {
@@ -6,7 +7,11 @@ interface SectionHeaderProps {
   readonly chevron?: boolean;
 }
 
-export function SectionHeader({ title, to, chevron = false }: SectionHeaderProps) {
+export const SectionHeader = memo(function SectionHeader({
+  title,
+  to,
+  chevron = false,
+}: SectionHeaderProps) {
   const content = (
     <span className="flex items-center gap-1 border-l-2 border-primary pl-2">
       {title}
@@ -36,4 +41,4 @@ export function SectionHeader({ title, to, chevron = false }: SectionHeaderProps
       {content}
     </h2>
   );
-}
+});

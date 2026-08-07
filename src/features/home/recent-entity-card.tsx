@@ -1,3 +1,4 @@
+import { memo } from "react";
 import { Link } from "react-router-dom";
 import { Badge } from "@/components/ui";
 
@@ -8,7 +9,12 @@ interface RecentEntityCardProps {
   readonly metadata?: string;
 }
 
-export function RecentEntityCard({ name, href, categoryLabel, metadata }: RecentEntityCardProps) {
+export const RecentEntityCard = memo(function RecentEntityCard({
+  name,
+  href,
+  categoryLabel,
+  metadata,
+}: RecentEntityCardProps) {
   return (
     <Link
       to={href}
@@ -21,4 +27,4 @@ export function RecentEntityCard({ name, href, categoryLabel, metadata }: Recent
       {metadata && <span className="truncate text-xs text-muted-foreground">{metadata}</span>}
     </Link>
   );
-}
+});

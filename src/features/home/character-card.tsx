@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { memo, useState } from "react";
 import { Link } from "react-router-dom";
 import { Button, ConfirmDialog } from "@/components/ui";
 import { userStore } from "@/user-state";
@@ -14,7 +14,7 @@ function classLine(player: PlayerReference): string {
     : `Lv ${player.level}`;
 }
 
-export function CharacterCard({ player }: CharacterCardProps) {
+export const CharacterCard = memo(function CharacterCard({ player }: CharacterCardProps) {
   const [confirmingRemove, setConfirmingRemove] = useState(false);
 
   if (player === null) {
@@ -81,4 +81,4 @@ export function CharacterCard({ player }: CharacterCardProps) {
       )}
     </div>
   );
-}
+});

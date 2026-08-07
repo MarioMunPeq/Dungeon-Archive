@@ -26,11 +26,24 @@ export function useScrollRestoration() {
   useLayoutEffect(() => {
     const main = mainRef.current;
     if (!main || !location.key) return;
-    const onScroll = () => {
+    let pending = false;
+    const save = () => {
+      pending = false;
       sessionStorage.setItem(STORAGE_PREFIX + location.key, String(main.scrollTop));
     };
+    const onScroll = () => {
+      if (pending) return;
+      pending = true;
+      requestAnimationFrame(save);
+    };
     main.addEventListener("scroll", onScroll, { passive: true });
-    return () => main.removeEventListener("scroll", onScroll);
+    return () => {
+      main.removeEventListener("scroll", onScroll);
+      if (pending) {
+        pending = false;
+        save();
+      }
+    };
   }, [location.key]);
 
   return mainRef;

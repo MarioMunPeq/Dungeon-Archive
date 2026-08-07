@@ -27,12 +27,22 @@ export interface EntityRef {
   readonly stat?: CardStat;
 }
 
+/**
+ * Compendium data is immutable and loaded once, so a resolved reference is
+ * stable for the lifetime of the app. Caching avoids re-resolving on every
+ * call (which walks category + version maps) and keeps object references
+ * stable across renders, making memoized consumers effective.
+ */
+const entityRefCache = new Map<string, EntityRef>();
+
 export function entityRefFromCanonicalId(canonicalId: string): EntityRef | null {
+  const cached = entityRefCache.get(canonicalId);
+  if (cached) return cached;
   const resolved = resolveEntity(canonicalId);
   if (!resolved) return null;
   const entity = resolved.selected;
   const category = entity.category;
-  return {
+  const ref: EntityRef = {
     canonicalId,
     category,
     name: entity.name,
@@ -41,4 +51,6 @@ export function entityRefFromCanonicalId(canonicalId: string): EntityRef | null 
     href: referenceToUrl(canonicalId),
     stat: entityCardStat(entity),
   };
+  entityRefCache.set(canonicalId, ref);
+  return ref;
 }

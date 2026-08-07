@@ -150,6 +150,10 @@ const GLOSSARY_TERMS: readonly GlossaryEntryData[] = [
   { term: "Spell Save DC", definition: LOREM_B },
 ];
 
+const SORTED_GLOSSARY_TERMS: readonly GlossaryEntryData[] = [...GLOSSARY_TERMS].sort((a, b) =>
+  a.term.localeCompare(b.term),
+);
+
 type RulesTabId = "how-to-play" | "rules" | "glossary";
 
 const TABS: readonly { id: RulesTabId; label: string }[] = [
@@ -331,7 +335,7 @@ function RulesTab({ beginnerMode }: { readonly beginnerMode: boolean }) {
 }
 
 function GlossaryTab() {
-  const terms = [...GLOSSARY_TERMS].sort((a, b) => a.term.localeCompare(b.term));
+  const terms = SORTED_GLOSSARY_TERMS;
   return (
     <div
       id="rules-panel-glossary"

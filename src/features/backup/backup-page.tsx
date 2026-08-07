@@ -21,24 +21,28 @@ import { userStore } from "@/user-state";
 
 type Operation = "signIn" | "signOut" | "upload" | "restore";
 
+const timestampFormatter = new Intl.DateTimeFormat(undefined, {
+  dateStyle: "medium",
+  timeStyle: "short",
+});
+const timeFormatter = new Intl.DateTimeFormat(undefined, {
+  hour: "2-digit",
+  minute: "2-digit",
+});
+const dateFormatter = new Intl.DateTimeFormat(undefined, { dateStyle: "medium" });
+
 function formatTimestamp(at: number): string {
-  return new Intl.DateTimeFormat(undefined, {
-    dateStyle: "medium",
-    timeStyle: "short",
-  }).format(new Date(at));
+  return timestampFormatter.format(new Date(at));
 }
 
 function formatRelative(at: number, now = Date.now()): string {
-  const time = new Intl.DateTimeFormat(undefined, {
-    hour: "2-digit",
-    minute: "2-digit",
-  }).format(new Date(at));
+  const time = timeFormatter.format(new Date(at));
   const startOfToday = new Date(now).setHours(0, 0, 0, 0);
   const startOfDay = new Date(at).setHours(0, 0, 0, 0);
   const days = Math.round((startOfToday - startOfDay) / 86400000);
   if (days === 0) return `Today ${time}`;
   if (days === 1) return `Yesterday ${time}`;
-  return new Intl.DateTimeFormat(undefined, { dateStyle: "medium" }).format(new Date(at));
+  return dateFormatter.format(new Date(at));
 }
 
 function plural(n: number, singular: string, pluralText: string): string {

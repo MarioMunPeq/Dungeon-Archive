@@ -1,6 +1,7 @@
 import type { ReactNode } from "react";
 import { EntityCard } from "@/components/entity";
 import { EmptyResults } from "@/components/search";
+import { VirtualGrid } from "@/components/virtual";
 import type { EntityCardData } from "@/compendium";
 
 interface EntityListProps {
@@ -19,10 +20,13 @@ export function EntityList({
   }
 
   return (
-    <div className="grid grid-cols-2 gap-2">
-      {entities.map((entity) => (
-        <EntityCard key={entity.href} {...entity} />
-      ))}
-    </div>
+    <VirtualGrid
+      items={entities}
+      getItemKey={(entity) => entity.href}
+      renderItem={(entity) => <EntityCard {...entity} />}
+      columnCount={2}
+      gap={8}
+      estimateRowHeight={96}
+    />
   );
 }

@@ -28,7 +28,7 @@ export function SearchPage() {
   const navigate = useNavigate();
 
   const debouncedQuery = useDebouncedValue(query, 200);
-  const rawResults = search(debouncedQuery);
+  const rawResults = useMemo(() => search(debouncedQuery), [debouncedQuery]);
   const results = useMemo(
     () => createSearchResultItems(debouncedQuery, rawResults),
     [debouncedQuery, rawResults],
