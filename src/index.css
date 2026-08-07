@@ -218,6 +218,27 @@
   }
 }
 
+/* Motion pass — route/tab transitions (manual, no View Transitions API).
+   The routed content is keyed by pathname inside main (see
+   route-transition.tsx); on navigation React remounts the wrapper and the new
+   page plays a quick fade+translate. 240ms screen-level per Design DNA rule 41;
+   opacity + translate animate together per rule 43. Reduced motion is already
+   zeroed out by the base-layer media query. */
+@keyframes route-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.route-transition {
+  animation: route-in 240ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
 @layer base {
   *,
   *::before,

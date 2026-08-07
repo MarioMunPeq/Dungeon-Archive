@@ -183,10 +183,10 @@ function ConditionChip({
         aria-pressed={active}
         aria-expanded={open}
         className={cn(
-          "w-full rounded-control border px-3 py-1.5 text-left text-xs font-medium transition-all duration-150 active:scale-95",
+          "w-full rounded-control border px-3 py-1.5 text-left text-xs font-medium transition-all duration-secondary ease-standard active:scale-95",
           active
             ? "border-primary/60 bg-primary/15 text-foreground"
-            : "border-border bg-transparent text-muted-foreground hover:bg-accent hover:text-foreground",
+            : "border-border bg-transparent text-muted-foreground",
         )}
       >
         {name}
@@ -260,7 +260,7 @@ function TurnChecklist() {
             <div
               key={item.title}
               className={cn(
-                "flex items-center gap-2 rounded-control border border-border-amber bg-surface readout-card px-3 py-2 transition-all duration-150",
+                "flex items-center gap-2 rounded-control border border-border-amber bg-surface readout-card px-3 py-2 transition-all duration-secondary ease-standard",
                 isUsed && "border-primary/40",
               )}
             >
@@ -272,7 +272,7 @@ function TurnChecklist() {
               >
                 <span
                   className={cn(
-                    "flex h-4 w-4 shrink-0 items-center justify-center rounded-stat border transition-all duration-150",
+                    "flex h-4 w-4 shrink-0 items-center justify-center rounded-stat border transition-all duration-secondary ease-standard",
                     isUsed
                       ? "border-primary bg-primary text-primary-foreground"
                       : "border-border bg-card text-transparent",
@@ -289,13 +289,22 @@ function TurnChecklist() {
                     <path d="M20 6 9 17l-5-5" />
                   </svg>
                 </span>
-                <span
-                  className={cn(
-                    "text-sm font-medium transition-colors duration-150",
-                    isUsed && "text-muted-foreground line-through",
-                  )}
-                >
-                  {item.title}
+                <span className="relative">
+                  <span
+                    className={cn(
+                      "text-sm font-medium transition-colors duration-secondary ease-standard",
+                      isUsed && "text-muted-foreground",
+                    )}
+                  >
+                    {item.title}
+                  </span>
+                  <span
+                    aria-hidden="true"
+                    className={cn(
+                      "absolute left-0 top-1/2 h-px w-full -translate-y-1/2 origin-left bg-muted-foreground transition-transform duration-secondary ease-standard",
+                      isUsed ? "scale-x-100" : "scale-x-0",
+                    )}
+                  />
                 </span>
               </button>
               <HelpTip label={`More about ${item.title}`}>{item.help}</HelpTip>

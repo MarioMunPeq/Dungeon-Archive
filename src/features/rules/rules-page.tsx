@@ -167,7 +167,7 @@ function RuleSection({
 }) {
   const [open, setOpen] = useState(defaultOpen);
   return (
-    <section className="flex flex-col gap-2 rounded-card border border-border bg-surface px-4 py-3">
+    <section className="flex flex-col rounded-card border border-border bg-surface px-4 py-3">
       <button
         type="button"
         onClick={() => setOpen((v) => !v)}
@@ -187,32 +187,45 @@ function RuleSection({
           stroke="currentColor"
           strokeWidth={2}
           className={cn(
-            "h-4 w-4 shrink-0 text-muted-foreground transition-transform duration-150",
+            "h-4 w-4 shrink-0 text-muted-foreground transition-transform duration-primary ease-emphasized",
             open && "rotate-180",
           )}
         >
           <polyline points="6 9 12 15 18 9" />
         </svg>
       </button>
-      {open && (
-        <div className="flex flex-col gap-2 animate-slide-up">
-          <p className="text-sm leading-relaxed text-muted-foreground">{data.summary}</p>
-          <ul className="flex flex-col gap-1">
-            {data.points.map((point) => (
-              <li key={point} className="flex items-start gap-2 text-sm text-foreground">
-                <span
-                  aria-hidden="true"
-                  className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-muted-foreground"
-                />
-                <span>{point}</span>
-              </li>
-            ))}
-          </ul>
-          {data.help !== undefined && (
-            <HelpTip label={`More about ${data.title}`}>{data.help}</HelpTip>
-          )}
+      <div
+        className={cn(
+          "grid transition-[grid-template-rows] duration-primary ease-emphasized",
+          open ? "grid-rows-[1fr]" : "grid-rows-[0fr]",
+        )}
+        inert={!open}
+      >
+        <div className="min-h-0 overflow-hidden">
+          <div
+            className={cn(
+              "flex flex-col gap-2 pt-2 transition-opacity duration-primary ease-emphasized",
+              open ? "opacity-100" : "opacity-0",
+            )}
+          >
+            <p className="text-sm leading-relaxed text-muted-foreground">{data.summary}</p>
+            <ul className="flex flex-col gap-1">
+              {data.points.map((point) => (
+                <li key={point} className="flex items-start gap-2 text-sm text-foreground">
+                  <span
+                    aria-hidden="true"
+                    className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-muted-foreground"
+                  />
+                  <span>{point}</span>
+                </li>
+              ))}
+            </ul>
+            {data.help !== undefined && (
+              <HelpTip label={`More about ${data.title}`}>{data.help}</HelpTip>
+            )}
+          </div>
         </div>
-      )}
+      </div>
     </section>
   );
 }
