@@ -19,7 +19,7 @@ export const EntityCard = memo(function EntityCard({
   return (
     <Link
       to={href}
-      className="flex flex-col gap-1.5 rounded-card border border-border bg-surface p-3 transition-colors hover:bg-accent active:bg-accent/80"
+      className="flex h-full flex-col gap-1.5 rounded-card border border-border bg-surface p-3 transition-colors hover:bg-accent active:bg-accent/80"
     >
       <span className="flex min-w-0 items-start gap-2">
         <span className="min-w-0 flex-1 text-sm font-medium leading-snug text-foreground">

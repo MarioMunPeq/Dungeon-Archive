@@ -67,7 +67,7 @@ function ScoreControl({
   };
 
   const stepClass = cn(
-    "hitbox-expand flex shrink-0 select-none items-center justify-center rounded-control text-muted-foreground transition-all duration-150 active:scale-90 hover:text-foreground disabled:cursor-default disabled:text-disabled-foreground disabled:active:scale-100",
+    "hitbox-expand relative flex shrink-0 select-none items-center justify-center rounded-control text-muted-foreground transition-all duration-150 active:scale-90 hover:text-foreground disabled:cursor-default disabled:text-disabled-foreground disabled:active:scale-100",
     compact ? "h-5 w-5" : "h-6 w-6",
   );
 

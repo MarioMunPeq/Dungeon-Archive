@@ -86,8 +86,8 @@ export function Stepper({
 
   const controlClass =
     variant === "ghost"
-      ? "hitbox-expand flex h-8 w-8 shrink-0 select-none items-center justify-center rounded-control text-muted-foreground transition-all duration-150 active:scale-90 active:text-foreground disabled:cursor-default disabled:text-disabled-foreground disabled:active:scale-100 hover:text-foreground"
-      : "hitbox-expand flex h-9 w-9 shrink-0 select-none items-center justify-center rounded-control border border-border bg-background text-base font-semibold text-foreground transition-all duration-150 active:scale-90 disabled:cursor-default disabled:bg-disabled disabled:text-disabled-foreground disabled:active:scale-100 hover:border-border-strong";
+      ? "hitbox-expand relative flex h-8 w-8 shrink-0 select-none items-center justify-center rounded-control text-muted-foreground transition-all duration-150 active:scale-90 active:text-foreground disabled:cursor-default disabled:text-disabled-foreground disabled:active:scale-100 hover:text-foreground"
+      : "hitbox-expand relative flex h-9 w-9 shrink-0 select-none items-center justify-center rounded-control border border-border bg-background text-base font-semibold text-foreground transition-all duration-150 active:scale-90 disabled:cursor-default disabled:bg-disabled disabled:text-disabled-foreground disabled:active:scale-100 hover:border-border-strong";
 
   const iconClass = "h-4 w-4";
 

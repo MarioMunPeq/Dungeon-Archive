@@ -394,9 +394,6 @@
     font-family: var(--font-family-display);
   }
 
-  .hitbox-expand {
-    position: relative;
-  }
   .hitbox-expand::before {
     content: "";
     position: absolute;

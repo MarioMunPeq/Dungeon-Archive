@@ -62,7 +62,7 @@ export function ReferencePicker({ title, candidates, onSelect, onClose }: Refere
           type="button"
           onClick={onClose}
           aria-label="Close picker"
-          className="hitbox-expand inline-flex h-8 w-8 items-center justify-center rounded-control text-muted-foreground transition-all duration-150 hover:bg-accent hover:text-foreground active:scale-90 active:bg-accent/80"
+          className="hitbox-expand relative inline-flex h-8 w-8 items-center justify-center rounded-control text-muted-foreground transition-all duration-150 hover:bg-accent hover:text-foreground active:scale-90 active:bg-accent/80"
         >
           <svg
             aria-hidden="true"

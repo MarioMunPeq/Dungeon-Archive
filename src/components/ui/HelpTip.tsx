@@ -23,7 +23,7 @@ export function HelpTip({ label, children, className }: HelpTipProps) {
         onClick={() => setOpen((v) => !v)}
         aria-label={label}
         aria-expanded={open}
-        className="hitbox-expand inline-flex h-4 w-4 select-none items-center justify-center rounded-full bg-info/10 text-xs font-semibold leading-none text-info/80 transition-all duration-150 active:scale-90"
+        className="hitbox-expand relative inline-flex h-4 w-4 select-none items-center justify-center rounded-full bg-info/10 text-xs font-semibold leading-none text-info/80 transition-all duration-150 active:scale-90"
       >
         ?
       </button>

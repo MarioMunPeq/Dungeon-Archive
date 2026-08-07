@@ -60,7 +60,7 @@ export function HomePage() {
   }, [recentIds]);
 
   return (
-    <div className="flex flex-col gap-5 px-4 py-6">
+    <div className="flex min-h-full flex-col justify-between gap-5 px-4 py-6">
       <section className="flex flex-col gap-3">
         <SectionHeader title="Current Character" to="/combat" />
         <CharacterCard player={player} />
@@ -71,7 +71,7 @@ export function HomePage() {
       <section className="flex flex-col gap-3">
         <SectionHeader title="Recently Viewed" chevron />
         {recentCards.length > 0 ? (
-          <div className="-mx-4 flex gap-3 overflow-x-auto px-4 pb-1 no-scrollbar snap-x snap-mandatory">
+          <div className="-mx-4 flex gap-3 overflow-x-auto px-4 pb-1 no-scrollbar snap-x snap-mandatory scroll-pl-4">
             {recentCards.map((card) => (
               <div key={card.href} className="w-32 shrink-0 snap-start">
                 <RecentEntityCard

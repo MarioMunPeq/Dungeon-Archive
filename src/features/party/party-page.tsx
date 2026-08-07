@@ -712,7 +712,7 @@ function PlayerReferenceCard({
             }
             aria-pressed={current}
             className={cn(
-              "hitbox-expand inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-control transition-all duration-150 active:scale-90",
+              "hitbox-expand relative inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-control transition-all duration-150 active:scale-90",
               current
                 ? "text-primary hover:bg-primary/10"
                 : "text-muted-foreground hover:bg-accent hover:text-foreground active:bg-accent/80",
@@ -739,7 +739,7 @@ function PlayerReferenceCard({
             onClick={() => setConfirmRemove(true)}
             title={`Remove ${reference.name}`}
             aria-label={`Remove ${reference.name}`}
-            className="hitbox-expand inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-control text-muted-foreground transition-all duration-150 hover:bg-accent hover:text-foreground active:scale-90 active:bg-accent/80"
+            className="hitbox-expand relative inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-control text-muted-foreground transition-all duration-150 hover:bg-accent hover:text-foreground active:scale-90 active:bg-accent/80"
           >
             <svg
               aria-hidden="true"

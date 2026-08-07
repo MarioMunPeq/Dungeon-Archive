@@ -44,7 +44,7 @@ export const SessionButton = memo(function SessionButton({
       type="button"
       onClick={handleClick}
       title={inSession ? "Unpin from session" : "Pin to session"}
-      className={`hitbox-expand inline-flex items-center justify-center rounded-control p-2 transition-all duration-150 hover:bg-accent active:scale-90 active:bg-accent/80 ${className} ${
+      className={`hitbox-expand relative inline-flex items-center justify-center rounded-control p-2 transition-all duration-150 hover:bg-accent active:scale-90 active:bg-accent/80 ${className} ${
         inSession ? "text-info" : "text-muted-foreground"
       }`}
       aria-label={inSession ? "Unpin from session" : "Pin to session"}
