@@ -4,9 +4,10 @@ import type {
   CombatValues,
   HitPoints,
   PlayerReference,
+  Theme,
   UserState,
 } from "./types";
-import { CURRENT_VERSION } from "./types";
+import { CURRENT_VERSION, DEFAULT_THEME, isTheme } from "./types";
 import { isRegistered } from "../compendium/registry/entity-registry";
 
 function uniqueStrings(arr: unknown, trim = false): string[] {
@@ -238,6 +239,7 @@ export function normalize(
     | "activePlayerId"
     | "beginnerMode"
     | "onboardingComplete"
+    | "theme"
   > & {
     adventures?: Adventure[];
     activeAdventureId?: string | null;
@@ -245,6 +247,7 @@ export function normalize(
     activePlayerId?: string | null;
     beginnerMode?: boolean;
     onboardingComplete?: boolean;
+    theme?: Theme;
   },
 ): UserState {
   const adventures = normalizeAdventures(state.adventures ?? []);
@@ -270,5 +273,6 @@ export function normalize(
     activePlayerId,
     beginnerMode: state.beginnerMode === true,
     onboardingComplete: state.onboardingComplete === true,
+    theme: isTheme(state.theme) ? state.theme : DEFAULT_THEME,
   };
 }

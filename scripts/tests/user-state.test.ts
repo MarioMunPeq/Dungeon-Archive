@@ -77,11 +77,11 @@ test("STORAGE_KEY equals dungeon:userState:v1", () => {
   strictEqual(STORAGE_KEY, "dungeon:userState:v1");
 });
 
-test("CURRENT_VERSION equals 11", () => {
-  strictEqual(CURRENT_VERSION, 11);
+test("CURRENT_VERSION equals 12", () => {
+  strictEqual(CURRENT_VERSION, 12);
 });
 
-test("createDefaultState returns valid v11 state", () => {
+test("createDefaultState returns valid v12 state", () => {
   const def = createDefaultState();
   strictEqual(def.version, CURRENT_VERSION);
   deepStrictEqual(def.favorites, []);
@@ -94,6 +94,7 @@ test("createDefaultState returns valid v11 state", () => {
   strictEqual(def.activePlayerId, null);
   strictEqual(def.beginnerMode, true);
   strictEqual(def.onboardingComplete, false);
+  strictEqual(def.theme, "jade");
 });
 
 // ---------------------------------------------------------------------------
@@ -800,6 +801,7 @@ test("favoritesSet rebuilt on _replace", () => {
     activePlayerId: null,
     beginnerMode: true,
     onboardingComplete: false,
+    theme: "jade",
   });
   const state = userStore.getState();
   strictEqual(state.favoritesSet.has("x"), true);
@@ -876,6 +878,194 @@ test("hydrate() loads persisted beginnerMode", () => {
   localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
   hydrate();
   strictEqual(userStore.getState().beginnerMode, false);
+});
+
+// ---------------------------------------------------------------------------
+// Theme
+// ---------------------------------------------------------------------------
+console.log("\nuser-state \u2014 theme\n");
+
+test("theme defaults to jade in default state", () => {
+  strictEqual(createDefaultState().theme, "jade");
+});
+
+test("normalize defaults theme to jade when missing", () => {
+  const result = normalize(createDefaultState());
+  strictEqual(result.theme, "jade");
+});
+
+test("normalize preserves a non-default theme", () => {
+  const result = normalize({ ...createDefaultState(), theme: "amber" });
+  strictEqual(result.theme, "amber");
+});
+
+test("normalize falls back to jade for an invalid theme", () => {
+  const result = normalize({ ...createDefaultState(), theme: "red" as never });
+  strictEqual(result.theme, "jade");
+});
+
+test("migrate defaults theme to jade for a v11 state", () => {
+  const input = {
+    version: 11,
+    favorites: [],
+    recentEntities: [],
+    recentSearches: [],
+    session: [],
+    adventures: [],
+    activeAdventureId: null,
+    players: [],
+    activePlayerId: null,
+    beginnerMode: true,
+    onboardingComplete: true,
+  };
+  const result = migrate(input);
+  strictEqual(result.version, CURRENT_VERSION);
+  strictEqual(result.theme, "jade");
+});
+
+test("migrate preserves a persisted theme", () => {
+  const input = {
+    version: 11,
+    favorites: [],
+    recentEntities: [],
+    recentSearches: [],
+    session: [],
+    adventures: [],
+    activeAdventureId: null,
+    players: [],
+    activePlayerId: null,
+    beginnerMode: true,
+    onboardingComplete: true,
+    theme: "teal",
+  };
+  const result = migrate(input);
+  strictEqual(result.theme, "teal");
+});
+
+test("migrate rejects an invalid theme value", () => {
+  const input = {
+    version: 11,
+    favorites: [],
+    recentEntities: [],
+    recentSearches: [],
+    session: [],
+    adventures: [],
+    activeAdventureId: null,
+    players: [],
+    activePlayerId: null,
+    beginnerMode: true,
+    onboardingComplete: true,
+    theme: "neon",
+  };
+  const result = migrate(input);
+  strictEqual(result.theme, "jade");
+});
+
+test("setTheme updates the theme", () => {
+  resetMock();
+  resetStore();
+  userStore.getState().setTheme("teal");
+  strictEqual(userStore.getState().theme, "teal");
+  userStore.getState().setTheme("jade");
+  strictEqual(userStore.getState().theme, "jade");
+});
+
+test("setTheme ignores invalid themes", () => {
+  resetMock();
+  resetStore();
+  userStore.getState().setTheme("neon" as never);
+  strictEqual(userStore.getState().theme, "jade");
+});
+
+test("setTheme persists to localStorage", () => {
+  resetMock();
+  resetStore();
+  userStore.getState().setTheme("amber");
+  const stored = localStorage.getItem(STORAGE_KEY);
+  if (stored) {
+    const parsed = JSON.parse(stored);
+    strictEqual(parsed.theme, "amber");
+  } else {
+    strictEqual(userStore.getState().theme, "amber");
+  }
+});
+
+test("hydrate() loads persisted theme", () => {
+  resetMock();
+  resetStore();
+  const data = {
+    version: CURRENT_VERSION,
+    favorites: [],
+    recentEntities: [],
+    recentSearches: [],
+    session: [],
+    adventures: [],
+    activeAdventureId: null,
+    players: [],
+    activePlayerId: null,
+    beginnerMode: true,
+    onboardingComplete: false,
+    theme: "teal",
+  };
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+  hydrate();
+  strictEqual(userStore.getState().theme, "teal");
+});
+
+test("hydrate() falls back to jade for an invalid persisted theme", () => {
+  resetMock();
+  resetStore();
+  const data = {
+    version: CURRENT_VERSION,
+    favorites: [],
+    recentEntities: [],
+    recentSearches: [],
+    session: [],
+    adventures: [],
+    activeAdventureId: null,
+    players: [],
+    activePlayerId: null,
+    beginnerMode: true,
+    onboardingComplete: false,
+    theme: "neon",
+  };
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+  hydrate();
+  strictEqual(userStore.getState().theme, "jade");
+});
+
+test("_reset restores the default theme", () => {
+  resetMock();
+  resetStore();
+  userStore.getState().setTheme("amber");
+  userStore.getState()._reset();
+  strictEqual(userStore.getState().theme, "jade");
+});
+
+test("_replace carries the theme field", () => {
+  resetMock();
+  resetStore();
+  userStore.getState()._replace({
+    version: CURRENT_VERSION,
+    favorites: [],
+    recentEntities: [],
+    recentSearches: [],
+    session: [],
+    adventures: [],
+    activeAdventureId: null,
+    players: [],
+    activePlayerId: null,
+    beginnerMode: true,
+    onboardingComplete: false,
+    theme: "teal",
+  });
+  strictEqual(userStore.getState().theme, "teal");
+});
+
+test("toUserState includes the theme field", async () => {
+  const { toUserState } = await import("../../src/user-state/serialization");
+  const serialized = toUserState({ ...createDefaultState(), theme: "amber" });
+  strictEqual(serialized.theme, "amber");
 });
 
 // ---------------------------------------------------------------------------
@@ -1230,6 +1420,7 @@ test("safe replace does nothing when state is identical", () => {
     activePlayerId: null,
     beginnerMode: true,
     onboardingComplete: false,
+    theme: "jade",
   });
   userStore.getState()._replace({
     version: CURRENT_VERSION,
@@ -1243,6 +1434,7 @@ test("safe replace does nothing when state is identical", () => {
     activePlayerId: null,
     beginnerMode: true,
     onboardingComplete: false,
+    theme: "jade",
   });
   const state2 = userStore.getState();
   deepStrictEqual(state2.favorites, ["a", "b"]);
@@ -1457,6 +1649,7 @@ test("sessionSet stays in sync after _replace", () => {
     activePlayerId: null,
     beginnerMode: true,
     onboardingComplete: false,
+    theme: "jade",
   });
   const state = userStore.getState();
   deepStrictEqual(state.session, ["x", "y"]);
@@ -1712,6 +1905,7 @@ test("_replace updates session when content differs", () => {
     activePlayerId: null,
     beginnerMode: true,
     onboardingComplete: false,
+    theme: "jade",
   });
   deepStrictEqual(userStore.getState().session, ["a", "b"]);
 });
@@ -2016,6 +2210,7 @@ test("adventureSet rebuilt on _replace", () => {
     activePlayerId: null,
     beginnerMode: true,
     onboardingComplete: false,
+    theme: "jade",
   });
   const state = userStore.getState();
   strictEqual(state.adventures.length, 1);
@@ -2379,6 +2574,7 @@ test("_replace updates adventures when content differs", () => {
     activePlayerId: null,
     beginnerMode: true,
     onboardingComplete: false,
+    theme: "jade",
   });
   const state = userStore.getState();
   strictEqual(state.adventures.length, 1);
@@ -2413,6 +2609,7 @@ test("adventuresEqual prevents unnecessary _replace on identical state", () => {
     activePlayerId: null,
     beginnerMode: true,
     onboardingComplete: false,
+    theme: "jade",
   };
   userStore.getState()._replace(state);
   userStore.getState()._replace(state);
@@ -3038,6 +3235,7 @@ test("_replace updates players when content differs", () => {
     activePlayerId: null,
     beginnerMode: true,
     onboardingComplete: false,
+    theme: "jade",
   });
   const state = userStore.getState();
   strictEqual(state.players.length, 1);

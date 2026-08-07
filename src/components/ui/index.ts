@@ -12,6 +12,7 @@ export {
   CloudCheckIcon,
   CloudWarningIcon,
   SyncIcon,
+  PaletteIcon,
 } from "./icons";
 export { Button } from "./Button";
 export { ConfirmDialog } from "./ConfirmDialog";

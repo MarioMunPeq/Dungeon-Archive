@@ -6,9 +6,10 @@ import type {
   CombatValues,
   HitPoints,
   PlayerReference,
+  Theme,
   UserState,
 } from "./types";
-import { STORAGE_KEY, CURRENT_VERSION } from "./types";
+import { STORAGE_KEY, CURRENT_VERSION, DEFAULT_THEME, isTheme } from "./types";
 import { read, write } from "./persistence";
 import { migrate } from "./migrations";
 import { normalize, validateIds } from "./normalize";
@@ -54,6 +55,7 @@ interface UserActions {
   clearSession: () => void;
   setBeginnerMode: (enabled: boolean) => void;
   completeOnboarding: () => void;
+  setTheme: (theme: Theme) => void;
   _replace: (state: UserState) => void;
   _reset: () => void;
 }
@@ -183,6 +185,7 @@ export const userStore = create<UserStore>((set, get) => ({
   activePlayerId: null,
   beginnerMode: true,
   onboardingComplete: false,
+  theme: DEFAULT_THEME,
   _hasHydrated: false,
 
   toggleFavorite: (canonicalId) => {
@@ -241,6 +244,12 @@ export const userStore = create<UserStore>((set, get) => ({
 
   completeOnboarding: () => {
     set({ onboardingComplete: true });
+    schedulePersist(get);
+  },
+
+  setTheme: (theme) => {
+    if (!isTheme(theme)) return;
+    set({ theme });
     schedulePersist(get);
   },
 
@@ -511,6 +520,7 @@ export const userStore = create<UserStore>((set, get) => ({
       activePlayerId: state.activePlayerId,
       beginnerMode: state.beginnerMode,
       onboardingComplete: state.onboardingComplete,
+      theme: isTheme(state.theme) ? state.theme : DEFAULT_THEME,
     });
   },
 
@@ -530,6 +540,7 @@ export const userStore = create<UserStore>((set, get) => ({
       activePlayerId: null,
       beginnerMode: true,
       onboardingComplete: false,
+      theme: DEFAULT_THEME,
       _hasHydrated: false,
     });
   },
@@ -603,6 +614,10 @@ export function useBeginnerMode(): boolean {
   return userStore((s) => s.beginnerMode);
 }
 
+export function useTheme(): Theme {
+  return userStore((s) => s.theme);
+}
+
 function processPersistedState(state: UserState): UserState {
   const validated: UserState = {
     version: state.version,
@@ -616,6 +631,7 @@ function processPersistedState(state: UserState): UserState {
     activePlayerId: state.activePlayerId,
     beginnerMode: state.beginnerMode === true,
     onboardingComplete: state.onboardingComplete === true,
+    theme: isTheme(state.theme) ? state.theme : DEFAULT_THEME,
   };
   return normalize(validated);
 }
@@ -659,7 +675,8 @@ function replaceState(state: UserState): void {
     playersEqual(current.players, state.players) &&
     current.activePlayerId === state.activePlayerId &&
     current.beginnerMode === state.beginnerMode &&
-    current.onboardingComplete === state.onboardingComplete
+    current.onboardingComplete === state.onboardingComplete &&
+    current.theme === state.theme
   ) {
     return;
   }

@@ -1,5 +1,5 @@
-import type { Adventure, PlayerReference, UserState } from "./types";
-import { CURRENT_VERSION, createDefaultState } from "./types";
+import type { Adventure, PlayerReference, Theme, UserState } from "./types";
+import { CURRENT_VERSION, DEFAULT_THEME, createDefaultState, isTheme } from "./types";
 
 function legacyMemberToPlayerReference(raw: unknown): Record<string, unknown> | null {
   if (!raw || typeof raw !== "object") return null;
@@ -223,5 +223,6 @@ export function migrate(raw: unknown): UserState {
     beginnerMode: typeof result.beginnerMode === "boolean" ? result.beginnerMode : true,
     onboardingComplete:
       typeof result.onboardingComplete === "boolean" ? result.onboardingComplete : false,
+    theme: isTheme(result.theme) ? (result.theme as Theme) : DEFAULT_THEME,
   };
 }

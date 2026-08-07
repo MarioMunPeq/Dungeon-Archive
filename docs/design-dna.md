@@ -14,11 +14,11 @@
 
 4. Base background: warm near-black (`#12100E`), never cool/blue-tinted black.
 5. Card background: `#1C1917` (flat) for ordinary content cards; protagonist stat/readout cards get a subtle radial-gradient depth treatment instead of flat color.
-6. Primary accent (amber, `#D97B29`) is reserved for interactive elements ONLY: buttons, toggles, active nav tab, focus states, active/selected states. Never decorative.
-7. Secondary accent (muted gold, `#C9A26B`) is for non-interactive secondary/metadata content: badges (level/CR/type), inactive nav icons, zero-value modifiers. Never used for primary interactive elements.
+6. Primary accent (themeable, default Jade `#3AB492`; Amber `#D97B29` and Arcane Teal `#4A90B8` are selectable) is reserved for interactive elements ONLY: buttons, toggles, active nav tab, focus states, active/selected states. Never decorative.
+7. Secondary accent (themeable, default Jade `#7FBFAA`; Amber `#C9A26B`; Arcane Teal `#86AFC7`) is for non-interactive secondary/metadata content: badges (level/CR/type), inactive nav icons, zero-value modifiers. Never used for primary interactive elements.
 8. Modifier/signed-value color coding is fixed: positive = success green, negative = danger red, zero = muted gold. This exact three-way rule applies everywhere a signed modifier renders.
 9. Text hierarchy: primary text `#F5F1EC`, secondary `#A39C93`, muted `#6B645C`. Never introduce a fourth text tone without updating this document.
-10. Borders on ordinary cards: neutral gray hairline (`rgba(255,255,255,0.08)`-ish). Borders on protagonist stat cards: amber-tinted (`rgba(217,123,41,0.15)`-ish). This distinction is deliberate — don't apply the amber tint everywhere or it stops meaning anything.
+10. Borders on ordinary cards: neutral gray hairline (`rgba(255,255,255,0.08)`-ish). Borders on protagonist stat cards: accent-tinted (`var(--theme-accent-border)`, the active theme's accent at ~15%). This distinction is deliberate — don't apply the accent tint everywhere or it stops meaning anything.
 11. The app shell background (root level, once) carries a subtle radial vignette + diagonal grain texture, pure CSS, no image assets. Never re-implement this per-screen.
 12. Never introduce a new color without adding it to this document and stating its exact usage rule.
 
@@ -83,3 +83,4 @@
 48. No gradients/decoration beyond what's explicitly defined in this document (the protagonist-card gradient, the app-shell vignette+grain, the section-header left border) — don't add a fourth decorative pattern without updating this document first.
 49. Every future visual prompt should be checked against this document before being written — if a new decision contradicts a rule here, update this document explicitly rather than silently diverging.
 50. This document should be revised (not silently ignored) whenever a genuinely new pattern is needed — treat additions as deliberate amendments, not exceptions.
+51. Accent theme system (added with the theme picker pass): only the primary + secondary accent pair vary per theme — default Jade `#3AB492`/`#7FBFAA`, Amber `#D97B29`/`#C9A26B`, Arcane Teal `#4A90B8`/`#86AFC7` — selectable from the top-bar palette popover and persisted in user state. Backgrounds, surfaces, typography, radius, and the fixed success/danger/neutral modifier colors never change. Theme swaps cross-fade at ~220ms (under the rule 41 ceiling) via a temporary whole-tree transition; the stored theme applies instantly on first load, and the reduced-motion block zeroes the cross-fade.

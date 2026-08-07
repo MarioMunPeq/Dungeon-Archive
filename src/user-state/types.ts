@@ -61,6 +61,8 @@ export interface Adventure {
   readonly archived: boolean;
 }
 
+export type Theme = "jade" | "amber" | "teal";
+
 export interface UserState {
   readonly version: number;
   readonly favorites: string[];
@@ -73,10 +75,17 @@ export interface UserState {
   readonly activePlayerId: string | null;
   readonly beginnerMode: boolean;
   readonly onboardingComplete: boolean;
+  readonly theme: Theme;
 }
 
 export const STORAGE_KEY = "dungeon:userState:v1";
-export const CURRENT_VERSION = 11;
+export const CURRENT_VERSION = 12;
+export const DEFAULT_THEME: Theme = "jade";
+export const THEMES: readonly Theme[] = ["jade", "amber", "teal"];
+
+export function isTheme(value: unknown): value is Theme {
+  return value === "jade" || value === "amber" || value === "teal";
+}
 
 export function createDefaultState(): UserState {
   return {
@@ -91,5 +100,6 @@ export function createDefaultState(): UserState {
     activePlayerId: null,
     beginnerMode: true,
     onboardingComplete: false,
+    theme: DEFAULT_THEME,
   };
 }

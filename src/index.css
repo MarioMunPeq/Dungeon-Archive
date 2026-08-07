@@ -1,13 +1,15 @@
 @import "tailwindcss";
 
 @theme {
-  /* Color tokens — warm dark-first semantic system */
-  --color-primary: #d97b29;
-  --color-primary-foreground: #221302;
-  --color-primary-hover: #e08a3f;
-  --color-primary-active: #c26a22;
-  --color-primary-muted: #e0924a;
-  --color-gold: #c9a26b;
+  /* Color tokens — warm dark-first semantic system.
+     The accent + secondary-accent pair (primary family + gold) are themed via
+     --theme-accent-* on :root / [data-theme]; everything else stays fixed. */
+  --color-primary: var(--theme-accent);
+  --color-primary-hover: var(--theme-accent-hover);
+  --color-primary-active: var(--theme-accent-active);
+  --color-primary-muted: var(--theme-accent-muted);
+  --color-primary-foreground: var(--theme-accent-foreground);
+  --color-gold: var(--theme-accent-secondary);
 
   --color-background: #12100e;
   --color-surface: #1c1917;
@@ -20,7 +22,7 @@
   --color-foreground-subtle: #a39c93;
   --color-border: rgb(245 241 236 / 0.09);
   --color-border-strong: #3b342c;
-  --color-border-amber: rgb(217 123 41 / 0.15);
+  --color-border-amber: var(--theme-accent-border);
   --color-input: #26221e;
   --color-accent: #26221e;
   --color-accent-foreground: #f5f1ec;
@@ -33,10 +35,15 @@
   --color-warning-foreground: #331f00;
   --color-info: #38bdf8;
 
-  --color-focus: #e6a15c;
+  --color-focus: var(--theme-accent-focus);
   --color-disabled: #1c1917;
   --color-disabled-foreground: #4d4842;
   --color-overlay: rgb(0 0 0 / 0.6);
+
+  /* Theme swatches — single source of truth for the accent selector. */
+  --color-theme-jade: #3ab492;
+  --color-theme-amber: #d97b29;
+  --color-theme-teal: #4a90b8;
 
   /* Typography scale */
   --font-sans: "Inter Variable", ui-sans-serif, system-ui, -apple-system, sans-serif;
@@ -253,6 +260,44 @@
     accent-color: var(--color-primary);
   }
 
+  /* Accent theming — only the accent + secondary-accent pair vary per theme
+     (Jade default, Amber, Arcane Teal). Backgrounds, surfaces, typography,
+     radius, and the success/danger/neutral modifier rules stay fixed (Design
+     DNA rules 6-10). Derived hover/active/muted shades keep the same tone
+     progression as the historical amber ramp. */
+  :root {
+    --theme-accent: #3ab492;
+    --theme-accent-hover: #4ec2a3;
+    --theme-accent-active: #2fa483;
+    --theme-accent-muted: #5ec6a9;
+    --theme-accent-foreground: #06231c;
+    --theme-accent-secondary: #7fbfaa;
+    --theme-accent-border: rgb(58 180 146 / 0.15);
+    --theme-accent-focus: #63c7ac;
+  }
+
+  :root[data-theme="amber"] {
+    --theme-accent: #d97b29;
+    --theme-accent-hover: #e08a3f;
+    --theme-accent-active: #c26a22;
+    --theme-accent-muted: #e0924a;
+    --theme-accent-foreground: #221302;
+    --theme-accent-secondary: #c9a26b;
+    --theme-accent-border: rgb(217 123 41 / 0.15);
+    --theme-accent-focus: #e6a15c;
+  }
+
+  :root[data-theme="teal"] {
+    --theme-accent: #4a90b8;
+    --theme-accent-hover: #5ca1c7;
+    --theme-accent-active: #3e7fa3;
+    --theme-accent-muted: #6faaca;
+    --theme-accent-foreground: #081b26;
+    --theme-accent-secondary: #86afc7;
+    --theme-accent-border: rgb(74 144 184 / 0.15);
+    --theme-accent-focus: #6faacc;
+  }
+
   html {
     -webkit-text-size-adjust: 100%;
     -webkit-tap-highlight-color: transparent;
@@ -293,13 +338,27 @@
   }
 
   ::selection {
-    background: rgb(217 123 41 / 0.35);
+    background: color-mix(in srgb, var(--theme-accent) 35%, transparent);
     color: var(--color-foreground);
   }
 
   :focus-visible {
     outline: 2px solid var(--color-focus);
     outline-offset: 2px;
+  }
+
+  /* Theme repaint — a cross-fade for the accent + secondary-accent pair on the
+     whole tree. Applied only while a theme selection is being repainted (see
+     useApplyTheme); instant on first load. 220ms is comfortably under the 300ms
+     transition ceiling of Design DNA rule 41. Reduced motion is zeroed by the
+     media query below (0.01ms !important wins over this rule). */
+  .theme-switching,
+  .theme-switching *,
+  .theme-switching *::before,
+  .theme-switching *::after {
+    transition-property: color, background-color, border-color, box-shadow, fill, stroke;
+    transition-duration: 220ms;
+    transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
   }
 
   @media (prefers-reduced-motion: reduce) {

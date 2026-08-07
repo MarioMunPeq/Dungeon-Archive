@@ -8,12 +8,7 @@ interface RecentEntityCardProps {
   readonly metadata?: string;
 }
 
-export function RecentEntityCard({
-  name,
-  href,
-  categoryLabel,
-  metadata,
-}: RecentEntityCardProps) {
+export function RecentEntityCard({ name, href, categoryLabel, metadata }: RecentEntityCardProps) {
   return (
     <Link
       to={href}

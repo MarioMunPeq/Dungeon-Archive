@@ -1,5 +1,6 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import { Button, ChevronLeftIcon, Display } from "@/components/ui";
+import { ThemePicker } from "@/features/theme/theme-picker";
 import { useCloudStatus } from "@/sync";
 import { getTopBarState } from "./top-bar-route";
 import type { TopBarState } from "./top-bar-route";
@@ -39,21 +40,24 @@ function TopBarContent({ state }: { state: TopBarState }) {
         )}
         <Display className="truncate text-lg font-semibold">{state.title}</Display>
       </div>
-      {!status.disabled && (
-        <Button
-          variant="ghost"
-          size="md"
-          className="px-2"
-          aria-label="Cloud Backup"
-          onClick={() => navigate("/backup")}
-        >
-          <CloudStatusIcon
-            signedIn={status.signedIn}
-            syncing={status.syncing}
-            failed={status.failed}
-          />
-        </Button>
-      )}
+      <div className="flex shrink-0 items-center gap-1">
+        <ThemePicker />
+        {!status.disabled && (
+          <Button
+            variant="ghost"
+            size="md"
+            className="px-2"
+            aria-label="Cloud Backup"
+            onClick={() => navigate("/backup")}
+          >
+            <CloudStatusIcon
+              signedIn={status.signedIn}
+              syncing={status.syncing}
+              failed={status.failed}
+            />
+          </Button>
+        )}
+      </div>
     </header>
   );
 }

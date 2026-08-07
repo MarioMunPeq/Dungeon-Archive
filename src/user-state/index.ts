@@ -21,6 +21,7 @@ export {
   usePlayerReferences,
   useOnboardingComplete,
   useBeginnerMode,
+  useTheme,
 } from "./store";
 export type { UserStore, PlayerReferenceUpdate } from "./store";
 export type {
@@ -30,8 +31,16 @@ export type {
   AbilityScores,
   HitPoints,
   CombatValues,
+  Theme,
 } from "./types";
-export { STORAGE_KEY, CURRENT_VERSION, abilityModifier } from "./types";
+export {
+  STORAGE_KEY,
+  CURRENT_VERSION,
+  DEFAULT_THEME,
+  THEMES,
+  isTheme,
+  abilityModifier,
+} from "./types";
 export { normalize } from "./normalize";
 export { toUserState } from "./serialization";
 export { migrate } from "./migrations";

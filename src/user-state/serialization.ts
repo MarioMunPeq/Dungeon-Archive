@@ -19,5 +19,6 @@ export function toUserState(state: UserState): UserState {
     activePlayerId: state.activePlayerId,
     beginnerMode: state.beginnerMode,
     onboardingComplete: state.onboardingComplete,
+    theme: state.theme,
   };
 }
