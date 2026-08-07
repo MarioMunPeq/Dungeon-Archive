@@ -14,8 +14,10 @@ import {
 } from "@/compendium";
 import type { CategorySort } from "@/compendium";
 import { useDebouncedValue } from "@/hooks/use-debounced-value";
+import { useCompendiumLoaded } from "@/hooks/use-compendium-loaded";
 import { FilterBar } from "../components/filter-bar";
 import { EntityList } from "../components/entity-list";
+import { CategorySkeleton } from "../components/category-skeleton";
 import { SearchInput } from "@/components/search";
 import { Button } from "@/components/ui/Button";
 import { SelectField } from "@/components/ui/SelectField";
@@ -27,6 +29,7 @@ interface CategoryPageProps {
 export function CategoryPage({ category }: CategoryPageProps) {
   const [searchParams, setSearchParams] = useSearchParams();
   const detailMatch = useMatch(`/${category}/:canonicalId`);
+  const isLoaded = useCompendiumLoaded();
 
   const allEntities = useMemo(() => getEntitiesForCategory(category), [category]);
   const filterDefs = useMemo(() => buildFilterDefs(category, allEntities), [category, allEntities]);
@@ -95,6 +98,10 @@ export function CategoryPage({ category }: CategoryPageProps) {
 
   const label = categoryLabel(category);
   const labelLower = categoryLabelSingular(category).toLowerCase();
+
+  if (!isLoaded) {
+    return <CategorySkeleton />;
+  }
 
   return (
     <div>

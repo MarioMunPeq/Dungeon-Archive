@@ -41,7 +41,6 @@ function toMap<T extends { id: string }>(items: readonly T[]): Map<string, T> {
 
 export async function loadCompendium(): Promise<void> {
   if (state.initialized) return;
-
   const [
     spells,
     conditions,
@@ -90,6 +89,8 @@ export async function loadCompendium(): Promise<void> {
     initialized: true,
   };
 
+  notifyLoaded();
+
   buildRegistry([
     ...spellList,
     ...conditionList,
@@ -117,3 +118,21 @@ function setSearchIndex(data: SearchIndexEntry[]): void {
 }
 
 export { searchIndex, searchIndexLower };
+
+export type LoadedListener = () => void;
+const loadedListeners = new Set<LoadedListener>();
+
+function notifyLoaded(): void {
+  for (const listener of loadedListeners) listener();
+}
+
+export function subscribeCompendiumLoaded(listener: LoadedListener): () => void {
+  loadedListeners.add(listener);
+  return () => {
+    loadedListeners.delete(listener);
+  };
+}
+
+export function isCompendiumLoaded(): boolean {
+  return state.initialized;
+}

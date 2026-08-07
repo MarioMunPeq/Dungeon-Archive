@@ -36,7 +36,7 @@ export function getTopBarState(pathname: string): TopBarState {
   const segments = pathname.split("/").filter(Boolean);
 
   if (segments.length === 1 && CATEGORY_REGISTRY[segments[0] as EntityCategory]) {
-    return { title: categoryLabel(segments[0]!) };
+    return { title: categoryLabel(segments[0]!), backTo: ROUTES.SEARCH };
   }
 
   if (segments.length === 2 && CATEGORY_REGISTRY[segments[0] as EntityCategory]) {

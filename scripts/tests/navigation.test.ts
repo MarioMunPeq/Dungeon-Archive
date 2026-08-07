@@ -47,16 +47,16 @@ async function main() {
     strictEqual(state.backTo, undefined);
   });
 
-  test("category root shows plural title without back", () => {
+  test("category root shows plural title and back to search", () => {
     const state = getTopBarState("/spell");
     strictEqual(state.title, "Spells");
-    strictEqual(state.backTo, undefined);
+    strictEqual(state.backTo, "/search");
   });
 
-  test("monster category root shows plural title", () => {
+  test("monster category root shows plural title and back to search", () => {
     const state = getTopBarState("/monster");
     strictEqual(state.title, "Monsters");
-    strictEqual(state.backTo, undefined);
+    strictEqual(state.backTo, "/search");
   });
 
   test("category detail shows entity name and back to category", () => {

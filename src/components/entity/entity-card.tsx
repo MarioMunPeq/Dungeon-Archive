@@ -19,29 +19,27 @@ export const EntityCard = memo(function EntityCard({
   return (
     <Link
       to={href}
-      className="flex flex-col gap-1 rounded-card border border-border bg-surface p-4 transition-colors hover:bg-accent active:bg-accent/80"
+      className="flex flex-col gap-1.5 rounded-card border border-border bg-surface p-3 transition-colors hover:bg-accent active:bg-accent/80"
     >
-      <div className="flex items-center justify-between gap-2">
-        <span className="truncate text-base font-medium text-foreground">{name}</span>
-        <span className="flex shrink-0 items-center gap-2">
-          {stat && <EntityCardStat stat={stat} />}
-          <span aria-hidden className="text-xl leading-none text-muted-foreground">
-            ›
-          </span>
+      <span className="flex min-w-0 items-start gap-2">
+        <span className="min-w-0 flex-1 text-sm font-medium leading-snug text-foreground">
+          {name}
         </span>
-      </div>
-      <div className="flex min-w-0 items-center gap-2">
+        <span aria-hidden className="shrink-0 text-lg leading-none text-muted-foreground">
+          ›
+        </span>
+      </span>
+      <span className="flex flex-wrap items-center gap-x-1.5 gap-y-1">
         <Badge variant={badgeVariantForCategory(category)}>{categoryLabel}</Badge>
-        {metadata ? (
-          <span className="truncate text-xs text-muted-foreground">{metadata}</span>
-        ) : null}
+        {stat && <EntityCardStat stat={stat} />}
         {versionCount != null && versionCount > 1 && (
           <span className="shrink-0 text-xs text-foreground-subtle">{versionCount} versions</span>
         )}
-      </div>
-      {!metadata?.includes(formatSource(source)) && (
-        <span className="text-xs text-foreground-subtle">{formatSource(source)}</span>
-      )}
+      </span>
+      <span className="flex flex-wrap items-center gap-x-1.5 text-xs leading-snug text-foreground-subtle">
+        {metadata && <span>{metadata}</span>}
+        {!metadata?.includes(formatSource(source)) && <span>{formatSource(source)}</span>}
+      </span>
     </Link>
   );
 });
