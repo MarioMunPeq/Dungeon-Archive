@@ -1,4 +1,5 @@
 import { doc, getDoc, setDoc } from "firebase/firestore";
+import type { Firestore } from "firebase/firestore";
 import type { CloudGateway, CloudSnapshot, CloudUser } from "./types";
 import { getAuthInstance } from "../lib/firebase/auth";
 import { getFirestoreInstance } from "../lib/firebase/firestore";
@@ -7,6 +8,18 @@ import type { AuthUser } from "../lib/firebase/auth-service";
 
 function toCloudUser(user: AuthUser): CloudUser {
   return { uid: user.uid, displayName: user.displayName, email: user.email };
+}
+
+const BACKUP_SUBCOLLECTION = "backup";
+const BACKUP_DOCUMENT_ID = "current";
+
+/**
+ * Reference to the user's cloud backup document. `users/{uid}/backup/current`
+ * is a valid document reference (collection/document/sub-collection/document),
+ * unlike the old 3-segment `users/{uid}/backup` which the SDK rejects.
+ */
+function backupRef(db: Firestore, uid: string) {
+  return doc(db, "users", uid, BACKUP_SUBCOLLECTION, BACKUP_DOCUMENT_ID);
 }
 
 export function createFirebaseGateway(): CloudGateway {
@@ -101,7 +114,7 @@ export function createFirebaseGateway(): CloudGateway {
         throw new Error("Firebase is not configured");
       }
       await logTokenHealth();
-      const ref = doc(db, "users", requireUid(), "backup");
+      const ref = backupRef(db, requireUid());
       console.log("[cloud] fetchSnapshot: reading document", ref.path, "-", describeAuthState());
       try {
         const snapshot = await getDoc(ref);
@@ -120,7 +133,7 @@ export function createFirebaseGateway(): CloudGateway {
         throw new Error("Firebase is not configured");
       }
       await logTokenHealth();
-      const ref = doc(db, "users", requireUid(), "backup");
+      const ref = backupRef(db, requireUid());
       console.log("[cloud] saveSnapshot: writing document", ref.path, "-", describeAuthState(), {
         updatedAt: snapshot.updatedAt,
         appVersion: snapshot.appVersion,

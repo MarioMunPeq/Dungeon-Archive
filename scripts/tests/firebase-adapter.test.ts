@@ -176,7 +176,7 @@ await test("saveSnapshot then fetchSnapshot round-trips a CloudSnapshot", async 
   deepStrictEqual(fetched, snapshot);
 });
 
-await test("saveSnapshot writes under users/{uid}/backup", async () => {
+await test("saveSnapshot writes under users/{uid}/backup/current", async () => {
   await gateway.signIn();
   await gateway.saveSnapshot({
     state: { favorites: ["x"] },
@@ -191,8 +191,8 @@ await test("saveSnapshot writes under users/{uid}/backup", async () => {
     updatedAt: 2,
     appVersion: "0.1.0",
   } as unknown as CloudSnapshot);
-  const stored = fakeFirebaseState.data.get("users/firebase-user/backup") as CloudSnapshot;
-  ok(stored !== undefined, "backup doc exists under users/firebase-user/backup");
+  const stored = fakeFirebaseState.data.get("users/firebase-user/backup/current") as CloudSnapshot;
+  ok(stored !== undefined, "backup doc exists under users/firebase-user/backup/current");
   deepStrictEqual(stored.state.favorites, ["x"]);
 });
 
@@ -270,7 +270,7 @@ await test("service upload then restore round-trips through the adapter", async 
 
   await upload();
 
-  const stored = fakeFirebaseState.data.get("users/firebase-user/backup") as CloudSnapshot;
+  const stored = fakeFirebaseState.data.get("users/firebase-user/backup/current") as CloudSnapshot;
   ok(stored !== undefined, "upload persisted the backup doc");
   deepStrictEqual(stored.state.favorites, ["test-entity"]);
   deepStrictEqual(stored.state.recentSearches, ["fireball"]);
@@ -296,7 +296,7 @@ await test("service upload stores metadata, updatedAt and appVersion in the doc"
 
   await upload();
 
-  const stored = fakeFirebaseState.data.get("users/firebase-user/backup") as CloudSnapshot;
+  const stored = fakeFirebaseState.data.get("users/firebase-user/backup/current") as CloudSnapshot;
   ok(stored !== undefined, "backup doc exists");
   deepStrictEqual(stored.state.favorites, ["meta-adapter"]);
   strictEqual(stored.metadata.favoriteCount, 1);
@@ -320,10 +320,10 @@ await test("service restore rejects through the adapter with no backup", async (
 
 async function setDocFor(uid: string, value: unknown): Promise<void> {
   if (value === null) {
-    fakeFirebaseState.data.delete(`users/${uid}/backup`);
+    fakeFirebaseState.data.delete(`users/${uid}/backup/current`);
     return;
   }
-  fakeFirebaseState.data.set(`users/${uid}/backup`, value);
+  fakeFirebaseState.data.set(`users/${uid}/backup/current`, value);
 }
 
 setGatewayForTesting(null);

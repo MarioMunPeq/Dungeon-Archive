@@ -188,16 +188,14 @@ function AbilityScoreRow({
         compact && "flex-col gap-0 px-1.5 py-1",
       )}
     >
-      {!compact && (
-        <span
-          className={cn(
-            "flex shrink-0 items-center gap-1 text-xs font-semibold uppercase text-muted-foreground",
-            compact ? "tracking-normal leading-tight" : "tracking-wide",
-          )}
-        >
-          {ABILITY_LABELS[abilityKey]}
-        </span>
-      )}
+      <span
+        className={cn(
+          "flex shrink-0 items-center gap-1 font-semibold uppercase text-muted-foreground",
+          compact ? "mb-0.5 text-[11px] leading-none tracking-tight" : "text-xs tracking-wide",
+        )}
+      >
+        {ABILITY_LABELS[abilityKey]}
+      </span>
       <span className={cn("flex items-center", compact ? "gap-1" : "gap-1.5")}>
         <span
           className={cn(
