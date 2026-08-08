@@ -10,7 +10,7 @@ interface ActionRendererProps {
 
 export function ActionRenderer({ entity }: ActionRendererProps) {
   return (
-    <Stack gap="lg">
+    <Stack gap="md">
       <EntityMetadataGrid>
         <EntityProperty label="Type" value={entity.actionType} />
       </EntityMetadataGrid>

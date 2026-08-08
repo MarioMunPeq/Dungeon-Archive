@@ -26,7 +26,7 @@ export function EntityDetailLayout({
   breadcrumbs,
 }: EntityDetailLayoutProps) {
   return (
-    <Stack as="article" gap="lg" className="px-4 py-6">
+    <Stack as="article" gap="md" className="px-4 py-4">
       {breadcrumbs && <EntityBreadcrumbs crumbs={breadcrumbs} />}
 
       <EntityHeader name={name} subtitle={subtitle} />

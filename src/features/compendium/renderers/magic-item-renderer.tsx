@@ -16,7 +16,7 @@ function attunementLabel(req: string): string {
 
 export function MagicItemRenderer({ entity }: MagicItemRendererProps) {
   return (
-    <Stack gap="lg">
+    <Stack gap="md">
       <EntityMetadataGrid>
         <EntityProperty label="Rarity" value={entity.rarity} stat />
         <EntityProperty label="Type" value={entity.itemType} />

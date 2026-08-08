@@ -8,7 +8,7 @@ interface InsetBlockProps {
 export function InsetBlock({ blocks }: InsetBlockProps) {
   return (
     <div className="border border-border rounded-card bg-muted/30 px-4 py-3 my-3 text-sm">
-      <div className="space-y-3">
+      <div className="space-y-2">
         {blocks.map((block, i) => (
           <BlockSwitch key={i} block={block} />
         ))}

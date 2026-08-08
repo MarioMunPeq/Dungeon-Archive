@@ -16,7 +16,7 @@ export function HelpButton() {
         aria-expanded={open}
         onClick={() => setOpen((v) => !v)}
       >
-        <HelpIcon />
+        <HelpIcon size="md" />
       </Button>
       {open && (
         <div
@@ -24,10 +24,10 @@ export function HelpButton() {
           role="dialog"
           aria-label="Help"
           className={cn(
-            "absolute right-0 z-20 transition-transform duration-150",
+            "absolute left-1/2 z-20 transition-transform duration-150",
             placement === "below" ? "top-full mt-2" : "bottom-full mb-2",
           )}
-          style={{ transform: shiftX !== 0 ? `translateX(${shiftX}px)` : undefined }}
+          style={{ transform: `translateX(calc(-50% + ${shiftX}px))` }}
         >
           <div className="w-56 rounded-card border border-border bg-elevated p-3 shadow-lg animate-pop">
             <Caption className="pb-1">Quick help</Caption>

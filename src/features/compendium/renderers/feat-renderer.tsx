@@ -10,7 +10,7 @@ interface FeatRendererProps {
 
 export function FeatRenderer({ entity }: FeatRendererProps) {
   return (
-    <Stack gap="lg">
+    <Stack gap="md">
       <EntityMetadataGrid>
         {entity.featCategory && <EntityProperty label="Category" value={entity.featCategory} />}
         {entity.prerequisite && <EntityProperty label="Prerequisite" value={entity.prerequisite} />}

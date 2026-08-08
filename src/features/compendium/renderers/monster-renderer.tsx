@@ -48,7 +48,7 @@ export function MonsterRenderer({ entity }: MonsterRendererProps) {
   };
 
   return (
-    <Stack gap="lg">
+    <Stack gap="md">
       <div className="grid grid-cols-2 gap-2 sm:grid-cols-4">
         <StatCard label="AC" value={entity.armorClass} />
         <StatCard label="HP" value={entity.hitPoints} />

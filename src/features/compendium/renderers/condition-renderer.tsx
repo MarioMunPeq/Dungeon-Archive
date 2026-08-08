@@ -9,7 +9,7 @@ interface ConditionRendererProps {
 
 export function ConditionRenderer({ entity }: ConditionRendererProps) {
   return (
-    <Stack gap="lg">
+    <Stack gap="md">
       <Section title="Description">
         <ContentRenderer blocks={entity.description} />
       </Section>

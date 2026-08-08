@@ -10,7 +10,7 @@ export function EntriesBlock({ name, blocks }: EntriesBlockProps) {
   return (
     <div>
       {name && <p className="text-sm font-semibold text-foreground">{name}</p>}
-      <div className="space-y-3">
+      <div className="space-y-2">
         {blocks.map((block, i) => (
           <BlockSwitch key={i} block={block} />
         ))}

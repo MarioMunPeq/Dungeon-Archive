@@ -9,7 +9,7 @@ interface EntityHeaderProps {
 export function EntityHeader({ name, subtitle }: EntityHeaderProps) {
   return (
     <div className="space-y-1">
-      <Display>{name}</Display>
+      <Display className="text-lg">{name}</Display>
       <Subtitle>{subtitle}</Subtitle>
     </div>
   );

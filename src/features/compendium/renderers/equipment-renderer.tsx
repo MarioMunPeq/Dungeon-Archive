@@ -11,7 +11,7 @@ interface EquipmentRendererProps {
 
 export function EquipmentRenderer({ entity }: EquipmentRendererProps) {
   return (
-    <Stack gap="lg">
+    <Stack gap="md">
       <EntityMetadataGrid>
         <EntityProperty label="Type" value={formatEquipmentType(entity.type)} />
         {entity.cost && <EntityProperty label="Cost" value={entity.cost} />}

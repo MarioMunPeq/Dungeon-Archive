@@ -332,7 +332,7 @@ function TurnChecklist() {
 
   return (
     <>
-      <div className="flex flex-col gap-2">
+      <div className="grid grid-cols-2 gap-2">
         {TURN_ITEMS.map((item) => (
           <TurnItemRow
             key={item.title}
@@ -412,7 +412,7 @@ function CombatCharacterView({ character }: { character: CharacterReference }) {
 
   return (
     <div className="flex flex-col gap-4">
-      <div className="flex flex-col gap-3 rounded-card border border-border-amber bg-surface readout-card p-3">
+      <div className="flex flex-col gap-2 rounded-card border border-border-amber bg-surface readout-card p-2">
         <div className="flex items-center justify-between gap-2">
           <span className="flex items-center gap-2 border-l-2 border-primary pl-2 text-xs font-bold uppercase tracking-wide text-muted-foreground">
             Hit Points
@@ -429,11 +429,11 @@ function CombatCharacterView({ character }: { character: CharacterReference }) {
           onPointerLeave={hpClearTimer}
           onPointerCancel={hpClearTimer}
           className={cn(
-            "relative flex items-center justify-between gap-3 rounded-stat border border-border-amber bg-card readout-card px-3 py-2",
+            "relative flex items-center justify-between gap-2 rounded-stat border border-border-amber bg-card readout-card px-2 py-1.5",
             hpLow && "border-destructive/40",
           )}
         >
-          <div className="flex flex-col items-center gap-1">
+          <div className="flex flex-col items-center gap-0.5">
             <span className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
               Current
             </span>
@@ -445,15 +445,15 @@ function CombatCharacterView({ character }: { character: CharacterReference }) {
               max={9999}
               onChange={(value) => update({ hitPoints: { current: value } })}
               label="Current HP"
-              className="h-9 w-24"
+              className="h-8 w-20"
               valueClassName={cn(
-                "font-mono text-2xl font-bold tabular-nums",
+                "font-mono text-xl font-bold tabular-nums",
                 hpLow && "text-destructive",
               )}
             />
           </div>
-          <span className="text-lg font-medium text-foreground-subtle">/</span>
-          <div className="flex flex-col items-center gap-1">
+          <span className="text-base font-medium text-foreground-subtle">/</span>
+          <div className="flex flex-col items-center gap-0.5">
             <span className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
               Max
             </span>
@@ -465,8 +465,8 @@ function CombatCharacterView({ character }: { character: CharacterReference }) {
               max={9999}
               onChange={(value) => update({ hitPoints: { max: value } })}
               label="Max HP"
-              className="h-9 w-24"
-              valueClassName="font-mono text-2xl font-bold tabular-nums"
+              className="h-8 w-20"
+              valueClassName="font-mono text-xl font-bold tabular-nums"
             />
           </div>
           {hpOpen && (
@@ -488,7 +488,7 @@ function CombatCharacterView({ character }: { character: CharacterReference }) {
             aria-valuemin={0}
             aria-valuemax={character.hitPoints.max}
             className={cn(
-              "h-1.5 rounded-full transition-all duration-150",
+              "h-1 rounded-full transition-all duration-150",
               hpLow ? "bg-destructive" : "bg-success",
             )}
             style={{ width: `${hpPercent}%` }}
@@ -500,7 +500,7 @@ function CombatCharacterView({ character }: { character: CharacterReference }) {
               key={delta}
               type="button"
               onClick={() => adjustHp(delta)}
-              className="rounded-control border border-border bg-card px-2 py-0.5 text-xs font-semibold text-muted-foreground transition-all duration-150 hover:bg-accent hover:text-foreground active:scale-95"
+              className="rounded-control border border-border bg-card px-1.5 py-0.5 text-xs font-semibold text-muted-foreground transition-all duration-150 hover:bg-accent hover:text-foreground active:scale-95"
             >
               {delta > 0 ? `+${delta}` : `${delta}`}
             </button>
@@ -511,6 +511,30 @@ function CombatCharacterView({ character }: { character: CharacterReference }) {
             Below half — your character is hurting!
           </p>
         )}
+      </div>
+
+      <div className="flex flex-col gap-3">
+        <span className="flex items-center gap-2 border-l-2 border-primary pl-2 text-xs font-bold uppercase tracking-wide text-muted-foreground">
+          Stats
+          <HelpTip label="What are these numbers?">
+            These are your combat numbers. Edit them on your character in the Character tab.
+          </HelpTip>
+        </span>
+        <div className="grid grid-cols-3 gap-2">
+          {COMBAT_STATS.map((stat) => (
+            <div
+              key={stat.key}
+              className="flex flex-col items-center gap-1 rounded-stat border border-border-amber bg-card readout-card px-2 py-3"
+            >
+              <span className="text-xs font-medium uppercase tracking-tight text-muted-foreground">
+                {stat.label}
+              </span>
+              <span className="font-mono text-2xl font-bold tabular-nums text-foreground">
+                {combatStatValue(character, stat.key)}
+              </span>
+            </div>
+          ))}
+        </div>
       </div>
 
       <div className="flex flex-col gap-3">
@@ -541,30 +565,6 @@ function CombatCharacterView({ character }: { character: CharacterReference }) {
           </HelpTip>
         </div>
         <TurnChecklist key={character.id} />
-      </div>
-
-      <div className="flex flex-col gap-3">
-        <span className="flex items-center gap-2 border-l-2 border-primary pl-2 text-xs font-bold uppercase tracking-wide text-muted-foreground">
-          Stats
-          <HelpTip label="What are these numbers?">
-            These are your combat numbers. Edit them on your character in the Character tab.
-          </HelpTip>
-        </span>
-        <div className="grid grid-cols-3 gap-2">
-          {COMBAT_STATS.map((stat) => (
-            <div
-              key={stat.key}
-              className="flex flex-col items-center gap-1 rounded-stat border border-border-amber bg-card readout-card px-2 py-3"
-            >
-              <span className="text-xs font-medium uppercase tracking-tight text-muted-foreground">
-                {stat.label}
-              </span>
-              <span className="font-mono text-2xl font-bold tabular-nums text-foreground">
-                {combatStatValue(character, stat.key)}
-              </span>
-            </div>
-          ))}
-        </div>
       </div>
     </div>
   );

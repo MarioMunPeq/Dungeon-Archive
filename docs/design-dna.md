@@ -60,7 +60,7 @@
 34. Prefer single-line compact rows over two-tier card+control layouts when the same information can be conveyed in less vertical height without losing legibility (e.g. ability score rows: label + modifier + score + adjust buttons in one row).
 35. Buttons are normal button-sized — never full-width colored slabs, even for primary actions.
 36. Empty states are compact and left-aligned (title + one-line description + normal button) — never centered, never oversized.
-37. Utility/secondary elements (e.g. cloud sync status) must visually read as lighter/lower-priority than the primary content on the same screen (e.g. character identity).
+37. Utility/secondary elements (e.g. cloud sync status) must visually read as lighter/lower-priority than the primary content on the same screen (e.g. character identity). Exception (theme-following pass): the top-bar cloud sync icon uses the active theme's accent token when signed in — never a fixed green — while failure stays fixed warning amber; it stays small and unanimated so it never out-ranks primary content.
 
 ## Content & Voice
 

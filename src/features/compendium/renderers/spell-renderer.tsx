@@ -15,7 +15,7 @@ export function SpellRenderer({ entity }: SpellRendererProps) {
   const schoolName = SCHOOL_NAMES[entity.school] ?? entity.school;
 
   return (
-    <Stack gap="lg">
+    <Stack gap="md">
       <Subtitle>
         {levelText} {METADATA_SEPARATOR} {schoolName}
       </Subtitle>

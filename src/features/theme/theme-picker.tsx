@@ -38,7 +38,7 @@ export function ThemePicker() {
         aria-expanded={open}
         onClick={() => setOpen((v) => !v)}
       >
-        <PaletteIcon />
+        <PaletteIcon size="md" />
       </Button>
       {open && (
         <div

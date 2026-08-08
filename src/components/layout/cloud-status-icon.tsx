@@ -14,7 +14,7 @@ export function CloudStatusIcon({ signedIn, syncing, failed }: CloudStatusIconPr
     return <CloudWarningIcon size="md" className="text-warning" />;
   }
   if (signedIn) {
-    return <CloudCheckIcon size="md" className="text-success" />;
+    return <CloudCheckIcon size="md" className="text-primary" />;
   }
   return <CloudIcon size="md" className="text-muted-foreground" />;
 }

@@ -7,7 +7,7 @@ interface ContentRendererProps {
 
 export function ContentRenderer({ blocks }: ContentRendererProps) {
   return (
-    <div className="space-y-3">
+    <div className="space-y-2">
       {blocks.map((block, i) => (
         <BlockSwitch key={i} block={block} />
       ))}

@@ -3,5 +3,5 @@ interface ParagraphBlockProps {
 }
 
 export function ParagraphBlock({ text }: ParagraphBlockProps) {
-  return <p className="leading-relaxed text-foreground">{text}</p>;
+  return <p className="text-sm leading-relaxed text-foreground">{text}</p>;
 }

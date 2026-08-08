@@ -9,7 +9,7 @@ interface QuoteBlockProps {
 export function QuoteBlock({ blocks, by }: QuoteBlockProps) {
   return (
     <blockquote className="border-l-4 border-muted-foreground/30 pl-4 italic text-muted-foreground my-3">
-      <div className="space-y-3">
+      <div className="space-y-2">
         {blocks.map((block, i) => (
           <BlockSwitch key={i} block={block} />
         ))}
