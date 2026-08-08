@@ -6,6 +6,7 @@ export interface FakeDocRef {
 
 export interface FakeDocSnapshot {
   data(): unknown;
+  exists(): boolean;
 }
 
 export function getFirestore(): object {
@@ -21,7 +22,7 @@ export async function getDoc(ref: FakeDocRef): Promise<FakeDocSnapshot> {
     throw fakeFirebaseState.firestoreError;
   }
   const data = fakeFirebaseState.data.get(ref.path);
-  return { data: () => (data === undefined ? undefined : data) };
+  return { data: () => (data === undefined ? undefined : data), exists: () => data !== undefined };
 }
 
 export async function setDoc(ref: FakeDocRef, data: unknown): Promise<void> {

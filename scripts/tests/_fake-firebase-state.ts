@@ -2,6 +2,7 @@ export interface FakeAuthUser {
   uid: string;
   displayName: string | null;
   email: string | null;
+  getIdToken(): Promise<string>;
 }
 
 export const fakeFirebaseState = {

@@ -243,10 +243,9 @@ export function migrate(raw: unknown): UserState {
     adventures: Array.isArray(result.adventures) ? (result.adventures as Adventure[]) : [],
     activeAdventureId:
       typeof result.activeAdventureId === "string" ? result.activeAdventureId : null,
-    characters: Array.isArray(result.characters)
-      ? (result.characters as CharacterReference[])
-      : [],
-    activeCharacterId: typeof result.activeCharacterId === "string" ? result.activeCharacterId : null,
+    characters: Array.isArray(result.characters) ? (result.characters as CharacterReference[]) : [],
+    activeCharacterId:
+      typeof result.activeCharacterId === "string" ? result.activeCharacterId : null,
     beginnerMode: typeof result.beginnerMode === "boolean" ? result.beginnerMode : true,
     onboardingComplete:
       typeof result.onboardingComplete === "boolean" ? result.onboardingComplete : false,

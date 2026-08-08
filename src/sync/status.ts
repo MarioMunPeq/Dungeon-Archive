@@ -46,9 +46,17 @@ export function useCloudStatus(): CloudStatus {
     void getGateway().then((next) => {
       if (cancelled) return;
       setGateway(next);
+      console.log(
+        "[cloud] gateway resolved:",
+        next.disabled === true ? "disabled (no Firebase config)" : "firebase",
+      );
       unsubscribe = next.onAuthChange((nextUser) => {
         setUser(nextUser);
         setReady(true);
+        console.log(
+          "[cloud] auth state:",
+          nextUser === null ? "signed out" : `signed in as ${nextUser.email ?? nextUser.uid}`,
+        );
       });
     });
     return () => {

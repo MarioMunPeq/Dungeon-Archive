@@ -18,8 +18,7 @@ interface LongPressInfo<T extends HTMLElement> {
 }
 
 export function useLongPressInfo<T extends HTMLElement>(): LongPressInfo<T> {
-  const { open, setOpen, placement, shiftX, containerRef, popoverRef } =
-    useConstrainedPopover<T>();
+  const { open, setOpen, placement, shiftX, containerRef, popoverRef } = useConstrainedPopover<T>();
   const [longPress, setLongPress] = useState(false);
   const timerRef = useRef<number | null>(null);
 

@@ -577,9 +577,7 @@ test("migrations.migrate() renames players/activePlayerId to characters/activeCh
   };
   const result = migrate(input);
   strictEqual(result.version, CURRENT_VERSION);
-  deepStrictEqual(result.characters, [
-    { id: "p1", name: "Lyra", class: "Wizard", level: 5 },
-  ]);
+  deepStrictEqual(result.characters, [{ id: "p1", name: "Lyra", class: "Wizard", level: 5 }]);
   strictEqual(result.activeCharacterId, "p1");
   ok(!("players" in result), "legacy players key removed");
   ok(!("activePlayerId" in result), "legacy activePlayerId key removed");

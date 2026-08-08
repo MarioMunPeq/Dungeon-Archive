@@ -19,7 +19,10 @@ registerHooks({
       return { url: new URL("./_fake-firebase-auth.ts", import.meta.url).href, shortCircuit: true };
     }
     if (specifier === "./config" && (context.parentURL ?? "").includes("src/lib/firebase/")) {
-      return { url: new URL("./_fake-firebase-config.ts", import.meta.url).href, shortCircuit: true };
+      return {
+        url: new URL("./_fake-firebase-config.ts", import.meta.url).href,
+        shortCircuit: true,
+      };
     }
     return nextResolve(specifier, context);
   },

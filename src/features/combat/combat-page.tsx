@@ -2,7 +2,14 @@ import { memo, useCallback, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import { useCharacters, usePrimaryCharacter, userStore } from "@/user-state";
 import type { CharacterReference, CharacterReferenceUpdate } from "@/user-state";
-import { Button, EmptyState, HelpTip, InfoPopover, Stepper, useLongPressInfo } from "@/components/ui";
+import {
+  Button,
+  EmptyState,
+  HelpTip,
+  InfoPopover,
+  Stepper,
+  useLongPressInfo,
+} from "@/components/ui";
 import { resolveEntity } from "@/compendium";
 import type { Condition, ContentBlock } from "@/compendium";
 import { cn } from "@/lib/utils";
@@ -133,8 +140,18 @@ const ConditionChip = memo(function ConditionChip({
   readonly active: boolean;
   readonly onToggle: () => void;
 }) {
-  const { open, setOpen, placement, shiftX, containerRef, popoverRef, longPress, clearLongPress, startPress, clearTimer } =
-    useLongPressInfo<HTMLSpanElement>();
+  const {
+    open,
+    setOpen,
+    placement,
+    shiftX,
+    containerRef,
+    popoverRef,
+    longPress,
+    clearLongPress,
+    startPress,
+    clearTimer,
+  } = useLongPressInfo<HTMLSpanElement>();
 
   const name = conditionName(id);
 
@@ -212,8 +229,17 @@ const TurnItemRow = memo(function TurnItemRow({
   readonly isUsed: boolean;
   readonly onToggle: () => void;
 }) {
-  const { open, placement, shiftX, containerRef, popoverRef, longPress, clearLongPress, startPress, clearTimer } =
-    useLongPressInfo<HTMLDivElement>();
+  const {
+    open,
+    placement,
+    shiftX,
+    containerRef,
+    popoverRef,
+    longPress,
+    clearLongPress,
+    startPress,
+    clearTimer,
+  } = useLongPressInfo<HTMLDivElement>();
 
   return (
     <div
@@ -277,7 +303,12 @@ const TurnItemRow = memo(function TurnItemRow({
         </span>
       </button>
       {open && (
-        <InfoPopover placement={placement} shiftX={shiftX} popoverRef={popoverRef} title={item.title}>
+        <InfoPopover
+          placement={placement}
+          shiftX={shiftX}
+          popoverRef={popoverRef}
+          title={item.title}
+        >
           {item.help}
         </InfoPopover>
       )}
@@ -328,7 +359,8 @@ function CombatCharacterView({ character }: { character: CharacterReference }) {
     [character.id],
   );
 
-  const hpLow = character.hitPoints.max > 0 && character.hitPoints.current <= character.hitPoints.max / 2;
+  const hpLow =
+    character.hitPoints.max > 0 && character.hitPoints.current <= character.hitPoints.max / 2;
 
   const hpPercent =
     character.hitPoints.max > 0
@@ -341,7 +373,8 @@ function CombatCharacterView({ character }: { character: CharacterReference }) {
   const adjustHp = useCallback(
     (delta: number) => {
       const hp =
-        userStore.getState().characters.find((p) => p.id === character.id)?.hitPoints ?? character.hitPoints;
+        userStore.getState().characters.find((p) => p.id === character.id)?.hitPoints ??
+        character.hitPoints;
       update({ hitPoints: { current: Math.min(Math.max(hp.current + delta, 0), hp.max) } });
     },
     [character.id, character.hitPoints, update],
@@ -443,8 +476,8 @@ function CombatCharacterView({ character }: { character: CharacterReference }) {
               popoverRef={hpPopoverRef}
               title="Hit Points"
             >
-              Hit Points (HP) measure how much damage you can take. Damage lowers your current HP; at
-              0 you fall unconscious. Heal to bring it back up.
+              Hit Points (HP) measure how much damage you can take. Damage lowers your current HP;
+              at 0 you fall unconscious. Heal to bring it back up.
             </InfoPopover>
           )}
         </div>

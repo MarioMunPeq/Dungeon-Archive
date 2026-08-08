@@ -39,6 +39,41 @@ export function currentStateHash(): string {
   return hashString(serializeState(userStore.getState()));
 }
 
+/**
+ * Collects the dotted paths of every `undefined` value in the serialized
+ * state. Firestore rejects `undefined` field values on write (invalid-argument
+ * error), so this surfaces the exact offending fields without logging any
+ * user data.
+ */
+function findUndefinedPaths(value: unknown, path: string, out: string[]): void {
+  if (value === undefined) {
+    out.push(path);
+    return;
+  }
+  if (Array.isArray(value)) {
+    value.forEach((item, index) => findUndefinedPaths(item, `${path}[${index}]`, out));
+    return;
+  }
+  if (value !== null && typeof value === "object") {
+    for (const [key, item] of Object.entries(value)) {
+      findUndefinedPaths(item, path ? `${path}.${key}` : key, out);
+    }
+  }
+}
+
+function logUndefinedFields(): void {
+  const paths: string[] = [];
+  findUndefinedPaths(toUserState(userStore.getState()), "state", paths);
+  if (paths.length === 0) {
+    console.log("[cloud] state check: no undefined fields in serialized state");
+  } else {
+    console.warn(
+      `[cloud] state check: ${paths.length} undefined field(s) in serialized state`,
+      paths.slice(0, 10),
+    );
+  }
+}
+
 function readLastUpload(uid: string): LastUploadRecord | null {
   try {
     const raw = localStorage.getItem(LAST_UPLOAD_KEY);
@@ -104,19 +139,30 @@ export function getBackupStatus(user: CloudUser): BackupStatus {
  * Identical uploads are skipped (no pointless writes).
  */
 export async function upload(): Promise<void> {
+  console.log("[cloud] upload: starting");
   const gateway = await getGateway();
   const user = gateway.getCurrentUser();
   if (user === null) {
     throw new Error("Not signed in");
   }
+  console.log("[cloud] upload: signed in as", user.email ?? user.uid);
   const hash = currentStateHash();
   const lastUpload = readLastUpload(user.uid);
   if (lastUpload !== null && lastUpload.hash === hash) {
+    console.log("[cloud] upload: skipped (local state matches last upload)");
     return;
   }
+  logUndefinedFields();
   const now = Date.now();
-  await gateway.saveSnapshot(buildSnapshot(now));
-  writeLastUpload({ uid: user.uid, at: now, hash });
+  console.log("[cloud] upload: writing snapshot to cloud");
+  try {
+    await gateway.saveSnapshot(buildSnapshot(now));
+    writeLastUpload({ uid: user.uid, at: now, hash });
+    console.log("[cloud] upload: done");
+  } catch (error) {
+    console.error("[cloud] upload FAILED:", error);
+    throw error;
+  }
 }
 
 /**
@@ -124,18 +170,28 @@ export async function upload(): Promise<void> {
  * hydration pipeline: migrate -> normalize -> _replace -> write.
  */
 export async function restore(): Promise<void> {
+  console.log("[cloud] restore: starting");
   const gateway = await getGateway();
   const user = gateway.getCurrentUser();
   if (user === null) {
     throw new Error("Not signed in");
   }
-  const snapshot = await gateway.fetchSnapshot();
-  if (snapshot === null) {
-    throw new Error("No cloud backup found");
+  console.log("[cloud] restore: signed in as", user.email ?? user.uid);
+  console.log("[cloud] restore: reading snapshot from cloud");
+  try {
+    const snapshot = await gateway.fetchSnapshot();
+    if (snapshot === null) {
+      console.log("[cloud] restore: no cloud backup found");
+      throw new Error("No cloud backup found");
+    }
+    const processed = normalize(migrate(snapshot.state));
+    userStore.getState()._replace(processed);
+    write(processed);
+    const now = typeof snapshot.updatedAt === "number" ? snapshot.updatedAt : Date.now();
+    writeLastUpload({ uid: user.uid, at: now, hash: currentStateHash() });
+    console.log("[cloud] restore: done");
+  } catch (error) {
+    console.error("[cloud] restore FAILED:", error);
+    throw error;
   }
-  const processed = normalize(migrate(snapshot.state));
-  userStore.getState()._replace(processed);
-  write(processed);
-  const now = typeof snapshot.updatedAt === "number" ? snapshot.updatedAt : Date.now();
-  writeLastUpload({ uid: user.uid, at: now, hash: currentStateHash() });
 }

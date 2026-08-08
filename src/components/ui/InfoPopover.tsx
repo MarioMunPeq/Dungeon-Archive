@@ -9,13 +9,7 @@ interface InfoPopoverProps {
   readonly children: ReactNode;
 }
 
-export function InfoPopover({
-  placement,
-  shiftX,
-  popoverRef,
-  title,
-  children,
-}: InfoPopoverProps) {
+export function InfoPopover({ placement, shiftX, popoverRef, title, children }: InfoPopoverProps) {
   return (
     <span
       ref={popoverRef as RefObject<HTMLSpanElement | null>}

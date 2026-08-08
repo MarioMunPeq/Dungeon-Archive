@@ -117,6 +117,7 @@ export function BackupPage() {
           show(successMessage, { tone: "success" });
         }
       } catch (e) {
+        console.error(`[backup] operation failed (${op}):`, e);
         const message = friendlyErrorMessage(e, online);
         markFailed(message);
         setError(message);
@@ -154,6 +155,7 @@ export function BackupPage() {
       }
       setPreview(snapshot);
     } catch (e) {
+      console.error("[backup] restore preview failed:", e);
       setError(friendlyErrorMessage(e, online));
     } finally {
       setPreviewLoading(false);
@@ -276,7 +278,11 @@ export function BackupPage() {
               </Surface>
               <div className="flex flex-col gap-3">
                 <div className="flex flex-col gap-1">
-                  <Button onClick={handleUpload} disabled={!canAct || !online || upToDate}>
+                  <Button
+                    variant="outline"
+                    onClick={handleUpload}
+                    disabled={!canAct || !online || upToDate}
+                  >
                     {busy === "upload" ? "Uploading…" : "Upload backup"}
                   </Button>
                   <p className="px-1 text-xs text-foreground-subtle">

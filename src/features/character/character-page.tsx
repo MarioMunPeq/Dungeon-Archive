@@ -16,7 +16,16 @@ import { ReferencePicker } from "@/components/ui/ReferencePicker";
 import type { PickerCandidate } from "@/components/ui/ReferencePicker";
 import { InlineTextEditor } from "@/components/ui/InlineTextEditor";
 import { InlineTextareaEditor } from "@/components/ui/InlineTextareaEditor";
-import { Button, ConfirmDialog, EmptyState, HelpTip, InfoPopover, SelectField, Stepper, useLongPressInfo } from "@/components/ui";
+import {
+  Button,
+  ConfirmDialog,
+  EmptyState,
+  HelpTip,
+  InfoPopover,
+  SelectField,
+  Stepper,
+  useLongPressInfo,
+} from "@/components/ui";
 import { AbilityScores } from "@/components/ui/ability-scores";
 import { cn } from "@/lib/utils";
 

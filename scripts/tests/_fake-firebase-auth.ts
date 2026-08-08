@@ -51,6 +51,7 @@ export async function signInWithPopup(
     uid: "firebase-user",
     displayName: "Firebase User",
     email: "firebase@example.com",
+    getIdToken: async () => "fake-id-token",
   };
   setFakeUser(user);
   return { user };
