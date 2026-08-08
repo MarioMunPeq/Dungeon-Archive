@@ -263,7 +263,7 @@ function RulesTabBar({
                 "-mb-px flex items-center border-b-2 px-3 py-3 text-sm font-medium transition-colors",
                 isActive
                   ? "border-primary text-foreground"
-                  : "border-transparent text-muted-foreground hover:border-border hover:text-foreground",
+                  : "border-transparent text-muted-foreground hover:border-border hover:text-foreground active:text-foreground",
               )}
             >
               {tab.label}

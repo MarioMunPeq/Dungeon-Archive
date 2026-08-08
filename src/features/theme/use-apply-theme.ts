@@ -4,12 +4,15 @@ import { useTheme } from "@/user-state";
 /**
  * Cross-fades the accent theme when the active theme changes.
  *
+ * This is the FALLBACK path for theme changes (used when the View Transitions
+ * theme wave in theme-picker.tsx is unavailable or reduced-motion is active).
  * The `theme-switching` class (see index.css) puts a ~220ms transition on
  * color/background-color/border-color for the whole tree while the attribute is
- * swapped a frame later; the class is then removed. First run applies the
- * persisted theme instantly — no animation on load. Reduced motion zeroes the
- * transition via the base-layer media query. 220ms stays under the 300ms
- * ceiling of Design DNA rule 41.
+ * swapped a frame later; the class is then removed. When the wave runs, the
+ * picker swaps `data-theme` synchronously inside the view transition, so this
+ * effect early-returns. First run applies the persisted theme instantly — no
+ * animation on load. Reduced motion zeroes the transition via the base-layer
+ * media query. 220ms stays under the 300ms ceiling of Design DNA rule 42.
  */
 export function useApplyTheme(): void {
   const theme = useTheme();

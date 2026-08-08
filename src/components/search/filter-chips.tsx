@@ -15,7 +15,7 @@ interface FilterChipsProps {
 }
 
 const CHIP_BASE =
-  "inline-flex shrink-0 items-center rounded-control border px-3 py-1 text-xs transition-colors";
+  "inline-flex shrink-0 items-center rounded-control border px-3 py-1 text-xs transition-all duration-150 active:scale-95";
 const CHIP_ACTIVE = "border-foreground bg-accent font-medium text-foreground";
 const CHIP_INACTIVE = "border-border text-muted-foreground hover:bg-accent hover:text-foreground";
 

@@ -228,9 +228,11 @@
 /* Motion pass — route/tab transitions (manual, no View Transitions API).
    The routed content is keyed by pathname inside main (see
    route-transition.tsx); on navigation React remounts the wrapper and the new
-   page plays a quick fade+translate. 240ms screen-level per Design DNA rule 41;
-   opacity + translate animate together per rule 43. Reduced motion is already
-   zeroed out by the base-layer media query. */
+   page plays a quick fade+translate. ~280ms screen-level per Design DNA rule 42
+   (route/tab budget 250-300ms); the top bar and bottom nav sit outside the
+   keyed wrapper so the chrome stays static. opacity + translate animate together
+   per rule 44. Reduced motion is already zeroed out by the base-layer media
+   query. */
 @keyframes route-in {
   from {
     opacity: 0;
@@ -243,7 +245,48 @@
 }
 
 .route-transition {
-  animation: route-in 240ms cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation: route-in 280ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+/* Signature moment — theme-switch wave (Design DNA rules 42/44/52).
+   An expanding circular clip-path reveal on the incoming page snapshot,
+   originating from the tapped swatch's screen position (--wave-x / --wave-y,
+   set by theme-picker.tsx). Driven by the native View Transitions API
+   (document.startViewTransition); browsers without it fall back to the
+   .theme-switching cross-fade below. ~600ms sits inside the signature-moment
+   budget (600-700ms) — the only motion allowed to exceed the 300ms ceiling.
+   The reveal clips only the new snapshot, so the old theme stays visible
+   outside the circle; pointer-events are off so nothing blocks interaction
+   while it plays, and it animates clip-path only (no layout shift). */
+::view-transition-old(root),
+::view-transition-new(root) {
+  pointer-events: none;
+  animation-duration: 600ms;
+  animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+::view-transition-old(root) {
+  animation-name: none;
+}
+
+::view-transition-new(root) {
+  animation-name: theme-wave-in;
+}
+
+@keyframes theme-wave-in {
+  from {
+    clip-path: circle(0px at var(--wave-x, 50%) var(--wave-y, 50%));
+  }
+  to {
+    clip-path: circle(var(--wave-r, 141.5%) at var(--wave-x, 50%) var(--wave-y, 50%));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation: none !important;
+  }
 }
 
 @layer base {
@@ -347,11 +390,13 @@
     outline-offset: 2px;
   }
 
-  /* Theme repaint — a cross-fade for the accent + secondary-accent pair on the
-     whole tree. Applied only while a theme selection is being repainted (see
-     useApplyTheme); instant on first load. 220ms is comfortably under the 300ms
-     transition ceiling of Design DNA rule 41. Reduced motion is zeroed by the
-     media query below (0.01ms !important wins over this rule). */
+  /* Theme repaint — fallback cross-fade for the accent + secondary-accent pair
+     on the whole tree, used only when the View Transitions theme wave is
+     unavailable or reduced-motion is active (see useApplyTheme and
+     theme-picker.tsx). Applied only while a theme selection is being repainted;
+     instant on first load. 220ms stays under the 300ms transition ceiling of
+     Design DNA rule 42. Reduced motion is zeroed by the media query below
+     (0.01ms !important wins over this rule). */
   .theme-switching,
   .theme-switching *,
   .theme-switching *::before,

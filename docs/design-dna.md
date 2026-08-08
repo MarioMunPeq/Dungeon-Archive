@@ -68,20 +68,50 @@
 39. Technical filter/type codes from underlying data sources (e.g. rulebook abbreviations) must be translated to human-readable labels before rendering as filter chips — never expose raw internal codes to the player.
 40. Any stat label must be fully readable, never truncated with an ellipsis inside its card — if it doesn't fit, abbreviate deliberately and consistently, don't let the browser cut it off.
 
-## Motion (principles — implementation happens in a separate, later pass)
+## Motion (principles — implemented in the "Alive Interactions" pass)
 
-41. Motion exists to make state changes feel continuous, never to draw attention to itself. If a person consciously notices "that was an animation," it's too much.
-42. Duration ceiling: nothing above 300ms. Primary interactions ~180-220ms, secondary ~120-160ms, screen-level transitions ~220-260ms.
+> **Amendment — supersedes the prior stricter version of these rules.** This is a
+> deliberate, explicit widening of the motion philosophy, not a silent drift:
+> breadth expanded (micro-interactions now apply to nearly every interactive
+> element; the theme switch became a named "signature moment"), while the
+> per-interaction duration ceilings stayed low. Rules 41-47 below replace the
+> earlier versions; rule 48 (dependencies) and rule 52 (theme swap) were amended
+> in place.
+
+41. Motion exists to make state changes feel continuous, never to draw attention
+    to itself. If a person consciously notices "that was an animation," it's too
+    much — **except for the named "signature moments" below**, which are allowed
+    to be noticed (that is their point). Everything else should still feel
+    invisible/natural, just more consistently present than before.
+42. Duration ceiling: nothing above 300ms for ordinary motion. Primary
+    interactions ~180-220ms; secondary micro-interactions ~120-180ms; route/tab
+    transitions ~250-300ms (raised from the previous 220-260ms to accommodate a
+    slightly richer transition). **Signature moments** (currently: the theme-switch
+    wave) may exceed the 300ms ceiling, capped at ~600-700ms. This is an explicit,
+    limited exception — not a general loosening. Any future addition to the
+    signature-moments list must be added here deliberately, never assumed.
 43. Prefer subtle easing (soft/spring-like), never cartoonish bounce.
-44. State changes animate opacity + translate together, never opacity alone or scale alone.
-45. Hover-only interactions are not implemented — this app has no mouse users in practice; motion budget goes to touch feedback (press/release/toggle) instead.
-46. Every animated interaction of the same type (e.g. every expand/collapse, every checklist toggle) must use the same duration/easing — no per-screen reinvention of the same interaction.
-47. When in doubt, don't animate — an un-animated instant change is always preferable to a janky or inconsistent one.
+44. State changes animate opacity + translate together, never opacity alone or
+    scale alone. The signature-moment theme wave may additionally animate
+    clip-path (its circular reveal shape) — that is its defining, deliberate
+    exception.
+45. Hover-only interactions are not implemented — this app has no mouse users in
+    practice; motion budget goes to touch feedback (press/release/toggle) instead.
+    **This rule is unchanged by the "Alive Interactions" pass**: the expanded
+    budget goes entirely to touch feedback, not hover.
+46. Every animated interaction of the same type (e.g. every expand/collapse, every
+    checklist toggle, every chip toggle) must use the same duration/easing — no
+    per-screen reinvention of the same interaction. **Micro-interactions now apply
+    almost everywhere**: every button, card, checkbox, chip, toggle, and input has
+    press/release/focus feedback. Individual durations stay in the ~120-180ms
+    secondary budget — breadth expanded, durations did NOT get slower.
+47. When in doubt, don't animate — an un-animated instant change is always
+    preferable to a janky or inconsistent one.
 
 ## Constraints (apply to every future prompt)
 
-48. No new dependencies unless a specific need can't be met with what's already in the project.
+48. No new dependencies unless a specific need can't be met with what's already in the project. **Exception ("Alive Interactions" pass): a single lightweight animation library is approved — Framer Motion is the designated choice.** It was not installed during the approving pass: the theme wave, route transitions, and micro-interactions were all implemented with native CSS + the View Transitions API, which is cheaper and lower-jank on the target mid-tier mobile hardware (rule 3). If richer multi-property animation is ever needed, Framer Motion is the one approved library — do not introduce a second animation library without amending this rule first.
 49. No gradients/decoration beyond what's explicitly defined in this document (the protagonist-card gradient, the app-shell vignette+grain, the section-header left border) — don't add a fourth decorative pattern without updating this document first.
 50. Every future visual prompt should be checked against this document before being written — if a new decision contradicts a rule here, update this document explicitly rather than silently diverging.
 51. This document should be revised (not silently ignored) whenever a genuinely new pattern is needed — treat additions as deliberate amendments, not exceptions.
-52. Accent theme system (added with the theme picker pass): only the primary + secondary accent pair vary per theme — default Arcane Teal `#4A90B8`/`#86AFC7`, Amber `#D97B29`/`#C9A26B`, Jade `#3AB492`/`#7FBFAA` — selectable from the top-bar palette popover and persisted in user state. Jade and Amber remain fully selectable, but Arcane Teal is the default for new users and the fallback for any existing user without a persisted theme. Backgrounds, surfaces, typography, radius, and the fixed success/danger/neutral modifier colors never change. Theme swaps cross-fade at ~220ms (under the rule 42 ceiling) via a temporary whole-tree transition; the stored theme applies instantly on first load, and the reduced-motion block zeroes the cross-fade.
+52. Accent theme system (added with the theme picker pass): only the primary + secondary accent pair vary per theme — default Arcane Teal `#4A90B8`/`#86AFC7`, Amber `#D97B29`/`#C9A26B`, Jade `#3AB492`/`#7FBFAA` — selectable from the top-bar palette popover and persisted in user state. Jade and Amber remain fully selectable, but Arcane Teal is the default for new users and the fallback for any existing user without a persisted theme. Backgrounds, surfaces, typography, radius, and the fixed success/danger/neutral modifier colors never change. Theme switches play the signature-moment "wave" (~500-700ms, per rule 42): an expanding circular clip-path reveal originating from the tapped swatch's actual screen position, using the native View Transitions API (`document.startViewTransition`) — independent of the router. Browsers without View Transitions (and users on reduced-motion) fall back to the previous ~220ms whole-tree cross-fade / instant swap. The stored theme applies instantly on first load.

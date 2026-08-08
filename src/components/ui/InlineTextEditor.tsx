@@ -53,7 +53,7 @@ export function InlineTextEditor({
       aria-label={ariaLabel}
       autoFocus
       className={cn(
-        "w-full rounded-control border border-border bg-background px-3 py-2 text-foreground outline-none focus:border-focus focus:ring-1 focus:ring-focus",
+        "w-full rounded-control border border-border bg-background px-3 py-2 text-foreground outline-none transition-all duration-150 focus:border-focus focus:ring-1 focus:ring-focus",
         className,
       )}
     />

@@ -32,7 +32,7 @@ export const SectionHeader = memo(function SectionHeader({
   return to ? (
     <Link
       to={to}
-      className="flex items-center gap-1 text-sm font-semibold uppercase tracking-wide text-muted-foreground transition-colors hover:text-foreground"
+      className="flex items-center gap-1 text-sm font-semibold uppercase tracking-wide text-muted-foreground transition-colors hover:text-foreground active:text-foreground"
     >
       {content}
     </Link>

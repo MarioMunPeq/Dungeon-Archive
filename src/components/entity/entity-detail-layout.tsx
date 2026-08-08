@@ -42,7 +42,7 @@ export function EntityDetailLayout({
               className={`rounded-full border px-3 py-1 text-xs transition-colors ${
                 v.source === source
                   ? "border-foreground bg-accent font-medium text-foreground"
-                  : "border-border text-muted-foreground hover:border-foreground/50"
+                  : "border-border text-muted-foreground hover:border-foreground/50 active:bg-accent active:text-foreground"
               }`}
             >
               {formatSource(v.source)}
