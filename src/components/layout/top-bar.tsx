@@ -5,6 +5,7 @@ import { useCloudStatus } from "@/sync";
 import { getTopBarState } from "./top-bar-route";
 import type { TopBarState } from "./top-bar-route";
 import { CloudStatusIcon } from "./cloud-status-icon";
+import { HelpButton } from "./help-button";
 
 export function TopBar() {
   const { pathname } = useLocation();
@@ -41,6 +42,7 @@ function TopBarContent({ state }: { state: TopBarState }) {
         <Display className="truncate text-lg font-semibold">{state.title}</Display>
       </div>
       <div className="flex shrink-0 items-center gap-1">
+        <HelpButton />
         <ThemePicker />
         {!status.disabled && (
           <Button

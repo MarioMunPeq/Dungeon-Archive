@@ -1,8 +1,9 @@
 import { useState } from "react";
 import { abilityModifier } from "@/user-state";
 import { cn } from "@/lib/utils";
-import { HelpTip } from "./HelpTip";
+import { InfoPopover } from "./InfoPopover";
 import { InlineNumberEditor } from "./InlineNumberEditor";
+import { useLongPressInfo } from "./use-long-press";
 
 export type AbilityKey =
   "strength" | "dexterity" | "constitution" | "intelligence" | "wisdom" | "charisma";
@@ -23,6 +24,15 @@ const ABILITY_LABELS: Record<AbilityKey, string> = {
   intelligence: "INT",
   wisdom: "WIS",
   charisma: "CHA",
+};
+
+const ABILITY_FULL_NAMES: Record<AbilityKey, string> = {
+  strength: "Strength",
+  dexterity: "Dexterity",
+  constitution: "Constitution",
+  intelligence: "Intelligence",
+  wisdom: "Wisdom",
+  charisma: "Charisma",
 };
 
 const ABILITY_HELP: Record<AbilityKey, string> = {
@@ -68,10 +78,10 @@ function ScoreControl({
 
   const stepClass = cn(
     "hitbox-expand relative flex shrink-0 select-none items-center justify-center rounded-control text-muted-foreground transition-all duration-150 active:scale-90 hover:text-foreground disabled:cursor-default disabled:text-disabled-foreground disabled:active:scale-100",
-    compact ? "h-5 w-5" : "h-6 w-6",
+    compact ? "h-6 w-6" : "h-6 w-6",
   );
 
-  const iconClass = "h-3.5 w-3.5";
+  const iconClass = compact ? "h-4 w-4" : "h-3.5 w-3.5";
 
   return (
     <div className="flex shrink-0 items-center gap-0.5">
@@ -84,7 +94,7 @@ function ScoreControl({
           ariaLabel={`Edit ${label}`}
           className={cn(
             "px-1 text-center font-mono",
-            compact ? "h-5 w-10 text-[11px]" : "h-6 w-12 text-xs",
+            compact ? "h-6 w-10 text-[11px]" : "h-6 w-12 text-xs",
           )}
         />
       ) : (
@@ -97,7 +107,7 @@ function ScoreControl({
           aria-label={`Edit ${label}`}
           className={cn(
             "flex items-center justify-center rounded-control px-1 font-mono font-medium text-foreground-subtle transition-colors duration-150 hover:bg-accent/60",
-            compact ? "h-5 min-w-4 text-[11px]" : "h-6 min-w-5 text-xs",
+            compact ? "h-6 min-w-4 text-[11px]" : "h-6 min-w-5 text-xs",
           )}
         >
           {value}
@@ -150,65 +160,102 @@ export interface AbilityScoresProps {
   readonly columns?: 2 | 3;
 }
 
+function AbilityScoreRow({
+  abilityKey,
+  score,
+  modifier,
+  onChange,
+  compact,
+}: {
+  readonly abilityKey: AbilityKey;
+  readonly score: number;
+  readonly modifier: number;
+  readonly onChange?: (key: AbilityKey, value: number) => void;
+  readonly compact: boolean;
+}) {
+  const { open, placement, shiftX, containerRef, popoverRef, startPress, clearTimer } =
+    useLongPressInfo<HTMLDivElement>();
+
+  return (
+    <div
+      ref={containerRef}
+      onPointerDown={startPress}
+      onPointerUp={clearTimer}
+      onPointerLeave={clearTimer}
+      onPointerCancel={clearTimer}
+      className={cn(
+        "relative flex min-w-0 items-center gap-1.5 rounded-card border border-border-amber bg-surface readout-card px-2.5 py-2",
+        compact && "flex-col gap-0 px-1.5 py-1",
+      )}
+    >
+      {!compact && (
+        <span
+          className={cn(
+            "flex shrink-0 items-center gap-1 text-xs font-semibold uppercase text-muted-foreground",
+            compact ? "tracking-normal leading-tight" : "tracking-wide",
+          )}
+        >
+          {ABILITY_LABELS[abilityKey]}
+        </span>
+      )}
+      <span className={cn("flex items-center", compact ? "gap-1" : "gap-1.5")}>
+        <span
+          className={cn(
+            "shrink-0 font-mono font-bold tabular-nums leading-none",
+            compact ? "text-sm" : "text-lg",
+            modifier > 0 ? "text-success" : modifier < 0 ? "text-destructive" : "text-gold",
+          )}
+        >
+          {formatSigned(modifier)}
+        </span>
+        {onChange ? (
+          <ScoreControl
+            value={score}
+            min={1}
+            max={30}
+            onChange={(value) => onChange(abilityKey, value)}
+            label={ABILITY_LABELS[abilityKey]}
+            compact={compact}
+          />
+        ) : (
+          <span
+            className={cn(
+              "shrink-0 font-mono font-medium tabular-nums text-foreground-subtle",
+              compact ? "text-[11px]" : "text-xs",
+            )}
+          >
+            {score}
+          </span>
+        )}
+      </span>
+      {open && (
+        <InfoPopover
+          placement={placement}
+          shiftX={shiftX}
+          popoverRef={popoverRef}
+          title={ABILITY_FULL_NAMES[abilityKey]}
+        >
+          {ABILITY_HELP[abilityKey]}
+        </InfoPopover>
+      )}
+    </div>
+  );
+}
+
 export function AbilityScores({ scores, onChange, columns = 2 }: AbilityScoresProps) {
   const compact = columns === 3;
   return (
     <div className={cn("grid gap-2", compact ? "grid-cols-3" : "grid-cols-2")}>
-      {ABILITY_KEYS.map((key) => {
-        const score = scores[key];
-        const modifier = abilityModifier(score);
-        return (
-          <div
-            key={key}
-            className={cn(
-              "flex min-w-0 items-center gap-1.5 rounded-card border border-border-amber bg-surface readout-card px-2.5 py-2",
-              compact && "flex-col gap-0 px-1.5 py-1",
-            )}
-          >
-            {!compact && (
-              <span
-                className={cn(
-                  "flex shrink-0 items-center gap-1 text-xs font-semibold uppercase text-muted-foreground",
-                  compact ? "tracking-normal leading-tight" : "tracking-wide",
-                )}
-              >
-                {ABILITY_LABELS[key]}
-                <HelpTip label={`What is ${ABILITY_LABELS[key]}?`}>{ABILITY_HELP[key]}</HelpTip>
-              </span>
-            )}
-            <span className={cn("flex items-center", compact ? "gap-1" : "gap-1.5")}>
-              <span
-                className={cn(
-                  "shrink-0 font-mono font-bold tabular-nums leading-none",
-                  compact ? "text-sm" : "text-lg",
-                  modifier > 0 ? "text-success" : modifier < 0 ? "text-destructive" : "text-gold",
-                )}
-              >
-                {formatSigned(modifier)}
-              </span>
-              {onChange ? (
-                <ScoreControl
-                  value={score}
-                  min={1}
-                  max={30}
-                  onChange={(value) => onChange(key, value)}
-                  label={ABILITY_LABELS[key]}
-                  compact={compact}
-                />
-              ) : (
-                <span
-                  className={cn(
-                    "shrink-0 font-mono font-medium tabular-nums text-foreground-subtle",
-                    compact ? "text-[11px]" : "text-xs",
-                  )}
-                >
-                  {score}
-                </span>
-              )}
-            </span>
-          </div>
-        );
-      })}
+      {ABILITY_KEYS.map((key) => (
+        <AbilityScoreRow
+          key={key}
+          abilityKey={key}
+          score={scores[key]}
+          modifier={abilityModifier(scores[key])}
+          onChange={onChange}
+          compact={compact}
+        />
+      ))}
     </div>
   );
 }

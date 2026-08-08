@@ -1,8 +1,8 @@
-import { memo, useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { memo, useCallback, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import { useCharacters, usePrimaryCharacter, userStore } from "@/user-state";
 import type { CharacterReference, CharacterReferenceUpdate } from "@/user-state";
-import { Button, EmptyState, HelpTip, Stepper, useConstrainedPopover } from "@/components/ui";
+import { Button, EmptyState, HelpTip, InfoPopover, Stepper, useLongPressInfo } from "@/components/ui";
 import { resolveEntity } from "@/compendium";
 import type { Condition, ContentBlock } from "@/compendium";
 import { cn } from "@/lib/utils";
@@ -114,8 +114,6 @@ function conditionSummary(condition: Condition): string {
   return walk(condition.description);
 }
 
-const LONG_PRESS_MS = 500;
-
 const FALLBACK_SUMMARY =
   "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.";
 
@@ -135,30 +133,8 @@ const ConditionChip = memo(function ConditionChip({
   readonly active: boolean;
   readonly onToggle: () => void;
 }) {
-  const { open, setOpen, placement, shiftX, containerRef, popoverRef } =
-    useConstrainedPopover<HTMLSpanElement>();
-  const [longPress, setLongPress] = useState(false);
-  const timerRef = useRef<number | null>(null);
-
-  const clearTimer = () => {
-    if (timerRef.current !== null) {
-      window.clearTimeout(timerRef.current);
-      timerRef.current = null;
-    }
-  };
-
-  const startPress = (e: React.PointerEvent<HTMLButtonElement>) => {
-    if (e.button !== 0) return;
-    clearTimer();
-    setLongPress(false);
-    timerRef.current = window.setTimeout(() => {
-      timerRef.current = null;
-      setLongPress(true);
-      setOpen(true);
-    }, LONG_PRESS_MS);
-  };
-
-  useEffect(() => () => clearTimer(), []);
+  const { open, setOpen, placement, shiftX, containerRef, popoverRef, longPress, clearLongPress, startPress, clearTimer } =
+    useLongPressInfo<HTMLSpanElement>();
 
   const name = conditionName(id);
 
@@ -168,7 +144,7 @@ const ConditionChip = memo(function ConditionChip({
         type="button"
         onClick={() => {
           if (longPress) {
-            setLongPress(false);
+            clearLongPress();
             return;
           }
           if (open) {
@@ -193,22 +169,9 @@ const ConditionChip = memo(function ConditionChip({
         {name}
       </button>
       {open && (
-        <span
-          ref={popoverRef}
-          role="tooltip"
-          className={cn(
-            "absolute left-1/2 z-20 transition-transform duration-150",
-            placement === "below" ? "top-full mt-2" : "bottom-full mb-2",
-          )}
-          style={{ transform: `translateX(calc(-50% + ${shiftX}px))` }}
-        >
-          <span className="block w-64 rounded-card border border-border bg-elevated px-3 py-2 text-xs leading-relaxed text-foreground shadow-lg animate-pop">
-            <span className="block text-xs font-semibold text-foreground">{name}</span>
-            <span className="mt-0.5 block text-xs leading-relaxed text-muted-foreground">
-              {conditionDefinition(id)}
-            </span>
-          </span>
-        </span>
+        <InfoPopover placement={placement} shiftX={shiftX} popoverRef={popoverRef} title={name}>
+          {conditionDefinition(id)}
+        </InfoPopover>
       )}
     </span>
   );
@@ -240,6 +203,88 @@ function CharacterSelector() {
   );
 }
 
+const TurnItemRow = memo(function TurnItemRow({
+  item,
+  isUsed,
+  onToggle,
+}: {
+  readonly item: TurnItem;
+  readonly isUsed: boolean;
+  readonly onToggle: () => void;
+}) {
+  const { open, placement, shiftX, containerRef, popoverRef, longPress, clearLongPress, startPress, clearTimer } =
+    useLongPressInfo<HTMLDivElement>();
+
+  return (
+    <div
+      ref={containerRef}
+      onPointerDown={startPress}
+      onPointerUp={clearTimer}
+      onPointerLeave={clearTimer}
+      onPointerCancel={clearTimer}
+      className={cn(
+        "relative flex items-center gap-2 rounded-control border border-border-amber bg-surface readout-card px-3 py-2 transition-all duration-secondary ease-standard",
+        isUsed && "border-primary/40",
+      )}
+    >
+      <button
+        type="button"
+        onClick={() => {
+          if (longPress) {
+            clearLongPress();
+            return;
+          }
+          onToggle();
+        }}
+        aria-pressed={isUsed}
+        className="flex flex-1 items-center gap-2 text-left"
+      >
+        <span
+          className={cn(
+            "flex h-4 w-4 shrink-0 items-center justify-center rounded-stat border transition-all duration-secondary ease-standard",
+            isUsed
+              ? "border-primary bg-primary text-primary-foreground"
+              : "border-border bg-card text-transparent",
+          )}
+        >
+          <svg
+            aria-hidden="true"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth={3}
+            className="h-3 w-3"
+          >
+            <path d="M20 6 9 17l-5-5" />
+          </svg>
+        </span>
+        <span className="relative">
+          <span
+            className={cn(
+              "text-sm font-medium transition-colors duration-secondary ease-standard",
+              isUsed && "text-muted-foreground",
+            )}
+          >
+            {item.title}
+          </span>
+          <span
+            aria-hidden="true"
+            className={cn(
+              "absolute left-0 top-1/2 h-px w-full -translate-y-1/2 origin-left bg-muted-foreground transition-transform duration-secondary ease-standard",
+              isUsed ? "scale-x-100" : "scale-x-0",
+            )}
+          />
+        </span>
+      </button>
+      {open && (
+        <InfoPopover placement={placement} shiftX={shiftX} popoverRef={popoverRef} title={item.title}>
+          {item.help}
+        </InfoPopover>
+      )}
+    </div>
+  );
+});
+
 function TurnChecklist() {
   const [used, setUsed] = useState<ReadonlySet<string>>(() => new Set());
 
@@ -257,63 +302,14 @@ function TurnChecklist() {
   return (
     <>
       <div className="flex flex-col gap-2">
-        {TURN_ITEMS.map((item) => {
-          const isUsed = used.has(item.title);
-          return (
-            <div
-              key={item.title}
-              className={cn(
-                "flex items-center gap-2 rounded-control border border-border-amber bg-surface readout-card px-3 py-2 transition-all duration-secondary ease-standard",
-                isUsed && "border-primary/40",
-              )}
-            >
-              <button
-                type="button"
-                onClick={() => toggle(item.title)}
-                aria-pressed={isUsed}
-                className="flex flex-1 items-center gap-2 text-left"
-              >
-                <span
-                  className={cn(
-                    "flex h-4 w-4 shrink-0 items-center justify-center rounded-stat border transition-all duration-secondary ease-standard",
-                    isUsed
-                      ? "border-primary bg-primary text-primary-foreground"
-                      : "border-border bg-card text-transparent",
-                  )}
-                >
-                  <svg
-                    aria-hidden="true"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth={3}
-                    className="h-3 w-3"
-                  >
-                    <path d="M20 6 9 17l-5-5" />
-                  </svg>
-                </span>
-                <span className="relative">
-                  <span
-                    className={cn(
-                      "text-sm font-medium transition-colors duration-secondary ease-standard",
-                      isUsed && "text-muted-foreground",
-                    )}
-                  >
-                    {item.title}
-                  </span>
-                  <span
-                    aria-hidden="true"
-                    className={cn(
-                      "absolute left-0 top-1/2 h-px w-full -translate-y-1/2 origin-left bg-muted-foreground transition-transform duration-secondary ease-standard",
-                      isUsed ? "scale-x-100" : "scale-x-0",
-                    )}
-                  />
-                </span>
-              </button>
-              <HelpTip label={`More about ${item.title}`}>{item.help}</HelpTip>
-            </div>
-          );
-        })}
+        {TURN_ITEMS.map((item) => (
+          <TurnItemRow
+            key={item.title}
+            item={item}
+            isUsed={used.has(item.title)}
+            onToggle={() => toggle(item.title)}
+          />
+        ))}
       </div>
       <div className="flex justify-end border-t border-border/60 pt-3">
         <Button variant="outline" size="sm" onClick={reset}>
@@ -371,9 +367,19 @@ function CombatCharacterView({ character }: { character: CharacterReference }) {
 
   const activeConditions = new Set(character.activeConditions);
 
+  const {
+    open: hpOpen,
+    placement: hpPlacement,
+    shiftX: hpShiftX,
+    containerRef: hpContainerRef,
+    popoverRef: hpPopoverRef,
+    startPress: hpStartPress,
+    clearTimer: hpClearTimer,
+  } = useLongPressInfo<HTMLDivElement>();
+
   return (
     <div className="flex flex-col gap-4">
-      <div className="flex flex-col gap-3 rounded-card border border-border-amber bg-surface readout-card p-4">
+      <div className="flex flex-col gap-3 rounded-card border border-border-amber bg-surface readout-card p-3">
         <div className="flex items-center justify-between gap-2">
           <span className="flex items-center gap-2 border-l-2 border-primary pl-2 text-xs font-bold uppercase tracking-wide text-muted-foreground">
             Hit Points
@@ -384,8 +390,13 @@ function CombatCharacterView({ character }: { character: CharacterReference }) {
           </HelpTip>
         </div>
         <div
+          ref={hpContainerRef}
+          onPointerDown={hpStartPress}
+          onPointerUp={hpClearTimer}
+          onPointerLeave={hpClearTimer}
+          onPointerCancel={hpClearTimer}
           className={cn(
-            "flex items-center justify-between gap-4 rounded-stat border border-border-amber bg-card readout-card px-4 py-3",
+            "relative flex items-center justify-between gap-3 rounded-stat border border-border-amber bg-card readout-card px-3 py-2",
             hpLow && "border-destructive/40",
           )}
         >
@@ -401,9 +412,9 @@ function CombatCharacterView({ character }: { character: CharacterReference }) {
               max={9999}
               onChange={(value) => update({ hitPoints: { current: value } })}
               label="Current HP"
-              className="w-24"
+              className="h-9 w-24"
               valueClassName={cn(
-                "font-mono text-3xl font-bold tabular-nums",
+                "font-mono text-2xl font-bold tabular-nums",
                 hpLow && "text-destructive",
               )}
             />
@@ -421,10 +432,21 @@ function CombatCharacterView({ character }: { character: CharacterReference }) {
               max={9999}
               onChange={(value) => update({ hitPoints: { max: value } })}
               label="Max HP"
-              className="w-24"
-              valueClassName="font-mono text-3xl font-bold tabular-nums"
+              className="h-9 w-24"
+              valueClassName="font-mono text-2xl font-bold tabular-nums"
             />
           </div>
+          {hpOpen && (
+            <InfoPopover
+              placement={hpPlacement}
+              shiftX={hpShiftX}
+              popoverRef={hpPopoverRef}
+              title="Hit Points"
+            >
+              Hit Points (HP) measure how much damage you can take. Damage lowers your current HP; at
+              0 you fall unconscious. Heal to bring it back up.
+            </InfoPopover>
+          )}
         </div>
         <div className="rounded-full bg-muted p-0.5">
           <div
@@ -433,7 +455,7 @@ function CombatCharacterView({ character }: { character: CharacterReference }) {
             aria-valuemin={0}
             aria-valuemax={character.hitPoints.max}
             className={cn(
-              "h-2 rounded-full transition-all duration-150",
+              "h-1.5 rounded-full transition-all duration-150",
               hpLow ? "bg-destructive" : "bg-success",
             )}
             style={{ width: `${hpPercent}%` }}
@@ -445,7 +467,7 @@ function CombatCharacterView({ character }: { character: CharacterReference }) {
               key={delta}
               type="button"
               onClick={() => adjustHp(delta)}
-              className="rounded-control border border-border bg-card px-2 py-1 text-xs font-semibold text-muted-foreground transition-all duration-150 hover:bg-accent hover:text-foreground active:scale-95"
+              className="rounded-control border border-border bg-card px-2 py-0.5 text-xs font-semibold text-muted-foreground transition-all duration-150 hover:bg-accent hover:text-foreground active:scale-95"
             >
               {delta > 0 ? `+${delta}` : `${delta}`}
             </button>

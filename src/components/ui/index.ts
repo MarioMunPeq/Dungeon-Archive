@@ -13,6 +13,7 @@ export {
   CloudWarningIcon,
   SyncIcon,
   PaletteIcon,
+  HelpIcon,
 } from "./icons";
 export { Button } from "./Button";
 export { ConfirmDialog } from "./ConfirmDialog";
@@ -27,7 +28,9 @@ export { SelectField } from "./SelectField";
 export { SearchField } from "./SearchField";
 export { Skeleton } from "./Skeleton";
 export { HelpTip } from "./HelpTip";
+export { InfoPopover } from "./InfoPopover";
 export { useConstrainedPopover } from "./use-constrained-popover";
+export { useLongPressInfo } from "./use-long-press";
 export { AbilityScores } from "./ability-scores";
 export type { AbilityKey, AbilityScoresProps } from "./ability-scores";
 export { EmptyState } from "./EmptyState";

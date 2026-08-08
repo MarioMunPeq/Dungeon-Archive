@@ -16,7 +16,7 @@ import { ReferencePicker } from "@/components/ui/ReferencePicker";
 import type { PickerCandidate } from "@/components/ui/ReferencePicker";
 import { InlineTextEditor } from "@/components/ui/InlineTextEditor";
 import { InlineTextareaEditor } from "@/components/ui/InlineTextareaEditor";
-import { Button, ConfirmDialog, EmptyState, HelpTip, SelectField, Stepper } from "@/components/ui";
+import { Button, ConfirmDialog, EmptyState, HelpTip, InfoPopover, SelectField, Stepper, useLongPressInfo } from "@/components/ui";
 import { AbilityScores } from "@/components/ui/ability-scores";
 import { cn } from "@/lib/utils";
 
@@ -326,7 +326,7 @@ function StatCard({
   onChange,
   onClear,
   help,
-  valueClassName = "font-mono text-3xl",
+  valueClassName = "font-mono text-2xl",
 }: {
   label: string;
   value: number;
@@ -337,35 +337,42 @@ function StatCard({
   help?: string;
   valueClassName?: string;
 }) {
+  const { open, placement, shiftX, containerRef, popoverRef, startPress, clearTimer } =
+    useLongPressInfo<HTMLDivElement>();
+
   return (
-    <div className="flex min-w-0 flex-col items-center gap-1 rounded-stat border border-border-amber bg-card readout-card px-1 py-3">
+    <div
+      ref={containerRef}
+      onPointerDown={startPress}
+      onPointerUp={clearTimer}
+      onPointerLeave={clearTimer}
+      onPointerCancel={clearTimer}
+      className="relative flex min-w-0 flex-col items-center gap-1 rounded-stat border border-border-amber bg-card readout-card px-1 py-2"
+    >
       <span className="flex w-full items-center justify-between gap-0.5">
         <span className="min-w-0 text-[11px] font-semibold uppercase tracking-tight text-muted-foreground">
           {label}
         </span>
-        <span className="flex items-center gap-1">
-          {onClear && (
-            <button
-              type="button"
-              onClick={onClear}
-              aria-label={`Clear ${label}`}
-              className="inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-control text-muted-foreground transition-colors duration-150 hover:bg-accent hover:text-foreground active:scale-90"
+        {onClear && (
+          <button
+            type="button"
+            onClick={onClear}
+            aria-label={`Clear ${label}`}
+            className="inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-control text-muted-foreground transition-colors duration-150 hover:bg-accent hover:text-foreground active:scale-90"
+          >
+            <svg
+              aria-hidden="true"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth={2}
+              className="h-3 w-3"
             >
-              <svg
-                aria-hidden="true"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth={2}
-                className="h-3 w-3"
-              >
-                <line x1="18" y1="6" x2="6" y2="18" />
-                <line x1="6" y1="6" x2="18" y2="18" />
-              </svg>
-            </button>
-          )}
-          {help && <HelpTip label={`More about ${label}`}>{help}</HelpTip>}
-        </span>
+              <line x1="18" y1="6" x2="6" y2="18" />
+              <line x1="6" y1="6" x2="18" y2="18" />
+            </svg>
+          </button>
+        )}
       </span>
       <Stepper
         variant="ghost"
@@ -375,8 +382,14 @@ function StatCard({
         max={max}
         onChange={onChange}
         label={label}
+        className="h-9"
         valueClassName={valueClassName}
       />
+      {open && help && (
+        <InfoPopover placement={placement} shiftX={shiftX} popoverRef={popoverRef} title={label}>
+          {help}
+        </InfoPopover>
+      )}
     </div>
   );
 }

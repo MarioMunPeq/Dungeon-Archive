@@ -47,9 +47,9 @@
 
 ## Iconography & Badges
 
-27. `?` help badges are small, subtle, tinted-background circles — never large or attention-grabbing. Gated on the app-wide "beginner mode" toggle.
-28. Every stat/term on a given screen either all have a `?` badge, or none do — never a mix on the same screen.
-29. Conditions (Combat) use long-press for their info popover instead of a `?` badge, since a short tap is already used to toggle the condition on/off.
+27. Stats, ability scores, items, and conditions use long-press (hold ~500ms) to show an info popover — never a per-item `?` badge. Long-press is purely additive: a short tap still performs its normal action.
+28. Section-level help stays as a small `?` badge on the section header (short taps there aren't claimed by another action). Per-item `?` badges are removed app-wide — never mix per-item and section-level help on the same screen.
+29. A top-bar help button (icon order: Help → Palette → Cloud) explains the long-press interaction in one sentence. It is persistent, not gated on the "beginner mode" toggle.
 30. Any popover/tooltip must clamp to stay fully within the viewport — never allowed to render off-screen, regardless of trigger position.
 31. Favorite (heart) and session-pin icons are not used on list/search result rows or entity detail pages — removed app-wide as of the search/list redesign pass.
 
