@@ -1,4 +1,4 @@
-import { SCHOOL_NAMES, METADATA_SEPARATOR } from "@/compendium";
+import { SCHOOL_NAMES, METADATA_SEPARATOR, extractSpellRoll } from "@/compendium";
 import type { Spell } from "@/compendium";
 import { Section } from "@/components/ui/Section";
 import { ContentRenderer } from "@/components/content";
@@ -13,6 +13,7 @@ interface SpellRendererProps {
 export function SpellRenderer({ entity }: SpellRendererProps) {
   const levelText = entity.level === 0 ? "Cantrip" : `Level ${entity.level}`;
   const schoolName = SCHOOL_NAMES[entity.school] ?? entity.school;
+  const roll = extractSpellRoll(entity.description);
 
   return (
     <Stack gap="md">
@@ -21,6 +22,7 @@ export function SpellRenderer({ entity }: SpellRendererProps) {
       </Subtitle>
 
       <EntityMetadataGrid>
+        {roll && <EntityProperty label="Damage" value={roll} stat />}
         <EntityProperty label="Casting Time" value={entity.castingTime} stat />
         <EntityProperty label="Range" value={entity.range} stat />
         <EntityProperty label="Duration" value={entity.duration} stat />

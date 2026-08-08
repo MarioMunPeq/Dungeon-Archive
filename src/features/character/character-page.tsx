@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { useCharacters, userStore } from "@/user-state";
 import type { CharacterReference, CharacterReferenceUpdate } from "@/user-state";
 import {
+  extractSpellRoll,
   formatDamage,
   getEntitiesForCategory,
   SCHOOL_NAMES,
@@ -267,6 +268,7 @@ function WeaponPreview({ item, href }: { item: Equipment; href: string }) {
 function SpellPreview({ spell, href }: { spell: Spell; href: string }) {
   const levelText = spell.level === 0 ? "Cantrip" : `Level ${spell.level}`;
   const school = SCHOOL_NAMES[spell.school] ?? spell.school;
+  const roll = extractSpellRoll(spell.description);
   const summary = firstParagraphText(spell.description);
   const flags = [spell.concentration && "Concentration", spell.ritual && "Ritual"].filter(
     Boolean,
@@ -277,6 +279,7 @@ function SpellPreview({ spell, href }: { spell: Spell; href: string }) {
       <p className="text-xs font-semibold text-foreground">
         {levelText} {METADATA_SEPARATOR} {school}
       </p>
+      {roll && <p className="text-base font-bold tabular-nums text-foreground">{roll}</p>}
       {details.length > 0 && (
         <p className="text-xs text-foreground-subtle">{details.join(` ${METADATA_SEPARATOR} `)}</p>
       )}

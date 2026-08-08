@@ -3,6 +3,8 @@ import { getSourceInfo, formatSource, formatEdition } from "../../src/compendium
 import { referenceToUrl, referenceLabel } from "../../src/compendium/reference";
 import { slugFromCanonicalId, canonicalIdFromSlug } from "../../src/compendium/slug";
 import { categoryLabel, categoryLabelSingular } from "../../src/compendium/category-registry";
+import { extractSpellRoll } from "../../src/compendium/spell-roll";
+import type { ContentBlock } from "../../src/types/content-block";
 
 function test(description: string, fn: () => void): void {
   try {
@@ -111,6 +113,52 @@ test("categoryLabelSingular returns singular label", () => {
 
 test("categoryLabel fallback for unknown", () => {
   strictEqual(categoryLabel("unknown"), "unknown");
+});
+
+console.log("\nspell roll extraction\n");
+
+function spellDescription(text: string): readonly ContentBlock[] {
+  return [{ type: "paragraph", text }];
+}
+
+test("extractSpellRoll returns dice and capitalized type from prose", () => {
+  const blocks = spellDescription(
+    "A target must succeed on a Dexterity saving throw or take 1d6 acid damage.",
+  );
+  strictEqual(extractSpellRoll(blocks), "1d6 Acid");
+});
+
+test("extractSpellRoll includes flat modifier", () => {
+  const blocks = spellDescription("The dart hits and deals 1d4 + 1 force damage to the target.");
+  strictEqual(extractSpellRoll(blocks), "1d4 + 1 Force");
+});
+
+test("extractSpellRoll returns bare dice when no damage type word", () => {
+  const blocks = spellDescription("The target takes 2d6 damage on a failed save.");
+  strictEqual(extractSpellRoll(blocks), "2d6");
+});
+
+test("extractSpellRoll ignores later scaling paragraphs", () => {
+  const blocks: readonly ContentBlock[] = [
+    { type: "paragraph", text: "You hurl a bubble of acid dealing 1d6 acid damage." },
+    { type: "paragraph", text: "This spell's damage increases by 1d6 when you reach 5th level (2d6)." },
+  ];
+  strictEqual(extractSpellRoll(blocks), "1d6 Acid");
+});
+
+test("extractSpellRoll returns undefined for utility spells", () => {
+  const blocks = spellDescription("You touch one object that is no larger than 10 feet in any dimension.");
+  strictEqual(extractSpellRoll(blocks), undefined);
+});
+
+test("extractSpellRoll walks nested entries blocks", () => {
+  const blocks: readonly ContentBlock[] = [
+    {
+      type: "entries",
+      blocks: [{ type: "paragraph", text: "Each creature in the cone takes 8d6 fire damage." }],
+    },
+  ];
+  strictEqual(extractSpellRoll(blocks), "8d6 Fire");
 });
 
 console.log(
