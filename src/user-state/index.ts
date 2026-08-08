@@ -12,23 +12,23 @@ export {
   useIsInSession,
   useIsInAdventure,
   useActiveAdventure,
-  useActivePlayer,
-  usePrimaryPlayer,
+  useActiveCharacter,
+  usePrimaryCharacter,
   useAdventureEntityIds,
   useFavoriteIds,
   useSessionIds,
   useRecentEntities,
   useRecentSearches,
-  usePlayerReferences,
+  useCharacters,
   useOnboardingComplete,
   useBeginnerMode,
   useTheme,
 } from "./store";
-export type { UserStore, PlayerReferenceUpdate } from "./store";
+export type { UserStore, CharacterReferenceUpdate } from "./store";
 export type {
   UserState,
   Adventure,
-  PlayerReference,
+  CharacterReference,
   AbilityScores,
   HitPoints,
   CombatValues,

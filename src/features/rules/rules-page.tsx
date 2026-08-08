@@ -87,7 +87,7 @@ const RULE_SECTIONS: readonly RuleSectionData[] = [
       "Saving Throw: the target rolls against your spell save DC.",
       "Concentration: if the spell says so, you lose it if you take damage and fail a Constitution save.",
     ],
-    help: "Your spell save DC and spell attack bonus live on your character in the Party tab.",
+    help: "Your spell save DC and spell attack bonus live on your character in the Character tab.",
   },
 ];
 

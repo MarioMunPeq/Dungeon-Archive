@@ -3,7 +3,7 @@ export const ROUTES = {
   SEARCH: "/search",
   RULES: "/rules",
   COMBAT: "/combat",
-  PARTY: "/party",
+  CHARACTER: "/character",
 } as const;
 
 export const APP_NAME = "Dungeon Archive";

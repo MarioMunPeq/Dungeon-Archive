@@ -2,32 +2,32 @@ import { memo, useState } from "react";
 import { Link } from "react-router-dom";
 import { Button, ConfirmDialog } from "@/components/ui";
 import { userStore } from "@/user-state";
-import type { PlayerReference } from "@/user-state";
+import type { CharacterReference } from "@/user-state";
 
 interface CharacterCardProps {
-  readonly player: PlayerReference | null;
+  readonly character: CharacterReference | null;
 }
 
-function classLine(player: PlayerReference): string {
-  return player.class
-    ? `${player.subclass ? `${player.class} (${player.subclass})` : player.class} · Lv ${player.level}`
-    : `Lv ${player.level}`;
+function classLine(character: CharacterReference): string {
+  return character.class
+    ? `${character.subclass ? `${character.class} (${character.subclass})` : character.class} · Lv ${character.level}`
+    : `Lv ${character.level}`;
 }
 
-export const CharacterCard = memo(function CharacterCard({ player }: CharacterCardProps) {
+export const CharacterCard = memo(function CharacterCard({ character }: CharacterCardProps) {
   const [confirmingRemove, setConfirmingRemove] = useState(false);
 
-  if (player === null) {
+  if (character === null) {
     return (
       <div className="rounded-card border border-border-amber bg-surface readout-card p-4">
         <div className="flex flex-col gap-3">
           <div className="flex flex-col gap-1">
             <h3 className="text-sm font-semibold text-foreground">Create your first character</h3>
             <p className="text-xs leading-relaxed text-muted-foreground">
-              Add a character to start tracking your party and combat state.
+              Add a character to start tracking your combat state.
             </p>
           </div>
-          <Link to="/party" className="w-fit">
+          <Link to="/character" className="w-fit">
             <Button size="sm">Create Character</Button>
           </Link>
         </div>
@@ -41,14 +41,14 @@ export const CharacterCard = memo(function CharacterCard({ player }: CharacterCa
         to="/combat"
         className="flex flex-col gap-1 p-4 pr-12 transition-opacity duration-primary ease-standard hover:opacity-95 active:opacity-75"
       >
-        <p className="truncate text-xl font-bold text-foreground">{player.name}</p>
-        <p className="truncate text-xs text-muted-foreground">{classLine(player)}</p>
+        <p className="truncate text-xl font-bold text-foreground">{character.name}</p>
+        <p className="truncate text-xs text-muted-foreground">{classLine(character)}</p>
       </Link>
       <button
         type="button"
         onClick={() => setConfirmingRemove(true)}
-        aria-label={`Remove ${player.name}`}
-        title={`Remove ${player.name}`}
+        aria-label={`Remove ${character.name}`}
+        title={`Remove ${character.name}`}
         className="hitbox-expand absolute right-2 top-2 inline-flex h-8 w-8 items-center justify-center rounded-control text-muted-foreground transition-colors duration-150 hover:bg-accent hover:text-foreground active:scale-90 active:bg-accent/80"
       >
         <svg
@@ -68,13 +68,13 @@ export const CharacterCard = memo(function CharacterCard({ player }: CharacterCa
       </button>
       {confirmingRemove && (
         <ConfirmDialog
-          title={`Remove ${player.name}?`}
-          message="This removes the character from your party, along with their hit points and combat state. This can't be undone."
+          title={`Remove ${character.name}?`}
+          message="This removes the character along with their hit points and combat state. This can't be undone."
           confirmLabel="Remove"
           destructive
           onCancel={() => setConfirmingRemove(false)}
           onConfirm={() => {
-            userStore.getState().removePlayerReference(player.id);
+            userStore.getState().removeCharacter(character.id);
             setConfirmingRemove(false);
           }}
         />

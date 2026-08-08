@@ -1,6 +1,6 @@
 /**
- * Player Quick Access — a fast-consultation reference, not a character sheet.
- * Only repeatedly-consulted combat values and references are stored.
+ * Character Reference — a fast-consultation reference, not a full character
+ * sheet. Only repeatedly-consulted combat values and references are stored.
  * Only canonical IDs are stored, never full entity data.
  * The Compendium is the source of truth for entity resolution.
  *
@@ -33,7 +33,7 @@ export interface CombatValues {
   readonly spellAttackBonus?: number;
 }
 
-export interface PlayerReference {
+export interface CharacterReference {
   readonly id: string;
   readonly name: string;
   readonly class: string;
@@ -71,15 +71,15 @@ export interface UserState {
   readonly session: string[];
   readonly adventures: Adventure[];
   readonly activeAdventureId: string | null;
-  readonly players: PlayerReference[];
-  readonly activePlayerId: string | null;
+  readonly characters: CharacterReference[];
+  readonly activeCharacterId: string | null;
   readonly beginnerMode: boolean;
   readonly onboardingComplete: boolean;
   readonly theme: Theme;
 }
 
 export const STORAGE_KEY = "dungeon:userState:v1";
-export const CURRENT_VERSION = 12;
+export const CURRENT_VERSION = 13;
 export const DEFAULT_THEME: Theme = "teal";
 export const THEMES: readonly Theme[] = ["jade", "amber", "teal"];
 
@@ -96,8 +96,8 @@ export function createDefaultState(): UserState {
     session: [],
     adventures: [],
     activeAdventureId: null,
-    players: [],
-    activePlayerId: null,
+    characters: [],
+    activeCharacterId: null,
     beginnerMode: true,
     onboardingComplete: false,
     theme: DEFAULT_THEME,

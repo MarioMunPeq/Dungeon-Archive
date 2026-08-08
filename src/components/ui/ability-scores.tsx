@@ -165,15 +165,17 @@ export function AbilityScores({ scores, onChange, columns = 2 }: AbilityScoresPr
               compact && "flex-col gap-0 px-1.5 py-1",
             )}
           >
-            <span
-              className={cn(
-                "flex shrink-0 items-center gap-1 text-xs font-semibold uppercase text-muted-foreground",
-                compact ? "tracking-normal leading-tight" : "tracking-wide",
-              )}
-            >
-              {ABILITY_LABELS[key]}
-              <HelpTip label={`What is ${ABILITY_LABELS[key]}?`}>{ABILITY_HELP[key]}</HelpTip>
-            </span>
+            {!compact && (
+              <span
+                className={cn(
+                  "flex shrink-0 items-center gap-1 text-xs font-semibold uppercase text-muted-foreground",
+                  compact ? "tracking-normal leading-tight" : "tracking-wide",
+                )}
+              >
+                {ABILITY_LABELS[key]}
+                <HelpTip label={`What is ${ABILITY_LABELS[key]}?`}>{ABILITY_HELP[key]}</HelpTip>
+              </span>
+            )}
             <span className={cn("flex items-center", compact ? "gap-1" : "gap-1.5")}>
               <span
                 className={cn(

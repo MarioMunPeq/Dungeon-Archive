@@ -128,13 +128,13 @@ await test("upload stores metadata, updatedAt and appVersion", async () => {
   ok(snapshot.updatedAt >= now, "updatedAt is set");
   ok(snapshot.appVersion.length > 0, "appVersion is set");
   strictEqual(snapshot.metadata.adventureCount, state.adventures.length);
-  strictEqual(snapshot.metadata.playerCount, state.players.length);
+  strictEqual(snapshot.metadata.characterCount, state.characters.length);
   strictEqual(snapshot.metadata.favoriteCount, 1);
   strictEqual(snapshot.metadata.sessionCount, 1);
   strictEqual(snapshot.metadata.activeAdventureTitle, null);
 });
 
-await test("computeMetadata counts adventures, players, favorites and sessions", () => {
+await test("computeMetadata counts adventures, characters, favorites and sessions", () => {
   const base = userStore.getState();
   const meta = computeMetadata(
     {
@@ -153,7 +153,7 @@ await test("computeMetadata counts adventures, players, favorites and sessions",
         },
       ],
       activeAdventureId: "adv-1",
-      players: [
+      characters: [
         {
           id: "p-1",
           name: "Luna",
@@ -185,7 +185,7 @@ await test("computeMetadata counts adventures, players, favorites and sessions",
     1234,
   );
   strictEqual(meta.adventureCount, 1);
-  strictEqual(meta.playerCount, 1);
+  strictEqual(meta.characterCount, 1);
   strictEqual(meta.favoriteCount, 3);
   strictEqual(meta.sessionCount, 2);
   strictEqual(meta.activeAdventureTitle, "Curse of Strahd");

@@ -51,7 +51,7 @@ function plural(n: number, singular: string, pluralText: string): string {
 
 interface PreviewCounts {
   readonly adventureCount: number;
-  readonly playerCount: number;
+  readonly characterCount: number;
   readonly favoriteCount: number;
   readonly sessionCount: number;
   readonly activeAdventureTitle: string | null;
@@ -61,7 +61,7 @@ function previewCounts(snapshot: CloudSnapshot): PreviewCounts {
   const meta = snapshot.metadata;
   return {
     adventureCount: meta?.adventureCount ?? snapshot.state.adventures.length,
-    playerCount: meta?.playerCount ?? snapshot.state.players.length,
+    characterCount: meta?.characterCount ?? snapshot.state.characters.length,
     favoriteCount: meta?.favoriteCount ?? snapshot.state.favorites.length,
     sessionCount: meta?.sessionCount ?? snapshot.state.session.length,
     activeAdventureTitle: meta?.activeAdventureTitle ?? null,
@@ -339,7 +339,7 @@ export function BackupPage() {
                     {plural(counts.adventureCount, "adventure", "adventures")}
                   </p>
                   <p className="text-foreground">
-                    {plural(counts.playerCount, "player", "players")}
+                    {plural(counts.characterCount, "character", "characters")}
                   </p>
                   <p className="text-foreground">
                     {plural(counts.favoriteCount, "favorite", "favorites")}

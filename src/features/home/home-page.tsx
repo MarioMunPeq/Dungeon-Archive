@@ -4,7 +4,7 @@ import { categoryLabelSingular } from "@/compendium";
 import type { EntityCardData } from "@/compendium";
 import { entityRefFromCanonicalId } from "@/components/entity";
 import { Button } from "@/components/ui";
-import { usePrimaryPlayer, useRecentEntities, useSessionIds } from "@/user-state";
+import { usePrimaryCharacter, useRecentEntities, useSessionIds } from "@/user-state";
 import { CharacterCard } from "./character-card";
 import { QuickTiles } from "./quick-tiles";
 import { RecentEntityCard } from "./recent-entity-card";
@@ -37,7 +37,7 @@ function entityCardFromCanonicalId(canonicalId: string): EntityCardData | null {
 }
 
 export function HomePage() {
-  const player = usePrimaryPlayer();
+  const character = usePrimaryCharacter();
   const sessionIds = useSessionIds(10);
   const recentIds = useRecentEntities(10);
 
@@ -63,7 +63,7 @@ export function HomePage() {
     <div className="flex min-h-full flex-col justify-between gap-5 px-4 py-6">
       <section className="flex flex-col gap-3">
         <SectionHeader title="Current Character" to="/combat" />
-        <CharacterCard player={player} />
+        <CharacterCard character={character} />
       </section>
 
       <QuickTiles sessionCount={sessionCards.length} />

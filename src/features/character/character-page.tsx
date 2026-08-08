@@ -1,7 +1,7 @@
 import { useState, useCallback, useMemo } from "react";
 import { Link } from "react-router-dom";
-import { usePlayerReferences, userStore } from "@/user-state";
-import type { PlayerReference, PlayerReferenceUpdate } from "@/user-state";
+import { useCharacters, userStore } from "@/user-state";
+import type { CharacterReference, CharacterReferenceUpdate } from "@/user-state";
 import {
   formatDamage,
   getEntitiesForCategory,
@@ -23,7 +23,7 @@ import { cn } from "@/lib/utils";
 type PickerKind = "spell" | "weapon" | "magicitem";
 
 const PICKER_TITLES: Record<PickerKind, string> = {
-  spell: "Known Spells",
+  spell: "Spells",
   weapon: "Weapons",
   magicitem: "Magic Items",
 };
@@ -191,7 +191,7 @@ function buildCandidates(kind: PickerKind): PickerCandidate[] {
   return out.sort((a, b) => a.name.localeCompare(b.name));
 }
 
-function classLine(reference: PlayerReference): string {
+function classLine(reference: CharacterReference): string {
   if (!reference.class) return "Add class, subclass, and level";
   const cls = reference.subclass ? `${reference.class} (${reference.subclass})` : reference.class;
   return `${cls} · Lv ${reference.level}`;
@@ -294,9 +294,9 @@ function SpellPreview({ spell, href }: { spell: Spell; href: string }) {
   );
 }
 
-function createEmptyReference(): Omit<PlayerReference, "id"> {
+function createEmptyCharacter(): Omit<CharacterReference, "id"> {
   return {
-    name: "New Player",
+    name: "New Character",
     class: "",
     level: 1,
     subclass: undefined,
@@ -551,11 +551,11 @@ function SectionLabel({ children }: { children: string }) {
   );
 }
 
-function PlayerReferenceCard({
+function CharacterSheet({
   reference,
   autoEditName,
 }: {
-  reference: PlayerReference;
+  reference: CharacterReference;
   autoEditName: boolean;
 }) {
   const [editing, setEditing] = useState<"name" | "note" | null>(autoEditName ? "name" : null);
@@ -567,8 +567,8 @@ function PlayerReferenceCard({
   const candidates = useMemo(() => (picker ? buildCandidates(picker) : []), [picker]);
 
   const update = useCallback(
-    (data: PlayerReferenceUpdate) => {
-      userStore.getState().updatePlayerReference(reference.id, data);
+    (data: CharacterReferenceUpdate) => {
+      userStore.getState().updateCharacter(reference.id, data);
     },
     [reference.id],
   );
@@ -626,8 +626,8 @@ function PlayerReferenceCard({
     [reference, update],
   );
 
-  const removePlayer = useCallback(() => {
-    userStore.getState().removePlayerReference(reference.id);
+  const removeCharacter = useCallback(() => {
+    userStore.getState().removeCharacter(reference.id);
   }, [reference.id]);
 
   const subclassOptions = reference.class ? (SUBCLASSES[reference.class] ?? []) : [];
@@ -729,7 +729,7 @@ function PlayerReferenceCard({
 
       <div className="flex flex-col gap-2">
         <span className="flex items-center gap-1 border-l-2 border-primary pl-2 text-xs font-bold uppercase tracking-wide text-muted-foreground">
-          Combat Stats
+          Combat
           <HelpTip label="What are combat stats?">
             The numbers you check every fight. Armor Class is what enemies must beat to hit you.
             Passive Perception notices hidden things.
@@ -765,7 +765,7 @@ function PlayerReferenceCard({
 
       <div className="flex flex-col gap-2">
         <span className="flex items-center gap-1 border-l-2 border-primary pl-2 text-xs font-bold uppercase tracking-wide text-muted-foreground">
-          Ability Scores
+          Abilities
           <HelpTip label="What are ability scores?">
             Six scores describe your character's strengths. The modifier underneath is the bonus you
             add to rolls — higher scores mean bigger bonuses.
@@ -780,7 +780,7 @@ function PlayerReferenceCard({
 
       <div className="flex flex-col gap-4">
         <ReferenceGroup
-          title="Known Spells"
+          title="Spells"
           help="Spells your character can cast. Add the ones you use most for quick access."
           kind="spell"
           ids={reference.knownSpellCanonicalIds}
@@ -807,7 +807,7 @@ function PlayerReferenceCard({
       </div>
 
       <div className="flex flex-col gap-2">
-        <SectionLabel>Quick Note</SectionLabel>
+        <SectionLabel>Notes</SectionLabel>
         {editing === "note" ? (
           <InlineTextareaEditor
             value={draft}
@@ -855,7 +855,7 @@ function PlayerReferenceCard({
           onCancel={() => setConfirmRemove(false)}
           onConfirm={() => {
             setConfirmRemove(false);
-            removePlayer();
+            removeCharacter();
           }}
         />
       )}
@@ -863,24 +863,24 @@ function PlayerReferenceCard({
   );
 }
 
-export function PartyPage() {
-  const players = usePlayerReferences();
-  const activePlayerId = userStore((s) => s.activePlayerId);
+export function CharacterPage() {
+  const characters = useCharacters();
+  const activeCharacterId = userStore((s) => s.activeCharacterId);
   const [creatingId, setCreatingId] = useState<string | null>(null);
 
-  const activePlayer = useMemo(() => {
-    if (!activePlayerId) return players[0] ?? null;
-    return players.find((p) => p.id === activePlayerId) ?? players[0] ?? null;
-  }, [players, activePlayerId]);
+  const activeCharacter = useMemo(() => {
+    if (!activeCharacterId) return characters[0] ?? null;
+    return characters.find((c) => c.id === activeCharacterId) ?? characters[0] ?? null;
+  }, [characters, activeCharacterId]);
 
   const handleAdd = useCallback(() => {
-    const id = userStore.getState().addPlayerReference(createEmptyReference());
+    const id = userStore.getState().addCharacter(createEmptyCharacter());
     setCreatingId(id);
   }, []);
 
   return (
     <div className="flex flex-col gap-3 px-4 py-4">
-      {players.length === 0 ? (
+      {characters.length === 0 ? (
         <EmptyState
           title="No character yet"
           description="Add your character to start tracking ability scores, combat stats, and the spells and items you use most."
@@ -903,22 +903,22 @@ export function PartyPage() {
         />
       ) : (
         <>
-          {players.length > 1 && (
+          {characters.length > 1 && (
             <div className="flex flex-wrap gap-2">
-              {players.map((player) => (
+              {characters.map((character) => (
                 <button
-                  key={player.id}
+                  key={character.id}
                   type="button"
-                  onClick={() => userStore.getState().setActivePlayer(player.id)}
-                  aria-pressed={player.id === activePlayerId}
+                  onClick={() => userStore.getState().setActiveCharacter(character.id)}
+                  aria-pressed={character.id === activeCharacterId}
                   className={cn(
                     "rounded-control border border-border px-3 py-1 text-xs font-medium transition-all duration-150 active:scale-95",
-                    player.id === activePlayerId
+                    character.id === activeCharacterId
                       ? "bg-primary text-primary-foreground"
                       : "text-muted-foreground hover:bg-accent hover:text-foreground",
                   )}
                 >
-                  {player.name}
+                  {character.name}
                 </button>
               ))}
               <Button variant="ghost" size="sm" onClick={handleAdd}>
@@ -926,11 +926,11 @@ export function PartyPage() {
               </Button>
             </div>
           )}
-          {activePlayer && (
-            <PlayerReferenceCard
-              key={activePlayer.id}
-              reference={activePlayer}
-              autoEditName={activePlayer.id === creatingId}
+          {activeCharacter && (
+            <CharacterSheet
+              key={activeCharacter.id}
+              reference={activeCharacter}
+              autoEditName={activeCharacter.id === creatingId}
             />
           )}
         </>

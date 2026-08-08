@@ -162,7 +162,7 @@ await test("saveSnapshot then fetchSnapshot round-trips a CloudSnapshot", async 
     metadata: {
       createdAt: 1,
       adventureCount: 0,
-      playerCount: 0,
+      characterCount: 0,
       favoriteCount: 1,
       sessionCount: 0,
       activeAdventureTitle: null,
@@ -183,7 +183,7 @@ await test("saveSnapshot writes under users/{uid}/backup", async () => {
     metadata: {
       createdAt: 1,
       adventureCount: 0,
-      playerCount: 0,
+      characterCount: 0,
       favoriteCount: 1,
       sessionCount: 0,
       activeAdventureTitle: null,
@@ -205,7 +205,7 @@ await test("saveSnapshot rejects when signed out (UID never trusted)", async () 
         metadata: {
           createdAt: 1,
           adventureCount: 0,
-          playerCount: 0,
+          characterCount: 0,
           favoriteCount: 0,
           sessionCount: 0,
           activeAdventureTitle: null,

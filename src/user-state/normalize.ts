@@ -1,9 +1,9 @@
 import type {
   AbilityScores,
   Adventure,
+  CharacterReference,
   CombatValues,
   HitPoints,
-  PlayerReference,
   Theme,
   UserState,
 } from "./types";
@@ -91,7 +91,7 @@ function normalizeAdventures(raw: unknown): Adventure[] {
   return valid;
 }
 
-const MAX_PLAYER_REFERENCES = 12;
+const MAX_CHARACTER_REFERENCES = 12;
 const MAX_SPELL_IDS = 50;
 const MAX_WEAPON_IDS = 10;
 const MAX_MAGIC_ITEM_IDS = 30;
@@ -181,7 +181,7 @@ function normalizeCombatValues(raw: unknown): CombatValues {
   };
 }
 
-function normalizePlayerReference(raw: unknown): PlayerReference | null {
+function normalizeCharacterReference(raw: unknown): CharacterReference | null {
   if (!raw || typeof raw !== "object") return null;
   const p = raw as Record<string, unknown>;
   if (typeof p.id !== "string" || !p.id) return null;
@@ -219,14 +219,14 @@ function normalizePlayerReference(raw: unknown): PlayerReference | null {
   };
 }
 
-function normalizePlayers(raw: unknown): PlayerReference[] {
+function normalizeCharacters(raw: unknown): CharacterReference[] {
   if (!Array.isArray(raw)) return [];
-  const valid: PlayerReference[] = [];
+  const valid: CharacterReference[] = [];
   for (const item of raw) {
-    const reference = normalizePlayerReference(item);
+    const reference = normalizeCharacterReference(item);
     if (reference) valid.push(reference);
   }
-  if (valid.length > MAX_PLAYER_REFERENCES) valid.length = MAX_PLAYER_REFERENCES;
+  if (valid.length > MAX_CHARACTER_REFERENCES) valid.length = MAX_CHARACTER_REFERENCES;
   return valid;
 }
 
@@ -235,16 +235,16 @@ export function normalize(
     UserState,
     | "adventures"
     | "activeAdventureId"
-    | "players"
-    | "activePlayerId"
+    | "characters"
+    | "activeCharacterId"
     | "beginnerMode"
     | "onboardingComplete"
     | "theme"
   > & {
     adventures?: Adventure[];
     activeAdventureId?: string | null;
-    players?: PlayerReference[];
-    activePlayerId?: string | null;
+    characters?: CharacterReference[];
+    activeCharacterId?: string | null;
     beginnerMode?: boolean;
     onboardingComplete?: boolean;
     theme?: Theme;
@@ -255,10 +255,10 @@ export function normalize(
     state.activeAdventureId && adventures.some((a) => a.id === state.activeAdventureId)
       ? state.activeAdventureId
       : null;
-  const players = normalizePlayers(state.players ?? []);
-  const activePlayerId =
-    state.activePlayerId && players.some((p) => p.id === state.activePlayerId)
-      ? state.activePlayerId
+  const characters = normalizeCharacters(state.characters ?? []);
+  const activeCharacterId =
+    state.activeCharacterId && characters.some((c) => c.id === state.activeCharacterId)
+      ? state.activeCharacterId
       : null;
 
   return {
@@ -269,8 +269,8 @@ export function normalize(
     session: normalizeSession(state.session),
     adventures,
     activeAdventureId,
-    players,
-    activePlayerId,
+    characters,
+    activeCharacterId,
     beginnerMode: state.beginnerMode === true,
     onboardingComplete: state.onboardingComplete === true,
     theme: isTheme(state.theme) ? state.theme : DEFAULT_THEME,

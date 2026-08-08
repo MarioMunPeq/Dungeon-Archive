@@ -41,9 +41,9 @@ async function main() {
     strictEqual(state.backTo, undefined);
   });
 
-  test("party shows fixed title without back", () => {
-    const state = getTopBarState("/party");
-    strictEqual(state.title, "Party");
+  test("character shows fixed title without back", () => {
+    const state = getTopBarState("/character");
+    strictEqual(state.title, "Character");
     strictEqual(state.backTo, undefined);
   });
 

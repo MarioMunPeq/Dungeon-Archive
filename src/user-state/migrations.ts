@@ -1,7 +1,7 @@
-import type { Adventure, PlayerReference, Theme, UserState } from "./types";
+import type { Adventure, CharacterReference, Theme, UserState } from "./types";
 import { CURRENT_VERSION, DEFAULT_THEME, createDefaultState, isTheme } from "./types";
 
-function legacyMemberToPlayerReference(raw: unknown): Record<string, unknown> | null {
+function legacyMemberToCharacterReference(raw: unknown): Record<string, unknown> | null {
   if (!raw || typeof raw !== "object") return null;
   const m = raw as Record<string, unknown>;
   const name = typeof m.name === "string" ? m.name.trim() : "";
@@ -88,7 +88,7 @@ const migrations: Record<number, (state: Record<string, unknown>) => Record<stri
   7: (raw) => {
     const party = Array.isArray(raw.party) ? raw.party : [];
     const players = party
-      .map(legacyMemberToPlayerReference)
+      .map(legacyMemberToCharacterReference)
       .filter((p): p is Record<string, unknown> => p !== null);
     const { party: _legacy, ...rest } = raw;
     return {
@@ -159,6 +159,28 @@ const migrations: Record<number, (state: Record<string, unknown>) => Record<stri
       beginnerMode: typeof raw.beginnerMode === "boolean" ? raw.beginnerMode : true,
     };
   },
+  13: (raw) => {
+    const hasLegacy = Array.isArray(raw.players);
+    const characters = hasLegacy
+      ? raw.players
+      : Array.isArray(raw.characters)
+        ? raw.characters
+        : [];
+    const activeCharacterId = hasLegacy
+      ? typeof raw.activePlayerId === "string"
+        ? raw.activePlayerId
+        : null
+      : typeof raw.activeCharacterId === "string"
+        ? raw.activeCharacterId
+        : null;
+    const { players: _legacyPlayers, activePlayerId: _legacyActive, ...rest } = raw;
+    return {
+      ...rest,
+      version: 13,
+      characters,
+      activeCharacterId,
+    };
+  },
 };
 
 export function migrate(raw: unknown): UserState {
@@ -198,6 +220,9 @@ export function migrate(raw: unknown): UserState {
   if (version < 10) {
     migrated = migrations[10]!(migrated);
   }
+  if (version < 13) {
+    migrated = migrations[13]!(migrated);
+  }
 
   const result = migrated as unknown as Record<string, unknown>;
   if (
@@ -218,8 +243,10 @@ export function migrate(raw: unknown): UserState {
     adventures: Array.isArray(result.adventures) ? (result.adventures as Adventure[]) : [],
     activeAdventureId:
       typeof result.activeAdventureId === "string" ? result.activeAdventureId : null,
-    players: Array.isArray(result.players) ? (result.players as PlayerReference[]) : [],
-    activePlayerId: typeof result.activePlayerId === "string" ? result.activePlayerId : null,
+    characters: Array.isArray(result.characters)
+      ? (result.characters as CharacterReference[])
+      : [],
+    activeCharacterId: typeof result.activeCharacterId === "string" ? result.activeCharacterId : null,
     beginnerMode: typeof result.beginnerMode === "boolean" ? result.beginnerMode : true,
     onboardingComplete:
       typeof result.onboardingComplete === "boolean" ? result.onboardingComplete : false,

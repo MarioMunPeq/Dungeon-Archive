@@ -9,7 +9,7 @@ export interface CloudUser {
 export interface CloudMetadata {
   readonly createdAt: number;
   readonly adventureCount: number;
-  readonly playerCount: number;
+  readonly characterCount: number;
   readonly favoriteCount: number;
   readonly sessionCount: number;
   readonly activeAdventureTitle: string | null;

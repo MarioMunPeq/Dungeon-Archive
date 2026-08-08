@@ -71,7 +71,7 @@ export function computeMetadata(state: UserState, now: number): CloudMetadata {
   return {
     createdAt: now,
     adventureCount: state.adventures.length,
-    playerCount: state.players.length,
+    characterCount: state.characters.length,
     favoriteCount: state.favorites.length,
     sessionCount: state.session.length,
     activeAdventureTitle: active ? active.title : null,

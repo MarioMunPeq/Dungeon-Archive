@@ -1,7 +1,7 @@
 import { memo, useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { Link } from "react-router-dom";
-import { usePlayerReferences, usePrimaryPlayer, userStore } from "@/user-state";
-import type { PlayerReference, PlayerReferenceUpdate } from "@/user-state";
+import { useCharacters, usePrimaryCharacter, userStore } from "@/user-state";
+import type { CharacterReference, CharacterReferenceUpdate } from "@/user-state";
 import { Button, EmptyState, HelpTip, Stepper, useConstrainedPopover } from "@/components/ui";
 import { resolveEntity } from "@/compendium";
 import type { Condition, ContentBlock } from "@/compendium";
@@ -73,14 +73,14 @@ const COMBAT_STATS: readonly {
   },
 ];
 
-function combatStatValue(player: PlayerReference, key: CombatStatKey): number {
+function combatStatValue(character: CharacterReference, key: CombatStatKey): number {
   switch (key) {
     case "armorClass":
-      return player.combatValues.armorClass;
+      return character.combatValues.armorClass;
     case "passivePerception":
-      return player.combatValues.passivePerception;
+      return character.combatValues.passivePerception;
     case "spellSaveDc":
-      return player.combatValues.spellSaveDc ?? 10;
+      return character.combatValues.spellSaveDc ?? 10;
   }
 }
 
@@ -214,26 +214,26 @@ const ConditionChip = memo(function ConditionChip({
   );
 });
 
-function PlayerSelector() {
-  const players = usePlayerReferences();
-  const activePlayerId = userStore((s) => s.activePlayerId);
-  if (players.length <= 1) return null;
+function CharacterSelector() {
+  const characters = useCharacters();
+  const activeCharacterId = userStore((s) => s.activeCharacterId);
+  if (characters.length <= 1) return null;
   return (
     <div className="flex flex-wrap gap-2">
-      {players.map((player) => (
+      {characters.map((character) => (
         <button
-          key={player.id}
+          key={character.id}
           type="button"
-          onClick={() => userStore.getState().setActivePlayer(player.id)}
-          aria-pressed={player.id === activePlayerId}
+          onClick={() => userStore.getState().setActiveCharacter(character.id)}
+          aria-pressed={character.id === activeCharacterId}
           className={cn(
             "rounded-control border border-border px-3 py-1 text-xs font-medium transition-all duration-150 active:scale-95",
-            player.id === activePlayerId
+            character.id === activeCharacterId
               ? "bg-primary text-primary-foreground"
               : "text-muted-foreground hover:bg-accent hover:text-foreground",
           )}
         >
-          {player.name}
+          {character.name}
         </button>
       ))}
     </div>
@@ -324,36 +324,36 @@ function TurnChecklist() {
   );
 }
 
-function CombatPlayerView({ player }: { player: PlayerReference }) {
+function CombatCharacterView({ character }: { character: CharacterReference }) {
   const update = useCallback(
-    (data: PlayerReferenceUpdate) => {
-      userStore.getState().updatePlayerReference(player.id, data);
+    (data: CharacterReferenceUpdate) => {
+      userStore.getState().updateCharacter(character.id, data);
     },
-    [player.id],
+    [character.id],
   );
 
-  const hpLow = player.hitPoints.max > 0 && player.hitPoints.current <= player.hitPoints.max / 2;
+  const hpLow = character.hitPoints.max > 0 && character.hitPoints.current <= character.hitPoints.max / 2;
 
   const hpPercent =
-    player.hitPoints.max > 0
+    character.hitPoints.max > 0
       ? Math.max(
           0,
-          Math.min(100, Math.round((player.hitPoints.current / player.hitPoints.max) * 100)),
+          Math.min(100, Math.round((character.hitPoints.current / character.hitPoints.max) * 100)),
         )
       : 0;
 
   const adjustHp = useCallback(
     (delta: number) => {
       const hp =
-        userStore.getState().players.find((p) => p.id === player.id)?.hitPoints ?? player.hitPoints;
+        userStore.getState().characters.find((p) => p.id === character.id)?.hitPoints ?? character.hitPoints;
       update({ hitPoints: { current: Math.min(Math.max(hp.current + delta, 0), hp.max) } });
     },
-    [player.id, player.hitPoints, update],
+    [character.id, character.hitPoints, update],
   );
 
   const toggleCondition = useCallback(
     (id: string) => {
-      const current = userStore.getState().players.find((p) => p.id === player.id);
+      const current = userStore.getState().characters.find((p) => p.id === character.id);
       if (!current) return;
       const activeConditions = current.activeConditions;
       const active = new Set(activeConditions);
@@ -361,7 +361,7 @@ function CombatPlayerView({ player }: { player: PlayerReference }) {
       else active.add(id);
       update({ activeConditions: [...active] });
     },
-    [player.id, update],
+    [character.id, update],
   );
 
   const toggleHandlers = useMemo(
@@ -369,7 +369,7 @@ function CombatPlayerView({ player }: { player: PlayerReference }) {
     [toggleCondition],
   );
 
-  const activeConditions = new Set(player.activeConditions);
+  const activeConditions = new Set(character.activeConditions);
 
   return (
     <div className="flex flex-col gap-4">
@@ -396,7 +396,7 @@ function CombatPlayerView({ player }: { player: PlayerReference }) {
             <Stepper
               variant="ghost"
               hiddenControls
-              value={player.hitPoints.current}
+              value={character.hitPoints.current}
               min={0}
               max={9999}
               onChange={(value) => update({ hitPoints: { current: value } })}
@@ -416,7 +416,7 @@ function CombatPlayerView({ player }: { player: PlayerReference }) {
             <Stepper
               variant="ghost"
               hiddenControls
-              value={player.hitPoints.max}
+              value={character.hitPoints.max}
               min={1}
               max={9999}
               onChange={(value) => update({ hitPoints: { max: value } })}
@@ -429,9 +429,9 @@ function CombatPlayerView({ player }: { player: PlayerReference }) {
         <div className="rounded-full bg-muted p-0.5">
           <div
             role="progressbar"
-            aria-valuenow={player.hitPoints.current}
+            aria-valuenow={character.hitPoints.current}
             aria-valuemin={0}
-            aria-valuemax={player.hitPoints.max}
+            aria-valuemax={character.hitPoints.max}
             className={cn(
               "h-2 rounded-full transition-all duration-150",
               hpLow ? "bg-destructive" : "bg-success",
@@ -485,14 +485,14 @@ function CombatPlayerView({ player }: { player: PlayerReference }) {
             this turn, then hit “Next turn” when your turn ends.
           </HelpTip>
         </div>
-        <TurnChecklist key={player.id} />
+        <TurnChecklist key={character.id} />
       </div>
 
       <div className="flex flex-col gap-3">
         <span className="flex items-center gap-2 border-l-2 border-primary pl-2 text-xs font-bold uppercase tracking-wide text-muted-foreground">
           Stats
           <HelpTip label="What are these numbers?">
-            These are your combat numbers. Edit them on your character in the Party tab.
+            These are your combat numbers. Edit them on your character in the Character tab.
           </HelpTip>
         </span>
         <div className="grid grid-cols-3 gap-2">
@@ -505,7 +505,7 @@ function CombatPlayerView({ player }: { player: PlayerReference }) {
                 {stat.label}
               </span>
               <span className="font-mono text-2xl font-bold tabular-nums text-foreground">
-                {combatStatValue(player, stat.key)}
+                {combatStatValue(character, stat.key)}
               </span>
             </div>
           ))}
@@ -516,14 +516,14 @@ function CombatPlayerView({ player }: { player: PlayerReference }) {
 }
 
 export function CombatPage() {
-  const player = usePrimaryPlayer();
+  const character = usePrimaryCharacter();
 
   return (
     <div className="flex flex-col gap-3 px-4 py-4">
-      {player === null ? (
+      {character === null ? (
         <EmptyState
           title="No character yet"
-          description="Add your character in the Party tab, then come back here to track hit points during combat."
+          description="Add your character in the Character tab, then come back here to track hit points during combat."
           icon={
             <svg
               aria-hidden="true"
@@ -540,15 +540,15 @@ export function CombatPage() {
             </svg>
           }
           action={
-            <Link to="/party">
-              <Button>Go to Party</Button>
+            <Link to="/character">
+              <Button>Go to Character</Button>
             </Link>
           }
         />
       ) : (
         <>
-          <PlayerSelector />
-          <CombatPlayerView player={player} />
+          <CharacterSelector />
+          <CombatCharacterView character={character} />
         </>
       )}
     </div>

@@ -6,7 +6,7 @@ import {
   SearchIcon,
   RulesIcon,
   CombatIcon,
-  PartyIcon,
+  CharacterIcon,
 } from "@/components/layout/nav-icons";
 
 const NAV_ITEMS = [
@@ -14,7 +14,7 @@ const NAV_ITEMS = [
   { to: ROUTES.SEARCH, label: "Search", icon: SearchIcon },
   { to: ROUTES.RULES, label: "Rules", icon: RulesIcon },
   { to: ROUTES.COMBAT, label: "Combat", icon: CombatIcon },
-  { to: ROUTES.PARTY, label: "Party", icon: PartyIcon },
+  { to: ROUTES.CHARACTER, label: "Character", icon: CharacterIcon },
 ] as const;
 
 export function BottomNav() {

@@ -5,7 +5,7 @@ import type {
   Adventure,
   CombatValues,
   HitPoints,
-  PlayerReference,
+  CharacterReference,
   Theme,
   UserState,
 } from "./types";
@@ -30,19 +30,19 @@ interface AdventureActions {
   setActiveAdventure: (id: string | null) => void;
 }
 
-export type PlayerReferenceUpdate = Partial<
-  Omit<PlayerReference, "id" | "abilityScores" | "combatValues" | "hitPoints">
+export type CharacterReferenceUpdate = Partial<
+  Omit<CharacterReference, "id" | "abilityScores" | "combatValues" | "hitPoints">
 > & {
   abilityScores?: Partial<AbilityScores>;
   combatValues?: Partial<CombatValues>;
   hitPoints?: Partial<HitPoints>;
 };
 
-interface PlayerActions {
-  addPlayerReference: (data: Omit<PlayerReference, "id">) => string;
-  updatePlayerReference: (id: string, data: PlayerReferenceUpdate) => void;
-  removePlayerReference: (id: string) => void;
-  setActivePlayer: (id: string | null) => void;
+interface CharacterActions {
+  addCharacter: (data: Omit<CharacterReference, "id">) => string;
+  updateCharacter: (id: string, data: CharacterReferenceUpdate) => void;
+  removeCharacter: (id: string) => void;
+  setActiveCharacter: (id: string | null) => void;
 }
 
 interface UserActions {
@@ -63,7 +63,7 @@ interface UserActions {
 export type UserStore = UserState &
   UserActions &
   AdventureActions &
-  PlayerActions & {
+  CharacterActions & {
     favoritesSet: Set<string>;
     sessionSet: Set<string>;
     adventureEntitySet: Set<string>;
@@ -181,8 +181,8 @@ export const userStore = create<UserStore>((set, get) => ({
   adventures: [],
   activeAdventureId: null,
   adventureEntitySet: new Set<string>(),
-  players: [],
-  activePlayerId: null,
+  characters: [],
+  activeCharacterId: null,
   beginnerMode: true,
   onboardingComplete: false,
   theme: DEFAULT_THEME,
@@ -417,15 +417,15 @@ export const userStore = create<UserStore>((set, get) => ({
     schedulePersist(get);
   },
 
-  setActivePlayer: (id) => {
-    set({ activePlayerId: id });
+  setActiveCharacter: (id) => {
+    set({ activeCharacterId: id });
     schedulePersist(get);
   },
 
-  addPlayerReference: (data) => {
+  addCharacter: (data) => {
     const id = generateId();
     set((s) => {
-      const reference: PlayerReference = {
+      const reference: CharacterReference = {
         id,
         name: data.name.trim(),
         class: data.class.trim(),
@@ -440,18 +440,18 @@ export const userStore = create<UserStore>((set, get) => ({
         activeConditions: [...data.activeConditions],
         note: data.note?.trim() || undefined,
       };
-      return { players: [...s.players, reference] };
+      return { characters: [...s.characters, reference] };
     });
     schedulePersist(get);
     return id;
   },
 
-  updatePlayerReference: (id, data) => {
+  updateCharacter: (id, data) => {
     set((s) => {
-      const idx = s.players.findIndex((p) => p.id === id);
+      const idx = s.characters.findIndex((p) => p.id === id);
       if (idx === -1) return s;
-      const current = s.players[idx]!;
-      const updated: PlayerReference = {
+      const current = s.characters[idx]!;
+      const updated: CharacterReference = {
         ...current,
         ...data,
         name: data.name !== undefined ? data.name.trim() || current.name : current.name,
@@ -489,17 +489,17 @@ export const userStore = create<UserStore>((set, get) => ({
             : current.activeConditions,
         note: data.note !== undefined ? data.note.trim() || undefined : current.note,
       };
-      const players = [...s.players];
-      players[idx] = updated;
-      return { players };
+      const characters = [...s.characters];
+      characters[idx] = updated;
+      return { characters };
     });
     schedulePersist(get);
   },
 
-  removePlayerReference: (id) => {
+  removeCharacter: (id) => {
     set((s) => ({
-      players: s.players.filter((p) => p.id !== id),
-      activePlayerId: s.activePlayerId === id ? null : s.activePlayerId,
+      characters: s.characters.filter((p) => p.id !== id),
+      activeCharacterId: s.activeCharacterId === id ? null : s.activeCharacterId,
     }));
     schedulePersist(get);
   },
@@ -516,8 +516,8 @@ export const userStore = create<UserStore>((set, get) => ({
       adventures: state.adventures,
       activeAdventureId: state.activeAdventureId,
       adventureEntitySet: updateActiveAdventureSet(state.adventures, state.activeAdventureId),
-      players: state.players,
-      activePlayerId: state.activePlayerId,
+      characters: state.characters,
+      activeCharacterId: state.activeCharacterId,
       beginnerMode: state.beginnerMode,
       onboardingComplete: state.onboardingComplete,
       theme: isTheme(state.theme) ? state.theme : DEFAULT_THEME,
@@ -536,8 +536,8 @@ export const userStore = create<UserStore>((set, get) => ({
       adventures: [],
       activeAdventureId: null,
       adventureEntitySet: new Set<string>(),
-      players: [],
-      activePlayerId: null,
+      characters: [],
+      activeCharacterId: null,
       beginnerMode: true,
       onboardingComplete: false,
       theme: DEFAULT_THEME,
@@ -565,25 +565,25 @@ export function useActiveAdventure(): Adventure | null {
   });
 }
 
-export function useActivePlayer(): PlayerReference | null {
+export function useActiveCharacter(): CharacterReference | null {
   return userStore((s) => {
-    if (!s.activePlayerId) return null;
-    return s.players.find((p) => p.id === s.activePlayerId) ?? null;
+    if (!s.activeCharacterId) return null;
+    return s.characters.find((p) => p.id === s.activeCharacterId) ?? null;
   });
 }
 
 /**
- * The player featured on the home screen: the active player when set,
- * otherwise the first player. Returns a stable object reference so the
- * subscriber only re-renders when the featured player itself changes.
+ * The character featured on the home screen: the active character when set,
+ * otherwise the first character. Returns a stable object reference so the
+ * subscriber only re-renders when the featured character itself changes.
  */
-export function usePrimaryPlayer(): PlayerReference | null {
+export function usePrimaryCharacter(): CharacterReference | null {
   return userStore((s) => {
-    if (s.activePlayerId) {
-      const active = s.players.find((p) => p.id === s.activePlayerId);
+    if (s.activeCharacterId) {
+      const active = s.characters.find((p) => p.id === s.activeCharacterId);
       if (active) return active;
     }
-    return s.players[0] ?? null;
+    return s.characters[0] ?? null;
   });
 }
 
@@ -617,8 +617,8 @@ export function useRecentSearches(limit = 5): string[] {
   return useMemo(() => recentSearches.slice(0, limit), [recentSearches, limit]);
 }
 
-export function usePlayerReferences(): PlayerReference[] {
-  return userStore((s) => s.players);
+export function useCharacters(): CharacterReference[] {
+  return userStore((s) => s.characters);
 }
 
 export function useOnboardingComplete(): boolean {
@@ -642,8 +642,8 @@ function processPersistedState(state: UserState): UserState {
     session: validateIds(state.session),
     adventures: state.adventures,
     activeAdventureId: state.activeAdventureId,
-    players: state.players,
-    activePlayerId: state.activePlayerId,
+    characters: state.characters,
+    activeCharacterId: state.activeCharacterId,
     beginnerMode: state.beginnerMode === true,
     onboardingComplete: state.onboardingComplete === true,
     theme: isTheme(state.theme) ? state.theme : DEFAULT_THEME,
@@ -668,7 +668,7 @@ function adventuresEqual(a: Adventure[], b: Adventure[]): boolean {
   return true;
 }
 
-function playersEqual(a: PlayerReference[], b: PlayerReference[]): boolean {
+function charactersEqual(a: CharacterReference[], b: CharacterReference[]): boolean {
   if (a.length !== b.length) return false;
   for (let i = 0; i < a.length; i++) {
     if (a[i]!.id !== b[i]!.id || a[i]!.name !== b[i]!.name || a[i]!.level !== b[i]!.level)
@@ -687,8 +687,8 @@ function replaceState(state: UserState): void {
     arraysEqual(current.session, state.session) &&
     current.activeAdventureId === state.activeAdventureId &&
     adventuresEqual(current.adventures, state.adventures) &&
-    playersEqual(current.players, state.players) &&
-    current.activePlayerId === state.activePlayerId &&
+    charactersEqual(current.characters, state.characters) &&
+    current.activeCharacterId === state.activeCharacterId &&
     current.beginnerMode === state.beginnerMode &&
     current.onboardingComplete === state.onboardingComplete &&
     current.theme === state.theme
