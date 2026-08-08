@@ -14,8 +14,8 @@
 
 4. Base background: warm near-black (`#12100E`), never cool/blue-tinted black.
 5. Card background: `#1C1917` (flat) for ordinary content cards; protagonist stat/readout cards get a subtle radial-gradient depth treatment instead of flat color.
-6. Primary accent (themeable, default Arcane Teal `#4A90B8`; Amber `#D97B29` and Jade `#3AB492` are selectable) is reserved for interactive elements ONLY: buttons, toggles, active nav tab, focus states, active/selected states. Never decorative.
-7. Secondary accent (themeable, default Arcane Teal `#86AFC7`; Amber `#C9A26B`; Jade `#7FBFAA`) is for non-interactive secondary/metadata content: badges (level/CR/type), inactive nav icons, zero-value modifiers. Never used for primary interactive elements.
+6. Primary accent (themeable, default Arcane Teal `#4A90B8`; selectable themes: Jade, Amber, Gold Sovereign, Wine Grimoire, Void Plum, Storm Steel) is reserved for interactive elements ONLY: buttons, toggles, active nav tab, focus states, active/selected states. Never decorative.
+7. Secondary accent (themeable, default Arcane Teal `#86AFC7`; the same 6 other themes each carry their own secondary accent) is for non-interactive secondary/metadata content: badges (level/CR/type), inactive nav icons, zero-value modifiers. Never used for primary interactive elements.
 8. `?` help-badge color is a fixed semantic info color (blue), deliberately theme-independent — it does not change when the accent theme switches (Jade/Amber/Arcane Teal). This keeps "interactive/brand accent" visually distinct from "neutral help affordance", and stops the badge blending into the accent in themes where both would otherwise be green-ish. Do not make it theme-dependent.
 9. Modifier/signed-value color coding is fixed: positive = success green, negative = danger red, zero = muted gold. This exact three-way rule applies everywhere a signed modifier renders.
 10. Text hierarchy: primary text `#F5F1EC`, secondary `#A39C93`, muted `#6B645C`. Never introduce a fourth text tone without updating this document.
@@ -114,4 +114,16 @@
 49. No gradients/decoration beyond what's explicitly defined in this document (the protagonist-card gradient, the app-shell vignette+grain, the section-header left border) — don't add a fourth decorative pattern without updating this document first.
 50. Every future visual prompt should be checked against this document before being written — if a new decision contradicts a rule here, update this document explicitly rather than silently diverging.
 51. This document should be revised (not silently ignored) whenever a genuinely new pattern is needed — treat additions as deliberate amendments, not exceptions.
-52. Accent theme system (added with the theme picker pass): only the primary + secondary accent pair vary per theme — default Arcane Teal `#4A90B8`/`#86AFC7`, Amber `#D97B29`/`#C9A26B`, Jade `#3AB492`/`#7FBFAA` — selectable from the top-bar palette popover and persisted in user state. Jade and Amber remain fully selectable, but Arcane Teal is the default for new users and the fallback for any existing user without a persisted theme. Backgrounds, surfaces, typography, radius, and the fixed success/danger/neutral modifier colors never change. Theme switches play the signature-moment "wave" (~500-700ms, per rule 42): an expanding circular clip-path reveal originating from the tapped swatch's actual screen position, using the native View Transitions API (`document.startViewTransition`) — independent of the router. Browsers without View Transitions (and users on reduced-motion) fall back to the previous ~220ms whole-tree cross-fade / instant swap. The stored theme applies instantly on first load.
+52. Accent theme system (added with the theme picker pass; expanded to 7 themes in the picker redesign pass): only the primary + secondary accent pair vary per theme. Seven themes are selectable from the top-bar palette popover and persisted in user state:
+
+    | Theme | Accent | Secondary accent |
+    |---|---|---|
+    | Jade | `#3AB492` | `#7FBFAA` |
+    | Gold Sovereign | `#C9A227` | `#DFC97A` |
+    | Amber | `#D97B29` | `#C9A26B` |
+    | Wine Grimoire | `#B0473F` | `#C98A85` |
+    | Void Plum | `#8B5FBF` | `#B79ED9` |
+    | Arcane Teal | `#4A90B8` | `#86AFC7` |
+    | Storm Steel | `#5B7C99` | `#8FAEC2` |
+
+    Arcane Teal remains the default for new users and the fallback for any existing user without a persisted theme; every other theme is a selectable override, never a default change. Backgrounds, surfaces, typography, radius, and the fixed success/danger/neutral modifier colors never change. Theme switches play the signature-moment "wave" (~500-700ms, per rule 42): an expanding circular clip-path reveal originating from the tapped preview card's actual screen position, using the native View Transitions API (`document.startViewTransition`) — independent of the router. Browsers without View Transitions (and users on reduced-motion) fall back to the previous ~220ms whole-tree cross-fade / instant swap. The stored theme applies instantly on first load. The picker renders the 7 themes as accent-tinted preview cards in a 4+3 grid (per rule 26's protagonist-card gradient treatment, tinted with each theme's own accent); the currently active card is ringed in its own accent and carries `aria-pressed`. The popover remains viewport-clamped (rule 30) at its larger size.

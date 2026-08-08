@@ -61,7 +61,7 @@ export interface Adventure {
   readonly archived: boolean;
 }
 
-export type Theme = "jade" | "amber" | "teal";
+export type Theme = "jade" | "amber" | "teal" | "gold" | "wine" | "plum" | "steel";
 
 export interface UserState {
   readonly version: number;
@@ -81,10 +81,26 @@ export interface UserState {
 export const STORAGE_KEY = "dungeon:userState:v1";
 export const CURRENT_VERSION = 13;
 export const DEFAULT_THEME: Theme = "teal";
-export const THEMES: readonly Theme[] = ["jade", "amber", "teal"];
+export const THEMES: readonly Theme[] = [
+  "jade",
+  "amber",
+  "teal",
+  "gold",
+  "wine",
+  "plum",
+  "steel",
+];
 
 export function isTheme(value: unknown): value is Theme {
-  return value === "jade" || value === "amber" || value === "teal";
+  return (
+    value === "jade" ||
+    value === "amber" ||
+    value === "teal" ||
+    value === "gold" ||
+    value === "wine" ||
+    value === "plum" ||
+    value === "steel"
+  );
 }
 
 export function createDefaultState(): UserState {

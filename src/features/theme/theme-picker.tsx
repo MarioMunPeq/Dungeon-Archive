@@ -1,4 +1,4 @@
-import type { MouseEvent } from "react";
+import type { CSSProperties, MouseEvent } from "react";
 import { flushSync } from "react-dom";
 import type { Theme } from "@/user-state";
 import { useTheme, userStore } from "@/user-state";
@@ -6,24 +6,28 @@ import { cn } from "@/lib/utils";
 import { Button, PaletteIcon, Caption } from "@/components/ui";
 import { useConstrainedPopover } from "@/components/ui/use-constrained-popover";
 
-const SWATCH_CLASS: Record<Theme, string> = {
-  jade: "bg-theme-jade",
-  amber: "bg-theme-amber",
-  teal: "bg-theme-teal",
-};
-
 const LABELS: Record<Theme, string> = {
   jade: "Jade",
   amber: "Amber",
   teal: "Arcane Teal",
+  gold: "Gold Sovereign",
+  wine: "Wine Grimoire",
+  plum: "Void Plum",
+  steel: "Storm Steel",
 };
 
-const THEMES: readonly Theme[] = ["jade", "amber", "teal"];
+const THEMES: readonly Theme[] = ["jade", "amber", "teal", "gold", "wine", "plum", "steel"];
 
-function swatchOrigin(id: Theme, fallback: DOMRect): { x: number; y: number } {
-  const swatch = document.getElementById(`theme-swatch-${id}`);
-  const rect = swatch ? swatch.getBoundingClientRect() : fallback;
-  return { x: rect.left + rect.width / 2, y: rect.top + rect.height / 2 };
+/** Accent token from index.css — the swatches stay the single source of truth. */
+function accentVar(id: Theme): string {
+  return `var(--color-theme-${id})`;
+}
+
+function accentPreview(id: Theme): CSSProperties {
+  const accent = accentVar(id);
+  return {
+    backgroundImage: `radial-gradient(150% 200% at 25% 0%, color-mix(in srgb, ${accent} 30%, transparent) 0%, transparent 60%), radial-gradient(240% 260% at 50% 0%, #221d18 0%, #1c1917 50%, #171311 100%)`,
+  };
 }
 
 export function ThemePicker() {
@@ -33,13 +37,15 @@ export function ThemePicker() {
 
   const select = (id: Theme, event: MouseEvent<HTMLButtonElement>) => {
     const root = document.documentElement;
-    const origin = swatchOrigin(id, event.currentTarget.getBoundingClientRect());
+    const rect = event.currentTarget.getBoundingClientRect();
+    const originX = rect.left + rect.width / 2;
+    const originY = rect.top + rect.height / 2;
     const radius = Math.hypot(
-      Math.max(origin.x, window.innerWidth - origin.x),
-      Math.max(origin.y, window.innerHeight - origin.y),
+      Math.max(originX, window.innerWidth - originX),
+      Math.max(originY, window.innerHeight - originY),
     );
-    root.style.setProperty("--wave-x", `${origin.x}px`);
-    root.style.setProperty("--wave-y", `${origin.y}px`);
+    root.style.setProperty("--wave-x", `${originX}px`);
+    root.style.setProperty("--wave-y", `${originY}px`);
     root.style.setProperty("--wave-r", `${radius}px`);
 
     const apply = () => {
@@ -89,9 +95,9 @@ export function ThemePicker() {
           )}
           style={{ transform: shiftX !== 0 ? `translateX(${shiftX}px)` : undefined }}
         >
-          <div className="w-44 rounded-card border border-border bg-elevated p-1.5 shadow-lg animate-pop">
-            <Caption className="px-2 pb-1 pt-0.5">Accent theme</Caption>
-            <div className="grid gap-0.5">
+          <div className="w-72 rounded-card border border-border bg-elevated p-2 shadow-lg animate-pop">
+            <Caption className="px-1 pb-1.5 pt-0.5">Accent theme</Caption>
+            <div className="grid grid-cols-4 gap-1.5">
               {THEMES.map((id) => {
                 const active = id === theme;
                 return (
@@ -101,22 +107,21 @@ export function ThemePicker() {
                     aria-pressed={active}
                     onClick={(event) => select(id, event)}
                     className={cn(
-                      "flex w-full items-center gap-2 rounded-control px-2 py-1.5 text-left transition-colors duration-150",
-                      "hover:bg-accent active:bg-accent/80",
+                      "flex min-w-0 flex-col items-center gap-1 rounded-card border px-1 pb-1 pt-1.5 text-center transition-all duration-150 active:scale-95",
+                      active
+                        ? "border-transparent ring-2 ring-[var(--theme-accent)] ring-offset-1 ring-offset-elevated"
+                        : "border-border hover:border-border-strong",
                     )}
+                    style={accentPreview(id)}
                   >
                     <span
-                      id={`theme-swatch-${id}`}
                       aria-hidden
-                      className={cn(
-                        "h-4 w-4 shrink-0 rounded-full border border-black/30 transition-shadow duration-150",
-                        SWATCH_CLASS[id],
-                        active && "ring-2 ring-foreground/80 ring-offset-2 ring-offset-elevated",
-                      )}
+                      className="h-6 w-9 shrink-0 rounded-stat"
+                      style={{ background: accentVar(id) }}
                     />
                     <span
                       className={cn(
-                        "text-sm",
+                        "w-full text-[10px] leading-tight",
                         active ? "font-semibold text-foreground" : "text-muted-foreground",
                       )}
                     >

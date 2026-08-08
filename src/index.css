@@ -40,10 +40,8 @@
   --color-disabled-foreground: #4d4842;
   --color-overlay: rgb(0 0 0 / 0.6);
 
-  /* Theme swatches — single source of truth for the accent selector. */
-  --color-theme-jade: #3ab492;
-  --color-theme-amber: #d97b29;
-  --color-theme-teal: #4a90b8;
+  /* Theme swatches moved to the :root block in @layer base (they must always
+     be emitted — Tailwind only generates @theme vars that utilities use). */
 
   /* Typography scale */
   --font-sans: "Inter Variable", ui-sans-serif, system-ui, -apple-system, sans-serif;
@@ -303,11 +301,26 @@
     accent-color: var(--color-primary);
   }
 
+  /* Theme swatches — single source of truth for the accent selector. Plain
+     custom properties so they are always emitted (unlike @theme tokens, which
+     Tailwind tree-shakes when no utility references them). The theme picker
+     reads these via var(--color-theme-<id>). */
+  :root {
+    --color-theme-jade: #3ab492;
+    --color-theme-amber: #d97b29;
+    --color-theme-teal: #4a90b8;
+    --color-theme-gold: #c9a227;
+    --color-theme-wine: #b0473f;
+    --color-theme-plum: #8b5fbf;
+    --color-theme-steel: #5b7c99;
+  }
+
   /* Accent theming — only the accent + secondary-accent pair vary per theme
-     (Jade default, Amber, Arcane Teal). Backgrounds, surfaces, typography,
-     radius, and the success/danger/neutral modifier rules stay fixed (Design
-     DNA rules 6-10). Derived hover/active/muted shades keep the same tone
-     progression as the historical amber ramp. */
+     (default Arcane Teal; plus Jade, Amber, Gold Sovereign, Wine Grimoire,
+     Void Plum, Storm Steel). Backgrounds, surfaces, typography, radius, and
+     the success/danger/neutral modifier rules stay fixed (Design DNA rules
+     6-10). Derived hover/active/muted shades keep the same tone progression
+     as the historical amber ramp. */
   :root {
     --theme-accent: #3ab492;
     --theme-accent-hover: #4ec2a3;
@@ -339,6 +352,50 @@
     --theme-accent-secondary: #86afc7;
     --theme-accent-border: rgb(74 144 184 / 0.15);
     --theme-accent-focus: #6faacc;
+  }
+
+  :root[data-theme="gold"] {
+    --theme-accent: #c9a227;
+    --theme-accent-hover: #d4b039;
+    --theme-accent-active: #b99421;
+    --theme-accent-muted: #dcbe5f;
+    --theme-accent-foreground: #241c04;
+    --theme-accent-secondary: #dfc97a;
+    --theme-accent-border: rgb(201 162 39 / 0.15);
+    --theme-accent-focus: #dbbd54;
+  }
+
+  :root[data-theme="wine"] {
+    --theme-accent: #b0473f;
+    --theme-accent-hover: #be554e;
+    --theme-accent-active: #9b3c37;
+    --theme-accent-muted: #c86e68;
+    --theme-accent-foreground: #200807;
+    --theme-accent-secondary: #c98a85;
+    --theme-accent-border: rgb(176 71 63 / 0.15);
+    --theme-accent-focus: #ca6962;
+  }
+
+  :root[data-theme="plum"] {
+    --theme-accent: #8b5fbf;
+    --theme-accent-hover: #9b7bcd;
+    --theme-accent-active: #784ea5;
+    --theme-accent-muted: #aa91d6;
+    --theme-accent-foreground: #170b24;
+    --theme-accent-secondary: #b79ed9;
+    --theme-accent-border: rgb(139 95 191 / 0.15);
+    --theme-accent-focus: #a387d4;
+  }
+
+  :root[data-theme="steel"] {
+    --theme-accent: #5b7c99;
+    --theme-accent-hover: #698baa;
+    --theme-accent-active: #4a6782;
+    --theme-accent-muted: #789bba;
+    --theme-accent-foreground: #080f16;
+    --theme-accent-secondary: #8faec2;
+    --theme-accent-border: rgb(91 124 153 / 0.15);
+    --theme-accent-focus: #7394b4;
   }
 
   html {
