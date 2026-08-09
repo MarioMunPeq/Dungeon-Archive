@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { Button, ConfirmDialog } from "@/components/ui";
 import { userStore } from "@/user-state";
 import type { CharacterReference } from "@/user-state";
+import { seedDemoData } from "@/features/demo/demo-data";
 
 interface CharacterCardProps {
   readonly character: CharacterReference | null;
@@ -24,12 +25,18 @@ export const CharacterCard = memo(function CharacterCard({ character }: Characte
           <div className="flex flex-col gap-1">
             <h3 className="text-sm font-semibold text-foreground">Create your first character</h3>
             <p className="text-xs leading-relaxed text-muted-foreground">
-              Add a character to start tracking your combat state.
+              Add a character to start tracking your combat state — or load a pre-filled sample
+              character and session.
             </p>
           </div>
-          <Link to="/character" className="w-fit">
-            <Button size="sm">Create Character</Button>
-          </Link>
+          <div className="flex flex-wrap items-center gap-2">
+            <Link to="/character" className="w-fit">
+              <Button size="sm">Create Character</Button>
+            </Link>
+            <Button size="sm" variant="outline" onClick={seedDemoData}>
+              View Demo
+            </Button>
+          </div>
         </div>
       </div>
     );

@@ -1,20 +1,32 @@
 # Dungeon Archive
 
+<p>
+  <img src="https://img.shields.io/badge/React-19-61DAFB?style=flat-square&logo=react&logoColor=black" alt="React 19" />
+  <img src="https://img.shields.io/badge/TypeScript-strict-3178C6?style=flat-square&logo=typescript&logoColor=white" alt="TypeScript strict" />
+  <img src="https://img.shields.io/badge/Vite-646CFF?style=flat-square&logo=vite&logoColor=white" alt="Vite" />
+  <img src="https://img.shields.io/badge/Tailwind_CSS-v4-38B2AC?style=flat-square&logo=tailwindcss&logoColor=white" alt="Tailwind CSS v4" />
+  <img src="https://img.shields.io/badge/Firebase-FFCA28?style=flat-square&logo=firebase&logoColor=black" alt="Firebase" />
+  <img src="https://img.shields.io/badge/PWA-installable-3AB492?style=flat-square&logo=pwa&logoColor=white" alt="PWA installable" />
+</p>
+
 A fast, mobile-first, offline-first companion for D&D 5e sessions. It puts the entire game reference — spells, monsters, equipment, conditions, actions, magic items, and feats — on the phone that is already on the table, and keeps the lightweight context of the game (your party, your current session, combat state) a tap away.
 
 Its only purpose is reducing the dead time at the table: the gap between a question coming up and its answer being found. Everything in the app is built around closing that gap.
 
-> **Version 0.1.0** — installable PWA, works fully offline, deployed on GitHub Pages.
+> **Try it live:** [Dungeon Archive](https://MarioMunPeq.github.io/Dungeon-Archive/) — installable PWA, works fully offline, no account needed. Hit **View Demo** on the Home screen to see the app pre-populated with a realistic character.
+
+> **Version 0.1.0**
 
 ---
 
 ## Screenshots
 
-_Images live in [`docs/screenshots/`](docs/screenshots/) and are linked below. (Placeholders until capture.)_
+_Images live in [`docs/screenshots/`](docs/screenshots/) and are linked below. (Placeholders until capture — the Home, Combat, Party, and Theme Picker screens are the most portfolio-relevant.)_
 
 | Screen | File |
 | ------ | ---- |
 | Home | [`docs/screenshots/home.png`](docs/screenshots/home.png) |
+| Theme picker (7 accent themes) | [`docs/screenshots/theme-picker.png`](docs/screenshots/theme-picker.png) |
 | Search | [`docs/screenshots/search.png`](docs/screenshots/search.png) |
 | Compendium (entity list) | [`docs/screenshots/compendium.png`](docs/screenshots/compendium.png) |
 | Entity detail | [`docs/screenshots/entity-detail.png`](docs/screenshots/entity-detail.png) |
@@ -57,6 +69,21 @@ So Dungeon Archive is offline-first by design:
 - Cloud Backup is an optional, manual addition for people who want a recovery copy. It is never a dependency.
 
 The app is consulted, then set aside. It should never be the reason a session slows down.
+
+---
+
+## Design process
+
+The interface follows a documented design system — [`docs/design-dna.md`](docs/design-dna.md) — that treats the app's look and feel as explicit rules rather than a style that "just happened." Everything from the 4px spacing grid to the single motion language is specified, so every screen reads as one product.
+
+A few examples of how the system evolved:
+
+- **Palette exploration.** The accent color went through several identities before landing on a themeable system: seven accent themes (Jade, Amber, Arcane Teal, Gold Sovereign, Wine Grimoire, Void Plum, Storm Steel) that swap via a signature ~600ms "wave" reveal, while the warm near-black background, surfaces, typography, and motion stay fixed. The rules forbid using the accent decoratively — it is reserved for interactive elements.
+- **Consistency passes.** Dedicated passes swept the app for drift: radius tiers (stat/card/control), the spacing grid, icon treatments, metadata typography, and empty-state guidance. Each pass is documented under [`docs/history/`](docs/history/), including the root-cause write-ups.
+- **Motion system.** One shared set of durations and easings (primary interactions ~200ms, screen transitions ~250ms) keeps every animation on the same rhythm, with exactly one signature exception.
+- **Accessibility as a rule.** Text tiers are pinned to WCAG AA contrast on every surface, focus states are visible on all interactive elements, icon-only buttons carry labels, and dialogs trap focus and restore it on close.
+
+The rules are the point: they make a small screen feel coherent and give the app a personality a generic template never would.
 
 ---
 

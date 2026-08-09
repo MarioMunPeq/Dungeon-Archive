@@ -30,12 +30,14 @@ export const SectionHeader = memo(function SectionHeader({
     </span>
   );
   return to ? (
-    <Link
-      to={to}
-      className="flex items-center gap-1 text-sm font-semibold uppercase tracking-wide text-muted-foreground transition-colors hover:text-foreground active:text-foreground"
-    >
-      {content}
-    </Link>
+    <h2 className="text-sm font-semibold uppercase tracking-wide text-muted-foreground">
+      <Link
+        to={to}
+        className="flex items-center gap-1 transition-colors hover:text-foreground active:text-foreground"
+      >
+        {content}
+      </Link>
+    </h2>
   ) : (
     <h2 className="text-sm font-semibold uppercase tracking-wide text-muted-foreground">
       {content}

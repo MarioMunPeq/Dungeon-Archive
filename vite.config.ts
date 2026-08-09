@@ -16,10 +16,10 @@ export default defineConfig({
       includeAssets: ["favicon.svg", "icons/*.png"],
       manifest: {
         name: "Dungeon Archive",
-        short_name: "Dungeon Archive",
+        short_name: "D. Archive",
         description: "Offline-first companion app for D&D 5e tabletop sessions",
-        theme_color: "#1a1a2e",
-        background_color: "#1a1a2e",
+        theme_color: "#12100e",
+        background_color: "#12100e",
         display: "standalone",
         scope: BASE_PATH,
         start_url: BASE_PATH,
@@ -44,8 +44,22 @@ export default defineConfig({
         ],
       },
       workbox: {
-        globPatterns: ["**/*.{js,css,html,svg,png,woff2}"],
+        globPatterns: ["**/*.{js,css,html,svg,png,json,woff2}"],
         navigateFallbackDenylist: [/bootRetry=/],
+        runtimeCaching: [
+          {
+            urlPattern: ({ request }) => request.mode === "navigate",
+            handler: "NetworkFirst",
+            options: {
+              networkTimeoutSeconds: 3,
+              cacheName: "pages",
+              expiration: {
+                maxEntries: 10,
+                maxAgeSeconds: 60 * 60 * 24,
+              },
+            },
+          },
+        ],
       },
     }),
   ],

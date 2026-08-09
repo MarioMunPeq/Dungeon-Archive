@@ -18,6 +18,7 @@ import {
 } from "@/sync";
 import type { CloudSnapshot } from "@/sync";
 import { userStore } from "@/user-state";
+import { InstallAppSection } from "./install-app";
 
 type Operation = "signIn" | "signOut" | "upload" | "restore";
 
@@ -317,6 +318,8 @@ export function BackupPage() {
           )}
         </div>
       )}
+
+      <InstallAppSection />
 
       {preview !== null && (
         <ConfirmDialog
