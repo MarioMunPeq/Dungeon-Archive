@@ -29,6 +29,7 @@ import {
 } from "@/components/ui";
 import { AbilityScores } from "@/components/ui/ability-scores";
 import { RollableDice } from "@/features/dice/rollable-dice";
+import { ExportSheetButton } from "@/features/character/export/export-sheet-button";
 import { splitSpellRoll } from "@/lib/dice";
 import { cn } from "@/lib/utils";
 
@@ -736,6 +737,7 @@ function CharacterSheet({
           )}
         </div>
         <div className="flex shrink-0 items-center gap-1">
+          <ExportSheetButton character={reference} />
           <button
             type="button"
             onClick={() => setConfirmRemove(true)}
