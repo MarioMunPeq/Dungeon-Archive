@@ -247,36 +247,20 @@
 
 /* Signature moment — theme-switch wave (Design DNA rules 42/44/52).
    An expanding circular clip-path reveal on the incoming page snapshot,
-   originating from the tapped swatch's screen position (--wave-x / --wave-y,
-   set by theme-picker.tsx). Driven by the native View Transitions API
-   (document.startViewTransition); browsers without it fall back to the
-   .theme-switching cross-fade below. ~600ms sits inside the signature-moment
+   originating from the tapped swatch's screen position. Driven from JS with
+   the Web Animations API: theme-picker.tsx calls root.animate() with a
+   clip-path circle() keyframe pair targeting ::view-transition-new(root)
+   (see theme-picker.tsx select()). ~600ms sits inside the signature-moment
    budget (600-700ms) — the only motion allowed to exceed the 300ms ceiling.
-   The reveal clips only the new snapshot, so the old theme stays visible
-   outside the circle; pointer-events are off so nothing blocks interaction
-   while it plays, and it animates clip-path only (no layout shift). */
+   Both root snapshots run with their UA cross-fade disabled (animation-name:
+   none), so the old theme stays fully visible outside the circle while the JS
+   clip-path reveal replaces the UA fade-in on the new snapshot. pointer-events
+   are off so nothing blocks interaction while it plays. Browsers without View
+   Transitions fall back to the .theme-switching cross-fade below. */
 ::view-transition-old(root),
 ::view-transition-new(root) {
   pointer-events: none;
-  animation-duration: 600ms;
-  animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-::view-transition-old(root) {
   animation-name: none;
-}
-
-::view-transition-new(root) {
-  animation-name: theme-wave-in;
-}
-
-@keyframes theme-wave-in {
-  from {
-    clip-path: circle(0px at var(--wave-x, 50%) var(--wave-y, 50%));
-  }
-  to {
-    clip-path: circle(var(--wave-r, 141.5%) at var(--wave-x, 50%) var(--wave-y, 50%));
-  }
 }
 
 @layer base {
@@ -451,6 +435,22 @@
     transition-property: color, background-color, border-color, box-shadow, fill, stroke;
     transition-duration: 220ms;
     transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  /* Reduced motion — zero out ordinary animations, transitions, and smooth
+     scrolling. The theme wave (a View Transitions animation) is deliberately
+     NOT suppressed here: `*` doesn't match the ::view-transition-*
+     pseudo-elements, and the picker runs the wave regardless of this setting
+     (see theme-picker.tsx). */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
   }
 }
 
