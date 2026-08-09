@@ -29,7 +29,6 @@ console.log("generated PNG assets\n");
 const cases: Array<{ file: string; width: number; height: number }> = [
   { file: "icons/icon-192.png", width: 192, height: 192 },
   { file: "icons/icon-512.png", width: 512, height: 512 },
-  { file: "og-image.png", width: 1200, height: 630 },
 ];
 
 const publicDir = join(dirname(fileURLToPath(import.meta.url)), "..", "..", "public");
