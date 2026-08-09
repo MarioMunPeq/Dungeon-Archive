@@ -89,15 +89,7 @@ function archCoverage(
 function gatePixel(px: number, py: number, size: number): RGB {
   const m = size;
   const outer = roundedRectCoverage(px, py, m / 2, m / 2, 0.31 * m, 0.31 * m, 0.15 * m);
-  const arch = archCoverage(
-    px,
-    py,
-    m / 2,
-    m / 2 - 0.2 * m,
-    m / 2 + 0.31 * m,
-    0.17 * m,
-    0.17 * m,
-  );
+  const arch = archCoverage(px, py, m / 2, m / 2 - 0.2 * m, m / 2 + 0.31 * m, 0.17 * m, 0.17 * m);
   return mix(mix(BG, ACCENT, outer), BG, arch);
 }
 
@@ -109,11 +101,7 @@ function vignetteFactor(px: number, py: number, width: number, height: number): 
   return 1 - 0.22 * smoothstep(0.5, 1, t);
 }
 
-function render(
-  width: number,
-  height: number,
-  pixelAt: (x: number, y: number) => RGB,
-): Buffer {
+function render(width: number, height: number, pixelAt: (x: number, y: number) => RGB): Buffer {
   const scanlineLength = width * 3;
   const raw = Buffer.alloc(height * (1 + scanlineLength));
   let offset = 0;

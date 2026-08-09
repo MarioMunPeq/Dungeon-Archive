@@ -17,11 +17,7 @@ function test(description: string, fn: () => void): void {
 function readPngDimensions(filePath: string): { width: number; height: number } {
   const bytes = readFileSync(filePath);
   const signature = Buffer.from([137, 80, 78, 71, 13, 10, 26, 10]);
-  strictEqual(
-    bytes.subarray(0, 8).equals(signature),
-    true,
-    `${filePath}: missing PNG signature`,
-  );
+  strictEqual(bytes.subarray(0, 8).equals(signature), true, `${filePath}: missing PNG signature`);
   const width = bytes.readUInt32BE(16);
   const height = bytes.readUInt32BE(20);
   ok(width > 0 && height > 0, `${filePath}: invalid dimensions ${width}x${height}`);

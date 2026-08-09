@@ -9,7 +9,9 @@ function blockText(block: ContentBlock): string {
     case "header":
       return block.text;
     case "list":
-      return block.items.map((item) => (typeof item === "string" ? item : blockText(item))).join(" ");
+      return block.items
+        .map((item) => (typeof item === "string" ? item : blockText(item)))
+        .join(" ");
     case "entries":
     case "quote":
     case "inset":

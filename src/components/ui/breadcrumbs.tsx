@@ -23,7 +23,10 @@ export function EntityBreadcrumbs({ crumbs }: EntityBreadcrumbsProps) {
                 </span>
               )}
               {crumb.to && !isLast ? (
-                <Link to={crumb.to} className="transition-colors hover:text-foreground active:text-foreground">
+                <Link
+                  to={crumb.to}
+                  className="transition-colors hover:text-foreground active:text-foreground"
+                >
                   {crumb.label}
                 </Link>
               ) : (

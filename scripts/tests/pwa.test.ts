@@ -22,11 +22,7 @@ const publicDir = join(repoRoot, "public");
 function readPngDimensions(filePath: string): { width: number; height: number } {
   const bytes = readFileSync(filePath);
   const signature = Buffer.from([137, 80, 78, 71, 13, 10, 26, 10]);
-  strictEqual(
-    bytes.subarray(0, 8).equals(signature),
-    true,
-    `${filePath}: missing PNG signature`,
-  );
+  strictEqual(bytes.subarray(0, 8).equals(signature), true, `${filePath}: missing PNG signature`);
   return { width: bytes.readUInt32BE(16), height: bytes.readUInt32BE(20) };
 }
 
@@ -46,7 +42,7 @@ test("manifest is installable: standalone, portrait, fixed warm-near-black color
     "theme/background must be the fixed #12100e base",
   );
   ok(
-    viteConfig.includes('scope: BASE_PATH') && viteConfig.includes('start_url: BASE_PATH'),
+    viteConfig.includes("scope: BASE_PATH") && viteConfig.includes("start_url: BASE_PATH"),
     "scope/start_url must use BASE_PATH so the installed app resolves under the subpath",
   );
 });
@@ -80,8 +76,14 @@ test("manifest declares 192, 512, and maskable icons that exist at matching dime
 });
 
 test("index.html carries the required PWA meta tags", () => {
-  ok(indexHtml.includes('name="theme-color" content="#12100e"'), "theme-color meta must match manifest");
-  ok(indexHtml.includes('name="apple-mobile-web-app-capable" content="yes"'), "missing apple-mobile-web-app-capable");
+  ok(
+    indexHtml.includes('name="theme-color" content="#12100e"'),
+    "theme-color meta must match manifest",
+  );
+  ok(
+    indexHtml.includes('name="apple-mobile-web-app-capable" content="yes"'),
+    "missing apple-mobile-web-app-capable",
+  );
   ok(
     indexHtml.includes('name="apple-mobile-web-app-status-bar-style" content="black-translucent"'),
     "missing apple-mobile-web-app-status-bar-style",

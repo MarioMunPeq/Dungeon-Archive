@@ -2,7 +2,10 @@ import { useCallback, useEffect, useState } from "react";
 
 interface BeforeInstallPromptEvent extends Event {
   readonly platforms: readonly string[];
-  readonly userChoice: Promise<{ readonly outcome: "accepted" | "dismissed"; readonly platform: string }>;
+  readonly userChoice: Promise<{
+    readonly outcome: "accepted" | "dismissed";
+    readonly platform: string;
+  }>;
   prompt(): Promise<void>;
 }
 

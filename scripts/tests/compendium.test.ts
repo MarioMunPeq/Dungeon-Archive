@@ -141,13 +141,18 @@ test("extractSpellRoll returns bare dice when no damage type word", () => {
 test("extractSpellRoll ignores later scaling paragraphs", () => {
   const blocks: readonly ContentBlock[] = [
     { type: "paragraph", text: "You hurl a bubble of acid dealing 1d6 acid damage." },
-    { type: "paragraph", text: "This spell's damage increases by 1d6 when you reach 5th level (2d6)." },
+    {
+      type: "paragraph",
+      text: "This spell's damage increases by 1d6 when you reach 5th level (2d6).",
+    },
   ];
   strictEqual(extractSpellRoll(blocks), "1d6 Acid");
 });
 
 test("extractSpellRoll returns undefined for utility spells", () => {
-  const blocks = spellDescription("You touch one object that is no larger than 10 feet in any dimension.");
+  const blocks = spellDescription(
+    "You touch one object that is no larger than 10 feet in any dimension.",
+  );
   strictEqual(extractSpellRoll(blocks), undefined);
 });
 
