@@ -28,6 +28,8 @@ import {
   useLongPressInfo,
 } from "@/components/ui";
 import { AbilityScores } from "@/components/ui/ability-scores";
+import { RollableDice } from "@/features/dice/rollable-dice";
+import { splitSpellRoll } from "@/lib/dice";
 import { cn } from "@/lib/utils";
 
 type PickerKind = "spell" | "weapon" | "magicitem";
@@ -269,6 +271,7 @@ function SpellPreview({ spell, href }: { spell: Spell; href: string }) {
   const levelText = spell.level === 0 ? "Cantrip" : `Level ${spell.level}`;
   const school = SCHOOL_NAMES[spell.school] ?? spell.school;
   const roll = extractSpellRoll(spell.description);
+  const spellRoll = roll ? splitSpellRoll(roll) : null;
   const summary = firstParagraphText(spell.description);
   const flags = [spell.concentration && "Concentration", spell.ritual && "Ritual"].filter(
     Boolean,
@@ -279,7 +282,13 @@ function SpellPreview({ spell, href }: { spell: Spell; href: string }) {
       <p className="text-xs font-semibold text-foreground">
         {levelText} {METADATA_SEPARATOR} {school}
       </p>
-      {roll && <p className="text-base font-bold tabular-nums text-foreground">{roll}</p>}
+      {spellRoll && (
+        <RollableDice
+          expression={spellRoll.expression}
+          label={spellRoll.type}
+          className="text-base font-bold tabular-nums text-foreground"
+        />
+      )}
       {details.length > 0 && (
         <p className="text-xs text-foreground-subtle">{details.join(` ${METADATA_SEPARATOR} `)}</p>
       )}

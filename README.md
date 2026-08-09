@@ -47,6 +47,7 @@ _Images live in [`docs/screenshots/`](docs/screenshots/) and are linked below. (
 | **Entity Relationships** | Entities link to each other. A spell shows its related conditions and spells; a monster shows the spells and equipment it references. |
 | **Party Manager** | Lightweight player reference sheets: name, class, level, subclass, ability scores, AC / passive perception / spell DC, and references to known spells, weapons, and magic items. References point into the Compendium — nothing is duplicated. |
 | **Combat tracker** | Per-character hit points with quick damage/heal deltas, a tap-to-toggle condition tray (13 conditions), a "what can I do on my turn" checklist, and the combat stats you consult most. |
+| **Dice Roller** | Roll any die (d4–d100) any number of times, with an optional modifier. Spell damage rolls inline on tap from the Character sheet and Compendium. |
 | **Session pins** | Pin monsters, spells, and items to the current session with one tap, and clear them all with **End Session**. |
 | **Favorites & recents** | Mark entities as favorites and let the app remember what you recently viewed and searched. |
 | **Beginner Mode** | New to the game? Toggle beginner tips that explain the d20, ability checks, and your turn in combat as you go. |
@@ -120,14 +121,15 @@ A set of feature pages built on the design system, orchestrated by React Router.
 | `/` | Home — current character, session pins, recently viewed, learn-the-basics |
 | `/search` | Search across the entire Compendium |
 | `/rules` | Quick Rules, How to Play, and glossary (Beginner Mode toggle) |
-| `/combat` | Combat tracker for the active player |
+| `/combat` | Combat tracker for the active player (links to the Dice Roller) |
+| `/dice` | Dice Roller — roll any die, any number of dice, with an optional modifier |
 | `/party` | Player reference sheets |
 | `/session` | The pinned session list (End Session) |
 | `/backup` | Cloud Backup (shows a "not available" state when the feature is disabled) |
 | `/:category/:canonicalId` | Entity detail pages (e.g. `/spell/fireball`) |
 | `/debug/*` | Dev-only debugging routes (never shipped) |
 
-The shell is a top bar, a scrollable main area, and a bottom navigation bar with five tabs: **Home, Search, Rules, Combat, Party**. A first-run onboarding overlay introduces the app once.
+The shell is a top bar, a scrollable main area, and a bottom navigation bar with five tabs: **Home, Search, Rules, Combat, Character**. A first-run onboarding overlay introduces the app once.
 
 ---
 

@@ -5,6 +5,7 @@ import { SessionPage } from "@/features/session/session-page";
 import { RulesPage } from "@/features/rules/rules-page";
 import { CombatPage } from "@/features/combat/combat-page";
 import { CharacterPage } from "@/features/character/character-page";
+import { DicePage } from "@/features/dice/dice-page";
 import { BackupPage } from "@/features/backup/backup-page";
 import { CompendiumPage } from "@/features/compendium/pages/entity-page";
 import { CategoryPage } from "@/features/compendium/pages/category-page";
@@ -25,6 +26,7 @@ export function AppRouter() {
       <Route path="/rules" element={<RulesPage />} />
       <Route path="/combat" element={<CombatPage />} />
       <Route path="/character" element={<CharacterPage />} />
+      <Route path="/dice" element={<DicePage />} />
       <Route path="/backup" element={<BackupPage />} />
       {CATEGORIES.map((cat) => (
         <Route key={cat} path={`/${cat}`} element={<CategoryPage category={cat} />}>

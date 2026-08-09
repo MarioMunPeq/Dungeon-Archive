@@ -30,7 +30,7 @@ The app uses a **5-tab bottom navigation bar**, always visible and thumb-reachab
 - **Home** (`/`) — Current Character (links to Combat), the session's pinned entities, Recently Viewed, and a link to the rules for newcomers.
 - **Search** (`/search`) — Global search across the entire Compendium. Instant results, category filter, recent searches. The top bar is hidden here so the query input is the focus.
 - **Rules** (`/rules`) — Three tabs: Rules, How to Play, and Glossary, plus the Beginner Mode toggle.
-- **Combat** (`/combat`) — Hit points, conditions, a turn checklist, and combat stats for the active player.
+- **Combat** (`/combat`) — Hit points, conditions, a turn checklist, and combat stats for the active player. The **Roll Dice** button opens the Dice Roller (`/dice`), where attack and damage rolls happen.
 - **Party** (`/party`) — Player reference sheets with pickers for spells, weapons, and magic items.
 
 ## Top Bar
@@ -44,6 +44,7 @@ A sticky header on every screen except Search:
 ## Other Routes
 
 - **Session** (`/session`) — has no tab. Reached from Home's Session section and from the pin button on any entity. Holds the pinned entities for the current encounter and the End Session action.
+- **Dice Roller** (`/dice`) — has no tab. Reached from the **Roll Dice** button on Combat. Rolls any die (d4–d100), any number of dice, with an optional modifier. Spell damage shown in the Character sheet and Compendium rolls inline on tap.
 - **Compendium categories** — every category has a browsable list page (`/spell`, `/monster`, `/equipment`, `/condition`, `/action`, `/magicitem`, `/feat`) with filters and sorting, linked from entity detail breadcrumbs.
 - **Entity detail** — `/:category/:canonicalId` (e.g. `/spell/fireball`) — full entity view with Favorite and Session pin actions, related entities, and edition/source selection.
 - **Backup** (`/backup`) — Cloud Backup. Shows a "not available" state when disabled.

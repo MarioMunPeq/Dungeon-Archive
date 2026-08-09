@@ -5,6 +5,8 @@ import { ContentRenderer } from "@/components/content";
 import { Subtitle } from "@/components/ui/Typography";
 import { Stack } from "@/components/ui/Stack";
 import { EntityProperty, EntityMetadataGrid } from "@/components/ui/entity-property";
+import { RollableDice } from "@/features/dice/rollable-dice";
+import { splitSpellRoll } from "@/lib/dice";
 
 interface SpellRendererProps {
   readonly entity: Spell;
@@ -14,6 +16,7 @@ export function SpellRenderer({ entity }: SpellRendererProps) {
   const levelText = entity.level === 0 ? "Cantrip" : `Level ${entity.level}`;
   const schoolName = SCHOOL_NAMES[entity.school] ?? entity.school;
   const roll = extractSpellRoll(entity.description);
+  const spellRoll = roll ? splitSpellRoll(roll) : null;
 
   return (
     <Stack gap="md">
@@ -22,7 +25,19 @@ export function SpellRenderer({ entity }: SpellRendererProps) {
       </Subtitle>
 
       <EntityMetadataGrid>
-        {roll && <EntityProperty label="Damage" value={roll} stat />}
+        {spellRoll && (
+          <EntityProperty
+            label="Damage"
+            value={
+              <RollableDice
+                expression={spellRoll.expression}
+                label={spellRoll.type}
+                className="text-lg font-bold leading-snug tabular-nums"
+              />
+            }
+            stat
+          />
+        )}
         <EntityProperty label="Casting Time" value={entity.castingTime} stat />
         <EntityProperty label="Range" value={entity.range} stat />
         <EntityProperty label="Duration" value={entity.duration} stat />

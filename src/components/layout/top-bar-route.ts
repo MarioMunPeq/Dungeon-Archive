@@ -19,6 +19,7 @@ const FIXED_TITLES: Record<string, string> = {
   [ROUTES.RULES]: "Quick Rules",
   [ROUTES.COMBAT]: "Combat",
   [ROUTES.CHARACTER]: "Character",
+  [ROUTES.DICE]: "Dice Roller",
   "/session": "Session",
   "/backup": "Backup",
 };
