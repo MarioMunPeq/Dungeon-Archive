@@ -55,8 +55,7 @@ export function ThemePicker() {
       });
     };
 
-    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (!reducedMotion && typeof document.startViewTransition === "function") {
+    if (typeof document.startViewTransition === "function") {
       try {
         document.startViewTransition(() => {
           // Swap the data-theme attribute synchronously so the new snapshot

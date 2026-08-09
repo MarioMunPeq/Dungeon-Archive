@@ -51,21 +51,13 @@ function plural(n: number, singular: string, pluralText: string): string {
 }
 
 interface PreviewCounts {
-  readonly adventureCount: number;
-  readonly characterCount: number;
-  readonly favoriteCount: number;
   readonly sessionCount: number;
-  readonly activeAdventureTitle: string | null;
 }
 
 function previewCounts(snapshot: CloudSnapshot): PreviewCounts {
   const meta = snapshot.metadata;
   return {
-    adventureCount: meta?.adventureCount ?? snapshot.state.adventures.length,
-    characterCount: meta?.characterCount ?? snapshot.state.characters.length,
-    favoriteCount: meta?.favoriteCount ?? snapshot.state.favorites.length,
     sessionCount: meta?.sessionCount ?? snapshot.state.session.length,
-    activeAdventureTitle: meta?.activeAdventureTitle ?? null,
   };
 }
 
@@ -332,6 +324,7 @@ export function BackupPage() {
         >
           {(() => {
             const counts = previewCounts(preview);
+            const character = preview.state.characters[0] ?? null;
             const updated =
               typeof preview.updatedAt === "number" ? formatRelative(preview.updatedAt) : "unknown";
             return (
@@ -345,20 +338,11 @@ export function BackupPage() {
                     Contains
                   </p>
                   <p className="text-foreground">
-                    {plural(counts.adventureCount, "adventure", "adventures")}
-                  </p>
-                  <p className="text-foreground">
-                    {plural(counts.characterCount, "character", "characters")}
-                  </p>
-                  <p className="text-foreground">
-                    {plural(counts.favoriteCount, "favorite", "favorites")}
+                    {character !== null ? `Character: ${character.name}` : "No character saved"}
                   </p>
                   <p className="text-foreground">
                     {plural(counts.sessionCount, "session item", "session items")}
                   </p>
-                  {counts.activeAdventureTitle !== null && (
-                    <p className="text-foreground">Adventure: {counts.activeAdventureTitle}</p>
-                  )}
                 </div>
               </div>
             );

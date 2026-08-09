@@ -42,9 +42,17 @@ export function useInstallPrompt() {
 
   const install = useCallback(async () => {
     if (deferred === null) return;
-    await deferred.prompt();
-    const { outcome } = await deferred.userChoice;
-    if (outcome === "accepted") setDeferred(null);
+    const event = deferred;
+    try {
+      await event.prompt();
+      const { outcome } = await event.userChoice;
+      if (outcome === "accepted") setStandalone(true);
+    } finally {
+      // The beforeinstallprompt event is single-use: prompt() can only be
+      // invoked once per captured event, so drop it after the flow completes
+      // (accepted, dismissed, or an unexpected error).
+      setDeferred(null);
+    }
   }, [deferred]);
 
   return {

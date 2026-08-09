@@ -229,8 +229,7 @@
    page plays a quick fade+translate. ~280ms screen-level per Design DNA rule 42
    (route/tab budget 250-300ms); the top bar and bottom nav sit outside the
    keyed wrapper so the chrome stays static. opacity + translate animate together
-   per rule 44. Reduced motion is already zeroed out by the base-layer media
-   query. */
+   per rule 44. */
 @keyframes route-in {
   from {
     opacity: 0;
@@ -277,13 +276,6 @@
   }
   to {
     clip-path: circle(var(--wave-r, 141.5%) at var(--wave-x, 50%) var(--wave-y, 50%));
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  ::view-transition-old(root),
-  ::view-transition-new(root) {
-    animation: none !important;
   }
 }
 
@@ -448,12 +440,10 @@
   }
 
   /* Theme repaint — fallback cross-fade for the accent + secondary-accent pair
-     on the whole tree, used only when the View Transitions theme wave is
-     unavailable or reduced-motion is active (see useApplyTheme and
-     theme-picker.tsx). Applied only while a theme selection is being repainted;
-     instant on first load. 220ms stays under the 300ms transition ceiling of
-     Design DNA rule 42. Reduced motion is zeroed by the media query below
-     (0.01ms !important wins over this rule). */
+     on the whole tree, used when the View Transitions theme wave is unavailable
+     (see useApplyTheme and theme-picker.tsx). Applied only while a theme
+     selection is being repainted; instant on first load. 220ms stays under the
+     300ms transition ceiling of Design DNA rule 42. */
   .theme-switching,
   .theme-switching *,
   .theme-switching *::before,
@@ -461,17 +451,6 @@
     transition-property: color, background-color, border-color, box-shadow, fill, stroke;
     transition-duration: 220ms;
     transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    *,
-    *::before,
-    *::after {
-      animation-duration: 0.01ms !important;
-      animation-iteration-count: 1 !important;
-      transition-duration: 0.01ms !important;
-      scroll-behavior: auto !important;
-    }
   }
 }
 
