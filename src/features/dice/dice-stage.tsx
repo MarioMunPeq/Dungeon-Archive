@@ -5,9 +5,19 @@ import type { DiceExpression } from "@/lib/dice";
 
 const FALLBACK_ACCENT = "#3ab492";
 
-/** Dice size in world units. The library default is 5; 25 is ~5x larger so the
- *  dice dominate the stage instead of appearing tiny. */
-const DICE_SCALE = 25;
+/** Single-die size in world units. The library default is 5; 25 is ~5x larger
+ *  so one die dominates the stage. */
+const BASE_DICE_SCALE = 25;
+/** Floor for the per-die scale so many dice never shrink to tiny. */
+const MIN_DICE_SCALE = 5;
+
+/** Per-die scale for a roll of `count` dice. A die's footprint grows with the
+ *  square of its size, so total area scales as count * scale^2; shrinking the
+ *  scale by 1/sqrt(count) keeps any number of dice fitting in the table area
+ *  while staying as large as possible: 1 die = full size, decreasing smoothly. */
+function diceScaleFor(count: number): number {
+  return Math.max(MIN_DICE_SCALE, BASE_DICE_SCALE / Math.sqrt(count));
+}
 
 /** Public theme assets copied by `pnpm assets:dice-box` (see scripts/assets). */
 const ASSET_PATH = `${import.meta.env.BASE_URL}dice-box/`;
@@ -49,7 +59,7 @@ export default function DiceStage({ expression, rollId, onSettle, onUnavailable 
           assetPath: ASSET_PATH,
           theme: "default",
           themeColor: readAccentColor(),
-          scale: DICE_SCALE,
+          scale: diceScaleFor(propsRef.current.expression.count),
         });
         await box.init();
       } catch (error) {
@@ -89,7 +99,8 @@ export default function DiceStage({ expression, rollId, onSettle, onUnavailable 
     const token = ++rollTokenRef.current;
 
     box
-      .roll(diceBoxNotation(current), { themeColor: readAccentColor() })
+      .updateConfig({ scale: diceScaleFor(current.count) })
+      .then(() => box.roll(diceBoxNotation(current), { themeColor: readAccentColor() }))
       .then((results) => {
         if (token !== rollTokenRef.current) return;
         const diceTotal = results.reduce(
