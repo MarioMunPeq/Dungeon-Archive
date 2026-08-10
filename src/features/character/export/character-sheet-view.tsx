@@ -1,19 +1,73 @@
 import { forwardRef } from "react";
-import type { CharacterSheetModel, ExportReferenceRow } from "./character-sheet-model";
+import type { ReactNode } from "react";
+import type {
+  CharacterSheetModel,
+  ExportAbilityRow,
+  ExportReferenceRow,
+} from "./character-sheet-model";
+import { SHEET_BACKGROUND } from "./character-sheet-export";
+import type { ExportSheetPalette } from "./character-sheet-export";
 
 const SHEET_WIDTH = 800;
-const PAPER = "#f7f3ec";
-const INK = "#241f1a";
-const INK_SUBTLE = "#6f675c";
-const LINE = "#d8d0c2";
-const ACCENT = "#8a5a22";
+const INK = "#f5f1ec";
+const INK_SUBTLE = "#928a81";
+const LINE = "rgba(245, 241, 236, 0.09)";
+const READOUT_GRADIENT =
+  "radial-gradient(240% 260% at 50% 0%, #221d18 0%, #1c1917 50%, #171311 100%)";
+const SUCCESS = "#58a374";
+const DESTRUCTIVE = "#ef4444";
 
-function SectionTitle({ children }: { children: string }) {
+function modifierColor(modifier: number, palette: ExportSheetPalette): string {
+  if (modifier > 0) return SUCCESS;
+  if (modifier < 0) return DESTRUCTIVE;
+  return palette.accentSecondary;
+}
+
+function D20Mark({ color, size }: { readonly color: string; readonly size: number }) {
   return (
-    <div className="flex items-center gap-2" style={{ marginBottom: 10 }}>
+    <svg
+      aria-hidden="true"
+      viewBox="0 0 192 192"
+      fill="none"
+      stroke={color}
+      strokeWidth={9}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      style={{ width: size, height: size, opacity: 0.85 }}
+    >
+      <polygon points="96,30 47,66 47,126 96,162 145,126 145,66" />
+      <line x1="47" y1="66" x2="145" y2="66" />
+      <line x1="47" y1="126" x2="145" y2="126" />
+      <line x1="96" y1="66" x2="96" y2="126" />
+      <line x1="96" y1="66" x2="47" y2="96" />
+      <line x1="96" y1="66" x2="145" y2="96" />
+      <line x1="47" y1="96" x2="96" y2="126" />
+      <line x1="145" y1="96" x2="96" y2="126" />
+    </svg>
+  );
+}
+
+function SectionTitle({
+  children,
+  palette,
+}: {
+  readonly children: string;
+  readonly palette: ExportSheetPalette;
+}) {
+  return (
+    <div
+      style={{
+        display: "flex",
+        alignItems: "center",
+        gap: 10,
+        marginBottom: 12,
+        paddingBottom: 8,
+        borderBottom: `1px solid ${LINE}`,
+      }}
+    >
       <span
         aria-hidden="true"
-        style={{ width: 3, height: 14, borderRadius: 2, backgroundColor: ACCENT }}
+        style={{ width: 3, height: 15, borderRadius: 2, backgroundColor: palette.accent }}
       />
       <span
         style={{
@@ -56,7 +110,7 @@ function ReferenceList({ rows, empty }: { rows: readonly ExportReferenceRow[]; e
             alignItems: "baseline",
             justifyContent: "space-between",
             gap: 16,
-            padding: "7px 0",
+            padding: "8px 0",
             borderBottom: `1px solid ${LINE}`,
           }}
         >
@@ -86,12 +140,120 @@ function ReferenceList({ rows, empty }: { rows: readonly ExportReferenceRow[]; e
   );
 }
 
+function AbilityCard({
+  ability,
+  palette,
+}: {
+  readonly ability: ExportAbilityRow;
+  readonly palette: ExportSheetPalette;
+}) {
+  return (
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        gap: 3,
+        padding: "10px 6px",
+        borderRadius: 10,
+        border: `1px solid ${palette.accentBorder}`,
+        background: READOUT_GRADIENT,
+      }}
+    >
+      <span
+        style={{
+          fontSize: 10,
+          fontWeight: 700,
+          letterSpacing: "0.1em",
+          color: INK_SUBTLE,
+          fontFamily: "var(--font-family-sans)",
+        }}
+      >
+        {ability.label}
+      </span>
+      <span
+        style={{
+          fontSize: 22,
+          fontWeight: 700,
+          lineHeight: 1,
+          fontVariantNumeric: "tabular-nums",
+          color: modifierColor(ability.modifier, palette),
+          fontFamily: "var(--font-family-mono)",
+        }}
+      >
+        {ability.modifier >= 0 ? `+${ability.modifier}` : ability.modifier}
+      </span>
+      <span
+        style={{
+          fontSize: 11,
+          color: INK_SUBTLE,
+          fontVariantNumeric: "tabular-nums",
+          fontFamily: "var(--font-family-mono)",
+        }}
+      >
+        {ability.score}
+      </span>
+    </div>
+  );
+}
+
+function StatCard({
+  label,
+  border,
+  children,
+}: {
+  readonly label: string;
+  readonly border: string;
+  readonly children: ReactNode;
+}) {
+  return (
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        gap: 6,
+        padding: "14px 10px",
+        borderRadius: 12,
+        border: `1px solid ${border}`,
+        background: READOUT_GRADIENT,
+      }}
+    >
+      <span
+        style={{
+          fontSize: 10,
+          fontWeight: 700,
+          letterSpacing: "0.12em",
+          textTransform: "uppercase",
+          color: INK_SUBTLE,
+          fontFamily: "var(--font-family-sans)",
+        }}
+      >
+        {label}
+      </span>
+      <span
+        style={{
+          fontSize: 24,
+          fontWeight: 700,
+          lineHeight: 1,
+          fontVariantNumeric: "tabular-nums",
+          color: INK,
+          fontFamily: "var(--font-family-mono)",
+        }}
+      >
+        {children}
+      </span>
+    </div>
+  );
+}
+
 export interface CharacterSheetViewProps {
   readonly model: CharacterSheetModel;
+  readonly palette: ExportSheetPalette;
 }
 
 export const CharacterSheetView = forwardRef<HTMLDivElement, CharacterSheetViewProps>(
-  function CharacterSheetView({ model }, ref) {
+  function CharacterSheetView({ model, palette }, ref) {
     return (
       <div
         ref={ref}
@@ -99,16 +261,16 @@ export const CharacterSheetView = forwardRef<HTMLDivElement, CharacterSheetViewP
           width: SHEET_WIDTH,
           boxSizing: "border-box",
           padding: "40px 44px",
-          backgroundColor: PAPER,
+          backgroundColor: SHEET_BACKGROUND,
           color: INK,
         }}
       >
-        <header style={{ borderBottom: `2px solid ${INK}`, paddingBottom: 18 }}>
+        <header style={{ borderBottom: `1px solid ${LINE}`, paddingBottom: 18 }}>
           <h1
             style={{
               margin: 0,
-              fontSize: 34,
-              fontWeight: 700,
+              fontSize: 32,
+              fontWeight: 800,
               lineHeight: 1.1,
               letterSpacing: "-0.02em",
               color: INK,
@@ -132,239 +294,65 @@ export const CharacterSheetView = forwardRef<HTMLDivElement, CharacterSheetViewP
           )}
         </header>
 
-        <section style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 12, marginTop: 24 }}>
-          <div
-            style={{
-              border: `1px solid ${LINE}`,
-              borderRadius: 10,
-              padding: "12px 10px",
-              textAlign: "center",
-            }}
-          >
-            <div
-              style={{
-                fontSize: 10,
-                fontWeight: 700,
-                letterSpacing: "0.12em",
-                textTransform: "uppercase",
-                color: INK_SUBTLE,
-                fontFamily: "var(--font-family-sans)",
-              }}
-            >
-              Hit Points
-            </div>
-            <div
-              style={{
-                marginTop: 4,
-                fontSize: 22,
-                fontWeight: 700,
-                fontVariantNumeric: "tabular-nums",
-                color: INK,
-                fontFamily: "var(--font-family-mono)",
-              }}
-            >
-              {model.hitPoints.current}
-              <span style={{ fontSize: 15, color: INK_SUBTLE }}> / {model.hitPoints.max}</span>
-            </div>
-          </div>
-          <div
-            style={{
-              border: `1px solid ${LINE}`,
-              borderRadius: 10,
-              padding: "12px 10px",
-              textAlign: "center",
-            }}
-          >
-            <div
-              style={{
-                fontSize: 10,
-                fontWeight: 700,
-                letterSpacing: "0.12em",
-                textTransform: "uppercase",
-                color: INK_SUBTLE,
-                fontFamily: "var(--font-family-sans)",
-              }}
-            >
-              Armor Class
-            </div>
-            <div
-              style={{
-                marginTop: 4,
-                fontSize: 22,
-                fontWeight: 700,
-                fontVariantNumeric: "tabular-nums",
-                color: INK,
-                fontFamily: "var(--font-family-mono)",
-              }}
-            >
-              {model.armorClass}
-            </div>
-          </div>
-          <div
-            style={{
-              border: `1px solid ${LINE}`,
-              borderRadius: 10,
-              padding: "12px 10px",
-              textAlign: "center",
-            }}
-          >
-            <div
-              style={{
-                fontSize: 10,
-                fontWeight: 700,
-                letterSpacing: "0.12em",
-                textTransform: "uppercase",
-                color: INK_SUBTLE,
-                fontFamily: "var(--font-family-sans)",
-              }}
-            >
-              Perception
-            </div>
-            <div
-              style={{
-                marginTop: 4,
-                fontSize: 22,
-                fontWeight: 700,
-                fontVariantNumeric: "tabular-nums",
-                color: INK,
-                fontFamily: "var(--font-family-mono)",
-              }}
-            >
-              {model.passivePerception}
-            </div>
-          </div>
-          <div
-            style={{
-              border: `1px solid ${LINE}`,
-              borderRadius: 10,
-              padding: "12px 10px",
-              textAlign: "center",
-            }}
-          >
-            <div
-              style={{
-                fontSize: 10,
-                fontWeight: 700,
-                letterSpacing: "0.12em",
-                textTransform: "uppercase",
-                color: INK_SUBTLE,
-                fontFamily: "var(--font-family-sans)",
-              }}
-            >
-              Spell DC
-            </div>
-            <div
-              style={{
-                marginTop: 4,
-                fontSize: 22,
-                fontWeight: 700,
-                fontVariantNumeric: "tabular-nums",
-                color: INK,
-                fontFamily: "var(--font-family-mono)",
-              }}
-            >
-              {model.spellSaveDc}
-            </div>
-          </div>
+        <section
+          style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 12, marginTop: 24 }}
+        >
+          <StatCard label="Hit Points" border={palette.accentBorder}>
+            {model.hitPoints.current}
+            <span style={{ fontSize: 15, color: INK_SUBTLE }}> / {model.hitPoints.max}</span>
+          </StatCard>
+          <StatCard label="Armor Class" border={palette.accentBorder}>
+            {String(model.armorClass)}
+          </StatCard>
+          <StatCard label="Perception" border={palette.accentBorder}>
+            {String(model.passivePerception)}
+          </StatCard>
+          <StatCard label="Spell DC" border={palette.accentBorder}>
+            {String(model.spellSaveDc)}
+          </StatCard>
         </section>
 
         <section style={{ marginTop: 28 }}>
-          <SectionTitle>Abilities</SectionTitle>
+          <SectionTitle palette={palette}>Ability Scores</SectionTitle>
           <div style={{ display: "grid", gridTemplateColumns: "repeat(6, 1fr)", gap: 10 }}>
             {model.abilities.map((ability) => (
-              <div
-                key={ability.label}
-                style={{
-                  border: `1px solid ${LINE}`,
-                  borderRadius: 10,
-                  padding: "10px 6px",
-                  textAlign: "center",
-                }}
-              >
-                <div
-                  style={{
-                    fontSize: 10,
-                    fontWeight: 700,
-                    letterSpacing: "0.1em",
-                    color: INK_SUBTLE,
-                    fontFamily: "var(--font-family-sans)",
-                  }}
-                >
-                  {ability.label}
-                </div>
-                <div
-                  style={{
-                    marginTop: 4,
-                    fontSize: 20,
-                    fontWeight: 700,
-                    fontVariantNumeric: "tabular-nums",
-                    color: INK,
-                    fontFamily: "var(--font-family-mono)",
-                  }}
-                >
-                  {ability.modifier >= 0 ? `+${ability.modifier}` : ability.modifier}
-                </div>
-                <div
-                  style={{
-                    fontSize: 11,
-                    color: INK_SUBTLE,
-                    fontVariantNumeric: "tabular-nums",
-                    fontFamily: "var(--font-family-mono)",
-                  }}
-                >
-                  {ability.score}
-                </div>
-              </div>
+              <AbilityCard key={ability.label} ability={ability} palette={palette} />
             ))}
           </div>
         </section>
 
         <section style={{ marginTop: 28 }}>
-          <SectionTitle>Spells</SectionTitle>
+          <SectionTitle palette={palette}>Spells</SectionTitle>
           <ReferenceList rows={model.spells} empty="No spells." />
         </section>
 
         <section style={{ marginTop: 28 }}>
-          <SectionTitle>Weapons</SectionTitle>
+          <SectionTitle palette={palette}>Weapons</SectionTitle>
           <ReferenceList rows={model.weapons} empty="No weapons." />
         </section>
 
         <section style={{ marginTop: 28 }}>
-          <SectionTitle>Magic Items</SectionTitle>
+          <SectionTitle palette={palette}>Magic Items</SectionTitle>
           <ReferenceList rows={model.magicItems} empty="No magic items." />
         </section>
 
         <footer
           style={{
-            marginTop: 36,
-            paddingTop: 14,
+            marginTop: 32,
+            paddingTop: 16,
             borderTop: `1px solid ${LINE}`,
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
-            gap: 8,
+            gap: 10,
           }}
         >
-          <svg
-            aria-hidden="true"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke={ACCENT}
-            strokeWidth={2}
-            style={{ width: 14, height: 14 }}
-          >
-            <path d="M4 19h16" />
-            <path d="M4 19V6" />
-            <path d="M20 19V6" />
-            <path d="M4 6h16" />
-            <path d="m9 19 6-6" />
-            <path d="m15 19-6-6" />
-          </svg>
+          <D20Mark color={palette.accent} size={20} />
           <span
             style={{
               fontSize: 11,
-              fontWeight: 600,
-              letterSpacing: "0.14em",
+              fontWeight: 700,
+              letterSpacing: "0.18em",
               textTransform: "uppercase",
               color: INK_SUBTLE,
               fontFamily: "var(--font-family-sans)",

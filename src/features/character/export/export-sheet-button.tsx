@@ -3,11 +3,11 @@ import { toPng } from "html-to-image";
 import { Button, useSnackbar } from "@/components/ui";
 import { resolveEntity } from "@/compendium";
 import type { Equipment, MagicItem, Spell } from "@/compendium";
+import { useTheme } from "@/user-state";
 import type { CharacterReference } from "@/user-state";
 import { buildCharacterSheetModel, exportFileName } from "./character-sheet-model";
 import { CharacterSheetView } from "./character-sheet-view";
-
-const PAPER_BACKGROUND = "#f7f3ec";
+import { readThemePalette, SHEET_BACKGROUND } from "./character-sheet-export";
 
 function resolveSpells(ids: readonly string[]): Spell[] {
   const out: Spell[] = [];
@@ -40,6 +40,7 @@ export function ExportSheetButton({ character }: { character: CharacterReference
   const sheetRef = useRef<HTMLDivElement | null>(null);
   const [exporting, setExporting] = useState(false);
   const { show } = useSnackbar();
+  useTheme();
 
   const model = useMemo(
     () =>
@@ -52,14 +53,21 @@ export function ExportSheetButton({ character }: { character: CharacterReference
     [character],
   );
 
+  const palette = readThemePalette();
+
   const handleExport = useCallback(async () => {
     const node = sheetRef.current;
     if (!node) return;
     setExporting(true);
+    // Re-render the off-screen sheet with the live theme accent before capture,
+    // then wait for the commit to be painted.
+    await new Promise<void>((resolve) => {
+      requestAnimationFrame(() => requestAnimationFrame(() => resolve()));
+    });
     try {
       const dataUrl = await toPng(node, {
         pixelRatio: 2,
-        backgroundColor: PAPER_BACKGROUND,
+        backgroundColor: SHEET_BACKGROUND,
       });
       const link = document.createElement("a");
       link.download = exportFileName(model.name);
@@ -77,7 +85,7 @@ export function ExportSheetButton({ character }: { character: CharacterReference
   return (
     <>
       <div aria-hidden className="pointer-events-none fixed -left-[9999px] top-0">
-        <CharacterSheetView ref={sheetRef} model={model} />
+        <CharacterSheetView ref={sheetRef} model={model} palette={palette} />
       </div>
       <Button variant="outline" size="sm" onClick={() => void handleExport()} disabled={exporting}>
         <svg
