@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import DiceBox from "@3d-dice/dice-box";
-import { diceBoxNotation, rollDice } from "@/lib/dice";
-import type { DiceExpression } from "@/lib/dice";
+import { rollDice } from "@/lib/dice";
 
 const FALLBACK_ACCENT = "#3ab492";
 
@@ -28,23 +27,70 @@ function readAccentColor(): string {
   return accent === "" ? FALLBACK_ACCENT : accent;
 }
 
+/** One die group in a multi-die roll: `count` dice of `sides` faces each. */
+export interface DiceGroup {
+  readonly sides: number;
+  readonly count: number;
+}
+
+/** A complete dice roll: any number of die groups plus an optional modifier. */
+export interface DiceRoll {
+  readonly groups: readonly DiceGroup[];
+  readonly modifier: number;
+}
+
+/** The settled outcome of a `DiceRoll`, with the sum of each group broken out. */
+export interface DiceRollResult {
+  readonly groups: readonly (DiceGroup & { readonly sum: number })[];
+  readonly modifier: number;
+  readonly total: number;
+}
+
+/** Slice the flat per-die results (returned in notation order) back into groups. */
+function sumResults(results: readonly { value?: unknown }[], roll: DiceRoll): DiceRollResult {
+  const groups: (DiceGroup & { readonly sum: number })[] = [];
+  let index = 0;
+  for (const group of roll.groups) {
+    let sum = 0;
+    for (let i = 0; i < group.count; i += 1) {
+      const value = Number(results[index]?.value);
+      sum += Number.isFinite(value) ? value : 0;
+      index += 1;
+    }
+    groups.push({ sides: group.sides, count: group.count, sum });
+  }
+  const diceTotal = groups.reduce((total, group) => total + group.sum, 0);
+  return { groups, modifier: roll.modifier, total: diceTotal + roll.modifier };
+}
+
+/** Deterministic fallback breakdown used when the 3D roll rejects. */
+function fallbackResult(roll: DiceRoll): DiceRollResult {
+  const groups = roll.groups.map((group) => ({
+    sides: group.sides,
+    count: group.count,
+    sum: rollDice({ count: group.count, sides: group.sides, modifier: 0 }),
+  }));
+  const diceTotal = groups.reduce((total, group) => total + group.sum, 0);
+  return { groups, modifier: roll.modifier, total: diceTotal + roll.modifier };
+}
+
 export interface DiceStageProps {
-  readonly expression: DiceExpression;
+  readonly roll: DiceRoll;
   /** Increments once per requested roll; 0 means idle. */
   readonly rollId: number;
-  /** Called with the summed total once the physics settle. */
-  readonly onSettle: (total: number) => void;
+  /** Called with the per-group breakdown once the physics settle. */
+  readonly onSettle: (result: DiceRollResult) => void;
   /** Called when the 3D stage cannot initialize (caller falls back to instant rolls). */
   readonly onUnavailable: () => void;
 }
 
-export default function DiceStage({ expression, rollId, onSettle, onUnavailable }: DiceStageProps) {
+export default function DiceStage({ roll, rollId, onSettle, onUnavailable }: DiceStageProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const boxRef = useRef<DiceBox | null>(null);
   const [ready, setReady] = useState(false);
 
-  const propsRef = useRef({ expression, onSettle, onUnavailable });
-  propsRef.current = { expression, onSettle, onUnavailable };
+  const propsRef = useRef({ roll, onSettle, onUnavailable });
+  propsRef.current = { roll, onSettle, onUnavailable };
 
   useEffect(() => {
     let cancelled = false;
@@ -59,7 +105,9 @@ export default function DiceStage({ expression, rollId, onSettle, onUnavailable 
           assetPath: ASSET_PATH,
           theme: "default",
           themeColor: readAccentColor(),
-          scale: diceScaleFor(propsRef.current.expression.count),
+          scale: diceScaleFor(
+            propsRef.current.roll.groups.reduce((sum, group) => sum + group.count, 0),
+          ),
         });
         await box.init();
       } catch (error) {
@@ -95,25 +143,24 @@ export default function DiceStage({ expression, rollId, onSettle, onUnavailable 
     if (box === null) return;
 
     lastRolledRef.current = rollId;
-    const { expression: current, onSettle: settle } = propsRef.current;
+    const { roll: current, onSettle: settle } = propsRef.current;
     const token = ++rollTokenRef.current;
 
+    const count = current.groups.reduce((sum, group) => sum + group.count, 0);
+    const notation = current.groups.map((group) => `${group.count}d${group.sides}`);
+
     box
-      .updateConfig({ scale: diceScaleFor(current.count) })
-      .then(() => box.roll(diceBoxNotation(current), { themeColor: readAccentColor() }))
+      .updateConfig({ scale: diceScaleFor(count) })
+      .then(() => box.roll(notation, { themeColor: readAccentColor() }))
       .then((results) => {
         if (token !== rollTokenRef.current) return;
-        const diceTotal = results.reduce(
-          (sum, die) => sum + (Number.isFinite(die.value) ? die.value : 0),
-          0,
-        );
-        settle(diceTotal + current.modifier);
+        settle(sumResults(results, current));
       })
       .catch((error) => {
         if (token !== rollTokenRef.current) return;
         // eslint-disable-next-line no-console -- roll failure must be debuggable
         console.error("[dice] 3D roll failed:", error);
-        settle(rollDice(current));
+        settle(fallbackResult(current));
       });
   }, [rollId, ready]);
 

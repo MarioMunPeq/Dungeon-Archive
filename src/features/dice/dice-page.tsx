@@ -1,8 +1,7 @@
 import { lazy, Suspense, useCallback, useRef, useState } from "react";
 import { Button, Stepper } from "@/components/ui";
 import { FilterChips } from "@/components/search";
-import { formatDiceExpression, parseDiceExpression } from "@/lib/dice";
-import type { DiceExpression } from "@/lib/dice";
+import type { DiceGroup, DiceRoll, DiceRollResult } from "./dice-stage";
 import { useRoll } from "./use-roll";
 
 const DiceStage = lazy(() => import("./dice-stage"));
@@ -17,8 +16,18 @@ const DIE_OPTIONS = [
   { value: "100", label: "d100" },
 ] as const;
 
+const MAX_DIE_COUNT = 20;
+
 const SECTION_LABEL =
   "border-l-2 border-primary pl-2 text-xs font-bold uppercase tracking-wide text-muted-foreground";
+
+function formatGroups(groups: readonly DiceGroup[], modifier: number): string {
+  const parts = groups.map((group) => `${group.count}d${group.sides}`);
+  if (modifier !== 0) {
+    parts.push(`${modifier > 0 ? "+" : "-"} ${Math.abs(modifier)}`);
+  }
+  return parts.join(" + ");
+}
 
 function prefersReducedMotion(): boolean {
   return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -37,53 +46,81 @@ function supportsWebGL(): boolean {
 }
 
 export function DicePage() {
-  const [sides, setSides] = useState(20);
-  const [count, setCount] = useState(1);
+  const [groups, setGroups] = useState<DiceGroup[]>([{ sides: 20, count: 1 }]);
   const [modifier, setModifier] = useState(0);
-  const { rolling: instantRolling, display, roll: instantRoll } = useRoll();
+  const { rolling: instantRolling, display, rollMany: instantRollMany } = useRoll();
 
   const [reduceMotion] = useState(prefersReducedMotion);
   const [webgl] = useState(supportsWebGL);
   const [stageUnavailable, setStageUnavailable] = useState(false);
   const [rolling, setRolling] = useState(false);
   const [result, setResult] = useState<number | null>(null);
+  const [rollResult, setRollResult] = useState<DiceRollResult | null>(null);
   const [rollId, setRollId] = useState(0);
 
   const show3D = !reduceMotion && webgl && !stageUnavailable;
 
-  const expression: DiceExpression = { count, sides, modifier };
-  const label = formatDiceExpression(expression);
-  const pendingExpressionRef = useRef<DiceExpression | null>(null);
+  const roll: DiceRoll = { groups, modifier };
+  const label = formatGroups(groups, modifier);
+  const totalCount = groups.reduce((sum, group) => sum + group.count, 0);
+  const pendingRollRef = useRef<DiceRoll | null>(null);
+
+  const addDie = (sides: number) => {
+    setGroups((prev) => {
+      const existing = prev.find((group) => group.sides === sides);
+      if (existing !== undefined) {
+        return prev.map((group) =>
+          group.sides === sides
+            ? { ...group, count: Math.min(group.count + 1, MAX_DIE_COUNT) }
+            : group,
+        );
+      }
+      return [...prev, { sides, count: 1 }];
+    });
+  };
+
+  const setDieCount = useCallback((sides: number, count: number) => {
+    setGroups((prev) => {
+      if (count <= 0) return prev.filter((group) => group.sides !== sides);
+      return prev.map((group) => (group.sides === sides ? { ...group, count } : group));
+    });
+  }, []);
 
   const handleRoll = () => {
     if (!show3D) {
-      const parsed = parseDiceExpression(label);
-      if (parsed !== null) instantRoll(parsed);
+      instantRollMany(groups, modifier);
       return;
     }
-    pendingExpressionRef.current = expression;
+    pendingRollRef.current = roll;
+    setRollResult(null);
     setResult(null);
     setRolling(true);
     setRollId((id) => id + 1);
   };
 
-  const handleSettle = useCallback((total: number) => {
-    pendingExpressionRef.current = null;
-    setResult(total);
+  const handleSettle = useCallback((settled: DiceRollResult) => {
+    pendingRollRef.current = null;
+    setRollResult(settled);
+    setResult(settled.total);
     setRolling(false);
   }, []);
 
   const handleUnavailable = useCallback(
-    (pending: DiceExpression | null) => {
+    (pending: DiceRoll | null) => {
       setStageUnavailable(true);
       setRolling(false);
-      pendingExpressionRef.current = null;
-      if (pending !== null) instantRoll(pending);
+      pendingRollRef.current = null;
+      if (pending !== null) instantRollMany(pending.groups, pending.modifier);
     },
-    [instantRoll],
+    [instantRollMany],
   );
 
   const displayValue = show3D ? (rolling ? "…" : result ? result : "—") : (display ?? "—");
+  const showBreakdown =
+    show3D &&
+    rollResult !== null &&
+    !rolling &&
+    (rollResult.groups.length > 1 || rollResult.modifier !== 0);
 
   return (
     <div className="flex min-h-full flex-col gap-5 px-4 py-6">
@@ -97,10 +134,10 @@ export function DicePage() {
             }
           >
             <DiceStage
-              expression={expression}
+              roll={roll}
               rollId={rollId}
               onSettle={handleSettle}
-              onUnavailable={() => handleUnavailable(pendingExpressionRef.current)}
+              onUnavailable={() => handleUnavailable(pendingRollRef.current)}
             />
           </Suspense>
         </div>
@@ -117,6 +154,30 @@ export function DicePage() {
         >
           {displayValue}
         </div>
+        {showBreakdown && (
+          <div className="flex w-full flex-col gap-0.5">
+            {rollResult.groups.map((group) => (
+              <div
+                key={`${group.sides}-${group.count}`}
+                className="flex items-baseline justify-between gap-6 font-mono text-sm"
+              >
+                <span className="text-muted-foreground">
+                  {group.count}d{group.sides}
+                </span>
+                <span className="tabular-nums text-foreground">{group.sum}</span>
+              </div>
+            ))}
+            {rollResult.modifier !== 0 && (
+              <div className="flex items-baseline justify-between gap-6 font-mono text-sm">
+                <span className="text-muted-foreground">
+                  {rollResult.modifier > 0 ? "+" : "−"}
+                  {Math.abs(rollResult.modifier)}
+                </span>
+                <span className="tabular-nums text-foreground">{rollResult.modifier}</span>
+              </div>
+            )}
+          </div>
+        )}
         <span className="font-mono text-sm text-muted-foreground">{label}</span>
       </div>
 
@@ -124,34 +185,52 @@ export function DicePage() {
         <span className={SECTION_LABEL}>Die</span>
         <FilterChips
           options={DIE_OPTIONS}
-          selected={String(sides)}
+          selected={groups.map((group) => String(group.sides))}
           onChange={(value) => {
-            if (value) setSides(Number(value));
+            if (value !== "") addDie(Number(value));
           }}
           ariaLabel="Die"
           wrap
+          allowDeselect={false}
         />
       </div>
 
-      <div className="grid grid-cols-2 gap-3">
-        <div className="flex flex-col gap-2">
-          <span className={SECTION_LABEL}>Count</span>
-          <Stepper value={count} min={1} max={20} onChange={setCount} label="Count" />
-        </div>
-        <div className="flex flex-col gap-2">
-          <span className={SECTION_LABEL}>Modifier</span>
-          <Stepper
-            value={modifier}
-            min={-20}
-            max={20}
-            onChange={setModifier}
-            label="Modifier"
-            format={(v) => (v > 0 ? `+${v}` : String(v))}
-          />
-        </div>
+      <div className="flex flex-col gap-2">
+        <span className={SECTION_LABEL}>Current roll</span>
+        {groups.map((group) => (
+          <div key={group.sides} className="flex items-center gap-3">
+            <span className="w-14 shrink-0 font-mono text-sm text-foreground">{group.sides}d</span>
+            <Stepper
+              variant="ghost"
+              value={group.count}
+              min={0}
+              max={MAX_DIE_COUNT}
+              onChange={(count) => setDieCount(group.sides, count)}
+              label={`${group.sides} die count`}
+              className="w-28"
+              valueClassName="text-sm"
+            />
+          </div>
+        ))}
       </div>
 
-      <Button onClick={handleRoll} disabled={rolling || instantRolling} className="w-full">
+      <div className="flex flex-col gap-2">
+        <span className={SECTION_LABEL}>Modifier</span>
+        <Stepper
+          value={modifier}
+          min={-20}
+          max={20}
+          onChange={setModifier}
+          label="Modifier"
+          format={(v) => (v > 0 ? `+${v}` : String(v))}
+        />
+      </div>
+
+      <Button
+        onClick={handleRoll}
+        disabled={rolling || instantRolling || totalCount === 0}
+        className="w-full"
+      >
         <span className="font-mono tabular-nums">Roll {label}</span>
       </Button>
     </div>
