@@ -1,24 +1,17 @@
 import { lazy, Suspense, useCallback, useRef, useState } from "react";
+import type { KeyboardEvent } from "react";
 import { Button, Stepper } from "@/components/ui";
 import type { DiceGroup, DiceRoll, DiceRollResult } from "./dice-stage";
+import { DiceChip } from "./dice-chip";
 import { useRoll } from "./use-roll";
 
 const DiceStage = lazy(() => import("./dice-stage"));
 
-const DIE_OPTIONS = [
-  { value: "4", label: "d4" },
-  { value: "6", label: "d6" },
-  { value: "8", label: "d8" },
-  { value: "10", label: "d10" },
-  { value: "12", label: "d12" },
-  { value: "20", label: "d20" },
-  { value: "100", label: "d100" },
-] as const;
-
 const MAX_DIE_COUNT = 20;
 
-const SECTION_LABEL =
-  "border-l-2 border-primary pl-2 text-xs font-bold uppercase tracking-wide text-muted-foreground";
+/** Fixed die order, left-to-right in a 3-column grid:
+ *  row 1: d20 d6 d8 — row 2: d10 d4 d12 — row 3: d100 + Modifier. */
+const DICE_ORDER = ["20", "6", "8", "10", "4", "12", "100"];
 
 function formatGroups(groups: readonly DiceGroup[], modifier: number): string {
   const parts = groups.map((group) => `${group.count}d${group.sides}`);
@@ -75,6 +68,21 @@ export function DicePage() {
     });
   }, []);
 
+  const renderChips = (options: readonly string[]) =>
+    options.map((value) => {
+      const sides = Number(value);
+      const count = groups.find((group) => group.sides === sides)?.count ?? 0;
+      return (
+        <DiceChip
+          key={value}
+          sides={sides}
+          count={count}
+          onChange={(next) => setDieCount(sides, next)}
+          max={MAX_DIE_COUNT}
+        />
+      );
+    });
+
   const handleRoll = () => {
     if (!show3D) {
       instantRollMany(groups, modifier);
@@ -85,6 +93,20 @@ export function DicePage() {
     setResult(null);
     setRolling(true);
     setRollId((id) => id + 1);
+  };
+
+  const rollEnabled = !rolling && !instantRolling && totalCount > 0;
+
+  const triggerRoll = () => {
+    if (!rollEnabled) return;
+    handleRoll();
+  };
+
+  const handleRollKeyDown = (event: KeyboardEvent<HTMLDivElement>) => {
+    if (event.key === "Enter" || event.key === " ") {
+      event.preventDefault();
+      triggerRoll();
+    }
   };
 
   const handleSettle = useCallback((settled: DiceRollResult) => {
@@ -112,9 +134,17 @@ export function DicePage() {
     (rollResult.groups.length > 1 || rollResult.modifier !== 0);
 
   return (
-    <div className="flex min-h-full flex-col gap-5 px-4 py-6">
+    <div className="flex min-h-full flex-col gap-3 px-4 py-4">
       {show3D && (
-        <div className="h-56 w-full overflow-hidden rounded-stat border border-border bg-surface">
+        <div
+          role="button"
+          tabIndex={0}
+          aria-label="Reroll dice"
+          aria-disabled={!rollEnabled}
+          onClick={triggerRoll}
+          onKeyDown={handleRollKeyDown}
+          className="h-48 w-full cursor-pointer overflow-hidden rounded-stat border border-border bg-surface"
+        >
           <Suspense
             fallback={
               <div className="flex h-full w-full items-center justify-center">
@@ -132,16 +162,23 @@ export function DicePage() {
         </div>
       )}
 
-      <div className="flex flex-col items-center gap-2 rounded-stat border border-border-amber bg-card p-4 readout-card">
+      <div className="flex flex-col items-center gap-1 rounded-stat border border-border-amber bg-card p-2 readout-card">
         <span className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
           Result
         </span>
-        <div
-          key={String(displayValue)}
-          className="flex h-16 items-center justify-center font-mono text-5xl font-bold tabular-nums text-foreground animate-value-tick"
-          aria-live="polite"
-        >
-          {displayValue}
+        <div aria-live="polite" className="w-full">
+          <div
+            key={String(displayValue)}
+            role="button"
+            tabIndex={0}
+            aria-label="Reroll dice"
+            aria-disabled={!rollEnabled}
+            onClick={triggerRoll}
+            onKeyDown={handleRollKeyDown}
+            className="flex h-11 w-full cursor-pointer items-center justify-center font-mono text-3xl font-bold tabular-nums text-foreground animate-value-tick"
+          >
+            {displayValue}
+          </div>
         </div>
         {showBreakdown && (
           <div className="flex w-full flex-col gap-0.5">
@@ -167,52 +204,51 @@ export function DicePage() {
             )}
           </div>
         )}
-        <span className="font-mono text-sm text-muted-foreground">{label}</span>
+        <span className="font-mono text-xs text-muted-foreground">{label}</span>
       </div>
 
-      <div className="grid grid-cols-2 gap-x-3 gap-y-2">
-        {DIE_OPTIONS.map((option) => {
-          const sides = Number(option.value);
-          const count = groups.find((group) => group.sides === sides)?.count ?? 0;
-          return (
-            <div key={option.value} className="flex items-center gap-2">
-              <span className="w-10 shrink-0 font-mono text-sm text-foreground">
-                {option.label}
-              </span>
-              <Stepper
-                variant="ghost"
-                value={count}
-                min={0}
-                max={MAX_DIE_COUNT}
-                onChange={(next) => setDieCount(sides, next)}
-                label={`${option.label} die count`}
-                className="min-w-0 flex-1"
-                valueClassName="text-sm"
-              />
-            </div>
-          );
-        })}
+      <div className="mx-auto grid w-full max-w-lg grid-cols-3 gap-2">
+        {renderChips(DICE_ORDER)}
+
+        <div className="col-span-2 flex flex-col gap-1.5 rounded-card border border-primary/40 bg-primary/10 p-2">
+          <span className="flex items-center gap-1.5 text-primary">
+            <svg
+              aria-hidden="true"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth={2.5}
+              className="h-3.5 w-3.5"
+            >
+              <path d="M4 12h6" />
+              <path d="M17 9v6" />
+              <path d="M14 12h6" />
+            </svg>
+            <span className="text-xs font-bold uppercase tracking-wide">Modifier</span>
+          </span>
+          <Stepper
+            variant="ghost"
+            value={modifier}
+            min={-20}
+            max={20}
+            onChange={setModifier}
+            label="Modifier"
+            format={(v) => (v > 0 ? `+${v}` : String(v))}
+            className="w-full"
+            valueClassName="text-sm"
+          />
+        </div>
       </div>
 
-      <div className="flex flex-col gap-2">
-        <span className={SECTION_LABEL}>Modifier</span>
-        <Stepper
-          value={modifier}
-          min={-20}
-          max={20}
-          onChange={setModifier}
-          label="Modifier"
-          format={(v) => (v > 0 ? `+${v}` : String(v))}
-        />
+      <div className="sticky bottom-0 -mx-4 mt-auto border-t border-border bg-background px-4 pb-3 pt-2 shadow-[0_-8px_16px_rgb(0_0_0/0.35)]">
+        <Button
+          onClick={handleRoll}
+          disabled={rolling || instantRolling || totalCount === 0}
+          className="mx-auto w-full max-w-lg"
+        >
+          <span className="font-mono tabular-nums">Roll {label}</span>
+        </Button>
       </div>
-
-      <Button
-        onClick={handleRoll}
-        disabled={rolling || instantRolling || totalCount === 0}
-        className="w-full"
-      >
-        <span className="font-mono tabular-nums">Roll {label}</span>
-      </Button>
     </div>
   );
 }
