@@ -17,6 +17,7 @@
     "typecheck": "tsc --noEmit -p tsconfig.app.json && tsc --noEmit -p tsconfig.scripts.json",
     "build:compendium": "tsx scripts/compendium/build.ts",
     "assets": "tsx scripts/assets/generate-assets.ts",
+    "assets:dice-box": "tsx scripts/assets/copy-dice-box.ts",
     "test:assets": "tsx scripts/tests/assets.test.ts",
     "test:pwa": "tsx scripts/tests/pwa.test.ts",
     "test:identity": "tsx scripts/tests/identity.test.ts",
@@ -42,6 +43,7 @@
     "test": "pnpm run test:identity && pnpm run test:grouping && pnpm run test:resolver && pnpm run test:compendium && pnpm run test:category && pnpm run test:highlight && pnpm run test:navigation && pnpm run test:content && pnpm run test:design && pnpm run test:relationships && pnpm run test:magic-item && pnpm run test:feat && pnpm run test:user-state && pnpm run test:demo && pnpm run test:dice && pnpm run test:character-sheet && pnpm run test:sync && pnpm run test:firebase-config && pnpm run test:firebase-adapter && pnpm run test:auth-popup && pnpm run test:assets && pnpm run test:pwa"
   },
   "dependencies": {
+    "@3d-dice/dice-box": "^1.1.4",
     "@fontsource-variable/inter": "^5.3.0",
     "@fontsource-variable/jetbrains-mono": "^5.3.0",
     "@tanstack/react-virtual": "^3.14.9",

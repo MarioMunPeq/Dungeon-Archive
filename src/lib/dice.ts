@@ -42,6 +42,15 @@ export function formatDiceExpression(expression: DiceExpression): string {
 }
 
 /**
+ * Notation for the @3d-dice/dice-box physics engine. Always includes the die
+ * count (dice-box rejects a bare "d20") and omits the modifier, which the 3D
+ * stage adds back from the rolled faces.
+ */
+export function diceBoxNotation(expression: DiceExpression): string {
+  return `${expression.count}d${expression.sides}`;
+}
+
+/**
  * Splits a spell roll string like "1d6 Acid", "1d4 + 1 Force", or "2d6" into
  * its dice expression and (optional) damage type.
  */

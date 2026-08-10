@@ -61,17 +61,11 @@ test("exportClassLine falls back to level only", () => {
 });
 
 test("spellRow formats a cantrip", () => {
-  strictEqual(
-    spellRow({ name: "Fire Bolt", level: 0, school: "V" }).meta,
-    "Cantrip · Evocation",
-  );
+  strictEqual(spellRow({ name: "Fire Bolt", level: 0, school: "V" }).meta, "Cantrip · Evocation");
 });
 
 test("spellRow formats a leveled spell", () => {
-  strictEqual(
-    spellRow({ name: "Fireball", level: 3, school: "V" }).meta,
-    "Level 3 · Evocation",
-  );
+  strictEqual(spellRow({ name: "Fireball", level: 3, school: "V" }).meta, "Level 3 · Evocation");
 });
 
 test("spellRow falls back to the raw school", () => {

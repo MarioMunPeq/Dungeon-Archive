@@ -4,6 +4,7 @@ import {
   rollDice,
   rollDiceExpression,
   formatDiceExpression,
+  diceBoxNotation,
   splitSpellRoll,
 } from "../../src/lib/dice";
 
@@ -133,6 +134,18 @@ test("formatDiceExpression formats modifiers", () => {
   strictEqual(formatDiceExpression(die(1, 4, 1)), "1d4 + 1");
   strictEqual(formatDiceExpression(die(1, 4, -1)), "1d4 - 1");
   strictEqual(formatDiceExpression(die(2, 8, 3)), "2d8 + 3");
+});
+
+console.log("dice-box notation\n");
+
+test("diceBoxNotation always includes the die count", () => {
+  strictEqual(diceBoxNotation(die(1, 20)), "1d20");
+  strictEqual(diceBoxNotation(die(2, 6)), "2d6");
+});
+
+test("diceBoxNotation omits the modifier", () => {
+  strictEqual(diceBoxNotation(die(2, 8, 3)), "2d8");
+  strictEqual(diceBoxNotation(die(1, 4, -1)), "1d4");
 });
 
 console.log("spell roll splitting\n");

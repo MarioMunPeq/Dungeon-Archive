@@ -87,9 +87,12 @@
     interactions ~180-220ms; secondary micro-interactions ~120-180ms; route/tab
     transitions ~250-300ms (raised from the previous 220-260ms to accommodate a
     slightly richer transition). **Signature moments** (currently: the theme-switch
-    wave) may exceed the 300ms ceiling, capped at ~600-700ms. This is an explicit,
-    limited exception — not a general loosening. Any future addition to the
-    signature-moments list must be added here deliberately, never assumed.
+    wave, and the Dice Roller's 3D physics dice roll) may exceed the 300ms ceiling,
+    capped at ~600-700ms (the dice roll runs on a physics simulation, so its exact
+    duration is not CSS-controlled; it stays short enough to not stall the table).
+    This is an explicit, limited exception — not a general loosening. Any future
+    addition to the signature-moments list must be added here deliberately, never
+    assumed.
 43. Prefer subtle easing (soft/spring-like), never cartoonish bounce.
 44. State changes animate opacity + translate together, never opacity alone or
     scale alone. The signature-moment theme wave may additionally animate
@@ -110,7 +113,7 @@
 
 ## Constraints (apply to every future prompt)
 
-48. No new dependencies unless a specific need can't be met with what's already in the project. **Exception ("Alive Interactions" pass): a single lightweight animation library is approved — Framer Motion is the designated choice.** It was not installed during the approving pass: the theme wave, route transitions, and micro-interactions were all implemented with native CSS + the View Transitions API, which is cheaper and lower-jank on the target mid-tier mobile hardware (rule 3). If richer multi-property animation is ever needed, Framer Motion is the one approved library — do not introduce a second animation library without amending this rule first.
+48. No new dependencies unless a specific need can't be met with what's already in the project. **Exception ("Alive Interactions" pass): a single lightweight animation library is approved — Framer Motion is the designated choice.** It was not installed during the approving pass: the theme wave, route transitions, and micro-interactions were all implemented with native CSS + the View Transitions API, which is cheaper and lower-jank on the target mid-tier mobile hardware (rule 3). If richer multi-property animation is ever needed, Framer Motion is the one approved library — do not introduce a second animation library without amending this rule first. **Exception (Dice Roller pass): `@3d-dice/dice-box` is approved for real 3D physics dice on the Dice Roller screen only** — the one interaction the design system cannot express with native CSS (rule 47's "when in doubt, don't animate" falls away for this deliberate signature moment). It must remain lazy-loaded to `/dice` so it never enters the main bundle, and users on reduced motion (or without WebGL) get the instant numeric result instead of the physics simulation. Do not reuse it for other surfaces without amending this rule first.
 49. No gradients/decoration beyond what's explicitly defined in this document (the protagonist-card gradient, the app-shell vignette+grain, the section-header left border) — don't add a fourth decorative pattern without updating this document first.
 50. Every future visual prompt should be checked against this document before being written — if a new decision contradicts a rule here, update this document explicitly rather than silently diverging.
 51. This document should be revised (not silently ignored) whenever a genuinely new pattern is needed — treat additions as deliberate amendments, not exceptions.

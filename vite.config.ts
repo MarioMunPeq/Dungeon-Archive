@@ -45,6 +45,9 @@ export default defineConfig({
       },
       workbox: {
         globPatterns: ["**/*.{js,css,html,svg,png,json,woff2}"],
+        // The lazy-loaded dice physics worker (world.offscreen) exceeds Workbox's
+        // default 2 MiB precache limit; it only loads on the /dice screen.
+        maximumFileSizeToCacheInBytes: 4_000_000,
         navigateFallbackDenylist: [/bootRetry=/],
         runtimeCaching: [
           {
