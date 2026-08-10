@@ -5,6 +5,10 @@ import type { DiceExpression } from "@/lib/dice";
 
 const FALLBACK_ACCENT = "#3ab492";
 
+/** Dice size in world units. The library default is 5; 25 is ~5x larger so the
+ *  dice dominate the stage instead of appearing tiny. */
+const DICE_SCALE = 25;
+
 /** Public theme assets copied by `pnpm assets:dice-box` (see scripts/assets). */
 const ASSET_PATH = `${import.meta.env.BASE_URL}dice-box/`;
 
@@ -45,6 +49,7 @@ export default function DiceStage({ expression, rollId, onSettle, onUnavailable 
           assetPath: ASSET_PATH,
           theme: "default",
           themeColor: readAccentColor(),
+          scale: DICE_SCALE,
         });
         await box.init();
       } catch (error) {
