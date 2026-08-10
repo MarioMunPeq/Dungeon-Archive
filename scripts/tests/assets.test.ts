@@ -1,5 +1,5 @@
 import { strictEqual, ok } from "node:assert";
-import { readFileSync } from "node:fs";
+import { readFileSync, statSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -40,3 +40,10 @@ for (const { file, width, height } of cases) {
     strictEqual(dims.height, height, `${file}: height mismatch`);
   });
 }
+
+const ammoFile = join(publicDir, "dice-box", "ammo", "ammo.wasm.wasm");
+test("dice-box physics engine (ammo.wasm.wasm) is present", () => {
+  const size = statSync(ammoFile).size;
+  ok(size > 1000, `${ammoFile}: suspiciously small (${size} bytes)`);
+  ok(size < 20_000_000, `${ammoFile}: unexpectedly large (${size} bytes)`);
+});
