@@ -7,6 +7,7 @@ import { CombatPage } from "@/features/combat/combat-page";
 import { CharacterPage } from "@/features/character/character-page";
 import { DicePage } from "@/features/dice/dice-page";
 import { BackupPage } from "@/features/backup/backup-page";
+import { HelpPage } from "@/features/help/help-page";
 import { CompendiumPage } from "@/features/compendium/pages/entity-page";
 import { CategoryPage } from "@/features/compendium/pages/category-page";
 import { DebugContentPage } from "@/features/debug/debug-content-page";
@@ -28,6 +29,7 @@ export function AppRouter() {
       <Route path="/character" element={<CharacterPage />} />
       <Route path="/dice" element={<DicePage />} />
       <Route path="/backup" element={<BackupPage />} />
+      <Route path="/help" element={<HelpPage />} />
       {CATEGORIES.map((cat) => (
         <Route key={cat} path={`/${cat}`} element={<CategoryPage category={cat} />}>
           <Route path=":canonicalId" element={<CompendiumPage category={cat} />} />

@@ -20,6 +20,7 @@ const FIXED_TITLES: Record<string, string> = {
   [ROUTES.COMBAT]: "Combat",
   [ROUTES.CHARACTER]: "Character",
   [ROUTES.DICE]: "Dice Roller",
+  [ROUTES.HELP]: "Help",
   "/session": "Session",
   "/backup": "Backup",
 };
@@ -27,6 +28,7 @@ const FIXED_TITLES: Record<string, string> = {
 const FIXED_BACK: Record<string, string> = {
   "/session": ROUTES.HOME,
   "/backup": ROUTES.HOME,
+  [ROUTES.HELP]: ROUTES.HOME,
 };
 
 export function getTopBarState(pathname: string): TopBarState {
