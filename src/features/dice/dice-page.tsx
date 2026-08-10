@@ -1,6 +1,5 @@
 import { lazy, Suspense, useCallback, useRef, useState } from "react";
 import { Button, Stepper } from "@/components/ui";
-import { FilterChips } from "@/components/search";
 import type { DiceGroup, DiceRoll, DiceRollResult } from "./dice-stage";
 import { useRoll } from "./use-roll";
 
@@ -65,24 +64,14 @@ export function DicePage() {
   const totalCount = groups.reduce((sum, group) => sum + group.count, 0);
   const pendingRollRef = useRef<DiceRoll | null>(null);
 
-  const addDie = (sides: number) => {
-    setGroups((prev) => {
-      const existing = prev.find((group) => group.sides === sides);
-      if (existing !== undefined) {
-        return prev.map((group) =>
-          group.sides === sides
-            ? { ...group, count: Math.min(group.count + 1, MAX_DIE_COUNT) }
-            : group,
-        );
-      }
-      return [...prev, { sides, count: 1 }];
-    });
-  };
-
   const setDieCount = useCallback((sides: number, count: number) => {
     setGroups((prev) => {
       if (count <= 0) return prev.filter((group) => group.sides !== sides);
-      return prev.map((group) => (group.sides === sides ? { ...group, count } : group));
+      const existing = prev.find((group) => group.sides === sides);
+      if (existing !== undefined) {
+        return prev.map((group) => (group.sides === sides ? { ...group, count } : group));
+      }
+      return [...prev, { sides, count }];
     });
   }, []);
 
@@ -181,37 +170,28 @@ export function DicePage() {
         <span className="font-mono text-sm text-muted-foreground">{label}</span>
       </div>
 
-      <div className="flex flex-col gap-2">
-        <span className={SECTION_LABEL}>Die</span>
-        <FilterChips
-          options={DIE_OPTIONS}
-          selected={groups.map((group) => String(group.sides))}
-          onChange={(value) => {
-            if (value !== "") addDie(Number(value));
-          }}
-          ariaLabel="Die"
-          wrap
-          allowDeselect={false}
-        />
-      </div>
-
-      <div className="flex flex-col gap-2">
-        <span className={SECTION_LABEL}>Current roll</span>
-        {groups.map((group) => (
-          <div key={group.sides} className="flex items-center gap-3">
-            <span className="w-14 shrink-0 font-mono text-sm text-foreground">{group.sides}d</span>
-            <Stepper
-              variant="ghost"
-              value={group.count}
-              min={0}
-              max={MAX_DIE_COUNT}
-              onChange={(count) => setDieCount(group.sides, count)}
-              label={`${group.sides} die count`}
-              className="w-28"
-              valueClassName="text-sm"
-            />
-          </div>
-        ))}
+      <div className="grid grid-cols-2 gap-x-3 gap-y-2">
+        {DIE_OPTIONS.map((option) => {
+          const sides = Number(option.value);
+          const count = groups.find((group) => group.sides === sides)?.count ?? 0;
+          return (
+            <div key={option.value} className="flex items-center gap-2">
+              <span className="w-10 shrink-0 font-mono text-sm text-foreground">
+                {option.label}
+              </span>
+              <Stepper
+                variant="ghost"
+                value={count}
+                min={0}
+                max={MAX_DIE_COUNT}
+                onChange={(next) => setDieCount(sides, next)}
+                label={`${option.label} die count`}
+                className="min-w-0 flex-1"
+                valueClassName="text-sm"
+              />
+            </div>
+          );
+        })}
       </div>
 
       <div className="flex flex-col gap-2">
