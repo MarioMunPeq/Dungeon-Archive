@@ -80,6 +80,12 @@ async function main() {
     ok(html.includes("The D20"), "Rule section missing");
   });
 
+  test("/archive tab bar sticks flush with the scroll container top", () => {
+    const html = renderArchive("/archive");
+    ok(html.includes("sticky top-0"), "Tab bar is not sticky top-0");
+    ok(!html.includes("sticky top-14"), "Tab bar carries the stale top-14 offset");
+  });
+
   test("/archive?tab=glossary shows the glossary", () => {
     const html = renderArchive("/archive?tab=glossary");
     ok(html.includes("Ability Check"), "Glossary term missing");

@@ -29,7 +29,7 @@ export function ArchiveTabBar({
     <div
       role="tablist"
       aria-label="Archive sections"
-      className="sticky top-14 z-30 border-b border-border bg-background/95 backdrop-blur-sm"
+      className="sticky top-0 z-30 border-b border-border bg-background/95 backdrop-blur-sm"
     >
       <div className="flex gap-1 px-2">
         {ARCHIVE_TABS.map((tab) => {
