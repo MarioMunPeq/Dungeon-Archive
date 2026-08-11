@@ -7,10 +7,10 @@ The application is a **second screen that sits next to the table**. Navigation e
 There are five destinations:
 
 1. **Home** — the landing screen: current character, session pins, recently viewed, learn-the-basics.
-2. **Search** — the primary interface, available everywhere.
-3. **Rules** — quick reference for the game rules, for newcomers and veterans alike.
-4. **Combat** — the lightweight combat tracker for the active player.
-5. **Party** — the group's lightweight reference sheets.
+2. **Archive** — the canonical reference surface: global search plus the game rules.
+3. **Combat** — the lightweight combat tracker for the active player.
+4. **Dice** — the dice roller, reachable in one tap from anywhere.
+5. **Character** — the active player's reference sheet.
 
 ## The Tab Bar
 
@@ -22,29 +22,33 @@ The app uses a **5-tab bottom navigation bar**, always visible and thumb-reachab
 │           [Main content area]             │
 │                                           │
 ├────────┬────────┬────────┬────────┬───────┤
-│  ⌂     │  🔍    │  📜    │  ⚔     │  👥   │
-│ Home   │ Search │ Rules  │ Combat │ Party │
+│  ⌂     │  🗄     │  ⚔     │  ⚄     │  👤   │
+│ Home   │Archive │ Combat │  Dice  │Character│
 └────────┴────────┴────────┴────────┴───────┘
 ```
 
-- **Home** (`/`) — Current Character (links to Combat), the session's pinned entities, Recently Viewed, and a link to the rules for newcomers.
-- **Search** (`/search`) — Global search across the entire Compendium. Instant results, category filter, recent searches. The top bar is hidden here so the query input is the focus.
-- **Rules** (`/rules`) — Three tabs: Rules, How to Play, and Glossary, plus the Beginner Mode toggle.
-- **Combat** (`/combat`) — Hit points, conditions, a turn checklist, and combat stats for the active player. The **Roll Dice** button opens the Dice Roller (`/dice`), where attack and damage rolls happen.
-- **Party** (`/party`) — Player reference sheets with pickers for spells, weapons, and magic items.
+- **Home** (`/`) — Current Character (links to Combat), the session's pinned entities, Recently Viewed, and quick links into the Archive.
+- **Archive** (`/archive`) — the single reference surface. The default **Search** tab is global search across the entire Compendium (instant results, category filter, recent searches). The **How to Play**, **Rules**, and **Glossary** tabs are the built-in rules reference (with the Beginner tips toggle). Tab state lives in the URL (`/archive?tab=rules`, `/archive?q=fireball`).
+- **Combat** (`/combat`) — Hit points, conditions, a turn checklist, and combat stats for the active player.
+- **Dice** (`/dice`) — the dice roller. Rolls any die (d4–d100), any number of dice, with an optional modifier. Spell damage shown in the Character sheet and Compendium rolls inline on tap.
+- **Character** (`/character`) — the active player's reference sheet with pickers for spells, weapons, and magic items.
 
 ## Top Bar
 
-A sticky header on every screen except Search:
+A sticky header on every screen:
 
 - Shows the current screen title (app name on Home).
 - Shows a **Back** button on screens reached from elsewhere (entity detail, Session, Backup).
 - Shows a **Cloud Backup** icon button on the right. The entry is hidden in production builds where Cloud Backup is not configured.
 
+## Redirects
+
+- `/search` → `/archive` (the search screen is now the Archive's Search tab).
+- `/rules` → `/archive?tab=rules` (the rules screen is now the Archive's Rules tab).
+
 ## Other Routes
 
 - **Session** (`/session`) — has no tab. Reached from Home's Session section and from the pin button on any entity. Holds the pinned entities for the current encounter and the End Session action.
-- **Dice Roller** (`/dice`) — has no tab. Reached from the **Roll Dice** button on Combat. Rolls any die (d4–d100), any number of dice, with an optional modifier. Spell damage shown in the Character sheet and Compendium rolls inline on tap.
 - **Compendium categories** — every category has a browsable list page (`/spell`, `/monster`, `/equipment`, `/condition`, `/action`, `/magicitem`, `/feat`) with filters and sorting, linked from entity detail breadcrumbs.
 - **Entity detail** — `/:category/:canonicalId` (e.g. `/spell/fireball`) — full entity view with Favorite and Session pin actions, related entities, and edition/source selection.
 - **Backup** (`/backup`) — Cloud Backup. Shows a "not available" state when disabled.
@@ -62,15 +66,16 @@ All navigation is designed for one thumb:
 - **Scroll** — single-finger swipe.
 - **No hover states** — touch-first; active/pressed states via scale and color.
 
-### Search Navigation
+### Archive Navigation
 
-- **Tap the Search tab** — opens search, keyboard appears.
+- **Tap the Archive tab** — opens the Search tab, keyboard appears.
 - **Type** — results appear instantly (200ms debounce, synchronous scoring).
 - **Arrow keys / Enter** — keyboard navigation through results (also usable with external keyboards).
 - **Escape** — clear the query.
 - **Tap result** — open entity detail.
 - **Category filter** — narrow results to one category.
 - **Recent searches** — shown as chips when the query is empty.
+- **Rules tabs** — How to Play, Rules, and Glossary share the Archive surface; the selected tab is reflected in the URL so it survives reloads and back navigation.
 
 ### Quick Actions (Entity Detail)
 

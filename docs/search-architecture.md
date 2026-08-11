@@ -12,7 +12,7 @@ Search is not a feature — it is the core interface of Dungeon Archive. The Sea
 
 Users find things by asking, not by browsing:
 
-- **Search tab** — A dedicated bottom-nav tab, one tap away from every screen.
+- **Archive tab (Search)** — The Archive is a bottom-nav destination and Search is its default tab, one tap away from every screen.
 - **Category pages are fallbacks** — browsable, but not the primary path.
 - **Search from user data** (roadmap) — future work: party members and session history become searchable too.
 

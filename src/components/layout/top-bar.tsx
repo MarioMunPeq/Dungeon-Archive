@@ -11,8 +11,6 @@ export function TopBar() {
   const { pathname } = useLocation();
   const state = getTopBarState(pathname);
 
-  if (state.hidden) return null;
-
   return <TopBarContent state={state} />;
 }
 

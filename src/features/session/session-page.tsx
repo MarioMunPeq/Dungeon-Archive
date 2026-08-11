@@ -52,7 +52,7 @@ export function SessionPage() {
             Session is empty. Search the Compendium and pin what you need for this session.
           </p>
           <Link
-            to="/search"
+            to="/archive"
             className="inline-flex touch-target items-center justify-center gap-2 rounded-control bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-all duration-150 hover:bg-primary-hover active:scale-95 active:bg-primary-active"
           >
             Search

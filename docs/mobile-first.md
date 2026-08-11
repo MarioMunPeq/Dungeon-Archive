@@ -57,16 +57,16 @@ The app must work with **one thumb** on a phone screen.
 │ (scrollable)                │
 │                             │
 ├─────────────────────────────┤
-│ ⌂  🔍  📜  ⚔  👥           │ ← Bottom (thumb zone)
-│ Home Search Rules Combat Party│
+│ ⌂  🗄  ⚔  ⚄  👤             │ ← Bottom (thumb zone)
+│ Home Archive Combat Dice Character│
 └─────────────────────────────┘
 ```
 
 ### Key Principles
 
-- **TopBar:** Minimal. Shows the app name (home), breadcrumbs/title (entity detail), a back button on nested screens, and the Cloud Backup entry (hidden when the feature is disabled). Search hides the top bar entirely.
+- **TopBar:** Minimal. Shows the app name (home), breadcrumbs/title (entity detail), a back button on nested screens, and the Cloud Backup entry (hidden when the feature is disabled).
 - **Content:** Scrollable, single column, primary content.
-- **BottomNav:** Always visible, five tabs (Home, Search, Rules, Combat, Party), minimum 56px target height.
+- **BottomNav:** Always visible, five tabs (Home, Archive, Combat, Dice, Character), minimum 56px target height.
 - **Session and Backup** have no tabs: Session is reached from Home and from pin buttons on entity detail; Backup from the top bar.
 
 ---

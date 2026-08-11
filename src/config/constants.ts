@@ -1,12 +1,18 @@
 export const ROUTES = {
   HOME: "/",
-  SEARCH: "/search",
-  RULES: "/rules",
+  ARCHIVE: "/archive",
   COMBAT: "/combat",
   CHARACTER: "/character",
   DICE: "/dice",
   HELP: "/help",
 } as const;
+
+/** Routes retired in the navigation redesign, kept as redirects so old
+ *  bookmarks and deep links still land in the right place. */
+export const ROUTE_REDIRECTS: Readonly<Record<string, string>> = {
+  "/search": ROUTES.ARCHIVE,
+  "/rules": `${ROUTES.ARCHIVE}?tab=rules`,
+};
 
 export const APP_NAME = "Dungeon Archive";
 

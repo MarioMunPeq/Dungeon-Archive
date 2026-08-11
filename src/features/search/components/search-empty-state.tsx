@@ -16,7 +16,7 @@ export function SearchEmptyState() {
             {recentSearches.map((q) => (
               <Link
                 key={q}
-                to={`/search?q=${encodeURIComponent(q)}`}
+                to={`/archive?q=${encodeURIComponent(q)}`}
                 className="rounded-full border border-border px-3 py-1 text-xs text-muted-foreground transition-all duration-150 hover:bg-accent hover:text-foreground active:scale-95"
               >
                 {q}

@@ -18,7 +18,7 @@ const STEPS: readonly OnboardingStep[] = [
   },
   {
     title: "Learn the rules as you play.",
-    body: "New to the game? The Quick Rules tab explains the d20, ability checks, and your turn in combat.",
+    body: "New to the game? The Rules tab in the Archive explains the d20, ability checks, and your turn in combat.",
   },
   {
     title: "You're ready. Start exploring.",

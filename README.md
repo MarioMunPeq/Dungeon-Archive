@@ -21,19 +21,19 @@ Its only purpose is reducing the dead time at the table: the gap between a quest
 
 ## Screenshots
 
-_Images live in [`docs/screenshots/`](docs/screenshots/) and are linked below. (Placeholders until capture — the Home, Combat, Party, and Theme Picker screens are the most portfolio-relevant.)_
+_Images live in [`docs/screenshots/`](docs/screenshots/) and are linked below. (Placeholders until capture — the Home, Combat, Character, and Theme Picker screens are the most portfolio-relevant.)_
 
 | Screen | File |
 | ------ | ---- |
 | Home | [`docs/screenshots/home.png`](docs/screenshots/home.png) |
 | Theme picker (7 accent themes) | [`docs/screenshots/theme-picker.png`](docs/screenshots/theme-picker.png) |
-| Search | [`docs/screenshots/search.png`](docs/screenshots/search.png) |
+| Search (Archive tab) | [`docs/screenshots/search.png`](docs/screenshots/search.png) |
 | Compendium (entity list) | [`docs/screenshots/compendium.png`](docs/screenshots/compendium.png) |
 | Entity detail | [`docs/screenshots/entity-detail.png`](docs/screenshots/entity-detail.png) |
-| Party | [`docs/screenshots/party.png`](docs/screenshots/party.png) |
+| Character | [`docs/screenshots/party.png`](docs/screenshots/party.png) |
 | Combat | [`docs/screenshots/combat.png`](docs/screenshots/combat.png) |
 | Session | [`docs/screenshots/session.png`](docs/screenshots/session.png) |
-| Quick Rules | [`docs/screenshots/rules.png`](docs/screenshots/rules.png) |
+| Rules (Archive tab) | [`docs/screenshots/rules.png`](docs/screenshots/rules.png) |
 | Cloud Backup | [`docs/screenshots/backup.png`](docs/screenshots/backup.png) |
 
 ---
@@ -45,13 +45,13 @@ _Images live in [`docs/screenshots/`](docs/screenshots/) and are linked below. (
 | **Instant Search** | One search across the whole Compendium. As-you-type results from a prebuilt in-memory index; no network, no server. |
 | **Offline Compendium** | The complete SRD reference for D&D 5e — spells, monsters, equipment, conditions, actions, magic items, and feats — compiled into the app at build time and available offline. |
 | **Entity Relationships** | Entities link to each other. A spell shows its related conditions and spells; a monster shows the spells and equipment it references. |
-| **Party Manager** | Lightweight player reference sheets: name, class, level, subclass, ability scores, AC / passive perception / spell DC, and references to known spells, weapons, and magic items. References point into the Compendium — nothing is duplicated. |
+| **Character Manager** | Lightweight player reference sheets: name, class, level, subclass, ability scores, AC / passive perception / spell DC, and references to known spells, weapons, and magic items. References point into the Compendium — nothing is duplicated. |
 | **Combat tracker** | Per-character hit points with quick damage/heal deltas, a tap-to-toggle condition tray (13 conditions), a "what can I do on my turn" checklist, and the combat stats you consult most. |
 | **Dice Roller** | Roll any die (d4–d100) any number of times, with an optional modifier. Spell damage rolls inline on tap from the Character sheet and Compendium. |
 | **Session pins** | Pin monsters, spells, and items to the current session with one tap, and clear them all with **End Session**. |
 | **Favorites & recents** | Mark entities as favorites and let the app remember what you recently viewed and searched. |
 | **Beginner Mode** | New to the game? Toggle beginner tips that explain the d20, ability checks, and your turn in combat as you go. |
-| **Quick Rules** | A built-in reference for the d20, ability checks, saving throws, combat turns, attacks & damage, hit points & resting, and spellcasting — plus a plain-language glossary. |
+| **Rules reference** | A built-in reference for the d20, ability checks, saving throws, combat turns, attacks & damage, hit points & resting, and spellcasting — plus a plain-language glossary, all inside the Archive. |
 | **Cloud Backup (optional)** | Optional Google Sign-In with manual upload/restore of your local data to Firestore. Everything else works with zero internet. |
 | **Progressive Web App** | Installable, with offline caching via a service worker. |
 
@@ -107,7 +107,7 @@ Everything the user creates lives in a single versioned document persisted in `l
 
 - favorites, recently viewed entities, recent searches
 - the current session's pinned entities
-- player reference sheets (party) and the active player
+- player reference sheets (character) and the active player
 - beginner mode and onboarding flags
 
 State is versioned with forward migrations, so saved data survives app updates. This is what Cloud Backup uploads and restores.
@@ -119,17 +119,18 @@ A set of feature pages built on the design system, orchestrated by React Router.
 | Path | Screen |
 | ---- | ------ |
 | `/` | Home — current character, session pins, recently viewed, learn-the-basics |
-| `/search` | Search across the entire Compendium |
-| `/rules` | Quick Rules, How to Play, and glossary (Beginner Mode toggle) |
-| `/combat` | Combat tracker for the active player (links to the Dice Roller) |
+| `/archive` | Archive — Search tab by default, plus How to Play, Rules, and Glossary tabs (`?tab=rules`) |
+| `/combat` | Combat tracker for the active player |
 | `/dice` | Dice Roller — roll any die, any number of dice, with an optional modifier |
-| `/party` | Player reference sheets |
+| `/character` | Player reference sheets |
 | `/session` | The pinned session list (End Session) |
 | `/backup` | Cloud Backup (shows a "not available" state when the feature is disabled) |
 | `/:category/:canonicalId` | Entity detail pages (e.g. `/spell/fireball`) |
+| `/search` | Redirects to `/archive` |
+| `/rules` | Redirects to `/archive?tab=rules` |
 | `/debug/*` | Dev-only debugging routes (never shipped) |
 
-The shell is a top bar, a scrollable main area, and a bottom navigation bar with five tabs: **Home, Search, Rules, Combat, Character**. A first-run onboarding overlay introduces the app once.
+The shell is a top bar, a scrollable main area, and a bottom navigation bar with five tabs: **Home, Archive, Combat, Dice, Character**. A first-run onboarding overlay introduces the app once.
 
 ---
 
