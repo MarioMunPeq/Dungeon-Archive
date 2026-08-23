@@ -15,6 +15,7 @@ import { entityRefFromCanonicalId } from "@/components/entity";
 import { CloseIcon } from "@/components/ui/icons";
 import { ReferencePicker } from "@/components/ui/ReferencePicker";
 import type { PickerCandidate } from "@/components/ui/ReferencePicker";
+import { SpellPicker } from "@/features/character/components/spell-picker";
 import { InlineTextEditor } from "@/components/ui/InlineTextEditor";
 import { InlineTextareaEditor } from "@/components/ui/InlineTextareaEditor";
 import {
@@ -34,9 +35,9 @@ import { splitSpellRoll } from "@/lib/dice";
 import { cn } from "@/lib/utils";
 
 type PickerKind = "spell" | "weapon" | "magicitem";
+type ReferencePickerKind = Exclude<PickerKind, "spell">;
 
-const PICKER_TITLES: Record<PickerKind, string> = {
-  spell: "Spells",
+const PICKER_TITLES: Record<ReferencePickerKind, string> = {
   weapon: "Weapons",
   magicitem: "Magic Items",
 };
@@ -163,7 +164,7 @@ const SUBCLASSES: Record<string, readonly string[]> = {
   Artificer: ["Alchemist", "Artillerist", "Battle Smith", "Armorer"],
 };
 
-function buildCandidates(kind: PickerKind): PickerCandidate[] {
+function buildCandidates(kind: ReferencePickerKind): PickerCandidate[] {
   const seen = new Set<string>();
   const out: PickerCandidate[] = [];
   const push = (candidate: PickerCandidate): void => {
@@ -171,34 +172,19 @@ function buildCandidates(kind: PickerKind): PickerCandidate[] {
     seen.add(candidate.canonicalId);
     out.push(candidate);
   };
-  switch (kind) {
-    case "spell": {
-      for (const s of getEntitiesForCategory("spell") as readonly Spell[]) {
-        push({
-          canonicalId: s.canonicalId,
-          name: s.name,
-          subtitle: `${s.level === 0 ? "Cantrip" : `Level ${s.level}`} ${METADATA_SEPARATOR} ${SCHOOL_NAMES[s.school] ?? s.school}`,
-        });
-      }
-      break;
+  if (kind === "weapon") {
+    for (const e of getEntitiesForCategory("equipment") as readonly Equipment[]) {
+      if (!WEAPON_TYPES.has(e.type)) continue;
+      const dmg = formatDamage(e.damage, e.damageType);
+      push({
+        canonicalId: e.canonicalId,
+        name: e.name,
+        subtitle: dmg ? `${e.type} ${METADATA_SEPARATOR} ${dmg}` : e.type,
+      });
     }
-    case "weapon": {
-      for (const e of getEntitiesForCategory("equipment") as readonly Equipment[]) {
-        if (!WEAPON_TYPES.has(e.type)) continue;
-        const dmg = formatDamage(e.damage, e.damageType);
-        push({
-          canonicalId: e.canonicalId,
-          name: e.name,
-          subtitle: dmg ? `${e.type} ${METADATA_SEPARATOR} ${dmg}` : e.type,
-        });
-      }
-      break;
-    }
-    case "magicitem": {
-      for (const m of getEntitiesForCategory("magicitem") as readonly MagicItem[]) {
-        push({ canonicalId: m.canonicalId, name: m.name, subtitle: m.rarity });
-      }
-      break;
+  } else {
+    for (const m of getEntitiesForCategory("magicitem") as readonly MagicItem[]) {
+      push({ canonicalId: m.canonicalId, name: m.name, subtitle: m.rarity });
     }
   }
   return out.sort((a, b) => a.name.localeCompare(b.name));
@@ -599,7 +585,10 @@ function CharacterSheet({
   const [picker, setPicker] = useState<PickerKind | null>(null);
   const [confirmRemove, setConfirmRemove] = useState(false);
 
-  const candidates = useMemo(() => (picker ? buildCandidates(picker) : []), [picker]);
+  const candidates = useMemo(
+    () => (picker && picker !== "spell" ? buildCandidates(picker) : []),
+    [picker],
+  );
 
   const update = useCallback(
     (data: CharacterReferenceUpdate) => {
@@ -625,12 +614,8 @@ function CharacterSheet({
   );
 
   const addReference = useCallback(
-    (kind: PickerKind, canonicalId: string) => {
-      if (kind === "spell") {
-        if (!reference.knownSpellCanonicalIds.includes(canonicalId)) {
-          update({ knownSpellCanonicalIds: [...reference.knownSpellCanonicalIds, canonicalId] });
-        }
-      } else if (kind === "weapon") {
+    (kind: ReferencePickerKind, canonicalId: string) => {
+      if (kind === "weapon") {
         if (!reference.weaponCanonicalIds.includes(canonicalId)) {
           update({ weaponCanonicalIds: [...reference.weaponCanonicalIds, canonicalId] });
         }
@@ -638,6 +623,18 @@ function CharacterSheet({
         update({ magicItemCanonicalIds: [...reference.magicItemCanonicalIds, canonicalId] });
       }
       setPicker(null);
+    },
+    [reference, update],
+  );
+
+  const toggleKnownSpell = useCallback(
+    (canonicalId: string) => {
+      const known = reference.knownSpellCanonicalIds;
+      update({
+        knownSpellCanonicalIds: known.includes(canonicalId)
+          ? known.filter((id) => id !== canonicalId)
+          : [...known, canonicalId],
+      });
     },
     [reference, update],
   );
@@ -873,7 +870,16 @@ function CharacterSheet({
         )}
       </div>
 
-      {picker && (
+      {picker === "spell" && (
+        <SpellPicker
+          characterClass={reference.class}
+          selectedIds={reference.knownSpellCanonicalIds}
+          onToggle={toggleKnownSpell}
+          onClose={() => setPicker(null)}
+        />
+      )}
+
+      {picker && picker !== "spell" && (
         <ReferencePicker
           title={PICKER_TITLES[picker]}
           candidates={candidates}
