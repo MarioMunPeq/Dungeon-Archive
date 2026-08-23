@@ -21,6 +21,7 @@ import {
 import { formatSource } from "./source";
 import { METADATA_SEPARATOR } from "./separator";
 import { referenceToUrl } from "./reference";
+import { formatDamageType } from "./damage";
 
 export type AnyEntity = Spell | Condition | Equipment | Action | Monster | MagicItem | Feat;
 
@@ -56,6 +57,24 @@ export const SOURCE_ORDER: Record<string, number> = {
   XDMG: 9,
 };
 
+export const RARITY_ORDER: Record<string, number> = {
+  common: 0,
+  uncommon: 1,
+  rare: 2,
+  "very rare": 3,
+  legendary: 4,
+  artifact: 5,
+};
+
+const DAMAGE_TYPE_ORDER: Record<string, number> = {
+  B: 0,
+  P: 1,
+  S: 2,
+  R: 3,
+  N: 4,
+  Y: 5,
+};
+
 export function formatMonsterType(monster: Monster): string {
   const base = monster.monsterType;
   const tags = monster.tags;
@@ -74,6 +93,28 @@ function crValue(cr: string): number {
 
 function compareCr(a: string, b: string): number {
   return crValue(a) - crValue(b);
+}
+
+function compareRarity(a: string, b: string): number {
+  const ra = RARITY_ORDER[a] ?? 99;
+  const rb = RARITY_ORDER[b] ?? 99;
+  return ra - rb || a.localeCompare(b);
+}
+
+function compareDamageType(a: string, b: string): number {
+  const da = DAMAGE_TYPE_ORDER[a] ?? 99;
+  const db = DAMAGE_TYPE_ORDER[b] ?? 99;
+  return da - db || a.localeCompare(b);
+}
+
+function collectArrayValues(groups: readonly (readonly string[])[]): string[] {
+  const set = new Set<string>();
+  for (const values of groups) {
+    for (const value of values) {
+      set.add(value);
+    }
+  }
+  return [...set].sort((a, b) => a.localeCompare(b));
 }
 
 export function entityCardStat(entity: AnyEntity): CardStat | undefined {
@@ -192,6 +233,29 @@ export const CATEGORY_REGISTRY: Record<EntityCategory, CategoryRegistration> = {
             SCHOOL_NAMES,
           ),
         },
+        {
+          key: "class",
+          label: "Class",
+          options: buildOptions(collectArrayValues(spells.map((s) => s.classes))),
+        },
+        {
+          key: "concentration",
+          label: "Concentration",
+          options: [
+            { value: "", label: "All" },
+            { value: "yes", label: "Yes" },
+            { value: "no", label: "No" },
+          ],
+        },
+        {
+          key: "ritual",
+          label: "Ritual",
+          options: [
+            { value: "", label: "All" },
+            { value: "yes", label: "Yes" },
+            { value: "no", label: "No" },
+          ],
+        },
         sourceFilter(spells),
       ];
     },
@@ -268,11 +332,26 @@ export const CATEGORY_REGISTRY: Record<EntityCategory, CategoryRegistration> = {
     getList: getEquipmentList,
     buildFilterDefs: (entities) => {
       const equipment = entities as readonly Equipment[];
+      const damaged = equipment.filter((e) => Boolean(e.damageType));
       return [
         {
           key: "type",
           label: "Type",
           options: buildOptions(collectUnique(equipment, (e) => formatEquipmentType(e.type))),
+        },
+        {
+          key: "damageType",
+          label: "Damage type",
+          options: buildOptions(
+            collectUnique(damaged, (e) => e.damageType!, compareDamageType),
+            {},
+            formatDamageType,
+          ),
+        },
+        {
+          key: "property",
+          label: "Property",
+          options: buildOptions(collectArrayValues(equipment.map((e) => e.properties ?? []))),
         },
         sourceFilter(equipment),
       ];
@@ -345,7 +424,7 @@ export const CATEGORY_REGISTRY: Record<EntityCategory, CategoryRegistration> = {
         {
           key: "rarity",
           label: "Rarity",
-          options: buildOptions(collectUnique(items, (m) => m.rarity)),
+          options: buildOptions(collectUnique(items, (m) => m.rarity, compareRarity)),
         },
         {
           key: "itemType",

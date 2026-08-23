@@ -25,6 +25,43 @@ function test(description: string, fn: () => void): void {
   }
 }
 
+type SpellType = import("../../src/types/compendium").Spell;
+type EquipmentType = import("../../src/types/compendium").Equipment;
+
+function fakeSpell(overrides: Partial<SpellType> = {}): SpellType {
+  return {
+    id: "phb|fake",
+    canonicalId: "spell.fake",
+    category: "spell",
+    name: "Fake Spell",
+    source: "PHB",
+    level: 1,
+    school: "V",
+    castingTime: "action",
+    range: "Self",
+    components: ["V"],
+    duration: "Instantaneous",
+    description: [],
+    classes: [],
+    ritual: false,
+    concentration: false,
+    ...overrides,
+  };
+}
+
+function fakeEquipment(overrides: Partial<EquipmentType> = {}): EquipmentType {
+  return {
+    id: "phb|fake",
+    canonicalId: "equipment.fake",
+    category: "equipment",
+    name: "Fake Item",
+    source: "PHB",
+    type: "Gear",
+    description: [],
+    ...overrides,
+  };
+}
+
 async function main() {
   console.log("category browsing\n");
 
@@ -609,6 +646,256 @@ async function main() {
           crValue(result[i]! as import("../../src/types/compendium").Monster),
       );
     }
+  });
+
+  test("buildFilterDefs creates concentration and ritual filters for spells", () => {
+    const spells = getEntitiesForCategory("spell");
+    const defs = buildFilterDefs("spell", spells);
+    const concentration = defs.find((d: { key: string }) => d.key === "concentration");
+    ok(concentration, "spells should have a concentration filter");
+    deepEqual(
+      concentration!.options.map((o: { value: string }) => o.value),
+      ["", "yes", "no"],
+    );
+    const ritual = defs.find((d: { key: string }) => d.key === "ritual");
+    ok(ritual, "spells should have a ritual filter");
+    deepEqual(
+      ritual!.options.map((o: { value: string }) => o.value),
+      ["", "yes", "no"],
+    );
+  });
+
+  test("applyFilters filters spells by concentration", () => {
+    const spells = getEntitiesForCategory("spell");
+    const yes = applyFilters("spell", spells, { concentration: "yes" });
+    const no = applyFilters("spell", spells, { concentration: "no" });
+    ok(yes.length > 0 && no.length > 0, "both partitions should be non-empty");
+    strictEqual(yes.length + no.length, spells.length, "partitions cover every spell");
+    for (const spell of yes) ok((spell as SpellType).concentration);
+    for (const spell of no) ok(!(spell as SpellType).concentration);
+  });
+
+  test("applyFilters treats missing ritual metadata as not ritual", () => {
+    const synthetic = [
+      fakeSpell({ canonicalId: "spell.a", name: "Ritual", ritual: true }),
+      fakeSpell({
+        canonicalId: "spell.b",
+        name: "Undefined Ritual",
+        ritual: undefined as unknown as boolean,
+      }),
+    ];
+    const yes = applyFilters("spell", synthetic, { ritual: "yes" });
+    strictEqual(yes.length, 1);
+    strictEqual(yes[0]!.name, "Ritual");
+    const no = applyFilters("spell", synthetic, { ritual: "no" });
+    strictEqual(no.length, 1);
+    strictEqual(no[0]!.name, "Undefined Ritual");
+  });
+
+  test("applyFilters combines level, school and class with AND", () => {
+    const spells = getEntitiesForCategory("spell");
+    const combined = applyFilters("spell", spells, {
+      level: "1",
+      school: "V",
+      class: "Wizard",
+    });
+    ok(combined.length > 0, "level 1 wizard evocation spells should exist");
+    for (const spell of combined) {
+      const s = spell as SpellType;
+      strictEqual(s.level, 1);
+      strictEqual(s.school, "V");
+      ok(s.classes.includes("Wizard"));
+    }
+    const byLevel = applyFilters("spell", spells, { level: "1" });
+    ok(byLevel.length > combined.length, "combined filters narrow more than one alone");
+  });
+
+  test("clearing one filter widens results while others stay active", () => {
+    const spells = getEntitiesForCategory("spell");
+    const all = applyFilters("spell", spells, { level: "1", school: "V", class: "Wizard" });
+    const clearedSchool = applyFilters("spell", spells, { level: "1", class: "Wizard" });
+    const clearedAll = applyFilters("spell", spells, {});
+    ok(clearedSchool.length >= all.length);
+    strictEqual(clearedAll.length, spells.length);
+    for (const spell of clearedSchool) {
+      const s = spell as SpellType;
+      strictEqual(s.level, 1);
+      ok(s.classes.includes("Wizard"));
+    }
+  });
+
+  test("search narrows filtered results without resetting them", () => {
+    const spells = getEntitiesForCategory("spell");
+    const filtered = applyFilters("spell", spells, { level: "3", class: "Wizard" });
+    const q = "fire";
+    const searched = filtered.filter((entity) => entity.name.toLowerCase().includes(q));
+    ok(searched.length > 0, "fire + level 3 wizard should match e.g. Fireball");
+    ok(searched.length <= filtered.length, "search only narrows");
+    for (const spell of searched) {
+      ok(spell.name.toLowerCase().includes(q));
+      const s = spell as SpellType;
+      strictEqual(s.level, 3);
+      ok(s.classes.includes("Wizard"));
+    }
+  });
+
+  test("applyFilters returns empty for valid but unmatchable combination", () => {
+    const spells = getEntitiesForCategory("spell");
+    const result = applyFilters("spell", spells, { level: "0", ritual: "yes" });
+    strictEqual(result.length, 0, "no ritual cantrips exist in official content");
+  });
+
+  test("buildFilterDefs creates class filter for spells", () => {
+    const spells = getEntitiesForCategory("spell");
+    const defs = buildFilterDefs("spell", spells);
+    const klass = defs.find((d: { key: string }) => d.key === "class");
+    ok(klass, "spells should have a class filter");
+    strictEqual(klass!.label, "Class");
+    strictEqual(klass!.options[0]!.value, "", "first option is All");
+    ok(klass!.options.some((o: { value: string }) => o.value === "Wizard"));
+    ok(klass!.options.some((o: { value: string }) => o.value === "Bard"));
+    const values = klass!.options.map((o: { value: string }) => o.value);
+    deepEqual([...values].sort(), [...values], "class options are alphabetically sorted");
+  });
+
+  test("applyFilters filters spells by class", () => {
+    const spells = getEntitiesForCategory("spell");
+    const result = applyFilters("spell", spells, { class: "Druid" });
+    ok(result.length > 0, "druid spells should exist");
+    for (const spell of result) {
+      ok((spell as SpellType).classes.includes("Druid"), `${spell.name} should list Druid`);
+    }
+  });
+
+  test("applyFilters excludes spells without classes from class filter", () => {
+    const synthetic = [
+      fakeSpell({ canonicalId: "spell.a", name: "Has Class", classes: ["Wizard"] }),
+      fakeSpell({ canonicalId: "spell.b", name: "No Class", classes: [] }),
+    ];
+    const result = applyFilters("spell", synthetic, { class: "Wizard" });
+    strictEqual(result.length, 1);
+    strictEqual(result[0]!.name, "Has Class");
+  });
+
+  test("buildFilterDefs creates damage type filter for equipment", () => {
+    const equipment = getEntitiesForCategory("equipment");
+    const defs = buildFilterDefs("equipment", equipment);
+    const damageType = defs.find((d: { key: string }) => d.key === "damageType");
+    ok(damageType, "equipment should have a damage type filter");
+    strictEqual(damageType!.label, "Damage type");
+    const labels = damageType!.options.map((o: { label: string }) => o.label);
+    ok(labels.includes("Bludgeoning"), "human-readable labels only");
+    ok(labels.includes("Piercing"));
+    ok(labels.includes("Slashing"));
+    for (const option of damageType!.options) {
+      ok(!/^[BPSRNY]$/.test(option.label), `raw code must not leak: ${option.label}`);
+    }
+  });
+
+  test("applyFilters filters weapons by damage type", () => {
+    const equipment = getEntitiesForCategory("equipment");
+    const result = applyFilters("equipment", equipment, { damageType: "P" });
+    ok(result.length > 0, "piercing weapons should exist");
+    for (const item of result) {
+      strictEqual((item as EquipmentType).damageType, "P");
+    }
+  });
+
+  test("applyFilters excludes items without damage metadata from damage type filter", () => {
+    const synthetic = [
+      fakeEquipment({
+        canonicalId: "equipment.a",
+        name: "Spear",
+        type: "Melee Weapon",
+        damage: "1d6",
+        damageType: "P",
+      }),
+      fakeEquipment({ canonicalId: "equipment.b", name: "Rope", type: "Gear" }),
+    ];
+    const result = applyFilters("equipment", synthetic, { damageType: "P" });
+    strictEqual(result.length, 1);
+    strictEqual(result[0]!.name, "Spear");
+  });
+
+  test("buildFilterDefs creates property filter for equipment", () => {
+    const equipment = getEntitiesForCategory("equipment");
+    const defs = buildFilterDefs("equipment", equipment);
+    const property = defs.find((d: { key: string }) => d.key === "property");
+    ok(property, "equipment should have a property filter");
+    ok(property!.options.some((o: { value: string }) => o.value === "Two-Handed"));
+    ok(property!.options.some((o: { value: string }) => o.value === "Finesse"));
+  });
+
+  test("applyFilters filters weapons by property", () => {
+    const equipment = getEntitiesForCategory("equipment");
+    const result = applyFilters("equipment", equipment, { property: "Reach" });
+    ok(result.length > 0, "reach weapons should exist");
+    for (const item of result) {
+      ok((item as EquipmentType).properties?.includes("Reach"), `${item.name} should have Reach`);
+    }
+  });
+
+  test("magic item rarity options follow progression order with unknown last", () => {
+    const items = getEntitiesForCategory("magicitem");
+    const defs = buildFilterDefs("magicitem", items);
+    const rarity = defs.find((d: { key: string }) => d.key === "rarity");
+    ok(rarity, "magic items should have a rarity filter");
+    const values = rarity!.options.map((o: { value: string }) => o.value).filter((v) => v !== "");
+    const indexOf = (value: string): number => {
+      const i = values.indexOf(value);
+      ok(i !== -1, `rarity ${value} should be an option`);
+      return i;
+    };
+    ok(indexOf("common") < indexOf("uncommon"), "common before uncommon");
+    ok(indexOf("uncommon") < indexOf("rare"), "uncommon before rare");
+    ok(indexOf("rare") < indexOf("very rare"), "rare before very rare");
+    ok(indexOf("very rare") < indexOf("legendary"), "very rare before legendary");
+    ok(indexOf("legendary") < indexOf("artifact"), "legendary before artifact");
+    if (values.includes("unknown (magic)")) {
+      ok(indexOf("artifact") < indexOf("unknown (magic)"), "unknown sorts last");
+    }
+  });
+
+  test("getSortOptions adds rarity only for magic items", () => {
+    const options = getSortOptions("magicitem");
+    ok(options.some((o: { value: string }) => o.value === "rarity"));
+    ok(!options.some((o: { value: string }) => o.value === "level"));
+    ok(!getSortOptions("spell").some((o: { value: string }) => o.value === "rarity"));
+    ok(!getSortOptions("monster").some((o: { value: string }) => o.value === "rarity"));
+  });
+
+  test("sortEntities sorts magic items by rarity then name", () => {
+    const items = getEntitiesForCategory("magicitem");
+    const result = sortEntities("magicitem", items, "rarity");
+    type MagicItemType = import("../../src/types/compendium").MagicItem;
+    const RANK: Record<string, number> = {
+      common: 0,
+      uncommon: 1,
+      rare: 2,
+      "very rare": 3,
+      legendary: 4,
+      artifact: 5,
+    };
+    let prevRank = -1;
+    for (const item of result) {
+      const r = RANK[(item as MagicItemType).rarity] ?? 99;
+      ok(r >= prevRank, "rarity rank never decreases");
+      prevRank = r;
+    }
+  });
+
+  test("sortEntities places unknown rarity last with name tiebreak", () => {
+    const items = [
+      { ...fakeEquipment({ name: "Legendary Thing" }), rarity: "legendary" },
+      { ...fakeEquipment({ name: "Common Thing" }), rarity: "common" },
+      { ...fakeEquipment({ name: "Mystery" }), rarity: "unknown (magic)" },
+      { ...fakeEquipment({ name: "Artifact Thing" }), rarity: "artifact" },
+    ] as unknown as import("../../src/compendium/category-registry").AnyEntity[];
+    const result = sortEntities("magicitem", items, "rarity");
+    deepEqual(
+      result.map((e) => e.name),
+      ["Common Thing", "Legendary Thing", "Artifact Thing", "Mystery"],
+    );
   });
 
   test("dedupeEntities removes duplicate canonicalIds", () => {

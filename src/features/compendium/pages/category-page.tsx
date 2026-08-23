@@ -88,8 +88,17 @@ export function CategoryPage({ category }: CategoryPageProps) {
     );
   };
 
-  const handleClearAll = () => {
-    setSearchParams(new URLSearchParams(), { replace: true });
+  const handleClearFilters = () => {
+    setSearchParams(
+      (prev) => {
+        const next = new URLSearchParams(prev);
+        for (const def of filterDefs) {
+          next.delete(def.key);
+        }
+        return next;
+      },
+      { replace: true },
+    );
   };
 
   const hasActiveQuery = debouncedQuery.trim().length > 0;
@@ -98,6 +107,12 @@ export function CategoryPage({ category }: CategoryPageProps) {
 
   const label = categoryLabel(category);
   const labelLower = categoryLabelSingular(category).toLowerCase();
+  const emptyMessage =
+    hasActiveQuery && hasActiveFilters
+      ? `No ${labelLower} match your search and filters`
+      : hasActiveFilters
+        ? `No ${labelLower} match these filters`
+        : `No ${labelLower} match your search`;
 
   if (!isLoaded) {
     return <CategorySkeleton />;
@@ -113,7 +128,12 @@ export function CategoryPage({ category }: CategoryPageProps) {
             ariaLabel={`Search ${label}`}
             placeholder={`Search ${labelLower}\u2026`}
           />
-          <FilterBar filters={filterDefs} values={currentFilters} onChange={updateParam} />
+          <FilterBar
+            filters={filterDefs}
+            values={currentFilters}
+            onChange={updateParam}
+            onClearAll={hasActiveFilters ? handleClearFilters : undefined}
+          />
         </div>
 
         <div className="flex items-center justify-between gap-3 px-4 py-4">
@@ -133,10 +153,10 @@ export function CategoryPage({ category }: CategoryPageProps) {
         <div className="px-4 pb-4">
           <EntityList
             entities={cards}
-            emptyMessage={`No ${labelLower} match your search`}
+            emptyMessage={emptyMessage}
             emptyAction={
               isFiltered ? (
-                <Button variant="outline" size="sm" onClick={handleClearAll}>
+                <Button variant="outline" size="sm" onClick={handleClearFilters}>
                   Clear filters
                 </Button>
               ) : undefined

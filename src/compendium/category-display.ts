@@ -7,7 +7,12 @@ import type {
   Feat,
 } from "@/types/compendium";
 import type { EntityCardData, FilterDefinition } from "./types";
-import { CATEGORY_REGISTRY, SOURCE_ORDER, formatEquipmentType } from "./category-registry";
+import {
+  CATEGORY_REGISTRY,
+  SOURCE_ORDER,
+  RARITY_ORDER,
+  formatEquipmentType,
+} from "./category-registry";
 import { sourcePriority } from "./resolver/version-selector";
 export type { AnyEntity } from "./category-registry";
 export { SCHOOL_NAMES, formatMonsterType, formatEquipmentType } from "./category-registry";
@@ -44,7 +49,7 @@ export function dedupeEntities(
   return result;
 }
 
-export type CategorySort = "alphabetical" | "recent" | "level" | "cr";
+export type CategorySort = "alphabetical" | "recent" | "level" | "cr" | "rarity";
 
 export interface SortOption {
   readonly value: CategorySort;
@@ -60,6 +65,7 @@ export function getSortOptions(category: EntityCategory): readonly SortOption[] 
   const options = [...SORT_OPTIONS];
   if (category === "spell") options.push({ value: "level", label: "Level" });
   if (category === "monster") options.push({ value: "cr", label: "Challenge Rating" });
+  if (category === "magicitem") options.push({ value: "rarity", label: "Rarity" });
   return options;
 }
 
@@ -104,6 +110,16 @@ export function sortEntities(
         if (ca !== cb) return ca - cb;
         return a.name.localeCompare(b.name);
       });
+    case "rarity": {
+      const rank = (entity: import("./category-registry").AnyEntity): number =>
+        RARITY_ORDER[(entity as MagicItem).rarity] ?? 99;
+      return sorted.sort((a, b) => {
+        const ra = rank(a);
+        const rb = rank(b);
+        if (ra !== rb) return ra - rb;
+        return a.name.localeCompare(b.name);
+      });
+    }
     default:
       return sorted;
   }
@@ -165,6 +181,21 @@ export function applyFilters(
           break;
         case "school":
           if ((entity as Spell).school !== value) return false;
+          break;
+        case "class":
+          if (!(entity as Spell).classes?.includes(value)) return false;
+          break;
+        case "concentration":
+          if (((entity as Spell).concentration ? "yes" : "no") !== value) return false;
+          break;
+        case "ritual":
+          if (((entity as Spell).ritual ? "yes" : "no") !== value) return false;
+          break;
+        case "damageType":
+          if ((entity as Equipment).damageType !== value) return false;
+          break;
+        case "property":
+          if (!(entity as Equipment).properties?.includes(value)) return false;
           break;
         case "cr":
           if ((entity as Monster).challengeRating !== value) return false;
