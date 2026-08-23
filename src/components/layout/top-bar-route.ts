@@ -11,15 +11,14 @@ import { APP_NAME, ROUTES } from "@/config/constants";
 export interface TopBarState {
   readonly title: string;
   readonly backTo?: string;
-  readonly hidden?: boolean;
 }
 
 const FIXED_TITLES: Record<string, string> = {
   [ROUTES.HOME]: APP_NAME,
-  [ROUTES.RULES]: "Quick Rules",
+  [ROUTES.ARCHIVE]: "Archive",
   [ROUTES.COMBAT]: "Combat",
   [ROUTES.CHARACTER]: "Character",
-  [ROUTES.DICE]: "Dice Roller",
+  [ROUTES.DICE]: "Dice",
   [ROUTES.HELP]: "Help",
   "/session": "Session",
   "/backup": "Backup",
@@ -32,14 +31,10 @@ const FIXED_BACK: Record<string, string> = {
 };
 
 export function getTopBarState(pathname: string): TopBarState {
-  if (pathname === ROUTES.SEARCH) {
-    return { title: APP_NAME, hidden: true };
-  }
-
   const segments = pathname.split("/").filter(Boolean);
 
   if (segments.length === 1 && CATEGORY_REGISTRY[segments[0] as EntityCategory]) {
-    return { title: categoryLabel(segments[0]!), backTo: ROUTES.SEARCH };
+    return { title: categoryLabel(segments[0]!), backTo: ROUTES.ARCHIVE };
   }
 
   if (segments.length === 2 && CATEGORY_REGISTRY[segments[0] as EntityCategory]) {

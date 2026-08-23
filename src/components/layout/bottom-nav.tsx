@@ -3,17 +3,17 @@ import { cn } from "@/lib/utils";
 import { ROUTES } from "@/config/constants";
 import {
   HomeIcon,
-  SearchIcon,
-  RulesIcon,
+  ArchiveIcon,
   CombatIcon,
+  DiceIcon,
   CharacterIcon,
 } from "@/components/layout/nav-icons";
 
 const NAV_ITEMS = [
   { to: ROUTES.HOME, label: "Home", icon: HomeIcon },
-  { to: ROUTES.SEARCH, label: "Search", icon: SearchIcon },
-  { to: ROUTES.RULES, label: "Rules", icon: RulesIcon },
+  { to: ROUTES.ARCHIVE, label: "Archive", icon: ArchiveIcon },
   { to: ROUTES.COMBAT, label: "Combat", icon: CombatIcon },
+  { to: ROUTES.DICE, label: "Dice", icon: DiceIcon },
   { to: ROUTES.CHARACTER, label: "Character", icon: CharacterIcon },
 ] as const;
 

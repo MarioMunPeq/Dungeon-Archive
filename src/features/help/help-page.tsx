@@ -32,8 +32,8 @@ export function HelpPage() {
               Press and hold any stat, ability score, or item to see what it means.
             </p>
             <p className="text-sm leading-relaxed text-muted-foreground">
-              The Quick Rules tab has a Beginner tips toggle that shows small ? helpers next to
-              rules as you play.
+              The Rules tab in the Archive has a Beginner tips toggle that shows small ? helpers
+              next to rules as you play.
             </p>
           </div>
         </Surface>

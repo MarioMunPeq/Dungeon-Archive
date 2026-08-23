@@ -18,7 +18,7 @@ export function HomeIcon({ className }: IconProps) {
   );
 }
 
-export function SearchIcon({ className }: IconProps) {
+export function ArchiveIcon({ className }: IconProps) {
   return (
     <svg
       aria-hidden="true"
@@ -28,13 +28,15 @@ export function SearchIcon({ className }: IconProps) {
       stroke="currentColor"
       strokeWidth={2}
     >
-      <circle cx="11" cy="11" r="8" />
-      <line x1="21" y1="21" x2="16.65" y2="16.65" />
+      <rect x="3" y="8" width="18" height="13" rx="2" />
+      <path d="M3 8l1.4-3.5A2 2 0 0 1 6.3 3h11.4a2 2 0 0 1 1.9 1.5L21 8" />
+      <path d="M3 8h18" />
+      <path d="M9.5 13h5" />
     </svg>
   );
 }
 
-export function RulesIcon({ className }: IconProps) {
+export function DiceIcon({ className }: IconProps) {
   return (
     <svg
       aria-hidden="true"
@@ -44,8 +46,12 @@ export function RulesIcon({ className }: IconProps) {
       stroke="currentColor"
       strokeWidth={2}
     >
-      <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z" />
-      <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z" />
+      <path d="M12 2.5l8.5 5v9l-8.5 5-8.5-5v-9z" />
+      <circle cx="12" cy="12" r="0.4" fill="currentColor" stroke="none" />
+      <circle cx="8" cy="12" r="0.4" fill="currentColor" stroke="none" />
+      <circle cx="16" cy="12" r="0.4" fill="currentColor" stroke="none" />
+      <circle cx="12" cy="8" r="0.4" fill="currentColor" stroke="none" />
+      <circle cx="12" cy="16" r="0.4" fill="currentColor" stroke="none" />
     </svg>
   );
 }

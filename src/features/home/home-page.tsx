@@ -92,7 +92,7 @@ export function HomePage() {
                   Browse the Compendium and return here to keep recent items within reach.
                 </p>
               </div>
-              <Link to="/search" className="w-fit">
+              <Link to="/archive" className="w-fit">
                 <Button size="sm">Browse the Compendium</Button>
               </Link>
             </div>

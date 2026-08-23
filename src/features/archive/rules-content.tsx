@@ -154,14 +154,6 @@ const SORTED_GLOSSARY_TERMS: readonly GlossaryEntryData[] = [...GLOSSARY_TERMS].
   a.term.localeCompare(b.term),
 );
 
-type RulesTabId = "how-to-play" | "rules" | "glossary";
-
-const TABS: readonly { id: RulesTabId; label: string }[] = [
-  { id: "how-to-play", label: "How to Play" },
-  { id: "rules", label: "Rules" },
-  { id: "glossary", label: "Glossary" },
-];
-
 function RuleSection({
   data,
   defaultOpen = false,
@@ -234,53 +226,12 @@ function RuleSection({
   );
 }
 
-function RulesTabBar({
-  active,
-  onChange,
-}: {
-  readonly active: RulesTabId;
-  readonly onChange: (tab: RulesTabId) => void;
-}) {
+export function HowToPlayPane() {
   return (
     <div
-      role="tablist"
-      aria-label="Rules sections"
-      className="sticky top-0 z-30 border-b border-border bg-background/95 backdrop-blur-sm"
-    >
-      <div className="flex gap-1 px-2">
-        {TABS.map((tab) => {
-          const isActive = tab.id === active;
-          return (
-            <button
-              key={tab.id}
-              type="button"
-              role="tab"
-              id={`rules-tab-${tab.id}`}
-              aria-selected={isActive}
-              aria-controls={`rules-panel-${tab.id}`}
-              onClick={() => onChange(tab.id)}
-              className={cn(
-                "-mb-px flex items-center border-b-2 px-3 py-3 text-sm font-medium transition-colors",
-                isActive
-                  ? "border-primary text-foreground"
-                  : "border-transparent text-muted-foreground hover:border-border hover:text-foreground active:text-foreground",
-              )}
-            >
-              {tab.label}
-            </button>
-          );
-        })}
-      </div>
-    </div>
-  );
-}
-
-function HowToPlayTab() {
-  return (
-    <div
-      id="rules-panel-how-to-play"
+      id="archive-panel-how-to-play"
       role="tabpanel"
-      aria-labelledby="rules-tab-how-to-play"
+      aria-labelledby="archive-tab-how-to-play"
       className="flex flex-col gap-3"
     >
       {HOW_TO_PLAY_POINTS.map((point) => (
@@ -296,12 +247,13 @@ function HowToPlayTab() {
   );
 }
 
-function RulesTab({ beginnerMode }: { readonly beginnerMode: boolean }) {
+export function RulesPane() {
+  const beginnerMode = useBeginnerMode();
   return (
     <div
-      id="rules-panel-rules"
+      id="archive-panel-rules"
       role="tabpanel"
-      aria-labelledby="rules-tab-rules"
+      aria-labelledby="archive-tab-rules"
       className="flex flex-col gap-3"
     >
       <label className="flex items-center justify-between gap-3 rounded-card border border-border bg-surface px-4 py-3">
@@ -334,16 +286,15 @@ function RulesTab({ beginnerMode }: { readonly beginnerMode: boolean }) {
   );
 }
 
-function GlossaryTab() {
-  const terms = SORTED_GLOSSARY_TERMS;
+export function GlossaryPane() {
   return (
     <div
-      id="rules-panel-glossary"
+      id="archive-panel-glossary"
       role="tabpanel"
-      aria-labelledby="rules-tab-glossary"
+      aria-labelledby="archive-tab-glossary"
       className="flex flex-col gap-2"
     >
-      {terms.map((entry) => (
+      {SORTED_GLOSSARY_TERMS.map((entry) => (
         <section
           key={entry.term}
           className="flex flex-col gap-1 rounded-card border border-border bg-surface px-4 py-3"
@@ -352,21 +303,6 @@ function GlossaryTab() {
           <p className="text-sm leading-relaxed text-muted-foreground">{entry.definition}</p>
         </section>
       ))}
-    </div>
-  );
-}
-
-export function RulesPage() {
-  const [tab, setTab] = useState<RulesTabId>("rules");
-  const beginnerMode = useBeginnerMode();
-  return (
-    <div>
-      <RulesTabBar active={tab} onChange={setTab} />
-      <div className="flex flex-col gap-3 px-4 py-4">
-        {tab === "how-to-play" && <HowToPlayTab />}
-        {tab === "rules" && <RulesTab beginnerMode={beginnerMode} />}
-        {tab === "glossary" && <GlossaryTab />}
-      </div>
     </div>
   );
 }

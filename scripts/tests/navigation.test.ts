@@ -20,18 +20,13 @@ async function main() {
 
   test("home shows app name with no back button", () => {
     const state = getTopBarState("/");
-    strictEqual(state.hidden, undefined);
     strictEqual(state.title, "Dungeon Archive");
     strictEqual(state.backTo, undefined);
   });
 
-  test("search hides the top bar", () => {
-    strictEqual(getTopBarState("/search").hidden, true);
-  });
-
-  test("quick rules shows fixed title without back", () => {
-    const state = getTopBarState("/rules");
-    strictEqual(state.title, "Quick Rules");
+  test("archive shows fixed title without back", () => {
+    const state = getTopBarState("/archive");
+    strictEqual(state.title, "Archive");
     strictEqual(state.backTo, undefined);
   });
 
@@ -47,16 +42,22 @@ async function main() {
     strictEqual(state.backTo, undefined);
   });
 
-  test("category root shows plural title and back to search", () => {
-    const state = getTopBarState("/spell");
-    strictEqual(state.title, "Spells");
-    strictEqual(state.backTo, "/search");
+  test("dice shows fixed title without back", () => {
+    const state = getTopBarState("/dice");
+    strictEqual(state.title, "Dice");
+    strictEqual(state.backTo, undefined);
   });
 
-  test("monster category root shows plural title and back to search", () => {
+  test("category root shows plural title and back to archive", () => {
+    const state = getTopBarState("/spell");
+    strictEqual(state.title, "Spells");
+    strictEqual(state.backTo, "/archive");
+  });
+
+  test("monster category root shows plural title and back to archive", () => {
     const state = getTopBarState("/monster");
     strictEqual(state.title, "Monsters");
-    strictEqual(state.backTo, "/search");
+    strictEqual(state.backTo, "/archive");
   });
 
   test("category detail shows entity name and back to category", () => {

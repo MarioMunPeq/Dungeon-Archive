@@ -68,7 +68,7 @@ export const QuickTiles = memo(function QuickTiles({ sessionCount }: QuickTilesP
         <Button
           size="sm"
           className="mt-auto self-start"
-          onClick={() => navigate(sessionCount > 0 ? "/session" : "/search")}
+          onClick={() => navigate(sessionCount > 0 ? "/session" : "/archive")}
         >
           {sessionCount > 0 ? "Open Session" : "Search"}
         </Button>
@@ -84,7 +84,11 @@ export const QuickTiles = memo(function QuickTiles({ sessionCount }: QuickTilesP
             New to D&D? Start with the d20, checks, and your turn in combat.
           </span>
         </div>
-        <Button size="sm" className="mt-auto self-start" onClick={() => navigate("/rules")}>
+        <Button
+          size="sm"
+          className="mt-auto self-start"
+          onClick={() => navigate("/archive?tab=rules")}
+        >
           Open Rules
         </Button>
       </div>

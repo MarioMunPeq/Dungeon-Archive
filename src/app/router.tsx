@@ -1,8 +1,7 @@
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import { HomePage } from "@/features/home/home-page";
-import { SearchPage } from "@/features/search/search-page";
+import { ArchivePage } from "@/features/archive/archive-page";
 import { SessionPage } from "@/features/session/session-page";
-import { RulesPage } from "@/features/rules/rules-page";
 import { CombatPage } from "@/features/combat/combat-page";
 import { CharacterPage } from "@/features/character/character-page";
 import { DicePage } from "@/features/dice/dice-page";
@@ -15,6 +14,7 @@ import { DebugSpellPage } from "@/features/debug/debug-spell-page";
 import { NotFoundPage } from "@/features/not-found-page";
 import { CATEGORY_REGISTRY } from "@/compendium";
 import type { EntityCategory } from "@/compendium";
+import { ROUTE_REDIRECTS } from "@/config/constants";
 
 const CATEGORIES = Object.keys(CATEGORY_REGISTRY) as EntityCategory[];
 
@@ -22,14 +22,16 @@ export function AppRouter() {
   return (
     <Routes>
       <Route path="/" element={<HomePage />} />
-      <Route path="/search" element={<SearchPage />} />
+      <Route path="/archive" element={<ArchivePage />} />
       <Route path="/session" element={<SessionPage />} />
-      <Route path="/rules" element={<RulesPage />} />
       <Route path="/combat" element={<CombatPage />} />
       <Route path="/character" element={<CharacterPage />} />
       <Route path="/dice" element={<DicePage />} />
       <Route path="/backup" element={<BackupPage />} />
       <Route path="/help" element={<HelpPage />} />
+      {Object.entries(ROUTE_REDIRECTS).map(([from, to]) => (
+        <Route key={from} path={from} element={<Navigate to={to} replace />} />
+      ))}
       {CATEGORIES.map((cat) => (
         <Route key={cat} path={`/${cat}`} element={<CategoryPage category={cat} />}>
           <Route path=":canonicalId" element={<CompendiumPage category={cat} />} />

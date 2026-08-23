@@ -198,7 +198,7 @@ A one-tap action on an entity detail: Favorite, or pin to the current Session.
 
 ### Route
 
-A URL path (e.g., `/search`, `/spell/fireball`). Routes exist for the tab screens, for every Compendium category and entity, and for Backup (when enabled).
+A URL path (e.g., `/archive`, `/spell/fireball`). Routes exist for the tab screens, for every Compendium category and entity, and for Backup (when enabled).
 
 ---
 
