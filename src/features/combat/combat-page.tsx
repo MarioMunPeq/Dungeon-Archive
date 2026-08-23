@@ -121,8 +121,7 @@ function conditionSummary(condition: Condition): string {
   return walk(condition.description);
 }
 
-const FALLBACK_SUMMARY =
-  "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.";
+const FALLBACK_SUMMARY = "No description available for this condition.";
 
 function conditionDefinition(id: string): string {
   const resolved = resolveEntity(id);

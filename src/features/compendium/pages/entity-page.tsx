@@ -37,11 +37,11 @@ export function CompendiumPage({ category }: CompendiumPageProps) {
   }, [fullCanonicalId]);
 
   if (!slug) {
-    return <ErrorState message="Missing entity identifier" />;
+    return <ErrorState message={`${categoryLabelSingular(category)} not found`} />;
   }
 
   if (!resolved) {
-    return <ErrorState message={`${categoryLabelSingular(category)} not found: ${slug}`} />;
+    return <ErrorState message={`${categoryLabelSingular(category)} not found`} />;
   }
 
   return (

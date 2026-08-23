@@ -29,7 +29,7 @@ export class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundarySt
       return (
         this.props.fallback ?? (
           <ErrorState
-            message={this.state.error?.message ?? "An unexpected error occurred"}
+            message="An unexpected error occurred while showing this screen."
             onRetry={() => this.setState({ hasError: false, error: null })}
           />
         )

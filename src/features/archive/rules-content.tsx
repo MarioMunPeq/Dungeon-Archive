@@ -120,34 +120,94 @@ interface GlossaryEntryData {
   readonly definition: string;
 }
 
-const LOREM_A =
-  "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.";
-const LOREM_B =
-  "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.";
-const LOREM_C =
-  "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt.";
-const LOREM_D =
-  "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident.";
-
 const GLOSSARY_TERMS: readonly GlossaryEntryData[] = [
-  { term: "AC", definition: LOREM_A },
-  { term: "Ability Check", definition: LOREM_B },
-  { term: "Action", definition: LOREM_C },
-  { term: "Advantage", definition: LOREM_D },
-  { term: "Bonus Action", definition: LOREM_A },
-  { term: "Cantrip", definition: LOREM_B },
-  { term: "Concentration", definition: LOREM_C },
-  { term: "Critical Hit", definition: LOREM_D },
-  { term: "DC", definition: LOREM_A },
-  { term: "Disadvantage", definition: LOREM_B },
-  { term: "Hit Dice", definition: LOREM_C },
-  { term: "Hit Points", definition: LOREM_D },
-  { term: "Long Rest", definition: LOREM_A },
-  { term: "Reaction", definition: LOREM_B },
-  { term: "Saving Throw", definition: LOREM_C },
-  { term: "Short Rest", definition: LOREM_D },
-  { term: "Spell Attack", definition: LOREM_A },
-  { term: "Spell Save DC", definition: LOREM_B },
+  {
+    term: "AC",
+    definition:
+      "Armor Class. How hard you are to hit: an attack lands when its total roll equals or beats your AC.",
+  },
+  {
+    term: "Ability Check",
+    definition:
+      "A d20 roll plus an ability modifier, used when you try something risky — like a Dexterity check to balance across a beam.",
+  },
+  {
+    term: "Action",
+    definition:
+      "The main thing you do on your turn: attack, cast a spell, dash, dodge, hide, or use an object.",
+  },
+  {
+    term: "Advantage",
+    definition:
+      "Roll two d20s and keep the higher one — granted when circumstances work in your favor.",
+  },
+  {
+    term: "Bonus Action",
+    definition:
+      "A small extra action some features or spells grant. You get one per turn, and only if something gives you one.",
+  },
+  {
+    term: "Cantrip",
+    definition: "A level 0 spell you can cast at will, without spending spell slots.",
+  },
+  {
+    term: "Concentration",
+    definition:
+      "Some spells need your focus to keep going. Take damage and you must pass a Constitution save or the spell ends.",
+  },
+  {
+    term: "Critical Hit",
+    definition:
+      "A natural 20 on an attack roll. It always hits, and you roll double the damage dice.",
+  },
+  {
+    term: "DC",
+    definition:
+      "Difficulty Class. The number a roll has to meet or beat to succeed — a higher DC means a harder task.",
+  },
+  {
+    term: "Disadvantage",
+    definition:
+      "Roll two d20s and keep the lower one — imposed when circumstances work against you.",
+  },
+  {
+    term: "Hit Dice",
+    definition:
+      "Dice you spend on a short rest to heal yourself. You have one per level; they refresh on a long rest.",
+  },
+  {
+    term: "Hit Points",
+    definition: "Your HP measures how much punishment you can take. At 0 HP you fall unconscious.",
+  },
+  {
+    term: "Long Rest",
+    definition:
+      "8 hours of sleep and light activity. You recover all lost HP and half your spent Hit Dice.",
+  },
+  {
+    term: "Reaction",
+    definition:
+      "A quick response outside your turn — like an opportunity attack — taken when its trigger happens. One per round.",
+  },
+  {
+    term: "Saving Throw",
+    definition:
+      "A d20 roll plus an ability modifier to resist a spell, trap, or effect. Meet or beat its DC.",
+  },
+  {
+    term: "Short Rest",
+    definition: "An hour of rest. Spend Hit Dice to heal, and some features recharge.",
+  },
+  {
+    term: "Spell Attack",
+    definition:
+      "The roll you make when a spell attacks directly: d20 plus your spell attack bonus vs. the target's AC.",
+  },
+  {
+    term: "Spell Save DC",
+    definition:
+      "The number enemies must beat to resist your spells. It grows with your proficiency and spellcasting ability.",
+  },
 ];
 
 const SORTED_GLOSSARY_TERMS: readonly GlossaryEntryData[] = [...GLOSSARY_TERMS].sort((a, b) =>
