@@ -26,7 +26,7 @@ export function useRoll(): RollState {
   const [rolling, setRolling] = useState(false);
   const [display, setDisplay] = useState<number | null>(null);
   const [total, setTotal] = useState<number | null>(null);
-  const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
+  const timerRef = useRef<number | null>(null);
 
   useEffect(() => {
     return () => {

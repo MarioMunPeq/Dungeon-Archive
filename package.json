@@ -29,6 +29,7 @@
     "test:spell-picker-model": "tsx --tsconfig tsconfig.app.json scripts/tests/spell-picker-model.test.ts",
     "test:spell-picker": "tsx --tsconfig tsconfig.app.json scripts/tests/spell-picker.test.tsx",
     "test:damage-type": "tsx --tsconfig tsconfig.app.json scripts/tests/damage-type.test.tsx",
+    "test:spell-renderer": "tsx --tsconfig tsconfig.app.json scripts/tests/spell-renderer.test.tsx",
     "test:highlight": "tsx scripts/tests/highlight.test.ts",
     "test:navigation": "tsx --tsconfig tsconfig.app.json scripts/tests/navigation.test.ts",
     "test:navigation-ia": "tsx --tsconfig tsconfig.app.json scripts/tests/navigation-ia.test.tsx",
@@ -46,7 +47,7 @@
     "test:firebase-config": "tsx scripts/tests/firebase-config.test.ts",
     "test:firebase-adapter": "tsx scripts/tests/firebase-adapter.test.ts",
     "test:auth-popup": "tsx scripts/tests/auth-popup.test.ts",
-    "test": "pnpm run test:identity && pnpm run test:grouping && pnpm run test:resolver && pnpm run test:compendium && pnpm run test:category && pnpm run test:filter-bar && pnpm run test:spell-picker-model && pnpm run test:spell-picker && pnpm run test:damage-type && pnpm run test:highlight && pnpm run test:navigation && pnpm run test:content && pnpm run test:design && pnpm run test:relationships && pnpm run test:magic-item && pnpm run test:feat && pnpm run test:user-state && pnpm run test:demo && pnpm run test:dice && pnpm run test:dice-chip && pnpm run test:character-sheet && pnpm run test:sync && pnpm run test:firebase-config && pnpm run test:firebase-adapter && pnpm run test:auth-popup && pnpm run test:assets && pnpm run test:pwa"
+    "test": "pnpm run test:identity && pnpm run test:grouping && pnpm run test:resolver && pnpm run test:compendium && pnpm run test:category && pnpm run test:filter-bar && pnpm run test:spell-picker-model && pnpm run test:spell-picker && pnpm run test:damage-type && pnpm run test:spell-renderer && pnpm run test:highlight && pnpm run test:navigation && pnpm run test:content && pnpm run test:design && pnpm run test:relationships && pnpm run test:magic-item && pnpm run test:feat && pnpm run test:user-state && pnpm run test:demo && pnpm run test:dice && pnpm run test:dice-chip && pnpm run test:character-sheet && pnpm run test:sync && pnpm run test:firebase-config && pnpm run test:firebase-adapter && pnpm run test:auth-popup && pnpm run test:assets && pnpm run test:pwa"
   },
   "dependencies": {
     "@3d-dice/dice-box": "^1.1.4",

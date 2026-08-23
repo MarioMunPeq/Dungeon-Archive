@@ -5,17 +5,26 @@ import type { AbilityKey } from "@/components/ui/ability-scores";
 import { Stack } from "@/components/ui/Stack";
 import { Section } from "@/components/ui/Section";
 import { EntityProperty, EntityMetadataGrid } from "@/components/ui/entity-property";
+import { HelpTip } from "@/components/ui/HelpTip";
 import { ContentRenderer } from "@/components/content/content-renderer";
 
 interface MonsterRendererProps {
   readonly entity: Monster;
 }
 
-function StatCard({ label, value }: { label: string; value: ReactNode }) {
+interface StatHelp {
+  readonly title: string;
+  readonly text: string;
+}
+
+function StatCard({ label, value, help }: { label: string; value: ReactNode; help?: StatHelp }) {
   return (
     <div className="flex min-w-0 flex-col items-center gap-1 rounded-stat border border-border bg-card px-2 py-3">
-      <span className="w-full text-xs font-semibold uppercase tracking-tight text-muted-foreground">
-        {label}
+      <span className="flex w-full items-center justify-between gap-0.5">
+        <span className="text-xs font-semibold uppercase tracking-tight text-muted-foreground">
+          {label}
+        </span>
+        {help && <HelpTip label={help.title}>{help.text}</HelpTip>}
       </span>
       <span className="font-mono text-2xl font-bold tabular-nums leading-none text-foreground">
         {value}
@@ -50,10 +59,31 @@ export function MonsterRenderer({ entity }: MonsterRendererProps) {
   return (
     <Stack gap="md">
       <div className="grid grid-cols-2 gap-2 sm:grid-cols-4">
-        <StatCard label="AC" value={entity.armorClass} />
-        <StatCard label="HP" value={entity.hitPoints} />
+        <StatCard
+          label="AC"
+          value={entity.armorClass}
+          help={{
+            title: "What is Armor Class?",
+            text: "Armor Class is what attackers must beat to hit this creature.",
+          }}
+        />
+        <StatCard
+          label="HP"
+          value={entity.hitPoints}
+          help={{
+            title: "What are Hit Points?",
+            text: "Hit Points measure how much damage the creature can take before dropping.",
+          }}
+        />
         <StatCard label="Speed" value={<SpeedValue value={entity.speed} />} />
-        <StatCard label="CR" value={entity.challengeRating} />
+        <StatCard
+          label="CR"
+          value={entity.challengeRating}
+          help={{
+            title: "What is Challenge Rating?",
+            text: "A rough estimate of danger. CR 3 suits a group of four 3rd-level adventurers.",
+          }}
+        />
       </div>
       <EntityMetadataGrid>
         <EntityProperty label="Size / Type" value={`${entity.size} ${entity.monsterType}`} />
