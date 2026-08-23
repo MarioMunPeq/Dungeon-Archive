@@ -1,4 +1,5 @@
 import { useState, useCallback, useMemo } from "react";
+import type { ReactNode } from "react";
 import { Link } from "react-router-dom";
 import { useCharacters, userStore } from "@/user-state";
 import type { CharacterReference, CharacterReferenceUpdate } from "@/user-state";
@@ -11,7 +12,7 @@ import {
   METADATA_SEPARATOR,
 } from "@/compendium";
 import type { ContentBlock, Equipment, MagicItem, Spell } from "@/compendium";
-import { entityRefFromCanonicalId } from "@/components/entity";
+import { entityRefFromCanonicalId, DamageTypeTag } from "@/components/entity";
 import { CloseIcon } from "@/components/ui/icons";
 import { ReferencePicker } from "@/components/ui/ReferencePicker";
 import type { PickerCandidate } from "@/components/ui/ReferencePicker";
@@ -196,11 +197,17 @@ function classLine(reference: CharacterReference): string {
   return `${cls} · Lv ${reference.level}`;
 }
 
-function weaponStats(canonicalId: string): string | undefined {
+function weaponStats(canonicalId: string): ReactNode {
   const resolved = resolveEntity(canonicalId);
   if (!resolved || resolved.selected.category !== "equipment") return undefined;
   const item = resolved.selected as Equipment;
-  return formatDamage(item.damage, item.damageType) || undefined;
+  if (!item.damage && !item.damageType) return undefined;
+  return (
+    <span className="inline-flex items-center gap-1">
+      {item.damage}
+      <DamageTypeTag code={item.damageType} />
+    </span>
+  );
 }
 
 function spellSubtitle(entity: Spell | undefined): string | undefined {
@@ -234,11 +241,15 @@ function firstParagraphText(blocks: readonly ContentBlock[]): string | undefined
 }
 
 function WeaponPreview({ item, href }: { item: Equipment; href: string }) {
-  const damage = formatDamage(item.damage, item.damageType);
   const properties = item.properties ?? [];
   return (
     <div className="flex flex-col gap-2 rounded-card bg-card px-3 py-2 animate-slide-up">
-      {damage && <p className="text-base font-bold tabular-nums text-foreground">{damage}</p>}
+      {(item.damage || item.damageType) && (
+        <p className="flex flex-wrap items-baseline gap-x-2 gap-y-0.5 text-base font-bold tabular-nums text-foreground">
+          {item.damage}
+          <DamageTypeTag code={item.damageType} />
+        </p>
+      )}
       {properties.length > 0 && (
         <p className="text-xs text-foreground-subtle">
           {properties.join(` ${METADATA_SEPARATOR} `)}
@@ -430,7 +441,7 @@ function ReferenceCell({
   canonicalId: string;
   kind: PickerKind;
   onRemove: (id: string) => void;
-  quickStats?: string;
+  quickStats?: ReactNode;
 }) {
   const [expanded, setExpanded] = useState(false);
   const resolved = useMemo(() => resolveEntity(canonicalId), [canonicalId]);
@@ -534,7 +545,7 @@ function ReferenceGroup({
   ids: string[];
   onAdd: () => void;
   onRemove: (canonicalId: string) => void;
-  getQuickStats?: (canonicalId: string) => string | undefined;
+  getQuickStats?: (canonicalId: string) => ReactNode | undefined;
 }) {
   return (
     <div className="flex flex-col gap-2">

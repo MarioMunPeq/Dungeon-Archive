@@ -11,3 +11,7 @@ export { EntityIdentity } from "./entity-identity";
 
 export { EntityCard } from "./entity-card";
 export { EntityCardStat } from "./entity-card-stat";
+
+export { DamageTypeTag } from "./damage-type-tag";
+export { damageTypeVisual } from "./damage-type";
+export type { DamageTypeVisual } from "./damage-type";

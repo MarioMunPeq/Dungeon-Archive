@@ -35,6 +35,18 @@
   --color-warning-foreground: #331f00;
   --color-info: #38bdf8;
 
+  /* Damage-type identity hues — fixed semantic metadata colors (same layer as
+     success/warning/info), independent of the switchable accent theme. Muted
+     tones chosen to stay distinguishable from destructive/success/warning/info
+     and across all seven accent swatches. Consumed as tiny markers next to the
+     damage-type text, which always carries the meaning itself. */
+  --color-damage-bludgeoning: #a8a29e;
+  --color-damage-piercing: #92b0ce;
+  --color-damage-slashing: #d16a4f;
+  --color-damage-radiant: #e7cd85;
+  --color-damage-necrotic: #a98fd8;
+  --color-damage-psychic: #de8fc0;
+
   --color-focus: var(--theme-accent-focus);
   --color-disabled: #1c1917;
   --color-disabled-foreground: #4d4842;
