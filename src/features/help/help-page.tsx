@@ -1,5 +1,6 @@
 import type { ReactNode } from "react";
 import { Inline, Section, Surface } from "@/components/ui";
+import { t } from "@/i18n";
 
 const GITHUB_URL = "https://github.com/MarioMunPeq";
 const LINKEDIN_URL = "https://es.linkedin.com/in/mario-mu%C3%B1oz-peque%C3%B1o";
@@ -25,27 +26,24 @@ function LinkButton({ href, children }: LinkButtonProps) {
 export function HelpPage() {
   return (
     <div className="flex flex-col gap-6 px-4 py-6">
-      <Section title="Quick help">
+      <Section title={t("helpPage.quickHelp")}>
         <Surface>
           <div className="flex flex-col gap-2">
             <p className="text-sm leading-relaxed text-muted-foreground">
-              Press and hold any stat, ability score, or item to see what it means.
+              {t("helpPage.longPress")}
             </p>
             <p className="text-sm leading-relaxed text-muted-foreground">
-              The Rules tab in the Archive has a Beginner tips toggle that shows small ? helpers
-              next to rules as you play.
+              {t("helpPage.beginnerTips")}
             </p>
           </div>
         </Surface>
       </Section>
 
-      <Section title="About this project">
+      <Section title={t("helpPage.aboutProject")}>
         <Surface>
           <div className="flex flex-col gap-3">
             <p className="text-sm leading-relaxed text-muted-foreground">
-              Dungeon Archive is a personal project: a mobile-first companion for tabletop RPG
-              players, designed to sit next to the table and answer rules questions in seconds.
-              Every screen is checked against a written Design DNA before it ships.
+              {t("helpPage.aboutBody")}
             </p>
             <Inline>
               <LinkButton href={GITHUB_URL}>GitHub</LinkButton>

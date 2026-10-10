@@ -20,5 +20,6 @@ export function toUserState(state: UserState): UserState {
     beginnerMode: state.beginnerMode,
     onboardingComplete: state.onboardingComplete,
     theme: state.theme,
+    language: state.language,
   };
 }

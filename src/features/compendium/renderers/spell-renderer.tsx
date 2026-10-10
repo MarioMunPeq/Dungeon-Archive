@@ -1,4 +1,4 @@
-import { SCHOOL_NAMES, METADATA_SEPARATOR, extractSpellRoll } from "@/compendium";
+import { METADATA_SEPARATOR, extractSpellRoll, formatSchool, spellLevelLabel } from "@/compendium";
 import type { Spell } from "@/compendium";
 import { Section } from "@/components/ui/Section";
 import { ContentRenderer } from "@/components/content";
@@ -8,23 +8,26 @@ import { EntityProperty, EntityMetadataGrid } from "@/components/ui/entity-prope
 import { HelpTip } from "@/components/ui/HelpTip";
 import { RollableDice } from "@/features/dice/rollable-dice";
 import { splitSpellRoll } from "@/lib/dice";
+import type { TranslationKey } from "@/i18n";
+import { t } from "@/i18n";
 import { useBeginnerMode } from "@/user-state";
 
 interface SpellRendererProps {
   readonly entity: Spell;
 }
 
-const COMPONENT_NAMES: Record<string, string> = {
-  V: "Verbal",
-  S: "Somatic",
-  M: "Material",
+const COMPONENT_KEYS: Record<string, TranslationKey> = {
+  V: "spell.component.verbal",
+  S: "spell.component.somatic",
+  M: "spell.component.material",
 };
 
 export function expandComponents(components: readonly string[]): string[] {
   return components.map((component) => {
     const match = component.match(/^([VSM])(\s*\(.*\))?$/);
     if (!match) return component;
-    return `${COMPONENT_NAMES[match[1]!] ?? match[1]}${match[2] ?? ""}`;
+    const key = COMPONENT_KEYS[match[1]!];
+    return `${key ? t(key) : match[1]}${match[2] ?? ""}`;
   });
 }
 
@@ -34,8 +37,8 @@ export function componentsDisplay(components: readonly string[], beginnerMode: b
 
 export function SpellRenderer({ entity }: SpellRendererProps) {
   const beginnerMode = useBeginnerMode();
-  const levelText = entity.level === 0 ? "Cantrip" : `Level ${entity.level}`;
-  const schoolName = SCHOOL_NAMES[entity.school] ?? entity.school;
+  const levelText = spellLevelLabel(entity.level);
+  const schoolName = formatSchool(entity.school);
   const roll = extractSpellRoll(entity.description);
   const spellRoll = roll ? splitSpellRoll(roll) : null;
   const componentsText = componentsDisplay(entity.components, beginnerMode);
@@ -49,7 +52,7 @@ export function SpellRenderer({ entity }: SpellRendererProps) {
       <EntityMetadataGrid>
         {spellRoll && (
           <EntityProperty
-            label="Damage"
+            label={t("term.damage")}
             value={
               <RollableDice
                 expression={spellRoll.expression}
@@ -60,18 +63,18 @@ export function SpellRenderer({ entity }: SpellRendererProps) {
             stat
           />
         )}
-        <EntityProperty label="Casting Time" value={entity.castingTime} stat />
-        <EntityProperty label="Range" value={entity.range} stat />
-        <EntityProperty label="Duration" value={entity.duration} stat />
-        <EntityProperty label="Components" value={componentsText} />
+        <EntityProperty label={t("spell.castingTime")} value={entity.castingTime} stat />
+        <EntityProperty label={t("spell.range")} value={entity.range} stat />
+        <EntityProperty label={t("spell.duration")} value={entity.duration} stat />
+        <EntityProperty label={t("spell.components")} value={componentsText} />
         {entity.ritual && (
           <EntityProperty
-            label="Ritual"
+            label={t("filter.ritual")}
             value={
               <span className="inline-flex items-center gap-1">
-                Yes
-                <HelpTip label="What is ritual casting?">
-                  A ritual takes 10 extra minutes to cast, but it doesn't use a spell slot.
+                {t("filter.yes")}
+                <HelpTip label={t("help.ritualCasting.title")}>
+                  {t("help.ritualCasting.body")}
                 </HelpTip>
               </span>
             }
@@ -79,26 +82,26 @@ export function SpellRenderer({ entity }: SpellRendererProps) {
         )}
         {entity.concentration && (
           <EntityProperty
-            label="Concentration"
+            label={t("filter.concentration")}
             value={
               <span className="inline-flex items-center gap-1">
-                Yes
-                <HelpTip label="What is concentration?">
-                  The spell ends early if you cast another concentration spell or lose focus.
+                {t("filter.yes")}
+                <HelpTip label={t("help.concentration.title")}>
+                  {t("help.concentration.body")}
                 </HelpTip>
               </span>
             }
           />
         )}
-        <EntityProperty label="Classes" value={entity.classes.join(", ")} />
+        <EntityProperty label={t("spell.classes")} value={entity.classes.join(", ")} />
       </EntityMetadataGrid>
 
-      <Section title="Description">
+      <Section title={t("spell.description")}>
         <ContentRenderer blocks={entity.description} />
       </Section>
 
       {entity.higherLevels && entity.higherLevels.length > 0 && (
-        <Section title="At Higher Levels">
+        <Section title={t("spell.higherLevels")}>
           <ContentRenderer blocks={entity.higherLevels} />
         </Section>
       )}

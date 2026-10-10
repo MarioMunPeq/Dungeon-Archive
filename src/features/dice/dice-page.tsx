@@ -4,6 +4,7 @@ import { Button, Stepper } from "@/components/ui";
 import type { DiceGroup, DiceRoll, DiceRollResult } from "./dice-stage";
 import { DiceChip } from "./dice-chip";
 import { useRoll } from "./use-roll";
+import { t } from "@/i18n";
 
 const DiceStage = lazy(() => import("./dice-stage"));
 
@@ -139,7 +140,7 @@ export function DicePage() {
         <div
           role="button"
           tabIndex={0}
-          aria-label="Reroll dice"
+          aria-label={t("dice.reroll")}
           aria-disabled={!rollEnabled}
           onClick={triggerRoll}
           onKeyDown={handleRollKeyDown}
@@ -148,7 +149,7 @@ export function DicePage() {
           <Suspense
             fallback={
               <div className="flex h-full w-full items-center justify-center">
-                <span className="text-xs text-muted-foreground">Loading dice…</span>
+                <span className="text-xs text-muted-foreground">{t("dice.loading")}</span>
               </div>
             }
           >
@@ -164,14 +165,14 @@ export function DicePage() {
 
       <div className="flex flex-col items-center gap-1 rounded-stat border border-border-amber bg-card p-2 readout-card">
         <span className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
-          Result
+          {t("dice.result")}
         </span>
         <div aria-live="polite" className="w-full">
           <div
             key={String(displayValue)}
             role="button"
             tabIndex={0}
-            aria-label="Reroll dice"
+            aria-label={t("dice.reroll")}
             aria-disabled={!rollEnabled}
             onClick={triggerRoll}
             onKeyDown={handleRollKeyDown}
@@ -224,7 +225,7 @@ export function DicePage() {
               <path d="M17 9v6" />
               <path d="M14 12h6" />
             </svg>
-            <span className="text-xs font-bold uppercase tracking-wide">Modifier</span>
+            <span className="text-xs font-bold uppercase tracking-wide">{t("dice.modifier")}</span>
           </span>
           <Stepper
             variant="ghost"
@@ -232,7 +233,7 @@ export function DicePage() {
             min={-20}
             max={20}
             onChange={setModifier}
-            label="Modifier"
+            label={t("dice.modifier")}
             format={(v) => (v > 0 ? `+${v}` : String(v))}
             className="w-full"
             valueClassName="text-sm"
@@ -246,7 +247,9 @@ export function DicePage() {
           disabled={rolling || instantRolling || totalCount === 0}
           className="mx-auto w-full max-w-lg"
         >
-          <span className="font-mono tabular-nums">Roll {label}</span>
+          <span className="font-mono tabular-nums">
+            {t("dice.rollWith", { expression: label })}
+          </span>
         </Button>
       </div>
     </div>

@@ -9,10 +9,11 @@ import {
   getSortOptions,
   sortEntities,
   dedupeEntities,
-  SCHOOL_NAMES,
+  formatSchool,
 } from "../../src/compendium/category-display";
 import { sourcePriority } from "../../src/compendium/resolver/version-selector";
 import { loadCompendium } from "../../src/compendium/loader";
+import { userStore } from "../../src/user-state";
 
 function test(description: string, fn: () => void): void {
   try {
@@ -122,18 +123,24 @@ async function main() {
     strictEqual(options[1]!.value, "a");
   });
 
-  test("buildOptions applies labelMap", () => {
-    const options = buildOptions(["V", "A"], SCHOOL_NAMES);
-    const vOpt = options.find((o: { value: string }) => o.value === "V");
-    ok(vOpt);
-    strictEqual(vOpt.label, "Evocation");
-  });
-
   test("buildOptions applies labelFn", () => {
     const options = buildOptions(["XPHB", "PHB"], {}, (s) => (s === "XPHB" ? "PHB24" : s));
     const xphb = options.find((o: { value: string }) => o.value === "XPHB");
     ok(xphb);
     strictEqual(xphb.label, "PHB24");
+  });
+
+  test("formatSchool resolves both languages", () => {
+    const previous = userStore.getState().language;
+    userStore.setState({ language: "en" });
+    strictEqual(formatSchool("V"), "Evocation");
+    strictEqual(formatSchool("A"), "Abjuration");
+    userStore.setState({ language: "es" });
+    strictEqual(formatSchool("V"), "Evocación");
+    strictEqual(formatSchool("A"), "Abjuración");
+    strictEqual(formatSchool("Z"), "Z");
+    // Restore, or every later assertion in this file reads Spanish labels.
+    userStore.setState({ language: previous });
   });
 
   test("buildFilterDefs creates level filter for spells", () => {
@@ -497,7 +504,7 @@ async function main() {
     const card = toCardData("magicitem", item!);
     strictEqual(card.name, "Staff of Power");
     strictEqual(card.categoryLabel, "Magic Item");
-    ok(card.metadata.includes("very rare"));
+    ok(card.metadata.includes("Very Rare"));
     strictEqual(card.source, "DMG");
     ok(card.href.startsWith("/magicitem/"));
   });

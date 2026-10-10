@@ -1,4 +1,5 @@
 import { cn } from "@/lib/utils";
+import { t } from "@/i18n";
 import { ARCHIVE_TABS } from "./archive-tabs";
 import type { ArchiveTabId } from "./archive-tabs";
 
@@ -28,7 +29,7 @@ export function ArchiveTabBar({
   return (
     <div
       role="tablist"
-      aria-label="Archive sections"
+      aria-label={t("archive.sections")}
       className="sticky top-0 z-30 border-b border-border bg-background/95 backdrop-blur-sm"
     >
       <div className="flex gap-1 px-2">
@@ -51,7 +52,7 @@ export function ArchiveTabBar({
               )}
             >
               {tab.id === "search" && <SearchGlyph />}
-              {tab.label}
+              {t(tab.label)}
             </button>
           );
         })}

@@ -6,10 +6,18 @@ import type {
   CombatValues,
   HitPoints,
   CharacterReference,
+  Language,
   Theme,
   UserState,
 } from "./types";
-import { STORAGE_KEY, CURRENT_VERSION, DEFAULT_THEME, isTheme } from "./types";
+import {
+  STORAGE_KEY,
+  CURRENT_VERSION,
+  DEFAULT_LANGUAGE,
+  DEFAULT_THEME,
+  isLanguage,
+  isTheme,
+} from "./types";
 import { read, write } from "./persistence";
 import { migrate } from "./migrations";
 import { normalize, validateIds } from "./normalize";
@@ -56,6 +64,7 @@ interface UserActions {
   setBeginnerMode: (enabled: boolean) => void;
   completeOnboarding: () => void;
   setTheme: (theme: Theme) => void;
+  setLanguage: (language: Language) => void;
   _replace: (state: UserState) => void;
   _reset: () => void;
 }
@@ -186,6 +195,7 @@ export const userStore = create<UserStore>((set, get) => ({
   beginnerMode: true,
   onboardingComplete: false,
   theme: DEFAULT_THEME,
+  language: DEFAULT_LANGUAGE,
   _hasHydrated: false,
 
   toggleFavorite: (canonicalId) => {
@@ -250,6 +260,12 @@ export const userStore = create<UserStore>((set, get) => ({
   setTheme: (theme) => {
     if (!isTheme(theme)) return;
     set({ theme });
+    schedulePersist(get);
+  },
+
+  setLanguage: (language) => {
+    if (!isLanguage(language)) return;
+    set({ language });
     schedulePersist(get);
   },
 
@@ -521,6 +537,7 @@ export const userStore = create<UserStore>((set, get) => ({
       beginnerMode: state.beginnerMode,
       onboardingComplete: state.onboardingComplete,
       theme: isTheme(state.theme) ? state.theme : DEFAULT_THEME,
+      language: isLanguage(state.language) ? state.language : DEFAULT_LANGUAGE,
     });
   },
 
@@ -541,6 +558,7 @@ export const userStore = create<UserStore>((set, get) => ({
       beginnerMode: true,
       onboardingComplete: false,
       theme: DEFAULT_THEME,
+      language: DEFAULT_LANGUAGE,
       _hasHydrated: false,
     });
   },
@@ -633,6 +651,10 @@ export function useTheme(): Theme {
   return userStore((s) => s.theme);
 }
 
+export function useLanguage(): Language {
+  return userStore((s) => s.language);
+}
+
 function processPersistedState(state: UserState): UserState {
   const validated: UserState = {
     version: state.version,
@@ -647,6 +669,7 @@ function processPersistedState(state: UserState): UserState {
     beginnerMode: state.beginnerMode === true,
     onboardingComplete: state.onboardingComplete === true,
     theme: isTheme(state.theme) ? state.theme : DEFAULT_THEME,
+    language: isLanguage(state.language) ? state.language : DEFAULT_LANGUAGE,
   };
   return normalize(validated);
 }
@@ -691,7 +714,8 @@ function replaceState(state: UserState): void {
     current.activeCharacterId === state.activeCharacterId &&
     current.beginnerMode === state.beginnerMode &&
     current.onboardingComplete === state.onboardingComplete &&
-    current.theme === state.theme
+    current.theme === state.theme &&
+    current.language === state.language
   ) {
     return;
   }

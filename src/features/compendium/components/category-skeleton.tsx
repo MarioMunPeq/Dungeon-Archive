@@ -1,8 +1,10 @@
+import { t } from "@/i18n";
+
 const SKELETON_CARD_COUNT = 8;
 
 export function CategorySkeleton() {
   return (
-    <div aria-busy="true" aria-label="Loading category">
+    <div aria-busy="true" aria-label={t("category.loading")}>
       <div className="sticky top-0 z-30 space-y-3 border-b border-border bg-background/95 px-4 pb-3 pt-4 backdrop-blur-sm">
         <div className="h-10 w-full animate-pulse rounded-md bg-elevated" />
         <div className="flex flex-wrap gap-2">

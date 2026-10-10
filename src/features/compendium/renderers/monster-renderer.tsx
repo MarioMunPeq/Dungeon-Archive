@@ -7,6 +7,7 @@ import { Section } from "@/components/ui/Section";
 import { EntityProperty, EntityMetadataGrid } from "@/components/ui/entity-property";
 import { HelpTip } from "@/components/ui/HelpTip";
 import { ContentRenderer } from "@/components/content/content-renderer";
+import { t } from "@/i18n";
 
 interface MonsterRendererProps {
   readonly entity: Monster;
@@ -60,7 +61,7 @@ export function MonsterRenderer({ entity }: MonsterRendererProps) {
     <Stack gap="md">
       <div className="grid grid-cols-2 gap-2 sm:grid-cols-4">
         <StatCard
-          label="AC"
+          label={t("character.armorClass")}
           value={entity.armorClass}
           help={{
             title: "What is Armor Class?",
@@ -68,16 +69,16 @@ export function MonsterRenderer({ entity }: MonsterRendererProps) {
           }}
         />
         <StatCard
-          label="HP"
+          label={t("combat.hitPoints")}
           value={entity.hitPoints}
           help={{
             title: "What are Hit Points?",
             text: "Hit Points measure how much damage the creature can take before dropping.",
           }}
         />
-        <StatCard label="Speed" value={<SpeedValue value={entity.speed} />} />
+        <StatCard label={t("monster.speed")} value={<SpeedValue value={entity.speed} />} />
         <StatCard
-          label="CR"
+          label={t("term.cr")}
           value={entity.challengeRating}
           help={{
             title: "What is Challenge Rating?",
@@ -86,40 +87,40 @@ export function MonsterRenderer({ entity }: MonsterRendererProps) {
         />
       </div>
       <EntityMetadataGrid>
-        <EntityProperty label="Size / Type" value={`${entity.size} ${entity.monsterType}`} />
-        <EntityProperty label="Alignment" value={entity.alignment.join(" ")} />
+        <EntityProperty label={t("filter.size")} value={`${entity.size} ${entity.monsterType}`} />
+        <EntityProperty label={t("monster.alignment")} value={entity.alignment.join(" ")} />
       </EntityMetadataGrid>
 
-      <Section title="Ability Scores">
+      <Section title={t("character.abilities")}>
         <AbilityScores scores={abilities} />
       </Section>
 
       {entity.traits.length > 0 && (
-        <Section title="Traits">
+        <Section title={t("monster.traits")}>
           <ContentRenderer blocks={entity.traits} />
         </Section>
       )}
 
       {entity.actions.length > 0 && (
-        <Section title="Actions">
+        <Section title={t("monster.actions")}>
           <ContentRenderer blocks={entity.actions} />
         </Section>
       )}
 
       {entity.reactions.length > 0 && (
-        <Section title="Reactions">
+        <Section title={t("monster.reactions")}>
           <ContentRenderer blocks={entity.reactions} />
         </Section>
       )}
 
       {entity.legendaryActions.length > 0 && (
-        <Section title="Legendary Actions">
+        <Section title={t("monster.legendaryActions")}>
           <ContentRenderer blocks={entity.legendaryActions} />
         </Section>
       )}
 
       {entity.description.length > 0 && (
-        <Section title="Description">
+        <Section title={t("common.description")}>
           <ContentRenderer blocks={entity.description} />
         </Section>
       )}

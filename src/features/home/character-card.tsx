@@ -1,18 +1,14 @@
 import { memo, useState } from "react";
 import { Link } from "react-router-dom";
 import { Button, ConfirmDialog } from "@/components/ui";
+import { t } from "@/i18n";
+import { classLine } from "@/features/character/class-labels";
 import { userStore } from "@/user-state";
 import type { CharacterReference } from "@/user-state";
 import { seedDemoData } from "@/features/demo/demo-data";
 
 interface CharacterCardProps {
   readonly character: CharacterReference | null;
-}
-
-function classLine(character: CharacterReference): string {
-  return character.class
-    ? `${character.subclass ? `${character.class} (${character.subclass})` : character.class} · Lv ${character.level}`
-    : `Lv ${character.level}`;
 }
 
 export const CharacterCard = memo(function CharacterCard({ character }: CharacterCardProps) {
@@ -23,18 +19,17 @@ export const CharacterCard = memo(function CharacterCard({ character }: Characte
       <div className="rounded-card border border-border-amber bg-surface readout-card p-4">
         <div className="flex flex-col gap-3">
           <div className="flex flex-col gap-1">
-            <h3 className="text-sm font-semibold text-foreground">Create your first character</h3>
+            <h3 className="text-sm font-semibold text-foreground">{t("home.createFirstTitle")}</h3>
             <p className="text-xs leading-relaxed text-muted-foreground">
-              Add a character to start tracking your combat state — or load a pre-filled sample
-              character and session.
+              {t("home.createFirstBody")}
             </p>
           </div>
           <div className="flex flex-wrap items-center gap-2">
             <Link to="/character" className="w-fit">
-              <Button size="sm">Create Character</Button>
+              <Button size="sm">{t("home.createCharacter")}</Button>
             </Link>
             <Button size="sm" variant="outline" onClick={seedDemoData}>
-              View Demo
+              {t("home.viewDemo")}
             </Button>
           </div>
         </div>
@@ -49,13 +44,15 @@ export const CharacterCard = memo(function CharacterCard({ character }: Characte
         className="flex flex-col gap-1 p-4 pr-12 transition-opacity duration-primary ease-standard hover:opacity-95 active:opacity-75"
       >
         <p className="truncate text-xl font-bold text-foreground">{character.name}</p>
-        <p className="truncate text-xs text-muted-foreground">{classLine(character)}</p>
+        <p className="truncate text-xs text-muted-foreground">
+          {classLine(character.class, character.subclass, character.level)}
+        </p>
       </Link>
       <button
         type="button"
         onClick={() => setConfirmingRemove(true)}
-        aria-label={`Remove ${character.name}`}
-        title={`Remove ${character.name}`}
+        aria-label={t("common.removeItem", { subject: character.name })}
+        title={t("common.removeItem", { subject: character.name })}
         className="hitbox-expand absolute right-2 top-2 inline-flex h-8 w-8 items-center justify-center rounded-control text-muted-foreground transition-colors duration-150 hover:bg-accent hover:text-foreground active:scale-90 active:bg-accent/80"
       >
         <svg
@@ -75,8 +72,8 @@ export const CharacterCard = memo(function CharacterCard({ character }: Characte
       </button>
       {confirmingRemove && (
         <ConfirmDialog
-          title={`Remove ${character.name}?`}
-          message="This removes the character along with their hit points and combat state. This can't be undone."
+          title={t("character.removeTitle", { name: character.name })}
+          message={t("home.removeBody")}
           confirmLabel="Remove"
           destructive
           onCancel={() => setConfirmingRemove(false)}

@@ -3,6 +3,7 @@ import type { FilterDefinition } from "@/compendium";
 import { Button } from "@/components/ui/Button";
 import { CloseIcon } from "@/components/ui/icons";
 import { FilterGroup, FilterSheet } from "./filter-sheet";
+import { t } from "@/i18n";
 
 interface FilterBarProps {
   readonly filters: readonly FilterDefinition[];
@@ -54,7 +55,7 @@ export function FilterBar({ filters, values, onChange, onClearAll }: FilterBarPr
       {active.length > 0 && (
         <div
           role="group"
-          aria-label="Active filters"
+          aria-label={t("filter.active")}
           className="-mx-4 flex items-center gap-2 overflow-x-auto px-4 no-scrollbar"
         >
           {active.map((filter) => (

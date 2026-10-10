@@ -7,21 +7,21 @@ import {
 } from "@/compendium";
 import type { EntityCategory } from "@/compendium";
 import { APP_NAME, ROUTES } from "@/config/constants";
+import type { Translate, TranslationKey } from "@/i18n";
 
 export interface TopBarState {
   readonly title: string;
   readonly backTo?: string;
 }
 
-const FIXED_TITLES: Record<string, string> = {
-  [ROUTES.HOME]: APP_NAME,
-  [ROUTES.ARCHIVE]: "Archive",
-  [ROUTES.COMBAT]: "Combat",
-  [ROUTES.CHARACTER]: "Character",
-  [ROUTES.DICE]: "Dice",
-  [ROUTES.HELP]: "Help",
-  "/session": "Session",
-  "/backup": "Backup",
+const FIXED_TITLES: Record<string, TranslationKey> = {
+  [ROUTES.ARCHIVE]: "page.archive",
+  [ROUTES.COMBAT]: "page.combat",
+  [ROUTES.CHARACTER]: "page.character",
+  [ROUTES.DICE]: "page.dice",
+  [ROUTES.HELP]: "page.help",
+  "/session": "page.session",
+  "/backup": "page.backup",
 };
 
 const FIXED_BACK: Record<string, string> = {
@@ -30,7 +30,11 @@ const FIXED_BACK: Record<string, string> = {
   [ROUTES.HELP]: ROUTES.HOME,
 };
 
-export function getTopBarState(pathname: string): TopBarState {
+/**
+ * `t` is injected rather than read from the store so this stays a pure function
+ * and both languages stay assertable from tests.
+ */
+export function getTopBarState(pathname: string, t: Translate): TopBarState {
   const segments = pathname.split("/").filter(Boolean);
 
   if (segments.length === 1 && CATEGORY_REGISTRY[segments[0] as EntityCategory]) {
@@ -48,11 +52,12 @@ export function getTopBarState(pathname: string): TopBarState {
   }
 
   if (pathname.startsWith("/debug/")) {
-    return { title: "Debug", backTo: ROUTES.HOME };
+    return { title: t("page.debug"), backTo: ROUTES.HOME };
   }
 
+  const fixed = FIXED_TITLES[pathname];
   return {
-    title: FIXED_TITLES[pathname] ?? APP_NAME,
+    title: fixed ? t(fixed) : APP_NAME,
     backTo: FIXED_BACK[pathname],
   };
 }

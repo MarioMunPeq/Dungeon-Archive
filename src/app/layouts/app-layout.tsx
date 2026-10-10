@@ -4,6 +4,7 @@ import { BottomNav } from "@/components/layout/bottom-nav";
 import { RouteTransition } from "@/components/layout/route-transition";
 import { ScrollElementProvider } from "@/components/virtual";
 import { Onboarding } from "@/features/onboarding/onboarding";
+import { useApplyLanguage } from "@/features/language/use-apply-language";
 import { useApplyTheme } from "@/features/theme/use-apply-theme";
 import { useScrollRestoration } from "./use-scroll-restoration";
 
@@ -14,6 +15,7 @@ interface AppLayoutProps {
 export function AppLayout({ children }: AppLayoutProps) {
   const mainRef = useScrollRestoration();
   useApplyTheme();
+  useApplyLanguage();
   return (
     <div className="mx-auto flex h-dvh w-full max-w-screen-xl flex-col overflow-hidden">
       <TopBar />

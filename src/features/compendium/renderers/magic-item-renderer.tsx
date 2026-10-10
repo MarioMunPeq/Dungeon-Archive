@@ -1,9 +1,11 @@
+import { formatRarity } from "@/compendium";
 import type { MagicItem } from "@/compendium";
 import { Section } from "@/components/ui/Section";
 import { Stack } from "@/components/ui/Stack";
 import { EntityMetadataGrid, EntityProperty } from "@/components/ui/entity-property";
 import { HelpTip } from "@/components/ui/HelpTip";
 import { ContentRenderer } from "@/components/content";
+import { t } from "@/i18n";
 
 interface MagicItemRendererProps {
   readonly entity: MagicItem;
@@ -19,15 +21,15 @@ export function MagicItemRenderer({ entity }: MagicItemRendererProps) {
   return (
     <Stack gap="md">
       <EntityMetadataGrid>
-        <EntityProperty label="Rarity" value={entity.rarity} stat />
-        <EntityProperty label="Type" value={entity.itemType} />
+        <EntityProperty label={t("filter.rarity")} value={formatRarity(entity.rarity)} stat />
+        <EntityProperty label={t("filter.type")} value={entity.itemType} />
         {entity.requiresAttunement && (
           <EntityProperty
-            label="Attunement"
+            label={t("filter.attunement")}
             value={
               <span className="inline-flex items-center gap-1">
                 {attunementLabel(entity.requiresAttunement)}
-                <HelpTip label="What is attunement?">
+                <HelpTip label={t("help.attunement.title")}>
                   Powerful items bond to one character during a short rest. Most characters can
                   attune to three items at once.
                 </HelpTip>
@@ -35,11 +37,11 @@ export function MagicItemRenderer({ entity }: MagicItemRendererProps) {
             }
           />
         )}
-        {entity.value && <EntityProperty label="Value" value={entity.value} />}
-        {entity.weight && <EntityProperty label="Weight" value={entity.weight} />}
+        {entity.value && <EntityProperty label={t("equipment.value")} value={entity.value} />}
+        {entity.weight && <EntityProperty label={t("equipment.weight")} value={entity.weight} />}
       </EntityMetadataGrid>
 
-      <Section title="Description">
+      <Section title={t("common.description")}>
         <ContentRenderer blocks={entity.description} />
       </Section>
     </Stack>

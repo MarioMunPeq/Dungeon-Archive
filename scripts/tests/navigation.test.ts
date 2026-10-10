@@ -1,6 +1,9 @@
 import { strictEqual } from "node:assert";
 import { getTopBarState } from "../../src/components/layout/top-bar-route";
 import { loadCompendium } from "../../src/compendium/loader";
+import { t, translateFor } from "../../src/i18n";
+import type { Language } from "../../src/i18n";
+import { userStore } from "../../src/user-state";
 
 function test(description: string, fn: () => void): void {
   try {
@@ -13,91 +16,76 @@ function test(description: string, fn: () => void): void {
   }
 }
 
+/**
+ * getTopBarState takes its translator explicitly, while the category labels it
+ * composes resolve through the store. Pointing both at the same language lets
+ * every title be asserted in either locale from one table.
+ */
+function topBar(pathname: string, language: Language) {
+  userStore.setState({ language });
+  return getTopBarState(pathname, translateFor(language));
+}
+
+const TITLES: readonly { path: string; en: string; es: string; backTo?: string }[] = [
+  { path: "/", en: "Dungeon Archive", es: "Dungeon Archive" },
+  { path: "/archive", en: "Archive", es: "Archivo" },
+  { path: "/combat", en: "Combat", es: "Combate" },
+  { path: "/character", en: "Character", es: "Personaje" },
+  { path: "/dice", en: "Dice", es: "Dados" },
+  { path: "/help", en: "Help", es: "Ayuda", backTo: "/" },
+  { path: "/session", en: "Session", es: "Sesión", backTo: "/" },
+  { path: "/backup", en: "Backup", es: "Copia de seguridad", backTo: "/" },
+  { path: "/debug/content", en: "Debug", es: "Depuración", backTo: "/" },
+  { path: "/not-a-route", en: "Dungeon Archive", es: "Dungeon Archive" },
+  { path: "/spell", en: "Spells", es: "Hechizos", backTo: "/archive" },
+  { path: "/monster", en: "Monsters", es: "Monstruos", backTo: "/archive" },
+  // Entity names come from the SRD and stay in English in both languages.
+  { path: "/spell/fireball", en: "Fireball", es: "Fireball", backTo: "/spell" },
+  { path: "/spell/not-a-real-spell", en: "Spell", es: "Hechizo", backTo: "/spell" },
+];
+
 async function main() {
   console.log("navigation\n");
 
   await loadCompendium();
 
+  const translators: readonly Language[] = ["en", "es"];
+
+  for (const { path, en, es, backTo } of TITLES) {
+    for (const language of translators) {
+      const expected = language === "en" ? en : es;
+      test(`${path} resolves to "${expected}" in ${language}`, () => {
+        const state = topBar(path, language);
+        strictEqual(state.title, expected);
+        strictEqual(state.backTo, backTo);
+      });
+    }
+  }
+
   test("home shows app name with no back button", () => {
-    const state = getTopBarState("/");
+    const state = topBar("/", "en");
     strictEqual(state.title, "Dungeon Archive");
     strictEqual(state.backTo, undefined);
   });
 
-  test("archive shows fixed title without back", () => {
-    const state = getTopBarState("/archive");
-    strictEqual(state.title, "Archive");
-    strictEqual(state.backTo, undefined);
-  });
-
-  test("combat shows fixed title without back", () => {
-    const state = getTopBarState("/combat");
+  test("an explicit translator is used for fixed titles", () => {
+    userStore.setState({ language: "es" });
+    // The store says Spanish, but the injected translator is English.
+    const state = getTopBarState("/combat", translateFor("en"));
     strictEqual(state.title, "Combat");
-    strictEqual(state.backTo, undefined);
   });
 
-  test("character shows fixed title without back", () => {
-    const state = getTopBarState("/character");
-    strictEqual(state.title, "Character");
-    strictEqual(state.backTo, undefined);
-  });
-
-  test("dice shows fixed title without back", () => {
-    const state = getTopBarState("/dice");
-    strictEqual(state.title, "Dice");
-    strictEqual(state.backTo, undefined);
-  });
-
-  test("category root shows plural title and back to archive", () => {
-    const state = getTopBarState("/spell");
-    strictEqual(state.title, "Spells");
-    strictEqual(state.backTo, "/archive");
-  });
-
-  test("monster category root shows plural title and back to archive", () => {
-    const state = getTopBarState("/monster");
-    strictEqual(state.title, "Monsters");
-    strictEqual(state.backTo, "/archive");
-  });
-
-  test("category detail shows entity name and back to category", () => {
-    const state = getTopBarState("/spell/fireball");
-    strictEqual(state.title, "Fireball");
-    strictEqual(state.backTo, "/spell");
-  });
-
-  test("category detail falls back to singular label when entity is missing", () => {
-    const state = getTopBarState("/spell/not-a-real-spell");
-    strictEqual(state.title, "Spell");
-    strictEqual(state.backTo, "/spell");
-  });
-
-  test("session shows back to home", () => {
-    const state = getTopBarState("/session");
-    strictEqual(state.title, "Session");
-    strictEqual(state.backTo, "/");
-  });
-
-  test("backup shows back to home", () => {
-    const state = getTopBarState("/backup");
-    strictEqual(state.title, "Backup");
-    strictEqual(state.backTo, "/");
-  });
-
-  test("debug routes show title and back to home", () => {
-    const state = getTopBarState("/debug/content");
-    strictEqual(state.title, "Debug");
-    strictEqual(state.backTo, "/");
-  });
-
-  test("unknown route falls back to app name without back", () => {
-    const state = getTopBarState("/not-a-route");
-    strictEqual(state.title, "Dungeon Archive");
-    strictEqual(state.backTo, undefined);
+  test("the default translator follows the store", () => {
+    userStore.setState({ language: "es" });
+    strictEqual(t("page.combat"), "Combate");
+    strictEqual(t("page.archive"), "Archivo");
+    userStore.setState({ language: "en" });
+    strictEqual(t("page.combat"), "Combat");
+    strictEqual(t("page.archive"), "Archive");
   });
 
   console.log(
-    "\n\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\n",
+    "\n\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\n",
   );
 }
 

@@ -4,10 +4,11 @@ import type {
   CharacterReference,
   CombatValues,
   HitPoints,
+  Language,
   Theme,
   UserState,
 } from "./types";
-import { CURRENT_VERSION, DEFAULT_THEME, isTheme } from "./types";
+import { CURRENT_VERSION, DEFAULT_LANGUAGE, DEFAULT_THEME, isLanguage, isTheme } from "./types";
 import { isRegistered } from "../compendium/registry/entity-registry";
 
 function uniqueStrings(arr: unknown, trim = false): string[] {
@@ -240,6 +241,7 @@ export function normalize(
     | "beginnerMode"
     | "onboardingComplete"
     | "theme"
+    | "language"
   > & {
     adventures?: Adventure[];
     activeAdventureId?: string | null;
@@ -248,6 +250,7 @@ export function normalize(
     beginnerMode?: boolean;
     onboardingComplete?: boolean;
     theme?: Theme;
+    language?: Language;
   },
 ): UserState {
   const adventures = normalizeAdventures(state.adventures ?? []);
@@ -274,5 +277,6 @@ export function normalize(
     beginnerMode: state.beginnerMode === true,
     onboardingComplete: state.onboardingComplete === true,
     theme: isTheme(state.theme) ? state.theme : DEFAULT_THEME,
+    language: isLanguage(state.language) ? state.language : DEFAULT_LANGUAGE,
   };
 }

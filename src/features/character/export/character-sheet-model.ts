@@ -1,8 +1,14 @@
-import { SCHOOL_NAMES, formatEquipmentType } from "@/compendium/category-registry";
+import {
+  formatEquipmentType,
+  formatRarity,
+  formatSchool,
+  spellLevelLabel,
+} from "@/compendium/category-registry";
 import { formatDamage } from "@/compendium/damage";
 import type { Equipment, MagicItem, Spell } from "@/types/compendium";
 import { abilityModifier } from "@/user-state/types";
 import type { CharacterReference } from "@/user-state/types";
+import { t } from "@/i18n";
 
 const SEPARATOR = "·";
 
@@ -43,12 +49,13 @@ export function exportClassLine(
   character: Pick<CharacterReference, "class" | "subclass" | "level">,
 ): string {
   const cls = character.subclass ? `${character.class} (${character.subclass})` : character.class;
-  return cls ? `${cls} ${SEPARATOR} Lv ${character.level}` : `Lv ${character.level}`;
+  const level = t("term.levelShort", { level: character.level });
+  return cls ? `${cls} ${SEPARATOR} ${level}` : level;
 }
 
 export function spellRow(spell: Pick<Spell, "name" | "level" | "school">): ExportReferenceRow {
-  const levelText = spell.level === 0 ? "Cantrip" : `Level ${spell.level}`;
-  const school = SCHOOL_NAMES[spell.school] ?? spell.school;
+  const levelText = spellLevelLabel(spell.level);
+  const school = formatSchool(spell.school);
   return { name: spell.name, meta: `${levelText} ${SEPARATOR} ${school}` };
 }
 
@@ -60,7 +67,7 @@ export function weaponRow(
 }
 
 export function magicItemRow(item: Pick<MagicItem, "name" | "rarity">): ExportReferenceRow {
-  return { name: item.name, meta: item.rarity };
+  return { name: item.name, meta: formatRarity(item.rarity) };
 }
 
 export function exportFileName(name: string): string {

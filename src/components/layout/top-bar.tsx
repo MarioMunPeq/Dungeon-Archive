@@ -1,15 +1,17 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import { Button, ChevronLeftIcon, Display } from "@/components/ui";
 import { ThemePicker } from "@/features/theme/theme-picker";
+import { t } from "@/i18n";
 import { useCloudStatus } from "@/sync";
 import { getTopBarState } from "./top-bar-route";
 import type { TopBarState } from "./top-bar-route";
 import { CloudStatusIcon } from "./cloud-status-icon";
 import { HelpButton } from "./help-button";
+import { LanguageToggle } from "./language-toggle";
 
 export function TopBar() {
   const { pathname } = useLocation();
-  const state = getTopBarState(pathname);
+  const state = getTopBarState(pathname, t);
 
   return <TopBarContent state={state} />;
 }
@@ -33,7 +35,13 @@ function TopBarContent({ state }: { state: TopBarState }) {
     <header className="sticky top-0 z-40 flex h-14 items-center justify-between border-b border-border bg-background/95 px-4 backdrop-blur-sm">
       <div className="flex min-w-0 items-center gap-1">
         {backTo && (
-          <Button variant="ghost" size="md" className="px-2" aria-label="Back" onClick={handleBack}>
+          <Button
+            variant="ghost"
+            size="md"
+            className="px-2"
+            aria-label={t("a11y.back")}
+            onClick={handleBack}
+          >
             <ChevronLeftIcon />
           </Button>
         )}
@@ -42,12 +50,13 @@ function TopBarContent({ state }: { state: TopBarState }) {
       <div className="flex shrink-0 items-center gap-1">
         <HelpButton />
         <ThemePicker />
+        <LanguageToggle />
         {!status.disabled && (
           <Button
             variant="ghost"
             size="md"
             className="px-2"
-            aria-label="Cloud Backup"
+            aria-label={t("a11y.cloudBackup")}
             onClick={() => navigate("/backup")}
           >
             <CloudStatusIcon

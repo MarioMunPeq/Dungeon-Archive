@@ -1,6 +1,7 @@
 import { useMemo, useRef, useEffect, useState } from "react";
 import { useDialog } from "./use-dialog";
 import { SearchField } from "./SearchField";
+import { t } from "@/i18n";
 
 export interface PickerCandidate {
   readonly canonicalId: string;
@@ -61,7 +62,7 @@ export function ReferencePicker({ title, candidates, onSelect, onClose }: Refere
         <button
           type="button"
           onClick={onClose}
-          aria-label="Close picker"
+          aria-label={t("picker.close")}
           className="hitbox-expand relative inline-flex h-8 w-8 items-center justify-center rounded-control text-muted-foreground transition-all duration-150 hover:bg-accent hover:text-foreground active:scale-90 active:bg-accent/80"
         >
           <svg

@@ -15,6 +15,8 @@ import {
 import type { CategorySort } from "@/compendium";
 import { useDebouncedValue } from "@/hooks/use-debounced-value";
 import { useCompendiumLoaded } from "@/hooks/use-compendium-loaded";
+import { t } from "@/i18n";
+import { useLanguage } from "@/user-state";
 import { FilterBar } from "../components/filter-bar";
 import { EntityList } from "../components/entity-list";
 import { CategorySkeleton } from "../components/category-skeleton";
@@ -30,10 +32,19 @@ export function CategoryPage({ category }: CategoryPageProps) {
   const [searchParams, setSearchParams] = useSearchParams();
   const detailMatch = useMatch(`/${category}/:canonicalId`);
   const isLoaded = useCompendiumLoaded();
+  const language = useLanguage();
 
   const allEntities = useMemo(() => getEntitiesForCategory(category), [category]);
-  const filterDefs = useMemo(() => buildFilterDefs(category, allEntities), [category, allEntities]);
-  const sortOptions = useMemo(() => getSortOptions(category), [category]);
+  // Filter and sort labels are localized inside the compendium helpers via the
+  // store-aware t(), so the lint rule cannot see them as a dependency. Without
+  // `language` these memos would survive a language switch with stale labels.
+  /* eslint-disable react-hooks/exhaustive-deps -- `language` drives localized labels built via the store-aware t() */
+  const filterDefs = useMemo(
+    () => buildFilterDefs(category, allEntities),
+    [category, allEntities, language],
+  );
+  const sortOptions = useMemo(() => getSortOptions(category), [category, language]);
+  /* eslint-enable react-hooks/exhaustive-deps */
 
   const currentFilters = useMemo(() => {
     const filters: Record<string, string> = {};
@@ -109,10 +120,10 @@ export function CategoryPage({ category }: CategoryPageProps) {
   const labelLower = categoryLabelSingular(category).toLowerCase();
   const emptyMessage =
     hasActiveQuery && hasActiveFilters
-      ? `No ${labelLower} match your search and filters`
+      ? t("category.emptyQueryAndFilters", { label: labelLower })
       : hasActiveFilters
-        ? `No ${labelLower} match these filters`
-        : `No ${labelLower} match your search`;
+        ? t("category.emptyFilters", { label: labelLower })
+        : t("category.emptyQuery", { label: labelLower });
 
   if (!isLoaded) {
     return <CategorySkeleton />;
@@ -125,8 +136,8 @@ export function CategoryPage({ category }: CategoryPageProps) {
           <SearchInput
             value={query}
             onChange={(value) => updateParam("q", value)}
-            ariaLabel={`Search ${label}`}
-            placeholder={`Search ${labelLower}\u2026`}
+            ariaLabel={t("category.searchLabel", { subject: label })}
+            placeholder={t("category.searchPlaceholder", { label: labelLower })}
           />
           <FilterBar
             filters={filterDefs}
@@ -139,14 +150,16 @@ export function CategoryPage({ category }: CategoryPageProps) {
         <div className="flex items-center justify-between gap-3 px-4 py-4">
           <p className="text-sm text-muted-foreground">
             <span className="font-medium text-foreground">{cards.length}</span>
-            {isFiltered ? ` of ${allEntities.length} ${labelLower}` : ` ${labelLower}`}
+            {isFiltered
+              ? t("category.countOf", { count: allEntities.length, label: labelLower })
+              : ` ${labelLower}`}
           </p>
           <SelectField
             value={sort}
             options={sortOptions}
             onChange={(value) => updateParam("sort", value)}
-            ariaLabel="Sort"
-            placeholder="Sort"
+            ariaLabel={t("sort.label")}
+            placeholder={t("sort.label")}
           />
         </div>
 
@@ -157,7 +170,7 @@ export function CategoryPage({ category }: CategoryPageProps) {
             emptyAction={
               isFiltered ? (
                 <Button variant="outline" size="sm" onClick={handleClearFilters}>
-                  Clear filters
+                  {t("filter.clear")}
                 </Button>
               ) : undefined
             }

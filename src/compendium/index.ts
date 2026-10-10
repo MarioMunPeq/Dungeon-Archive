@@ -43,10 +43,13 @@ export { categoryLabel, categoryLabelSingular } from "./category-registry";
 
 export {
   CATEGORY_REGISTRY,
-  SCHOOL_NAMES,
   SOURCE_ORDER,
   formatMonsterType,
   formatEquipmentType,
+  formatSchool,
+  formatRarity,
+  formatCondition,
+  spellLevelLabel,
   entityCardStat,
 } from "./category-registry";
 export type { AnyEntity, CategoryRegistration } from "./category-registry";

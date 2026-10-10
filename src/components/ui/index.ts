@@ -14,6 +14,7 @@ export {
   SyncIcon,
   PaletteIcon,
   HelpIcon,
+  LanguagesIcon,
 } from "./icons";
 export { Button } from "./Button";
 export { ConfirmDialog } from "./ConfirmDialog";

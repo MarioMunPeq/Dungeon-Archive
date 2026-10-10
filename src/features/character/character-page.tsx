@@ -6,9 +6,11 @@ import type { CharacterReference, CharacterReferenceUpdate } from "@/user-state"
 import {
   extractSpellRoll,
   formatDamage,
+  formatRarity,
+  formatSchool,
   getEntitiesForCategory,
-  SCHOOL_NAMES,
   resolveEntity,
+  spellLevelLabel,
   METADATA_SEPARATOR,
 } from "@/compendium";
 import type { ContentBlock, Equipment, MagicItem, Spell } from "@/compendium";
@@ -32,15 +34,18 @@ import {
 import { AbilityScores } from "@/components/ui/ability-scores";
 import { RollableDice } from "@/features/dice/rollable-dice";
 import { ExportSheetButton } from "@/features/character/export/export-sheet-button";
+import { classLabel, classLine, subclassLabel } from "@/features/character/class-labels";
+import { t } from "@/i18n";
+import type { TranslationKey } from "@/i18n";
 import { splitSpellRoll } from "@/lib/dice";
 import { cn } from "@/lib/utils";
 
 type PickerKind = "spell" | "weapon" | "magicitem";
 type ReferencePickerKind = Exclude<PickerKind, "spell">;
 
-const PICKER_TITLES: Record<ReferencePickerKind, string> = {
-  weapon: "Weapons",
-  magicitem: "Magic Items",
+const PICKER_TITLES: Record<ReferencePickerKind, TranslationKey> = {
+  weapon: "character.picker.weapons",
+  magicitem: "character.picker.magicItems",
 };
 
 const WEAPON_TYPES = new Set(["Melee Weapon", "Ranged Weapon"]);
@@ -185,16 +190,10 @@ function buildCandidates(kind: ReferencePickerKind): PickerCandidate[] {
     }
   } else {
     for (const m of getEntitiesForCategory("magicitem") as readonly MagicItem[]) {
-      push({ canonicalId: m.canonicalId, name: m.name, subtitle: m.rarity });
+      push({ canonicalId: m.canonicalId, name: m.name, subtitle: formatRarity(m.rarity) });
     }
   }
   return out.sort((a, b) => a.name.localeCompare(b.name));
-}
-
-function classLine(reference: CharacterReference): string {
-  if (!reference.class) return "Add class, subclass, and level";
-  const cls = reference.subclass ? `${reference.class} (${reference.subclass})` : reference.class;
-  return `${cls} · Lv ${reference.level}`;
 }
 
 function weaponStats(canonicalId: string): ReactNode {
@@ -212,8 +211,8 @@ function weaponStats(canonicalId: string): ReactNode {
 
 function spellSubtitle(entity: Spell | undefined): string | undefined {
   if (!entity) return undefined;
-  const levelText = entity.level === 0 ? "Cantrip" : `Level ${entity.level}`;
-  return `${levelText} ${METADATA_SEPARATOR} ${SCHOOL_NAMES[entity.school] ?? entity.school}`;
+  const levelText = spellLevelLabel(entity.level);
+  return `${levelText} ${METADATA_SEPARATOR} ${formatSchool(entity.school)}`;
 }
 
 function weaponSubtitle(entity: Equipment | undefined): string | undefined {
@@ -266,14 +265,15 @@ function WeaponPreview({ item, href }: { item: Equipment; href: string }) {
 }
 
 function SpellPreview({ spell, href }: { spell: Spell; href: string }) {
-  const levelText = spell.level === 0 ? "Cantrip" : `Level ${spell.level}`;
-  const school = SCHOOL_NAMES[spell.school] ?? spell.school;
+  const levelText = spellLevelLabel(spell.level);
+  const school = formatSchool(spell.school);
   const roll = extractSpellRoll(spell.description);
   const spellRoll = roll ? splitSpellRoll(roll) : null;
   const summary = firstParagraphText(spell.description);
-  const flags = [spell.concentration && "Concentration", spell.ritual && "Ritual"].filter(
-    Boolean,
-  ) as string[];
+  const flags = [
+    spell.concentration && t("filter.concentration"),
+    spell.ritual && t("filter.ritual"),
+  ].filter(Boolean) as string[];
   const details = [spell.castingTime, spell.range, spell.duration].filter(Boolean);
   return (
     <div className="flex flex-col gap-2 rounded-card bg-card px-3 py-2 animate-slide-up">
@@ -307,7 +307,7 @@ function SpellPreview({ spell, href }: { spell: Spell; href: string }) {
         to={href}
         className="self-start text-xs font-medium text-primary transition-colors duration-150 hover:underline"
       >
-        Open in Compendium
+        {t("character.openInCompendium")}
       </Link>
     </div>
   );
@@ -315,7 +315,7 @@ function SpellPreview({ spell, href }: { spell: Spell; href: string }) {
 
 function createEmptyCharacter(): Omit<CharacterReference, "id"> {
   return {
-    name: "New Character",
+    name: t("character.newCharacter"),
     class: "",
     level: 1,
     subclass: undefined,
@@ -376,7 +376,7 @@ function StatCard({
           <button
             type="button"
             onClick={onClear}
-            aria-label={`Clear ${label}`}
+            aria-label={t("common.clearValue", { subject: label })}
             className="inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-control text-muted-foreground transition-colors duration-150 hover:bg-accent hover:text-foreground active:scale-90"
           >
             <svg
@@ -457,7 +457,7 @@ function ReferenceCell({
       : kind === "weapon" && selected?.category === "equipment"
         ? weaponSubtitle(selected)
         : kind === "magicitem" && selected?.category === "magicitem"
-          ? selected.rarity
+          ? formatRarity(selected.rarity)
           : undefined;
 
   const remove = (
@@ -468,7 +468,7 @@ function ReferenceCell({
         e.stopPropagation();
         onRemove(canonicalId);
       }}
-      aria-label={`Remove ${ref.name}`}
+      aria-label={t("common.removeItem", { subject: ref.name })}
       className="hitbox-expand absolute right-1 top-1 inline-flex h-6 w-6 items-center justify-center rounded-control text-muted-foreground transition-all duration-150 hover:bg-accent hover:text-foreground active:scale-90 active:bg-accent/80"
     >
       <CloseIcon />
@@ -552,12 +552,12 @@ function ReferenceGroup({
       <div className="flex items-center justify-between gap-2">
         <span className="flex items-center gap-1 border-l-2 border-primary pl-2 text-xs font-bold uppercase tracking-wide text-muted-foreground">
           {title}
-          <HelpTip label={`More about ${title}`}>{help}</HelpTip>
+          <HelpTip label={t("common.about", { subject: title })}>{help}</HelpTip>
         </span>
-        <AddButton label="Add" onClick={onAdd} />
+        <AddButton label={t("character.add")} onClick={onAdd} />
       </div>
       {ids.length === 0 ? (
-        <p className="px-1 text-xs text-foreground-subtle">None</p>
+        <p className="px-1 text-xs text-foreground-subtle">{t("character.empty")}</p>
       ) : (
         <div className="grid grid-cols-2 gap-2">
           {ids.map((canonicalId) => (
@@ -675,6 +675,14 @@ function CharacterSheet({
 
   const subclassOptions = reference.class ? (SUBCLASSES[reference.class] ?? []) : [];
 
+  // The stored value stays English so it keeps matching the SRD `classes`
+  // field; only the visible option text is localized.
+  const classOptions = CLASSES.map((name) => ({ value: name, label: classLabel(name) }));
+  const subclassPickerOptions = subclassOptions.map((name) => ({
+    value: name,
+    label: subclassLabel(name),
+  }));
+
   return (
     <div className="flex flex-col gap-4 rounded-card border border-border bg-surface p-3 animate-slide-up">
       <div className="flex items-start justify-between gap-2">
@@ -685,7 +693,7 @@ function CharacterSheet({
               onChange={setDraft}
               onSave={(value) => commitText("name", value)}
               onCancel={() => setEditing(null)}
-              ariaLabel="Name"
+              ariaLabel={t("character.name")}
               className="text-base font-bold"
             />
           ) : (
@@ -702,22 +710,22 @@ function CharacterSheet({
               <div className="flex flex-wrap gap-2">
                 <SelectField
                   value={reference.class}
-                  options={CLASSES}
+                  options={classOptions}
                   onChange={(value) => update({ class: value })}
-                  ariaLabel="Class"
-                  placeholder="Class"
+                  ariaLabel={t("filter.class")}
+                  placeholder={t("filter.class")}
                 />
                 <SelectField
                   value={reference.subclass ?? ""}
-                  options={subclassOptions}
+                  options={subclassPickerOptions}
                   onChange={(value) => update({ subclass: value || undefined })}
-                  ariaLabel="Subclass"
-                  placeholder="Subclass"
+                  ariaLabel={t("character.subclass")}
+                  placeholder={t("character.subclass")}
                 />
               </div>
               <div className="flex items-center justify-between gap-2">
                 <span className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
-                  Level
+                  {t("filter.level")}
                 </span>
                 <div className="flex items-center gap-2">
                   <Stepper
@@ -725,10 +733,10 @@ function CharacterSheet({
                     min={1}
                     max={20}
                     onChange={(value) => update({ level: value })}
-                    label="Level"
+                    label={t("filter.level")}
                   />
                   <Button variant="ghost" size="sm" onClick={() => setSubtitleEditing(false)}>
-                    Done
+                    {t("common.done")}
                   </Button>
                 </div>
               </div>
@@ -737,10 +745,10 @@ function CharacterSheet({
             <button
               type="button"
               onClick={() => setSubtitleEditing(true)}
-              aria-label="Edit class, subclass, and level"
+              aria-label={t("character.editClassLine")}
               className="block w-fit -mx-1 mt-1 rounded-control px-1 text-xs font-medium text-foreground-subtle transition-colors duration-150 hover:bg-accent/50 hover:text-foreground"
             >
-              {classLine(reference)}
+              {classLine(reference.class, reference.subclass, reference.level)}
             </button>
           )}
         </div>
@@ -749,8 +757,8 @@ function CharacterSheet({
           <button
             type="button"
             onClick={() => setConfirmRemove(true)}
-            title={`Remove ${reference.name}`}
-            aria-label={`Remove ${reference.name}`}
+            title={t("character.removeTitle", { name: reference.name })}
+            aria-label={t("character.removeTitle", { name: reference.name })}
             className="hitbox-expand relative inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-control text-muted-foreground transition-all duration-150 hover:bg-accent hover:text-foreground active:scale-90 active:bg-accent/80"
           >
             <svg
@@ -773,47 +781,41 @@ function CharacterSheet({
 
       <div className="flex flex-col gap-2">
         <span className="flex items-center gap-1 border-l-2 border-primary pl-2 text-xs font-bold uppercase tracking-wide text-muted-foreground">
-          Combat
-          <HelpTip label="What are combat stats?">
-            The numbers you check every fight. Armor Class is what enemies must beat to hit you.
-            Passive Perception notices hidden things.
-          </HelpTip>
+          {t("character.combat")}
+          <HelpTip label={t("help.combatStats.title")}>{t("help.combatStats.body")}</HelpTip>
         </span>
         <div className="grid grid-cols-3 gap-2">
           <StatCard
-            label="AC"
+            label={t("character.armorClass")}
             value={reference.combatValues.armorClass}
             min={0}
             max={40}
             onChange={(value) => update({ combatValues: { armorClass: value } })}
-            help="Armor Class is what enemies must beat to hit you."
+            help={t("help.armorClass.body")}
           />
           <StatCard
-            label="Perception"
+            label={t("character.perception")}
             value={reference.combatValues.passivePerception}
             min={0}
             max={40}
             onChange={(value) => update({ combatValues: { passivePerception: value } })}
-            help="Passive Perception is how well you notice hidden things without trying."
+            help={t("help.passivePerception.body")}
           />
           <StatCard
-            label="DC"
+            label={t("character.spellDc")}
             value={reference.combatValues.spellSaveDc ?? 10}
             min={0}
             max={40}
             onChange={(value) => update({ combatValues: { spellSaveDc: value } })}
-            help="Spell save DC is the number enemies must beat to resist your spells."
+            help={t("help.spellSaveDc.body")}
           />
         </div>
       </div>
 
       <div className="flex flex-col gap-2">
         <span className="flex items-center gap-1 border-l-2 border-primary pl-2 text-xs font-bold uppercase tracking-wide text-muted-foreground">
-          Abilities
-          <HelpTip label="What are ability scores?">
-            Six scores describe your character's strengths. The modifier underneath is the bonus you
-            add to rolls — higher scores mean bigger bonuses.
-          </HelpTip>
+          {t("character.abilities")}
+          <HelpTip label={t("help.abilityScores.title")}>{t("help.abilityScores.body")}</HelpTip>
         </span>
         <AbilityScores
           scores={reference.abilityScores}
@@ -824,16 +826,16 @@ function CharacterSheet({
 
       <div className="flex flex-col gap-4">
         <ReferenceGroup
-          title="Spells"
-          help="Spells your character can cast. Add the ones you use most for quick access."
+          title={t("category.spell.many")}
+          help={t("help.characterSpells.body")}
           kind="spell"
           ids={reference.knownSpellCanonicalIds}
           onAdd={() => setPicker("spell")}
           onRemove={(canonicalId) => removeReference("spell", canonicalId)}
         />
         <ReferenceGroup
-          title="Weapons"
-          help="The weapons your character carries, with their damage at a glance."
+          title={t("character.weapons")}
+          help={t("help.characterWeapons.body")}
           kind="weapon"
           ids={reference.weaponCanonicalIds}
           onAdd={() => setPicker("weapon")}
@@ -841,8 +843,8 @@ function CharacterSheet({
           getQuickStats={weaponStats}
         />
         <ReferenceGroup
-          title="Magic Items"
-          help="Magic items your character owns. Add the ones you consult during play."
+          title={t("category.magicitem.many")}
+          help={t("help.characterMagicItems.body")}
           kind="magicitem"
           ids={reference.magicItemCanonicalIds}
           onAdd={() => setPicker("magicitem")}
@@ -851,7 +853,7 @@ function CharacterSheet({
       </div>
 
       <div className="flex flex-col gap-2">
-        <SectionLabel>Notes</SectionLabel>
+        <SectionLabel>{t("character.notes")}</SectionLabel>
         {editing === "note" ? (
           <InlineTextareaEditor
             value={draft}
@@ -859,8 +861,8 @@ function CharacterSheet({
             onSave={(value) => commitText("note", value)}
             onCancel={() => setEditing(null)}
             rows={2}
-            placeholder="One quick reminder…"
-            ariaLabel="Quick note"
+            placeholder={t("character.notePlaceholder")}
+            ariaLabel={t("character.notes")}
           />
         ) : reference.note ? (
           <button
@@ -876,7 +878,7 @@ function CharacterSheet({
             onClick={() => startEdit("note")}
             className="rounded-control text-left text-xs text-muted-foreground transition-colors duration-150 hover:bg-accent/50"
           >
-            Add a quick note…
+            {t("character.addNote")}
           </button>
         )}
       </div>
@@ -892,7 +894,7 @@ function CharacterSheet({
 
       {picker && picker !== "spell" && (
         <ReferencePicker
-          title={PICKER_TITLES[picker]}
+          title={t(PICKER_TITLES[picker])}
           candidates={candidates}
           onSelect={(canonicalId) => addReference(picker, canonicalId)}
           onClose={() => setPicker(null)}
@@ -902,8 +904,8 @@ function CharacterSheet({
       {confirmRemove && (
         <ConfirmDialog
           title={`Remove ${reference.name}?`}
-          message="This removes their combat numbers, ability scores, and references. This can't be undone."
-          confirmLabel="Remove"
+          message={t("character.removeBody")}
+          confirmLabel={t("character.remove")}
           destructive
           onCancel={() => setConfirmRemove(false)}
           onConfirm={() => {
@@ -935,8 +937,8 @@ export function CharacterPage() {
     <div className="flex flex-col gap-3 px-4 py-4">
       {characters.length === 0 ? (
         <EmptyState
-          title="No character yet"
-          description="Add your character to start tracking ability scores, combat stats, and the spells and items you use most."
+          title={t("character.emptyTitle")}
+          description={t("character.emptyBody")}
           icon={
             <svg
               aria-hidden="true"
@@ -952,7 +954,7 @@ export function CharacterPage() {
               <path d="M16 3.13a4 4 0 0 1 0 7.75" />
             </svg>
           }
-          action={<Button onClick={handleAdd}>Create your first character</Button>}
+          action={<Button onClick={handleAdd}>{t("character.createFirst")}</Button>}
         />
       ) : (
         <>
@@ -975,7 +977,7 @@ export function CharacterPage() {
                 </button>
               ))}
               <Button variant="ghost" size="sm" onClick={handleAdd}>
-                + Add
+                {t("character.addMore")}
               </Button>
             </div>
           )}

@@ -22,28 +22,84 @@ import { formatSource } from "./source";
 import { METADATA_SEPARATOR } from "./separator";
 import { referenceToUrl } from "./reference";
 import { formatDamageType } from "./damage";
+import type { TranslationKey } from "@/i18n";
+import { t } from "@/i18n";
 
 export type AnyEntity = Spell | Condition | Equipment | Action | Monster | MagicItem | Feat;
 
 export interface CategoryRegistration {
-  readonly singular: string;
-  readonly plural: string;
+  /** Translation keys, resolved with `t()` at the point of display. */
+  readonly singular: TranslationKey;
+  readonly plural: TranslationKey;
   readonly getList: () => readonly AnyEntity[];
   readonly buildFilterDefs: (entities: readonly AnyEntity[]) => readonly FilterDefinition[];
   readonly toCardData: (entity: AnyEntity) => EntityCardData;
   readonly getSubtitle: (entity: AnyEntity) => string;
 }
 
-export const SCHOOL_NAMES: Record<string, string> = {
-  A: "Abjuration",
-  C: "Conjuration",
-  D: "Divination",
-  E: "Enchantment",
-  I: "Illusion",
-  N: "Necromancy",
-  T: "Transmutation",
-  V: "Evocation",
+const SCHOOL_KEYS: Record<string, TranslationKey> = {
+  A: "school.A",
+  C: "school.C",
+  D: "school.D",
+  E: "school.E",
+  I: "school.I",
+  N: "school.N",
+  T: "school.T",
+  V: "school.V",
 };
+
+/** Falls back to the raw code for schools the SRD adds after this build. */
+export function formatSchool(code: string): string {
+  const key = SCHOOL_KEYS[code];
+  return key ? t(key) : code;
+}
+
+const RARITY_KEYS: Record<string, TranslationKey> = {
+  common: "rarity.common",
+  uncommon: "rarity.uncommon",
+  rare: "rarity.rare",
+  "very rare": "rarity.very rare",
+  legendary: "rarity.legendary",
+  artifact: "rarity.artifact",
+};
+
+/** Rarity is stored in the SRD as a lowercase English slug. */
+export function formatRarity(rarity: string): string {
+  const key = RARITY_KEYS[rarity];
+  return key ? t(key) : rarity;
+}
+
+/** Level 0 spells are cantrips; the rest read "Level N". */
+export function spellLevelLabel(level: number): string {
+  return level === 0 ? t("term.cantrip") : t("term.level", { level });
+}
+
+const CONDITION_KEYS: Record<string, TranslationKey> = {
+  blinded: "condition.blinded",
+  charmed: "condition.charmed",
+  deafened: "condition.deafened",
+  exhaustion: "condition.exhaustion",
+  frightened: "condition.frightened",
+  grappled: "condition.grappled",
+  incapacitated: "condition.incapacitated",
+  invisible: "condition.invisible",
+  paralyzed: "condition.paralyzed",
+  petrified: "condition.petrified",
+  poisoned: "condition.poisoned",
+  prone: "condition.prone",
+  restrained: "condition.restrained",
+  stunned: "condition.stunned",
+  unconscious: "condition.unconscious",
+};
+
+/**
+ * Condition names as the SRD states them ("Blinded", "Unconscious") rather
+ * than the Spanish rules term ("Cegado", "Inconsciente").
+ */
+export function formatCondition(slug: string): string {
+  const key = CONDITION_KEYS[slug];
+  return key ? t(key) : slug;
+}
 
 export const SOURCE_ORDER: Record<string, number> = {
   XPHB: 1,
@@ -122,18 +178,18 @@ export function entityCardStat(entity: AnyEntity): CardStat | undefined {
     case "spell": {
       const spell = entity as Spell;
       return {
-        label: "Level",
-        value: spell.level === 0 ? "Cantrip" : String(spell.level),
+        label: t("filter.level"),
+        value: spell.level === 0 ? t("term.cantrip") : String(spell.level),
         numeric: spell.level > 0,
       };
     }
     case "monster": {
       const monster = entity as Monster;
-      return { label: "CR", value: monster.challengeRating, numeric: true };
+      return { label: t("term.cr"), value: monster.challengeRating, numeric: true };
     }
     case "equipment": {
       const item = entity as Equipment;
-      if (item.damage) return { label: "Damage", value: item.damage, numeric: true };
+      if (item.damage) return { label: t("term.damage"), value: item.damage, numeric: true };
       return undefined;
     }
     default:
@@ -141,29 +197,30 @@ export function entityCardStat(entity: AnyEntity): CardStat | undefined {
   }
 }
 
-const EQUIPMENT_TYPE_DISPLAY: Record<string, string> = {
-  $A: "Art Object",
-  $C: "Coin",
-  $G: "Gemstone",
-  AF: "Firearm Ammunition",
-  AIR: "Airship",
-  EXP: "Explosive",
-  FD: "Food and Drink",
-  GS: "Gaming Set",
-  MNT: "Mount",
-  SCF: "Spellcasting Focus",
-  SHP: "Ship",
-  TAH: "Tack and Harness",
-  TB: "Trade Bar",
-  VEH: "Vehicle",
-  WD: "Wand",
-  G: "Gear",
-  T: "Tool",
+const EQUIPMENT_TYPE_KEYS: Record<string, TranslationKey> = {
+  $A: "equip.$A",
+  $C: "equip.$C",
+  $G: "equip.$G",
+  AF: "equip.AF",
+  AIR: "equip.AIR",
+  EXP: "equip.EXP",
+  FD: "equip.FD",
+  GS: "equip.GS",
+  MNT: "equip.MNT",
+  SCF: "equip.SCF",
+  SHP: "equip.SHP",
+  TAH: "equip.TAH",
+  TB: "equip.TB",
+  VEH: "equip.VEH",
+  WD: "equip.WD",
+  G: "equip.G",
+  T: "equip.T",
 };
 
 export function formatEquipmentType(rawType: string): string {
   const clean = rawType.includes("|") ? rawType.split("|")[0]! : rawType;
-  return EQUIPMENT_TYPE_DISPLAY[clean] ?? clean;
+  const key = EQUIPMENT_TYPE_KEYS[clean];
+  return key ? t(key) : clean;
 }
 
 function collectUnique<T>(
@@ -186,21 +243,29 @@ function collectUnique<T>(
 
 function buildOptions(
   values: string[],
-  labelMap?: Record<string, string>,
+  labelMap?: Record<string, TranslationKey>,
   labelFn?: (v: string) => string,
 ): { value: string; label: string }[] {
-  const options = [{ value: "", label: "All" }];
+  const options = [{ value: "", label: t("filter.all") }];
   for (const v of values) {
-    const label = labelFn ? labelFn(v) : (labelMap?.[v] ?? v);
+    const label = labelFn ? labelFn(v) : labelMap?.[v] ? t(labelMap[v]!) : v;
     options.push({ value: v, label });
   }
   return options;
 }
 
+function yesNoOptions(): { value: string; label: string }[] {
+  return [
+    { value: "", label: t("filter.all") },
+    { value: "yes", label: t("filter.yes") },
+    { value: "no", label: t("filter.no") },
+  ];
+}
+
 function sourceFilter(entities: readonly AnyEntity[]): FilterDefinition {
   return {
     key: "source",
-    label: "Source",
+    label: t("filter.source"),
     options: buildOptions(
       collectUnique(entities, (e) => e.source),
       {},
@@ -211,58 +276,50 @@ function sourceFilter(entities: readonly AnyEntity[]): FilterDefinition {
 
 export const CATEGORY_REGISTRY: Record<EntityCategory, CategoryRegistration> = {
   spell: {
-    singular: "Spell",
-    plural: "Spells",
+    singular: "category.spell.one",
+    plural: "category.spell.many",
     getList: getSpells,
     buildFilterDefs: (entities) => {
       const spells = entities as readonly Spell[];
       return [
         {
           key: "level",
-          label: "Level",
+          label: t("filter.level"),
           options: buildOptions(
             collectUnique(spells, (s) => String(s.level)),
-            { "0": "Cantrip" },
+            { "0": "term.cantrip" },
           ),
         },
         {
           key: "school",
-          label: "School",
+          label: t("filter.school"),
           options: buildOptions(
             collectUnique(spells, (s) => s.school),
-            SCHOOL_NAMES,
+            SCHOOL_KEYS,
           ),
         },
         {
           key: "class",
-          label: "Class",
+          label: t("filter.class"),
           options: buildOptions(collectArrayValues(spells.map((s) => s.classes))),
         },
         {
           key: "concentration",
-          label: "Concentration",
-          options: [
-            { value: "", label: "All" },
-            { value: "yes", label: "Yes" },
-            { value: "no", label: "No" },
-          ],
+          label: t("filter.concentration"),
+          options: yesNoOptions(),
         },
         {
           key: "ritual",
-          label: "Ritual",
-          options: [
-            { value: "", label: "All" },
-            { value: "yes", label: "Yes" },
-            { value: "no", label: "No" },
-          ],
+          label: t("filter.ritual"),
+          options: yesNoOptions(),
         },
         sourceFilter(spells),
       ];
     },
     toCardData: (entity) => {
       const spell = entity as Spell;
-      const level = spell.level === 0 ? "Cantrip" : `Level ${spell.level}`;
-      const school = SCHOOL_NAMES[spell.school] ?? spell.school;
+      const level = spellLevelLabel(spell.level);
+      const school = formatSchool(spell.school);
       return {
         name: spell.name,
         href: referenceToUrl(spell.canonicalId),
@@ -276,32 +333,32 @@ export const CATEGORY_REGISTRY: Record<EntityCategory, CategoryRegistration> = {
     },
     getSubtitle: (entity) => {
       const spell = entity as Spell;
-      const levelText = spell.level === 0 ? "Cantrip" : `Level ${spell.level}`;
-      const schoolName = SCHOOL_NAMES[spell.school] ?? spell.school;
-      return `Spell ${METADATA_SEPARATOR} ${levelText} ${METADATA_SEPARATOR} ${schoolName} ${METADATA_SEPARATOR} ${formatSource(spell.source)}`;
+      const levelText = spellLevelLabel(spell.level);
+      const schoolName = formatSchool(spell.school);
+      return `${categoryLabelSingular("spell")} ${METADATA_SEPARATOR} ${levelText} ${METADATA_SEPARATOR} ${schoolName} ${METADATA_SEPARATOR} ${formatSource(spell.source)}`;
     },
   },
 
   monster: {
-    singular: "Monster",
-    plural: "Monsters",
+    singular: "category.monster.one",
+    plural: "category.monster.many",
     getList: getMonsters,
     buildFilterDefs: (entities) => {
       const monsters = entities as readonly Monster[];
       return [
         {
           key: "cr",
-          label: "CR",
+          label: t("filter.cr"),
           options: buildOptions(collectUnique(monsters, (m) => m.challengeRating, compareCr)),
         },
         {
           key: "type",
-          label: "Type",
+          label: t("filter.type"),
           options: buildOptions(collectUnique(monsters, (m) => m.monsterType)),
         },
         {
           key: "size",
-          label: "Size",
+          label: t("filter.size"),
           options: buildOptions(collectUnique(monsters, (m) => m.size)),
         },
         sourceFilter(monsters),
@@ -322,13 +379,13 @@ export const CATEGORY_REGISTRY: Record<EntityCategory, CategoryRegistration> = {
     },
     getSubtitle: (entity) => {
       const monster = entity as Monster;
-      return `Monster ${METADATA_SEPARATOR} CR ${monster.challengeRating} ${METADATA_SEPARATOR} ${formatMonsterType(monster)} ${METADATA_SEPARATOR} ${formatSource(monster.source)}`;
+      return `${categoryLabelSingular("monster")} ${METADATA_SEPARATOR} CR ${monster.challengeRating} ${METADATA_SEPARATOR} ${formatMonsterType(monster)} ${METADATA_SEPARATOR} ${formatSource(monster.source)}`;
     },
   },
 
   equipment: {
-    singular: "Equipment",
-    plural: "Equipment",
+    singular: "category.equipment.one",
+    plural: "category.equipment.many",
     getList: getEquipmentList,
     buildFilterDefs: (entities) => {
       const equipment = entities as readonly Equipment[];
@@ -336,12 +393,12 @@ export const CATEGORY_REGISTRY: Record<EntityCategory, CategoryRegistration> = {
       return [
         {
           key: "type",
-          label: "Type",
+          label: t("filter.type"),
           options: buildOptions(collectUnique(equipment, (e) => formatEquipmentType(e.type))),
         },
         {
           key: "damageType",
-          label: "Damage type",
+          label: t("filter.damageType"),
           options: buildOptions(
             collectUnique(damaged, (e) => e.damageType!, compareDamageType),
             {},
@@ -350,7 +407,7 @@ export const CATEGORY_REGISTRY: Record<EntityCategory, CategoryRegistration> = {
         },
         {
           key: "property",
-          label: "Property",
+          label: t("filter.property"),
           options: buildOptions(collectArrayValues(equipment.map((e) => e.properties ?? []))),
         },
         sourceFilter(equipment),
@@ -371,13 +428,13 @@ export const CATEGORY_REGISTRY: Record<EntityCategory, CategoryRegistration> = {
     },
     getSubtitle: (entity) => {
       const item = entity as Equipment;
-      return `Equipment ${METADATA_SEPARATOR} ${formatEquipmentType(item.type)} ${METADATA_SEPARATOR} ${formatSource(item.source)}`;
+      return `${categoryLabelSingular("equipment")} ${METADATA_SEPARATOR} ${formatEquipmentType(item.type)} ${METADATA_SEPARATOR} ${formatSource(item.source)}`;
     },
   },
 
   condition: {
-    singular: "Condition",
-    plural: "Conditions",
+    singular: "category.condition.one",
+    plural: "category.condition.many",
     getList: getConditions,
     buildFilterDefs: (entities) => [sourceFilter(entities)],
     toCardData: (entity) => ({
@@ -390,12 +447,13 @@ export const CATEGORY_REGISTRY: Record<EntityCategory, CategoryRegistration> = {
       canonicalId: entity.canonicalId,
       stat: entityCardStat(entity),
     }),
-    getSubtitle: (entity) => `Condition ${METADATA_SEPARATOR} ${formatSource(entity.source)}`,
+    getSubtitle: (entity) =>
+      `${categoryLabelSingular("condition")} ${METADATA_SEPARATOR} ${formatSource(entity.source)}`,
   },
 
   action: {
-    singular: "Action",
-    plural: "Actions",
+    singular: "category.action.one",
+    plural: "category.action.many",
     getList: getActions,
     buildFilterDefs: (entities) => [sourceFilter(entities)],
     toCardData: (entity) => {
@@ -411,33 +469,34 @@ export const CATEGORY_REGISTRY: Record<EntityCategory, CategoryRegistration> = {
         stat: entityCardStat(action),
       };
     },
-    getSubtitle: (entity) => `Action ${METADATA_SEPARATOR} ${formatSource(entity.source)}`,
+    getSubtitle: (entity) =>
+      `${categoryLabelSingular("action")} ${METADATA_SEPARATOR} ${formatSource(entity.source)}`,
   },
 
   magicitem: {
-    singular: "Magic Item",
-    plural: "Magic Items",
+    singular: "category.magicitem.one",
+    plural: "category.magicitem.many",
     getList: getMagicItems,
     buildFilterDefs: (entities) => {
       const items = entities as readonly MagicItem[];
       return [
         {
           key: "rarity",
-          label: "Rarity",
+          label: t("filter.rarity"),
           options: buildOptions(collectUnique(items, (m) => m.rarity, compareRarity)),
         },
         {
           key: "itemType",
-          label: "Type",
+          label: t("filter.type"),
           options: buildOptions(collectUnique(items, (m) => m.itemType)),
         },
         {
           key: "attunement",
-          label: "Attunement",
+          label: t("filter.attunement"),
           options: [
-            { value: "", label: "All" },
-            { value: "required", label: "Required" },
-            { value: "none", label: "None" },
+            { value: "", label: t("filter.all") },
+            { value: "required", label: t("filter.required") },
+            { value: "none", label: t("filter.none") },
           ],
         },
         sourceFilter(items),
@@ -445,13 +504,15 @@ export const CATEGORY_REGISTRY: Record<EntityCategory, CategoryRegistration> = {
     },
     toCardData: (entity) => {
       const magic = entity as MagicItem;
-      const attunement = magic.requiresAttunement ? ` ${METADATA_SEPARATOR} Attunement` : "";
+      const attunement = magic.requiresAttunement
+        ? ` ${METADATA_SEPARATOR} ${t("term.attunement")}`
+        : "";
       return {
         name: magic.name,
         href: referenceToUrl(magic.canonicalId),
         category: "magicitem",
         categoryLabel: categoryLabelSingular("magicitem"),
-        metadata: `${magic.rarity}${attunement}`,
+        metadata: `${formatRarity(magic.rarity)}${attunement}`,
         source: magic.source,
         canonicalId: magic.canonicalId,
         stat: entityCardStat(magic),
@@ -459,34 +520,36 @@ export const CATEGORY_REGISTRY: Record<EntityCategory, CategoryRegistration> = {
     },
     getSubtitle: (entity) => {
       const magic = entity as MagicItem;
-      const attune = magic.requiresAttunement ? ` ${METADATA_SEPARATOR} Requires Attunement` : "";
-      return `Magic Item ${METADATA_SEPARATOR} ${magic.rarity}${attune} ${METADATA_SEPARATOR} ${formatSource(magic.source)}`;
+      const attune = magic.requiresAttunement
+        ? ` ${METADATA_SEPARATOR} ${t("term.requiresAttunement")}`
+        : "";
+      return `${categoryLabelSingular("magicitem")} ${METADATA_SEPARATOR} ${formatRarity(magic.rarity)}${attune} ${METADATA_SEPARATOR} ${formatSource(magic.source)}`;
     },
   },
 
   feat: {
-    singular: "Feat",
-    plural: "Feats",
+    singular: "category.feat.one",
+    plural: "category.feat.many",
     getList: getFeats,
     buildFilterDefs: (entities) => {
       const feats = entities as readonly Feat[];
       return [
         {
           key: "prerequisite",
-          label: "Prerequisite",
+          label: t("filter.prerequisite"),
           options: [
-            { value: "", label: "All" },
-            { value: "yes", label: "Has Prerequisite" },
-            { value: "none", label: "No Prerequisite" },
+            { value: "", label: t("filter.all") },
+            { value: "yes", label: t("term.hasPrerequisite") },
+            { value: "none", label: t("term.noPrerequisite") },
           ],
         },
         {
           key: "repeatable",
-          label: "Repeatable",
+          label: t("filter.repeatable"),
           options: [
-            { value: "", label: "All" },
-            { value: "yes", label: "Repeatable" },
-            { value: "no", label: "Not Repeatable" },
+            { value: "", label: t("filter.all") },
+            { value: "yes", label: t("term.repeatable") },
+            { value: "no", label: t("term.notRepeatable") },
           ],
         },
         sourceFilter(feats),
@@ -508,20 +571,24 @@ export const CATEGORY_REGISTRY: Record<EntityCategory, CategoryRegistration> = {
     },
     getSubtitle: (entity) => {
       const feat = entity as Feat;
-      const prereq = feat.prerequisite ? `Prerequisite: ${feat.prerequisite}` : undefined;
-      const repeatable = feat.repeatable ? "Repeatable" : undefined;
+      const prereq = feat.prerequisite
+        ? `${t("term.prerequisite")}: ${feat.prerequisite}`
+        : undefined;
+      const repeatable = feat.repeatable ? t("term.repeatable") : undefined;
       const extras = [prereq, repeatable].filter(Boolean).join(` ${METADATA_SEPARATOR} `);
       return extras
-        ? `Feat ${METADATA_SEPARATOR} ${extras} ${METADATA_SEPARATOR} ${formatSource(feat.source)}`
-        : `Feat ${METADATA_SEPARATOR} ${formatSource(feat.source)}`;
+        ? `${categoryLabelSingular("feat")} ${METADATA_SEPARATOR} ${extras} ${METADATA_SEPARATOR} ${formatSource(feat.source)}`
+        : `${categoryLabelSingular("feat")} ${METADATA_SEPARATOR} ${formatSource(feat.source)}`;
     },
   },
 };
 
 export function categoryLabel(category: string): string {
-  return CATEGORY_REGISTRY[category as EntityCategory]?.plural ?? category;
+  const registration = CATEGORY_REGISTRY[category as EntityCategory];
+  return registration ? t(registration.plural) : category;
 }
 
 export function categoryLabelSingular(category: string): string {
-  return CATEGORY_REGISTRY[category as EntityCategory]?.singular ?? category;
+  const registration = CATEGORY_REGISTRY[category as EntityCategory];
+  return registration ? t(registration.singular) : category;
 }

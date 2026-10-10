@@ -2,9 +2,10 @@ import { useMemo, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import {
   buildFilterDefs,
+  formatSchool,
   getEntitiesForCategory,
   METADATA_SEPARATOR,
-  SCHOOL_NAMES,
+  spellLevelLabel,
 } from "@/compendium";
 import type { Spell } from "@/compendium";
 import { EmptyResults, FilterChips } from "@/components/search";
@@ -17,6 +18,8 @@ import { CheckIcon, CloseIcon } from "@/components/ui/icons";
 import { cn } from "@/lib/utils";
 import { countClassSpells, filterSpellCandidates } from "@/features/character/spell-picker-model";
 import type { SpellPickerFilterValues } from "@/features/character/spell-picker-model";
+import { t } from "@/i18n";
+import { useLanguage } from "@/user-state";
 
 type SpellScope = "mine" | "all";
 
@@ -47,10 +50,18 @@ export function SpellPickerContent({
   initialScope,
 }: SpellPickerContentProps) {
   const spells = useMemo(() => getEntitiesForCategory("spell") as readonly Spell[], []);
+  // Filter labels are localized inside buildFilterDefs, so the language has to
+  // be a dependency or a language switch would leave stale labels behind.
+  const language = useLanguage();
+  // `language` looks redundant to the lint rule, but the labels are produced
+  // inside buildFilterDefs through the store-aware t(), which the rule cannot
+  // see. Without it a language switch would keep the previous language's chips.
+  /* eslint-disable react-hooks/exhaustive-deps -- `language` drives localized labels built via the store-aware t() */
   const filterDefs = useMemo(
     () => new Map(buildFilterDefs("spell", spells).map((def) => [def.key, def] as const)),
-    [spells],
+    [spells, language],
   );
+  /* eslint-enable react-hooks/exhaustive-deps */
 
   const hasClass = characterClass.trim().length > 0;
   const classSpellCount = useMemo(
@@ -96,7 +107,7 @@ export function SpellPickerContent({
   const ritualDef = filterDefs.get("ritual");
   const classDef = filterDefs.get("class");
   const advancedGroups = [
-    schoolDef && { def: schoolDef, help: "The style of magic the spell belongs to." },
+    schoolDef && { def: schoolDef, help: t("help.spellSchool.body") },
     classDef && scope !== "mine" && { def: classDef, help: null },
     concentrationDef && { def: concentrationDef, help: null },
     ritualDef && { def: ritualDef, help: null },
@@ -110,23 +121,25 @@ export function SpellPickerContent({
     <div
       role="dialog"
       aria-modal="true"
-      aria-label="Select spells"
+      aria-label={t("spellPicker.title")}
       className="fixed inset-0 z-50 flex flex-col bg-card animate-slide-up"
     >
       <div className="flex items-center gap-2 border-b border-border px-4 py-3">
-        <h2 className="flex-1 text-base font-semibold text-foreground">Spells</h2>
+        <h2 className="flex-1 text-base font-semibold text-foreground">
+          {t("category.spell.many")}
+        </h2>
         {selectedIds.length > 0 && (
           <span
             className="text-xs text-muted-foreground"
-            aria-label={`${selectedIds.length} known`}
+            aria-label={t("spellPicker.knownCount", { count: selectedIds.length })}
           >
-            {selectedIds.length} known
+            {t("spellPicker.knownCount", { count: selectedIds.length })}
           </span>
         )}
         <button
           type="button"
           onClick={onClose}
-          aria-label="Close spells picker"
+          aria-label={t("spellPicker.close")}
           className="hitbox-expand relative inline-flex h-8 w-8 items-center justify-center rounded-control text-muted-foreground transition-all duration-150 hover:bg-accent hover:text-foreground active:scale-90 active:bg-accent/80"
         >
           <CloseIcon className="h-4 w-4" />
@@ -138,35 +151,36 @@ export function SpellPickerContent({
           value={query}
           onChange={setQuery}
           autoFocus
-          placeholder="Search spells…"
-          ariaLabel="Search spells"
+          placeholder={t("spellPicker.searchPlaceholder")}
+          ariaLabel={t("spellPicker.searchLabel")}
         />
         {hasClass && (
           <div className="flex items-center gap-2">
             <FilterChips
               options={[
-                { value: "mine", label: `For ${characterClass}` },
-                { value: "all", label: "All spells" },
+                { value: "mine", label: t("spellPicker.forClass", { class: characterClass }) },
+                { value: "all", label: t("spellPicker.allSpells") },
               ]}
               selected={scope}
               onChange={(next) => setScope(next === "mine" ? "mine" : "all")}
-              ariaLabel="Which spells to show"
+              ariaLabel={t("spellPicker.whichToShow")}
               allowDeselect={false}
             />
-            <HelpTip label="About this spell list">
-              “For {characterClass}” shows only spells a {characterClass} can choose from. Switch to
-              “All spells” to browse every spell in the Compendium.
+            <HelpTip label={t("spellPicker.aboutList")}>
+              {t("spellPicker.aboutListBody", { class: characterClass })}
             </HelpTip>
           </div>
         )}
         {levelDef && (
           <div className="flex items-center gap-2">
-            <span className="shrink-0 text-xs font-medium text-muted-foreground">Level</span>
+            <span className="shrink-0 text-xs font-medium text-muted-foreground">
+              {t("filter.level")}
+            </span>
             <FilterChips
               options={levelDef.options}
               selected={filters.level ?? ""}
               onChange={(next) => setFilters((prev) => ({ ...prev, level: next }))}
-              ariaLabel="Spell level"
+              ariaLabel={t("spellPicker.levelLabel")}
             />
           </div>
         )}
@@ -177,9 +191,10 @@ export function SpellPickerContent({
                 key={entry.key}
                 type="button"
                 onClick={() => clearFilter(entry.key)}
-                aria-label={`Remove ${
-                  filterDefs.get(entry.key)?.label ?? entry.key
-                } filter: ${entry.label}`}
+                aria-label={t("spellPicker.removeFilter", {
+                  label: filterDefs.get(entry.key)?.label ?? entry.key,
+                  value: entry.label,
+                })}
                 className="inline-flex max-w-full shrink-0 items-center gap-1 rounded-control border border-border bg-accent py-1 pl-2 pr-1.5 text-xs text-foreground transition-all duration-150 active:scale-95"
               >
                 <span className="text-muted-foreground">
@@ -190,7 +205,7 @@ export function SpellPickerContent({
               </button>
             ))}
             <Button variant="ghost" size="sm" onClick={clearAllFilters}>
-              Clear all
+              {t("common.clearAll")}
             </Button>
           </div>
         )}
@@ -198,7 +213,7 @@ export function SpellPickerContent({
           <div key={def.key} className="flex min-w-0 flex-col gap-1.5">
             <span className="flex items-center gap-1.5 text-xs font-medium text-muted-foreground">
               {def.label}
-              {help && <HelpTip label={`About ${def.label}`}>{help}</HelpTip>}
+              {help && <HelpTip label={t("common.about", { subject: def.label })}>{help}</HelpTip>}
             </span>
             <FilterChips
               options={def.options}
@@ -212,7 +227,7 @@ export function SpellPickerContent({
       </div>
 
       <p className="px-4 pt-2 text-xs text-muted-foreground" role="status">
-        {`${results.length} ${results.length === 1 ? "spell" : "spells"}`}
+        {t("spellPicker.resultCount", { count: results.length })}
       </p>
 
       <div className="relative min-h-0 flex-1">
@@ -221,21 +236,23 @@ export function SpellPickerContent({
             {results.length === 0 ? (
               <EmptyResults
                 title={
-                  hasQueryOrFilters ? "No spells found" : `No spells listed for ${characterClass}`
+                  hasQueryOrFilters
+                    ? t("spellPicker.emptyWithFilters")
+                    : t("spellPicker.emptyForClass", { class: characterClass })
                 }
                 description={
                   hasQueryOrFilters
-                    ? "Try a different search or clear some filters."
-                    : "This Compendium may not include spells for this class."
+                    ? t("spellPicker.emptyWithFiltersBody")
+                    : t("spellPicker.emptyForClassBody")
                 }
                 action={
                   hasQueryOrFilters ? (
                     <Button variant="outline" size="sm" onClick={clearAllFilters}>
-                      Clear filters
+                      {t("filter.clear")}
                     </Button>
                   ) : (
                     <Button variant="outline" size="sm" onClick={() => setScope("all")}>
-                      Show all spells
+                      {t("spellPicker.showAll")}
                     </Button>
                   )
                 }
@@ -261,7 +278,7 @@ export function SpellPickerContent({
 
       <div className="border-t border-border px-4 py-3">
         <Button className="w-full" onClick={onClose}>
-          Done
+          {t("common.done")}
         </Button>
       </div>
     </div>
@@ -277,12 +294,12 @@ function SpellRow({
   selected: boolean;
   onToggle: (canonicalId: string) => void;
 }) {
-  const levelText = spell.level === 0 ? "Cantrip" : `Level ${spell.level}`;
+  const levelText = spellLevelLabel(spell.level);
   const parts = [
     levelText,
-    SCHOOL_NAMES[spell.school] ?? spell.school,
-    spell.concentration ? "Conc." : null,
-    spell.ritual ? "Rit." : null,
+    formatSchool(spell.school),
+    spell.concentration ? t("spell.abbrev.concentration") : null,
+    spell.ritual ? t("spell.abbrev.ritual") : null,
   ].filter(Boolean);
   return (
     <button

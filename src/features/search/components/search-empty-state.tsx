@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { CATEGORY_REGISTRY } from "@/compendium";
+import { t } from "@/i18n";
 import { useRecentSearches } from "@/user-state";
 
 export function SearchEmptyState() {
@@ -10,7 +11,7 @@ export function SearchEmptyState() {
       {recentSearches.length > 0 && (
         <div>
           <p className="mb-2 text-xs font-medium uppercase tracking-wide text-muted-foreground">
-            Recent Searches
+            {t("search.recentSearches")}
           </p>
           <div className="flex flex-wrap gap-2">
             {recentSearches.map((q) => (
@@ -28,7 +29,7 @@ export function SearchEmptyState() {
 
       <div>
         <p className="mb-2 text-xs font-medium uppercase tracking-wide text-muted-foreground">
-          Categories
+          {t("search.categories")}
         </p>
         <div className="grid grid-cols-1 gap-2 sm:grid-cols-2 lg:grid-cols-3">
           {Object.entries(CATEGORY_REGISTRY).map(([key, reg]) => (
@@ -37,7 +38,7 @@ export function SearchEmptyState() {
               to={`/${key}`}
               className="flex items-center justify-between gap-2 rounded-card border border-border bg-surface px-3 py-3 transition-colors hover:bg-accent active:bg-accent/80"
             >
-              <span className="text-sm font-medium text-foreground">{reg.plural}</span>
+              <span className="text-sm font-medium text-foreground">{t(reg.plural)}</span>
               <svg
                 aria-hidden="true"
                 viewBox="0 0 24 24"
@@ -53,9 +54,7 @@ export function SearchEmptyState() {
         </div>
       </div>
 
-      <p className="text-center text-xs text-muted-foreground">
-        Search spells, monsters, equipment, and more
-      </p>
+      <p className="text-center text-xs text-muted-foreground">{t("search.footer")}</p>
     </div>
   );
 }

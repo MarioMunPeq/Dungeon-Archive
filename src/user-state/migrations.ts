@@ -1,5 +1,12 @@
-import type { Adventure, CharacterReference, Theme, UserState } from "./types";
-import { CURRENT_VERSION, DEFAULT_THEME, createDefaultState, isTheme } from "./types";
+import type { Adventure, CharacterReference, Language, Theme, UserState } from "./types";
+import {
+  CURRENT_VERSION,
+  DEFAULT_LANGUAGE,
+  DEFAULT_THEME,
+  createDefaultState,
+  isLanguage,
+  isTheme,
+} from "./types";
 
 function legacyMemberToCharacterReference(raw: unknown): Record<string, unknown> | null {
   if (!raw || typeof raw !== "object") return null;
@@ -181,6 +188,11 @@ const migrations: Record<number, (state: Record<string, unknown>) => Record<stri
       activeCharacterId,
     };
   },
+  14: (raw) => ({
+    ...raw,
+    version: 14,
+    language: isLanguage(raw.language) ? raw.language : DEFAULT_LANGUAGE,
+  }),
 };
 
 export function migrate(raw: unknown): UserState {
@@ -223,6 +235,9 @@ export function migrate(raw: unknown): UserState {
   if (version < 13) {
     migrated = migrations[13]!(migrated);
   }
+  if (version < 14) {
+    migrated = migrations[14]!(migrated);
+  }
 
   const result = migrated as unknown as Record<string, unknown>;
   if (
@@ -250,5 +265,6 @@ export function migrate(raw: unknown): UserState {
     onboardingComplete:
       typeof result.onboardingComplete === "boolean" ? result.onboardingComplete : false,
     theme: isTheme(result.theme) ? (result.theme as Theme) : DEFAULT_THEME,
+    language: isLanguage(result.language) ? (result.language as Language) : DEFAULT_LANGUAGE,
   };
 }

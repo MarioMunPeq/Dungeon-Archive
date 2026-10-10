@@ -1,5 +1,5 @@
 import type { ReactNode } from "react";
-import { CATEGORY_REGISTRY } from "@/compendium";
+import { categoryLabelSingular } from "@/compendium";
 import type { EntityCategory } from "@/compendium";
 import { Badge } from "@/components/ui/Badge";
 import { badgeVariantForCategory } from "./entity-reference";
@@ -21,7 +21,7 @@ export function EntityIdentity({
     <>
       {showBadge && (
         <Badge variant={badgeVariantForCategory(category)} className="shrink-0">
-          {CATEGORY_REGISTRY[category].singular}
+          {categoryLabelSingular(category)}
         </Badge>
       )}
       <div className="min-w-0 flex-1 space-y-1">

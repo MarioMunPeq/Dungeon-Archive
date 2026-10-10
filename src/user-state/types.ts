@@ -63,6 +63,12 @@ export interface Adventure {
 
 export type Theme = "jade" | "amber" | "teal" | "gold" | "wine" | "plum" | "steel";
 
+/**
+ * UI languages. The Compendium data itself stays in the English of the SRD:
+ * only application chrome and taxonomy labels are translated.
+ */
+export type Language = "en" | "es";
+
 export interface UserState {
   readonly version: number;
   readonly favorites: string[];
@@ -76,12 +82,15 @@ export interface UserState {
   readonly beginnerMode: boolean;
   readonly onboardingComplete: boolean;
   readonly theme: Theme;
+  readonly language: Language;
 }
 
 export const STORAGE_KEY = "dungeon:userState:v1";
-export const CURRENT_VERSION = 13;
+export const CURRENT_VERSION = 14;
 export const DEFAULT_THEME: Theme = "teal";
 export const THEMES: readonly Theme[] = ["jade", "amber", "teal", "gold", "wine", "plum", "steel"];
+export const DEFAULT_LANGUAGE: Language = "en";
+export const LANGUAGES: readonly Language[] = ["en", "es"];
 
 export function isTheme(value: unknown): value is Theme {
   return (
@@ -93,6 +102,10 @@ export function isTheme(value: unknown): value is Theme {
     value === "plum" ||
     value === "steel"
   );
+}
+
+export function isLanguage(value: unknown): value is Language {
+  return value === "en" || value === "es";
 }
 
 export function createDefaultState(): UserState {
@@ -109,5 +122,6 @@ export function createDefaultState(): UserState {
     beginnerMode: true,
     onboardingComplete: false,
     theme: DEFAULT_THEME,
+    language: DEFAULT_LANGUAGE,
   };
 }

@@ -10,31 +10,33 @@ import {
   Stepper,
   useLongPressInfo,
 } from "@/components/ui";
-import { resolveEntity } from "@/compendium";
+import { formatCondition, resolveEntity } from "@/compendium";
 import type { Condition, ContentBlock } from "@/compendium";
+import type { TranslationKey } from "@/i18n";
+import { t } from "@/i18n";
 import { cn } from "@/lib/utils";
 
 interface TurnItem {
-  readonly title: string;
-  readonly help: string;
+  readonly title: TranslationKey;
+  readonly help: TranslationKey;
 }
 
 const TURN_ITEMS: readonly TurnItem[] = [
   {
-    title: "Action",
-    help: "Attack, cast a spell, dash, dodge, hide, disengage, or use an object.",
+    title: "combat.action",
+    help: "combat.actionHelp",
   },
   {
-    title: "Bonus Action",
-    help: "A small extra action granted by a feature, spell, or item.",
+    title: "combat.bonusAction",
+    help: "combat.bonusActionHelp",
   },
   {
-    title: "Movement",
-    help: "Move up to your speed (usually 30 ft), split any way across your turn.",
+    title: "combat.movement",
+    help: "combat.movementHelp",
   },
   {
-    title: "Reaction",
-    help: "A response to something that happens, like an opportunity attack.",
+    title: "combat.reaction",
+    help: "combat.reactionHelp",
   },
 ];
 
@@ -59,24 +61,24 @@ const QUICK_DELTAS: readonly number[] = [-5, -1, 1, 5];
 type CombatStatKey = "armorClass" | "passivePerception" | "spellSaveDc";
 
 const COMBAT_STATS: readonly {
-  label: string;
+  label: TranslationKey;
   key: CombatStatKey;
-  help: string;
+  help: TranslationKey;
 }[] = [
   {
-    label: "AC",
+    label: "character.armorClass",
     key: "armorClass",
-    help: "Armor Class is what enemies must beat to hit you.",
+    help: "help.armorClass.body",
   },
   {
-    label: "Perception",
+    label: "character.perception",
     key: "passivePerception",
-    help: "A score used to notice hidden things without rolling.",
+    help: "combat.perceptionHelp",
   },
   {
-    label: "DC",
+    label: "character.spellDc",
     key: "spellSaveDc",
-    help: "Spell save DC is the number enemies must beat to resist your spells.",
+    help: "help.spellSaveDc.body",
   },
 ];
 
@@ -92,9 +94,9 @@ function combatStatValue(character: CharacterReference, key: CombatStatKey): num
 }
 
 function conditionName(canonicalId: string): string {
-  const resolved = resolveEntity(canonicalId);
-  if (resolved?.selected.category === "condition") return resolved.selected.name;
   const slug = canonicalId.slice(canonicalId.lastIndexOf(".") + 1);
+  const resolved = resolveEntity(canonicalId);
+  if (resolved?.selected.category === "condition") return formatCondition(slug);
   return slug.charAt(0).toUpperCase() + slug.slice(1);
 }
 
@@ -121,13 +123,13 @@ function conditionSummary(condition: Condition): string {
   return walk(condition.description);
 }
 
-const FALLBACK_SUMMARY = "No description available for this condition.";
+const FALLBACK_SUMMARY_KEY = "combat.noConditionDescription";
 
 function conditionDefinition(id: string): string {
   const resolved = resolveEntity(id);
   const summary =
     resolved?.selected.category === "condition" ? conditionSummary(resolved.selected) : "";
-  return summary || FALLBACK_SUMMARY;
+  return summary || t(FALLBACK_SUMMARY_KEY);
 }
 
 const ConditionChip = memo(function ConditionChip({
@@ -290,7 +292,7 @@ const TurnItemRow = memo(function TurnItemRow({
               isUsed && "text-muted-foreground",
             )}
           >
-            {item.title}
+            {t(item.title)}
           </span>
           <span
             aria-hidden="true"
@@ -306,9 +308,9 @@ const TurnItemRow = memo(function TurnItemRow({
           placement={placement}
           shiftX={shiftX}
           popoverRef={popoverRef}
-          title={item.title}
+          title={t(item.title)}
         >
-          {item.help}
+          {t(item.help)}
         </InfoPopover>
       )}
     </div>
@@ -343,7 +345,7 @@ function TurnChecklist() {
       </div>
       <div className="flex justify-end border-t border-border/60 pt-3">
         <Button variant="outline" size="sm" onClick={reset}>
-          Next turn
+          {t("combat.nextTurn")}
         </Button>
       </div>
     </>
@@ -414,12 +416,9 @@ function CombatCharacterView({ character }: { character: CharacterReference }) {
       <div className="flex flex-col gap-2 rounded-card border border-border-amber bg-surface readout-card p-2">
         <div className="flex items-center justify-between gap-2">
           <span className="flex items-center gap-2 border-l-2 border-primary pl-2 text-xs font-bold uppercase tracking-wide text-muted-foreground">
-            Hit Points
+            {t("combat.hitPoints")}
           </span>
-          <HelpTip label="What are Hit Points?">
-            Hit Points (HP) measure how much damage you can take. Damage lowers your current HP; at
-            0 you fall unconscious. Heal to bring it back up.
-          </HelpTip>
+          <HelpTip label={t("help.hitPoints.title")}>{t("help.hitPoints.body")}</HelpTip>
         </div>
         <div
           ref={hpContainerRef}
@@ -434,7 +433,7 @@ function CombatCharacterView({ character }: { character: CharacterReference }) {
         >
           <div className="flex flex-col items-center gap-0.5">
             <span className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
-              Current
+              {t("combat.current")}
             </span>
             <Stepper
               variant="ghost"
@@ -443,7 +442,7 @@ function CombatCharacterView({ character }: { character: CharacterReference }) {
               min={0}
               max={9999}
               onChange={(value) => update({ hitPoints: { current: value } })}
-              label="Current HP"
+              label={t("combat.currentHp")}
               className="h-8 w-20"
               valueClassName={cn(
                 "font-mono text-xl font-bold tabular-nums",
@@ -454,7 +453,7 @@ function CombatCharacterView({ character }: { character: CharacterReference }) {
           <span className="text-base font-medium text-foreground-subtle">/</span>
           <div className="flex flex-col items-center gap-0.5">
             <span className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
-              Max
+              {t("combat.max")}
             </span>
             <Stepper
               variant="ghost"
@@ -463,7 +462,7 @@ function CombatCharacterView({ character }: { character: CharacterReference }) {
               min={1}
               max={9999}
               onChange={(value) => update({ hitPoints: { max: value } })}
-              label="Max HP"
+              label={t("combat.maxHp")}
               className="h-8 w-20"
               valueClassName="font-mono text-xl font-bold tabular-nums"
             />
@@ -473,10 +472,9 @@ function CombatCharacterView({ character }: { character: CharacterReference }) {
               placement={hpPlacement}
               shiftX={hpShiftX}
               popoverRef={hpPopoverRef}
-              title="Hit Points"
+              title={t("combat.hitPoints")}
             >
-              Hit Points (HP) measure how much damage you can take. Damage lowers your current HP;
-              at 0 you fall unconscious. Heal to bring it back up.
+              {t("help.hitPoints.body")}
             </InfoPopover>
           )}
         </div>
@@ -505,19 +503,13 @@ function CombatCharacterView({ character }: { character: CharacterReference }) {
             </button>
           ))}
         </div>
-        {hpLow && (
-          <p className="text-xs font-medium text-destructive">
-            Below half — your character is hurting!
-          </p>
-        )}
+        {hpLow && <p className="text-xs font-medium text-destructive">{t("combat.belowHalf")}</p>}
       </div>
 
       <div className="flex flex-col gap-3">
         <span className="flex items-center gap-2 border-l-2 border-primary pl-2 text-xs font-bold uppercase tracking-wide text-muted-foreground">
-          Stats
-          <HelpTip label="What are these numbers?">
-            These are your combat numbers. Edit them on your character in the Character tab.
-          </HelpTip>
+          {t("combat.stats")}
+          <HelpTip label={t("help.combatStats.short")}>{t("combat.statsHelp")}</HelpTip>
         </span>
         <div className="grid grid-cols-3 gap-2">
           {COMBAT_STATS.map((stat) => (
@@ -526,7 +518,7 @@ function CombatCharacterView({ character }: { character: CharacterReference }) {
               className="flex flex-col items-center gap-1 rounded-stat border border-border-amber bg-card readout-card px-2 py-3"
             >
               <span className="text-xs font-medium uppercase tracking-tight text-muted-foreground">
-                {stat.label}
+                {t(stat.label)}
               </span>
               <span className="font-mono text-2xl font-bold tabular-nums text-foreground">
                 {combatStatValue(character, stat.key)}
@@ -538,7 +530,7 @@ function CombatCharacterView({ character }: { character: CharacterReference }) {
 
       <div className="flex flex-col gap-3">
         <span className="border-l-2 border-primary pl-2 text-xs font-bold uppercase tracking-wide text-muted-foreground">
-          Conditions
+          {t("combat.conditions")}
         </span>
         <div className="grid grid-cols-2 gap-2">
           {CONDITION_IDS.map((id) => (
@@ -555,12 +547,10 @@ function CombatCharacterView({ character }: { character: CharacterReference }) {
       <div className="flex flex-col gap-3">
         <div className="flex items-center gap-2">
           <span className="border-l-2 border-primary pl-2 text-xs font-bold uppercase tracking-wide text-muted-foreground">
-            On Your Turn
+            {t("combat.onYourTurn")}
           </span>
-          <HelpTip label="What can I do on my turn?">
-            Each round you get one Action, one Bonus Action, and one Reaction. You can also move up
-            to your speed and split the movement however you like. Tap a row once you have used it
-            this turn, then hit “Next turn” when your turn ends.
+          <HelpTip label={t("combat.onYourTurnHelp.title")}>
+            {t("combat.onYourTurnHelp.body")}
           </HelpTip>
         </div>
         <TurnChecklist key={character.id} />
@@ -576,8 +566,8 @@ export function CombatPage() {
     <div className="flex flex-col gap-3 px-4 py-4">
       {character === null ? (
         <EmptyState
-          title="No character yet"
-          description="Add your character in the Character tab, then come back here to track hit points during combat."
+          title={t("character.emptyTitle")}
+          description={t("combat.emptyBody")}
           icon={
             <svg
               aria-hidden="true"
@@ -595,7 +585,7 @@ export function CombatPage() {
           }
           action={
             <Link to="/character">
-              <Button>Go to Character</Button>
+              <Button>{t("combat.goToCharacter")}</Button>
             </Link>
           }
         />

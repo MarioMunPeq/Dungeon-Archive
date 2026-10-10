@@ -6,6 +6,7 @@ import { Button } from "./Button";
 import { CloseIcon } from "./icons";
 import { SnackbarContext } from "./snackbar-context";
 import type { SnackbarAction, SnackbarOptions, SnackbarTone } from "./snackbar-context";
+import { t } from "@/i18n";
 
 const DEFAULT_DURATION_MS = 5000;
 
@@ -99,7 +100,7 @@ export function SnackbarProvider({ children }: { children: ReactNode }) {
                 <Button
                   variant="ghost"
                   size="sm"
-                  aria-label="Dismiss notification"
+                  aria-label={t("snackbar.dismiss")}
                   onClick={() => dismiss(entry.id)}
                 >
                   <CloseIcon size="xs" />

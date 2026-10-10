@@ -77,8 +77,8 @@ test("STORAGE_KEY equals dungeon:userState:v1", () => {
   strictEqual(STORAGE_KEY, "dungeon:userState:v1");
 });
 
-test("CURRENT_VERSION equals 13", () => {
-  strictEqual(CURRENT_VERSION, 13);
+test("CURRENT_VERSION equals 14", () => {
+  strictEqual(CURRENT_VERSION, 14);
 });
 
 test("createDefaultState returns valid v13 state", () => {
@@ -825,6 +825,7 @@ test("favoritesSet rebuilt on _replace", () => {
     beginnerMode: true,
     onboardingComplete: false,
     theme: "jade",
+    language: "en",
   });
   const state = userStore.getState();
   strictEqual(state.favoritesSet.has("x"), true);
@@ -1081,6 +1082,7 @@ test("_replace carries the theme field", () => {
     beginnerMode: true,
     onboardingComplete: false,
     theme: "teal",
+    language: "en",
   });
   strictEqual(userStore.getState().theme, "teal");
 });
@@ -1444,6 +1446,7 @@ test("safe replace does nothing when state is identical", () => {
     beginnerMode: true,
     onboardingComplete: false,
     theme: "jade",
+    language: "en",
   });
   userStore.getState()._replace({
     version: CURRENT_VERSION,
@@ -1458,6 +1461,7 @@ test("safe replace does nothing when state is identical", () => {
     beginnerMode: true,
     onboardingComplete: false,
     theme: "jade",
+    language: "en",
   });
   const state2 = userStore.getState();
   deepStrictEqual(state2.favorites, ["a", "b"]);
@@ -1673,6 +1677,7 @@ test("sessionSet stays in sync after _replace", () => {
     beginnerMode: true,
     onboardingComplete: false,
     theme: "jade",
+    language: "en",
   });
   const state = userStore.getState();
   deepStrictEqual(state.session, ["x", "y"]);
@@ -1929,6 +1934,7 @@ test("_replace updates session when content differs", () => {
     beginnerMode: true,
     onboardingComplete: false,
     theme: "jade",
+    language: "en",
   });
   deepStrictEqual(userStore.getState().session, ["a", "b"]);
 });
@@ -2234,6 +2240,7 @@ test("adventureSet rebuilt on _replace", () => {
     beginnerMode: true,
     onboardingComplete: false,
     theme: "jade",
+    language: "en",
   });
   const state = userStore.getState();
   strictEqual(state.adventures.length, 1);
@@ -2598,6 +2605,7 @@ test("_replace updates adventures when content differs", () => {
     beginnerMode: true,
     onboardingComplete: false,
     theme: "jade",
+    language: "en",
   });
   const state = userStore.getState();
   strictEqual(state.adventures.length, 1);
@@ -2633,6 +2641,7 @@ test("adventuresEqual prevents unnecessary _replace on identical state", () => {
     beginnerMode: true,
     onboardingComplete: false,
     theme: "jade",
+    language: "en",
   };
   userStore.getState()._replace(state);
   userStore.getState()._replace(state);
@@ -3259,6 +3268,7 @@ test("_replace updates characters when content differs", () => {
     beginnerMode: true,
     onboardingComplete: false,
     theme: "jade",
+    language: "en",
   });
   const state = userStore.getState();
   strictEqual(state.characters.length, 1);

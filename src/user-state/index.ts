@@ -23,6 +23,7 @@ export {
   useOnboardingComplete,
   useBeginnerMode,
   useTheme,
+  useLanguage,
 } from "./store";
 export type { UserStore, CharacterReferenceUpdate } from "./store";
 export type {
@@ -33,13 +34,17 @@ export type {
   HitPoints,
   CombatValues,
   Theme,
+  Language,
 } from "./types";
 export {
   STORAGE_KEY,
   CURRENT_VERSION,
   DEFAULT_THEME,
   THEMES,
+  DEFAULT_LANGUAGE,
+  LANGUAGES,
   isTheme,
+  isLanguage,
   abilityModifier,
 } from "./types";
 export { normalize } from "./normalize";

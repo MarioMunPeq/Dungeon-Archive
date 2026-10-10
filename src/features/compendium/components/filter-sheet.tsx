@@ -3,6 +3,7 @@ import { createPortal } from "react-dom";
 import type { FilterDefinition } from "@/compendium";
 import { FilterChips } from "@/components/search";
 import { useDialog } from "@/components/ui/use-dialog";
+import { t } from "@/i18n";
 
 interface FilterSheetProps {
   readonly filters: readonly FilterDefinition[];
@@ -20,15 +21,15 @@ export function FilterSheet({ filters, values, onChange, onClose }: FilterSheetP
       ref={containerRef}
       role="dialog"
       aria-modal="true"
-      aria-label="Filters"
+      aria-label={t("filter.active")}
       className="fixed inset-0 z-50 flex flex-col bg-card animate-slide-up"
     >
       <div className="flex items-center gap-2 border-b border-border px-4 py-3">
-        <h2 className="flex-1 text-base font-semibold text-foreground">Filters</h2>
+        <h2 className="flex-1 text-base font-semibold text-foreground">{t("filter.active")}</h2>
         <button
           type="button"
           onClick={onClose}
-          aria-label="Close filters"
+          aria-label={t("filter.close")}
           className="hitbox-expand relative inline-flex h-8 w-8 items-center justify-center rounded-control text-muted-foreground transition-all duration-150 hover:bg-accent hover:text-foreground active:scale-90 active:bg-accent/80"
         >
           <svg

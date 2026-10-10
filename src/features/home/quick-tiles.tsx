@@ -2,6 +2,7 @@ import { memo } from "react";
 import type { ReactNode } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui";
+import { t } from "@/i18n";
 
 interface QuickTilesProps {
   readonly sessionCount: number;
@@ -58,11 +59,13 @@ export const QuickTiles = memo(function QuickTiles({ sessionCount }: QuickTilesP
           <SessionIcon />
         </IconChip>
         <div className="flex min-w-0 flex-col gap-1">
-          <span className="text-sm font-semibold text-foreground">Session</span>
+          <span className="text-sm font-semibold text-foreground">{t("page.session")}</span>
           <span className="text-xs leading-snug text-muted-foreground">
             {sessionCount > 0
-              ? `${sessionCount} item${sessionCount === 1 ? "" : "s"} pinned for your encounter.`
-              : "Pin creatures, spells, and items for your encounter."}
+              ? sessionCount === 1
+                ? t("home.sessionPinned")
+                : t("home.sessionPinnedOther", { count: sessionCount })
+              : t("home.sessionPinnedEmpty")}
           </span>
         </div>
         <Button
@@ -70,7 +73,7 @@ export const QuickTiles = memo(function QuickTiles({ sessionCount }: QuickTilesP
           className="mt-auto self-start"
           onClick={() => navigate(sessionCount > 0 ? "/session" : "/archive")}
         >
-          {sessionCount > 0 ? "Open Session" : "Search"}
+          {sessionCount > 0 ? t("home.openSession") : t("tab.search")}
         </Button>
       </div>
 
@@ -79,9 +82,9 @@ export const QuickTiles = memo(function QuickTiles({ sessionCount }: QuickTilesP
           <BookIcon />
         </IconChip>
         <div className="flex min-w-0 flex-col gap-1">
-          <span className="text-sm font-semibold text-foreground">Learn the basics</span>
+          <span className="text-sm font-semibold text-foreground">{t("home.learnBasics")}</span>
           <span className="text-xs leading-snug text-muted-foreground">
-            New to D&D? Start with the d20, checks, and your turn in combat.
+            {t("home.learnBasicsBody")}
           </span>
         </div>
         <Button
@@ -89,7 +92,7 @@ export const QuickTiles = memo(function QuickTiles({ sessionCount }: QuickTilesP
           className="mt-auto self-start"
           onClick={() => navigate("/archive?tab=rules")}
         >
-          Open Rules
+          {t("home.openRules")}
         </Button>
       </div>
     </div>

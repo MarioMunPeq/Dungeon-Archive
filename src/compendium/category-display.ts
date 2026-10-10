@@ -14,8 +14,15 @@ import {
   formatEquipmentType,
 } from "./category-registry";
 import { sourcePriority } from "./resolver/version-selector";
+import type { TranslationKey } from "@/i18n";
+import { t } from "@/i18n";
 export type { AnyEntity } from "./category-registry";
-export { SCHOOL_NAMES, formatMonsterType, formatEquipmentType } from "./category-registry";
+export {
+  formatMonsterType,
+  formatEquipmentType,
+  formatSchool,
+  formatRarity,
+} from "./category-registry";
 
 export interface DedupedEntity {
   readonly entity: import("./category-registry").AnyEntity;
@@ -56,16 +63,31 @@ export interface SortOption {
   readonly label: string;
 }
 
-export const SORT_OPTIONS: readonly SortOption[] = [
-  { value: "alphabetical", label: "Alphabetical" },
-  { value: "recent", label: "Recently Added" },
-];
+const SORT_LABELS: Record<CategorySort, TranslationKey> = {
+  alphabetical: "sort.alphabetical",
+  recent: "sort.recent",
+  level: "filter.level",
+  cr: "sort.challengeRating",
+  rarity: "filter.rarity",
+};
+
+function baseSortOptions(): SortOption[] {
+  return [
+    { value: "alphabetical", label: t("sort.alphabetical") },
+    { value: "recent", label: t("sort.recent") },
+  ];
+}
+
+const SORTABLE: Partial<Record<EntityCategory, CategorySort>> = {
+  spell: "level",
+  monster: "cr",
+  magicitem: "rarity",
+};
 
 export function getSortOptions(category: EntityCategory): readonly SortOption[] {
-  const options = [...SORT_OPTIONS];
-  if (category === "spell") options.push({ value: "level", label: "Level" });
-  if (category === "monster") options.push({ value: "cr", label: "Challenge Rating" });
-  if (category === "magicitem") options.push({ value: "rarity", label: "Rarity" });
+  const options = baseSortOptions();
+  const extra = SORTABLE[category];
+  if (extra) options.push({ value: extra, label: t(SORT_LABELS[extra]) });
   return options;
 }
 
@@ -149,7 +171,7 @@ export function buildOptions(
   labelMap?: Record<string, string>,
   labelFn?: (v: string) => string,
 ): { value: string; label: string }[] {
-  const options = [{ value: "", label: "All" }];
+  const options = [{ value: "", label: t("filter.all") }];
   for (const v of values) {
     const label = labelFn ? labelFn(v) : (labelMap?.[v] ?? v);
     options.push({ value: v, label });

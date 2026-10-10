@@ -17,37 +17,33 @@ import {
   useCloudSync,
 } from "@/sync";
 import type { CloudSnapshot } from "@/sync";
-import { userStore } from "@/user-state";
+import { t } from "@/i18n";
+import { useLanguage, userStore } from "@/user-state";
 import { InstallAppSection } from "./install-app";
 
 type Operation = "signIn" | "signOut" | "upload" | "restore";
 
-const timestampFormatter = new Intl.DateTimeFormat(undefined, {
-  dateStyle: "medium",
-  timeStyle: "short",
-});
-const timeFormatter = new Intl.DateTimeFormat(undefined, {
-  hour: "2-digit",
-  minute: "2-digit",
-});
-const dateFormatter = new Intl.DateTimeFormat(undefined, { dateStyle: "medium" });
-
-function formatTimestamp(at: number): string {
-  return timestampFormatter.format(new Date(at));
+/**
+ * Formatters are locale-aware so Spanish speakers get "14 de marzo de 2026,
+ * 18:04" instead of an anglicized "Mar 14, 2026". They are built per call
+ * because the locale follows the chosen language rather than the browser.
+ */
+function formatTimestamp(at: number, locale: string): string {
+  return new Intl.DateTimeFormat(locale, { dateStyle: "medium", timeStyle: "short" }).format(
+    new Date(at),
+  );
 }
 
-function formatRelative(at: number, now = Date.now()): string {
-  const time = timeFormatter.format(new Date(at));
+function formatRelative(at: number, locale: string, now = Date.now()): string {
+  const time = new Intl.DateTimeFormat(locale, { hour: "2-digit", minute: "2-digit" }).format(
+    new Date(at),
+  );
   const startOfToday = new Date(now).setHours(0, 0, 0, 0);
   const startOfDay = new Date(at).setHours(0, 0, 0, 0);
   const days = Math.round((startOfToday - startOfDay) / 86400000);
-  if (days === 0) return `Today ${time}`;
-  if (days === 1) return `Yesterday ${time}`;
-  return dateFormatter.format(new Date(at));
-}
-
-function plural(n: number, singular: string, pluralText: string): string {
-  return `${n} ${n === 1 ? singular : pluralText}`;
+  if (days === 0) return t("backup.todayAt", { time });
+  if (days === 1) return t("backup.yesterdayAt", { time });
+  return new Intl.DateTimeFormat(locale, { dateStyle: "medium" }).format(new Date(at));
 }
 
 interface PreviewCounts {
@@ -92,6 +88,7 @@ export function BackupPage() {
   const markIdle = useCloudSync((s) => s.markIdle);
   const online = useOnline();
   useUserStateVersion();
+  const language = useLanguage();
   const { show } = useSnackbar();
   const [busy, setBusy] = useState<Operation | null>(null);
   const [previewLoading, setPreviewLoading] = useState(false);
@@ -133,7 +130,7 @@ export function BackupPage() {
 
   const handleUpload = useCallback(() => {
     if (gateway === null) return;
-    void run("upload", upload, "Backup uploaded.");
+    void run("upload", upload, t("backup.uploaded"));
   }, [gateway, run]);
 
   const handleRequestRestore = useCallback(async () => {
@@ -143,7 +140,7 @@ export function BackupPage() {
     try {
       const snapshot = await gateway.fetchSnapshot();
       if (snapshot === null) {
-        setError("No cloud backup found.");
+        setError(t("backup.notFound"));
         return;
       }
       setPreview(snapshot);
@@ -157,7 +154,7 @@ export function BackupPage() {
 
   const handleConfirmRestore = useCallback(() => {
     setPreview(null);
-    void run("restore", restore, "Backup restored.");
+    void run("restore", restore, t("backup.restored"));
   }, [run]);
 
   const ready = gateway !== null;
@@ -172,15 +169,12 @@ export function BackupPage() {
   return (
     <div className="flex flex-col px-4 py-6">
       <div className="mb-6 space-y-1">
-        <p className="text-xs text-muted-foreground">
-          Your data lives locally on this device. Cloud backup is optional and lets you restore it
-          on another device.
-        </p>
+        <p className="text-xs text-muted-foreground">{t("backup.intro")}</p>
       </div>
 
       {!ready && (
         <div role="status" className="space-y-2">
-          <span className="sr-only">Loading backup…</span>
+          <span className="sr-only">{t("backup.loading")}</span>
           <Skeleton className="h-7 w-44" />
           <Skeleton className="h-24 w-full" />
         </div>
@@ -191,17 +185,14 @@ export function BackupPage() {
           role="status"
           className="flex flex-col gap-1 rounded-card border border-border bg-muted/30 p-4"
         >
-          <p className="text-sm font-semibold text-foreground">Cloud Backup is not available</p>
-          <p className="text-xs text-muted-foreground">
-            This build was compiled without Firebase configuration. Cloud Backup is an optional
-            feature; everything else works fully offline.
-          </p>
+          <p className="text-sm font-semibold text-foreground">{t("backup.unavailable")}</p>
+          <p className="text-xs text-muted-foreground">{t("backup.unavailableBody")}</p>
         </div>
       )}
 
       {ready && !disabled && !authReady && (
         <div role="status">
-          <span className="sr-only">Checking account…</span>
+          <span className="sr-only">{t("backup.checkingAccount")}</span>
           <Skeleton className="h-11 w-full" />
         </div>
       )}
@@ -210,33 +201,29 @@ export function BackupPage() {
         <div className="flex flex-col gap-6">
           {!online && (
             <div className="flex flex-col gap-1 rounded-card border border-border bg-muted/30 p-3">
-              <p className="text-sm font-semibold text-warning">Offline</p>
-              <p className="text-xs text-muted-foreground">
-                Cloud backup requires an internet connection.
-              </p>
+              <p className="text-sm font-semibold text-warning">{t("backup.offline")}</p>
+              <p className="text-xs text-muted-foreground">{t("backup.offlineBody")}</p>
             </div>
           )}
 
-          <Section title="Account">
+          <Section title={t("backup.account")}>
             <Surface>
               {!signedIn ? (
                 <div className="flex flex-col gap-3">
-                  <p className="text-xs text-muted-foreground">
-                    Sign in with Google to back up your local data.
-                  </p>
+                  <p className="text-xs text-muted-foreground">{t("backup.signInBody")}</p>
                   <Inline>
                     <Button variant="outline" onClick={handleSignIn} disabled={!canAct}>
-                      {busy === "signIn" ? "Signing in…" : "Sign in with Google"}
+                      {busy === "signIn" ? t("backup.signingIn") : t("backup.signInWithGoogle")}
                     </Button>
                   </Inline>
                 </div>
               ) : (
                 <div className="flex items-center justify-between gap-3">
                   <p className="min-w-0 truncate text-sm text-foreground">
-                    {user.email ?? user.displayName ?? "Connected"}
+                    {user.email ?? user.displayName ?? t("backup.connected")}
                   </p>
                   <Button variant="outline" size="sm" onClick={handleSignOut} disabled={!canAct}>
-                    {busy === "signOut" ? "Signing out…" : "Sign out"}
+                    {busy === "signOut" ? t("backup.signingOut") : t("backup.signOut")}
                   </Button>
                 </div>
               )}
@@ -244,27 +231,33 @@ export function BackupPage() {
           </Section>
 
           {signedIn && user !== null && (
-            <Section title="Backup">
+            <Section title={t("page.backup")}>
               <Surface>
                 <div className="flex flex-col gap-2">
                   <div className="flex items-center justify-between gap-3">
-                    <span className="text-xs text-muted-foreground">Last backup</span>
+                    <span className="text-xs text-muted-foreground">{t("backup.lastBackup")}</span>
                     <span className="text-sm font-medium text-foreground">
                       {lastCloudBackupAt !== null
-                        ? formatTimestamp(lastCloudBackupAt)
-                        : "No backup found"}
+                        ? formatTimestamp(lastCloudBackupAt, language)
+                        : t("backup.noBackup")}
                     </span>
                   </div>
                   <div className="flex items-center justify-between gap-3">
-                    <span className="text-xs text-muted-foreground">Local data</span>
+                    <span className="text-xs text-muted-foreground">{t("backup.localData")}</span>
                     {lastCloudBackupAt !== null ? (
                       upToDate ? (
-                        <span className="text-xs font-medium text-success">Backup current</span>
+                        <span className="text-xs font-medium text-success">
+                          {t("backup.upToDate")}
+                        </span>
                       ) : (
-                        <span className="text-xs font-medium text-warning">Backup outdated</span>
+                        <span className="text-xs font-medium text-warning">
+                          {t("backup.outdated")}
+                        </span>
                       )
                     ) : (
-                      <span className="text-xs text-muted-foreground">Not uploaded yet</span>
+                      <span className="text-xs text-muted-foreground">
+                        {t("backup.notUploaded")}
+                      </span>
                     )}
                   </div>
                 </div>
@@ -276,12 +269,10 @@ export function BackupPage() {
                     onClick={handleUpload}
                     disabled={!canAct || !online || upToDate}
                   >
-                    {busy === "upload" ? "Uploading…" : "Upload backup"}
+                    {busy === "upload" ? t("backup.uploading") : t("backup.upload")}
                   </Button>
                   <p className="px-1 text-xs text-foreground-subtle">
-                    {upToDate
-                      ? "Already up to date."
-                      : "Replaces the cloud copy with your current data."}
+                    {upToDate ? t("backup.alreadyUpToDate") : t("backup.uploadBody")}
                   </p>
                 </div>
                 <div className="flex flex-col gap-1">
@@ -291,14 +282,12 @@ export function BackupPage() {
                     disabled={!canAct || !online}
                   >
                     {busy === "restore"
-                      ? "Restoring…"
+                      ? t("backup.restoring")
                       : previewLoading
-                        ? "Checking…"
-                        : "Restore backup"}
+                        ? t("backup.checking")
+                        : t("backup.restore")}
                   </Button>
-                  <p className="px-1 text-xs text-foreground-subtle">
-                    Replaces your local data with the cloud copy.
-                  </p>
+                  <p className="px-1 text-xs text-foreground-subtle">{t("backup.restoreBody")}</p>
                 </div>
               </div>
               {error && (
@@ -315,9 +304,9 @@ export function BackupPage() {
 
       {preview !== null && (
         <ConfirmDialog
-          title="Restore backup"
-          message="This will replace your local data."
-          confirmLabel="Restore"
+          title={t("backup.restore")}
+          message={t("backup.restoreWarning")}
+          confirmLabel={t("backup.restore")}
           destructive
           onCancel={() => setPreview(null)}
           onConfirm={handleConfirmRestore}
@@ -326,22 +315,30 @@ export function BackupPage() {
             const counts = previewCounts(preview);
             const character = preview.state.characters[0] ?? null;
             const updated =
-              typeof preview.updatedAt === "number" ? formatRelative(preview.updatedAt) : "unknown";
+              typeof preview.updatedAt === "number"
+                ? formatRelative(preview.updatedAt, language)
+                : t("backup.unknown");
             return (
               <div className="space-y-2">
                 <div className="flex items-center justify-between gap-3 text-xs">
-                  <span className="text-muted-foreground">Cloud backup</span>
-                  <span className="text-foreground">Last updated {updated}</span>
+                  <span className="text-muted-foreground">{t("backup.cloudCopy")}</span>
+                  <span className="text-foreground">
+                    {t("backup.lastUpdatedAt", { date: updated })}
+                  </span>
                 </div>
                 <div className="space-y-1 rounded-card border border-border bg-muted/30 p-3 text-xs">
                   <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
-                    Contains
+                    {t("backup.contains")}
                   </p>
                   <p className="text-foreground">
-                    {character !== null ? `Character: ${character.name}` : "No character saved"}
+                    {character !== null
+                      ? t("backup.containsCharacter", { name: character.name })
+                      : t("backup.containsNoCharacter")}
                   </p>
                   <p className="text-foreground">
-                    {plural(counts.sessionCount, "session item", "session items")}
+                    {counts.sessionCount === 1
+                      ? t("backup.containsItems", { count: counts.sessionCount })
+                      : t("backup.containsItemsOther", { count: counts.sessionCount })}
                   </p>
                 </div>
               </div>

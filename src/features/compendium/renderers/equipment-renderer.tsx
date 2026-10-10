@@ -5,6 +5,7 @@ import { ContentRenderer } from "@/components/content";
 import { Stack } from "@/components/ui/Stack";
 import { EntityProperty, EntityMetadataGrid } from "@/components/ui/entity-property";
 import { DamageTypeTag } from "@/components/entity";
+import { t } from "@/i18n";
 
 interface EquipmentRendererProps {
   readonly entity: Equipment;
@@ -14,12 +15,12 @@ export function EquipmentRenderer({ entity }: EquipmentRendererProps) {
   return (
     <Stack gap="md">
       <EntityMetadataGrid>
-        <EntityProperty label="Type" value={formatEquipmentType(entity.type)} />
-        {entity.cost && <EntityProperty label="Cost" value={entity.cost} />}
-        {entity.weight && <EntityProperty label="Weight" value={entity.weight} />}
+        <EntityProperty label={t("filter.type")} value={formatEquipmentType(entity.type)} />
+        {entity.cost && <EntityProperty label={t("equipment.cost")} value={entity.cost} />}
+        {entity.weight && <EntityProperty label={t("equipment.weight")} value={entity.weight} />}
         {(entity.damage || entity.damageType) && (
           <EntityProperty
-            label="Damage"
+            label={t("term.damage")}
             stat={Boolean(entity.damage)}
             value={
               <span className="flex flex-wrap items-baseline gap-x-2 gap-y-0.5">
@@ -29,16 +30,20 @@ export function EquipmentRenderer({ entity }: EquipmentRendererProps) {
             }
           />
         )}
-        {entity.ac !== undefined && <EntityProperty label="AC" value={String(entity.ac)} stat />}
-        {entity.strength && <EntityProperty label="Strength" value={entity.strength} />}
-        {entity.stealth && <EntityProperty label="Stealth" value={entity.stealth} />}
+        {entity.ac !== undefined && (
+          <EntityProperty label={t("character.armorClass")} value={String(entity.ac)} stat />
+        )}
+        {entity.strength && (
+          <EntityProperty label={t("ability.strength")} value={entity.strength} />
+        )}
+        {entity.stealth && <EntityProperty label={t("equipment.stealth")} value={entity.stealth} />}
         {entity.properties && entity.properties.length > 0 && (
-          <EntityProperty label="Properties" value={entity.properties.join(", ")} />
+          <EntityProperty label={t("filter.property")} value={entity.properties.join(", ")} />
         )}
       </EntityMetadataGrid>
 
       {entity.description.length > 0 && (
-        <Section title="Description">
+        <Section title={t("common.description")}>
           <ContentRenderer blocks={entity.description} />
         </Section>
       )}

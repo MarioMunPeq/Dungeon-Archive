@@ -1,6 +1,8 @@
 import { NavLink } from "react-router-dom";
 import { cn } from "@/lib/utils";
 import { ROUTES } from "@/config/constants";
+import type { TranslationKey } from "@/i18n";
+import { t } from "@/i18n";
 import {
   HomeIcon,
   ArchiveIcon,
@@ -9,18 +11,18 @@ import {
   CharacterIcon,
 } from "@/components/layout/nav-icons";
 
-const NAV_ITEMS = [
-  { to: ROUTES.HOME, label: "Home", icon: HomeIcon },
-  { to: ROUTES.ARCHIVE, label: "Archive", icon: ArchiveIcon },
-  { to: ROUTES.COMBAT, label: "Combat", icon: CombatIcon },
-  { to: ROUTES.DICE, label: "Dice", icon: DiceIcon },
-  { to: ROUTES.CHARACTER, label: "Character", icon: CharacterIcon },
-] as const;
+const NAV_ITEMS: readonly { to: string; label: TranslationKey; icon: typeof HomeIcon }[] = [
+  { to: ROUTES.HOME, label: "nav.home", icon: HomeIcon },
+  { to: ROUTES.ARCHIVE, label: "nav.archive", icon: ArchiveIcon },
+  { to: ROUTES.COMBAT, label: "nav.combat", icon: CombatIcon },
+  { to: ROUTES.DICE, label: "nav.dice", icon: DiceIcon },
+  { to: ROUTES.CHARACTER, label: "nav.character", icon: CharacterIcon },
+];
 
 export function BottomNav() {
   return (
     <nav
-      aria-label="Main Navigation"
+      aria-label={t("nav.main")}
       className="relative z-50 border-t border-border bg-background pb-[env(safe-area-inset-bottom)]"
     >
       <div className="mx-auto flex w-full max-w-screen-xl">
@@ -39,7 +41,7 @@ export function BottomNav() {
             }
           >
             <Icon className="h-5 w-5" />
-            <span>{label}</span>
+            <span>{t(label)}</span>
           </NavLink>
         ))}
       </div>

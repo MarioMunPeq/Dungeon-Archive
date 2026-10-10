@@ -1,5 +1,6 @@
 import { Button, Section, Surface } from "@/components/ui";
 import { useInstallPrompt } from "@/hooks/use-install-prompt";
+import { t } from "@/i18n";
 
 export function InstallAppSection() {
   const { canPrompt, showIosHint, install } = useInstallPrompt();
@@ -7,22 +8,19 @@ export function InstallAppSection() {
   if (!canPrompt && !showIosHint) return null;
 
   return (
-    <Section title="Install">
+    <Section title={t("install.title")}>
       <Surface>
         <div className="flex flex-col gap-3">
-          <p className="text-xs text-muted-foreground">
-            Add Dungeon Archive to your home screen to run it full-screen, offline, like a native
-            app.
-          </p>
+          <p className="text-xs text-muted-foreground">{t("install.body")}</p>
           {canPrompt ? (
             <div className="flex flex-col gap-1">
-              <Button onClick={() => void install()}>Install App</Button>
+              <Button onClick={() => void install()}>{t("install.action")}</Button>
             </div>
           ) : (
             <div className="flex flex-col gap-1">
               <p className="text-xs text-foreground-subtle">
-                On iPhone or iPad: tap the Share button in Safari, then choose{" "}
-                <span className="font-medium text-foreground">Add to Home Screen</span>.
+                {t("install.iosHint")}{" "}
+                <span className="font-medium text-foreground">{t("install.iosAction")}</span>.
               </p>
             </div>
           )}

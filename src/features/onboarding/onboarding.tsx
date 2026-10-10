@@ -1,28 +1,30 @@
 import { useEffect, useState } from "react";
 import { useOnboardingComplete, userStore } from "@/user-state";
 import { Button } from "@/components/ui/Button";
+import type { TranslationKey } from "@/i18n";
+import { t } from "@/i18n";
 
 interface OnboardingStep {
-  readonly title: string;
-  readonly body: string;
+  readonly title: TranslationKey;
+  readonly body: TranslationKey;
 }
 
 const STEPS: readonly OnboardingStep[] = [
   {
-    title: "Search the Compendium instantly.",
-    body: "Every spell, monster, item, and condition in the Compendium is a few keystrokes away.",
+    title: "onboarding.step1.title",
+    body: "onboarding.step1.body",
   },
   {
-    title: "Pin anything to your Session.",
-    body: "Keep the monsters, spells, and items you need right now one tap away during play.",
+    title: "onboarding.step2.title",
+    body: "onboarding.step2.body",
   },
   {
-    title: "Learn the rules as you play.",
-    body: "New to the game? The Rules tab in the Archive explains the d20, ability checks, and your turn in combat.",
+    title: "onboarding.step3.title",
+    body: "onboarding.step3.body",
   },
   {
-    title: "You're ready. Start exploring.",
-    body: "Everything stays on this device. Search, pin, and run your game.",
+    title: "onboarding.step4.title",
+    body: "onboarding.step4.body",
   },
 ];
 
@@ -59,13 +61,13 @@ export function Onboarding() {
     <div
       role="dialog"
       aria-modal="true"
-      aria-label="Welcome to Dungeon Archive"
+      aria-label={t("onboarding.welcome")}
       className="fixed inset-0 z-50 flex flex-col bg-background"
     >
       <div className="flex flex-1 flex-col justify-center px-6">
         <div key={step} className="flex flex-col gap-3 animate-slide-up">
-          <h2 className="text-2xl font-bold text-foreground">{STEPS[step]!.title}</h2>
-          <p className="max-w-md text-sm text-muted-foreground">{STEPS[step]!.body}</p>
+          <h2 className="text-2xl font-bold text-foreground">{t(STEPS[step]!.title)}</h2>
+          <p className="max-w-md text-sm text-muted-foreground">{t(STEPS[step]!.body)}</p>
         </div>
       </div>
       <div className="flex flex-col gap-4 border-t border-border px-6 py-5">
@@ -81,10 +83,10 @@ export function Onboarding() {
         </div>
         <div className="flex items-center justify-between gap-3">
           <Button variant="ghost" onClick={finish}>
-            Skip
+            {t("onboarding.skip")}
           </Button>
           <Button data-onboarding-primary onClick={isLast ? finish : next}>
-            {isLast ? "Start exploring" : "Next"}
+            {isLast ? t("onboarding.start") : t("onboarding.next")}
           </Button>
         </div>
       </div>

@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { t } from "@/i18n";
 
 interface Crumb {
   readonly label: string;
@@ -11,7 +12,7 @@ interface EntityBreadcrumbsProps {
 
 export function EntityBreadcrumbs({ crumbs }: EntityBreadcrumbsProps) {
   return (
-    <nav aria-label="Breadcrumb" className="mb-4">
+    <nav aria-label={t("a11y.breadcrumb")} className="mb-4">
       <ol className="flex flex-wrap items-center gap-2 text-xs text-muted-foreground">
         {crumbs.map((crumb, i) => {
           const isLast = i === crumbs.length - 1;

@@ -8,15 +8,19 @@ import { SearchEmptyState } from "./components/search-empty-state";
 import { userStore } from "@/user-state";
 import { useDebouncedValue } from "@/hooks/use-debounced-value";
 import { CATEGORY_REGISTRY } from "@/compendium";
+import { t } from "@/i18n";
 import { Button } from "@/components/ui/Button";
 
-const CATEGORY_OPTIONS = [
-  { value: "", label: "All" },
-  ...Object.entries(CATEGORY_REGISTRY).map(([key, reg]) => ({
-    value: key,
-    label: reg.plural,
-  })),
-];
+/** Built per call: the category labels are localized. */
+function categoryOptions(): { value: string; label: string }[] {
+  return [
+    { value: "", label: t("filter.all") },
+    ...Object.entries(CATEGORY_REGISTRY).map(([key, reg]) => ({
+      value: key,
+      label: t(reg.plural),
+    })),
+  ];
+}
 
 export function SearchPage() {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -94,8 +98,8 @@ export function SearchPage() {
           value={query}
           onChange={setQuery}
           onKeyDown={handleKeyDown}
-          placeholder="Search spells, equipment, conditions..."
-          ariaLabel="Search"
+          placeholder={t("search.placeholder")}
+          ariaLabel={t("common.search")}
           role="combobox"
           ariaExpanded={hasResults}
           ariaControls="search-results-listbox"
@@ -106,10 +110,10 @@ export function SearchPage() {
       {hasQuery && (
         <div className="px-4 pt-3 pb-1">
           <FilterChips
-            options={CATEGORY_OPTIONS}
+            options={categoryOptions()}
             selected={categoryFilter}
             onChange={setCategoryFilter}
-            ariaLabel="Filter by category"
+            ariaLabel={t("search.filterByCategory")}
           />
         </div>
       )}
@@ -118,21 +122,21 @@ export function SearchPage() {
       {hasQuery && !hasResults && (
         <div className="px-4">
           <EmptyResults
-            title={`No results for \u201c${debouncedQuery}\u201d`}
+            title={t("search.noResults", { query: debouncedQuery })}
             description={
               <>
-                Try a different search term, or{" "}
+                {t("search.noResultsBody")}{" "}
                 <Link
                   to="/"
                   className="text-primary transition-colors duration-150 hover:underline"
                 >
-                  look through the Compendium
+                  {t("search.browseCompendium")}
                 </Link>
               </>
             }
             action={
               <Button variant="outline" size="sm" onClick={() => setQuery("")}>
-                Clear search
+                {t("search.clear")}
               </Button>
             }
           />

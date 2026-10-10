@@ -100,3 +100,14 @@ export function PaletteIcon(props: IconProps) {
     </Icon>
   );
 }
+
+export function LanguagesIcon(props: IconProps) {
+  return (
+    <Icon {...props}>
+      <path d="M2 5h10M7 3v2c0 4.4-2.2 8-5 8-1 0-1.8-.3-2.5-.8" />
+      <path d="M4.5 8.5c.8 1.6 2.4 2.8 4.5 3.2" />
+      <path d="m12 21 4.5-11L21 21" />
+      <path d="M13.8 17h5.4" />
+    </Icon>
+  );
+}
