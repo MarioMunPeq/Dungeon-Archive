@@ -441,8 +441,7 @@ export const es: Record<keyof typeof en, string> = {
   "rules.d20.title": "El d20",
   "rules.d20.summary":
     "Casi todas las pruebas de D&D empiezan tirando un dado de 20 caras, el d20. Cuanto más alto sale, mejor.",
-  "rules.d20.point1":
-    "Tira el d20 y suma el modificador de la característica que estés usando.",
+  "rules.d20.point1": "Tira el d20 y suma el modificador de la característica que estés usando.",
   "rules.d20.point2": "Supera o iguala el número de dificultad (CD) para tener éxito.",
   "rules.d20.point3":
     "Ventaja: tira dos veces y quédate con la más alta. Desventaja: tira dos veces y quédate con la más baja.",
@@ -454,8 +453,10 @@ export const es: Record<keyof typeof en, string> = {
   "rules.checks.summary":
     "Cuando intentas algo arriesgado, el DM te pide una prueba de característica usando una de tus seis características.",
   "rules.checks.point1": "Fuerza (FUE): empujar, levantar, romper.",
-  "rules.checks.point2": "Destreza (DES): moverte a hurtadillas, mantener el equilibrio, reaccionar.",
-  "rules.checks.point3": "Constitución (CON): resistir veneno, agotamiento, mantener la concentración.",
+  "rules.checks.point2":
+    "Destreza (DES): moverte a hurtadillas, mantener el equilibrio, reaccionar.",
+  "rules.checks.point3":
+    "Constitución (CON): resistir veneno, agotamiento, mantener la concentración.",
   "rules.checks.point4": "Inteligencia (INT): recordar, resolver, investigar.",
   "rules.checks.point5": "Sabiduría (SAB): percatarse, intuir peligro, leer a la gente.",
   "rules.checks.point6": "Carisma (CAR): convencer, actuar, intimidar.",
@@ -501,7 +502,8 @@ export const es: Record<keyof typeof en, string> = {
   "rules.rest.point2": "Descanso corto: 1 hora; gastas dados de golpe para curarte.",
   "rules.rest.point3":
     "Descanso largo: 8 horas; recuperas todos tus PV y la mitad de tus dados de golpe.",
-  "rules.rest.help": "Lleva el control de tus PV actuales en la pestaña Combate durante la partida.",
+  "rules.rest.help":
+    "Lleva el control de tus PV actuales en la pestaña Combate durante la partida.",
 
   "rules.spellcasting.title": "Lanzamiento de hechizos",
   "rules.spellcasting.summary":

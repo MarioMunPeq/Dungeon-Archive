@@ -485,10 +485,8 @@ export const en = {
   "rules.attacks.title": "Attacks & Damage",
   "rules.attacks.summary":
     "To attack, roll a d20 and add your attack bonus. If you hit, roll damage.",
-  "rules.attacks.point1":
-    "Attack roll: d20 + attack bonus vs. the target's Armor Class (AC).",
-  "rules.attacks.point2":
-    "Damage roll: the weapon or spell's dice, plus your ability modifier.",
+  "rules.attacks.point1": "Attack roll: d20 + attack bonus vs. the target's Armor Class (AC).",
+  "rules.attacks.point2": "Damage roll: the weapon or spell's dice, plus your ability modifier.",
   "rules.attacks.point3": "Criticals: a natural 20 always hits and rolls double damage dice.",
 
   "rules.rest.title": "Hit Points & Resting",
@@ -499,8 +497,7 @@ export const en = {
   "rules.rest.help": "Track your current HP in the Combat tab while you play.",
 
   "rules.spellcasting.title": "Spellcasting",
-  "rules.spellcasting.summary":
-    "Casting a spell takes an Action unless the spell says otherwise.",
+  "rules.spellcasting.summary": "Casting a spell takes an Action unless the spell says otherwise.",
   "rules.spellcasting.point1":
     "Spell Attack: roll d20 + your spell attack bonus vs. the target's AC.",
   "rules.spellcasting.point2": "Saving Throw: the target rolls against your spell save DC.",

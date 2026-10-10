@@ -54,12 +54,7 @@ const RULE_SECTIONS: readonly RuleSectionData[] = [
     title: "rules.turn.title",
     titleHelp: "rules.turn.titleHelp",
     summary: "rules.turn.summary",
-    points: [
-      "rules.turn.point1",
-      "rules.turn.point2",
-      "rules.turn.point3",
-      "rules.turn.point4",
-    ],
+    points: ["rules.turn.point1", "rules.turn.point2", "rules.turn.point3", "rules.turn.point4"],
     help: "rules.turn.help",
   },
   {
@@ -80,11 +75,7 @@ const RULE_SECTIONS: readonly RuleSectionData[] = [
     id: "spellcasting",
     title: "rules.spellcasting.title",
     summary: "rules.spellcasting.summary",
-    points: [
-      "rules.spellcasting.point1",
-      "rules.spellcasting.point2",
-      "rules.spellcasting.point3",
-    ],
+    points: ["rules.spellcasting.point1", "rules.spellcasting.point2", "rules.spellcasting.point3"],
     help: "rules.spellcasting.help",
   },
 ];
