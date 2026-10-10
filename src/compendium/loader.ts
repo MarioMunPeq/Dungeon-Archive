@@ -6,6 +6,7 @@ import type {
   Monster,
   MagicItem,
   Feat,
+  Class,
   SearchIndexEntry,
 } from "@/types/compendium";
 import type { CompendiumState } from "./types";
@@ -21,6 +22,7 @@ export let state: CompendiumState = {
   monsters: new Map(),
   magicItems: new Map(),
   feats: new Map(),
+  classes: new Map(),
   spellList: [],
   conditionList: [],
   equipmentList: [],
@@ -28,6 +30,7 @@ export let state: CompendiumState = {
   monsterList: [],
   magicItemList: [],
   featList: [],
+  classList: [],
   initialized: false,
 };
 
@@ -49,6 +52,7 @@ export async function loadCompendium(): Promise<void> {
     monsters,
     magicItems,
     feats,
+    classes,
     searchIndex,
     relatedIndexModule,
   ] = await Promise.all([
@@ -59,6 +63,7 @@ export async function loadCompendium(): Promise<void> {
     import("../generated/compendium/monsters.json"),
     import("../generated/compendium/magic-items.json"),
     import("../generated/compendium/feats.json"),
+    import("../generated/compendium/classes.json"),
     import("../generated/compendium/search-index.json"),
     import("../generated/compendium/related-index.json"),
   ]);
@@ -70,6 +75,7 @@ export async function loadCompendium(): Promise<void> {
   const monsterList = Object.freeze(monsters.default as Monster[]);
   const magicItemList = Object.freeze(magicItems.default as MagicItem[]);
   const featList = Object.freeze(feats.default as Feat[]);
+  const classList = Object.freeze(classes.default as Class[]);
 
   state = {
     spells: toMap(spellList),
@@ -79,6 +85,7 @@ export async function loadCompendium(): Promise<void> {
     monsters: toMap(monsterList),
     magicItems: toMap(magicItemList),
     feats: toMap(featList),
+    classes: toMap(classList),
     spellList,
     conditionList,
     equipmentList,
@@ -86,6 +93,7 @@ export async function loadCompendium(): Promise<void> {
     monsterList,
     magicItemList,
     featList,
+    classList,
     initialized: true,
   };
 
@@ -99,6 +107,7 @@ export async function loadCompendium(): Promise<void> {
     ...monsterList,
     ...magicItemList,
     ...featList,
+    ...classList,
   ]);
 
   setSearchIndex(searchIndex.default as SearchIndexEntry[]);

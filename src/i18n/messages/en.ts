@@ -60,6 +60,8 @@ export const en = {
   "category.magicitem.many": "Magic Items",
   "category.feat.one": "Feat",
   "category.feat.many": "Feats",
+  "category.class.one": "Class",
+  "category.class.many": "Classes",
 
   // ---- Spell schools ----
   "school.A": "Abjuration",
@@ -332,6 +334,8 @@ export const en = {
     "This removes their combat numbers, ability scores, and references. This can't be undone.",
   "character.picker.weapons": "Weapons",
   "character.picker.magicItems": "Magic Items",
+  "character.classes.one": "Class",
+  "character.classes.many": "Classes",
   "character.newCharacter": "New Character",
   "character.name": "Name",
   "character.subclass": "Subclass",

@@ -1,7 +1,7 @@
 import type { ContentBlock } from "./content-block";
 
 export type EntityCategory =
-  "spell" | "condition" | "equipment" | "action" | "monster" | "magicitem" | "feat";
+  "spell" | "condition" | "equipment" | "action" | "monster" | "magicitem" | "feat" | "class";
 
 export type CompendiumCategory = EntityCategory;
 
@@ -69,6 +69,42 @@ export interface Feat extends CompendiumEntry {
   readonly prerequisite?: string;
   readonly repeatable?: boolean;
   readonly description: readonly ContentBlock[];
+}
+
+export interface Class extends CompendiumEntry {
+  readonly category: "class";
+  readonly hitDice: {
+    readonly number: number;
+    readonly faces: number;
+  };
+  readonly proficiency: readonly string[];
+  readonly startingProficiencies: {
+    readonly armor?: readonly string[];
+    readonly weapons?: readonly string[];
+    readonly tools?: readonly string[];
+    readonly savingThrows?: readonly string[];
+    readonly skills?: { readonly choose?: { readonly from: readonly string[]; readonly count: number } }[];
+  };
+  readonly startingEquipment?: {
+    readonly goldAlternative?: string;
+    readonly default?: readonly (readonly string[])[];
+    readonly defaultData?: readonly {
+      readonly a?: readonly string[];
+      readonly b?: readonly string[];
+    }[];
+  };
+  readonly multiclassing?: {
+    readonly requirements?: { readonly or?: readonly { readonly str?: number; readonly dex?: number }[] };
+    readonly proficienciesGained?: {
+      readonly armor?: readonly string[];
+      readonly weapons?: readonly string[];
+    };
+  };
+  readonly classFeatures: readonly string[];
+  readonly subclassGroups?: readonly {
+    readonly name: string;
+    readonly source: string;
+  }[];
 }
 
 export interface Monster extends CompendiumEntry {

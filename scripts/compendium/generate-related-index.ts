@@ -223,6 +223,8 @@ function extractTags(entity: CompendiumEntry): string[] {
       return extractMagicItemTags(entity as MagicItem);
     case "feat":
       return extractFeatTags(entity as Feat);
+    case "class":
+      return [];
   }
 }
 
@@ -320,6 +322,8 @@ function computeSimilarity(
       return magicItemScoring(a as MagicItem, b as MagicItem, tagsA, tagsB);
     case "feat":
       return featScoring(a as Feat, b as Feat, tagsA, tagsB);
+    case "class":
+      return 0;
     case "action":
       return 0;
   }

@@ -6,6 +6,7 @@ import type {
   Monster,
   MagicItem,
   Feat,
+  Class,
   EntityCategory,
 } from "@/types/compendium";
 import type { CategoryMap, CategoryKey } from "./types";
@@ -27,6 +28,8 @@ function resolveMap(category: EntityCategory): Map<string, CategoryMap[CategoryK
       return state.magicItems;
     case "feat":
       return state.feats;
+    case "class":
+      return state.classes;
   }
 }
 
@@ -70,4 +73,8 @@ export function getMagicItems(): readonly MagicItem[] {
 
 export function getFeats(): readonly Feat[] {
   return state.featList;
+}
+
+export function getClasses(): readonly Class[] {
+  return state.classList;
 }

@@ -75,6 +75,7 @@ export type {
   Monster,
   MagicItem,
   Feat,
+  Class,
   SearchIndexEntry,
   CompendiumEntry,
   EntityCategory,

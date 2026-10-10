@@ -7,6 +7,7 @@ import type { Raw5eItem } from "../../src/adapter/5etools-raw-types";
 import type { Raw5eMonster } from "../../src/adapter/5etools-raw-types";
 import type { Raw5eMagicItem } from "../../src/adapter/5etools-raw-types";
 import type { Raw5eFeat } from "../../src/adapter/5etools-raw-types";
+import type { Raw5eClass } from "../../src/adapter/5etools-raw-types";
 import { transformFeats } from "./categories/feat/transform";
 import { validateFeats } from "./categories/feat/validate";
 import { transformSpells } from "./categories/spell/transform";
@@ -21,6 +22,8 @@ import { transformMonsters } from "./categories/monster/transform";
 import { validateMonsters } from "./categories/monster/validate";
 import { transformMagicItems } from "./categories/magic-item/transform";
 import { validateMagicItems } from "./categories/magic-item/validate";
+import { transformClasses } from "./categories/class/transform";
+import { validateClasses } from "./categories/class/validate";
 import { generateSearchIndex } from "./generate-index";
 import { generateRelatedIndex } from "./generate-related-index";
 
@@ -141,6 +144,29 @@ const CATEGORIES: readonly CategoryConfig[] = [
     },
     validate: validateMagicItems as (entities: CompendiumEntry[]) => ValidationError[],
     outputPath: "magic-items.json",
+  },
+  {
+    name: "classes",
+    sourcePaths: [
+      "class/class-artificer.json",
+      "class/class-barbarian.json",
+      "class/class-bard.json",
+      "class/class-cleric.json",
+      "class/class-druid.json",
+      "class/class-fighter.json",
+      "class/class-monk.json",
+      "class/class-mystic.json",
+      "class/class-paladin.json",
+      "class/class-ranger.json",
+      "class/class-rogue.json",
+      "class/class-sorcerer.json",
+      "class/class-warlock.json",
+      "class/class-wizard.json",
+    ],
+    dataKey: "class",
+    transform: (data) => transformClasses(data as Raw5eClass[]),
+    validate: validateClasses as (entities: CompendiumEntry[]) => ValidationError[],
+    outputPath: "classes.json",
   },
 ];
 

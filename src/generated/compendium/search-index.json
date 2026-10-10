@@ -24142,5 +24142,155 @@
     "canonicalId": "magicitem.wings-of-flying",
     "name": "Wings of Flying",
     "category": "magicitem"
+  },
+  {
+    "id": "tce|artificer",
+    "canonicalId": "class.artificer",
+    "name": "Artificer",
+    "category": "class"
+  },
+  {
+    "id": "phb|barbarian",
+    "canonicalId": "class.barbarian",
+    "name": "Barbarian",
+    "category": "class"
+  },
+  {
+    "id": "xphb|barbarian",
+    "canonicalId": "class.barbarian",
+    "name": "Barbarian",
+    "category": "class"
+  },
+  {
+    "id": "phb|bard",
+    "canonicalId": "class.bard",
+    "name": "Bard",
+    "category": "class"
+  },
+  {
+    "id": "xphb|bard",
+    "canonicalId": "class.bard",
+    "name": "Bard",
+    "category": "class"
+  },
+  {
+    "id": "phb|cleric",
+    "canonicalId": "class.cleric",
+    "name": "Cleric",
+    "category": "class"
+  },
+  {
+    "id": "xphb|cleric",
+    "canonicalId": "class.cleric",
+    "name": "Cleric",
+    "category": "class"
+  },
+  {
+    "id": "phb|druid",
+    "canonicalId": "class.druid",
+    "name": "Druid",
+    "category": "class"
+  },
+  {
+    "id": "xphb|druid",
+    "canonicalId": "class.druid",
+    "name": "Druid",
+    "category": "class"
+  },
+  {
+    "id": "phb|fighter",
+    "canonicalId": "class.fighter",
+    "name": "Fighter",
+    "category": "class"
+  },
+  {
+    "id": "xphb|fighter",
+    "canonicalId": "class.fighter",
+    "name": "Fighter",
+    "category": "class"
+  },
+  {
+    "id": "phb|monk",
+    "canonicalId": "class.monk",
+    "name": "Monk",
+    "category": "class"
+  },
+  {
+    "id": "xphb|monk",
+    "canonicalId": "class.monk",
+    "name": "Monk",
+    "category": "class"
+  },
+  {
+    "id": "phb|paladin",
+    "canonicalId": "class.paladin",
+    "name": "Paladin",
+    "category": "class"
+  },
+  {
+    "id": "xphb|paladin",
+    "canonicalId": "class.paladin",
+    "name": "Paladin",
+    "category": "class"
+  },
+  {
+    "id": "phb|ranger",
+    "canonicalId": "class.ranger",
+    "name": "Ranger",
+    "category": "class"
+  },
+  {
+    "id": "xphb|ranger",
+    "canonicalId": "class.ranger",
+    "name": "Ranger",
+    "category": "class"
+  },
+  {
+    "id": "phb|rogue",
+    "canonicalId": "class.rogue",
+    "name": "Rogue",
+    "category": "class"
+  },
+  {
+    "id": "xphb|rogue",
+    "canonicalId": "class.rogue",
+    "name": "Rogue",
+    "category": "class"
+  },
+  {
+    "id": "phb|sorcerer",
+    "canonicalId": "class.sorcerer",
+    "name": "Sorcerer",
+    "category": "class"
+  },
+  {
+    "id": "xphb|sorcerer",
+    "canonicalId": "class.sorcerer",
+    "name": "Sorcerer",
+    "category": "class"
+  },
+  {
+    "id": "phb|warlock",
+    "canonicalId": "class.warlock",
+    "name": "Warlock",
+    "category": "class"
+  },
+  {
+    "id": "xphb|warlock",
+    "canonicalId": "class.warlock",
+    "name": "Warlock",
+    "category": "class"
+  },
+  {
+    "id": "phb|wizard",
+    "canonicalId": "class.wizard",
+    "name": "Wizard",
+    "category": "class"
+  },
+  {
+    "id": "xphb|wizard",
+    "canonicalId": "class.wizard",
+    "name": "Wizard",
+    "category": "class"
   }
 ]

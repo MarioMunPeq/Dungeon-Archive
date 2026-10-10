@@ -68,6 +68,8 @@ export const es: Record<keyof typeof en, string> = {
   "category.magicitem.many": "Objetos mágicos",
   "category.feat.one": "Dote",
   "category.feat.many": "Dotes",
+  "category.class.one": "Clase",
+  "category.class.many": "Clases",
 
   "school.A": "Abjuración",
   "school.C": "Conjuración",
@@ -327,6 +329,8 @@ export const es: Record<keyof typeof en, string> = {
     "Esto elimina sus números de combate, sus características y sus referencias. No se puede deshacer.",
   "character.picker.weapons": "Armas",
   "character.picker.magicItems": "Objetos mágicos",
+  "character.classes.one": "Clase",
+  "character.classes.many": "Clases",
   "character.newCharacter": "Nuevo personaje",
   "character.name": "Nombre",
   "character.subclass": "Subclase",

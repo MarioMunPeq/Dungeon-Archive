@@ -6,8 +6,9 @@ import type {
   Monster,
   MagicItem,
   Feat,
+  Class,
   EntityCategory,
-} from "@/types/compendium";
+} from "@/compendium";
 
 export interface CompendiumState {
   spells: Map<string, Spell>;
@@ -17,6 +18,7 @@ export interface CompendiumState {
   monsters: Map<string, Monster>;
   magicItems: Map<string, MagicItem>;
   feats: Map<string, Feat>;
+  classes: Map<string, Class>;
   spellList: readonly Spell[];
   conditionList: readonly Condition[];
   equipmentList: readonly Equipment[];
@@ -24,6 +26,7 @@ export interface CompendiumState {
   monsterList: readonly Monster[];
   magicItemList: readonly MagicItem[];
   featList: readonly Feat[];
+  classList: readonly Class[];
   initialized: boolean;
 }
 
@@ -35,6 +38,7 @@ export type CategoryMap = {
   monster: Monster;
   magicitem: MagicItem;
   feat: Feat;
+  class: Class;
 };
 
 export type CategoryKey = keyof CategoryMap;

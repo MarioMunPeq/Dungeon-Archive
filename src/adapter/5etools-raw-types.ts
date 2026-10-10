@@ -219,6 +219,59 @@ export interface Raw5eActionFile {
   readonly action: readonly Raw5eAction[];
 }
 
+export interface Raw5eClass {
+  readonly name: string;
+  readonly source: string;
+  readonly page?: number;
+  readonly hd?: {
+    readonly number: number;
+    readonly faces: number;
+  };
+  readonly proficiency?: readonly string[];
+  readonly startingProficiencies?: {
+    readonly armor?: readonly string[];
+    readonly weapons?: readonly string[];
+    readonly tools?: readonly string[];
+    readonly savingThrows?: readonly string[];
+    readonly skills?: readonly {
+      readonly choose?: { readonly from: readonly string[]; readonly count: number };
+    }[];
+  };
+  readonly startingEquipment?: {
+    readonly goldAlternative?: string;
+    readonly default?: readonly (readonly string[])[];
+    readonly defaultData?: readonly {
+      readonly a?: readonly string[];
+      readonly b?: readonly string[];
+    }[];
+  };
+  readonly multiclassing?: {
+    readonly requirements?: { readonly or?: readonly { readonly str?: number; readonly dex?: number }[] };
+    readonly proficienciesGained?: {
+      readonly armor?: readonly string[];
+      readonly weapons?: readonly string[];
+    };
+  };
+  readonly classFeatures?: readonly string[];
+  readonly subclassGroups?: readonly {
+    readonly name: string;
+    readonly source: string;
+  }[];
+  readonly optionalfeatureProgression?: readonly {
+    readonly name: string;
+    readonly featureType?: readonly string[];
+    readonly progression?: Record<string, number>;
+  }[];
+}
+
+export interface Raw5eActionFile {
+  readonly action: readonly Raw5eAction[];
+}
+
+export interface Raw5eClassFile {
+  readonly class: readonly Raw5eClass[];
+}
+
 export interface Raw5eMonsterFile {
   readonly monster: readonly Raw5eMonster[];
 }

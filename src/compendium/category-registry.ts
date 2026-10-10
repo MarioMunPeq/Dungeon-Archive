@@ -7,6 +7,7 @@ import type {
   Monster,
   MagicItem,
   Feat,
+  Class,
 } from "@/types/compendium";
 import type { FilterDefinition, EntityCardData, CardStat } from "./types";
 import {
@@ -17,6 +18,7 @@ import {
   getActions,
   getMagicItems,
   getFeats,
+  getClasses,
 } from "./repository";
 import { formatSource } from "./source";
 import { METADATA_SEPARATOR } from "./separator";
@@ -25,7 +27,7 @@ import { formatDamageType } from "./damage";
 import type { TranslationKey } from "@/i18n";
 import { t } from "@/i18n";
 
-export type AnyEntity = Spell | Condition | Equipment | Action | Monster | MagicItem | Feat;
+export type AnyEntity = Spell | Condition | Equipment | Action | Monster | MagicItem | Feat | Class;
 
 export interface CategoryRegistration {
   /** Translation keys, resolved with `t()` at the point of display. */
@@ -579,6 +581,30 @@ export const CATEGORY_REGISTRY: Record<EntityCategory, CategoryRegistration> = {
       return extras
         ? `${categoryLabelSingular("feat")} ${METADATA_SEPARATOR} ${extras} ${METADATA_SEPARATOR} ${formatSource(feat.source)}`
         : `${categoryLabelSingular("feat")} ${METADATA_SEPARATOR} ${formatSource(feat.source)}`;
+    },
+  },
+
+  class: {
+    singular: "category.class.one",
+    plural: "category.class.many",
+    getList: getClasses,
+    buildFilterDefs: () => [],
+    toCardData: (entity) => {
+      const cls = entity as Class;
+      return {
+        name: cls.name,
+        href: referenceToUrl(cls.canonicalId),
+        category: "class",
+        categoryLabel: categoryLabelSingular("class"),
+        metadata: `${cls.hitDice.number}d${cls.hitDice.faces}`,
+        source: cls.source,
+        canonicalId: cls.canonicalId,
+        stat: undefined,
+      };
+    },
+    getSubtitle: (entity) => {
+      const cls = entity as Class;
+      return `${categoryLabelSingular("class")} ${METADATA_SEPARATOR} ${cls.hitDice.number}d${cls.hitDice.faces} ${METADATA_SEPARATOR} ${formatSource(cls.source)}`;
     },
   },
 };
