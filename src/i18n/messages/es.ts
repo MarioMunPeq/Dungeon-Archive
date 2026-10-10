@@ -432,6 +432,23 @@ export const es: Record<keyof typeof en, string> = {
   "condition.stunned": "Aturdido",
   "condition.unconscious": "Inconsciente",
 
+  // ---- Combate: definiciones de estados ----
+  "condition.def.blinded": "Estás ciego. Fallas automáticamente cualquier prueba de característica que requiera visión. Las tiradas de ataque contra ti tienen ventaja, y tus tiradas de ataque tienen desventaja.",
+  "condition.def.charmed": "No puedes atacar a quien te encanta ni serle objetivo de facultades dañinas. Quien te encanta tiene ventaja en las pruebas de característica para interactuar socialmente contigo.",
+  "condition.def.deafened": "Estás ensordecido. Fallas automáticamente cualquier prueba de característica que requiera oído.",
+  "condition.def.exhaustion": "Sufres agotamiento. Tiene seis niveles. Cada nivel añade penalizaciones: 1 — desventaja en pruebas de característica; 2 — velocidad a la mitad; 3 — desventaja en ataques y tiradas de salvación; 4 — PV máximos a la mitad; 5 — velocidad 0; 6 — muerte.",
+  "condition.def.frightened": "Tienes desventaja en pruebas de característica y tiradas de ataque mientras la fuente de tu miedo esté a la vista. No puedes acercarte voluntariamente a ella.",
+  "condition.def.grappled": "Tu velocidad es 0 y no puedes beneficiarte de bonificaciones a tu velocidad. El estado termina si quien te agarra queda incapacitado o sales de su alcance.",
+  "condition.def.incapacitated": "No puedes realizar acciones ni reacciones.",
+  "condition.def.invisible": "No pueden verte sin magia o un sentido especial. Tienes ventaja en tiradas de ataque; las tiradas de ataque contra ti tienen desventaja.",
+  "condition.def.paralyzed": "Estás incapacitado, no puedes moverte ni hablar, y fallas automáticamente las tiradas de salvación de Fuerza y Destreza. Las tiradas de ataque contra ti tienen ventaja, y cualquier impacto a 1,5 m (5 ft) es un golpe crítico.",
+  "condition.def.petrified": "Te conviertes en piedra, quedas incapacitado y no puedes moverte ni hablar. No percibes tu entorno. Las tiradas de ataque contra ti tienen ventaja. Tienes resistencia a todo daño, pero inmunidad a veneno y enfermedad.",
+  "condition.def.poisoned": "Tienes desventaja en tiradas de ataque y pruebas de característica.",
+  "condition.def.prone": "Estás tumbado (derribado). Solo puedes arrastrarte a menos que te levantes. Tienes desventaja en tiradas de ataque. Los ataques contra ti tienen ventaja a 1,5 m (5 ft); más lejos, desventaja.",
+  "condition.def.restrained": "Tu velocidad es 0 y no puedes beneficiarte de bonificaciones a la velocidad. Las tiradas de ataque contra ti tienen ventaja, y las tuyas desventaja. Tienes desventaja en tiradas de salvación de Destreza.",
+  "condition.def.stunned": "Estás incapacitado, no puedes moverte y solo puedes hablar balbuceando. Fallas automáticamente las tiradas de salvación de Fuerza y Destreza. Las tiradas de ataque contra ti tienen ventaja.",
+  "condition.def.unconscious": "Estás incapacitado, no puedes moverte ni hablar, y no percibes tu entorno. Dejas caer lo que sujetas y caes derribado. Fallas automáticamente las tiradas de salvación de Fuerza y Destreza. Las tiradas de ataque contra ti tienen ventaja, y cualquier impacto a 1,5 m (5 ft) es un golpe crítico.",
+
   // ---- Archivo: pestaña Reglas ----
   "rules.beginnerTips": "Consejos para principiantes",
   "rules.beginnerTipsBody": "Muestra los ayudantes ? que explican las reglas sobre la marcha.",

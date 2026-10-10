@@ -436,6 +436,23 @@ export const en = {
   "condition.stunned": "Stunned",
   "condition.unconscious": "Unconscious",
 
+  // ---- Combat: Condition definitions ----
+  "condition.def.blinded": "You can't see. You automatically fail any ability check that requires sight. Attack rolls against you have advantage, and your attack rolls have disadvantage.",
+  "condition.def.charmed": "You can't attack the charmer or target them with harmful abilities. The charmer has advantage on any ability check to interact socially with you.",
+  "condition.def.deafened": "You can't hear. You automatically fail any ability check that requires hearing.",
+  "condition.def.exhaustion": "You suffer from exhaustion. It has six levels. Each level adds penalties: 1 — disadvantage on ability checks; 2 — speed halved; 3 — disadvantage on attacks and saves; 4 — max HP halved; 5 — speed 0; 6 — death.",
+  "condition.def.frightened": "You have disadvantage on ability checks and attack rolls while the source of your fear is in sight. You can't willingly move closer to it.",
+  "condition.def.grappled": "Your speed becomes 0, and you can't benefit from any bonus to your speed. The condition ends if the grappler is incapacitated or you're moved out of range.",
+  "condition.def.incapacitated": "You can't take actions or reactions.",
+  "condition.def.invisible": "You can't be seen without magic or a special sense. You have advantage on attack rolls; attacks against you have disadvantage.",
+  "condition.def.paralyzed": "You're incapacitated, can't move or speak, and automatically fail Strength and Dexterity saves. Attack rolls against you have advantage, and any hit within 5 ft is a critical hit.",
+  "condition.def.petrified": "You're transformed into stone, incapacitated, and can't move or speak. You're unaware of your surroundings. Attack rolls against you have advantage. You have resistance to all damage but are immune to poison and disease.",
+  "condition.def.poisoned": "You have disadvantage on attack rolls and ability checks.",
+  "condition.def.prone": "You're lying down. You can only crawl unless you stand up. You have disadvantage on attack rolls. Attacks against you have advantage within 5 ft, otherwise disadvantage.",
+  "condition.def.restrained": "Your speed becomes 0, and you can't benefit from speed bonuses. Attack rolls against you have advantage, and your attack rolls have disadvantage. You have disadvantage on Dexterity saves.",
+  "condition.def.stunned": "You're incapacitated, can't move, and can only speak falteringly. You automatically fail Strength and Dexterity saves. Attack rolls against you have advantage.",
+  "condition.def.unconscious": "You're incapacitated, can't move or speak, and are unaware of surroundings. You drop what you're holding and fall prone. You automatically fail Strength and Dexterity saves. Attack rolls against you have advantage, and any hit within 5 ft is a critical hit.",
+
   // ---- Archive: Rules tab ----
   "rules.beginnerTips": "Beginner tips",
   "rules.beginnerTipsBody": "Show the ? helpers that explain the rules as you go.",

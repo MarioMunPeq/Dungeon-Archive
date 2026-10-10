@@ -11,7 +11,6 @@ import {
   useLongPressInfo,
 } from "@/components/ui";
 import { formatCondition, resolveEntity } from "@/compendium";
-import type { Condition, ContentBlock } from "@/compendium";
 import type { TranslationKey } from "@/i18n";
 import { t } from "@/i18n";
 import { cn } from "@/lib/utils";
@@ -100,36 +99,28 @@ function conditionName(canonicalId: string): string {
   return slug.charAt(0).toUpperCase() + slug.slice(1);
 }
 
-function conditionSummary(condition: Condition): string {
-  const walk = (blocks: readonly ContentBlock[]): string => {
-    for (const block of blocks) {
-      if (block.type === "paragraph") {
-        const text = block.text.trim();
-        if (text) return text;
-      } else if (block.type === "list") {
-        for (const item of block.items) {
-          if (typeof item === "string") {
-            const text = item.trim();
-            if (text) return text;
-          }
-        }
-      } else if (block.type === "entries" || block.type === "inset" || block.type === "quote") {
-        const text = walk(block.blocks);
-        if (text) return text;
-      }
-    }
-    return "";
-  };
-  return walk(condition.description);
-}
-
-const FALLBACK_SUMMARY_KEY = "combat.noConditionDescription";
+const CONDITION_DEFINITIONS: Record<string, TranslationKey> = {
+  "condition.blinded": "condition.def.blinded",
+  "condition.charmed": "condition.def.charmed",
+  "condition.deafened": "condition.def.deafened",
+  "condition.exhaustion": "condition.def.exhaustion",
+  "condition.frightened": "condition.def.frightened",
+  "condition.grappled": "condition.def.grappled",
+  "condition.incapacitated": "condition.def.incapacitated",
+  "condition.invisible": "condition.def.invisible",
+  "condition.paralyzed": "condition.def.paralyzed",
+  "condition.petrified": "condition.def.petrified",
+  "condition.poisoned": "condition.def.poisoned",
+  "condition.prone": "condition.def.prone",
+  "condition.restrained": "condition.def.restrained",
+  "condition.stunned": "condition.def.stunned",
+  "condition.unconscious": "condition.def.unconscious",
+};
 
 function conditionDefinition(id: string): string {
-  const resolved = resolveEntity(id);
-  const summary =
-    resolved?.selected.category === "condition" ? conditionSummary(resolved.selected) : "";
-  return summary || t(FALLBACK_SUMMARY_KEY);
+  const slug = id.slice(id.lastIndexOf(".") + 1);
+  const key = CONDITION_DEFINITIONS[`condition.${slug}`];
+  return key ? t(key) : t("combat.noConditionDescription");
 }
 
 const ConditionChip = memo(function ConditionChip({
@@ -415,10 +406,15 @@ function CombatCharacterView({ character }: { character: CharacterReference }) {
     <div className="flex flex-col gap-4">
       <div className="flex flex-col gap-2 rounded-card border border-border-amber bg-surface readout-card p-2">
         <div className="flex items-center justify-between gap-2">
-          <span className="flex items-center gap-2 border-l-2 border-primary pl-2 text-xs font-bold uppercase tracking-wide text-muted-foreground">
+          <div className="flex items-center gap-2 border-l-2 border-primary pl-2 text-xs font-bold uppercase tracking-wide text-muted-foreground">
             {t("combat.hitPoints")}
-          </span>
-          <HelpTip label={t("help.hitPoints.title")}>{t("help.hitPoints.body")}</HelpTip>
+            <HelpTip label={t("help.hitPoints.title")}>
+              {t("help.hitPoints.body")}
+            </HelpTip>
+          </div>
+          <HelpTip label={t("help.hitPoints.title")}>
+            {t("help.hitPoints.body")}
+          </HelpTip>
         </div>
         <div
           ref={hpContainerRef}
@@ -503,13 +499,19 @@ function CombatCharacterView({ character }: { character: CharacterReference }) {
             </button>
           ))}
         </div>
-        {hpLow && <p className="text-xs font-medium text-destructive">{t("combat.belowHalf")}</p>}
+        {hpLow && (
+          <p className="text-xs font-medium text-destructive">
+            {t("combat.belowHalf")}
+          </p>
+        )}
       </div>
 
       <div className="flex flex-col gap-3">
         <span className="flex items-center gap-2 border-l-2 border-primary pl-2 text-xs font-bold uppercase tracking-wide text-muted-foreground">
           {t("combat.stats")}
-          <HelpTip label={t("help.combatStats.short")}>{t("combat.statsHelp")}</HelpTip>
+          <HelpTip label={t("help.combatStats.short")}>
+            {t("combat.statsHelp")}
+          </HelpTip>
         </span>
         <div className="grid grid-cols-3 gap-2">
           {COMBAT_STATS.map((stat) => (
