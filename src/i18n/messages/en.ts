@@ -436,6 +436,149 @@ export const en = {
   "condition.stunned": "Stunned",
   "condition.unconscious": "Unconscious",
 
+  // ---- Archive: Rules tab ----
+  "rules.beginnerTips": "Beginner tips",
+  "rules.beginnerTipsBody": "Show the ? helpers that explain the rules as you go.",
+  "rules.beginnerTipsToggle": "Toggle beginner tips",
+  "rules.hitPoints.titleHelp": "HP",
+
+  "rules.d20.title": "The D20",
+  "rules.d20.summary":
+    "Almost every check in D&D starts with rolling a 20-sided die (the d20). Higher is better.",
+  "rules.d20.point1": "Roll the d20 and add the relevant modifier for the ability you're using.",
+  "rules.d20.point2": "Beat or match the difficulty number (DC) to succeed.",
+  "rules.d20.point3":
+    "Advantage: roll twice, keep the higher. Disadvantage: roll twice, keep the lower.",
+  "rules.d20.help":
+    'A "1" on an attack roll is a critical miss and always fails. A "20" is a critical hit and always hits, with extra damage!',
+
+  "rules.checks.title": "Ability Checks",
+  "rules.checks.titleHelp": "STR · DEX · CON · INT · WIS · CHA",
+  "rules.checks.summary":
+    "When you try something risky, the DM asks for an ability check using one of your six ability scores.",
+  "rules.checks.point1": "Strength (STR): pushing, lifting, breaking.",
+  "rules.checks.point2": "Dexterity (DEX): sneaking, balancing, reacting.",
+  "rules.checks.point3": "Constitution (CON): resisting poison, exhaustion, holding focus.",
+  "rules.checks.point4": "Intelligence (INT): remembering, solving, researching.",
+  "rules.checks.point5": "Wisdom (WIS): noticing, sensing danger, reading people.",
+  "rules.checks.point6": "Charisma (CHA): persuading, performing, intimidating.",
+  "rules.checks.help":
+    "Your ability modifier is the bonus your score grants: a score of 10 gives +0, 12 gives +1, 14 gives +2, and so on.",
+
+  "rules.saves.title": "Saving Throws",
+  "rules.saves.summary":
+    "When a spell or trap tries to affect you, you roll a saving throw to resist it.",
+  "rules.saves.point1": 'The DM tells you which ability to use (e.g. "make a Dexterity save").',
+  "rules.saves.point2": "Roll the d20 and add that ability's modifier.",
+  "rules.saves.point3": "If you beat the spell's DC, the effect is reduced or avoided entirely.",
+
+  "rules.turn.title": "Your Turn in Combat",
+  "rules.turn.titleHelp": "Action · Bonus Action · Movement · Reaction",
+  "rules.turn.summary": "On your turn you can do a few things, in any order.",
+  "rules.turn.point1": "Movement: move up to your speed (usually 30 ft / 9 m).",
+  "rules.turn.point2": "Action: attack, cast a spell, dash, dodge, hide, or more.",
+  "rules.turn.point3": "Bonus Action: a small extra action if a feature or spell grants one.",
+  "rules.turn.point4": "Reaction: a special response to someone else's trigger, once per round.",
+  "rules.turn.help":
+    "You only get one Action, one Bonus Action, and one Reaction per round — use them wisely!",
+
+  "rules.attacks.title": "Attacks & Damage",
+  "rules.attacks.summary":
+    "To attack, roll a d20 and add your attack bonus. If you hit, roll damage.",
+  "rules.attacks.point1":
+    "Attack roll: d20 + attack bonus vs. the target's Armor Class (AC).",
+  "rules.attacks.point2":
+    "Damage roll: the weapon or spell's dice, plus your ability modifier.",
+  "rules.attacks.point3": "Criticals: a natural 20 always hits and rolls double damage dice.",
+
+  "rules.rest.title": "Hit Points & Resting",
+  "rules.rest.summary": "Your Hit Points (HP) measure how much punishment you can take.",
+  "rules.rest.point1": "Damage reduces your HP. At 0 HP you fall unconscious.",
+  "rules.rest.point2": "Short rest: 1 hour — spend Hit Dice to heal.",
+  "rules.rest.point3": "Long rest: 8 hours — recover all HP and half your Hit Dice.",
+  "rules.rest.help": "Track your current HP in the Combat tab while you play.",
+
+  "rules.spellcasting.title": "Spellcasting",
+  "rules.spellcasting.summary":
+    "Casting a spell takes an Action unless the spell says otherwise.",
+  "rules.spellcasting.point1":
+    "Spell Attack: roll d20 + your spell attack bonus vs. the target's AC.",
+  "rules.spellcasting.point2": "Saving Throw: the target rolls against your spell save DC.",
+  "rules.spellcasting.point3":
+    "Concentration: if the spell says so, you lose it when you take damage and fail a Constitution save.",
+  "rules.spellcasting.help":
+    "Your spell save DC and spell attack bonus live on your character in the Character tab.",
+
+  // ---- Archive: How to Play tab ----
+  "howToPlay.1.title": "Your character won't be good at everything — and that's fine.",
+  "howToPlay.1.body":
+    "Every class has strengths and weaknesses. Failing a roll now and then is part of the game, not a failure on your part.",
+  "howToPlay.2.title": "The session isn't only about you.",
+  "howToPlay.2.body":
+    "Some scenes will center on other characters. That doesn't mean you sit out — react, chime in, support whoever has the spotlight, without taking the scene away from them.",
+  "howToPlay.3.title": 'The goal is to have fun, not to "win."',
+  "howToPlay.3.body":
+    "There's no scoreboard. A good session is one where everyone at the table enjoyed themselves, including you, even when things don't go the way you hoped.",
+  "howToPlay.4.title": "Participate actively.",
+  "howToPlay.4.body":
+    'Describe what your character does, don\'t just roll dice. Asking "what do I see / feel / know about this?" is always a valid thing to do.',
+
+  // ---- Archive: Glossary tab ----
+  "glossary.ac.term": "AC",
+  "glossary.ac.definition":
+    "Armor Class. How hard you are to hit: an attack lands when its total equals or beats your AC.",
+  "glossary.abilityCheck.term": "Ability Check",
+  "glossary.abilityCheck.definition":
+    "A d20 roll plus an ability modifier, used when you try something risky — like a Dexterity check to balance across a beam.",
+  "glossary.action.term": "Action",
+  "glossary.action.definition":
+    "The main thing you do on your turn: attack, cast a spell, dash, dodge, hide, or use an object.",
+  "glossary.advantage.term": "Advantage",
+  "glossary.advantage.definition":
+    "Roll two d20s and keep the higher one — granted when the circumstances work in your favor.",
+  "glossary.bonusAction.term": "Bonus Action",
+  "glossary.bonusAction.definition":
+    "A small extra action some features or spells grant. You get one per turn, and only if something gives you one.",
+  "glossary.cantrip.term": "Cantrip",
+  "glossary.cantrip.definition":
+    "A level 0 spell you can cast at will, without spending spell slots.",
+  "glossary.concentration.term": "Concentration",
+  "glossary.concentration.definition":
+    "Some spells need your focus to keep going. Take damage and you must pass a Constitution save or the spell ends.",
+  "glossary.critical.term": "Critical Hit",
+  "glossary.critical.definition":
+    "A natural 20 on an attack roll. It always hits, and you roll double the damage dice.",
+  "glossary.dc.term": "DC",
+  "glossary.dc.definition":
+    "Difficulty Class. The number a roll has to meet or beat to succeed — a higher DC means a harder task.",
+  "glossary.disadvantage.term": "Disadvantage",
+  "glossary.disadvantage.definition":
+    "Roll two d20s and keep the lower one — imposed when the circumstances work against you.",
+  "glossary.hitDice.term": "Hit Dice",
+  "glossary.hitDice.definition":
+    "Dice you spend on a short rest to heal yourself. You have one per level; they refresh on a long rest.",
+  "glossary.hitPoints.term": "Hit Points",
+  "glossary.hitPoints.definition":
+    "Your HP measures how much punishment you can take. At 0 HP you fall unconscious.",
+  "glossary.longRest.term": "Long Rest",
+  "glossary.longRest.definition":
+    "8 hours of sleep and light activity. You recover all lost HP and half your spent Hit Dice.",
+  "glossary.reaction.term": "Reaction",
+  "glossary.reaction.definition":
+    "A quick response outside your turn — like an opportunity attack — taken when its trigger happens. One per round.",
+  "glossary.savingThrow.term": "Saving Throw",
+  "glossary.savingThrow.definition":
+    "A d20 roll plus an ability modifier to resist a spell, trap, or effect. Meet or beat its DC.",
+  "glossary.shortRest.term": "Short Rest",
+  "glossary.shortRest.definition":
+    "An hour of rest. Spend Hit Dice to heal, and some features recharge.",
+  "glossary.spellAttack.term": "Spell Attack",
+  "glossary.spellAttack.definition":
+    "The roll you make when a spell attacks directly: d20 plus your spell attack bonus vs. the target's AC.",
+  "glossary.spellSaveDc.term": "Spell Save DC",
+  "glossary.spellSaveDc.definition":
+    "The number enemies must beat to resist your spells. It grows with your proficiency bonus and your spellcasting ability score.",
+
   // ---- Dice roller ----
   "dice.result": "Result",
   "dice.modifier": "Modifier",

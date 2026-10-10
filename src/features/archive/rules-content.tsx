@@ -1,218 +1,177 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { cn } from "@/lib/utils";
-import { useBeginnerMode, userStore } from "@/user-state";
+import { t } from "@/i18n";
+import type { TranslationKey } from "@/i18n";
+import { useBeginnerMode, useLanguage, userStore } from "@/user-state";
 import { HelpTip } from "@/components/ui";
 
+/**
+ * The long-form Rules / How to Play / Glossary copy lives in the message
+ * dictionaries, so these arrays only describe the shape of the content.
+ * Everything user-facing below is a key.
+ */
 interface RuleSectionData {
-  readonly title: string;
-  readonly titleHelp?: string;
-  readonly summary: string;
-  readonly points: readonly string[];
-  readonly help?: string;
+  /** Stable React key; also disambiguates the section from its siblings. */
+  readonly id: string;
+  readonly title: TranslationKey;
+  readonly titleHelp?: TranslationKey;
+  readonly summary: TranslationKey;
+  readonly points: readonly TranslationKey[];
+  readonly help?: TranslationKey;
 }
 
 const RULE_SECTIONS: readonly RuleSectionData[] = [
   {
-    title: "The D20",
-    summary:
-      "Almost every check in D&D starts with rolling a 20-sided die (the d20). Higher is better.",
-    points: [
-      "Roll the d20 and add your relevant modifier (bonus).",
-      "Beat or match the difficulty number (DC) to succeed.",
-      "Advantage: roll twice, keep the higher. Disadvantage: roll twice, keep the lower.",
-    ],
-    help: 'A "1" on an attack roll is a critical miss and always fails. A "20" is a critical hit and always hits, with extra damage!',
+    id: "d20",
+    title: "rules.d20.title",
+    summary: "rules.d20.summary",
+    points: ["rules.d20.point1", "rules.d20.point2", "rules.d20.point3"],
+    help: "rules.d20.help",
   },
   {
-    title: "Ability Checks",
-    titleHelp: "STR · DEX · CON · INT · WIS · CHA",
-    summary:
-      "When you try something risky, the DM asks for an ability check using one of your six ability scores.",
+    id: "checks",
+    title: "rules.checks.title",
+    titleHelp: "rules.checks.titleHelp",
+    summary: "rules.checks.summary",
     points: [
-      "Strength (STR): pushing, lifting, breaking.",
-      "Dexterity (DEX): sneaking, balancing, reacting.",
-      "Constitution (CON): resisting poison, exhaustion, focus.",
-      "Intelligence (INT): remembering, solving, researching.",
-      "Wisdom (WIS): noticing, sensing danger, reading people.",
-      "Charisma (CHA): persuading, performing, intimidating.",
+      "rules.checks.point1",
+      "rules.checks.point2",
+      "rules.checks.point3",
+      "rules.checks.point4",
+      "rules.checks.point5",
+      "rules.checks.point6",
     ],
-    help: "Your ability modifier is your score's bonus: score 10 gives +0, 12 gives +1, 14 gives +2, and so on.",
+    help: "rules.checks.help",
   },
   {
-    title: "Saving Throws",
-    summary: "When a spell or trap tries to affect you, you roll a saving throw to resist it.",
-    points: [
-      'The DM tells you which ability to use (e.g. "make a Dexterity save").',
-      "Roll the d20 and add that ability's modifier.",
-      "If you beat the spell's DC, the effect is reduced or avoided.",
-    ],
+    id: "saves",
+    title: "rules.saves.title",
+    summary: "rules.saves.summary",
+    points: ["rules.saves.point1", "rules.saves.point2", "rules.saves.point3"],
   },
   {
-    title: "Your Turn in Combat",
-    titleHelp: "Action · Bonus Action · Movement · Reaction",
-    summary: "On your turn you can do a few things, in any order.",
+    id: "turn",
+    title: "rules.turn.title",
+    titleHelp: "rules.turn.titleHelp",
+    summary: "rules.turn.summary",
     points: [
-      "Movement: move up to your speed (usually 30 ft).",
-      "Action: attack, cast a spell, dash, dodge, hide, or more.",
-      "Bonus Action: a small extra action if a feature or spell grants one.",
-      "Reaction: a special response to someone else's trigger, once per round.",
+      "rules.turn.point1",
+      "rules.turn.point2",
+      "rules.turn.point3",
+      "rules.turn.point4",
     ],
-    help: "You only get one Action, one Bonus Action, and one Reaction per round — use them wisely!",
+    help: "rules.turn.help",
   },
   {
-    title: "Attacks & Damage",
-    summary: "To attack, roll a d20 and add your attack bonus. If you hit, roll damage.",
-    points: [
-      "Attack roll: d20 + attack bonus vs. the target's Armor Class (AC).",
-      "Damage roll: the weapon or spell's dice, plus your ability modifier.",
-      "Criticals: a natural 20 hits and rolls double the damage dice.",
-    ],
+    id: "attacks",
+    title: "rules.attacks.title",
+    summary: "rules.attacks.summary",
+    points: ["rules.attacks.point1", "rules.attacks.point2", "rules.attacks.point3"],
   },
   {
-    title: "Hit Points & Resting",
-    titleHelp: "HP",
-    summary: "Your Hit Points (HP) measure how much punishment you can take.",
-    points: [
-      "Damage reduces your HP. At 0 HP you fall unconscious.",
-      "Short rest: 1 hour — spend Hit Dice to heal.",
-      "Long rest: 8 hours — recover all HP and half your Hit Dice.",
-    ],
-    help: "Track your current HP in the Combat tab while you play.",
+    id: "rest",
+    title: "rules.rest.title",
+    titleHelp: "rules.hitPoints.titleHelp",
+    summary: "rules.rest.summary",
+    points: ["rules.rest.point1", "rules.rest.point2", "rules.rest.point3"],
+    help: "rules.rest.help",
   },
   {
-    title: "Spellcasting",
-    summary: "Casting a spell takes an Action unless the spell says otherwise.",
+    id: "spellcasting",
+    title: "rules.spellcasting.title",
+    summary: "rules.spellcasting.summary",
     points: [
-      "Spell Attack: roll d20 + your spell attack bonus vs. the target's AC.",
-      "Saving Throw: the target rolls against your spell save DC.",
-      "Concentration: if the spell says so, you lose it if you take damage and fail a Constitution save.",
+      "rules.spellcasting.point1",
+      "rules.spellcasting.point2",
+      "rules.spellcasting.point3",
     ],
-    help: "Your spell save DC and spell attack bonus live on your character in the Character tab.",
+    help: "rules.spellcasting.help",
   },
 ];
 
 interface HowToPlayPointData {
-  readonly title: string;
-  readonly body: string;
+  readonly id: string;
+  readonly title: TranslationKey;
+  readonly body: TranslationKey;
 }
 
 const HOW_TO_PLAY_POINTS: readonly HowToPlayPointData[] = [
-  {
-    title: "Your character won't be good at everything — and that's fine.",
-    body: "Every class has strengths and weaknesses. Failing a roll now and then is part of the game, not a failure on your part.",
-  },
-  {
-    title: "The session isn't only about you.",
-    body: "Some scenes will center on other characters. That doesn't mean you sit out — react, chime in, support whoever has the spotlight, without taking the scene away from them.",
-  },
-  {
-    title: 'The goal is to have fun, not to "win."',
-    body: "There's no scoreboard. A good session is one where everyone at the table enjoyed themselves, including you, even when things don't go the way you hoped.",
-  },
-  {
-    title: "Participate actively.",
-    body: 'Describe what your character does, don\'t just roll dice. Asking "what do I see/feel/know about this?" is always a valid thing to do.',
-  },
+  { id: "1", title: "howToPlay.1.title", body: "howToPlay.1.body" },
+  { id: "2", title: "howToPlay.2.title", body: "howToPlay.2.body" },
+  { id: "3", title: "howToPlay.3.title", body: "howToPlay.3.body" },
+  { id: "4", title: "howToPlay.4.title", body: "howToPlay.4.body" },
 ];
 
 interface GlossaryEntryData {
-  readonly term: string;
-  readonly definition: string;
+  readonly id: string;
+  readonly term: TranslationKey;
+  readonly definition: TranslationKey;
 }
 
 const GLOSSARY_TERMS: readonly GlossaryEntryData[] = [
+  { id: "ac", term: "glossary.ac.term", definition: "glossary.ac.definition" },
   {
-    term: "AC",
-    definition:
-      "Armor Class. How hard you are to hit: an attack lands when its total roll equals or beats your AC.",
+    id: "abilityCheck",
+    term: "glossary.abilityCheck.term",
+    definition: "glossary.abilityCheck.definition",
+  },
+  { id: "action", term: "glossary.action.term", definition: "glossary.action.definition" },
+  {
+    id: "advantage",
+    term: "glossary.advantage.term",
+    definition: "glossary.advantage.definition",
   },
   {
-    term: "Ability Check",
-    definition:
-      "A d20 roll plus an ability modifier, used when you try something risky — like a Dexterity check to balance across a beam.",
+    id: "bonusAction",
+    term: "glossary.bonusAction.term",
+    definition: "glossary.bonusAction.definition",
+  },
+  { id: "cantrip", term: "glossary.cantrip.term", definition: "glossary.cantrip.definition" },
+  {
+    id: "concentration",
+    term: "glossary.concentration.term",
+    definition: "glossary.concentration.definition",
+  },
+  { id: "critical", term: "glossary.critical.term", definition: "glossary.critical.definition" },
+  { id: "dc", term: "glossary.dc.term", definition: "glossary.dc.definition" },
+  {
+    id: "disadvantage",
+    term: "glossary.disadvantage.term",
+    definition: "glossary.disadvantage.definition",
+  },
+  { id: "hitDice", term: "glossary.hitDice.term", definition: "glossary.hitDice.definition" },
+  {
+    id: "hitPoints",
+    term: "glossary.hitPoints.term",
+    definition: "glossary.hitPoints.definition",
   },
   {
-    term: "Action",
-    definition:
-      "The main thing you do on your turn: attack, cast a spell, dash, dodge, hide, or use an object.",
+    id: "longRest",
+    term: "glossary.longRest.term",
+    definition: "glossary.longRest.definition",
+  },
+  { id: "reaction", term: "glossary.reaction.term", definition: "glossary.reaction.definition" },
+  {
+    id: "savingThrow",
+    term: "glossary.savingThrow.term",
+    definition: "glossary.savingThrow.definition",
   },
   {
-    term: "Advantage",
-    definition:
-      "Roll two d20s and keep the higher one — granted when circumstances work in your favor.",
+    id: "shortRest",
+    term: "glossary.shortRest.term",
+    definition: "glossary.shortRest.definition",
   },
   {
-    term: "Bonus Action",
-    definition:
-      "A small extra action some features or spells grant. You get one per turn, and only if something gives you one.",
+    id: "spellAttack",
+    term: "glossary.spellAttack.term",
+    definition: "glossary.spellAttack.definition",
   },
   {
-    term: "Cantrip",
-    definition: "A level 0 spell you can cast at will, without spending spell slots.",
-  },
-  {
-    term: "Concentration",
-    definition:
-      "Some spells need your focus to keep going. Take damage and you must pass a Constitution save or the spell ends.",
-  },
-  {
-    term: "Critical Hit",
-    definition:
-      "A natural 20 on an attack roll. It always hits, and you roll double the damage dice.",
-  },
-  {
-    term: "DC",
-    definition:
-      "Difficulty Class. The number a roll has to meet or beat to succeed — a higher DC means a harder task.",
-  },
-  {
-    term: "Disadvantage",
-    definition:
-      "Roll two d20s and keep the lower one — imposed when circumstances work against you.",
-  },
-  {
-    term: "Hit Dice",
-    definition:
-      "Dice you spend on a short rest to heal yourself. You have one per level; they refresh on a long rest.",
-  },
-  {
-    term: "Hit Points",
-    definition: "Your HP measures how much punishment you can take. At 0 HP you fall unconscious.",
-  },
-  {
-    term: "Long Rest",
-    definition:
-      "8 hours of sleep and light activity. You recover all lost HP and half your spent Hit Dice.",
-  },
-  {
-    term: "Reaction",
-    definition:
-      "A quick response outside your turn — like an opportunity attack — taken when its trigger happens. One per round.",
-  },
-  {
-    term: "Saving Throw",
-    definition:
-      "A d20 roll plus an ability modifier to resist a spell, trap, or effect. Meet or beat its DC.",
-  },
-  {
-    term: "Short Rest",
-    definition: "An hour of rest. Spend Hit Dice to heal, and some features recharge.",
-  },
-  {
-    term: "Spell Attack",
-    definition:
-      "The roll you make when a spell attacks directly: d20 plus your spell attack bonus vs. the target's AC.",
-  },
-  {
-    term: "Spell Save DC",
-    definition:
-      "The number enemies must beat to resist your spells. It grows with your proficiency and spellcasting ability.",
+    id: "spellSaveDc",
+    term: "glossary.spellSaveDc.term",
+    definition: "glossary.spellSaveDc.definition",
   },
 ];
-
-const SORTED_GLOSSARY_TERMS: readonly GlossaryEntryData[] = [...GLOSSARY_TERMS].sort((a, b) =>
-  a.term.localeCompare(b.term),
-);
 
 function RuleSection({
   data,
@@ -222,6 +181,7 @@ function RuleSection({
   defaultOpen?: boolean;
 }) {
   const [open, setOpen] = useState(defaultOpen);
+  const title = t(data.title);
   return (
     <section className="flex flex-col rounded-card border border-border bg-surface px-4 py-3">
       <button
@@ -231,9 +191,9 @@ function RuleSection({
         className="flex items-center justify-between gap-2 text-left"
       >
         <span className="flex min-w-0 items-center gap-2">
-          <span className="text-sm font-semibold text-foreground">{data.title}</span>
+          <span className="text-sm font-semibold text-foreground">{title}</span>
           {data.titleHelp && (
-            <span className="truncate text-xs text-foreground-subtle">{data.titleHelp}</span>
+            <span className="truncate text-xs text-foreground-subtle">{t(data.titleHelp)}</span>
           )}
         </span>
         <svg
@@ -264,7 +224,7 @@ function RuleSection({
               open ? "opacity-100" : "opacity-0",
             )}
           >
-            <p className="text-sm leading-relaxed text-muted-foreground">{data.summary}</p>
+            <p className="text-sm leading-relaxed text-muted-foreground">{t(data.summary)}</p>
             <ul className="flex flex-col gap-1">
               {data.points.map((point) => (
                 <li key={point} className="flex items-start gap-2 text-sm text-foreground">
@@ -272,12 +232,12 @@ function RuleSection({
                     aria-hidden="true"
                     className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-muted-foreground"
                   />
-                  <span>{point}</span>
+                  <span>{t(point)}</span>
                 </li>
               ))}
             </ul>
             {data.help !== undefined && (
-              <HelpTip label={`More about ${data.title}`}>{data.help}</HelpTip>
+              <HelpTip label={t("common.about", { subject: title })}>{t(data.help)}</HelpTip>
             )}
           </div>
         </div>
@@ -296,11 +256,11 @@ export function HowToPlayPane() {
     >
       {HOW_TO_PLAY_POINTS.map((point) => (
         <section
-          key={point.title}
+          key={point.id}
           className="flex flex-col gap-1 rounded-card border border-border bg-surface px-4 py-3"
         >
-          <h2 className="text-sm font-semibold text-foreground">{point.title}</h2>
-          <p className="text-sm leading-relaxed text-muted-foreground">{point.body}</p>
+          <h2 className="text-sm font-semibold text-foreground">{t(point.title)}</h2>
+          <p className="text-sm leading-relaxed text-muted-foreground">{t(point.body)}</p>
         </section>
       ))}
     </div>
@@ -318,16 +278,14 @@ export function RulesPane() {
     >
       <label className="flex items-center justify-between gap-3 rounded-card border border-border bg-surface px-4 py-3">
         <span className="flex flex-col gap-1">
-          <span className="text-sm font-medium text-foreground">Beginner tips</span>
-          <span className="text-xs text-muted-foreground">
-            Show the ? helpers that explain the rules as you go.
-          </span>
+          <span className="text-sm font-medium text-foreground">{t("rules.beginnerTips")}</span>
+          <span className="text-xs text-muted-foreground">{t("rules.beginnerTipsBody")}</span>
         </span>
         <span className="relative inline-flex">
           <input
             type="checkbox"
             role="switch"
-            aria-label="Toggle beginner tips"
+            aria-label={t("rules.beginnerTipsToggle")}
             checked={beginnerMode}
             onChange={(e) => userStore.getState().setBeginnerMode(e.target.checked)}
             className="peer sr-only"
@@ -339,7 +297,7 @@ export function RulesPane() {
 
       <div className="flex flex-col gap-2">
         {RULE_SECTIONS.map((data, index) => (
-          <RuleSection key={data.title} data={data} defaultOpen={index === 0} />
+          <RuleSection key={data.id} data={data} defaultOpen={index === 0} />
         ))}
       </div>
     </div>
@@ -347,6 +305,18 @@ export function RulesPane() {
 }
 
 export function GlossaryPane() {
+  const language = useLanguage();
+
+  // Sorted on the *translated* term, so the Spanish glossary reads
+  // alphabetically in Spanish rather than following the English order.
+  const entries = useMemo(
+    () =>
+      [...GLOSSARY_TERMS].sort((a, b) =>
+        t(a.term).localeCompare(t(b.term), language === "es" ? "es" : "en"),
+      ),
+    [language],
+  );
+
   return (
     <div
       id="archive-panel-glossary"
@@ -354,13 +324,13 @@ export function GlossaryPane() {
       aria-labelledby="archive-tab-glossary"
       className="flex flex-col gap-2"
     >
-      {SORTED_GLOSSARY_TERMS.map((entry) => (
+      {entries.map((entry) => (
         <section
-          key={entry.term}
+          key={entry.id}
           className="flex flex-col gap-1 rounded-card border border-border bg-surface px-4 py-3"
         >
-          <h3 className="text-sm font-semibold text-foreground">{entry.term}</h3>
-          <p className="text-sm leading-relaxed text-muted-foreground">{entry.definition}</p>
+          <h3 className="text-sm font-semibold text-foreground">{t(entry.term)}</h3>
+          <p className="text-sm leading-relaxed text-muted-foreground">{t(entry.definition)}</p>
         </section>
       ))}
     </div>

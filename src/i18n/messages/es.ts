@@ -431,6 +431,159 @@ export const es: Record<keyof typeof en, string> = {
   "condition.restrained": "Inmovilizado",
   "condition.stunned": "Aturdido",
   "condition.unconscious": "Inconsciente",
+
+  // ---- Archivo: pestaña Reglas ----
+  "rules.beginnerTips": "Consejos para principiantes",
+  "rules.beginnerTipsBody": "Muestra los ayudantes ? que explican las reglas sobre la marcha.",
+  "rules.beginnerTipsToggle": "Alternar los consejos para principiantes",
+  "rules.hitPoints.titleHelp": "PV",
+
+  "rules.d20.title": "El d20",
+  "rules.d20.summary":
+    "Casi todas las pruebas de D&D empiezan tirando un dado de 20 caras, el d20. Cuanto más alto sale, mejor.",
+  "rules.d20.point1":
+    "Tira el d20 y suma el modificador de la característica que estés usando.",
+  "rules.d20.point2": "Supera o iguala el número de dificultad (CD) para tener éxito.",
+  "rules.d20.point3":
+    "Ventaja: tira dos veces y quédate con la más alta. Desventaja: tira dos veces y quédate con la más baja.",
+  "rules.d20.help":
+    "Un «1» en una tirada de ataque es un fallo crítico y siempre falla. Un «20» es un golpe crítico: siempre acieta y además inflige daño adicional.",
+
+  "rules.checks.title": "Pruebas de característica",
+  "rules.checks.titleHelp": "FUE · DES · CON · INT · SAB · CAR",
+  "rules.checks.summary":
+    "Cuando intentas algo arriesgado, el DM te pide una prueba de característica usando una de tus seis características.",
+  "rules.checks.point1": "Fuerza (FUE): empujar, levantar, romper.",
+  "rules.checks.point2": "Destreza (DES): moverte a hurtadillas, mantener el equilibrio, reaccionar.",
+  "rules.checks.point3": "Constitución (CON): resistir veneno, agotamiento, mantener la concentración.",
+  "rules.checks.point4": "Inteligencia (INT): recordar, resolver, investigar.",
+  "rules.checks.point5": "Sabiduría (SAB): percatarse, intuir peligro, leer a la gente.",
+  "rules.checks.point6": "Carisma (CAR): convencer, actuar, intimidar.",
+  "rules.checks.help":
+    "Tu modificador de característica es la bonificación que te da tu puntuación: 10 da +0, 12 da +1, 14 da +2, y así sucesivamente.",
+
+  "rules.saves.title": "Tiradas de salvación",
+  "rules.saves.summary":
+    "Cuando un hechizo o una trampa intenta afectarte, tiras una tirada de salvación para resistirte.",
+  "rules.saves.point1":
+    "El DM te indica qué característica debes usar (por ejemplo: «haz una tirada de salvación de Destreza»).",
+  "rules.saves.point2": "Tira el d20 y suma el modificador de esa característica.",
+  "rules.saves.point3":
+    "Si superas la CD del hechizo, el efecto se reduce o se evita por completo.",
+
+  "rules.turn.title": "Tu turno en combate",
+  "rules.turn.titleHelp": "Acción · Acción de bonus · Movimiento · Reacción",
+  "rules.turn.summary": "En tu turno puedes hacer varias cosas, en el orden que quieras.",
+  "rules.turn.point1": "Movimiento: muévete hasta tu velocidad (normalmente 9 m).",
+  "rules.turn.point2":
+    "Acción: atacar, lanzar un hechizo, esquivar, esconderte o hacer cualquier otra cosa.",
+  "rules.turn.point3":
+    "Acción de bonus: una acción adicional pequeña si alguna característica o hechizo te la concede.",
+  "rules.turn.point4":
+    "Reacción: una respuesta especial a algo que activa otra persona, una vez por ronda.",
+  "rules.turn.help":
+    "Solo tienes una Acción, una Acción de bonus y una Reacción por ronda: ¡úsalas con cabeza!",
+
+  "rules.attacks.title": "Ataques y daño",
+  "rules.attacks.summary":
+    "Para atacar, tira un d20 y suma tu bonificación de ataque. Si aciertas, tira el daño.",
+  "rules.attacks.point1":
+    "Tirada de ataque: d20 + bonificación de ataque contra la Clase de Armadura (CA) del objetivo.",
+  "rules.attacks.point2":
+    "Tirada de daño: los dados del arma o del hechizo, más tu modificador de característica.",
+  "rules.attacks.point3":
+    "Críticos: un 20 natural siempre acieta y se tiran los dados de daño por duplicado.",
+
+  "rules.rest.title": "Puntos de vida y descansos",
+  "rules.rest.summary":
+    "Tus puntos de vida (PV) indican cuánto castigo puede aguantar tu personaje.",
+  "rules.rest.point1": "El daño te resta PV. Con 0 PV quedas inconsciente.",
+  "rules.rest.point2": "Descanso corto: 1 hora; gastas dados de golpe para curarte.",
+  "rules.rest.point3":
+    "Descanso largo: 8 horas; recuperas todos tus PV y la mitad de tus dados de golpe.",
+  "rules.rest.help": "Lleva el control de tus PV actuales en la pestaña Combate durante la partida.",
+
+  "rules.spellcasting.title": "Lanzamiento de hechizos",
+  "rules.spellcasting.summary":
+    "Lanzar un hechizo gasta una Acción, salvo que el hechizo indique lo contrario.",
+  "rules.spellcasting.point1":
+    "Ataque de hechizo: tira d20 + tu bonificación de ataque de hechizo contra la CA del objetivo.",
+  "rules.spellcasting.point2":
+    "Tirada de salvación: el objetivo tira contra la CD de tirada de salvación de tus hechizos.",
+  "rules.spellcasting.point3":
+    "Concentración: si el hechizo lo indica, la pierdes cuando recibes daño y fallas una tirada de salvación de Constitución.",
+  "rules.spellcasting.help":
+    "Tu CD de tirada de salvación de hechizos y tu bonificación de ataque de hechizo están en tu personaje, en la pestaña Personaje.",
+
+  // ---- Archivo: pestaña Cómo jugar ----
+  "howToPlay.1.title": "Tu personaje no será bueno en todo, y eso está bien.",
+  "howToPlay.1.body":
+    "Todas las clases tienen puntos fuertes y débiles. Fallar una tirada de vez en cuando forma parte del juego; no significa que lo estés haciendo mal.",
+  "howToPlay.2.title": "La sesión no va solo sobre ti.",
+  "howToPlay.2.body":
+    "Algunas escenas toman el protagonismo de otros personajes. Eso no significa que tengas que quedarte fuera: reacciona, participa, apoya a quien tenga el foco sin robarle la escena.",
+  "howToPlay.3.title": "El objetivo es divertirse, no «ganar».",
+  "howToPlay.3.body":
+    "No hay marcador. Una buena sesión es aquella en la que todo el mundo en la mesa lo pasa bien, tú incluido, aunque las cosas no salgan como esperabas.",
+  "howToPlay.4.title": "Participa activamente.",
+  "howToPlay.4.body":
+    "Describe lo que hace tu personaje, no te limites a tirar dados. Preguntar «¿qué veo, qué siento o qué sé de esto?» siempre es una acción válida.",
+
+  // ---- Archivo: pestaña Glosario ----
+  "glossary.ac.term": "CA",
+  "glossary.ac.definition":
+    "Clase de Armadura. Qué tan difícil es acertarte: un ataque impacta cuando su total iguala o supera tu CA.",
+  "glossary.abilityCheck.term": "Prueba de característica",
+  "glossary.abilityCheck.definition":
+    "Una tirada de d20 más un modificador de característica, que haces cuando intentas algo arriesgado, como una prueba de Destreza para equilibrarte sobre una viga.",
+  "glossary.action.term": "Acción",
+  "glossary.action.definition":
+    "La acción principal de tu turno: atacar, lanzar un hechizo, esquivar, esconderte o usar un objeto.",
+  "glossary.advantage.term": "Ventaja",
+  "glossary.advantage.definition":
+    "Tira dos d20 y quédate con el más alto. Se concede cuando las circunstancias juegan a tu favor.",
+  "glossary.bonusAction.term": "Acción de bonus",
+  "glossary.bonusAction.definition":
+    "Una pequeña acción adicional que conceden algunas características o hechizos. Tienes una por turno, y solo si algo te la otorga.",
+  "glossary.cantrip.term": "Truco",
+  "glossary.cantrip.definition":
+    "Un hechizo de nivel 0 que puedes lanzar cuando quieras, sin gastar espacios de hechizo.",
+  "glossary.concentration.term": "Concentración",
+  "glossary.concentration.definition":
+    "Algunos hechizos necesitan tu concentración para seguir activos. Si recibes daño, debes superar una tirada de salvación de Constitución o el hechizo termina.",
+  "glossary.critical.term": "Golpe crítico",
+  "glossary.critical.definition":
+    "Un 20 natural en una tirada de ataque. Siempre acieta y se tiran los dados de daño por duplicado.",
+  "glossary.dc.term": "CD",
+  "glossary.dc.definition":
+    "Clase de Dificultad. El número que una tirada debe igualar o superar para tener éxito. Una CD más alta significa una tarea más difícil.",
+  "glossary.disadvantage.term": "Desventaja",
+  "glossary.disadvantage.definition":
+    "Tira dos d20 y quédate con el más bajo. Se impone cuando las circunstancias juegan en tu contra.",
+  "glossary.hitDice.term": "Dados de golpe",
+  "glossary.hitDice.definition":
+    "Dados que gastas en un descanso corto para curarte. Tienes uno por nivel y se recuperan al terminar un descanso largo.",
+  "glossary.hitPoints.term": "Puntos de vida",
+  "glossary.hitPoints.definition":
+    "Tus PV indican cuánto castigo puede aguantar tu personaje. Con 0 PV quedas inconsciente.",
+  "glossary.longRest.term": "Descanso largo",
+  "glossary.longRest.definition":
+    "Ocho horas de sueño y actividad ligera. Recuperas todos los PV perdidos y la mitad de los dados de golpe gastados.",
+  "glossary.reaction.term": "Reacción",
+  "glossary.reaction.definition":
+    "Una respuesta rápida fuera de tu turno, como un ataque de oportunidad, que realizas cuando ocurre su desencadenante. Una por ronda.",
+  "glossary.savingThrow.term": "Tirada de salvación",
+  "glossary.savingThrow.definition":
+    "Una tirada de d20 más un modificador de característica para resistir un hechizo, una trampa o un efecto. Iguala o supera su CD.",
+  "glossary.shortRest.term": "Descanso corto",
+  "glossary.shortRest.definition":
+    "Una hora de descanso. Gastas dados de golpe para curarte y algunas características se recargan.",
+  "glossary.spellAttack.term": "Ataque de hechizo",
+  "glossary.spellAttack.definition":
+    "La tirada que haces cuando un hechizo ataca directamente: d20 más tu bonificación de ataque de hechizo contra la CA del objetivo.",
+  "glossary.spellSaveDc.term": "CD de tirada de salvación de hechizos",
+  "glossary.spellSaveDc.definition":
+    "El número que los enemigos deben superar para resistir tus hechizos. Crece con tu bonificación por competencia y con tu puntuación de característica de lanzamiento.",
   "session.emptyCount": "No hay referencias en la sesión",
   "session.countOne": "1 referencia",
   "session.countOther": "{count} referencias",
