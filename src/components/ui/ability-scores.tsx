@@ -44,8 +44,14 @@ const ABILITY_HELP: Record<AbilityKey, string> = {
   charisma: "Force of personality. Used for persuasion, performance, and deception.",
 };
 
+/**
+ * Design DNA rule 9 fixes the three-way coding: positive = success green,
+ * negative = danger red, zero = muted gold. The `+` on a zero carried no
+ * information and read louder than the non-zero modifiers next to it.
+ */
 function formatSigned(value: number): string {
-  return value >= 0 ? `+${value}` : `${value}`;
+  if (value > 0) return `+${value}`;
+  return `${value}`;
 }
 
 function ScoreControl({

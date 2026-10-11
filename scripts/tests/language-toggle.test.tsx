@@ -16,10 +16,7 @@ function test(description: string, fn: () => void): void {
 }
 
 import { LANGUAGES, languageCode, nextLanguage } from "../../src/features/language/language";
-import {
-  WAVE_DURATION_MS,
-  prefersReducedMotion,
-} from "../../src/features/motion/wave-reveal";
+import { WAVE_DURATION_MS, prefersReducedMotion } from "../../src/features/motion/wave-reveal";
 import { LanguageToggle } from "../../src/components/layout/language-toggle";
 
 console.log("language switch\n");
@@ -83,5 +80,5 @@ test("the switch shows no toast, so no notification copy is left behind", () => 
   // The wave reveal is the confirmation; a snackbar was removed as redundant.
   // Guard it so the strings (and the toast) don't quietly come back.
   const html = renderToString(createElement(LanguageToggle));
-  ok(!html.includes("role=\"status\""), "no live region in the toggle");
+  ok(!html.includes('role="status"'), "no live region in the toggle");
 });

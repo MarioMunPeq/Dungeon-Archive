@@ -79,13 +79,10 @@ function FeatureSummary({ feature }: { readonly feature: ClassFeatureRef }): Rea
       <span className="min-w-0 flex-1 text-sm font-medium">{feature.name}</span>
       {feature.consumes && (
         <span className="shrink-0 text-xs text-muted-foreground">
-          <span className="font-medium text-foreground">{t("class.uses")}:</span>{" "}
-          {feature.consumes}
+          <span className="font-medium text-foreground">{t("class.uses")}:</span> {feature.consumes}
         </span>
       )}
-      {feature.gainSubclassFeature && (
-        <Badge variant="outline">{t("class.subclassAt")}</Badge>
-      )}
+      {feature.gainSubclassFeature && <Badge variant="outline">{t("class.subclassAt")}</Badge>}
     </>
   );
 }
@@ -149,19 +146,28 @@ function LevelStats({ card }: { readonly card: ClassLevelCard }): ReactNode {
 }
 
 /** One collapsible card per class level, covering the full 1-20 range. */
-function LevelCard({ card, defaultOpen }: { readonly card: ClassLevelCard; readonly defaultOpen: boolean }): ReactNode {
+function LevelCard({
+  card,
+  defaultOpen,
+}: {
+  readonly card: ClassLevelCard;
+  readonly defaultOpen: boolean;
+}): ReactNode {
   const hasProgression = card.statGroups.length > 0;
 
   return (
     <Accordion
       defaultOpen={defaultOpen}
       title={
-        <span className="flex items-baseline gap-2">
-          <span className="text-xs font-semibold uppercase tracking-wide text-primary">
+        // `shrink-0` on the level label stops "LEVEL" and the number wrapping
+        // onto separate lines; the feature names take the remaining width and
+        // wrap to a second line rather than truncating (rule 40).
+        <span className="flex min-w-0 flex-1 items-baseline gap-2">
+          <span className="shrink-0 whitespace-nowrap text-xs font-semibold uppercase tracking-wide text-primary">
             {t("class.level")} {card.level}
           </span>
           {card.features.length > 0 && (
-            <span className="truncate text-sm font-medium">
+            <span className="line-clamp-2 min-w-0 text-sm font-medium">
               {card.features.map((f) => f.name).join(" \u00b7 ")}
             </span>
           )}
@@ -181,8 +187,11 @@ function LevelCard({ card, defaultOpen }: { readonly card: ClassLevelCard; reado
       <Stack gap="md">
         {hasProgression && (
           <div className="space-y-1.5">
+            {/* Labelled "Numbers", not "Progression by Level" — the outer
+                section already carries that title and repeating it read as a
+                duplicate heading on every level card. */}
             <p className="flex items-center gap-1.5 text-xs font-medium uppercase tracking-wide text-muted-foreground">
-              {t("class.progression")}
+              {t("class.numbersAtLevel")}
               <HelpTip label={t("help.classProgression.title")}>
                 {t("help.classProgression.body")}
               </HelpTip>
@@ -196,6 +205,9 @@ function LevelCard({ card, defaultOpen }: { readonly card: ClassLevelCard; reado
             {card.features.map((feature) => (
               <Accordion
                 key={`${feature.name}-${feature.source}`}
+                // Nested inside the level card's own bordered content area, so
+                // the hairline would be a third border stacked on a second one.
+                divider={false}
                 contentClassName="bg-card/40"
                 title={<FeatureSummary feature={feature} />}
               >
@@ -239,10 +251,7 @@ export function ClassRenderer({ entity }: ClassRendererProps) {
           <HelpTip label={t("help.hitDice.title")}>{t("help.hitDice.body")}</HelpTip>
         </EntityProperty>
         {primaryAbility.length > 0 && (
-          <EntityProperty
-            label={t("class.primaryAbility")}
-            value={abilityList(primaryAbility)}
-          >
+          <EntityProperty label={t("class.primaryAbility")} value={abilityList(primaryAbility)}>
             <HelpTip label={t("help.primaryAbility.title")}>
               {t("help.primaryAbility.body")}
             </HelpTip>
@@ -334,10 +343,7 @@ export function ClassRenderer({ entity }: ClassRendererProps) {
       )}
 
       {hasLevelBreakdown && (
-        <Section
-          title={t("class.progression")}
-          subtitle={t("class.progressionSubtitle")}
-        >
+        <Section title={t("class.progression")} subtitle={t("class.progressionSubtitle")}>
           <Stack gap="sm">
             {levelCards.map((card) => (
               <LevelCard key={card.level} card={card} defaultOpen={card.level === 1} />

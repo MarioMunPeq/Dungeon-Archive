@@ -32,12 +32,12 @@ function group(
   colLabels: string[],
   rows: readonly (readonly (string | number | boolean | null)[])[],
 ): ClassTableGroup {
-  return title === undefined
-    ? { colLabels, rows }
-    : { title, colLabels, rows };
+  return title === undefined ? { colLabels, rows } : { title, colLabels, rows };
 }
 
-function rows20(fill: (level: number) => (string | number | boolean | null)[]): ClassTableGroup["rows"] {
+function rows20(
+  fill: (level: number) => (string | number | boolean | null)[],
+): ClassTableGroup["rows"] {
   return Array.from({ length: MAX_CLASS_LEVEL }, (_, i) => fill(i + 1));
 }
 
@@ -78,8 +78,18 @@ function classFixture(overrides?: Partial<Class>): Class {
       additionalFromBackground: false,
     },
     multiclassing: null,
-    classTableGroups: [group("Rage", ["Rages", "Rage Damage"], rows20((l) => [l, String(l)]))],
-    classFeatures: [feature(1, "Rage"), feature(3, "Primal Knowledge"), feature(20, "Raging Wrath")],
+    classTableGroups: [
+      group(
+        "Rage",
+        ["Rages", "Rage Damage"],
+        rows20((l) => [l, String(l)]),
+      ),
+    ],
+    classFeatures: [
+      feature(1, "Rage"),
+      feature(3, "Primal Knowledge"),
+      feature(20, "Raging Wrath"),
+    ],
     subclassTitle: "Primal Path",
     subclassGroups: [{ name: "Path of the Berserker", source: "PHB" }],
     ...overrides,
@@ -115,7 +125,11 @@ test("blank progression cells are dropped unless they are spell slots", () => {
   const base = classFixture();
   const withGaps = classFixture({
     classTableGroups: [
-      group(undefined, ["Extra Attack"], rows20((l) => (l >= 5 ? [1] : [null]))),
+      group(
+        undefined,
+        ["Extra Attack"],
+        rows20((l) => (l >= 5 ? [1] : [null])),
+      ),
       group(
         "Spell Slots",
         ["1st", "2nd", "3rd", "4th", "5th", "6th", "7th", "8th", "9th"],
@@ -137,7 +151,11 @@ test("identical duplicate tables from multiple sources collapse to one", () => {
     rows20(() => [2, 0, 0, 0, 0, 0, 0, 0, 0]),
   );
   strictEqual(dedupeTableGroups([spellSlots, spellSlots, spellSlots]).length, 1);
-  const different = group("Cantrips", ["Cantrips Known"], rows20(() => [3]));
+  const different = group(
+    "Cantrips",
+    ["Cantrips Known"],
+    rows20(() => [3]),
+  );
   strictEqual(dedupeTableGroups([spellSlots, different]).length, 2);
 });
 
@@ -167,7 +185,11 @@ test("blocksToPlainText flattens paragraphs, lists, tables and nested entries", 
 
 test("renderer shows every level and keeps collapsed panels in the DOM", () => {
   const html = renderToString(createElement(ClassRenderer, { entity: classFixture() }));
-  strictEqual((html.match(/aria-expanded="false"/g) ?? []).length > 0, true, "collapsed panels exist");
+  strictEqual(
+    (html.match(/aria-expanded="false"/g) ?? []).length > 0,
+    true,
+    "collapsed panels exist",
+  );
   strictEqual(html.includes('aria-expanded="true"'), true, "level 1 starts open");
   strictEqual(html.includes("Primal Knowledge"), true, "level 3 feature is listed");
   strictEqual(html.includes("Raging Wrath"), true, "level 20 feature is listed");
@@ -199,7 +221,11 @@ test("a class with no levels at all still renders its basics", () => {
   );
   strictEqual(html.includes("1d12"), true);
   strictEqual(html.includes("Path of the Berserker"), true, "subclasses still listed");
-  strictEqual(html.includes("Progression by Level"), false, "no level cards when there is nothing to show");
+  strictEqual(
+    html.includes("Progression by Level"),
+    false,
+    "no level cards when there is nothing to show",
+  );
 });
 
 test("progression alone is enough to show the level breakdown", () => {

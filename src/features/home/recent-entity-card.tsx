@@ -23,8 +23,11 @@ export const RecentEntityCard = memo(function RecentEntityCard({
       <Badge variant="outline" className="w-fit">
         {categoryLabel}
       </Badge>
-      <span className="truncate text-sm font-semibold text-foreground">{name}</span>
-      {metadata && <span className="truncate text-xs text-muted-foreground">{metadata}</span>}
+      {/* Rule 40: labels wrap to a second line rather than cutting off with an
+          ellipsis. The cards are in a fixed-width horizontal rail, so they grow
+          vertically instead of horizontally. */}
+      <span className="line-clamp-2 text-sm font-semibold text-foreground">{name}</span>
+      {metadata && <span className="line-clamp-2 text-xs text-muted-foreground">{metadata}</span>}
     </Link>
   );
 });

@@ -26,5 +26,9 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": ["scripts"]
+  // `src/types/*.d.ts` are ambient module declarations (e.g. `@3d-dice/dice-box`)
+  // that source files under src/ depend on. They are not reachable from
+  // `scripts/` by import, so they have to be listed explicitly or the scripts
+  // project fails to typecheck anything that transitively pulls in those modules.
+  "include": ["scripts", "src/types/*.d.ts"]
 }

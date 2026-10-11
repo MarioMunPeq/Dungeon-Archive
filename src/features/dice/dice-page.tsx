@@ -137,6 +137,13 @@ export function DicePage() {
   return (
     <div className="flex min-h-full flex-col gap-3 px-4 py-4">
       {show3D && (
+        // The stage used `bg-surface`, one step lighter than the page background,
+        // which drew a visible rectangle seam around the 3D canvas.
+        // `bg-background` blends it in; the border still separates it as a card
+        // (rule 23). The height is sized for the die, so the stage no longer
+        // reserves a third of the screen for a small render.
+        // Safe as a line comment: it sits inside the parentheses of the `&&`,
+        // which are JS, not in JSX children position.
         <div
           role="button"
           tabIndex={0}
@@ -144,7 +151,7 @@ export function DicePage() {
           aria-disabled={!rollEnabled}
           onClick={triggerRoll}
           onKeyDown={handleRollKeyDown}
-          className="h-48 w-full cursor-pointer overflow-hidden rounded-stat border border-border bg-surface"
+          className="h-36 w-full cursor-pointer overflow-hidden rounded-stat border border-border bg-background"
         >
           <Suspense
             fallback={
@@ -162,7 +169,6 @@ export function DicePage() {
           </Suspense>
         </div>
       )}
-
       <div className="flex flex-col items-center gap-1 rounded-stat border border-border-amber bg-card p-2 readout-card">
         <span className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
           {t("dice.result")}
@@ -207,7 +213,6 @@ export function DicePage() {
         )}
         <span className="font-mono text-xs text-muted-foreground">{label}</span>
       </div>
-
       <div className="mx-auto grid w-full max-w-lg grid-cols-3 gap-2">
         {renderChips(DICE_ORDER)}
 
@@ -240,17 +245,21 @@ export function DicePage() {
           />
         </div>
       </div>
-
+      {/* Design DNA rule 35: buttons are never full-width coloured slabs, even for
+          the primary action. It stays in a sticky footer so it remains reachable,
+          but at its natural size. */}
       <div className="sticky bottom-0 -mx-4 mt-auto border-t border-border bg-background px-4 pb-3 pt-2 shadow-[0_-8px_16px_rgb(0_0_0/0.35)]">
-        <Button
-          onClick={handleRoll}
-          disabled={rolling || instantRolling || totalCount === 0}
-          className="mx-auto w-full max-w-lg"
-        >
-          <span className="font-mono tabular-nums">
-            {t("dice.rollWith", { expression: label })}
-          </span>
-        </Button>
+        <div className="mx-auto flex max-w-lg justify-center">
+          <Button
+            onClick={handleRoll}
+            disabled={rolling || instantRolling || totalCount === 0}
+            className="px-6"
+          >
+            <span className="font-mono tabular-nums">
+              {t("dice.rollWith", { expression: label })}
+            </span>
+          </Button>
+        </div>
       </div>
     </div>
   );

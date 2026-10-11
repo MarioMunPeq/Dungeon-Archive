@@ -98,10 +98,7 @@ const wizardSpellCount = countClassSpells(spells, "Wizard");
 test("defaults to the character's class list when it has spells", () => {
   const html = renderPicker({ characterClass: "Wizard" });
   ok(resultCount(wizardSpellCount).test(html), "count reflects the wizard-only scope");
-  ok(
-    !html.includes(`>${spells.length} `),
-    "count is not the unfiltered total",
-  );
+  ok(!html.includes(`>${spells.length} `), "count is not the unfiltered total");
 });
 
 test("falls back to all spells when there is no class to scope by", () => {

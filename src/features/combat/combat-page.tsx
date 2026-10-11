@@ -413,11 +413,10 @@ function CombatCharacterView({ character }: { character: CharacterReference }) {
   return (
     <div className="flex flex-col gap-4">
       <div className="flex flex-col gap-2 rounded-card border border-border-amber bg-surface readout-card p-2">
-        <div className="flex items-center justify-between gap-2">
-          <div className="flex items-center gap-2 border-l-2 border-primary pl-2 text-xs font-bold uppercase tracking-wide text-muted-foreground">
-            {t("combat.hitPoints")}
-            <HelpTip label={t("help.hitPoints.title")}>{t("help.hitPoints.body")}</HelpTip>
-          </div>
+        {/* Design DNA rule 28: section-level help lives on the section header
+            only — a second badge in the card corner duplicated the same tip. */}
+        <div className="flex items-center gap-2 border-l-2 border-primary pl-2 text-xs font-bold uppercase tracking-wide text-muted-foreground">
+          {t("combat.hitPoints")}
           <HelpTip label={t("help.hitPoints.title")}>{t("help.hitPoints.body")}</HelpTip>
         </div>
         <div

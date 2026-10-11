@@ -559,7 +559,11 @@ function ReferenceGroup({
       {ids.length === 0 ? (
         <p className="px-1 text-xs text-foreground-subtle">{t("character.empty")}</p>
       ) : (
-        <div className="grid grid-cols-2 gap-2">
+        // A single item stranded in a 2-column grid left half the row empty, which read
+        // as a layout bug rather than a one-item list. One item spans the row.
+        // Safe as a line comment: the ternary branch's parentheses are JS, and the
+        // branch takes a single expression rather than JSX children.
+        <div className={cn("grid gap-2", ids.length === 1 ? "grid-cols-1" : "grid-cols-2")}>
           {ids.map((canonicalId) => (
             <ReferenceCell
               key={canonicalId}

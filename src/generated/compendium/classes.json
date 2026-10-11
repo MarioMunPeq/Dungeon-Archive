@@ -9,28 +9,14 @@
       "number": 1,
       "faces": 8
     },
-    "proficiency": [
-      "con",
-      "int"
-    ],
+    "proficiency": ["con", "int"],
     "primaryAbility": [],
     "spellcastingAbility": "int",
     "casterProgression": "artificer",
     "startingProficiencies": {
-      "armor": [
-        "light",
-        "medium",
-        "shield"
-      ],
-      "weapons": [
-        "simple",
-        "firearms (optional)"
-      ],
-      "tools": [
-        "thieves' tools",
-        "tinker's tools",
-        "one type of artisan's tools of your choice"
-      ],
+      "armor": ["light", "medium", "shield"],
+      "weapons": ["simple", "firearms (optional)"],
+      "tools": ["thieves' tools", "tinker's tools", "one type of artisan's tools of your choice"],
       "savingThrows": [],
       "skills": [
         {
@@ -53,9 +39,7 @@
           "alternatives": [
             {
               "label": "",
-              "items": [
-                "2 × Simple Weapon"
-              ],
+              "items": ["2 × Simple Weapon"],
               "gold": null
             }
           ]
@@ -64,10 +48,7 @@
           "alternatives": [
             {
               "label": "",
-              "items": [
-                "Light Crossbow",
-                "Crossbow Bolts (20)"
-              ],
+              "items": ["Light Crossbow", "Crossbow Bolts (20)"],
               "gold": null
             }
           ]
@@ -76,16 +57,12 @@
           "alternatives": [
             {
               "label": "A",
-              "items": [
-                "Studded Leather Armor"
-              ],
+              "items": ["Studded Leather Armor"],
               "gold": null
             },
             {
               "label": "B",
-              "items": [
-                "Scale Mail"
-              ],
+              "items": ["Scale Mail"],
               "gold": null
             }
           ]
@@ -94,10 +71,7 @@
           "alternatives": [
             {
               "label": "",
-              "items": [
-                "Thieves' Tools",
-                "Dungeoneer's Pack"
-              ],
+              "items": ["Thieves' Tools", "Dungeoneer's Pack"],
               "gold": null
             }
           ]
@@ -108,270 +82,58 @@
     },
     "multiclassing": {
       "requirements": [],
-      "proficienciesGained": [
-        "Armor: light, medium, shield"
-      ]
+      "proficienciesGained": ["Armor: light, medium, shield"]
     },
     "classTableGroups": [
       {
-        "colLabels": [
-          "Infusions Known",
-          "Infused Items",
-          "Cantrips Known"
-        ],
+        "colLabels": ["Infusions Known", "Infused Items", "Cantrips Known"],
         "rows": [
-          [
-            0,
-            0,
-            2
-          ],
-          [
-            4,
-            2,
-            2
-          ],
-          [
-            4,
-            2,
-            2
-          ],
-          [
-            4,
-            2,
-            2
-          ],
-          [
-            4,
-            2,
-            2
-          ],
-          [
-            6,
-            3,
-            2
-          ],
-          [
-            6,
-            3,
-            2
-          ],
-          [
-            6,
-            3,
-            2
-          ],
-          [
-            6,
-            3,
-            2
-          ],
-          [
-            8,
-            4,
-            3
-          ],
-          [
-            8,
-            4,
-            3
-          ],
-          [
-            8,
-            4,
-            3
-          ],
-          [
-            8,
-            4,
-            3
-          ],
-          [
-            10,
-            5,
-            4
-          ],
-          [
-            10,
-            5,
-            4
-          ],
-          [
-            10,
-            5,
-            4
-          ],
-          [
-            10,
-            5,
-            4
-          ],
-          [
-            12,
-            6,
-            4
-          ],
-          [
-            12,
-            6,
-            4
-          ],
-          [
-            12,
-            6,
-            4
-          ]
+          [0, 0, 2],
+          [4, 2, 2],
+          [4, 2, 2],
+          [4, 2, 2],
+          [4, 2, 2],
+          [6, 3, 2],
+          [6, 3, 2],
+          [6, 3, 2],
+          [6, 3, 2],
+          [8, 4, 3],
+          [8, 4, 3],
+          [8, 4, 3],
+          [8, 4, 3],
+          [10, 5, 4],
+          [10, 5, 4],
+          [10, 5, 4],
+          [10, 5, 4],
+          [12, 6, 4],
+          [12, 6, 4],
+          [12, 6, 4]
         ]
       },
       {
         "title": "Spell Slots per Spell Level",
-        "colLabels": [
-          "1st",
-          "2nd",
-          "3rd",
-          "4th",
-          "5th"
-        ],
+        "colLabels": ["1st", "2nd", "3rd", "4th", "5th"],
         "rows": [
-          [
-            2,
-            0,
-            0,
-            0,
-            0
-          ],
-          [
-            2,
-            0,
-            0,
-            0,
-            0
-          ],
-          [
-            3,
-            0,
-            0,
-            0,
-            0
-          ],
-          [
-            3,
-            0,
-            0,
-            0,
-            0
-          ],
-          [
-            4,
-            2,
-            0,
-            0,
-            0
-          ],
-          [
-            4,
-            2,
-            0,
-            0,
-            0
-          ],
-          [
-            4,
-            3,
-            0,
-            0,
-            0
-          ],
-          [
-            4,
-            3,
-            0,
-            0,
-            0
-          ],
-          [
-            4,
-            3,
-            2,
-            0,
-            0
-          ],
-          [
-            4,
-            3,
-            2,
-            0,
-            0
-          ],
-          [
-            4,
-            3,
-            3,
-            0,
-            0
-          ],
-          [
-            4,
-            3,
-            3,
-            0,
-            0
-          ],
-          [
-            4,
-            3,
-            3,
-            1,
-            0
-          ],
-          [
-            4,
-            3,
-            3,
-            1,
-            0
-          ],
-          [
-            4,
-            3,
-            3,
-            2,
-            0
-          ],
-          [
-            4,
-            3,
-            3,
-            2,
-            0
-          ],
-          [
-            4,
-            3,
-            3,
-            3,
-            1
-          ],
-          [
-            4,
-            3,
-            3,
-            3,
-            1
-          ],
-          [
-            4,
-            3,
-            3,
-            3,
-            2
-          ],
-          [
-            4,
-            3,
-            3,
-            3,
-            2
-          ]
+          [2, 0, 0, 0, 0],
+          [2, 0, 0, 0, 0],
+          [3, 0, 0, 0, 0],
+          [3, 0, 0, 0, 0],
+          [4, 2, 0, 0, 0],
+          [4, 2, 0, 0, 0],
+          [4, 3, 0, 0, 0],
+          [4, 3, 0, 0, 0],
+          [4, 3, 2, 0, 0],
+          [4, 3, 2, 0, 0],
+          [4, 3, 3, 0, 0],
+          [4, 3, 3, 0, 0],
+          [4, 3, 3, 1, 0],
+          [4, 3, 3, 1, 0],
+          [4, 3, 3, 2, 0],
+          [4, 3, 3, 2, 0],
+          [4, 3, 3, 3, 1],
+          [4, 3, 3, 3, 1],
+          [4, 3, 3, 3, 2],
+          [4, 3, 3, 3, 2]
         ]
       }
     ],
@@ -550,9 +312,7 @@
           },
           {
             "type": "list",
-            "items": [
-              "TCE"
-            ]
+            "items": ["TCE"]
           },
           {
             "type": "inset",
@@ -1412,23 +1172,13 @@
       "number": 1,
       "faces": 12
     },
-    "proficiency": [
-      "str",
-      "con"
-    ],
+    "proficiency": ["str", "con"],
     "primaryAbility": [],
     "spellcastingAbility": null,
     "casterProgression": null,
     "startingProficiencies": {
-      "armor": [
-        "light",
-        "medium",
-        "shield"
-      ],
-      "weapons": [
-        "simple",
-        "martial"
-      ],
+      "armor": ["light", "medium", "shield"],
+      "weapons": ["simple", "martial"],
       "tools": [],
       "savingThrows": [],
       "skills": [
@@ -1451,16 +1201,12 @@
           "alternatives": [
             {
               "label": "A",
-              "items": [
-                "Greataxe"
-              ],
+              "items": ["Greataxe"],
               "gold": null
             },
             {
               "label": "B",
-              "items": [
-                "Martial Melee Weapon"
-              ],
+              "items": ["Martial Melee Weapon"],
               "gold": null
             }
           ]
@@ -1469,16 +1215,12 @@
           "alternatives": [
             {
               "label": "A",
-              "items": [
-                "2 × Handaxe"
-              ],
+              "items": ["2 × Handaxe"],
               "gold": null
             },
             {
               "label": "B",
-              "items": [
-                "Simple Weapon"
-              ],
+              "items": ["Simple Weapon"],
               "gold": null
             }
           ]
@@ -1487,10 +1229,7 @@
           "alternatives": [
             {
               "label": "",
-              "items": [
-                "Explorer's Pack",
-                "4 × Javelin"
-              ],
+              "items": ["Explorer's Pack", "4 × Javelin"],
               "gold": null
             }
           ]
@@ -1501,98 +1240,32 @@
     },
     "multiclassing": {
       "requirements": [],
-      "proficienciesGained": [
-        "Armor: shield",
-        "Weapons: simple, martial"
-      ]
+      "proficienciesGained": ["Armor: shield", "Weapons: simple, martial"]
     },
     "classTableGroups": [
       {
-        "colLabels": [
-          "Rages",
-          "Rage Damage"
-        ],
+        "colLabels": ["Rages", "Rage Damage"],
         "rows": [
-          [
-            "2",
-            null
-          ],
-          [
-            "2",
-            null
-          ],
-          [
-            "3",
-            null
-          ],
-          [
-            "3",
-            null
-          ],
-          [
-            "3",
-            null
-          ],
-          [
-            "4",
-            null
-          ],
-          [
-            "4",
-            null
-          ],
-          [
-            "4",
-            null
-          ],
-          [
-            "4",
-            null
-          ],
-          [
-            "4",
-            null
-          ],
-          [
-            "4",
-            null
-          ],
-          [
-            "5",
-            null
-          ],
-          [
-            "5",
-            null
-          ],
-          [
-            "5",
-            null
-          ],
-          [
-            "5",
-            null
-          ],
-          [
-            "5",
-            null
-          ],
-          [
-            "6",
-            null
-          ],
-          [
-            "6",
-            null
-          ],
-          [
-            "6",
-            null
-          ],
-          [
-            "Unlimited",
-            null
-          ]
+          ["2", null],
+          ["2", null],
+          ["3", null],
+          ["3", null],
+          ["3", null],
+          ["4", null],
+          ["4", null],
+          ["4", null],
+          ["4", null],
+          ["4", null],
+          ["4", null],
+          ["5", null],
+          ["5", null],
+          ["5", null],
+          ["5", null],
+          ["5", null],
+          ["6", null],
+          ["6", null],
+          ["6", null],
+          ["Unlimited", null]
         ]
       }
     ],
@@ -2329,25 +2002,13 @@
       "number": 1,
       "faces": 12
     },
-    "proficiency": [
-      "str",
-      "con"
-    ],
-    "primaryAbility": [
-      "str"
-    ],
+    "proficiency": ["str", "con"],
+    "primaryAbility": ["str"],
     "spellcastingAbility": null,
     "casterProgression": null,
     "startingProficiencies": {
-      "armor": [
-        "light",
-        "medium",
-        "shield"
-      ],
-      "weapons": [
-        "simple",
-        "martial"
-      ],
+      "armor": ["light", "medium", "shield"],
+      "weapons": ["simple", "martial"],
       "tools": [],
       "savingThrows": [],
       "skills": [
@@ -2370,11 +2031,7 @@
           "alternatives": [
             {
               "label": "A",
-              "items": [
-                "Greataxe",
-                "4 × Handaxe",
-                "Explorer's Pack"
-              ],
+              "items": ["Greataxe", "4 × Handaxe", "Explorer's Pack"],
               "gold": "1,500 GP"
             },
             {
@@ -2390,119 +2047,32 @@
     },
     "multiclassing": {
       "requirements": [],
-      "proficienciesGained": [
-        "Armor: shield",
-        "Weapons: martial"
-      ]
+      "proficienciesGained": ["Armor: shield", "Weapons: martial"]
     },
     "classTableGroups": [
       {
-        "colLabels": [
-          "Rages",
-          "Rage Damage",
-          "Weapon Mastery"
-        ],
+        "colLabels": ["Rages", "Rage Damage", "Weapon Mastery"],
         "rows": [
-          [
-            "2",
-            null,
-            "2"
-          ],
-          [
-            "2",
-            null,
-            "2"
-          ],
-          [
-            "3",
-            null,
-            "2"
-          ],
-          [
-            "3",
-            null,
-            "3"
-          ],
-          [
-            "3",
-            null,
-            "3"
-          ],
-          [
-            "4",
-            null,
-            "3"
-          ],
-          [
-            "4",
-            null,
-            "3"
-          ],
-          [
-            "4",
-            null,
-            "3"
-          ],
-          [
-            "4",
-            null,
-            "3"
-          ],
-          [
-            "4",
-            null,
-            "4"
-          ],
-          [
-            "4",
-            null,
-            "4"
-          ],
-          [
-            "5",
-            null,
-            "4"
-          ],
-          [
-            "5",
-            null,
-            "4"
-          ],
-          [
-            "5",
-            null,
-            "4"
-          ],
-          [
-            "5",
-            null,
-            "4"
-          ],
-          [
-            "5",
-            null,
-            "4"
-          ],
-          [
-            "6",
-            null,
-            "4"
-          ],
-          [
-            "6",
-            null,
-            "4"
-          ],
-          [
-            "6",
-            null,
-            "4"
-          ],
-          [
-            "6",
-            null,
-            "4"
-          ]
+          ["2", null, "2"],
+          ["2", null, "2"],
+          ["3", null, "2"],
+          ["3", null, "3"],
+          ["3", null, "3"],
+          ["4", null, "3"],
+          ["4", null, "3"],
+          ["4", null, "3"],
+          ["4", null, "3"],
+          ["4", null, "4"],
+          ["4", null, "4"],
+          ["5", null, "4"],
+          ["5", null, "4"],
+          ["5", null, "4"],
+          ["5", null, "4"],
+          ["5", null, "4"],
+          ["6", null, "4"],
+          ["6", null, "4"],
+          ["6", null, "4"],
+          ["6", null, "4"]
         ]
       }
     ],
@@ -3240,27 +2810,14 @@
       "number": 1,
       "faces": 8
     },
-    "proficiency": [
-      "dex",
-      "cha"
-    ],
+    "proficiency": ["dex", "cha"],
     "primaryAbility": [],
     "spellcastingAbility": "cha",
     "casterProgression": "full",
     "startingProficiencies": {
-      "armor": [
-        "light"
-      ],
-      "weapons": [
-        "simple",
-        "hand crossbow",
-        "longsword",
-        "rapier",
-        "shortsword"
-      ],
-      "tools": [
-        "three musical instrument of your choice"
-      ],
+      "armor": ["light"],
+      "weapons": ["simple", "hand crossbow", "longsword", "rapier", "shortsword"],
+      "tools": ["three musical instrument of your choice"],
       "savingThrows": [],
       "skills": []
     },
@@ -3270,23 +2827,17 @@
           "alternatives": [
             {
               "label": "A",
-              "items": [
-                "Rapier"
-              ],
+              "items": ["Rapier"],
               "gold": null
             },
             {
               "label": "B",
-              "items": [
-                "Longsword"
-              ],
+              "items": ["Longsword"],
               "gold": null
             },
             {
               "label": "C",
-              "items": [
-                "Simple Weapon"
-              ],
+              "items": ["Simple Weapon"],
               "gold": null
             }
           ]
@@ -3295,16 +2846,12 @@
           "alternatives": [
             {
               "label": "A",
-              "items": [
-                "Diplomat's Pack"
-              ],
+              "items": ["Diplomat's Pack"],
               "gold": null
             },
             {
               "label": "B",
-              "items": [
-                "Entertainer's Pack"
-              ],
+              "items": ["Entertainer's Pack"],
               "gold": null
             }
           ]
@@ -3313,16 +2860,12 @@
           "alternatives": [
             {
               "label": "A",
-              "items": [
-                "Lute"
-              ],
+              "items": ["Lute"],
               "gold": null
             },
             {
               "label": "B",
-              "items": [
-                "Musical Instrument"
-              ],
+              "items": ["Musical Instrument"],
               "gold": null
             }
           ]
@@ -3331,10 +2874,7 @@
           "alternatives": [
             {
               "label": "",
-              "items": [
-                "Leather Armor",
-                "Dagger"
-              ],
+              "items": ["Leather Armor", "Dagger"],
               "gold": null
             }
           ]
@@ -3345,333 +2885,58 @@
     },
     "multiclassing": {
       "requirements": [],
-      "proficienciesGained": [
-        "Armor: light"
-      ]
+      "proficienciesGained": ["Armor: light"]
     },
     "classTableGroups": [
       {
-        "colLabels": [
-          "Cantrips Known",
-          "Spells Known"
-        ],
+        "colLabels": ["Cantrips Known", "Spells Known"],
         "rows": [
-          [
-            2,
-            4
-          ],
-          [
-            2,
-            5
-          ],
-          [
-            2,
-            6
-          ],
-          [
-            3,
-            7
-          ],
-          [
-            3,
-            8
-          ],
-          [
-            3,
-            9
-          ],
-          [
-            3,
-            10
-          ],
-          [
-            3,
-            11
-          ],
-          [
-            3,
-            12
-          ],
-          [
-            4,
-            14
-          ],
-          [
-            4,
-            15
-          ],
-          [
-            4,
-            15
-          ],
-          [
-            4,
-            16
-          ],
-          [
-            4,
-            18
-          ],
-          [
-            4,
-            19
-          ],
-          [
-            4,
-            19
-          ],
-          [
-            4,
-            20
-          ],
-          [
-            4,
-            22
-          ],
-          [
-            4,
-            22
-          ],
-          [
-            4,
-            22
-          ]
+          [2, 4],
+          [2, 5],
+          [2, 6],
+          [3, 7],
+          [3, 8],
+          [3, 9],
+          [3, 10],
+          [3, 11],
+          [3, 12],
+          [4, 14],
+          [4, 15],
+          [4, 15],
+          [4, 16],
+          [4, 18],
+          [4, 19],
+          [4, 19],
+          [4, 20],
+          [4, 22],
+          [4, 22],
+          [4, 22]
         ]
       },
       {
         "title": "Spell Slots per Spell Level",
-        "colLabels": [
-          "1st",
-          "2nd",
-          "3rd",
-          "4th",
-          "5th",
-          "6th",
-          "7th",
-          "8th",
-          "9th"
-        ],
+        "colLabels": ["1st", "2nd", "3rd", "4th", "5th", "6th", "7th", "8th", "9th"],
         "rows": [
-          [
-            2,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0
-          ],
-          [
-            3,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0
-          ],
-          [
-            4,
-            2,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0
-          ],
-          [
-            4,
-            3,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0
-          ],
-          [
-            4,
-            3,
-            2,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0
-          ],
-          [
-            4,
-            3,
-            3,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0
-          ],
-          [
-            4,
-            3,
-            3,
-            1,
-            0,
-            0,
-            0,
-            0,
-            0
-          ],
-          [
-            4,
-            3,
-            3,
-            2,
-            0,
-            0,
-            0,
-            0,
-            0
-          ],
-          [
-            4,
-            3,
-            3,
-            3,
-            1,
-            0,
-            0,
-            0,
-            0
-          ],
-          [
-            4,
-            3,
-            3,
-            3,
-            2,
-            0,
-            0,
-            0,
-            0
-          ],
-          [
-            4,
-            3,
-            3,
-            3,
-            2,
-            1,
-            0,
-            0,
-            0
-          ],
-          [
-            4,
-            3,
-            3,
-            3,
-            2,
-            1,
-            0,
-            0,
-            0
-          ],
-          [
-            4,
-            3,
-            3,
-            3,
-            2,
-            1,
-            1,
-            0,
-            0
-          ],
-          [
-            4,
-            3,
-            3,
-            3,
-            2,
-            1,
-            1,
-            0,
-            0
-          ],
-          [
-            4,
-            3,
-            3,
-            3,
-            2,
-            1,
-            1,
-            1,
-            0
-          ],
-          [
-            4,
-            3,
-            3,
-            3,
-            2,
-            1,
-            1,
-            1,
-            0
-          ],
-          [
-            4,
-            3,
-            3,
-            3,
-            2,
-            1,
-            1,
-            1,
-            1
-          ],
-          [
-            4,
-            3,
-            3,
-            3,
-            3,
-            1,
-            1,
-            1,
-            1
-          ],
-          [
-            4,
-            3,
-            3,
-            3,
-            3,
-            2,
-            1,
-            1,
-            1
-          ],
-          [
-            4,
-            3,
-            3,
-            3,
-            3,
-            2,
-            2,
-            1,
-            1
-          ]
+          [2, 0, 0, 0, 0, 0, 0, 0, 0],
+          [3, 0, 0, 0, 0, 0, 0, 0, 0],
+          [4, 2, 0, 0, 0, 0, 0, 0, 0],
+          [4, 3, 0, 0, 0, 0, 0, 0, 0],
+          [4, 3, 2, 0, 0, 0, 0, 0, 0],
+          [4, 3, 3, 0, 0, 0, 0, 0, 0],
+          [4, 3, 3, 1, 0, 0, 0, 0, 0],
+          [4, 3, 3, 2, 0, 0, 0, 0, 0],
+          [4, 3, 3, 3, 1, 0, 0, 0, 0],
+          [4, 3, 3, 3, 2, 0, 0, 0, 0],
+          [4, 3, 3, 3, 2, 1, 0, 0, 0],
+          [4, 3, 3, 3, 2, 1, 0, 0, 0],
+          [4, 3, 3, 3, 2, 1, 1, 0, 0],
+          [4, 3, 3, 3, 2, 1, 1, 0, 0],
+          [4, 3, 3, 3, 2, 1, 1, 1, 0],
+          [4, 3, 3, 3, 2, 1, 1, 1, 0],
+          [4, 3, 3, 3, 2, 1, 1, 1, 1],
+          [4, 3, 3, 3, 3, 1, 1, 1, 1],
+          [4, 3, 3, 3, 3, 2, 1, 1, 1],
+          [4, 3, 3, 3, 3, 2, 2, 1, 1]
         ]
       }
     ],
@@ -4643,25 +3908,14 @@
       "number": 1,
       "faces": 8
     },
-    "proficiency": [
-      "dex",
-      "cha"
-    ],
-    "primaryAbility": [
-      "cha"
-    ],
+    "proficiency": ["dex", "cha"],
+    "primaryAbility": ["cha"],
     "spellcastingAbility": "cha",
     "casterProgression": "full",
     "startingProficiencies": {
-      "armor": [
-        "light"
-      ],
-      "weapons": [
-        "simple"
-      ],
-      "tools": [
-        "Choose three Musical Instrument"
-      ],
+      "armor": ["light"],
+      "weapons": ["simple"],
+      "tools": ["Choose three Musical Instrument"],
       "savingThrows": [],
       "skills": []
     },
@@ -4671,12 +3925,7 @@
           "alternatives": [
             {
               "label": "A",
-              "items": [
-                "Leather Armor",
-                "2 × Dagger",
-                "Musical Instrument",
-                "Entertainer's Pack"
-              ],
+              "items": ["Leather Armor", "2 × Dagger", "Musical Instrument", "Entertainer's Pack"],
               "gold": "1,900 GP"
             },
             {
@@ -4692,354 +3941,58 @@
     },
     "multiclassing": {
       "requirements": [],
-      "proficienciesGained": [
-        "Armor: light"
-      ]
+      "proficienciesGained": ["Armor: light"]
     },
     "classTableGroups": [
       {
-        "colLabels": [
-          "Bardic Die",
-          "Cantrips",
-          "Prepared Spells"
-        ],
+        "colLabels": ["Bardic Die", "Cantrips", "Prepared Spells"],
         "rows": [
-          [
-            null,
-            2,
-            4
-          ],
-          [
-            null,
-            2,
-            5
-          ],
-          [
-            null,
-            2,
-            6
-          ],
-          [
-            null,
-            3,
-            7
-          ],
-          [
-            null,
-            3,
-            9
-          ],
-          [
-            null,
-            3,
-            10
-          ],
-          [
-            null,
-            3,
-            11
-          ],
-          [
-            null,
-            3,
-            12
-          ],
-          [
-            null,
-            3,
-            14
-          ],
-          [
-            null,
-            4,
-            15
-          ],
-          [
-            null,
-            4,
-            16
-          ],
-          [
-            null,
-            4,
-            16
-          ],
-          [
-            null,
-            4,
-            17
-          ],
-          [
-            null,
-            4,
-            17
-          ],
-          [
-            null,
-            4,
-            18
-          ],
-          [
-            null,
-            4,
-            18
-          ],
-          [
-            null,
-            4,
-            19
-          ],
-          [
-            null,
-            4,
-            20
-          ],
-          [
-            null,
-            4,
-            21
-          ],
-          [
-            null,
-            4,
-            22
-          ]
+          [null, 2, 4],
+          [null, 2, 5],
+          [null, 2, 6],
+          [null, 3, 7],
+          [null, 3, 9],
+          [null, 3, 10],
+          [null, 3, 11],
+          [null, 3, 12],
+          [null, 3, 14],
+          [null, 4, 15],
+          [null, 4, 16],
+          [null, 4, 16],
+          [null, 4, 17],
+          [null, 4, 17],
+          [null, 4, 18],
+          [null, 4, 18],
+          [null, 4, 19],
+          [null, 4, 20],
+          [null, 4, 21],
+          [null, 4, 22]
         ]
       },
       {
         "title": "Spell Slots per Spell Level",
-        "colLabels": [
-          "1st",
-          "2nd",
-          "3rd",
-          "4th",
-          "5th",
-          "6th",
-          "7th",
-          "8th",
-          "9th"
-        ],
+        "colLabels": ["1st", "2nd", "3rd", "4th", "5th", "6th", "7th", "8th", "9th"],
         "rows": [
-          [
-            2,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0
-          ],
-          [
-            3,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0
-          ],
-          [
-            4,
-            2,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0
-          ],
-          [
-            4,
-            3,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0
-          ],
-          [
-            4,
-            3,
-            2,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0
-          ],
-          [
-            4,
-            3,
-            3,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0
-          ],
-          [
-            4,
-            3,
-            3,
-            1,
-            0,
-            0,
-            0,
-            0,
-            0
-          ],
-          [
-            4,
-            3,
-            3,
-            2,
-            0,
-            0,
-            0,
-            0,
-            0
-          ],
-          [
-            4,
-            3,
-            3,
-            3,
-            1,
-            0,
-            0,
-            0,
-            0
-          ],
-          [
-            4,
-            3,
-            3,
-            3,
-            2,
-            0,
-            0,
-            0,
-            0
-          ],
-          [
-            4,
-            3,
-            3,
-            3,
-            2,
-            1,
-            0,
-            0,
-            0
-          ],
-          [
-            4,
-            3,
-            3,
-            3,
-            2,
-            1,
-            0,
-            0,
-            0
-          ],
-          [
-            4,
-            3,
-            3,
-            3,
-            2,
-            1,
-            1,
-            0,
-            0
-          ],
-          [
-            4,
-            3,
-            3,
-            3,
-            2,
-            1,
-            1,
-            0,
-            0
-          ],
-          [
-            4,
-            3,
-            3,
-            3,
-            2,
-            1,
-            1,
-            1,
-            0
-          ],
-          [
-            4,
-            3,
-            3,
-            3,
-            2,
-            1,
-            1,
-            1,
-            0
-          ],
-          [
-            4,
-            3,
-            3,
-            3,
-            2,
-            1,
-            1,
-            1,
-            1
-          ],
-          [
-            4,
-            3,
-            3,
-            3,
-            3,
-            1,
-            1,
-            1,
-            1
-          ],
-          [
-            4,
-            3,
-            3,
-            3,
-            3,
-            2,
-            1,
-            1,
-            1
-          ],
-          [
-            4,
-            3,
-            3,
-            3,
-            3,
-            2,
-            2,
-            1,
-            1
-          ]
+          [2, 0, 0, 0, 0, 0, 0, 0, 0],
+          [3, 0, 0, 0, 0, 0, 0, 0, 0],
+          [4, 2, 0, 0, 0, 0, 0, 0, 0],
+          [4, 3, 0, 0, 0, 0, 0, 0, 0],
+          [4, 3, 2, 0, 0, 0, 0, 0, 0],
+          [4, 3, 3, 0, 0, 0, 0, 0, 0],
+          [4, 3, 3, 1, 0, 0, 0, 0, 0],
+          [4, 3, 3, 2, 0, 0, 0, 0, 0],
+          [4, 3, 3, 3, 1, 0, 0, 0, 0],
+          [4, 3, 3, 3, 2, 0, 0, 0, 0],
+          [4, 3, 3, 3, 2, 1, 0, 0, 0],
+          [4, 3, 3, 3, 2, 1, 0, 0, 0],
+          [4, 3, 3, 3, 2, 1, 1, 0, 0],
+          [4, 3, 3, 3, 2, 1, 1, 0, 0],
+          [4, 3, 3, 3, 2, 1, 1, 1, 0],
+          [4, 3, 3, 3, 2, 1, 1, 1, 0],
+          [4, 3, 3, 3, 2, 1, 1, 1, 1],
+          [4, 3, 3, 3, 3, 1, 1, 1, 1],
+          [4, 3, 3, 3, 3, 2, 1, 1, 1],
+          [4, 3, 3, 3, 3, 2, 2, 1, 1]
         ]
       }
     ],
@@ -5610,33 +4563,18 @@
       "number": 1,
       "faces": 8
     },
-    "proficiency": [
-      "wis",
-      "cha"
-    ],
+    "proficiency": ["wis", "cha"],
     "primaryAbility": [],
     "spellcastingAbility": "wis",
     "casterProgression": "full",
     "startingProficiencies": {
-      "armor": [
-        "light",
-        "medium",
-        "shield"
-      ],
-      "weapons": [
-        "simple"
-      ],
+      "armor": ["light", "medium", "shield"],
+      "weapons": ["simple"],
       "tools": [],
       "savingThrows": [],
       "skills": [
         {
-          "from": [
-            "history",
-            "insight",
-            "medicine",
-            "persuasion",
-            "religion"
-          ],
+          "from": ["history", "insight", "medicine", "persuasion", "religion"],
           "count": 2
         }
       ]
@@ -5647,16 +4585,12 @@
           "alternatives": [
             {
               "label": "A",
-              "items": [
-                "Mace"
-              ],
+              "items": ["Mace"],
               "gold": null
             },
             {
               "label": "B",
-              "items": [
-                "Warhammer"
-              ],
+              "items": ["Warhammer"],
               "gold": null
             }
           ]
@@ -5665,23 +4599,17 @@
           "alternatives": [
             {
               "label": "A",
-              "items": [
-                "Scale Mail"
-              ],
+              "items": ["Scale Mail"],
               "gold": null
             },
             {
               "label": "B",
-              "items": [
-                "Leather Armor"
-              ],
+              "items": ["Leather Armor"],
               "gold": null
             },
             {
               "label": "C",
-              "items": [
-                "Chain Mail"
-              ],
+              "items": ["Chain Mail"],
               "gold": null
             }
           ]
@@ -5690,17 +4618,12 @@
           "alternatives": [
             {
               "label": "A",
-              "items": [
-                "Light Crossbow",
-                "Crossbow Bolts (20)"
-              ],
+              "items": ["Light Crossbow", "Crossbow Bolts (20)"],
               "gold": null
             },
             {
               "label": "B",
-              "items": [
-                "Simple Weapon"
-              ],
+              "items": ["Simple Weapon"],
               "gold": null
             }
           ]
@@ -5709,16 +4632,12 @@
           "alternatives": [
             {
               "label": "A",
-              "items": [
-                "Priest's Pack"
-              ],
+              "items": ["Priest's Pack"],
               "gold": null
             },
             {
               "label": "B",
-              "items": [
-                "Explorer's Pack"
-              ],
+              "items": ["Explorer's Pack"],
               "gold": null
             }
           ]
@@ -5727,10 +4646,7 @@
           "alternatives": [
             {
               "label": "",
-              "items": [
-                "Shield",
-                "Holy Symbol"
-              ],
+              "items": ["Shield", "Holy Symbol"],
               "gold": null
             }
           ]
@@ -5741,312 +4657,58 @@
     },
     "multiclassing": {
       "requirements": [],
-      "proficienciesGained": [
-        "Armor: light, medium, shield"
-      ]
+      "proficienciesGained": ["Armor: light, medium, shield"]
     },
     "classTableGroups": [
       {
-        "colLabels": [
-          "Cantrips Known"
-        ],
+        "colLabels": ["Cantrips Known"],
         "rows": [
-          [
-            3
-          ],
-          [
-            3
-          ],
-          [
-            3
-          ],
-          [
-            4
-          ],
-          [
-            4
-          ],
-          [
-            4
-          ],
-          [
-            4
-          ],
-          [
-            4
-          ],
-          [
-            4
-          ],
-          [
-            5
-          ],
-          [
-            5
-          ],
-          [
-            5
-          ],
-          [
-            5
-          ],
-          [
-            5
-          ],
-          [
-            5
-          ],
-          [
-            5
-          ],
-          [
-            5
-          ],
-          [
-            5
-          ],
-          [
-            5
-          ],
-          [
-            5
-          ]
+          [3],
+          [3],
+          [3],
+          [4],
+          [4],
+          [4],
+          [4],
+          [4],
+          [4],
+          [5],
+          [5],
+          [5],
+          [5],
+          [5],
+          [5],
+          [5],
+          [5],
+          [5],
+          [5],
+          [5]
         ]
       },
       {
         "title": "Spell Slots per Spell Level",
-        "colLabels": [
-          "1st",
-          "2nd",
-          "3rd",
-          "4th",
-          "5th",
-          "6th",
-          "7th",
-          "8th",
-          "9th"
-        ],
+        "colLabels": ["1st", "2nd", "3rd", "4th", "5th", "6th", "7th", "8th", "9th"],
         "rows": [
-          [
-            2,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0
-          ],
-          [
-            3,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0
-          ],
-          [
-            4,
-            2,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0
-          ],
-          [
-            4,
-            3,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0
-          ],
-          [
-            4,
-            3,
-            2,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0
-          ],
-          [
-            4,
-            3,
-            3,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0
-          ],
-          [
-            4,
-            3,
-            3,
-            1,
-            0,
-            0,
-            0,
-            0,
-            0
-          ],
-          [
-            4,
-            3,
-            3,
-            2,
-            0,
-            0,
-            0,
-            0,
-            0
-          ],
-          [
-            4,
-            3,
-            3,
-            3,
-            1,
-            0,
-            0,
-            0,
-            0
-          ],
-          [
-            4,
-            3,
-            3,
-            3,
-            2,
-            0,
-            0,
-            0,
-            0
-          ],
-          [
-            4,
-            3,
-            3,
-            3,
-            2,
-            1,
-            0,
-            0,
-            0
-          ],
-          [
-            4,
-            3,
-            3,
-            3,
-            2,
-            1,
-            0,
-            0,
-            0
-          ],
-          [
-            4,
-            3,
-            3,
-            3,
-            2,
-            1,
-            1,
-            0,
-            0
-          ],
-          [
-            4,
-            3,
-            3,
-            3,
-            2,
-            1,
-            1,
-            0,
-            0
-          ],
-          [
-            4,
-            3,
-            3,
-            3,
-            2,
-            1,
-            1,
-            1,
-            0
-          ],
-          [
-            4,
-            3,
-            3,
-            3,
-            2,
-            1,
-            1,
-            1,
-            0
-          ],
-          [
-            4,
-            3,
-            3,
-            3,
-            2,
-            1,
-            1,
-            1,
-            1
-          ],
-          [
-            4,
-            3,
-            3,
-            3,
-            3,
-            1,
-            1,
-            1,
-            1
-          ],
-          [
-            4,
-            3,
-            3,
-            3,
-            3,
-            2,
-            1,
-            1,
-            1
-          ],
-          [
-            4,
-            3,
-            3,
-            3,
-            3,
-            2,
-            2,
-            1,
-            1
-          ]
+          [2, 0, 0, 0, 0, 0, 0, 0, 0],
+          [3, 0, 0, 0, 0, 0, 0, 0, 0],
+          [4, 2, 0, 0, 0, 0, 0, 0, 0],
+          [4, 3, 0, 0, 0, 0, 0, 0, 0],
+          [4, 3, 2, 0, 0, 0, 0, 0, 0],
+          [4, 3, 3, 0, 0, 0, 0, 0, 0],
+          [4, 3, 3, 1, 0, 0, 0, 0, 0],
+          [4, 3, 3, 2, 0, 0, 0, 0, 0],
+          [4, 3, 3, 3, 1, 0, 0, 0, 0],
+          [4, 3, 3, 3, 2, 0, 0, 0, 0],
+          [4, 3, 3, 3, 2, 1, 0, 0, 0],
+          [4, 3, 3, 3, 2, 1, 0, 0, 0],
+          [4, 3, 3, 3, 2, 1, 1, 0, 0],
+          [4, 3, 3, 3, 2, 1, 1, 0, 0],
+          [4, 3, 3, 3, 2, 1, 1, 1, 0],
+          [4, 3, 3, 3, 2, 1, 1, 1, 0],
+          [4, 3, 3, 3, 2, 1, 1, 1, 1],
+          [4, 3, 3, 3, 3, 1, 1, 1, 1],
+          [4, 3, 3, 3, 3, 2, 1, 1, 1],
+          [4, 3, 3, 3, 3, 2, 2, 1, 1]
         ]
       }
     ],
@@ -6182,9 +4844,7 @@
           },
           {
             "type": "list",
-            "items": [
-              "Channel Divinity: Turn Undead"
-            ]
+            "items": ["Channel Divinity: Turn Undead"]
           },
           {
             "type": "entries",
@@ -6407,9 +5067,7 @@
           },
           {
             "type": "list",
-            "items": [
-              "Channel Divinity: Turn Undead"
-            ]
+            "items": ["Channel Divinity: Turn Undead"]
           },
           {
             "type": "entries",
@@ -6905,9 +5563,7 @@
           },
           {
             "type": "list",
-            "items": [
-              "Channel Divinity: Turn Undead"
-            ]
+            "items": ["Channel Divinity: Turn Undead"]
           },
           {
             "type": "entries",
@@ -7048,35 +5704,18 @@
       "number": 1,
       "faces": 8
     },
-    "proficiency": [
-      "wis",
-      "cha"
-    ],
-    "primaryAbility": [
-      "wis"
-    ],
+    "proficiency": ["wis", "cha"],
+    "primaryAbility": ["wis"],
     "spellcastingAbility": "wis",
     "casterProgression": "full",
     "startingProficiencies": {
-      "armor": [
-        "light",
-        "medium",
-        "shield"
-      ],
-      "weapons": [
-        "simple"
-      ],
+      "armor": ["light", "medium", "shield"],
+      "weapons": ["simple"],
       "tools": [],
       "savingThrows": [],
       "skills": [
         {
-          "from": [
-            "history",
-            "insight",
-            "medicine",
-            "persuasion",
-            "religion"
-          ],
+          "from": ["history", "insight", "medicine", "persuasion", "religion"],
           "count": 2
         }
       ]
@@ -7087,13 +5726,7 @@
           "alternatives": [
             {
               "label": "A",
-              "items": [
-                "Chain Shirt",
-                "Shield",
-                "Mace",
-                "Holy Symbol",
-                "Priest's Pack"
-              ],
+              "items": ["Chain Shirt", "Shield", "Mace", "Holy Symbol", "Priest's Pack"],
               "gold": "7,000 GP"
             },
             {
@@ -7109,354 +5742,58 @@
     },
     "multiclassing": {
       "requirements": [],
-      "proficienciesGained": [
-        "Armor: light, medium, shield"
-      ]
+      "proficienciesGained": ["Armor: light, medium, shield"]
     },
     "classTableGroups": [
       {
-        "colLabels": [
-          "Channel Divinity",
-          "Cantrips",
-          "Prepared Spells"
-        ],
+        "colLabels": ["Channel Divinity", "Cantrips", "Prepared Spells"],
         "rows": [
-          [
-            0,
-            3,
-            4
-          ],
-          [
-            2,
-            3,
-            5
-          ],
-          [
-            2,
-            3,
-            6
-          ],
-          [
-            2,
-            4,
-            7
-          ],
-          [
-            2,
-            4,
-            9
-          ],
-          [
-            3,
-            4,
-            10
-          ],
-          [
-            3,
-            4,
-            11
-          ],
-          [
-            3,
-            4,
-            12
-          ],
-          [
-            3,
-            4,
-            14
-          ],
-          [
-            3,
-            5,
-            15
-          ],
-          [
-            3,
-            5,
-            16
-          ],
-          [
-            3,
-            5,
-            16
-          ],
-          [
-            3,
-            5,
-            17
-          ],
-          [
-            3,
-            5,
-            17
-          ],
-          [
-            3,
-            5,
-            18
-          ],
-          [
-            3,
-            5,
-            18
-          ],
-          [
-            3,
-            5,
-            19
-          ],
-          [
-            4,
-            5,
-            20
-          ],
-          [
-            4,
-            5,
-            21
-          ],
-          [
-            4,
-            5,
-            22
-          ]
+          [0, 3, 4],
+          [2, 3, 5],
+          [2, 3, 6],
+          [2, 4, 7],
+          [2, 4, 9],
+          [3, 4, 10],
+          [3, 4, 11],
+          [3, 4, 12],
+          [3, 4, 14],
+          [3, 5, 15],
+          [3, 5, 16],
+          [3, 5, 16],
+          [3, 5, 17],
+          [3, 5, 17],
+          [3, 5, 18],
+          [3, 5, 18],
+          [3, 5, 19],
+          [4, 5, 20],
+          [4, 5, 21],
+          [4, 5, 22]
         ]
       },
       {
         "title": "Spell Slots per Spell Level",
-        "colLabels": [
-          "1st",
-          "2nd",
-          "3rd",
-          "4th",
-          "5th",
-          "6th",
-          "7th",
-          "8th",
-          "9th"
-        ],
+        "colLabels": ["1st", "2nd", "3rd", "4th", "5th", "6th", "7th", "8th", "9th"],
         "rows": [
-          [
-            2,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0
-          ],
-          [
-            3,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0
-          ],
-          [
-            4,
-            2,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0
-          ],
-          [
-            4,
-            3,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0
-          ],
-          [
-            4,
-            3,
-            2,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0
-          ],
-          [
-            4,
-            3,
-            3,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0
-          ],
-          [
-            4,
-            3,
-            3,
-            1,
-            0,
-            0,
-            0,
-            0,
-            0
-          ],
-          [
-            4,
-            3,
-            3,
-            2,
-            0,
-            0,
-            0,
-            0,
-            0
-          ],
-          [
-            4,
-            3,
-            3,
-            3,
-            1,
-            0,
-            0,
-            0,
-            0
-          ],
-          [
-            4,
-            3,
-            3,
-            3,
-            2,
-            0,
-            0,
-            0,
-            0
-          ],
-          [
-            4,
-            3,
-            3,
-            3,
-            2,
-            1,
-            0,
-            0,
-            0
-          ],
-          [
-            4,
-            3,
-            3,
-            3,
-            2,
-            1,
-            0,
-            0,
-            0
-          ],
-          [
-            4,
-            3,
-            3,
-            3,
-            2,
-            1,
-            1,
-            0,
-            0
-          ],
-          [
-            4,
-            3,
-            3,
-            3,
-            2,
-            1,
-            1,
-            0,
-            0
-          ],
-          [
-            4,
-            3,
-            3,
-            3,
-            2,
-            1,
-            1,
-            1,
-            0
-          ],
-          [
-            4,
-            3,
-            3,
-            3,
-            2,
-            1,
-            1,
-            1,
-            0
-          ],
-          [
-            4,
-            3,
-            3,
-            3,
-            2,
-            1,
-            1,
-            1,
-            1
-          ],
-          [
-            4,
-            3,
-            3,
-            3,
-            3,
-            1,
-            1,
-            1,
-            1
-          ],
-          [
-            4,
-            3,
-            3,
-            3,
-            3,
-            2,
-            1,
-            1,
-            1
-          ],
-          [
-            4,
-            3,
-            3,
-            3,
-            3,
-            2,
-            2,
-            1,
-            1
-          ]
+          [2, 0, 0, 0, 0, 0, 0, 0, 0],
+          [3, 0, 0, 0, 0, 0, 0, 0, 0],
+          [4, 2, 0, 0, 0, 0, 0, 0, 0],
+          [4, 3, 0, 0, 0, 0, 0, 0, 0],
+          [4, 3, 2, 0, 0, 0, 0, 0, 0],
+          [4, 3, 3, 0, 0, 0, 0, 0, 0],
+          [4, 3, 3, 1, 0, 0, 0, 0, 0],
+          [4, 3, 3, 2, 0, 0, 0, 0, 0],
+          [4, 3, 3, 3, 1, 0, 0, 0, 0],
+          [4, 3, 3, 3, 2, 0, 0, 0, 0],
+          [4, 3, 3, 3, 2, 1, 0, 0, 0],
+          [4, 3, 3, 3, 2, 1, 0, 0, 0],
+          [4, 3, 3, 3, 2, 1, 1, 0, 0],
+          [4, 3, 3, 3, 2, 1, 1, 0, 0],
+          [4, 3, 3, 3, 2, 1, 1, 1, 0],
+          [4, 3, 3, 3, 2, 1, 1, 1, 0],
+          [4, 3, 3, 3, 2, 1, 1, 1, 1],
+          [4, 3, 3, 3, 3, 1, 1, 1, 1],
+          [4, 3, 3, 3, 3, 2, 1, 1, 1],
+          [4, 3, 3, 3, 3, 2, 2, 1, 1]
         ]
       }
     ],
@@ -7569,10 +5906,7 @@
                 "blocks": [
                   {
                     "type": "list",
-                    "items": [
-                      "XPHB",
-                      "XPHB"
-                    ]
+                    "items": ["XPHB", "XPHB"]
                   }
                 ]
               }
@@ -7605,15 +5939,11 @@
             "blocks": [
               {
                 "type": "list",
-                "items": [
-                  "XPHB"
-                ]
+                "items": ["XPHB"]
               },
               {
                 "type": "list",
-                "items": [
-                  "XPHB"
-                ]
+                "items": ["XPHB"]
               }
             ]
           }
@@ -7732,15 +6062,11 @@
             "blocks": [
               {
                 "type": "list",
-                "items": [
-                  "XPHB"
-                ]
+                "items": ["XPHB"]
               },
               {
                 "type": "list",
-                "items": [
-                  "XPHB"
-                ]
+                "items": ["XPHB"]
               }
             ]
           }
@@ -7996,19 +6322,12 @@
       "number": 1,
       "faces": 8
     },
-    "proficiency": [
-      "int",
-      "wis"
-    ],
+    "proficiency": ["int", "wis"],
     "primaryAbility": [],
     "spellcastingAbility": "wis",
     "casterProgression": "full",
     "startingProficiencies": {
-      "armor": [
-        "light",
-        "medium",
-        "shield"
-      ],
+      "armor": ["light", "medium", "shield"],
       "weapons": [
         "club",
         "dagger",
@@ -8021,9 +6340,7 @@
         "sling",
         "spear"
       ],
-      "tools": [
-        "Herbalism kit"
-      ],
+      "tools": ["Herbalism kit"],
       "savingThrows": [],
       "skills": [
         {
@@ -8047,16 +6364,12 @@
           "alternatives": [
             {
               "label": "A",
-              "items": [
-                "Shield"
-              ],
+              "items": ["Shield"],
               "gold": null
             },
             {
               "label": "B",
-              "items": [
-                "Simple Weapon"
-              ],
+              "items": ["Simple Weapon"],
               "gold": null
             }
           ]
@@ -8065,16 +6378,12 @@
           "alternatives": [
             {
               "label": "A",
-              "items": [
-                "Scimitar"
-              ],
+              "items": ["Scimitar"],
               "gold": null
             },
             {
               "label": "B",
-              "items": [
-                "Simple Melee Weapon"
-              ],
+              "items": ["Simple Melee Weapon"],
               "gold": null
             }
           ]
@@ -8083,11 +6392,7 @@
           "alternatives": [
             {
               "label": "",
-              "items": [
-                "Leather armor",
-                "Explorer's Pack",
-                "Druidic Focus"
-              ],
+              "items": ["Leather armor", "Explorer's Pack", "Druidic Focus"],
               "gold": null
             }
           ]
@@ -8098,312 +6403,58 @@
     },
     "multiclassing": {
       "requirements": [],
-      "proficienciesGained": [
-        "Armor: light, medium, [object Object]"
-      ]
+      "proficienciesGained": ["Armor: light, medium, [object Object]"]
     },
     "classTableGroups": [
       {
-        "colLabels": [
-          "Cantrips Known"
-        ],
+        "colLabels": ["Cantrips Known"],
         "rows": [
-          [
-            2
-          ],
-          [
-            2
-          ],
-          [
-            2
-          ],
-          [
-            3
-          ],
-          [
-            3
-          ],
-          [
-            3
-          ],
-          [
-            3
-          ],
-          [
-            3
-          ],
-          [
-            3
-          ],
-          [
-            4
-          ],
-          [
-            4
-          ],
-          [
-            4
-          ],
-          [
-            4
-          ],
-          [
-            4
-          ],
-          [
-            4
-          ],
-          [
-            4
-          ],
-          [
-            4
-          ],
-          [
-            4
-          ],
-          [
-            4
-          ],
-          [
-            4
-          ]
+          [2],
+          [2],
+          [2],
+          [3],
+          [3],
+          [3],
+          [3],
+          [3],
+          [3],
+          [4],
+          [4],
+          [4],
+          [4],
+          [4],
+          [4],
+          [4],
+          [4],
+          [4],
+          [4],
+          [4]
         ]
       },
       {
         "title": "Spell Slots per Spell Level",
-        "colLabels": [
-          "1st",
-          "2nd",
-          "3rd",
-          "4th",
-          "5th",
-          "6th",
-          "7th",
-          "8th",
-          "9th"
-        ],
+        "colLabels": ["1st", "2nd", "3rd", "4th", "5th", "6th", "7th", "8th", "9th"],
         "rows": [
-          [
-            2,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0
-          ],
-          [
-            3,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0
-          ],
-          [
-            4,
-            2,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0
-          ],
-          [
-            4,
-            3,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0
-          ],
-          [
-            4,
-            3,
-            2,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0
-          ],
-          [
-            4,
-            3,
-            3,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0
-          ],
-          [
-            4,
-            3,
-            3,
-            1,
-            0,
-            0,
-            0,
-            0,
-            0
-          ],
-          [
-            4,
-            3,
-            3,
-            2,
-            0,
-            0,
-            0,
-            0,
-            0
-          ],
-          [
-            4,
-            3,
-            3,
-            3,
-            1,
-            0,
-            0,
-            0,
-            0
-          ],
-          [
-            4,
-            3,
-            3,
-            3,
-            2,
-            0,
-            0,
-            0,
-            0
-          ],
-          [
-            4,
-            3,
-            3,
-            3,
-            2,
-            1,
-            0,
-            0,
-            0
-          ],
-          [
-            4,
-            3,
-            3,
-            3,
-            2,
-            1,
-            0,
-            0,
-            0
-          ],
-          [
-            4,
-            3,
-            3,
-            3,
-            2,
-            1,
-            1,
-            0,
-            0
-          ],
-          [
-            4,
-            3,
-            3,
-            3,
-            2,
-            1,
-            1,
-            0,
-            0
-          ],
-          [
-            4,
-            3,
-            3,
-            3,
-            2,
-            1,
-            1,
-            1,
-            0
-          ],
-          [
-            4,
-            3,
-            3,
-            3,
-            2,
-            1,
-            1,
-            1,
-            0
-          ],
-          [
-            4,
-            3,
-            3,
-            3,
-            2,
-            1,
-            1,
-            1,
-            1
-          ],
-          [
-            4,
-            3,
-            3,
-            3,
-            3,
-            1,
-            1,
-            1,
-            1
-          ],
-          [
-            4,
-            3,
-            3,
-            3,
-            3,
-            2,
-            1,
-            1,
-            1
-          ],
-          [
-            4,
-            3,
-            3,
-            3,
-            3,
-            2,
-            2,
-            1,
-            1
-          ]
+          [2, 0, 0, 0, 0, 0, 0, 0, 0],
+          [3, 0, 0, 0, 0, 0, 0, 0, 0],
+          [4, 2, 0, 0, 0, 0, 0, 0, 0],
+          [4, 3, 0, 0, 0, 0, 0, 0, 0],
+          [4, 3, 2, 0, 0, 0, 0, 0, 0],
+          [4, 3, 3, 0, 0, 0, 0, 0, 0],
+          [4, 3, 3, 1, 0, 0, 0, 0, 0],
+          [4, 3, 3, 2, 0, 0, 0, 0, 0],
+          [4, 3, 3, 3, 1, 0, 0, 0, 0],
+          [4, 3, 3, 3, 2, 0, 0, 0, 0],
+          [4, 3, 3, 3, 2, 1, 0, 0, 0],
+          [4, 3, 3, 3, 2, 1, 0, 0, 0],
+          [4, 3, 3, 3, 2, 1, 1, 0, 0],
+          [4, 3, 3, 3, 2, 1, 1, 0, 0],
+          [4, 3, 3, 3, 2, 1, 1, 1, 0],
+          [4, 3, 3, 3, 2, 1, 1, 1, 0],
+          [4, 3, 3, 3, 2, 1, 1, 1, 1],
+          [4, 3, 3, 3, 3, 1, 1, 1, 1],
+          [4, 3, 3, 3, 3, 2, 1, 1, 1],
+          [4, 3, 3, 3, 3, 2, 2, 1, 1]
         ]
       }
     ],
@@ -9233,26 +7284,14 @@
       "number": 1,
       "faces": 8
     },
-    "proficiency": [
-      "int",
-      "wis"
-    ],
-    "primaryAbility": [
-      "wis"
-    ],
+    "proficiency": ["int", "wis"],
+    "primaryAbility": ["wis"],
     "spellcastingAbility": "wis",
     "casterProgression": "full",
     "startingProficiencies": {
-      "armor": [
-        "light",
-        "shield"
-      ],
-      "weapons": [
-        "simple"
-      ],
-      "tools": [
-        "Herbalism Kit"
-      ],
+      "armor": ["light", "shield"],
+      "weapons": ["simple"],
+      "tools": ["Herbalism Kit"],
       "savingThrows": [],
       "skills": [
         {
@@ -9299,354 +7338,58 @@
     },
     "multiclassing": {
       "requirements": [],
-      "proficienciesGained": [
-        "Armor: light, shield"
-      ]
+      "proficienciesGained": ["Armor: light, shield"]
     },
     "classTableGroups": [
       {
-        "colLabels": [
-          "Wild Shape",
-          "Cantrips",
-          "Prepared Spells"
-        ],
+        "colLabels": ["Wild Shape", "Cantrips", "Prepared Spells"],
         "rows": [
-          [
-            0,
-            2,
-            4
-          ],
-          [
-            2,
-            2,
-            5
-          ],
-          [
-            2,
-            2,
-            6
-          ],
-          [
-            2,
-            3,
-            7
-          ],
-          [
-            2,
-            3,
-            9
-          ],
-          [
-            3,
-            3,
-            10
-          ],
-          [
-            3,
-            3,
-            11
-          ],
-          [
-            3,
-            3,
-            12
-          ],
-          [
-            3,
-            3,
-            14
-          ],
-          [
-            3,
-            4,
-            15
-          ],
-          [
-            3,
-            4,
-            16
-          ],
-          [
-            3,
-            4,
-            16
-          ],
-          [
-            3,
-            4,
-            17
-          ],
-          [
-            3,
-            4,
-            17
-          ],
-          [
-            3,
-            4,
-            18
-          ],
-          [
-            3,
-            4,
-            18
-          ],
-          [
-            4,
-            4,
-            19
-          ],
-          [
-            4,
-            4,
-            20
-          ],
-          [
-            4,
-            4,
-            21
-          ],
-          [
-            4,
-            4,
-            22
-          ]
+          [0, 2, 4],
+          [2, 2, 5],
+          [2, 2, 6],
+          [2, 3, 7],
+          [2, 3, 9],
+          [3, 3, 10],
+          [3, 3, 11],
+          [3, 3, 12],
+          [3, 3, 14],
+          [3, 4, 15],
+          [3, 4, 16],
+          [3, 4, 16],
+          [3, 4, 17],
+          [3, 4, 17],
+          [3, 4, 18],
+          [3, 4, 18],
+          [4, 4, 19],
+          [4, 4, 20],
+          [4, 4, 21],
+          [4, 4, 22]
         ]
       },
       {
         "title": "Spell Slots per Spell Level",
-        "colLabels": [
-          "1st",
-          "2nd",
-          "3rd",
-          "4th",
-          "5th",
-          "6th",
-          "7th",
-          "8th",
-          "9th"
-        ],
+        "colLabels": ["1st", "2nd", "3rd", "4th", "5th", "6th", "7th", "8th", "9th"],
         "rows": [
-          [
-            2,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0
-          ],
-          [
-            3,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0
-          ],
-          [
-            4,
-            2,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0
-          ],
-          [
-            4,
-            3,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0
-          ],
-          [
-            4,
-            3,
-            2,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0
-          ],
-          [
-            4,
-            3,
-            3,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0
-          ],
-          [
-            4,
-            3,
-            3,
-            1,
-            0,
-            0,
-            0,
-            0,
-            0
-          ],
-          [
-            4,
-            3,
-            3,
-            2,
-            0,
-            0,
-            0,
-            0,
-            0
-          ],
-          [
-            4,
-            3,
-            3,
-            3,
-            1,
-            0,
-            0,
-            0,
-            0
-          ],
-          [
-            4,
-            3,
-            3,
-            3,
-            2,
-            0,
-            0,
-            0,
-            0
-          ],
-          [
-            4,
-            3,
-            3,
-            3,
-            2,
-            1,
-            0,
-            0,
-            0
-          ],
-          [
-            4,
-            3,
-            3,
-            3,
-            2,
-            1,
-            0,
-            0,
-            0
-          ],
-          [
-            4,
-            3,
-            3,
-            3,
-            2,
-            1,
-            1,
-            0,
-            0
-          ],
-          [
-            4,
-            3,
-            3,
-            3,
-            2,
-            1,
-            1,
-            0,
-            0
-          ],
-          [
-            4,
-            3,
-            3,
-            3,
-            2,
-            1,
-            1,
-            1,
-            0
-          ],
-          [
-            4,
-            3,
-            3,
-            3,
-            2,
-            1,
-            1,
-            1,
-            0
-          ],
-          [
-            4,
-            3,
-            3,
-            3,
-            2,
-            1,
-            1,
-            1,
-            1
-          ],
-          [
-            4,
-            3,
-            3,
-            3,
-            3,
-            1,
-            1,
-            1,
-            1
-          ],
-          [
-            4,
-            3,
-            3,
-            3,
-            3,
-            2,
-            1,
-            1,
-            1
-          ],
-          [
-            4,
-            3,
-            3,
-            3,
-            3,
-            2,
-            2,
-            1,
-            1
-          ]
+          [2, 0, 0, 0, 0, 0, 0, 0, 0],
+          [3, 0, 0, 0, 0, 0, 0, 0, 0],
+          [4, 2, 0, 0, 0, 0, 0, 0, 0],
+          [4, 3, 0, 0, 0, 0, 0, 0, 0],
+          [4, 3, 2, 0, 0, 0, 0, 0, 0],
+          [4, 3, 3, 0, 0, 0, 0, 0, 0],
+          [4, 3, 3, 1, 0, 0, 0, 0, 0],
+          [4, 3, 3, 2, 0, 0, 0, 0, 0],
+          [4, 3, 3, 3, 1, 0, 0, 0, 0],
+          [4, 3, 3, 3, 2, 0, 0, 0, 0],
+          [4, 3, 3, 3, 2, 1, 0, 0, 0],
+          [4, 3, 3, 3, 2, 1, 0, 0, 0],
+          [4, 3, 3, 3, 2, 1, 1, 0, 0],
+          [4, 3, 3, 3, 2, 1, 1, 0, 0],
+          [4, 3, 3, 3, 2, 1, 1, 1, 0],
+          [4, 3, 3, 3, 2, 1, 1, 1, 0],
+          [4, 3, 3, 3, 2, 1, 1, 1, 1],
+          [4, 3, 3, 3, 3, 1, 1, 1, 1],
+          [4, 3, 3, 3, 3, 2, 1, 1, 1],
+          [4, 3, 3, 3, 3, 2, 2, 1, 1]
         ]
       }
     ],
@@ -9688,10 +7431,7 @@
                 "blocks": [
                   {
                     "type": "list",
-                    "items": [
-                      "XPHB",
-                      "XPHB"
-                    ]
+                    "items": ["XPHB", "XPHB"]
                   }
                 ]
               }
@@ -10102,10 +7842,7 @@
                 "blocks": [
                   {
                     "type": "list",
-                    "items": [
-                      "XPHB",
-                      "XPHB"
-                    ]
+                    "items": ["XPHB", "XPHB"]
                   }
                 ]
               }
@@ -10439,24 +8176,13 @@
       "number": 1,
       "faces": 10
     },
-    "proficiency": [
-      "str",
-      "con"
-    ],
+    "proficiency": ["str", "con"],
     "primaryAbility": [],
     "spellcastingAbility": null,
     "casterProgression": null,
     "startingProficiencies": {
-      "armor": [
-        "light",
-        "medium",
-        "heavy",
-        "shield"
-      ],
-      "weapons": [
-        "simple",
-        "martial"
-      ],
+      "armor": ["light", "medium", "heavy", "shield"],
+      "weapons": ["simple", "martial"],
       "tools": [],
       "savingThrows": [],
       "skills": [
@@ -10481,18 +8207,12 @@
           "alternatives": [
             {
               "label": "A",
-              "items": [
-                "Chain Mail"
-              ],
+              "items": ["Chain Mail"],
               "gold": null
             },
             {
               "label": "B",
-              "items": [
-                "Leather Armor",
-                "Longbow",
-                "Arrows (20)"
-              ],
+              "items": ["Leather Armor", "Longbow", "Arrows (20)"],
               "gold": null
             }
           ]
@@ -10501,17 +8221,12 @@
           "alternatives": [
             {
               "label": "A",
-              "items": [
-                "Martial Weapon",
-                "Shield"
-              ],
+              "items": ["Martial Weapon", "Shield"],
               "gold": null
             },
             {
               "label": "B",
-              "items": [
-                "2 × Martial Weapon"
-              ],
+              "items": ["2 × Martial Weapon"],
               "gold": null
             }
           ]
@@ -10520,17 +8235,12 @@
           "alternatives": [
             {
               "label": "A",
-              "items": [
-                "Light Crossbow",
-                "Crossbow Bolts (20)"
-              ],
+              "items": ["Light Crossbow", "Crossbow Bolts (20)"],
               "gold": null
             },
             {
               "label": "B",
-              "items": [
-                "2 × Handaxe"
-              ],
+              "items": ["2 × Handaxe"],
               "gold": null
             }
           ]
@@ -10539,16 +8249,12 @@
           "alternatives": [
             {
               "label": "A",
-              "items": [
-                "Dungeoneer's Pack"
-              ],
+              "items": ["Dungeoneer's Pack"],
               "gold": null
             },
             {
               "label": "B",
-              "items": [
-                "Explorer's Pack"
-              ],
+              "items": ["Explorer's Pack"],
               "gold": null
             }
           ]
@@ -10568,10 +8274,7 @@
           "score": 13
         }
       ],
-      "proficienciesGained": [
-        "Armor: light, medium, shield",
-        "Weapons: simple, martial"
-      ]
+      "proficienciesGained": ["Armor: light, medium, shield", "Weapons: simple, martial"]
     },
     "classTableGroups": [],
     "classFeatures": [
@@ -11695,27 +9398,13 @@
       "number": 1,
       "faces": 10
     },
-    "proficiency": [
-      "str",
-      "con"
-    ],
-    "primaryAbility": [
-      "str",
-      "dex"
-    ],
+    "proficiency": ["str", "con"],
+    "primaryAbility": ["str", "dex"],
     "spellcastingAbility": null,
     "casterProgression": null,
     "startingProficiencies": {
-      "armor": [
-        "light",
-        "medium",
-        "heavy",
-        "shield"
-      ],
-      "weapons": [
-        "simple",
-        "martial"
-      ],
+      "armor": ["light", "medium", "heavy", "shield"],
+      "weapons": ["simple", "martial"],
       "tools": [],
       "savingThrows": [],
       "skills": [
@@ -11741,13 +9430,7 @@
           "alternatives": [
             {
               "label": "A",
-              "items": [
-                "Chain Mail",
-                "Greatsword",
-                "Flail",
-                "8 × Javelin",
-                "Dungeoneer's Pack"
-              ],
+              "items": ["Chain Mail", "Greatsword", "Flail", "8 × Javelin", "Dungeoneer's Pack"],
               "gold": "400 GP"
             },
             {
@@ -11776,98 +9459,32 @@
     },
     "multiclassing": {
       "requirements": [],
-      "proficienciesGained": [
-        "Armor: light, medium, shield",
-        "Weapons: martial"
-      ]
+      "proficienciesGained": ["Armor: light, medium, shield", "Weapons: martial"]
     },
     "classTableGroups": [
       {
-        "colLabels": [
-          "Second Wind",
-          "Weapon Mastery"
-        ],
+        "colLabels": ["Second Wind", "Weapon Mastery"],
         "rows": [
-          [
-            "2",
-            "3"
-          ],
-          [
-            "2",
-            "3"
-          ],
-          [
-            "2",
-            "3"
-          ],
-          [
-            "3",
-            "4"
-          ],
-          [
-            "3",
-            "4"
-          ],
-          [
-            "3",
-            "4"
-          ],
-          [
-            "3",
-            "4"
-          ],
-          [
-            "3",
-            "4"
-          ],
-          [
-            "3",
-            "4"
-          ],
-          [
-            "4",
-            "5"
-          ],
-          [
-            "4",
-            "5"
-          ],
-          [
-            "4",
-            "5"
-          ],
-          [
-            "4",
-            "5"
-          ],
-          [
-            "4",
-            "5"
-          ],
-          [
-            "4",
-            "5"
-          ],
-          [
-            "4",
-            "6"
-          ],
-          [
-            "4",
-            "6"
-          ],
-          [
-            "4",
-            "6"
-          ],
-          [
-            "4",
-            "6"
-          ],
-          [
-            "4",
-            "6"
-          ]
+          ["2", "3"],
+          ["2", "3"],
+          ["2", "3"],
+          ["3", "4"],
+          ["3", "4"],
+          ["3", "4"],
+          ["3", "4"],
+          ["3", "4"],
+          ["3", "4"],
+          ["4", "5"],
+          ["4", "5"],
+          ["4", "5"],
+          ["4", "5"],
+          ["4", "5"],
+          ["4", "5"],
+          ["4", "6"],
+          ["4", "6"],
+          ["4", "6"],
+          ["4", "6"],
+          ["4", "6"]
         ]
       }
     ],
@@ -12832,33 +10449,18 @@
       "number": 1,
       "faces": 8
     },
-    "proficiency": [
-      "str",
-      "dex"
-    ],
+    "proficiency": ["str", "dex"],
     "primaryAbility": [],
     "spellcastingAbility": null,
     "casterProgression": null,
     "startingProficiencies": {
       "armor": [],
-      "weapons": [
-        "simple",
-        "shortsword"
-      ],
-      "tools": [
-        "any one type of artisan's tools or any one musical instrument of your choice"
-      ],
+      "weapons": ["simple", "shortsword"],
+      "tools": ["any one type of artisan's tools or any one musical instrument of your choice"],
       "savingThrows": [],
       "skills": [
         {
-          "from": [
-            "acrobatics",
-            "athletics",
-            "history",
-            "insight",
-            "religion",
-            "stealth"
-          ],
+          "from": ["acrobatics", "athletics", "history", "insight", "religion", "stealth"],
           "count": 2
         }
       ]
@@ -12869,16 +10471,12 @@
           "alternatives": [
             {
               "label": "A",
-              "items": [
-                "Shortsword"
-              ],
+              "items": ["Shortsword"],
               "gold": null
             },
             {
               "label": "B",
-              "items": [
-                "Simple Weapon"
-              ],
+              "items": ["Simple Weapon"],
               "gold": null
             }
           ]
@@ -12887,16 +10485,12 @@
           "alternatives": [
             {
               "label": "A",
-              "items": [
-                "Dungeoneer's Pack"
-              ],
+              "items": ["Dungeoneer's Pack"],
               "gold": null
             },
             {
               "label": "B",
-              "items": [
-                "Explorer's Pack"
-              ],
+              "items": ["Explorer's Pack"],
               "gold": null
             }
           ]
@@ -12905,9 +10499,7 @@
           "alternatives": [
             {
               "label": "",
-              "items": [
-                "10 × Dart"
-              ],
+              "items": ["10 × Dart"],
               "gold": null
             }
           ]
@@ -12918,118 +10510,32 @@
     },
     "multiclassing": {
       "requirements": [],
-      "proficienciesGained": [
-        "Weapons: simple, {@item shortsword|phb|shortswords}"
-      ]
+      "proficienciesGained": ["Weapons: simple, {@item shortsword|phb|shortswords}"]
     },
     "classTableGroups": [
       {
-        "colLabels": [
-          "Martial Arts",
-          "Ki Points",
-          "Unarmored Movement"
-        ],
+        "colLabels": ["Martial Arts", "Ki Points", "Unarmored Movement"],
         "rows": [
-          [
-            null,
-            0,
-            null
-          ],
-          [
-            null,
-            2,
-            null
-          ],
-          [
-            null,
-            3,
-            null
-          ],
-          [
-            null,
-            4,
-            null
-          ],
-          [
-            null,
-            5,
-            null
-          ],
-          [
-            null,
-            6,
-            null
-          ],
-          [
-            null,
-            7,
-            null
-          ],
-          [
-            null,
-            8,
-            null
-          ],
-          [
-            null,
-            9,
-            null
-          ],
-          [
-            null,
-            10,
-            null
-          ],
-          [
-            null,
-            11,
-            null
-          ],
-          [
-            null,
-            12,
-            null
-          ],
-          [
-            null,
-            13,
-            null
-          ],
-          [
-            null,
-            14,
-            null
-          ],
-          [
-            null,
-            15,
-            null
-          ],
-          [
-            null,
-            16,
-            null
-          ],
-          [
-            null,
-            17,
-            null
-          ],
-          [
-            null,
-            18,
-            null
-          ],
-          [
-            null,
-            19,
-            null
-          ],
-          [
-            null,
-            20,
-            null
-          ]
+          [null, 0, null],
+          [null, 2, null],
+          [null, 3, null],
+          [null, 4, null],
+          [null, 5, null],
+          [null, 6, null],
+          [null, 7, null],
+          [null, 8, null],
+          [null, 9, null],
+          [null, 10, null],
+          [null, 11, null],
+          [null, 12, null],
+          [null, 13, null],
+          [null, 14, null],
+          [null, 15, null],
+          [null, 16, null],
+          [null, 17, null],
+          [null, 18, null],
+          [null, 19, null],
+          [null, 20, null]
         ]
       }
     ],
@@ -13110,21 +10616,15 @@
             "blocks": [
               {
                 "type": "list",
-                "items": [
-                  "Flurry of Blows"
-                ]
+                "items": ["Flurry of Blows"]
               },
               {
                 "type": "list",
-                "items": [
-                  "Patient Defense"
-                ]
+                "items": ["Patient Defense"]
               },
               {
                 "type": "list",
-                "items": [
-                  "Step of the Wind"
-                ]
+                "items": ["Step of the Wind"]
               }
             ]
           }
@@ -13941,35 +11441,18 @@
       "number": 1,
       "faces": 8
     },
-    "proficiency": [
-      "str",
-      "dex"
-    ],
-    "primaryAbility": [
-      "dex"
-    ],
+    "proficiency": ["str", "dex"],
+    "primaryAbility": ["dex"],
     "spellcastingAbility": null,
     "casterProgression": null,
     "startingProficiencies": {
       "armor": [],
-      "weapons": [
-        "simple",
-        "Martial weapons that have the Light property"
-      ],
-      "tools": [
-        "Choose one type of Artisan's Tools or Musical Instrument"
-      ],
+      "weapons": ["simple", "Martial weapons that have the Light property"],
+      "tools": ["Choose one type of Artisan's Tools or Musical Instrument"],
       "savingThrows": [],
       "skills": [
         {
-          "from": [
-            "acrobatics",
-            "athletics",
-            "history",
-            "insight",
-            "religion",
-            "stealth"
-          ],
+          "from": ["acrobatics", "athletics", "history", "insight", "religion", "stealth"],
           "count": 2
         }
       ]
@@ -14002,112 +11485,28 @@
     "multiclassing": null,
     "classTableGroups": [
       {
-        "colLabels": [
-          "Martial Arts",
-          "Focus Points",
-          "Unarmored Movement"
-        ],
+        "colLabels": ["Martial Arts", "Focus Points", "Unarmored Movement"],
         "rows": [
-          [
-            null,
-            0,
-            null
-          ],
-          [
-            null,
-            2,
-            null
-          ],
-          [
-            null,
-            3,
-            null
-          ],
-          [
-            null,
-            4,
-            null
-          ],
-          [
-            null,
-            5,
-            null
-          ],
-          [
-            null,
-            6,
-            null
-          ],
-          [
-            null,
-            7,
-            null
-          ],
-          [
-            null,
-            8,
-            null
-          ],
-          [
-            null,
-            9,
-            null
-          ],
-          [
-            null,
-            10,
-            null
-          ],
-          [
-            null,
-            11,
-            null
-          ],
-          [
-            null,
-            12,
-            null
-          ],
-          [
-            null,
-            13,
-            null
-          ],
-          [
-            null,
-            14,
-            null
-          ],
-          [
-            null,
-            15,
-            null
-          ],
-          [
-            null,
-            16,
-            null
-          ],
-          [
-            null,
-            17,
-            null
-          ],
-          [
-            null,
-            18,
-            null
-          ],
-          [
-            null,
-            19,
-            null
-          ],
-          [
-            null,
-            20,
-            null
-          ]
+          [null, 0, null],
+          [null, 2, null],
+          [null, 3, null],
+          [null, 4, null],
+          [null, 5, null],
+          [null, 6, null],
+          [null, 7, null],
+          [null, 8, null],
+          [null, 9, null],
+          [null, 10, null],
+          [null, 11, null],
+          [null, 12, null],
+          [null, 13, null],
+          [null, 14, null],
+          [null, 15, null],
+          [null, 16, null],
+          [null, 17, null],
+          [null, 18, null],
+          [null, 19, null],
+          [null, 20, null]
         ]
       }
     ],
@@ -14125,10 +11524,7 @@
           },
           {
             "type": "list",
-            "items": [
-              "Simple Melee Weapons",
-              "Martial Melee Weapons that have the Light property"
-            ]
+            "items": ["Simple Melee Weapons", "Martial Melee Weapons that have the Light property"]
           },
           {
             "type": "paragraph",
@@ -14139,21 +11535,15 @@
             "blocks": [
               {
                 "type": "list",
-                "items": [
-                  "XPHB"
-                ]
+                "items": ["XPHB"]
               },
               {
                 "type": "list",
-                "items": [
-                  "XPHB"
-                ]
+                "items": ["XPHB"]
               },
               {
                 "type": "list",
-                "items": [
-                  "XPHB"
-                ]
+                "items": ["XPHB"]
               }
             ]
           }
@@ -14202,21 +11592,15 @@
             "blocks": [
               {
                 "type": "list",
-                "items": [
-                  "XPHB"
-                ]
+                "items": ["XPHB"]
               },
               {
                 "type": "list",
-                "items": [
-                  "XPHB"
-                ]
+                "items": ["XPHB"]
               },
               {
                 "type": "list",
-                "items": [
-                  "XPHB"
-                ]
+                "items": ["XPHB"]
               }
             ]
           }
@@ -14819,36 +12203,18 @@
       "number": 1,
       "faces": 10
     },
-    "proficiency": [
-      "wis",
-      "cha"
-    ],
+    "proficiency": ["wis", "cha"],
     "primaryAbility": [],
     "spellcastingAbility": "cha",
     "casterProgression": "1/2",
     "startingProficiencies": {
-      "armor": [
-        "light",
-        "medium",
-        "heavy",
-        "shield"
-      ],
-      "weapons": [
-        "simple",
-        "martial"
-      ],
+      "armor": ["light", "medium", "heavy", "shield"],
+      "weapons": ["simple", "martial"],
       "tools": [],
       "savingThrows": [],
       "skills": [
         {
-          "from": [
-            "athletics",
-            "insight",
-            "intimidation",
-            "medicine",
-            "persuasion",
-            "religion"
-          ],
+          "from": ["athletics", "insight", "intimidation", "medicine", "persuasion", "religion"],
           "count": 2
         }
       ]
@@ -14859,17 +12225,12 @@
           "alternatives": [
             {
               "label": "A",
-              "items": [
-                "Martial Weapon",
-                "Shield"
-              ],
+              "items": ["Martial Weapon", "Shield"],
               "gold": null
             },
             {
               "label": "B",
-              "items": [
-                "2 × Martial Weapon"
-              ],
+              "items": ["2 × Martial Weapon"],
               "gold": null
             }
           ]
@@ -14878,16 +12239,12 @@
           "alternatives": [
             {
               "label": "A",
-              "items": [
-                "5 × Javelin"
-              ],
+              "items": ["5 × Javelin"],
               "gold": null
             },
             {
               "label": "B",
-              "items": [
-                "Simple Melee Weapon"
-              ],
+              "items": ["Simple Melee Weapon"],
               "gold": null
             }
           ]
@@ -14896,16 +12253,12 @@
           "alternatives": [
             {
               "label": "A",
-              "items": [
-                "Priest's Pack"
-              ],
+              "items": ["Priest's Pack"],
               "gold": null
             },
             {
               "label": "B",
-              "items": [
-                "Explorer's Pack"
-              ],
+              "items": ["Explorer's Pack"],
               "gold": null
             }
           ]
@@ -14914,10 +12267,7 @@
           "alternatives": [
             {
               "label": "",
-              "items": [
-                "Chain Mail",
-                "Holy Symbol"
-              ],
+              "items": ["Chain Mail", "Holy Symbol"],
               "gold": null
             }
           ]
@@ -14928,162 +12278,33 @@
     },
     "multiclassing": {
       "requirements": [],
-      "proficienciesGained": [
-        "Armor: light, medium, shield",
-        "Weapons: simple, martial"
-      ]
+      "proficienciesGained": ["Armor: light, medium, shield", "Weapons: simple, martial"]
     },
     "classTableGroups": [
       {
         "title": "Spell Slots per Spell Level",
-        "colLabels": [
-          "1st",
-          "2nd",
-          "3rd",
-          "4th",
-          "5th"
-        ],
+        "colLabels": ["1st", "2nd", "3rd", "4th", "5th"],
         "rows": [
-          [
-            0,
-            0,
-            0,
-            0,
-            0
-          ],
-          [
-            2,
-            0,
-            0,
-            0,
-            0
-          ],
-          [
-            3,
-            0,
-            0,
-            0,
-            0
-          ],
-          [
-            3,
-            0,
-            0,
-            0,
-            0
-          ],
-          [
-            4,
-            2,
-            0,
-            0,
-            0
-          ],
-          [
-            4,
-            2,
-            0,
-            0,
-            0
-          ],
-          [
-            4,
-            3,
-            0,
-            0,
-            0
-          ],
-          [
-            4,
-            3,
-            0,
-            0,
-            0
-          ],
-          [
-            4,
-            3,
-            2,
-            0,
-            0
-          ],
-          [
-            4,
-            3,
-            2,
-            0,
-            0
-          ],
-          [
-            4,
-            3,
-            3,
-            0,
-            0
-          ],
-          [
-            4,
-            3,
-            3,
-            0,
-            0
-          ],
-          [
-            4,
-            3,
-            3,
-            1,
-            0
-          ],
-          [
-            4,
-            3,
-            3,
-            1,
-            0
-          ],
-          [
-            4,
-            3,
-            3,
-            2,
-            0
-          ],
-          [
-            4,
-            3,
-            3,
-            2,
-            0
-          ],
-          [
-            4,
-            3,
-            3,
-            3,
-            1
-          ],
-          [
-            4,
-            3,
-            3,
-            3,
-            1
-          ],
-          [
-            4,
-            3,
-            3,
-            3,
-            2
-          ],
-          [
-            4,
-            3,
-            3,
-            3,
-            2
-          ]
+          [0, 0, 0, 0, 0],
+          [2, 0, 0, 0, 0],
+          [3, 0, 0, 0, 0],
+          [3, 0, 0, 0, 0],
+          [4, 2, 0, 0, 0],
+          [4, 2, 0, 0, 0],
+          [4, 3, 0, 0, 0],
+          [4, 3, 0, 0, 0],
+          [4, 3, 2, 0, 0],
+          [4, 3, 2, 0, 0],
+          [4, 3, 3, 0, 0],
+          [4, 3, 3, 0, 0],
+          [4, 3, 3, 1, 0],
+          [4, 3, 3, 1, 0],
+          [4, 3, 3, 2, 0],
+          [4, 3, 3, 2, 0],
+          [4, 3, 3, 3, 1],
+          [4, 3, 3, 3, 1],
+          [4, 3, 3, 3, 2],
+          [4, 3, 3, 3, 2]
         ]
       }
     ],
@@ -15282,15 +12503,11 @@
           },
           {
             "type": "list",
-            "items": [
-              "Channel Divinity"
-            ]
+            "items": ["Channel Divinity"]
           },
           {
             "type": "list",
-            "items": [
-              "Channel Divinity: Harness Divine Power"
-            ]
+            "items": ["Channel Divinity: Harness Divine Power"]
           },
           {
             "type": "inset",
@@ -15912,38 +13129,18 @@
       "number": 1,
       "faces": 10
     },
-    "proficiency": [
-      "wis",
-      "cha"
-    ],
-    "primaryAbility": [
-      "str"
-    ],
+    "proficiency": ["wis", "cha"],
+    "primaryAbility": ["str"],
     "spellcastingAbility": "cha",
     "casterProgression": "artificer",
     "startingProficiencies": {
-      "armor": [
-        "light",
-        "medium",
-        "heavy",
-        "shield"
-      ],
-      "weapons": [
-        "simple",
-        "martial"
-      ],
+      "armor": ["light", "medium", "heavy", "shield"],
+      "weapons": ["simple", "martial"],
       "tools": [],
       "savingThrows": [],
       "skills": [
         {
-          "from": [
-            "athletics",
-            "insight",
-            "intimidation",
-            "medicine",
-            "persuasion",
-            "religion"
-          ],
+          "from": ["athletics", "insight", "intimidation", "medicine", "persuasion", "religion"],
           "count": 2
         }
       ]
@@ -15977,250 +13174,58 @@
     },
     "multiclassing": {
       "requirements": [],
-      "proficienciesGained": [
-        "Armor: light, medium, shield",
-        "Weapons: martial"
-      ]
+      "proficienciesGained": ["Armor: light, medium, shield", "Weapons: martial"]
     },
     "classTableGroups": [
       {
-        "colLabels": [
-          "Channel Divinity",
-          "Prepared Spells"
-        ],
+        "colLabels": ["Channel Divinity", "Prepared Spells"],
         "rows": [
-          [
-            0,
-            2
-          ],
-          [
-            0,
-            3
-          ],
-          [
-            2,
-            4
-          ],
-          [
-            2,
-            5
-          ],
-          [
-            2,
-            6
-          ],
-          [
-            2,
-            6
-          ],
-          [
-            2,
-            7
-          ],
-          [
-            2,
-            7
-          ],
-          [
-            2,
-            9
-          ],
-          [
-            2,
-            9
-          ],
-          [
-            3,
-            10
-          ],
-          [
-            3,
-            10
-          ],
-          [
-            3,
-            11
-          ],
-          [
-            3,
-            11
-          ],
-          [
-            3,
-            12
-          ],
-          [
-            3,
-            12
-          ],
-          [
-            3,
-            14
-          ],
-          [
-            3,
-            14
-          ],
-          [
-            3,
-            15
-          ],
-          [
-            3,
-            15
-          ]
+          [0, 2],
+          [0, 3],
+          [2, 4],
+          [2, 5],
+          [2, 6],
+          [2, 6],
+          [2, 7],
+          [2, 7],
+          [2, 9],
+          [2, 9],
+          [3, 10],
+          [3, 10],
+          [3, 11],
+          [3, 11],
+          [3, 12],
+          [3, 12],
+          [3, 14],
+          [3, 14],
+          [3, 15],
+          [3, 15]
         ]
       },
       {
         "title": "Spell Slots per Spell Level",
-        "colLabels": [
-          "1st",
-          "2nd",
-          "3rd",
-          "4th",
-          "5th"
-        ],
+        "colLabels": ["1st", "2nd", "3rd", "4th", "5th"],
         "rows": [
-          [
-            2,
-            0,
-            0,
-            0,
-            0
-          ],
-          [
-            2,
-            0,
-            0,
-            0,
-            0
-          ],
-          [
-            3,
-            0,
-            0,
-            0,
-            0
-          ],
-          [
-            3,
-            0,
-            0,
-            0,
-            0
-          ],
-          [
-            4,
-            2,
-            0,
-            0,
-            0
-          ],
-          [
-            4,
-            2,
-            0,
-            0,
-            0
-          ],
-          [
-            4,
-            3,
-            0,
-            0,
-            0
-          ],
-          [
-            4,
-            3,
-            0,
-            0,
-            0
-          ],
-          [
-            4,
-            3,
-            2,
-            0,
-            0
-          ],
-          [
-            4,
-            3,
-            2,
-            0,
-            0
-          ],
-          [
-            4,
-            3,
-            3,
-            0,
-            0
-          ],
-          [
-            4,
-            3,
-            3,
-            0,
-            0
-          ],
-          [
-            4,
-            3,
-            3,
-            1,
-            0
-          ],
-          [
-            4,
-            3,
-            3,
-            1,
-            0
-          ],
-          [
-            4,
-            3,
-            3,
-            2,
-            0
-          ],
-          [
-            4,
-            3,
-            3,
-            2,
-            0
-          ],
-          [
-            4,
-            3,
-            3,
-            3,
-            1
-          ],
-          [
-            4,
-            3,
-            3,
-            3,
-            1
-          ],
-          [
-            4,
-            3,
-            3,
-            3,
-            2
-          ],
-          [
-            4,
-            3,
-            3,
-            3,
-            2
-          ]
+          [2, 0, 0, 0, 0],
+          [2, 0, 0, 0, 0],
+          [3, 0, 0, 0, 0],
+          [3, 0, 0, 0, 0],
+          [4, 2, 0, 0, 0],
+          [4, 2, 0, 0, 0],
+          [4, 3, 0, 0, 0],
+          [4, 3, 0, 0, 0],
+          [4, 3, 2, 0, 0],
+          [4, 3, 2, 0, 0],
+          [4, 3, 3, 0, 0],
+          [4, 3, 3, 0, 0],
+          [4, 3, 3, 1, 0],
+          [4, 3, 3, 1, 0],
+          [4, 3, 3, 2, 0],
+          [4, 3, 3, 2, 0],
+          [4, 3, 3, 3, 1],
+          [4, 3, 3, 3, 1],
+          [4, 3, 3, 3, 2],
+          [4, 3, 3, 3, 2]
         ]
       }
     ],
@@ -16353,9 +13358,7 @@
             "blocks": [
               {
                 "type": "list",
-                "items": [
-                  "Blessed Warrior"
-                ]
+                "items": ["Blessed Warrior"]
               }
             ]
           }
@@ -16400,9 +13403,7 @@
             "blocks": [
               {
                 "type": "list",
-                "items": [
-                  "XPHB"
-                ]
+                "items": ["XPHB"]
               }
             ]
           }
@@ -16870,23 +13871,13 @@
       "number": 1,
       "faces": 10
     },
-    "proficiency": [
-      "str",
-      "dex"
-    ],
+    "proficiency": ["str", "dex"],
     "primaryAbility": [],
     "spellcastingAbility": "wis",
     "casterProgression": "1/2",
     "startingProficiencies": {
-      "armor": [
-        "light",
-        "medium",
-        "shield"
-      ],
-      "weapons": [
-        "simple",
-        "martial"
-      ],
+      "armor": ["light", "medium", "shield"],
+      "weapons": ["simple", "martial"],
       "tools": [],
       "savingThrows": [],
       "skills": [
@@ -16911,16 +13902,12 @@
           "alternatives": [
             {
               "label": "A",
-              "items": [
-                "Scale Mail"
-              ],
+              "items": ["Scale Mail"],
               "gold": null
             },
             {
               "label": "B",
-              "items": [
-                "Leather Armor"
-              ],
+              "items": ["Leather Armor"],
               "gold": null
             }
           ]
@@ -16929,16 +13916,12 @@
           "alternatives": [
             {
               "label": "A",
-              "items": [
-                "2 × Shortsword"
-              ],
+              "items": ["2 × Shortsword"],
               "gold": null
             },
             {
               "label": "B",
-              "items": [
-                "2 × Simple Melee Weapon"
-              ],
+              "items": ["2 × Simple Melee Weapon"],
               "gold": null
             }
           ]
@@ -16947,16 +13930,12 @@
           "alternatives": [
             {
               "label": "A",
-              "items": [
-                "Dungeoneer's Pack"
-              ],
+              "items": ["Dungeoneer's Pack"],
               "gold": null
             },
             {
               "label": "B",
-              "items": [
-                "Explorer's Pack"
-              ],
+              "items": ["Explorer's Pack"],
               "gold": null
             }
           ]
@@ -16965,10 +13944,7 @@
           "alternatives": [
             {
               "label": "",
-              "items": [
-                "Longbow",
-                "Arrows (20)"
-              ],
+              "items": ["Longbow", "Arrows (20)"],
               "gold": null
             }
           ]
@@ -16979,229 +13955,58 @@
     },
     "multiclassing": {
       "requirements": [],
-      "proficienciesGained": [
-        "Armor: light, medium, shield",
-        "Weapons: simple, martial"
-      ]
+      "proficienciesGained": ["Armor: light, medium, shield", "Weapons: simple, martial"]
     },
     "classTableGroups": [
       {
-        "colLabels": [
-          "Spells Known"
-        ],
+        "colLabels": ["Spells Known"],
         "rows": [
-          [
-            0
-          ],
-          [
-            2
-          ],
-          [
-            3
-          ],
-          [
-            3
-          ],
-          [
-            4
-          ],
-          [
-            4
-          ],
-          [
-            5
-          ],
-          [
-            5
-          ],
-          [
-            6
-          ],
-          [
-            6
-          ],
-          [
-            7
-          ],
-          [
-            7
-          ],
-          [
-            8
-          ],
-          [
-            8
-          ],
-          [
-            9
-          ],
-          [
-            9
-          ],
-          [
-            10
-          ],
-          [
-            10
-          ],
-          [
-            11
-          ],
-          [
-            11
-          ]
+          [0],
+          [2],
+          [3],
+          [3],
+          [4],
+          [4],
+          [5],
+          [5],
+          [6],
+          [6],
+          [7],
+          [7],
+          [8],
+          [8],
+          [9],
+          [9],
+          [10],
+          [10],
+          [11],
+          [11]
         ]
       },
       {
         "title": "Spell Slots per Spell Level",
-        "colLabels": [
-          "1st",
-          "2nd",
-          "3rd",
-          "4th",
-          "5th"
-        ],
+        "colLabels": ["1st", "2nd", "3rd", "4th", "5th"],
         "rows": [
-          [
-            0,
-            0,
-            0,
-            0,
-            0
-          ],
-          [
-            2,
-            0,
-            0,
-            0,
-            0
-          ],
-          [
-            3,
-            0,
-            0,
-            0,
-            0
-          ],
-          [
-            3,
-            0,
-            0,
-            0,
-            0
-          ],
-          [
-            4,
-            2,
-            0,
-            0,
-            0
-          ],
-          [
-            4,
-            2,
-            0,
-            0,
-            0
-          ],
-          [
-            4,
-            3,
-            0,
-            0,
-            0
-          ],
-          [
-            4,
-            3,
-            0,
-            0,
-            0
-          ],
-          [
-            4,
-            3,
-            2,
-            0,
-            0
-          ],
-          [
-            4,
-            3,
-            2,
-            0,
-            0
-          ],
-          [
-            4,
-            3,
-            3,
-            0,
-            0
-          ],
-          [
-            4,
-            3,
-            3,
-            0,
-            0
-          ],
-          [
-            4,
-            3,
-            3,
-            1,
-            0
-          ],
-          [
-            4,
-            3,
-            3,
-            1,
-            0
-          ],
-          [
-            4,
-            3,
-            3,
-            2,
-            0
-          ],
-          [
-            4,
-            3,
-            3,
-            2,
-            0
-          ],
-          [
-            4,
-            3,
-            3,
-            3,
-            1
-          ],
-          [
-            4,
-            3,
-            3,
-            3,
-            1
-          ],
-          [
-            4,
-            3,
-            3,
-            3,
-            2
-          ],
-          [
-            4,
-            3,
-            3,
-            3,
-            2
-          ]
+          [0, 0, 0, 0, 0],
+          [2, 0, 0, 0, 0],
+          [3, 0, 0, 0, 0],
+          [3, 0, 0, 0, 0],
+          [4, 2, 0, 0, 0],
+          [4, 2, 0, 0, 0],
+          [4, 3, 0, 0, 0],
+          [4, 3, 0, 0, 0],
+          [4, 3, 2, 0, 0],
+          [4, 3, 2, 0, 0],
+          [4, 3, 3, 0, 0],
+          [4, 3, 3, 0, 0],
+          [4, 3, 3, 1, 0],
+          [4, 3, 3, 1, 0],
+          [4, 3, 3, 2, 0],
+          [4, 3, 3, 2, 0],
+          [4, 3, 3, 3, 1],
+          [4, 3, 3, 3, 1],
+          [4, 3, 3, 3, 2],
+          [4, 3, 3, 3, 2]
         ]
       }
     ],
@@ -18300,25 +15105,13 @@
       "number": 1,
       "faces": 10
     },
-    "proficiency": [
-      "str",
-      "dex"
-    ],
-    "primaryAbility": [
-      "dex"
-    ],
+    "proficiency": ["str", "dex"],
+    "primaryAbility": ["dex"],
     "spellcastingAbility": "wis",
     "casterProgression": "artificer",
     "startingProficiencies": {
-      "armor": [
-        "light",
-        "medium",
-        "shield"
-      ],
-      "weapons": [
-        "simple",
-        "martial"
-      ],
+      "armor": ["light", "medium", "shield"],
+      "weapons": ["simple", "martial"],
       "tools": [],
       "savingThrows": [],
       "skills": [
@@ -18368,296 +15161,83 @@
     },
     "multiclassing": {
       "requirements": [],
-      "proficienciesGained": [
-        "Armor: light, medium, shield",
-        "Weapons: martial"
-      ]
+      "proficienciesGained": ["Armor: light, medium, shield", "Weapons: martial"]
     },
     "classTableGroups": [
       {
-        "colLabels": [
-          "Favored Enemy"
-        ],
+        "colLabels": ["Favored Enemy"],
         "rows": [
-          [
-            2
-          ],
-          [
-            2
-          ],
-          [
-            2
-          ],
-          [
-            2
-          ],
-          [
-            3
-          ],
-          [
-            3
-          ],
-          [
-            3
-          ],
-          [
-            3
-          ],
-          [
-            4
-          ],
-          [
-            4
-          ],
-          [
-            4
-          ],
-          [
-            4
-          ],
-          [
-            5
-          ],
-          [
-            5
-          ],
-          [
-            5
-          ],
-          [
-            5
-          ],
-          [
-            6
-          ],
-          [
-            6
-          ],
-          [
-            6
-          ],
-          [
-            6
-          ]
+          [2],
+          [2],
+          [2],
+          [2],
+          [3],
+          [3],
+          [3],
+          [3],
+          [4],
+          [4],
+          [4],
+          [4],
+          [5],
+          [5],
+          [5],
+          [5],
+          [6],
+          [6],
+          [6],
+          [6]
         ]
       },
       {
-        "colLabels": [
-          "Prepared Spells"
-        ],
+        "colLabels": ["Prepared Spells"],
         "rows": [
-          [
-            2
-          ],
-          [
-            3
-          ],
-          [
-            4
-          ],
-          [
-            5
-          ],
-          [
-            6
-          ],
-          [
-            6
-          ],
-          [
-            7
-          ],
-          [
-            7
-          ],
-          [
-            9
-          ],
-          [
-            9
-          ],
-          [
-            10
-          ],
-          [
-            10
-          ],
-          [
-            11
-          ],
-          [
-            11
-          ],
-          [
-            12
-          ],
-          [
-            12
-          ],
-          [
-            14
-          ],
-          [
-            14
-          ],
-          [
-            15
-          ],
-          [
-            15
-          ]
+          [2],
+          [3],
+          [4],
+          [5],
+          [6],
+          [6],
+          [7],
+          [7],
+          [9],
+          [9],
+          [10],
+          [10],
+          [11],
+          [11],
+          [12],
+          [12],
+          [14],
+          [14],
+          [15],
+          [15]
         ]
       },
       {
         "title": "Spell Slots per Spell Level",
-        "colLabels": [
-          "1st",
-          "2nd",
-          "3rd",
-          "4th",
-          "5th"
-        ],
+        "colLabels": ["1st", "2nd", "3rd", "4th", "5th"],
         "rows": [
-          [
-            2,
-            0,
-            0,
-            0,
-            0
-          ],
-          [
-            2,
-            0,
-            0,
-            0,
-            0
-          ],
-          [
-            3,
-            0,
-            0,
-            0,
-            0
-          ],
-          [
-            3,
-            0,
-            0,
-            0,
-            0
-          ],
-          [
-            4,
-            2,
-            0,
-            0,
-            0
-          ],
-          [
-            4,
-            2,
-            0,
-            0,
-            0
-          ],
-          [
-            4,
-            3,
-            0,
-            0,
-            0
-          ],
-          [
-            4,
-            3,
-            0,
-            0,
-            0
-          ],
-          [
-            4,
-            3,
-            2,
-            0,
-            0
-          ],
-          [
-            4,
-            3,
-            2,
-            0,
-            0
-          ],
-          [
-            4,
-            3,
-            3,
-            0,
-            0
-          ],
-          [
-            4,
-            3,
-            3,
-            0,
-            0
-          ],
-          [
-            4,
-            3,
-            3,
-            1,
-            0
-          ],
-          [
-            4,
-            3,
-            3,
-            1,
-            0
-          ],
-          [
-            4,
-            3,
-            3,
-            2,
-            0
-          ],
-          [
-            4,
-            3,
-            3,
-            2,
-            0
-          ],
-          [
-            4,
-            3,
-            3,
-            3,
-            1
-          ],
-          [
-            4,
-            3,
-            3,
-            3,
-            1
-          ],
-          [
-            4,
-            3,
-            3,
-            3,
-            2
-          ],
-          [
-            4,
-            3,
-            3,
-            3,
-            2
-          ]
+          [2, 0, 0, 0, 0],
+          [2, 0, 0, 0, 0],
+          [3, 0, 0, 0, 0],
+          [3, 0, 0, 0, 0],
+          [4, 2, 0, 0, 0],
+          [4, 2, 0, 0, 0],
+          [4, 3, 0, 0, 0],
+          [4, 3, 0, 0, 0],
+          [4, 3, 2, 0, 0],
+          [4, 3, 2, 0, 0],
+          [4, 3, 3, 0, 0],
+          [4, 3, 3, 0, 0],
+          [4, 3, 3, 1, 0],
+          [4, 3, 3, 1, 0],
+          [4, 3, 3, 2, 0],
+          [4, 3, 3, 2, 0],
+          [4, 3, 3, 3, 1],
+          [4, 3, 3, 3, 1],
+          [4, 3, 3, 3, 2],
+          [4, 3, 3, 3, 2]
         ]
       }
     ],
@@ -18823,9 +15403,7 @@
             "blocks": [
               {
                 "type": "list",
-                "items": [
-                  "Druidic Warrior"
-                ]
+                "items": ["Druidic Warrior"]
               }
             ]
           }
@@ -19305,27 +15883,14 @@
       "number": 1,
       "faces": 8
     },
-    "proficiency": [
-      "dex",
-      "int"
-    ],
+    "proficiency": ["dex", "int"],
     "primaryAbility": [],
     "spellcastingAbility": null,
     "casterProgression": null,
     "startingProficiencies": {
-      "armor": [
-        "light"
-      ],
-      "weapons": [
-        "simple",
-        "hand crossbow",
-        "longsword",
-        "rapier",
-        "shortsword"
-      ],
-      "tools": [
-        "thieves' tools"
-      ],
+      "armor": ["light"],
+      "weapons": ["simple", "hand crossbow", "longsword", "rapier", "shortsword"],
+      "tools": ["thieves' tools"],
       "savingThrows": [],
       "skills": [
         {
@@ -19352,16 +15917,12 @@
           "alternatives": [
             {
               "label": "A",
-              "items": [
-                "Rapier"
-              ],
+              "items": ["Rapier"],
               "gold": null
             },
             {
               "label": "B",
-              "items": [
-                "Shortsword"
-              ],
+              "items": ["Shortsword"],
               "gold": null
             }
           ]
@@ -19370,17 +15931,12 @@
           "alternatives": [
             {
               "label": "A",
-              "items": [
-                "Shortbow",
-                "Arrows (20)"
-              ],
+              "items": ["Shortbow", "Arrows (20)"],
               "gold": null
             },
             {
               "label": "B",
-              "items": [
-                "Shortsword"
-              ],
+              "items": ["Shortsword"],
               "gold": null
             }
           ]
@@ -19389,23 +15945,17 @@
           "alternatives": [
             {
               "label": "A",
-              "items": [
-                "Burglar's Pack"
-              ],
+              "items": ["Burglar's Pack"],
               "gold": null
             },
             {
               "label": "B",
-              "items": [
-                "Dungeoneer's Pack"
-              ],
+              "items": ["Dungeoneer's Pack"],
               "gold": null
             },
             {
               "label": "C",
-              "items": [
-                "Explorer's Pack"
-              ],
+              "items": ["Explorer's Pack"],
               "gold": null
             }
           ]
@@ -19414,11 +15964,7 @@
           "alternatives": [
             {
               "label": "",
-              "items": [
-                "Leather Armor",
-                "2 × Dagger",
-                "Thieves' Tools"
-              ],
+              "items": ["Leather Armor", "2 × Dagger", "Thieves' Tools"],
               "gold": null
             }
           ]
@@ -19429,76 +15975,32 @@
     },
     "multiclassing": {
       "requirements": [],
-      "proficienciesGained": [
-        "Armor: light"
-      ]
+      "proficienciesGained": ["Armor: light"]
     },
     "classTableGroups": [
       {
-        "colLabels": [
-          "Sneak Attack"
-        ],
+        "colLabels": ["Sneak Attack"],
         "rows": [
-          [
-            null
-          ],
-          [
-            null
-          ],
-          [
-            null
-          ],
-          [
-            null
-          ],
-          [
-            null
-          ],
-          [
-            null
-          ],
-          [
-            null
-          ],
-          [
-            null
-          ],
-          [
-            null
-          ],
-          [
-            null
-          ],
-          [
-            null
-          ],
-          [
-            null
-          ],
-          [
-            null
-          ],
-          [
-            null
-          ],
-          [
-            null
-          ],
-          [
-            null
-          ],
-          [
-            null
-          ],
-          [
-            null
-          ],
-          [
-            null
-          ],
-          [
-            null
-          ]
+          [null],
+          [null],
+          [null],
+          [null],
+          [null],
+          [null],
+          [null],
+          [null],
+          [null],
+          [null],
+          [null],
+          [null],
+          [null],
+          [null],
+          [null],
+          [null],
+          [null],
+          [null],
+          [null],
+          [null]
         ]
       }
     ],
@@ -20391,26 +16893,14 @@
       "number": 1,
       "faces": 8
     },
-    "proficiency": [
-      "dex",
-      "int"
-    ],
-    "primaryAbility": [
-      "dex"
-    ],
+    "proficiency": ["dex", "int"],
+    "primaryAbility": ["dex"],
     "spellcastingAbility": null,
     "casterProgression": null,
     "startingProficiencies": {
-      "armor": [
-        "light"
-      ],
-      "weapons": [
-        "simple",
-        "Martial weapons that have the Finesse or Light property"
-      ],
-      "tools": [
-        "Thieves' Tools"
-      ],
+      "armor": ["light"],
+      "weapons": ["simple", "Martial weapons that have the Finesse or Light property"],
+      "tools": ["Thieves' Tools"],
       "savingThrows": [],
       "skills": [
         {
@@ -20461,76 +16951,32 @@
     },
     "multiclassing": {
       "requirements": [],
-      "proficienciesGained": [
-        "Armor: light"
-      ]
+      "proficienciesGained": ["Armor: light"]
     },
     "classTableGroups": [
       {
-        "colLabels": [
-          "Sneak Attack"
-        ],
+        "colLabels": ["Sneak Attack"],
         "rows": [
-          [
-            null
-          ],
-          [
-            null
-          ],
-          [
-            null
-          ],
-          [
-            null
-          ],
-          [
-            null
-          ],
-          [
-            null
-          ],
-          [
-            null
-          ],
-          [
-            null
-          ],
-          [
-            null
-          ],
-          [
-            null
-          ],
-          [
-            null
-          ],
-          [
-            null
-          ],
-          [
-            null
-          ],
-          [
-            null
-          ],
-          [
-            null
-          ],
-          [
-            null
-          ],
-          [
-            null
-          ],
-          [
-            null
-          ],
-          [
-            null
-          ],
-          [
-            null
-          ]
+          [null],
+          [null],
+          [null],
+          [null],
+          [null],
+          [null],
+          [null],
+          [null],
+          [null],
+          [null],
+          [null],
+          [null],
+          [null],
+          [null],
+          [null],
+          [null],
+          [null],
+          [null],
+          [null],
+          [null]
         ]
       }
     ],
@@ -20733,21 +17179,15 @@
             "blocks": [
               {
                 "type": "list",
-                "items": [
-                  "XPHB"
-                ]
+                "items": ["XPHB"]
               },
               {
                 "type": "list",
-                "items": [
-                  "XPHB"
-                ]
+                "items": ["XPHB"]
               },
               {
                 "type": "list",
-                "items": [
-                  "XPHB"
-                ]
+                "items": ["XPHB"]
               }
             ]
           }
@@ -21084,21 +17524,15 @@
             "blocks": [
               {
                 "type": "list",
-                "items": [
-                  "XPHB"
-                ]
+                "items": ["XPHB"]
               },
               {
                 "type": "list",
-                "items": [
-                  "XPHB"
-                ]
+                "items": ["XPHB"]
               },
               {
                 "type": "list",
-                "items": [
-                  "XPHB"
-                ]
+                "items": ["XPHB"]
               }
             ]
           }
@@ -21267,34 +17701,18 @@
       "number": 1,
       "faces": 6
     },
-    "proficiency": [
-      "con",
-      "cha"
-    ],
+    "proficiency": ["con", "cha"],
     "primaryAbility": [],
     "spellcastingAbility": "cha",
     "casterProgression": "full",
     "startingProficiencies": {
       "armor": [],
-      "weapons": [
-        "dagger",
-        "dart",
-        "sling",
-        "quarterstaff",
-        "light crossbow"
-      ],
+      "weapons": ["dagger", "dart", "sling", "quarterstaff", "light crossbow"],
       "tools": [],
       "savingThrows": [],
       "skills": [
         {
-          "from": [
-            "arcana",
-            "deception",
-            "insight",
-            "intimidation",
-            "persuasion",
-            "religion"
-          ],
+          "from": ["arcana", "deception", "insight", "intimidation", "persuasion", "religion"],
           "count": 2
         }
       ]
@@ -21305,17 +17723,12 @@
           "alternatives": [
             {
               "label": "A",
-              "items": [
-                "Light Crossbow",
-                "Crossbow Bolts (20)"
-              ],
+              "items": ["Light Crossbow", "Crossbow Bolts (20)"],
               "gold": null
             },
             {
               "label": "B",
-              "items": [
-                "Simple Weapon"
-              ],
+              "items": ["Simple Weapon"],
               "gold": null
             }
           ]
@@ -21324,16 +17737,12 @@
           "alternatives": [
             {
               "label": "A",
-              "items": [
-                "Component Pouch"
-              ],
+              "items": ["Component Pouch"],
               "gold": null
             },
             {
               "label": "B",
-              "items": [
-                "Arcane Focus"
-              ],
+              "items": ["Arcane Focus"],
               "gold": null
             }
           ]
@@ -21342,16 +17751,12 @@
           "alternatives": [
             {
               "label": "A",
-              "items": [
-                "Dungeoneer's Pack"
-              ],
+              "items": ["Dungeoneer's Pack"],
               "gold": null
             },
             {
               "label": "B",
-              "items": [
-                "Explorer's Pack"
-              ],
+              "items": ["Explorer's Pack"],
               "gold": null
             }
           ]
@@ -21360,9 +17765,7 @@
           "alternatives": [
             {
               "label": "",
-              "items": [
-                "2 × Dagger"
-              ],
+              "items": ["2 × Dagger"],
               "gold": null
             }
           ]
@@ -21374,394 +17777,79 @@
     "multiclassing": null,
     "classTableGroups": [
       {
-        "colLabels": [
-          "Sorcery Points"
-        ],
+        "colLabels": ["Sorcery Points"],
         "rows": [
-          [
-            0
-          ],
-          [
-            2
-          ],
-          [
-            3
-          ],
-          [
-            4
-          ],
-          [
-            5
-          ],
-          [
-            6
-          ],
-          [
-            7
-          ],
-          [
-            8
-          ],
-          [
-            9
-          ],
-          [
-            10
-          ],
-          [
-            11
-          ],
-          [
-            12
-          ],
-          [
-            13
-          ],
-          [
-            14
-          ],
-          [
-            15
-          ],
-          [
-            16
-          ],
-          [
-            17
-          ],
-          [
-            18
-          ],
-          [
-            19
-          ],
-          [
-            20
-          ]
+          [0],
+          [2],
+          [3],
+          [4],
+          [5],
+          [6],
+          [7],
+          [8],
+          [9],
+          [10],
+          [11],
+          [12],
+          [13],
+          [14],
+          [15],
+          [16],
+          [17],
+          [18],
+          [19],
+          [20]
         ]
       },
       {
-        "colLabels": [
-          "Cantrips Known",
-          "Spells Known"
-        ],
+        "colLabels": ["Cantrips Known", "Spells Known"],
         "rows": [
-          [
-            4,
-            2
-          ],
-          [
-            4,
-            3
-          ],
-          [
-            4,
-            4
-          ],
-          [
-            5,
-            5
-          ],
-          [
-            5,
-            6
-          ],
-          [
-            5,
-            7
-          ],
-          [
-            5,
-            8
-          ],
-          [
-            5,
-            9
-          ],
-          [
-            5,
-            10
-          ],
-          [
-            6,
-            11
-          ],
-          [
-            6,
-            12
-          ],
-          [
-            6,
-            12
-          ],
-          [
-            6,
-            13
-          ],
-          [
-            6,
-            13
-          ],
-          [
-            6,
-            14
-          ],
-          [
-            6,
-            14
-          ],
-          [
-            6,
-            15
-          ],
-          [
-            6,
-            15
-          ],
-          [
-            6,
-            15
-          ],
-          [
-            6,
-            15
-          ]
+          [4, 2],
+          [4, 3],
+          [4, 4],
+          [5, 5],
+          [5, 6],
+          [5, 7],
+          [5, 8],
+          [5, 9],
+          [5, 10],
+          [6, 11],
+          [6, 12],
+          [6, 12],
+          [6, 13],
+          [6, 13],
+          [6, 14],
+          [6, 14],
+          [6, 15],
+          [6, 15],
+          [6, 15],
+          [6, 15]
         ]
       },
       {
         "title": "Spell Slots per Spell Level",
-        "colLabels": [
-          "1st",
-          "2nd",
-          "3rd",
-          "4th",
-          "5th",
-          "6th",
-          "7th",
-          "8th",
-          "9th"
-        ],
+        "colLabels": ["1st", "2nd", "3rd", "4th", "5th", "6th", "7th", "8th", "9th"],
         "rows": [
-          [
-            2,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0
-          ],
-          [
-            3,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0
-          ],
-          [
-            4,
-            2,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0
-          ],
-          [
-            4,
-            3,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0
-          ],
-          [
-            4,
-            3,
-            2,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0
-          ],
-          [
-            4,
-            3,
-            3,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0
-          ],
-          [
-            4,
-            3,
-            3,
-            1,
-            0,
-            0,
-            0,
-            0,
-            0
-          ],
-          [
-            4,
-            3,
-            3,
-            2,
-            0,
-            0,
-            0,
-            0,
-            0
-          ],
-          [
-            4,
-            3,
-            3,
-            3,
-            1,
-            0,
-            0,
-            0,
-            0
-          ],
-          [
-            4,
-            3,
-            3,
-            3,
-            2,
-            0,
-            0,
-            0,
-            0
-          ],
-          [
-            4,
-            3,
-            3,
-            3,
-            2,
-            1,
-            0,
-            0,
-            0
-          ],
-          [
-            4,
-            3,
-            3,
-            3,
-            2,
-            1,
-            0,
-            0,
-            0
-          ],
-          [
-            4,
-            3,
-            3,
-            3,
-            2,
-            1,
-            1,
-            0,
-            0
-          ],
-          [
-            4,
-            3,
-            3,
-            3,
-            2,
-            1,
-            1,
-            0,
-            0
-          ],
-          [
-            4,
-            3,
-            3,
-            3,
-            2,
-            1,
-            1,
-            1,
-            0
-          ],
-          [
-            4,
-            3,
-            3,
-            3,
-            2,
-            1,
-            1,
-            1,
-            0
-          ],
-          [
-            4,
-            3,
-            3,
-            3,
-            2,
-            1,
-            1,
-            1,
-            1
-          ],
-          [
-            4,
-            3,
-            3,
-            3,
-            3,
-            1,
-            1,
-            1,
-            1
-          ],
-          [
-            4,
-            3,
-            3,
-            3,
-            3,
-            2,
-            1,
-            1,
-            1
-          ],
-          [
-            4,
-            3,
-            3,
-            3,
-            3,
-            2,
-            2,
-            1,
-            1
-          ]
+          [2, 0, 0, 0, 0, 0, 0, 0, 0],
+          [3, 0, 0, 0, 0, 0, 0, 0, 0],
+          [4, 2, 0, 0, 0, 0, 0, 0, 0],
+          [4, 3, 0, 0, 0, 0, 0, 0, 0],
+          [4, 3, 2, 0, 0, 0, 0, 0, 0],
+          [4, 3, 3, 0, 0, 0, 0, 0, 0],
+          [4, 3, 3, 1, 0, 0, 0, 0, 0],
+          [4, 3, 3, 2, 0, 0, 0, 0, 0],
+          [4, 3, 3, 3, 1, 0, 0, 0, 0],
+          [4, 3, 3, 3, 2, 0, 0, 0, 0],
+          [4, 3, 3, 3, 2, 1, 0, 0, 0],
+          [4, 3, 3, 3, 2, 1, 0, 0, 0],
+          [4, 3, 3, 3, 2, 1, 1, 0, 0],
+          [4, 3, 3, 3, 2, 1, 1, 0, 0],
+          [4, 3, 3, 3, 2, 1, 1, 1, 0],
+          [4, 3, 3, 3, 2, 1, 1, 1, 0],
+          [4, 3, 3, 3, 2, 1, 1, 1, 1],
+          [4, 3, 3, 3, 3, 1, 1, 1, 1],
+          [4, 3, 3, 3, 3, 2, 1, 1, 1],
+          [4, 3, 3, 3, 3, 2, 2, 1, 1]
         ]
       }
     ],
@@ -21876,15 +17964,11 @@
           },
           {
             "type": "list",
-            "items": [
-              "Sorcery Points"
-            ]
+            "items": ["Sorcery Points"]
           },
           {
             "type": "list",
-            "items": [
-              "Flexible Casting"
-            ]
+            "items": ["Flexible Casting"]
           }
         ],
         "consumes": null
@@ -21965,15 +18049,11 @@
             "blocks": [
               {
                 "type": "list",
-                "items": [
-                  "Seeking Spell"
-                ]
+                "items": ["Seeking Spell"]
               },
               {
                 "type": "list",
-                "items": [
-                  "Transmuted Spell"
-                ]
+                "items": ["Transmuted Spell"]
               }
             ]
           }
@@ -22635,32 +18715,18 @@
       "number": 1,
       "faces": 6
     },
-    "proficiency": [
-      "con",
-      "cha"
-    ],
-    "primaryAbility": [
-      "cha"
-    ],
+    "proficiency": ["con", "cha"],
+    "primaryAbility": ["cha"],
     "spellcastingAbility": "cha",
     "casterProgression": "full",
     "startingProficiencies": {
       "armor": [],
-      "weapons": [
-        "simple"
-      ],
+      "weapons": ["simple"],
       "tools": [],
       "savingThrows": [],
       "skills": [
         {
-          "from": [
-            "arcana",
-            "deception",
-            "insight",
-            "intimidation",
-            "persuasion",
-            "religion"
-          ],
+          "from": ["arcana", "deception", "insight", "intimidation", "persuasion", "religion"],
           "count": 2
         }
       ]
@@ -22671,12 +18737,7 @@
           "alternatives": [
             {
               "label": "A",
-              "items": [
-                "Spear",
-                "2 × Dagger",
-                "Crystal",
-                "Dungeoneer's Pack"
-              ],
+              "items": ["Spear", "2 × Dagger", "Crystal", "Dungeoneer's Pack"],
               "gold": "2,800 GP"
             },
             {
@@ -22693,394 +18754,79 @@
     "multiclassing": null,
     "classTableGroups": [
       {
-        "colLabels": [
-          "Sorcery Points"
-        ],
+        "colLabels": ["Sorcery Points"],
         "rows": [
-          [
-            0
-          ],
-          [
-            2
-          ],
-          [
-            3
-          ],
-          [
-            4
-          ],
-          [
-            5
-          ],
-          [
-            6
-          ],
-          [
-            7
-          ],
-          [
-            8
-          ],
-          [
-            9
-          ],
-          [
-            10
-          ],
-          [
-            11
-          ],
-          [
-            12
-          ],
-          [
-            13
-          ],
-          [
-            14
-          ],
-          [
-            15
-          ],
-          [
-            16
-          ],
-          [
-            17
-          ],
-          [
-            18
-          ],
-          [
-            19
-          ],
-          [
-            20
-          ]
+          [0],
+          [2],
+          [3],
+          [4],
+          [5],
+          [6],
+          [7],
+          [8],
+          [9],
+          [10],
+          [11],
+          [12],
+          [13],
+          [14],
+          [15],
+          [16],
+          [17],
+          [18],
+          [19],
+          [20]
         ]
       },
       {
-        "colLabels": [
-          "Cantrips",
-          "Prepared Spells"
-        ],
+        "colLabels": ["Cantrips", "Prepared Spells"],
         "rows": [
-          [
-            4,
-            2
-          ],
-          [
-            4,
-            4
-          ],
-          [
-            4,
-            6
-          ],
-          [
-            5,
-            7
-          ],
-          [
-            5,
-            9
-          ],
-          [
-            5,
-            10
-          ],
-          [
-            5,
-            11
-          ],
-          [
-            5,
-            12
-          ],
-          [
-            5,
-            14
-          ],
-          [
-            6,
-            15
-          ],
-          [
-            6,
-            16
-          ],
-          [
-            6,
-            16
-          ],
-          [
-            6,
-            17
-          ],
-          [
-            6,
-            17
-          ],
-          [
-            6,
-            18
-          ],
-          [
-            6,
-            18
-          ],
-          [
-            6,
-            19
-          ],
-          [
-            6,
-            20
-          ],
-          [
-            6,
-            21
-          ],
-          [
-            6,
-            22
-          ]
+          [4, 2],
+          [4, 4],
+          [4, 6],
+          [5, 7],
+          [5, 9],
+          [5, 10],
+          [5, 11],
+          [5, 12],
+          [5, 14],
+          [6, 15],
+          [6, 16],
+          [6, 16],
+          [6, 17],
+          [6, 17],
+          [6, 18],
+          [6, 18],
+          [6, 19],
+          [6, 20],
+          [6, 21],
+          [6, 22]
         ]
       },
       {
         "title": "Spell Slots per Spell Level",
-        "colLabels": [
-          "1st",
-          "2nd",
-          "3rd",
-          "4th",
-          "5th",
-          "6th",
-          "7th",
-          "8th",
-          "9th"
-        ],
+        "colLabels": ["1st", "2nd", "3rd", "4th", "5th", "6th", "7th", "8th", "9th"],
         "rows": [
-          [
-            2,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0
-          ],
-          [
-            3,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0
-          ],
-          [
-            4,
-            2,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0
-          ],
-          [
-            4,
-            3,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0
-          ],
-          [
-            4,
-            3,
-            2,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0
-          ],
-          [
-            4,
-            3,
-            3,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0
-          ],
-          [
-            4,
-            3,
-            3,
-            1,
-            0,
-            0,
-            0,
-            0,
-            0
-          ],
-          [
-            4,
-            3,
-            3,
-            2,
-            0,
-            0,
-            0,
-            0,
-            0
-          ],
-          [
-            4,
-            3,
-            3,
-            3,
-            1,
-            0,
-            0,
-            0,
-            0
-          ],
-          [
-            4,
-            3,
-            3,
-            3,
-            2,
-            0,
-            0,
-            0,
-            0
-          ],
-          [
-            4,
-            3,
-            3,
-            3,
-            2,
-            1,
-            0,
-            0,
-            0
-          ],
-          [
-            4,
-            3,
-            3,
-            3,
-            2,
-            1,
-            0,
-            0,
-            0
-          ],
-          [
-            4,
-            3,
-            3,
-            3,
-            2,
-            1,
-            1,
-            0,
-            0
-          ],
-          [
-            4,
-            3,
-            3,
-            3,
-            2,
-            1,
-            1,
-            0,
-            0
-          ],
-          [
-            4,
-            3,
-            3,
-            3,
-            2,
-            1,
-            1,
-            1,
-            0
-          ],
-          [
-            4,
-            3,
-            3,
-            3,
-            2,
-            1,
-            1,
-            1,
-            0
-          ],
-          [
-            4,
-            3,
-            3,
-            3,
-            2,
-            1,
-            1,
-            1,
-            1
-          ],
-          [
-            4,
-            3,
-            3,
-            3,
-            3,
-            1,
-            1,
-            1,
-            1
-          ],
-          [
-            4,
-            3,
-            3,
-            3,
-            3,
-            2,
-            1,
-            1,
-            1
-          ],
-          [
-            4,
-            3,
-            3,
-            3,
-            3,
-            2,
-            2,
-            1,
-            1
-          ]
+          [2, 0, 0, 0, 0, 0, 0, 0, 0],
+          [3, 0, 0, 0, 0, 0, 0, 0, 0],
+          [4, 2, 0, 0, 0, 0, 0, 0, 0],
+          [4, 3, 0, 0, 0, 0, 0, 0, 0],
+          [4, 3, 2, 0, 0, 0, 0, 0, 0],
+          [4, 3, 3, 0, 0, 0, 0, 0, 0],
+          [4, 3, 3, 1, 0, 0, 0, 0, 0],
+          [4, 3, 3, 2, 0, 0, 0, 0, 0],
+          [4, 3, 3, 3, 1, 0, 0, 0, 0],
+          [4, 3, 3, 3, 2, 0, 0, 0, 0],
+          [4, 3, 3, 3, 2, 1, 0, 0, 0],
+          [4, 3, 3, 3, 2, 1, 0, 0, 0],
+          [4, 3, 3, 3, 2, 1, 1, 0, 0],
+          [4, 3, 3, 3, 2, 1, 1, 0, 0],
+          [4, 3, 3, 3, 2, 1, 1, 1, 0],
+          [4, 3, 3, 3, 2, 1, 1, 1, 0],
+          [4, 3, 3, 3, 2, 1, 1, 1, 1],
+          [4, 3, 3, 3, 3, 1, 1, 1, 1],
+          [4, 3, 3, 3, 3, 2, 1, 1, 1],
+          [4, 3, 3, 3, 3, 2, 2, 1, 1]
         ]
       }
     ],
@@ -23890,20 +19636,13 @@
       "number": 1,
       "faces": 8
     },
-    "proficiency": [
-      "wis",
-      "cha"
-    ],
+    "proficiency": ["wis", "cha"],
     "primaryAbility": [],
     "spellcastingAbility": "cha",
     "casterProgression": "pact",
     "startingProficiencies": {
-      "armor": [
-        "light"
-      ],
-      "weapons": [
-        "simple"
-      ],
+      "armor": ["light"],
+      "weapons": ["simple"],
       "tools": [],
       "savingThrows": [],
       "skills": [
@@ -23927,17 +19666,12 @@
           "alternatives": [
             {
               "label": "A",
-              "items": [
-                "Light Crossbow",
-                "Crossbow Bolts (20)"
-              ],
+              "items": ["Light Crossbow", "Crossbow Bolts (20)"],
               "gold": null
             },
             {
               "label": "B",
-              "items": [
-                "Simple Weapon"
-              ],
+              "items": ["Simple Weapon"],
               "gold": null
             }
           ]
@@ -23946,16 +19680,12 @@
           "alternatives": [
             {
               "label": "A",
-              "items": [
-                "Component Pouch"
-              ],
+              "items": ["Component Pouch"],
               "gold": null
             },
             {
               "label": "B",
-              "items": [
-                "Arcane Focus"
-              ],
+              "items": ["Arcane Focus"],
               "gold": null
             }
           ]
@@ -23964,16 +19694,12 @@
           "alternatives": [
             {
               "label": "A",
-              "items": [
-                "Scholar's Pack"
-              ],
+              "items": ["Scholar's Pack"],
               "gold": null
             },
             {
               "label": "B",
-              "items": [
-                "Dungeoneer's Pack"
-              ],
+              "items": ["Dungeoneer's Pack"],
               "gold": null
             }
           ]
@@ -23982,11 +19708,7 @@
           "alternatives": [
             {
               "label": "",
-              "items": [
-                "Leather Armor",
-                "Simple Weapon",
-                "2 × Dagger"
-              ],
+              "items": ["Leather Armor", "Simple Weapon", "2 × Dagger"],
               "gold": null
             }
           ]
@@ -23997,10 +19719,7 @@
     },
     "multiclassing": {
       "requirements": [],
-      "proficienciesGained": [
-        "Armor: light",
-        "Weapons: simple"
-      ]
+      "proficienciesGained": ["Armor: light", "Weapons: simple"]
     },
     "classTableGroups": [
       {
@@ -24012,146 +19731,26 @@
           "Invocations Known"
         ],
         "rows": [
-          [
-            2,
-            2,
-            1,
-            "1st",
-            0
-          ],
-          [
-            2,
-            3,
-            2,
-            "1st",
-            2
-          ],
-          [
-            2,
-            4,
-            2,
-            "2nd",
-            2
-          ],
-          [
-            3,
-            5,
-            2,
-            "2nd",
-            2
-          ],
-          [
-            3,
-            6,
-            2,
-            "3rd",
-            3
-          ],
-          [
-            3,
-            7,
-            2,
-            "3rd",
-            3
-          ],
-          [
-            3,
-            8,
-            2,
-            "4th",
-            4
-          ],
-          [
-            3,
-            9,
-            2,
-            "4th",
-            4
-          ],
-          [
-            3,
-            10,
-            2,
-            "5th",
-            5
-          ],
-          [
-            4,
-            10,
-            2,
-            "5th",
-            5
-          ],
-          [
-            4,
-            11,
-            3,
-            "5th",
-            5
-          ],
-          [
-            4,
-            11,
-            3,
-            "5th",
-            6
-          ],
-          [
-            4,
-            12,
-            3,
-            "5th",
-            6
-          ],
-          [
-            4,
-            12,
-            3,
-            "5th",
-            6
-          ],
-          [
-            4,
-            13,
-            3,
-            "5th",
-            7
-          ],
-          [
-            4,
-            13,
-            3,
-            "5th",
-            7
-          ],
-          [
-            4,
-            14,
-            4,
-            "5th",
-            7
-          ],
-          [
-            4,
-            14,
-            4,
-            "5th",
-            8
-          ],
-          [
-            4,
-            15,
-            4,
-            "5th",
-            8
-          ],
-          [
-            4,
-            15,
-            4,
-            "5th",
-            8
-          ]
+          [2, 2, 1, "1st", 0],
+          [2, 3, 2, "1st", 2],
+          [2, 4, 2, "2nd", 2],
+          [3, 5, 2, "2nd", 2],
+          [3, 6, 2, "3rd", 3],
+          [3, 7, 2, "3rd", 3],
+          [3, 8, 2, "4th", 4],
+          [3, 9, 2, "4th", 4],
+          [3, 10, 2, "5th", 5],
+          [4, 10, 2, "5th", 5],
+          [4, 11, 3, "5th", 5],
+          [4, 11, 3, "5th", 6],
+          [4, 12, 3, "5th", 6],
+          [4, 12, 3, "5th", 6],
+          [4, 13, 3, "5th", 7],
+          [4, 13, 3, "5th", 7],
+          [4, 14, 4, "5th", 7],
+          [4, 14, 4, "5th", 8],
+          [4, 15, 4, "5th", 8],
+          [4, 15, 4, "5th", 8]
         ]
       }
     ],
@@ -24909,22 +20508,13 @@
       "number": 1,
       "faces": 8
     },
-    "proficiency": [
-      "wis",
-      "cha"
-    ],
-    "primaryAbility": [
-      "cha"
-    ],
+    "proficiency": ["wis", "cha"],
+    "primaryAbility": ["cha"],
     "spellcastingAbility": "cha",
     "casterProgression": "pact",
     "startingProficiencies": {
-      "armor": [
-        "light"
-      ],
-      "weapons": [
-        "simple"
-      ],
+      "armor": ["light"],
+      "weapons": ["simple"],
       "tools": [],
       "savingThrows": [],
       "skills": [
@@ -24948,14 +20538,7 @@
           "alternatives": [
             {
               "label": "A",
-              "items": [
-                "Leather Armor",
-                "Sickle",
-                "2 × Dagger",
-                "Orb",
-                "Book",
-                "Scholar's Pack"
-              ],
+              "items": ["Leather Armor", "Sickle", "2 × Dagger", "Orb", "Book", "Scholar's Pack"],
               "gold": "1,500 GP"
             },
             {
@@ -24971,160 +20554,32 @@
     },
     "multiclassing": {
       "requirements": [],
-      "proficienciesGained": [
-        "Armor: light"
-      ]
+      "proficienciesGained": ["Armor: light"]
     },
     "classTableGroups": [
       {
-        "colLabels": [
-          "Invocations",
-          "Cantrips",
-          "Prepared Spells",
-          "Spell Slots",
-          "Slot Level"
-        ],
+        "colLabels": ["Invocations", "Cantrips", "Prepared Spells", "Spell Slots", "Slot Level"],
         "rows": [
-          [
-            1,
-            2,
-            2,
-            1,
-            1
-          ],
-          [
-            3,
-            2,
-            3,
-            2,
-            1
-          ],
-          [
-            3,
-            2,
-            4,
-            2,
-            2
-          ],
-          [
-            3,
-            3,
-            5,
-            2,
-            2
-          ],
-          [
-            5,
-            3,
-            6,
-            2,
-            3
-          ],
-          [
-            5,
-            3,
-            7,
-            2,
-            3
-          ],
-          [
-            6,
-            3,
-            8,
-            2,
-            4
-          ],
-          [
-            6,
-            3,
-            9,
-            2,
-            4
-          ],
-          [
-            7,
-            3,
-            10,
-            2,
-            5
-          ],
-          [
-            7,
-            4,
-            10,
-            2,
-            5
-          ],
-          [
-            7,
-            4,
-            11,
-            3,
-            5
-          ],
-          [
-            8,
-            4,
-            11,
-            3,
-            5
-          ],
-          [
-            8,
-            4,
-            12,
-            3,
-            5
-          ],
-          [
-            8,
-            4,
-            12,
-            3,
-            5
-          ],
-          [
-            9,
-            4,
-            13,
-            3,
-            5
-          ],
-          [
-            9,
-            4,
-            13,
-            3,
-            5
-          ],
-          [
-            9,
-            4,
-            14,
-            4,
-            5
-          ],
-          [
-            10,
-            4,
-            14,
-            4,
-            5
-          ],
-          [
-            10,
-            4,
-            15,
-            4,
-            5
-          ],
-          [
-            10,
-            4,
-            15,
-            4,
-            5
-          ]
+          [1, 2, 2, 1, 1],
+          [3, 2, 3, 2, 1],
+          [3, 2, 4, 2, 2],
+          [3, 3, 5, 2, 2],
+          [5, 3, 6, 2, 3],
+          [5, 3, 7, 2, 3],
+          [6, 3, 8, 2, 4],
+          [6, 3, 9, 2, 4],
+          [7, 3, 10, 2, 5],
+          [7, 4, 10, 2, 5],
+          [7, 4, 11, 3, 5],
+          [8, 4, 11, 3, 5],
+          [8, 4, 12, 3, 5],
+          [8, 4, 12, 3, 5],
+          [9, 4, 13, 3, 5],
+          [9, 4, 13, 3, 5],
+          [9, 4, 14, 4, 5],
+          [10, 4, 14, 4, 5],
+          [10, 4, 15, 4, 5],
+          [10, 4, 15, 4, 5]
         ]
       }
     ],
@@ -25910,34 +21365,18 @@
       "number": 1,
       "faces": 6
     },
-    "proficiency": [
-      "int",
-      "wis"
-    ],
+    "proficiency": ["int", "wis"],
     "primaryAbility": [],
     "spellcastingAbility": "int",
     "casterProgression": "full",
     "startingProficiencies": {
       "armor": [],
-      "weapons": [
-        "dagger",
-        "dart",
-        "sling",
-        "quarterstaff",
-        "light crossbow"
-      ],
+      "weapons": ["dagger", "dart", "sling", "quarterstaff", "light crossbow"],
       "tools": [],
       "savingThrows": [],
       "skills": [
         {
-          "from": [
-            "arcana",
-            "history",
-            "insight",
-            "investigation",
-            "medicine",
-            "religion"
-          ],
+          "from": ["arcana", "history", "insight", "investigation", "medicine", "religion"],
           "count": 2
         }
       ]
@@ -25948,16 +21387,12 @@
           "alternatives": [
             {
               "label": "A",
-              "items": [
-                "Quarterstaff"
-              ],
+              "items": ["Quarterstaff"],
               "gold": null
             },
             {
               "label": "B",
-              "items": [
-                "Dagger"
-              ],
+              "items": ["Dagger"],
               "gold": null
             }
           ]
@@ -25966,16 +21401,12 @@
           "alternatives": [
             {
               "label": "A",
-              "items": [
-                "Component Pouch"
-              ],
+              "items": ["Component Pouch"],
               "gold": null
             },
             {
               "label": "B",
-              "items": [
-                "Arcane Focus"
-              ],
+              "items": ["Arcane Focus"],
               "gold": null
             }
           ]
@@ -25984,16 +21415,12 @@
           "alternatives": [
             {
               "label": "A",
-              "items": [
-                "Scholar's Pack"
-              ],
+              "items": ["Scholar's Pack"],
               "gold": null
             },
             {
               "label": "B",
-              "items": [
-                "Explorer's Pack"
-              ],
+              "items": ["Explorer's Pack"],
               "gold": null
             }
           ]
@@ -26002,9 +21429,7 @@
           "alternatives": [
             {
               "label": "",
-              "items": [
-                "Spellbook"
-              ],
+              "items": ["Spellbook"],
               "gold": null
             }
           ]
@@ -26016,306 +21441,54 @@
     "multiclassing": null,
     "classTableGroups": [
       {
-        "colLabels": [
-          "Cantrips Known"
-        ],
+        "colLabels": ["Cantrips Known"],
         "rows": [
-          [
-            3
-          ],
-          [
-            3
-          ],
-          [
-            3
-          ],
-          [
-            4
-          ],
-          [
-            4
-          ],
-          [
-            4
-          ],
-          [
-            4
-          ],
-          [
-            4
-          ],
-          [
-            4
-          ],
-          [
-            5
-          ],
-          [
-            5
-          ],
-          [
-            5
-          ],
-          [
-            5
-          ],
-          [
-            5
-          ],
-          [
-            5
-          ],
-          [
-            5
-          ],
-          [
-            5
-          ],
-          [
-            5
-          ],
-          [
-            5
-          ],
-          [
-            5
-          ]
+          [3],
+          [3],
+          [3],
+          [4],
+          [4],
+          [4],
+          [4],
+          [4],
+          [4],
+          [5],
+          [5],
+          [5],
+          [5],
+          [5],
+          [5],
+          [5],
+          [5],
+          [5],
+          [5],
+          [5]
         ]
       },
       {
         "title": "Spell Slots per Spell Level",
-        "colLabels": [
-          "1st",
-          "2nd",
-          "3rd",
-          "4th",
-          "5th",
-          "6th",
-          "7th",
-          "8th",
-          "9th"
-        ],
+        "colLabels": ["1st", "2nd", "3rd", "4th", "5th", "6th", "7th", "8th", "9th"],
         "rows": [
-          [
-            2,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0
-          ],
-          [
-            3,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0
-          ],
-          [
-            4,
-            2,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0
-          ],
-          [
-            4,
-            3,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0
-          ],
-          [
-            4,
-            3,
-            2,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0
-          ],
-          [
-            4,
-            3,
-            3,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0
-          ],
-          [
-            4,
-            3,
-            3,
-            1,
-            0,
-            0,
-            0,
-            0,
-            0
-          ],
-          [
-            4,
-            3,
-            3,
-            2,
-            0,
-            0,
-            0,
-            0,
-            0
-          ],
-          [
-            4,
-            3,
-            3,
-            3,
-            1,
-            0,
-            0,
-            0,
-            0
-          ],
-          [
-            4,
-            3,
-            3,
-            3,
-            2,
-            0,
-            0,
-            0,
-            0
-          ],
-          [
-            4,
-            3,
-            3,
-            3,
-            2,
-            1,
-            0,
-            0,
-            0
-          ],
-          [
-            4,
-            3,
-            3,
-            3,
-            2,
-            1,
-            0,
-            0,
-            0
-          ],
-          [
-            4,
-            3,
-            3,
-            3,
-            2,
-            1,
-            1,
-            0,
-            0
-          ],
-          [
-            4,
-            3,
-            3,
-            3,
-            2,
-            1,
-            1,
-            0,
-            0
-          ],
-          [
-            4,
-            3,
-            3,
-            3,
-            2,
-            1,
-            1,
-            1,
-            0
-          ],
-          [
-            4,
-            3,
-            3,
-            3,
-            2,
-            1,
-            1,
-            1,
-            0
-          ],
-          [
-            4,
-            3,
-            3,
-            3,
-            2,
-            1,
-            1,
-            1,
-            1
-          ],
-          [
-            4,
-            3,
-            3,
-            3,
-            3,
-            1,
-            1,
-            1,
-            1
-          ],
-          [
-            4,
-            3,
-            3,
-            3,
-            3,
-            2,
-            1,
-            1,
-            1
-          ],
-          [
-            4,
-            3,
-            3,
-            3,
-            3,
-            2,
-            2,
-            1,
-            1
-          ]
+          [2, 0, 0, 0, 0, 0, 0, 0, 0],
+          [3, 0, 0, 0, 0, 0, 0, 0, 0],
+          [4, 2, 0, 0, 0, 0, 0, 0, 0],
+          [4, 3, 0, 0, 0, 0, 0, 0, 0],
+          [4, 3, 2, 0, 0, 0, 0, 0, 0],
+          [4, 3, 3, 0, 0, 0, 0, 0, 0],
+          [4, 3, 3, 1, 0, 0, 0, 0, 0],
+          [4, 3, 3, 2, 0, 0, 0, 0, 0],
+          [4, 3, 3, 3, 1, 0, 0, 0, 0],
+          [4, 3, 3, 3, 2, 0, 0, 0, 0],
+          [4, 3, 3, 3, 2, 1, 0, 0, 0],
+          [4, 3, 3, 3, 2, 1, 0, 0, 0],
+          [4, 3, 3, 3, 2, 1, 1, 0, 0],
+          [4, 3, 3, 3, 2, 1, 1, 0, 0],
+          [4, 3, 3, 3, 2, 1, 1, 1, 0],
+          [4, 3, 3, 3, 2, 1, 1, 1, 0],
+          [4, 3, 3, 3, 2, 1, 1, 1, 1],
+          [4, 3, 3, 3, 3, 1, 1, 1, 1],
+          [4, 3, 3, 3, 3, 2, 1, 1, 1],
+          [4, 3, 3, 3, 3, 2, 2, 1, 1]
         ]
       }
     ],
@@ -27065,20 +22238,13 @@
       "number": 1,
       "faces": 6
     },
-    "proficiency": [
-      "int",
-      "wis"
-    ],
-    "primaryAbility": [
-      "int"
-    ],
+    "proficiency": ["int", "wis"],
+    "primaryAbility": ["int"],
     "spellcastingAbility": "int",
     "casterProgression": "full",
     "startingProficiencies": {
       "armor": [],
-      "weapons": [
-        "simple"
-      ],
+      "weapons": ["simple"],
       "tools": [],
       "savingThrows": [],
       "skills": [
@@ -27102,13 +22268,7 @@
           "alternatives": [
             {
               "label": "A",
-              "items": [
-                "2 × Dagger",
-                "Quarterstaff",
-                "Robe",
-                "Spellbook",
-                "Scholar's Pack"
-              ],
+              "items": ["2 × Dagger", "Quarterstaff", "Robe", "Spellbook", "Scholar's Pack"],
               "gold": "500 GP"
             },
             {
@@ -27125,327 +22285,54 @@
     "multiclassing": null,
     "classTableGroups": [
       {
-        "colLabels": [
-          "Cantrips",
-          "Prepared Spells"
-        ],
+        "colLabels": ["Cantrips", "Prepared Spells"],
         "rows": [
-          [
-            3,
-            4
-          ],
-          [
-            3,
-            5
-          ],
-          [
-            3,
-            6
-          ],
-          [
-            4,
-            7
-          ],
-          [
-            4,
-            9
-          ],
-          [
-            4,
-            10
-          ],
-          [
-            4,
-            11
-          ],
-          [
-            4,
-            12
-          ],
-          [
-            4,
-            14
-          ],
-          [
-            5,
-            15
-          ],
-          [
-            5,
-            16
-          ],
-          [
-            5,
-            16
-          ],
-          [
-            5,
-            17
-          ],
-          [
-            5,
-            18
-          ],
-          [
-            5,
-            19
-          ],
-          [
-            5,
-            21
-          ],
-          [
-            5,
-            22
-          ],
-          [
-            5,
-            23
-          ],
-          [
-            5,
-            24
-          ],
-          [
-            5,
-            25
-          ]
+          [3, 4],
+          [3, 5],
+          [3, 6],
+          [4, 7],
+          [4, 9],
+          [4, 10],
+          [4, 11],
+          [4, 12],
+          [4, 14],
+          [5, 15],
+          [5, 16],
+          [5, 16],
+          [5, 17],
+          [5, 18],
+          [5, 19],
+          [5, 21],
+          [5, 22],
+          [5, 23],
+          [5, 24],
+          [5, 25]
         ]
       },
       {
         "title": "Spell Slots per Spell Level",
-        "colLabels": [
-          "1st",
-          "2nd",
-          "3rd",
-          "4th",
-          "5th",
-          "6th",
-          "7th",
-          "8th",
-          "9th"
-        ],
+        "colLabels": ["1st", "2nd", "3rd", "4th", "5th", "6th", "7th", "8th", "9th"],
         "rows": [
-          [
-            2,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0
-          ],
-          [
-            3,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0
-          ],
-          [
-            4,
-            2,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0
-          ],
-          [
-            4,
-            3,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0
-          ],
-          [
-            4,
-            3,
-            2,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0
-          ],
-          [
-            4,
-            3,
-            3,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0
-          ],
-          [
-            4,
-            3,
-            3,
-            1,
-            0,
-            0,
-            0,
-            0,
-            0
-          ],
-          [
-            4,
-            3,
-            3,
-            2,
-            0,
-            0,
-            0,
-            0,
-            0
-          ],
-          [
-            4,
-            3,
-            3,
-            3,
-            1,
-            0,
-            0,
-            0,
-            0
-          ],
-          [
-            4,
-            3,
-            3,
-            3,
-            2,
-            0,
-            0,
-            0,
-            0
-          ],
-          [
-            4,
-            3,
-            3,
-            3,
-            2,
-            1,
-            0,
-            0,
-            0
-          ],
-          [
-            4,
-            3,
-            3,
-            3,
-            2,
-            1,
-            0,
-            0,
-            0
-          ],
-          [
-            4,
-            3,
-            3,
-            3,
-            2,
-            1,
-            1,
-            0,
-            0
-          ],
-          [
-            4,
-            3,
-            3,
-            3,
-            2,
-            1,
-            1,
-            0,
-            0
-          ],
-          [
-            4,
-            3,
-            3,
-            3,
-            2,
-            1,
-            1,
-            1,
-            0
-          ],
-          [
-            4,
-            3,
-            3,
-            3,
-            2,
-            1,
-            1,
-            1,
-            0
-          ],
-          [
-            4,
-            3,
-            3,
-            3,
-            2,
-            1,
-            1,
-            1,
-            1
-          ],
-          [
-            4,
-            3,
-            3,
-            3,
-            3,
-            1,
-            1,
-            1,
-            1
-          ],
-          [
-            4,
-            3,
-            3,
-            3,
-            3,
-            2,
-            1,
-            1,
-            1
-          ],
-          [
-            4,
-            3,
-            3,
-            3,
-            3,
-            2,
-            2,
-            1,
-            1
-          ]
+          [2, 0, 0, 0, 0, 0, 0, 0, 0],
+          [3, 0, 0, 0, 0, 0, 0, 0, 0],
+          [4, 2, 0, 0, 0, 0, 0, 0, 0],
+          [4, 3, 0, 0, 0, 0, 0, 0, 0],
+          [4, 3, 2, 0, 0, 0, 0, 0, 0],
+          [4, 3, 3, 0, 0, 0, 0, 0, 0],
+          [4, 3, 3, 1, 0, 0, 0, 0, 0],
+          [4, 3, 3, 2, 0, 0, 0, 0, 0],
+          [4, 3, 3, 3, 1, 0, 0, 0, 0],
+          [4, 3, 3, 3, 2, 0, 0, 0, 0],
+          [4, 3, 3, 3, 2, 1, 0, 0, 0],
+          [4, 3, 3, 3, 2, 1, 0, 0, 0],
+          [4, 3, 3, 3, 2, 1, 1, 0, 0],
+          [4, 3, 3, 3, 2, 1, 1, 0, 0],
+          [4, 3, 3, 3, 2, 1, 1, 1, 0],
+          [4, 3, 3, 3, 2, 1, 1, 1, 0],
+          [4, 3, 3, 3, 2, 1, 1, 1, 1],
+          [4, 3, 3, 3, 3, 1, 1, 1, 1],
+          [4, 3, 3, 3, 3, 2, 1, 1, 1],
+          [4, 3, 3, 3, 3, 2, 2, 1, 1]
         ]
       }
     ],

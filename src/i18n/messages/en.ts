@@ -371,8 +371,10 @@ export const en = {
   "class.ability.cha": "Charisma",
   "class.proficiencySavingThrows": "Proficient Saving Throws",
   "class.progressionSubtitle": "Tap a level to see every feature and number it unlocks.",
+  "class.numbersAtLevel": "Numbers",
   "class.nothingNew": "No change",
-  "class.nothingNewAtLevel": "Nothing new at this level \u2014 your features and numbers stay the same.",
+  "class.nothingNewAtLevel":
+    "Nothing new at this level \u2014 your features and numbers stay the same.",
   "class.noFeatures": "No new features at this level; only the numbers above change.",
   "class.featureCount": "features",
   "class.uses": "Uses",

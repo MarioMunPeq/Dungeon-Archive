@@ -11,6 +11,8 @@ interface AccordionProps {
   readonly defaultOpen?: boolean;
   readonly className?: string;
   readonly contentClassName?: string;
+  /** Draw a hairline above the content area. Off for nested accordions. */
+  readonly divider?: boolean;
   readonly children?: ReactNode;
 }
 
@@ -26,6 +28,7 @@ export function Accordion({
   defaultOpen = false,
   className,
   contentClassName,
+  divider = true,
   children,
 }: AccordionProps) {
   const [open, setOpen] = useState(defaultOpen);
@@ -42,12 +45,19 @@ export function Accordion({
       >
         <ChevronRightIcon
           size="xs"
-          className={cn("shrink-0 text-muted-foreground transition-transform duration-200", open && "rotate-90")}
+          className={cn(
+            "shrink-0 text-muted-foreground transition-transform duration-200",
+            open && "rotate-90",
+          )}
         />
         <span className="min-w-0 flex-1">{title}</span>
         {meta && <span className="shrink-0">{meta}</span>}
       </button>
-      <div id={contentId} hidden={!open} className={cn("border-t border-border px-3 py-3", contentClassName)}>
+      <div
+        id={contentId}
+        hidden={!open}
+        className={cn("px-3 py-3", divider && "border-t border-border", contentClassName)}
+      >
         {children}
       </div>
     </div>

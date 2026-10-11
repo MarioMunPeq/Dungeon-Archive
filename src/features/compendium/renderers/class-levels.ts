@@ -45,7 +45,7 @@ export function dedupeTableGroups(
   groups: readonly Class["classTableGroups"][number][],
 ): Class["classTableGroups"] {
   const seen = new Set<string>();
-  const out: (Class["classTableGroups"][number])[] = [];
+  const out: Class["classTableGroups"][number][] = [];
   for (const group of groups) {
     const key = signature(group.colLabels, group.rows);
     if (seen.has(key)) continue;

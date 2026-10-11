@@ -37,10 +37,10 @@ export function LanguageToggle() {
 
       // Same wave as the theme switch, originating from the button that was
       // tapped — the app transitions the same way wherever the state changes.
-      void runWaveReveal(
-        () => userStore.getState().setLanguage(target),
-        { x: event.clientX, y: event.clientY },
-      );
+      void runWaveReveal(() => userStore.getState().setLanguage(target), {
+        x: event.clientX,
+        y: event.clientY,
+      });
     },
     [target],
   );

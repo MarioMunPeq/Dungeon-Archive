@@ -543,6 +543,33 @@
     display: none;
   }
 
+  /* Vertical scrollbar — was the default grey bar, which read as a hard line
+     across the warm dark surfaces. Thinner and tinted from the border token so it
+     belongs to the theme instead of cutting through it. */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: rgb(245 241 236 / 0.14);
+    border-radius: 9999px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background-color: rgb(245 241 236 / 0.26);
+  }
+
+  /* Firefox honours scrollbar-width / scrollbar-color rather than ::-webkit. */
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: rgb(245 241 236 / 0.16) transparent;
+  }
+
   /* Motion language — shared duration + easing classes (spec 09).
      Every interactive transition should use exactly one duration and one
      ease so the whole app moves with a single rhythm. */

@@ -366,6 +366,7 @@ export const es: Record<keyof typeof en, string> = {
   "class.ability.cha": "Carisma",
   "class.proficiencySavingThrows": "Tiradas de salvación con competencia",
   "class.progressionSubtitle": "Toca un nivel para ver cada rasgo y número que desbloquea.",
+  "class.numbersAtLevel": "Números",
   "class.nothingNew": "Sin cambios",
   "class.nothingNewAtLevel": "Nada nuevo en este nivel — tus rasgos y números siguen igual.",
   "class.noFeatures": "No hay rasgos nuevos en este nivel; solo cambian los números de arriba.",

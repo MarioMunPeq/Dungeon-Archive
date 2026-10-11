@@ -65,8 +65,13 @@ export function HomePage() {
     return cards;
   }, [recentIds, language]);
 
+  // Normal top-down flow. `justify-between` + `min-h-full` was distributing the
+  // leftover height into two ~150px voids and pushing the quick tiles past the
+  // fold, which clipped their buttons; a page shorter than the viewport is fine.
+  // Safe as a line comment: it sits inside the parentheses of `return (`, which
+  // are JS, not in JSX children position.
   return (
-    <div className="flex min-h-full flex-col justify-between gap-5 px-4 py-6">
+    <div className="flex flex-col gap-6 px-4 py-6">
       <section className="flex flex-col gap-3">
         <SectionHeader title={t("home.currentCharacter")} to="/combat" />
         <CharacterCard character={character} />

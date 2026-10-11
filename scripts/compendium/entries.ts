@@ -128,9 +128,12 @@ export function processEntries(entries: readonly unknown[]): ContentBlock[] {
     }
 
     // Inline references to other entities
-    if (obj.type === "refClassFeature" || obj.type === "refOptionalfeature" || obj.type === "refFeat") {
-      const key =
-        obj.classFeature ?? obj.optionalfeature ?? obj.feat ?? obj.name;
+    if (
+      obj.type === "refClassFeature" ||
+      obj.type === "refOptionalfeature" ||
+      obj.type === "refFeat"
+    ) {
+      const key = obj.classFeature ?? obj.optionalfeature ?? obj.feat ?? obj.name;
       const label = formatRefKey(key);
       if (label.length > 0) {
         blocks.push({ type: "list", items: [label] });

@@ -211,9 +211,7 @@ function formatSkills(
     .filter((s): s is { readonly from: readonly string[]; readonly count: number } => s !== null);
 }
 
-function formatMulticlassing(
-  raw: Raw5eClass["multiclassing"],
-): {
+function formatMulticlassing(raw: Raw5eClass["multiclassing"]): {
   readonly requirements: readonly { readonly ability: string; readonly score: number }[];
   readonly proficienciesGained: readonly string[];
 } | null {

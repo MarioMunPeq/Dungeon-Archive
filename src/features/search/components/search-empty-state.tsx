@@ -31,14 +31,14 @@ export function SearchEmptyState() {
         <p className="mb-2 text-xs font-medium uppercase tracking-wide text-muted-foreground">
           {t("search.categories")}
         </p>
-        <div className="grid grid-cols-1 gap-2 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="grid grid-cols-2 gap-2">
           {Object.entries(CATEGORY_REGISTRY).map(([key, reg]) => (
             <Link
               key={key}
               to={`/${key}`}
               className="flex items-center justify-between gap-2 rounded-card border border-border bg-surface px-3 py-3 transition-colors hover:bg-accent active:bg-accent/80"
             >
-              <span className="text-sm font-medium text-foreground">{t(reg.plural)}</span>
+              <span className="min-w-0 text-sm font-medium text-foreground">{t(reg.plural)}</span>
               <svg
                 aria-hidden="true"
                 viewBox="0 0 24 24"
