@@ -15,13 +15,11 @@ function test(description: string, fn: () => void): void {
   }
 }
 
+import { LANGUAGES, languageCode, nextLanguage } from "../../src/features/language/language";
 import {
-  LANGUAGES,
-  languageCode,
-  languageName,
-  nextLanguage,
+  WAVE_DURATION_MS,
   prefersReducedMotion,
-} from "../../src/features/language/language";
+} from "../../src/features/motion/wave-reveal";
 import { LanguageToggle } from "../../src/components/layout/language-toggle";
 
 console.log("language switch\n");
@@ -37,11 +35,9 @@ test("both languages are always offered, in a fixed order", () => {
   strictEqual(LANGUAGES.length, 2);
 });
 
-test("codes render uppercase, names render as a speaker would write them", () => {
+test("codes render uppercase for the toggle badge", () => {
   strictEqual(languageCode("en"), "EN");
   strictEqual(languageCode("es"), "ES");
-  strictEqual(languageName("es"), "Español");
-  strictEqual(languageName("en"), "English");
 });
 
 test("reduced motion is read defensively when matchMedia is missing", () => {
@@ -62,6 +58,12 @@ test("reduced motion is read defensively when matchMedia is missing", () => {
   }
 });
 
+test("the wave stays inside the Design DNA signature-moment budget", () => {
+  // Rule 42 caps signature moments at ~600-700ms.
+  ok(WAVE_DURATION_MS <= 700, `wave runs ${WAVE_DURATION_MS}ms, over the 700ms ceiling`);
+  ok(WAVE_DURATION_MS >= 300, "long enough to read as intentional motion");
+});
+
 test("toggle shows both codes so the current one is visible without tapping", () => {
   const html = renderToString(createElement(LanguageToggle));
   ok(html.includes(">EN<"), "English code rendered");
@@ -77,15 +79,9 @@ test("the globe glyph carries no baked-in language text", () => {
   strictEqual(html.includes("<text"), false, "no <text> node left inside the icon");
 });
 
-test("undo snackbar strings are translated in both languages", async () => {
-  const { t } = await import("../../src/i18n");
-  const { userStore } = await import("../../src/user-state");
-
-  userStore.getState().setLanguage("es");
-  strictEqual(t("language.switched", { language: "Español" }), "Idioma cambiado a Español");
-  strictEqual(t("language.undo"), "Deshacer");
-
-  userStore.getState().setLanguage("en");
-  strictEqual(t("language.switched", { language: "English" }), "Language changed to English");
-  strictEqual(t("language.undo"), "Undo");
+test("the switch shows no toast, so no notification copy is left behind", () => {
+  // The wave reveal is the confirmation; a snackbar was removed as redundant.
+  // Guard it so the strings (and the toast) don't quietly come back.
+  const html = renderToString(createElement(LanguageToggle));
+  ok(!html.includes("role=\"status\""), "no live region in the toggle");
 });

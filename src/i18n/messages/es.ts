@@ -42,8 +42,6 @@ export const es: Record<keyof typeof en, string> = {
   "a11y.cloudBackup": "Copia de seguridad en la nube",
   "a11y.help": "Ayuda",
   "a11y.language": "Idioma",
-  "language.switched": "Idioma cambiado a {language}",
-  "language.undo": "Deshacer",
   "a11y.switchToEnglish": "Cambiar a inglés",
   "a11y.switchToSpanish": "Cambiar a español",
   "a11y.close": "Cerrar",

@@ -21,7 +21,7 @@ export function AppLayout({ children }: AppLayoutProps) {
       <TopBar />
       <main
         ref={mainRef}
-        className="language-content min-h-0 flex flex-1 flex-col overflow-y-auto overscroll-contain pb-4"
+        className="min-h-0 flex flex-1 flex-col overflow-y-auto overscroll-contain pb-4"
       >
         <ScrollElementProvider elementRef={mainRef}>
           <RouteTransition>{children}</RouteTransition>

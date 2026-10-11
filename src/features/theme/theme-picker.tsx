@@ -5,6 +5,7 @@ import { useTheme, userStore, THEMES } from "@/user-state";
 import { cn } from "@/lib/utils";
 import { Button, PaletteIcon, Caption } from "@/components/ui";
 import { useConstrainedPopover } from "@/components/ui/use-constrained-popover";
+import { runWaveReveal } from "@/features/motion/wave-reveal";
 
 const LABELS: Record<Theme, string> = {
   jade: "Jade",
@@ -37,63 +38,20 @@ export function ThemePicker() {
     useConstrainedPopover<HTMLDivElement>();
 
   const select = (id: Theme, event: MouseEvent<HTMLButtonElement>) => {
-    const root = document.documentElement;
-    // Circular reveal origin: the tapped swatch's screen position.
-    const x = event.clientX;
-    const y = event.clientY;
-    // Radius large enough to cover the whole viewport from the tap point.
-    const radius = Math.hypot(
-      Math.max(x, window.innerWidth - x),
-      Math.max(y, window.innerHeight - y),
-    );
-
-    const apply = () => {
-      flushSync(() => {
-        userStore.getState().setTheme(id);
-        setOpen(false);
-      });
-    };
-
-    if (typeof document.startViewTransition === "function") {
-      try {
-        const transition = document.startViewTransition(() => {
-          // Swap the data-theme attribute synchronously so the new snapshot
-          // (captured right after this callback) already shows the new colors.
-          root.dataset.theme = id;
-          apply();
+    setOpen(false);
+    // The wave originates from the tapped swatch's real screen position, so
+    // tapping the bottom-right card opens the reveal from the bottom-right.
+    void runWaveReveal(
+      () => {
+        flushSync(() => {
+          // Swap data-theme synchronously so the incoming snapshot — captured
+          // right after this callback returns — already shows the new colours.
+          document.documentElement.dataset.theme = id;
+          userStore.getState().setTheme(id);
         });
-        // Drive the reveal once the transition's pseudo-elements exist: an
-        // expanding clip-path circle on the incoming snapshot, centered at the
-        // tap point. The old snapshot stays put underneath (animation-name:
-        // none in index.css), so this reads as a circular wave expanding from
-        // the swatch rather than a cross-fade. `ready` is used because
-        // ::view-transition-new(root) only exists once the new state has been
-        // captured. Browsers without startViewTransition fall through to the
-        // plain cross-fade below (the .theme-switching path in use-apply-theme.ts).
-        transition.ready
-          .then(() => {
-            root.animate(
-              [
-                { clipPath: `circle(0px at ${x}px ${y}px)` },
-                { clipPath: `circle(${radius}px at ${x}px ${y}px)` },
-              ],
-              {
-                duration: 600,
-                easing: "cubic-bezier(0.4, 0, 0.2, 1)",
-                fill: "both",
-                pseudoElement: "::view-transition-new(root)",
-              },
-            );
-          })
-          .catch(() => {
-            // The theme still applied; nothing else to do.
-          });
-        return;
-      } catch {
-        // Fall through to the plain path below.
-      }
-    }
-    apply();
+      },
+      { x: event.clientX, y: event.clientY },
+    );
   };
 
   return (

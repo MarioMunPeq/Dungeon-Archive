@@ -31,8 +31,6 @@ export const en = {
   "a11y.cloudBackup": "Cloud Backup",
   "a11y.help": "Help",
   "a11y.language": "Language",
-  "language.switched": "Language changed to {language}",
-  "language.undo": "Undo",
   "a11y.switchToEnglish": "Switch to English",
   "a11y.switchToSpanish": "Switch to Spanish",
   "a11y.close": "Close",

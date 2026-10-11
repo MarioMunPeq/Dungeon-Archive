@@ -87,17 +87,17 @@
     interactions ~180-220ms; secondary micro-interactions ~120-180ms; route/tab
     transitions ~250-300ms (raised from the previous 220-260ms to accommodate a
     slightly richer transition). **Signature moments** (currently: the theme-switch
-    wave, and the Dice Roller's 3D physics dice roll) may exceed the 300ms ceiling,
-    capped at ~600-700ms (the dice roll runs on a physics simulation, so its exact
-    duration is not CSS-controlled; it stays short enough to not stall the table).
-    This is an explicit, limited exception — not a general loosening. Any future
-    addition to the signature-moments list must be added here deliberately, never
-    assumed.
+    wave, the language-switch wave, and the Dice Roller's 3D physics dice roll) may
+    exceed the 300ms ceiling, capped at ~600-700ms (the dice roll runs on a physics
+    simulation, so its exact duration is not CSS-controlled; it stays short enough
+    to not stall the table). This is an explicit, limited exception — not a
+    general loosening. Any future addition to the signature-moments list must be
+    added here deliberately, never assumed.
 43. Prefer subtle easing (soft/spring-like), never cartoonish bounce.
 44. State changes animate opacity + translate together, never opacity alone or
-    scale alone. The signature-moment theme wave may additionally animate
-    clip-path (its circular reveal shape) — that is its defining, deliberate
-    exception.
+    scale alone. Two deliberate exceptions, both inside signature moments: the
+    wave reveal animates clip-path (its defining circular shape) and filter
+    drop-shadow (its ring), and the Dice Roller runs a physics simulation.
 45. Hover-only interactions are not implemented — this app has no mouse users in
     practice; motion budget goes to touch feedback (press/release/toggle) instead.
     **This rule is unchanged by the "Alive Interactions" pass**: the expanded
@@ -129,4 +129,6 @@
     | Arcane Teal | `#4A90B8` | `#86AFC7` |
     | Storm Steel | `#6A8CAA` | `#8FAEC2` |
 
-    Arcane Teal remains the default for new users and the fallback for any existing user without a persisted theme; every other theme is a selectable override, never a default change. Backgrounds, surfaces, typography, radius, and the fixed success/danger/neutral modifier colors never change. **Every accent must clear WCAG AA 4.5:1 against `--color-background` (#12100E)**, because the bottom nav renders the active tab in the accent at 12px — the original Wine/Plum/Steel accents measured 3.45/4.06/4.33 and were raised on an accessibility pass (all seven now measure ≥5.0:1). Re-check with a contrast tool before changing any accent; a theme that "looks right" but fails 4.5:1 is not acceptable. Theme switches play the signature-moment "wave" (~500-700ms, per rule 42): an expanding circular clip-path reveal originating from the tapped preview card's actual screen position, using the native View Transitions API (`document.startViewTransition`) — independent of the router. Browsers without View Transitions (and users on reduced-motion) fall back to the previous ~220ms whole-tree cross-fade / instant swap. The stored theme applies instantly on first load. The picker renders the 7 themes as accent-tinted preview cards in a 4+3 grid (per rule 26's protagonist-card gradient treatment, tinted with each theme's own accent); the currently active card is ringed in its own accent and carries `aria-pressed`. The popover remains viewport-clamped (rule 30) at its larger size.
+    Arcane Teal remains the default for new users and the fallback for any existing user without a persisted theme; every other theme is a selectable override, never a default change. Backgrounds, surfaces, typography, radius, and the fixed success/danger/neutral modifier colors never change. **Every accent must clear WCAG AA 4.5:1 against `--color-background` (#12100E)**, because the bottom nav renders the active tab in the accent at 12px — the original Wine/Plum/Steel accents measured 3.45/4.06/4.33 and were raised on an accessibility pass (all seven now measure ≥5.0:1). Re-check with a contrast tool before changing any accent; a theme that "looks right" but fails 4.5:1 is not acceptable.
+
+    **The wave reveal** is the app's single shared signature moment (`src/features/motion/wave-reveal.ts`), used by both the theme picker and the language toggle so every state change transitions the same way. A circular reveal opens from the exact point the user touched (the tapped swatch, the tapped toggle), carrying a shockwave ring of light tinted with the active accent, while the incoming content settles in with a slight rise. 550ms. It is driven from JS with the Web Animations API on `::view-transition-new(root)`, animating `clip-path` (the circle), `filter: drop-shadow()` (the ring — a drop-shadow follows the clipped silhouette, which is what makes it read as a ring on the wave's edge) and `transform` + `opacity` (the content settle) in a single pass over one pseudo-element. No extra DOM is added; the accent is published as `--wave-accent` on the root for the duration. Browsers without the View Transitions API, and users on `prefers-reduced-motion`, get an instant swap — the reduced-motion check happens in JS *before* the transition starts, because the global `* { animation: none }` rule cannot reach the `::view-transition-*` pseudo-elements. The stored theme applies instantly on first load. The theme picker renders the 7 themes as accent-tinted preview cards in a 4+3 grid (per rule 26's protagonist-card gradient treatment, tinted with each theme's own accent); the currently active card is ringed in its own accent and carries `aria-pressed`. The popover remains viewport-clamped (rule 30) at its larger size.

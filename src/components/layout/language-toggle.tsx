@@ -1,24 +1,22 @@
 import { useCallback, useEffect, useRef, useState } from "react";
-import type { Language } from "@/user-state";
+import type { MouseEvent } from "react";
 import { userStore, useLanguage } from "@/user-state";
 import { Button, LanguagesIcon } from "@/components/ui";
-import { useOptionalSnackbar } from "@/components/ui/snackbar-context";
 import { cn } from "@/lib/utils";
 import { t } from "@/i18n";
-import { LANGUAGES, languageCode, languageName, nextLanguage, prefersReducedMotion } from "@/features/language/language";
+import { LANGUAGES, languageCode, nextLanguage } from "@/features/language/language";
+import { runWaveReveal } from "@/features/motion/wave-reveal";
 
 /**
  * One-tap language switch.
  *
- * The globe spins a half turn while the page body cross-fades into the new
- * language; the top bar and bottom nav stay static so the control never moves
- * out from under the finger. The change is confirmed with an Undo snackbar
- * instead of a confirmation dialog, because a toggle should never be a
- * two-decision interaction.
+ * The globe spins a half turn while the wave reveal opens from the button and
+ * carries the new language in. No toast and no confirmation dialog: the wave
+ * *is* the confirmation — a full-screen change of language cannot read as
+ * accidental, and anything on top of it only delays the result.
  */
 export function LanguageToggle() {
   const language = useLanguage();
-  const snackbar = useOptionalSnackbar();
   const [spinning, setSpinning] = useState(false);
   const spinTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const target = nextLanguage(language);
@@ -31,50 +29,21 @@ export function LanguageToggle() {
     };
   }, []);
 
-  const apply = useCallback((previous: Language) => {
-    // Both strings resolve in the new language, since `setLanguage` already ran.
-    snackbar?.show(t("language.switched", { language: languageName(target) }), {
-      tone: "success",
-      durationMs: 4000,
-      action: {
-        label: t("language.undo"),
-        onPress: () => userStore.getState().setLanguage(previous),
-      },
-    });
-  }, [snackbar, target]);
+  const handleClick = useCallback(
+    (event: MouseEvent<HTMLButtonElement>) => {
+      setSpinning(true);
+      if (spinTimer.current !== null) clearTimeout(spinTimer.current);
+      spinTimer.current = setTimeout(() => setSpinning(false), 260);
 
-  const handleClick = useCallback(() => {
-    const previous = language;
-    const root = document.documentElement;
-
-    setSpinning(true);
-    if (spinTimer.current !== null) clearTimeout(spinTimer.current);
-    spinTimer.current = setTimeout(() => setSpinning(false), 260);
-
-    const canTransition =
-      typeof document.startViewTransition === "function" && !prefersReducedMotion();
-
-    const commit = () => {
-      userStore.getState().setLanguage(target);
-      apply(previous);
-    };
-
-    if (!canTransition) {
-      commit();
-      return;
-    }
-
-    root.classList.add("language-transitioning");
-    try {
-      const transition = document.startViewTransition!(commit);
-      transition.finished.finally(() => {
-        root.classList.remove("language-transitioning");
-      });
-    } catch {
-      root.classList.remove("language-transitioning");
-      commit();
-    }
-  }, [apply, language, target]);
+      // Same wave as the theme switch, originating from the button that was
+      // tapped — the app transitions the same way wherever the state changes.
+      void runWaveReveal(
+        () => userStore.getState().setLanguage(target),
+        { x: event.clientX, y: event.clientY },
+      );
+    },
+    [target],
+  );
 
   return (
     <Button

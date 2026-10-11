@@ -251,31 +251,17 @@
   }
 }
 
-/* Language switch content cross-fade. `main` is its own View Transition snapshot
-   (`view-transition-name: page`), so only the page body dissolves while the top
-   bar stays put. root is pinned to `animation: none` because without it the
-   default root cross-fade would re-animate the chrome that should stay static. */
-::view-transition-old(page) {
-  animation: fade-out 140ms cubic-bezier(0.4, 0, 1, 1) both;
-}
-
-::view-transition-new(page) {
-  animation: fade-in 200ms cubic-bezier(0, 0, 0.2, 1) both;
-}
-
+/* The wave reveal (theme switch + language switch) is driven from JS with the Web
+   Animations API on ::view-transition-new(root) — see features/motion/wave-reveal.
+   It animates clip-path (the circle), filter drop-shadow (the shockwave ring, tinted
+   by --wave-accent, which runWaveReveal publishes on the root for the duration) and
+   transform+opacity (the content settle). Nothing here needs to declare it; the
+   rules below only pin the snapshots still so the reveal reads as a wave opening
+   over the old state rather than a cross-fade. */
 ::view-transition-old(root),
 ::view-transition-new(root) {
-  animation: none;
-}
-
-/* Fallback for browsers without the View Transitions API: no outgoing snapshot
-   exists, so the incoming content simply fades in after the swap. */
-.language-content {
-  view-transition-name: page;
-}
-
-.language-content-fade-in {
-  animation: fade-in 200ms cubic-bezier(0, 0, 0.2, 1) both;
+  pointer-events: none;
+  animation-name: none;
 }
 
 /* Dice Roller chip feedback — a soft accent ring that scales in and fades out
@@ -498,25 +484,12 @@
     outline-offset: 2px;
   }
 
-  /* Theme repaint — fallback cross-fade for the accent + secondary-accent pair
-     on the whole tree, used when the View Transitions theme wave is unavailable
-     (see useApplyTheme and theme-picker.tsx). Applied only while a theme
-     selection is being repainted; instant on first load. 220ms stays under the
-     300ms transition ceiling of Design DNA rule 42. */
-  .theme-switching,
-  .theme-switching *,
-  .theme-switching *::before,
-  .theme-switching *::after {
-    transition-property: color, background-color, border-color, box-shadow, fill, stroke;
-    transition-duration: 220ms;
-    transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
-  }
-
   /* Reduced motion — zero out ordinary animations, transitions, and smooth
-     scrolling. The theme wave (a View Transitions animation) is deliberately
-     NOT suppressed here: `*` doesn't match the ::view-transition-*
-     pseudo-elements, and the picker runs the wave regardless of this setting
-     (see theme-picker.tsx). */
+     scrolling. The wave reveal runs on ::view-transition-* pseudo-elements, which
+     `*` does not match, so it is suppressed explicitly here *and* skipped in JS:
+     runWaveReveal checks matchMedia before starting the transition at all (see
+     features/motion/wave-reveal.ts). Belt and braces: the CSS below also kills
+     the pseudo-element animations in case the transition is started anyway. */
   @media (prefers-reduced-motion: reduce) {
     *,
     *::before,
@@ -527,9 +500,6 @@
       scroll-behavior: auto !important;
     }
 
-    /* The language cross-fade runs on ::view-transition-* pseudo-elements, which
-       `*` does not match, so it is suppressed explicitly here (the theme wave is
-       intentionally left alone). */
     ::view-transition-group(*),
     ::view-transition-old(*),
     ::view-transition-new(*) {
