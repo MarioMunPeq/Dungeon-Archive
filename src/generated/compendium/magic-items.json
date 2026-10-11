@@ -4368,12 +4368,7 @@
           },
           {
             "type": "list",
-            "items": [
-              "Animate Dead",
-              "Circle of Death",
-              "Dominate Monster",
-              "Finger of Death"
-            ]
+            "items": ["Animate Dead", "Circle of Death", "Dominate Monster", "Finger of Death"]
           },
           {
             "type": "paragraph",
@@ -20229,11 +20224,7 @@
       },
       {
         "type": "list",
-        "items": [
-          "Animal Friendship",
-          "Fear (affects Beasts only)",
-          "Speak with Animals"
-        ]
+        "items": ["Animal Friendship", "Fear (affects Beasts only)", "Speak with Animals"]
       }
     ]
   },
@@ -27123,11 +27114,7 @@
           },
           {
             "type": "list",
-            "items": [
-              "Call Lightning",
-              "Divine Word",
-              "Finger of Death"
-            ]
+            "items": ["Call Lightning", "Divine Word", "Finger of Death"]
           },
           {
             "type": "paragraph",

@@ -408,13 +408,9 @@ function CombatCharacterView({ character }: { character: CharacterReference }) {
         <div className="flex items-center justify-between gap-2">
           <div className="flex items-center gap-2 border-l-2 border-primary pl-2 text-xs font-bold uppercase tracking-wide text-muted-foreground">
             {t("combat.hitPoints")}
-            <HelpTip label={t("help.hitPoints.title")}>
-              {t("help.hitPoints.body")}
-            </HelpTip>
+            <HelpTip label={t("help.hitPoints.title")}>{t("help.hitPoints.body")}</HelpTip>
           </div>
-          <HelpTip label={t("help.hitPoints.title")}>
-            {t("help.hitPoints.body")}
-          </HelpTip>
+          <HelpTip label={t("help.hitPoints.title")}>{t("help.hitPoints.body")}</HelpTip>
         </div>
         <div
           ref={hpContainerRef}
@@ -499,19 +495,13 @@ function CombatCharacterView({ character }: { character: CharacterReference }) {
             </button>
           ))}
         </div>
-        {hpLow && (
-          <p className="text-xs font-medium text-destructive">
-            {t("combat.belowHalf")}
-          </p>
-        )}
+        {hpLow && <p className="text-xs font-medium text-destructive">{t("combat.belowHalf")}</p>}
       </div>
 
       <div className="flex flex-col gap-3">
         <span className="flex items-center gap-2 border-l-2 border-primary pl-2 text-xs font-bold uppercase tracking-wide text-muted-foreground">
           {t("combat.stats")}
-          <HelpTip label={t("help.combatStats.short")}>
-            {t("combat.statsHelp")}
-          </HelpTip>
+          <HelpTip label={t("help.combatStats.short")}>{t("combat.statsHelp")}</HelpTip>
         </span>
         <div className="grid grid-cols-3 gap-2">
           {COMBAT_STATS.map((stat) => (

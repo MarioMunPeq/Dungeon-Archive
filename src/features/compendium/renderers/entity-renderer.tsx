@@ -1,4 +1,13 @@
-import type { Spell, Condition, Equipment, Action, Monster, MagicItem, Feat, Class } from "@/compendium";
+import type {
+  Spell,
+  Condition,
+  Equipment,
+  Action,
+  Monster,
+  MagicItem,
+  Feat,
+  Class,
+} from "@/compendium";
 import { SpellRenderer } from "./spell-renderer";
 import { EquipmentRenderer } from "./equipment-renderer";
 import { ConditionRenderer } from "./condition-renderer";
@@ -6,6 +15,7 @@ import { ActionRenderer } from "./action-renderer";
 import { MonsterRenderer } from "./monster-renderer";
 import { MagicItemRenderer } from "./magic-item-renderer";
 import { FeatRenderer } from "./feat-renderer";
+import { ClassRenderer } from "./class-renderer";
 
 interface EntityRendererProps {
   readonly entity: Spell | Condition | Equipment | Action | Monster | MagicItem | Feat | Class;
@@ -28,6 +38,6 @@ export function EntityRenderer({ entity }: EntityRendererProps) {
     case "feat":
       return <FeatRenderer entity={entity} />;
     case "class":
-      return <div className="text-sm text-muted-foreground">Class rendering not yet implemented</div>;
+      return <ClassRenderer entity={entity} />;
   }
 }

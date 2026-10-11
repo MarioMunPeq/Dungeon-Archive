@@ -71,6 +71,30 @@ export interface Feat extends CompendiumEntry {
   readonly description: readonly ContentBlock[];
 }
 
+export interface ClassFeatureRef {
+  readonly name: string;
+  readonly className: string;
+  readonly source: string;
+  readonly level: number;
+  readonly gainSubclassFeature: boolean;
+}
+
+export interface ClassTableGroup {
+  readonly title?: string;
+  readonly colLabels: readonly string[];
+  readonly rows: readonly (readonly (string | number | boolean | null)[])[];
+}
+
+export interface ClassEquipmentChoice {
+  readonly label: string;
+  readonly items: readonly string[];
+  readonly gold: string | null;
+}
+
+export interface ClassEquipmentGroup {
+  readonly alternatives: readonly ClassEquipmentChoice[];
+}
+
 export interface Class extends CompendiumEntry {
   readonly category: "class";
   readonly hitDice: {
@@ -78,30 +102,29 @@ export interface Class extends CompendiumEntry {
     readonly faces: number;
   };
   readonly proficiency: readonly string[];
+  readonly primaryAbility: readonly string[];
+  readonly spellcastingAbility: string | null;
+  readonly casterProgression: string | null;
   readonly startingProficiencies: {
-    readonly armor?: readonly string[];
-    readonly weapons?: readonly string[];
-    readonly tools?: readonly string[];
-    readonly savingThrows?: readonly string[];
-    readonly skills?: { readonly choose?: { readonly from: readonly string[]; readonly count: number } }[];
+    readonly armor: readonly string[];
+    readonly weapons: readonly string[];
+    readonly tools: readonly string[];
+    readonly savingThrows: readonly string[];
+    readonly skills: readonly { readonly from: readonly string[]; readonly count: number }[];
   };
-  readonly startingEquipment?: {
-    readonly goldAlternative?: string;
-    readonly default?: readonly (readonly string[])[];
-    readonly defaultData?: readonly {
-      readonly a?: readonly string[];
-      readonly b?: readonly string[];
-    }[];
+  readonly startingEquipment: {
+    readonly groups: readonly ClassEquipmentGroup[];
+    readonly goldAlternative: string | null;
+    readonly additionalFromBackground: boolean;
   };
-  readonly multiclassing?: {
-    readonly requirements?: { readonly or?: readonly { readonly str?: number; readonly dex?: number }[] };
-    readonly proficienciesGained?: {
-      readonly armor?: readonly string[];
-      readonly weapons?: readonly string[];
-    };
-  };
-  readonly classFeatures: readonly string[];
-  readonly subclassGroups?: readonly {
+  readonly multiclassing: {
+    readonly requirements: readonly { readonly ability: string; readonly score: number }[];
+    readonly proficienciesGained: readonly string[];
+  } | null;
+  readonly classTableGroups: readonly ClassTableGroup[];
+  readonly classFeatures: readonly ClassFeatureRef[];
+  readonly subclassTitle: string | null;
+  readonly subclassGroups: readonly {
     readonly name: string;
     readonly source: string;
   }[];

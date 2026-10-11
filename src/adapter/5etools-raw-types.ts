@@ -219,6 +219,17 @@ export interface Raw5eActionFile {
   readonly action: readonly Raw5eAction[];
 }
 
+export interface Raw5eClassEquipmentItem {
+  readonly item?: string;
+  readonly equipment?: string;
+  readonly equipmentType?: string;
+  readonly equipmentTypes?: readonly string[];
+  readonly special?: string;
+  readonly value?: number;
+  readonly quantity?: number;
+  readonly [key: string]: unknown;
+}
+
 export interface Raw5eClass {
   readonly name: string;
   readonly source: string;
@@ -228,6 +239,11 @@ export interface Raw5eClass {
     readonly faces: number;
   };
   readonly proficiency?: readonly string[];
+  readonly primaryAbility?: readonly (string | { readonly [key: string]: boolean })[];
+  readonly spellcastingAbility?: string;
+  readonly casterProgression?: string;
+  readonly preparedSpellsProgression?: string;
+  readonly cantripProgression?: string;
   readonly startingProficiencies?: {
     readonly armor?: readonly string[];
     readonly weapons?: readonly string[];
@@ -239,20 +255,37 @@ export interface Raw5eClass {
   };
   readonly startingEquipment?: {
     readonly goldAlternative?: string;
+    readonly additionalFromBackground?: boolean;
     readonly default?: readonly (readonly string[])[];
-    readonly defaultData?: readonly {
-      readonly a?: readonly string[];
-      readonly b?: readonly string[];
-    }[];
+    readonly entries?: readonly string[];
+    readonly defaultData?: readonly Record<string, readonly Raw5eClassEquipmentItem[] | number>[];
   };
   readonly multiclassing?: {
-    readonly requirements?: { readonly or?: readonly { readonly str?: number; readonly dex?: number }[] };
+    readonly requirements?: {
+      readonly or?: readonly {
+        readonly str?: number;
+        readonly dex?: number;
+        readonly con?: number;
+        readonly int?: number;
+        readonly wis?: number;
+        readonly cha?: number;
+      }[];
+    };
     readonly proficienciesGained?: {
       readonly armor?: readonly string[];
       readonly weapons?: readonly string[];
     };
   };
-  readonly classFeatures?: readonly string[];
+  readonly classTableGroups?: readonly {
+    readonly title?: string;
+    readonly colLabels?: readonly string[];
+    readonly rows?: readonly (readonly unknown[])[];
+    readonly rowsSpellProgression?: readonly (readonly unknown[])[];
+  }[];
+  readonly classFeatures?: readonly (
+    string | { readonly classFeature?: string; readonly gainSubclassFeature?: boolean }
+  )[];
+  readonly subclassTitle?: string;
   readonly subclassGroups?: readonly {
     readonly name: string;
     readonly source: string;

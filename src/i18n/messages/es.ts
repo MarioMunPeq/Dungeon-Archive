@@ -334,6 +334,37 @@ export const es: Record<keyof typeof en, string> = {
   "character.newCharacter": "Nuevo personaje",
   "character.name": "Nombre",
   "character.subclass": "Subclase",
+  "character.subclasses": "Subclases",
+  "character.equipment": "Equipo",
+  "character.classFeatures": "Rasgos de clase",
+  "character.proficiencies": "Competencias",
+  "character.savingThrows": "Tiradas de salvación",
+  "character.skills": "Habilidades",
+  "class.hitDice": "Dados de daño",
+  "class.primaryAbility": "Característica principal",
+  "class.spellcastingAbility": "Característica de lanzamiento",
+  "class.casterProgression": "Progresión de lanzador",
+  "class.proficiencyBonus": "Bonificación de competencia",
+  "class.startingProficiencies": "Competencias iniciales",
+  "class.startingEquipment": "Equipo inicial",
+  "class.chooseOne": "Elige una opción",
+  "class.goldAlternative": "Alternativa en oro",
+  "class.additionalFromBackground": "También recibes el equipo de tu trasfondo.",
+  "class.multiclassing": "Multiclase",
+  "class.multiclassingRequirements": "Requisitos",
+  "class.multiclassingGains": "Competencias obtenidas",
+  "class.progression": "Progresión por nivel",
+  "class.level": "Nivel",
+  "class.subclassAt": "Subclase",
+  "class.subclassAtHint": "Eliges tu subclase al alcanzar este nivel.",
+  "class.spellSlots": "Espacios de conjuro por nivel de conjuro",
+  "class.ability.str": "Fuerza",
+  "class.ability.dex": "Destreza",
+  "class.ability.con": "Constitución",
+  "class.ability.int": "Inteligencia",
+  "class.ability.wis": "Sabiduría",
+  "class.ability.cha": "Carisma",
+  "class.proficiencySavingThrows": "Tiradas de salvación con competencia",
   "character.editClassLine": "Editar clase, subclase y nivel",
   "character.emptyTitle": "Todavía no hay ningún personaje",
   "character.emptyBody":
@@ -437,21 +468,34 @@ export const es: Record<keyof typeof en, string> = {
   "condition.unconscious": "Inconsciente",
 
   // ---- Combate: definiciones de estados ----
-  "condition.def.blinded": "Estás ciego. Fallas automáticamente cualquier prueba de característica que requiera visión. Las tiradas de ataque contra ti tienen ventaja, y tus tiradas de ataque tienen desventaja.",
-  "condition.def.charmed": "No puedes atacar a quien te encanta ni serle objetivo de facultades dañinas. Quien te encanta tiene ventaja en las pruebas de característica para interactuar socialmente contigo.",
-  "condition.def.deafened": "Estás ensordecido. Fallas automáticamente cualquier prueba de característica que requiera oído.",
-  "condition.def.exhaustion": "Sufres agotamiento. Tiene seis niveles. Cada nivel añade penalizaciones: 1 — desventaja en pruebas de característica; 2 — velocidad a la mitad; 3 — desventaja en ataques y tiradas de salvación; 4 — PV máximos a la mitad; 5 — velocidad 0; 6 — muerte.",
-  "condition.def.frightened": "Tienes desventaja en pruebas de característica y tiradas de ataque mientras la fuente de tu miedo esté a la vista. No puedes acercarte voluntariamente a ella.",
-  "condition.def.grappled": "Tu velocidad es 0 y no puedes beneficiarte de bonificaciones a tu velocidad. El estado termina si quien te agarra queda incapacitado o sales de su alcance.",
+  "condition.def.blinded":
+    "Estás ciego. Fallas automáticamente cualquier prueba de característica que requiera visión. Las tiradas de ataque contra ti tienen ventaja, y tus tiradas de ataque tienen desventaja.",
+  "condition.def.charmed":
+    "No puedes atacar a quien te encanta ni serle objetivo de facultades dañinas. Quien te encanta tiene ventaja en las pruebas de característica para interactuar socialmente contigo.",
+  "condition.def.deafened":
+    "Estás ensordecido. Fallas automáticamente cualquier prueba de característica que requiera oído.",
+  "condition.def.exhaustion":
+    "Sufres agotamiento. Tiene seis niveles. Cada nivel añade penalizaciones: 1 — desventaja en pruebas de característica; 2 — velocidad a la mitad; 3 — desventaja en ataques y tiradas de salvación; 4 — PV máximos a la mitad; 5 — velocidad 0; 6 — muerte.",
+  "condition.def.frightened":
+    "Tienes desventaja en pruebas de característica y tiradas de ataque mientras la fuente de tu miedo esté a la vista. No puedes acercarte voluntariamente a ella.",
+  "condition.def.grappled":
+    "Tu velocidad es 0 y no puedes beneficiarte de bonificaciones a tu velocidad. El estado termina si quien te agarra queda incapacitado o sales de su alcance.",
   "condition.def.incapacitated": "No puedes realizar acciones ni reacciones.",
-  "condition.def.invisible": "No pueden verte sin magia o un sentido especial. Tienes ventaja en tiradas de ataque; las tiradas de ataque contra ti tienen desventaja.",
-  "condition.def.paralyzed": "Estás incapacitado, no puedes moverte ni hablar, y fallas automáticamente las tiradas de salvación de Fuerza y Destreza. Las tiradas de ataque contra ti tienen ventaja, y cualquier impacto a 1,5 m (5 ft) es un golpe crítico.",
-  "condition.def.petrified": "Te conviertes en piedra, quedas incapacitado y no puedes moverte ni hablar. No percibes tu entorno. Las tiradas de ataque contra ti tienen ventaja. Tienes resistencia a todo daño, pero inmunidad a veneno y enfermedad.",
+  "condition.def.invisible":
+    "No pueden verte sin magia o un sentido especial. Tienes ventaja en tiradas de ataque; las tiradas de ataque contra ti tienen desventaja.",
+  "condition.def.paralyzed":
+    "Estás incapacitado, no puedes moverte ni hablar, y fallas automáticamente las tiradas de salvación de Fuerza y Destreza. Las tiradas de ataque contra ti tienen ventaja, y cualquier impacto a 1,5 m (5 ft) es un golpe crítico.",
+  "condition.def.petrified":
+    "Te conviertes en piedra, quedas incapacitado y no puedes moverte ni hablar. No percibes tu entorno. Las tiradas de ataque contra ti tienen ventaja. Tienes resistencia a todo daño, pero inmunidad a veneno y enfermedad.",
   "condition.def.poisoned": "Tienes desventaja en tiradas de ataque y pruebas de característica.",
-  "condition.def.prone": "Estás tumbado (derribado). Solo puedes arrastrarte a menos que te levantes. Tienes desventaja en tiradas de ataque. Los ataques contra ti tienen ventaja a 1,5 m (5 ft); más lejos, desventaja.",
-  "condition.def.restrained": "Tu velocidad es 0 y no puedes beneficiarte de bonificaciones a la velocidad. Las tiradas de ataque contra ti tienen ventaja, y las tuyas desventaja. Tienes desventaja en tiradas de salvación de Destreza.",
-  "condition.def.stunned": "Estás incapacitado, no puedes moverte y solo puedes hablar balbuceando. Fallas automáticamente las tiradas de salvación de Fuerza y Destreza. Las tiradas de ataque contra ti tienen ventaja.",
-  "condition.def.unconscious": "Estás incapacitado, no puedes moverte ni hablar, y no percibes tu entorno. Dejas caer lo que sujetas y caes derribado. Fallas automáticamente las tiradas de salvación de Fuerza y Destreza. Las tiradas de ataque contra ti tienen ventaja, y cualquier impacto a 1,5 m (5 ft) es un golpe crítico.",
+  "condition.def.prone":
+    "Estás tumbado (derribado). Solo puedes arrastrarte a menos que te levantes. Tienes desventaja en tiradas de ataque. Los ataques contra ti tienen ventaja a 1,5 m (5 ft); más lejos, desventaja.",
+  "condition.def.restrained":
+    "Tu velocidad es 0 y no puedes beneficiarte de bonificaciones a la velocidad. Las tiradas de ataque contra ti tienen ventaja, y las tuyas desventaja. Tienes desventaja en tiradas de salvación de Destreza.",
+  "condition.def.stunned":
+    "Estás incapacitado, no puedes moverte y solo puedes hablar balbuceando. Fallas automáticamente las tiradas de salvación de Fuerza y Destreza. Las tiradas de ataque contra ti tienen ventaja.",
+  "condition.def.unconscious":
+    "Estás incapacitado, no puedes moverte ni hablar, y no percibes tu entorno. Dejas caer lo que sujetas y caes derribado. Fallas automáticamente las tiradas de salvación de Fuerza y Destreza. Las tiradas de ataque contra ti tienen ventaja, y cualquier impacto a 1,5 m (5 ft) es un golpe crítico.",
 
   // ---- Archivo: pestaña Reglas ----
   "rules.beginnerTips": "Consejos para principiantes",
@@ -722,6 +766,9 @@ export const es: Record<keyof typeof en, string> = {
   "equipment.weight": "Peso",
   "equipment.value": "Valor",
   "equipment.stealth": "Sigilo",
+  "equipment.armor": "Armadura",
+  "equipment.weapons": "Armas",
+  "equipment.tools": "Herramientas",
   "monster.speed": "Velocidad",
   "monster.alignment": "Alineamiento",
   "monster.traits": "Rasgos",
