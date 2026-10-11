@@ -1,16 +1,16 @@
 import type { ReactNode } from "react";
-import { Display, Subtitle } from "@/components/ui/Typography";
+import { Subtitle } from "@/components/ui/Typography";
 
 interface EntityHeaderProps {
-  readonly name: string;
+  /**
+   * The top bar already renders the entity name (see getTopBarState), and Design
+   * DNA rule 24 makes that the single page title — repeating it in a large
+   * in-page heading was duplicating it on every entity page.
+   */
   readonly subtitle: ReactNode;
 }
 
-export function EntityHeader({ name, subtitle }: EntityHeaderProps) {
-  return (
-    <div className="space-y-1">
-      <Display className="text-lg">{name}</Display>
-      <Subtitle>{subtitle}</Subtitle>
-    </div>
-  );
+/** Metadata line under the (already present) top-bar title. */
+export function EntityHeader({ subtitle }: EntityHeaderProps) {
+  return <Subtitle>{subtitle}</Subtitle>;
 }

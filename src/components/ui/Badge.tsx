@@ -1,7 +1,9 @@
 import { cn } from "@/lib/utils";
 import type { ReactNode } from "react";
 
-type BadgeVariant = "default" | "accent" | "outline" | "subtle";
+/** The single source of truth for badge variants; `badgeVariantForCategory` maps
+ *  category → variant and must stay in sync with `VARIANT_CLASSES`. */
+export type BadgeVariant = "default" | "accent" | "outline" | "subtle";
 
 const VARIANT_CLASSES: Record<BadgeVariant, string> = {
   default: "border-foreground bg-accent font-medium text-foreground",

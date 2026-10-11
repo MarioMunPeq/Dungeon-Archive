@@ -11,7 +11,6 @@ export function DebugSpellPage() {
 
   return (
     <EntityDetailLayout
-      name={spell.name}
       subtitle={`${levelText} ${METADATA_SEPARATOR} ${formatSource(spell.source)}`}
       source={spell.source}
       versions={versions}

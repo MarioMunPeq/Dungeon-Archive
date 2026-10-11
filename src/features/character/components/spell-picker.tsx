@@ -87,12 +87,16 @@ export function SpellPickerContent({
 
   const selectedSet = useMemo(() => new Set(selectedIds), [selectedIds]);
 
-  const activeEntries = FILTER_KEYS.map((key): ActiveFilterEntry | null => {
-    const value = filters[key] ?? "";
-    if (!value) return null;
-    const label = filterDefs.get(key)?.options.find((o) => o.value === value)?.label ?? value;
-    return { key, value, label };
-  }).filter((entry): entry is ActiveFilterEntry => Boolean(entry));
+  const activeEntries = useMemo(
+    () =>
+      FILTER_KEYS.map((key): ActiveFilterEntry | null => {
+        const value = filters[key] ?? "";
+        if (!value) return null;
+        const label = filterDefs.get(key)?.options.find((o) => o.value === value)?.label ?? value;
+        return { key, value, label };
+      }).filter((entry): entry is ActiveFilterEntry => Boolean(entry)),
+    [filters, filterDefs],
+  );
   const clearFilter = (key: string) =>
     setFilters((prev) => {
       const next = { ...prev };
@@ -106,13 +110,17 @@ export function SpellPickerContent({
   const concentrationDef = filterDefs.get("concentration");
   const ritualDef = filterDefs.get("ritual");
   const classDef = filterDefs.get("class");
-  const advancedGroups = [
-    schoolDef && { def: schoolDef, help: t("help.spellSchool.body") },
-    classDef && scope !== "mine" && { def: classDef, help: null },
-    concentrationDef && { def: concentrationDef, help: null },
-    ritualDef && { def: ritualDef, help: null },
-  ].filter((group): group is { def: NonNullable<typeof schoolDef>; help: string | null } =>
-    Boolean(group),
+  const advancedGroups = useMemo(
+    () =>
+      [
+        schoolDef && { def: schoolDef, help: t("help.spellSchool.body") },
+        classDef && scope !== "mine" && { def: classDef, help: null },
+        concentrationDef && { def: concentrationDef, help: null },
+        ritualDef && { def: ritualDef, help: null },
+      ].filter((group): group is { def: NonNullable<typeof schoolDef>; help: string | null } =>
+        Boolean(group),
+      ),
+    [schoolDef, classDef, scope, concentrationDef, ritualDef],
   );
 
   const hasQueryOrFilters = query.trim().length > 0 || activeEntries.length > 0;

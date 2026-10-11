@@ -1,6 +1,7 @@
 import type { Language } from "@/user-state";
+import { LANGUAGES } from "@/user-state";
 
-export const LANGUAGES: readonly Language[] = ["en", "es"] as const;
+export { LANGUAGES };
 
 /** The only other language the app ships; used for one-tap toggling. */
 export function nextLanguage(language: Language): Language {

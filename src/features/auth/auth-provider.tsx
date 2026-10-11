@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import type { ReactNode } from "react";
 import { isFirebaseConfigured } from "@/lib/firebase/config";
 import { signInWithGoogle, logout, subscribeToAuth } from "@/lib/firebase/auth-service";
@@ -21,7 +21,13 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     });
   }, []);
 
-  const value: AuthContextValue = { user, status, login: signInWithGoogle, logout };
+  // `login`/`logout` are stable module imports, so memoizing on the two pieces of
+  // real state keeps every `useAuthContext()` consumer from re-rendering on each
+  // provider render.
+  const value = useMemo<AuthContextValue>(
+    () => ({ user, status, login: signInWithGoogle, logout }),
+    [user, status],
+  );
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }

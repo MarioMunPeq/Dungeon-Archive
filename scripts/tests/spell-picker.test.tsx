@@ -19,6 +19,7 @@ function test(description: string, fn: () => void): void {
 import { loadCompendium, getEntitiesForCategory } from "../../src/compendium";
 import type { Spell } from "../../src/compendium";
 import { SpellPickerContent } from "../../src/features/character/components/spell-picker";
+import { countClassSpells } from "../../src/features/character/spell-picker-model";
 
 await loadCompendium();
 
@@ -83,21 +84,34 @@ test("hides the scope toggle for characters without a class", () => {
   ok(!html.includes('aria-label="Which spells to show"'), "scope group absent");
 });
 
+// The result list is virtualized, and the server-render fallback only paints the
+// first overscan window — so asserting on a specific spell by name would depend
+// on alphabetical position. The scoping contract is asserted on the result count
+// (and, below, on the full list through the model, which spell-picker-model.test
+// covers exhaustively). Here we assert the count is scoped to the class.
+function resultCount(spellsInScope: number): RegExp {
+  return new RegExp(`>${spellsInScope} (spell|conjuro)`);
+}
+
+const wizardSpellCount = countClassSpells(spells, "Wizard");
+
 test("defaults to the character's class list when it has spells", () => {
   const html = renderPicker({ characterClass: "Wizard" });
-  ok(html.includes("Fireball"), "wizard spells listed");
-  ok(!html.includes("Divine Smite"), "non-wizard spell hidden");
+  ok(resultCount(wizardSpellCount).test(html), "count reflects the wizard-only scope");
+  ok(
+    !html.includes(`>${spells.length} `),
+    "count is not the unfiltered total",
+  );
 });
 
 test("falls back to all spells when there is no class to scope by", () => {
   const html = renderPicker({ characterClass: "" });
-  ok(html.includes("Fireball"), "wizard spell listed");
-  ok(html.includes("Divine Smite"), "other class spells listed");
+  ok(resultCount(spells.length).test(html), "count is the unfiltered total");
 });
 
 test("scope=all exposes spells outside the character's class", () => {
   const html = renderPicker({ characterClass: "Wizard", initialScope: "all" });
-  ok(html.includes("Divine Smite"), "non-wizard spell listed");
+  ok(resultCount(spells.length).test(html), "count widens to every spell");
 });
 
 test("marks selected spells and shows the known count", () => {

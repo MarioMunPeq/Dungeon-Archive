@@ -8,6 +8,7 @@ import type { CharacterReference } from "@/user-state";
 import { buildCharacterSheetModel, exportFileName } from "./character-sheet-model";
 import { CharacterSheetView } from "./character-sheet-view";
 import { readThemePalette, SHEET_BACKGROUND } from "./character-sheet-export";
+import { t } from "@/i18n";
 
 function resolveSpells(ids: readonly string[]): Spell[] {
   const out: Spell[] = [];
@@ -39,8 +40,13 @@ function resolveMagicItems(ids: readonly string[]): MagicItem[] {
 export function ExportSheetButton({ character }: { character: CharacterReference }) {
   const sheetRef = useRef<HTMLDivElement | null>(null);
   const [exporting, setExporting] = useState(false);
+  // The off-screen sheet is only needed to capture a PNG, but it was mounted on
+  // every render of the character page — a few hundred DOM nodes rebuilt on each
+  // HP edit. It is mounted on the first export and then kept, so repeated exports
+  // are instant.
+  const [sheetMounted, setSheetMounted] = useState(false);
   const { show } = useSnackbar();
-  useTheme();
+  const theme = useTheme();
 
   const model = useMemo(
     () =>
@@ -53,17 +59,23 @@ export function ExportSheetButton({ character }: { character: CharacterReference
     [character],
   );
 
-  const palette = readThemePalette();
+  // `readThemePalette` forces a synchronous style recalc, so it must not run on
+  // every render — only when the accent theme actually changes.
+  const palette = useMemo(() => readThemePalette(), [theme]);
 
   const handleExport = useCallback(async () => {
-    const node = sheetRef.current;
-    if (!node) return;
     setExporting(true);
-    // Re-render the off-screen sheet with the live theme accent before capture,
-    // then wait for the commit to be painted.
+    setSheetMounted(true);
+    // The sheet may have just mounted; wait for it to commit and paint with the
+    // live theme accent before capture.
     await new Promise<void>((resolve) => {
       requestAnimationFrame(() => requestAnimationFrame(() => resolve()));
     });
+    const node = sheetRef.current;
+    if (!node) {
+      setExporting(false);
+      return;
+    }
     try {
       const dataUrl = await toPng(node, {
         pixelRatio: 2,
@@ -73,10 +85,10 @@ export function ExportSheetButton({ character }: { character: CharacterReference
       link.download = exportFileName(model.name);
       link.href = dataUrl;
       link.click();
-      show("Character sheet exported.", { tone: "success" });
+      show(t("export.success"), { tone: "success" });
     } catch (e) {
       console.error("[export] failed:", e);
-      show("Could not export the sheet.", { tone: "error" });
+      show(t("export.failed"), { tone: "error" });
     } finally {
       setExporting(false);
     }
@@ -84,9 +96,11 @@ export function ExportSheetButton({ character }: { character: CharacterReference
 
   return (
     <>
-      <div aria-hidden className="pointer-events-none fixed -left-[9999px] top-0">
-        <CharacterSheetView ref={sheetRef} model={model} palette={palette} />
-      </div>
+      {sheetMounted && (
+        <div aria-hidden className="pointer-events-none fixed -left-[9999px] top-0">
+          <CharacterSheetView ref={sheetRef} model={model} palette={palette} />
+        </div>
+      )}
       <Button variant="outline" size="sm" onClick={() => void handleExport()} disabled={exporting}>
         <svg
           aria-hidden="true"
@@ -100,7 +114,7 @@ export function ExportSheetButton({ character }: { character: CharacterReference
           <polyline points="7 10 12 15 17 10" />
           <line x1="12" y1="15" x2="12" y2="3" />
         </svg>
-        {exporting ? "Exporting…" : "Export"}
+        {exporting ? t("export.exporting") : t("export.action")}
       </Button>
     </>
   );

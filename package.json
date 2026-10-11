@@ -31,6 +31,7 @@
     "test:damage-type": "tsx --tsconfig tsconfig.app.json scripts/tests/damage-type.test.tsx",
     "test:spell-renderer": "tsx --tsconfig tsconfig.app.json scripts/tests/spell-renderer.test.tsx",
     "test:class-renderer": "tsx --tsconfig tsconfig.app.json scripts/tests/class-renderer.test.tsx",
+    "dump:rules": "tsx --tsconfig tsconfig.app.json scripts/dump-rules.ts",
     "test:language-toggle": "tsx --tsconfig tsconfig.app.json scripts/tests/language-toggle.test.tsx",
     "test:highlight": "tsx --tsconfig tsconfig.app.json scripts/tests/highlight.test.ts",
     "test:navigation": "tsx --tsconfig tsconfig.app.json scripts/tests/navigation.test.ts",

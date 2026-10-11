@@ -10,6 +10,15 @@ interface EntityListProps {
   readonly emptyAction?: ReactNode;
 }
 
+/** Module scope so the props stay referentially stable across renders. */
+function cardKey(entity: EntityCardData): string {
+  return entity.href;
+}
+
+function renderCard(entity: EntityCardData): ReactNode {
+  return <EntityCard {...entity} />;
+}
+
 export function EntityList({
   entities,
   emptyMessage = "No entities found",
@@ -22,8 +31,8 @@ export function EntityList({
   return (
     <VirtualGrid
       items={entities}
-      getItemKey={(entity) => entity.href}
-      renderItem={(entity) => <EntityCard {...entity} />}
+      getItemKey={cardKey}
+      renderItem={renderCard}
       columnCount={2}
       gap={8}
       estimateRowHeight={96}

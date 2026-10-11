@@ -1,7 +1,6 @@
 import { CATEGORY_REGISTRY, referenceToUrl, resolveEntity, entityCardStat } from "@/compendium";
 import type { EntityCategory, CardStat } from "@/compendium";
-
-export type BadgeVariant = "default" | "accent" | "outline" | "subtle";
+import type { BadgeVariant } from "@/components/ui/Badge";
 
 const BADGE_VARIANT: Record<string, BadgeVariant> = {
   spell: "default",

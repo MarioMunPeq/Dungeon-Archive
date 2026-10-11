@@ -1,7 +1,7 @@
 import type { CSSProperties, MouseEvent } from "react";
 import { flushSync } from "react-dom";
 import type { Theme } from "@/user-state";
-import { useTheme, userStore } from "@/user-state";
+import { useTheme, userStore, THEMES } from "@/user-state";
 import { cn } from "@/lib/utils";
 import { Button, PaletteIcon, Caption } from "@/components/ui";
 import { useConstrainedPopover } from "@/components/ui/use-constrained-popover";
@@ -16,7 +16,8 @@ const LABELS: Record<Theme, string> = {
   steel: "Storm Steel",
 };
 
-const THEMES: readonly Theme[] = ["jade", "amber", "teal", "gold", "wine", "plum", "steel"];
+/** The canonical theme list lives in `@/user-state` (it drives the persisted
+ *  value's type), so the picker must not keep a private copy that can drift. */
 
 /** Accent token from index.css — the swatches stay the single source of truth. */
 function accentVar(id: Theme): string {

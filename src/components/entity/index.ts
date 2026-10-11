@@ -3,7 +3,7 @@ export { createSearchResultItems } from "./entity-display";
 export type { SearchResultItem } from "./entity-display";
 
 export { entityRefFromCanonicalId, badgeVariantForCategory } from "./entity-reference";
-export type { EntityRef, BadgeVariant } from "./entity-reference";
+export type { EntityRef } from "./entity-reference";
 
 export { EntityReferenceRow, RowRemoveButton } from "./entity-reference-row";
 

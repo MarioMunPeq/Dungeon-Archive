@@ -311,16 +311,24 @@ const TurnItemRow = memo(function TurnItemRow({
 function TurnChecklist() {
   const [used, setUsed] = useState<ReadonlySet<string>>(() => new Set());
 
-  const toggle = (title: string) => {
+  const toggle = useCallback((title: string) => {
     setUsed((prev) => {
       const next = new Set(prev);
       if (next.has(title)) next.delete(title);
       else next.add(title);
       return next;
     });
-  };
+  }, []);
 
   const reset = () => setUsed(new Set());
+
+  // Stable per-row handlers, mirroring the existing `toggleHandlers` pattern used
+  // for the condition chips. An inline arrow would give `TurnItemRow` a new prop
+  // on every render and defeat its `memo`.
+  const toggleHandlers = useMemo(
+    () => Object.fromEntries(TURN_ITEMS.map((item) => [item.title, () => toggle(item.title)])),
+    [toggle],
+  );
 
   return (
     <>
@@ -330,7 +338,7 @@ function TurnChecklist() {
             key={item.title}
             item={item}
             isUsed={used.has(item.title)}
-            onToggle={() => toggle(item.title)}
+            onToggle={toggleHandlers[item.title]!}
           />
         ))}
       </div>

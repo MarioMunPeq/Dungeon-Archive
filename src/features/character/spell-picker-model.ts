@@ -37,6 +37,24 @@ export function scoreSpellMatch(spell: Spell, query: string): number | null {
   return null;
 }
 
+/**
+ * Lowercased spell names, cached per spell object.
+ *
+ * `filterSpellCandidates` runs on every keystroke over all 868 spells; without
+ * this, each pass allocates 868 lowercased names. Spell instances come from the
+ * immutable generated JSON and are never mutated, so a WeakMap keyed by identity
+ * stays correct for the app's lifetime.
+ */
+const lowerNameCache = new WeakMap<Spell, string>();
+
+function lowerName(spell: Spell): string {
+  const cached = lowerNameCache.get(spell);
+  if (cached !== undefined) return cached;
+  const name = spell.name.toLowerCase();
+  lowerNameCache.set(spell, name);
+  return name;
+}
+
 export function filterSpellCandidates(
   spells: readonly Spell[],
   { query = "", characterClass = null, filters = {} }: SpellPickerQuery,
@@ -50,12 +68,26 @@ export function filterSpellCandidates(
     scoped,
     filters as Record<string, string>,
   ) as readonly Spell[];
+
+  const q = query.trim().toLowerCase();
   const scored: { spell: Spell; score: number }[] = [];
   for (const spell of filtered) {
-    const score = scoreSpellMatch(spell, query);
-    if (score === null) continue;
+    let score: number;
+    if (!q) {
+      score = 0;
+    } else {
+      const name = lowerName(spell);
+      if (name === q) score = 100;
+      else if (name.startsWith(q)) score = 80;
+      else if (name.includes(q)) score = 60;
+      else continue;
+    }
     scored.push({ spell, score });
   }
+  // Tie-break stays on `localeCompare`: the test contract (and SRD spell names
+  // containing accents/casing) depends on its collation, which plain code-unit
+  // comparison does not reproduce. The lowercase cache above is where the real
+  // saving is.
   scored.sort((a, b) => b.score - a.score || a.spell.name.localeCompare(b.spell.name));
   return scored.map((entry) => entry.spell);
 }

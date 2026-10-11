@@ -121,6 +121,9 @@ function clampCombatValues(values: CombatValues): CombatValues {
 }
 
 function moveToFront<T>(arr: T[], item: T, max: number): T[] {
+  // Re-adding an item that is already first is a no-op; returning the same array
+  // keeps its identity stable so subscribers don't re-render for nothing.
+  if (arr[0] === item) return arr;
   const filtered = arr.filter((x) => x !== item);
   filtered.unshift(item);
   if (filtered.length > max) filtered.length = max;
@@ -722,6 +725,12 @@ function replaceState(state: UserState): void {
   userStore.getState()._replace(state);
 }
 
+/**
+ * Kept at module scope so a second `hydrate()` call replaces the handler instead
+ * of stacking another `storage` listener (each one re-parses the same payload).
+ */
+let storageListener: ((event: StorageEvent) => void) | null = null;
+
 export function hydrate(): void {
   const persisted = read();
   const processed = processPersistedState(persisted);
@@ -730,17 +739,20 @@ export function hydrate(): void {
   userStore.setState({ _hasHydrated: true });
 
   if (typeof window !== "undefined") {
-    window.addEventListener("storage", (event) => {
+    if (storageListener !== null) {
+      window.removeEventListener("storage", storageListener);
+    }
+    storageListener = (event: StorageEvent) => {
       if (event.key !== STORAGE_KEY) return;
       if (!event.newValue) return;
       try {
         const parsed = JSON.parse(event.newValue) as unknown;
         const migrated = migrate(parsed);
-        const processed = processPersistedState(migrated);
-        replaceState(processed);
+        replaceState(processPersistedState(migrated));
       } catch {
         // ignore malformed cross-tab payloads
       }
-    });
+    };
+    window.addEventListener("storage", storageListener);
   }
 }

@@ -14,6 +14,7 @@ import { EntityDetailLayout } from "@/components/entity";
 import { EntityRenderer } from "@/features/compendium/renderers/entity-renderer";
 import { RelatedEntities } from "@/features/compendium/components/related-entities";
 import { userStore } from "@/user-state";
+import { t } from "@/i18n";
 
 interface CompendiumPageProps {
   category: EntityCategory;
@@ -46,13 +47,12 @@ export function CompendiumPage({ category }: CompendiumPageProps) {
 
   return (
     <EntityDetailLayout
-      name={resolved.selected.name}
       subtitle={`${categoryLabelSingular(category)} ${METADATA_SEPARATOR} ${formatSource(resolved.selected.source)}`}
       source={resolved.selected.source}
       versions={resolved.versions}
       onSourceChange={handleSourceChange}
       breadcrumbs={[
-        { label: "Home", to: "/" },
+        { label: t("nav.home"), to: "/" },
         { label: categoryLabel(category), to: `/${category}` },
         { label: resolved.selected.name },
       ]}

@@ -7,7 +7,6 @@ import { Stack } from "@/components/ui/Stack";
 import { formatSource } from "@/compendium";
 
 interface EntityDetailLayoutProps {
-  readonly name: string;
   readonly subtitle: ReactNode;
   readonly source: string;
   readonly versions: readonly EntityVersion[];
@@ -17,7 +16,6 @@ interface EntityDetailLayoutProps {
 }
 
 export function EntityDetailLayout({
-  name,
   subtitle,
   source,
   versions,
@@ -29,7 +27,7 @@ export function EntityDetailLayout({
     <Stack as="article" gap="md" className="px-4 py-4">
       {breadcrumbs && <EntityBreadcrumbs crumbs={breadcrumbs} />}
 
-      <EntityHeader name={name} subtitle={subtitle} />
+      <EntityHeader subtitle={subtitle} />
 
       {versions.length > 1 && (
         <Inline gap="xs">

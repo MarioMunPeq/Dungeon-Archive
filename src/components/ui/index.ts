@@ -7,7 +7,6 @@ export {
   ChevronRightIcon,
   ChevronLeftIcon,
   CloseIcon,
-  SearchIcon,
   CloudIcon,
   CloudCheckIcon,
   CloudWarningIcon,
@@ -20,6 +19,7 @@ export { Button } from "./Button";
 export { ConfirmDialog } from "./ConfirmDialog";
 export { Section } from "./Section";
 export { Badge } from "./Badge";
+export type { BadgeVariant } from "./Badge";
 export { Divider } from "./Divider";
 export { Stack } from "./Stack";
 export { Inline } from "./Inline";

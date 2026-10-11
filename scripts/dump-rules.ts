@@ -1,5 +1,5 @@
-import { es } from "../../src/i18n/messages/es";
-import { en } from "../../src/i18n/messages/en";
+import { es } from "../src/i18n/messages/es";
+import { en } from "../src/i18n/messages/en";
 
 const groups: readonly [string, readonly string[]][] = [
   [

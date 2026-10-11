@@ -83,13 +83,13 @@ export function ReferencePicker({ title, candidates, onSelect, onClose }: Refere
           ref={inputRef}
           value={query}
           onChange={setQuery}
-          placeholder={`Search ${title.toLowerCase()}\u2026`}
-          ariaLabel={`Search ${title}`}
+          placeholder={t("referencePicker.searchPlaceholder", { title: title.toLowerCase() })}
+          ariaLabel={t("referencePicker.searchLabel", { title })}
         />
       </div>
       <div className="flex-1 overflow-y-auto px-4 pb-8 pt-2">
         {filtered.length === 0 ? (
-          <p className="py-8 text-center text-sm text-muted-foreground">No results</p>
+          <p className="py-8 text-center text-sm text-muted-foreground">{t("common.noResults")}</p>
         ) : (
           <ul>
             {filtered.map((c) => (

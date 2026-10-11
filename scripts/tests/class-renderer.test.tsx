@@ -209,3 +209,27 @@ test("progression alone is enough to show the level breakdown", () => {
   strictEqual(html.includes("Progression by Level"), true);
   strictEqual(html.includes("Rages:"), true, "values still explained without any features");
 });
+
+test("nested accordions never put a button inside a button", () => {
+  const html = renderToString(createElement(ClassRenderer, { entity: classFixture() }));
+  // The level card and the feature rows are both <button>-based accordions.
+  // Nesting them directly would be invalid HTML and breaks keyboard/screen-reader
+  // behaviour, so the inner accordion must sit in the outer's sibling content div.
+  const nested = /<button[^>]*>(?:(?!<\/button>)[\s\S])*<button/.test(html);
+  strictEqual(nested, false, "no interactive control nested inside another");
+});
+
+test("every accordion toggle is labelled for assistive tech", () => {
+  const html = renderToString(createElement(ClassRenderer, { entity: classFixture() }));
+  // 20 level cards + 3 feature rows. `HelpTip` also renders `aria-expanded`, so
+  // count the accordions by `aria-controls` instead, which only they set.
+  const toggles = (html.match(/aria-controls="/g) ?? []).length;
+  strictEqual(toggles, 23, "one accordion per level plus one per feature");
+  const expanded = (html.match(/aria-expanded="true"/g) ?? []).length;
+  strictEqual(expanded, 1, "only level 1 starts open");
+  strictEqual(
+    (html.match(/hidden=""/g) ?? []).length,
+    toggles - expanded,
+    "every collapsed panel is hidden rather than unmounted",
+  );
+});

@@ -74,22 +74,27 @@ export function VirtualGrid<T>({
     gap: divide ? 0 : gap,
   });
 
-  const gridStyle = {
-    display: "grid",
-    gridTemplateColumns: `repeat(${columnCount}, minmax(0, 1fr))`,
-    gap,
-  } as const;
+  const gridStyle = useMemo(
+    () =>
+      ({
+        display: "grid",
+        gridTemplateColumns: `repeat(${columnCount}, minmax(0, 1fr))`,
+        gap,
+      }) as const,
+    [columnCount, gap],
+  );
 
-  const listProps = {
-    role,
-    "aria-label": ariaLabel,
-    id,
-  };
+  const listProps = { role, "aria-label": ariaLabel, id };
 
   if (!scrollElement) {
+    // Only the first overscan window is painted before the virtualizer takes
+    // over. Rendering every row here mounted all 1248 monster cards (939 magic
+    // items, 868 spells) and then threw them away — and because RouteTransition
+    // remounts the page by pathname, on *every* navigation into a category.
+    const preview = rows.slice(0, Math.max(1, overscan + 2));
     return (
       <div {...listProps}>
-        {rows.map((row, rowIndex) => (
+        {preview.map((row, rowIndex) => (
           <div
             key={rowIndex}
             className={divide && rowIndex > 0 ? "border-t border-border" : undefined}
