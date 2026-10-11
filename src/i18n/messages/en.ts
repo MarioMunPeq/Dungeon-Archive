@@ -31,6 +31,8 @@ export const en = {
   "a11y.cloudBackup": "Cloud Backup",
   "a11y.help": "Help",
   "a11y.language": "Language",
+  "language.switched": "Language changed to {language}",
+  "language.undo": "Undo",
   "a11y.switchToEnglish": "Switch to English",
   "a11y.switchToSpanish": "Switch to Spanish",
   "a11y.close": "Close",
@@ -370,6 +372,28 @@ export const en = {
   "class.ability.wis": "Wisdom",
   "class.ability.cha": "Charisma",
   "class.proficiencySavingThrows": "Proficient Saving Throws",
+  "class.progressionSubtitle": "Tap a level to see every feature and number it unlocks.",
+  "class.nothingNew": "No change",
+  "class.nothingNewAtLevel": "Nothing new at this level \u2014 your features and numbers stay the same.",
+  "class.noFeatures": "No new features at this level; only the numbers above change.",
+  "class.featureCount": "features",
+  "class.uses": "Uses",
+  "class.copyFeature": "Copy text",
+  "class.copiedFeature": "Text copied",
+  "class.noDescription": "The source book gives no text for this feature.",
+  "class.subclassSubtitle": "Pick one of these at the level marked with the Subclass badge.",
+  "help.hitDice.title": "What are Hit Dice?",
+  "help.hitDice.body":
+    "The die you roll to gain Hit Points when you level up, plus a fixed bonus. A d10 class with +3 per level gains 13 Hit Points each level.",
+  "help.primaryAbility.title": "What is the primary ability?",
+  "help.primaryAbility.body":
+    "The ability score that drives this class. It powers your class features and sets the DC enemies must beat to resist them.",
+  "help.spellcastingAbility.title": "What is the spellcasting ability?",
+  "help.spellcastingAbility.body":
+    "The ability used to cast this class's spells. Add its modifier to your proficiency bonus to get your spell save DC.",
+  "help.classProgression.title": "What is progression?",
+  "help.classProgression.body":
+    "The numbers that change as you level: Proficiency Bonus, spell slots, extra attacks, and similar. Open a level to see what it gives you.",
   "character.editClassLine": "Edit class, subclass, and level",
   "character.emptyTitle": "No character yet",
   "character.emptyBody":

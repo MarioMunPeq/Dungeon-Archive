@@ -42,6 +42,8 @@ export const es: Record<keyof typeof en, string> = {
   "a11y.cloudBackup": "Copia de seguridad en la nube",
   "a11y.help": "Ayuda",
   "a11y.language": "Idioma",
+  "language.switched": "Idioma cambiado a {language}",
+  "language.undo": "Deshacer",
   "a11y.switchToEnglish": "Cambiar a inglés",
   "a11y.switchToSpanish": "Cambiar a español",
   "a11y.close": "Cerrar",
@@ -365,6 +367,28 @@ export const es: Record<keyof typeof en, string> = {
   "class.ability.wis": "Sabiduría",
   "class.ability.cha": "Carisma",
   "class.proficiencySavingThrows": "Tiradas de salvación con competencia",
+  "class.progressionSubtitle": "Toca un nivel para ver cada rasgo y número que desbloquea.",
+  "class.nothingNew": "Sin cambios",
+  "class.nothingNewAtLevel": "Nada nuevo en este nivel — tus rasgos y números siguen igual.",
+  "class.noFeatures": "No hay rasgos nuevos en este nivel; solo cambian los números de arriba.",
+  "class.featureCount": "rasgos",
+  "class.uses": "Usa",
+  "class.copyFeature": "Copiar texto",
+  "class.copiedFeature": "Texto copiado",
+  "class.noDescription": "El libro fuente no incluye texto para este rasgo.",
+  "class.subclassSubtitle": "Elige una de estas en el nivel marcado con la insignia Subclase.",
+  "help.hitDice.title": "¿Qué son los dados de daño?",
+  "help.hitDice.body":
+    "El dado que tiras al subir de nivel, más un bonificador fijo. Una clase de d10 con +3 por nivel gana 13 puntos de vida por nivel.",
+  "help.primaryAbility.title": "¿Qué es la característica principal?",
+  "help.primaryAbility.body":
+    "La característica que impulsa esta clase. Alimenta sus rasgos y fija la CD que los enemigos deben superar para resistir sus efectos.",
+  "help.spellcastingAbility.title": "¿Qué es la característica de lanzamiento?",
+  "help.spellcastingAbility.body":
+    "La característica usada para lanzar los conjuros de esta clase. Suma su modificador a tu bonificación de competencia para obtener la CD de lanzamiento.",
+  "help.classProgression.title": "¿Qué es la progresión?",
+  "help.classProgression.body":
+    "Los números que cambian al subir de nivel: bonificación de competencia, espacios de conjuro, ataques adicionales y similares. Abre un nivel para ver qué obtienes.",
   "character.editClassLine": "Editar clase, subclase y nivel",
   "character.emptyTitle": "Todavía no hay ningún personaje",
   "character.emptyBody":

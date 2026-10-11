@@ -5,12 +5,17 @@ interface EntityPropertyProps {
   readonly label: string;
   readonly value: ReactNode;
   readonly stat?: boolean;
+  /** Rendered next to the label, e.g. a `HelpTip`. */
+  readonly children?: ReactNode;
 }
 
-export function EntityProperty({ label, value, stat = false }: EntityPropertyProps) {
+export function EntityProperty({ label, value, stat = false, children }: EntityPropertyProps) {
   return (
     <div className="space-y-1">
-      <dt className="text-xs text-muted-foreground">{label}</dt>
+      <dt className="flex items-center gap-1.5 text-xs text-muted-foreground">
+        {label}
+        {children}
+      </dt>
       <dd
         className={cn(
           "text-sm text-foreground",

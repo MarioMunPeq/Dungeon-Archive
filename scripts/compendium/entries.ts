@@ -74,7 +74,33 @@ function formatDiceFormula(roll: unknown): string {
   return "";
 }
 
+// --- Reference helpers ---
+
+// `refClassFeature` / `refOptionalfeature` / `refFeat` point at other entities by
+// `Name|Source|display text`; we only have the name and display text available here.
+function formatRefKey(key: unknown): string {
+  if (typeof key !== "string" || key.length === 0) return "";
+  const parts = key.split("|");
+  const display = normalizeText(parts[2] ?? "");
+  const name = normalizeText(parts[0] ?? "");
+  return display.length > 0 ? display : name;
+}
+
 // --- Main processor ---
+
+/** `options` wraps a "choose N of these" list; `mode` tunes the surrounding wording. */
+function resolveOptions(obj: Record<string, unknown>): ContentBlock | null {
+  const inner = processEntries(obj.entries as readonly unknown[]);
+  const count = typeof obj.count === "number" ? obj.count : null;
+  if (inner.length === 0) return null;
+  if (count === null) {
+    return { type: "entries", blocks: inner };
+  }
+  return {
+    type: "entries",
+    blocks: [{ type: "list", items: inner.flatMap((b) => (b.type === "list" ? b.items : [b])) }],
+  };
+}
 
 export function processEntries(entries: readonly unknown[]): ContentBlock[] {
   const blocks: ContentBlock[] = [];
@@ -93,6 +119,41 @@ export function processEntries(entries: readonly unknown[]): ContentBlock[] {
     }
 
     const obj = entry as Record<string, unknown>;
+
+    // Options — "choose N of these"
+    if (obj.type === "options" && Array.isArray(obj.entries)) {
+      const resolved = resolveOptions(obj);
+      if (resolved) blocks.push(resolved);
+      continue;
+    }
+
+    // Inline references to other entities
+    if (obj.type === "refClassFeature" || obj.type === "refOptionalfeature" || obj.type === "refFeat") {
+      const key =
+        obj.classFeature ?? obj.optionalfeature ?? obj.feat ?? obj.name;
+      const label = formatRefKey(key);
+      if (label.length > 0) {
+        blocks.push({ type: "list", items: [label] });
+      }
+      continue;
+    }
+
+    // Inline ability modifiers / DCs
+    if (obj.type === "abilityAttackMod" || obj.type === "abilityDc") {
+      const amount =
+        typeof obj.amount === "number" && !Number.isNaN(obj.amount)
+          ? obj.amount
+          : typeof obj.amount === "string"
+            ? Number.parseInt(obj.amount, 10)
+            : Number.NaN;
+      const label = Number.isNaN(amount)
+        ? normalizeText(obj.type === "abilityDc" ? "DC" : "attack bonus")
+        : obj.type === "abilityDc"
+          ? `DC ${amount}`
+          : `+${amount}`;
+      blocks.push({ type: "paragraph", text: label });
+      continue;
+    }
 
     // List
     if (obj.type === "list" && Array.isArray(obj.items)) {

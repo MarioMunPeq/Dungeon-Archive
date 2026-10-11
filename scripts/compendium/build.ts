@@ -41,6 +41,8 @@ interface CategoryConfig {
   readonly name: string;
   readonly sourcePaths: readonly string[];
   readonly dataKey: string;
+  /** Extra top-level arrays from the same files, merged into the transform input. */
+  readonly companionDataKeys?: readonly string[];
   readonly transform: (data: unknown[]) => CompendiumEntry[];
   readonly validate: (entities: CompendiumEntry[]) => ValidationError[];
   readonly outputPath: string;
@@ -164,6 +166,7 @@ const CATEGORIES: readonly CategoryConfig[] = [
       "class/class-wizard.json",
     ],
     dataKey: "class",
+    companionDataKeys: ["classFeature", "subclass", "subclassFeature"],
     transform: (data) => transformClasses(data as Raw5eClass[]),
     validate: validateClasses as (entities: CompendiumEntry[]) => ValidationError[],
     outputPath: "classes.json",
@@ -177,6 +180,7 @@ function readFileJson(filePath: string): unknown {
 
 function loadCategoryData(config: CategoryConfig): unknown[] {
   const results: unknown[] = [];
+  const companions: unknown[] = [];
 
   for (const relPath of config.sourcePaths) {
     const fullPath = join(EXTERNAL_DIR, relPath);
@@ -189,9 +193,13 @@ function loadCategoryData(config: CategoryConfig): unknown[] {
     if (Array.isArray(items)) {
       results.push(...items);
     }
+    for (const key of config.companionDataKeys ?? []) {
+      const extra = (data as Record<string, unknown[]>)[key];
+      if (Array.isArray(extra)) companions.push(...extra);
+    }
   }
 
-  return results;
+  return [...results, ...companions];
 }
 
 function writeJson(filePath: string, data: unknown): void {

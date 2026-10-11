@@ -5,6 +5,7 @@ import type {
   ClassFeatureRef,
   ClassTableGroup,
 } from "../../../../src/types/compendium";
+import type { ContentBlock } from "../../../../src/types/content-block";
 import type {
   Raw5eClass,
   Raw5eClassEquipmentItem,
@@ -13,6 +14,7 @@ import { generateId } from "../../id";
 import { createCanonicalId } from "../../identity";
 import { isAllowedSource } from "../../allowed-sources";
 import { normalizeText } from "../../normalizer/index";
+import { processEntries } from "../../entries";
 
 const ABILITY_ORDER = ["str", "dex", "con", "int", "wis", "cha"] as const;
 
@@ -252,7 +254,73 @@ function parseFeatureKey(
   };
 }
 
-function formatClassFeatures(raw: Raw5eClass["classFeatures"]): ClassFeatureRef[] {
+interface RawClassFeature {
+  readonly name: string;
+  readonly source: string;
+  readonly className?: string;
+  readonly classSource?: string;
+  readonly entries?: readonly unknown[];
+  readonly isClassFeatureVariant?: boolean;
+  readonly consumes?: { readonly name?: string };
+  readonly [key: string]: unknown;
+}
+
+interface FeatureDefinition {
+  readonly description: readonly ContentBlock[];
+  readonly consumes: string | null;
+}
+
+/** Variants are published as `Parent: Sub-Option`, so the parent key drops the suffix. */
+function variantParentName(name: string): { parent: string; child: string } | null {
+  const idx = name.indexOf(": ");
+  if (idx <= 0) return null;
+  return { parent: name.slice(0, idx), child: name.slice(idx + 2) };
+}
+
+function buildFeatureIndex(entries: readonly unknown[]): Map<string, FeatureDefinition> {
+  const index = new Map<string, FeatureDefinition>();
+
+  for (const raw of entries) {
+    if (!raw || typeof raw !== "object") continue;
+    const feature = raw as RawClassFeature;
+    if (typeof feature.name !== "string" || !Array.isArray(feature.entries)) continue;
+
+    const className = feature.className ?? "";
+    const classSource = feature.classSource ?? feature.source;
+    const blocks = processEntries(feature.entries);
+    const consumes =
+      typeof feature.consumes?.name === "string" ? normalizeText(feature.consumes.name) : null;
+    const definition: FeatureDefinition = { description: blocks, consumes };
+
+    const split = variantParentName(feature.name);
+    const lookupName = feature.isClassFeatureVariant && split ? split.parent : feature.name;
+    const key = `${lookupName}|${className}|${classSource}`;
+    const existing = index.get(key);
+
+    if (!existing) {
+      index.set(key, definition);
+      continue;
+    }
+
+    // Several variants can share one parent; keep them as labelled sub-blocks.
+    const childName = split ? split.child : feature.name;
+    index.set(key, {
+      description: [
+        ...existing.description,
+        { type: "entries", name: childName, blocks: blocks as ContentBlock[] },
+      ],
+      consumes: existing.consumes ?? consumes,
+    });
+  }
+
+  return index;
+}
+
+function formatClassFeatures(
+  raw: Raw5eClass["classFeatures"],
+  featureIndex: Map<string, FeatureDefinition>,
+  cls: { readonly name: string; readonly source: string },
+): ClassFeatureRef[] {
   const out: ClassFeatureRef[] = [];
   const seen = new Set<string>();
 
@@ -263,9 +331,20 @@ function formatClassFeatures(raw: Raw5eClass["classFeatures"]): ClassFeatureRef[
     if (!parsed) continue;
     if (seen.has(key)) continue;
     seen.add(key);
+
+    // PHB keys leave the source slot empty (`Name|Class||Level`), meaning "same as the class".
+    const className = parsed.className || cls.name;
+    const source = parsed.source || cls.source;
+    const definition = featureIndex.get(`${parsed.name}|${className}|${source}`);
+
     out.push({
-      ...parsed,
+      name: parsed.name,
+      className,
+      source,
+      level: parsed.level,
       gainSubclassFeature: typeof entry === "object" && entry.gainSubclassFeature === true,
+      description: definition?.description ?? [],
+      consumes: definition?.consumes ?? null,
     });
   }
 
@@ -320,8 +399,34 @@ function formatTableGroups(raw: Raw5eClass["classTableGroups"]): ClassTableGroup
   return out;
 }
 
+// Fields that only ever appear on top-level class entries.
+const CLASS_MARKERS = [
+  "hd",
+  "proficiency",
+  "primaryAbility",
+  "startingProficiencies",
+  "classFeatures",
+  "classTableGroups",
+  "multiclassing",
+  "subclassTitle",
+] as const;
+
+/**
+ * The loader appends `classFeature` and `subclass` rows to the same array, so
+ * top-level classes must be told apart before transforming.
+ */
+function isClassEntry(entry: Raw5eClass): boolean {
+  if (typeof entry.name !== "string") return false;
+  if (typeof (entry as { className?: unknown }).className === "string") return false;
+  return CLASS_MARKERS.some((marker) => marker in entry);
+}
+
 export function transformClasses(raw: readonly Raw5eClass[]): Class[] {
-  return raw
+  // The loader appends `classFeature` / `subclass` rows to the same array.
+  const classes = raw.filter(isClassEntry);
+  const featureIndex = buildFeatureIndex(raw);
+
+  return classes
     .filter((c) => isAllowedSource(c.source))
     .map((c): Class => ({
       id: generateId(c.source, c.name),
@@ -344,7 +449,7 @@ export function transformClasses(raw: readonly Raw5eClass[]): Class[] {
       startingEquipment: formatStartingEquipment(c.startingEquipment),
       multiclassing: formatMulticlassing(c.multiclassing),
       classTableGroups: formatTableGroups(c.classTableGroups),
-      classFeatures: formatClassFeatures(c.classFeatures),
+      classFeatures: formatClassFeatures(c.classFeatures, featureIndex, c),
       subclassTitle: c.subclassTitle ? normalizeText(c.subclassTitle) : null,
       subclassGroups: (c.subclassGroups ?? []).map((g) => ({ name: g.name, source: g.source })),
     }));

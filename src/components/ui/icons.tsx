@@ -34,6 +34,15 @@ export function CheckIcon(props: IconProps) {
   );
 }
 
+export function CopyIcon(props: IconProps) {
+  return (
+    <Icon {...props}>
+      <rect x="9" y="9" width="12" height="12" rx="2" />
+      <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
+    </Icon>
+  );
+}
+
 export function CloseIcon(props: IconProps) {
   return (
     <Icon {...props}>
@@ -101,23 +110,12 @@ export function PaletteIcon(props: IconProps) {
   );
 }
 
-export function LanguagesIcon(props: IconProps & { currentLanguage?: "en" | "es" }) {
-  const lang = props.currentLanguage ?? "en";
+export function LanguagesIcon(props: IconProps) {
   return (
     <Icon {...props}>
-      <text
-        x="12"
-        y="15"
-        dominantBaseline="middle"
-        textAnchor="middle"
-        fontSize="16"
-        fontWeight="400"
-        letterSpacing="0.2"
-        fill="currentColor"
-        fontFamily="system-ui, sans-serif"
-      >
-        {lang.toUpperCase()}
-      </text>
+      <path d="M2 5h9M6.5 3v2M9 5c0 3.5-2.5 6-6 6" />
+      <path d="M4 11c1.8 1.4 3.6 2 5.5 2" />
+      <path d="m13 21 4.2-10L21.4 21M14.8 17.2h4.8" />
     </Icon>
   );
 }

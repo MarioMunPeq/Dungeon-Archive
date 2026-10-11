@@ -76,6 +76,8 @@ export type {
   MagicItem,
   Feat,
   Class,
+  ClassFeatureRef,
+  ClassTableGroup,
   SearchIndexEntry,
   CompendiumEntry,
   EntityCategory,

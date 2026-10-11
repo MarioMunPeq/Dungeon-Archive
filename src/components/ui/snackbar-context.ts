@@ -26,3 +26,8 @@ export function useSnackbar(): SnackbarContextValue {
   }
   return value;
 }
+
+/** Non-throwing variant for components that can render outside the provider. */
+export function useOptionalSnackbar(): SnackbarContextValue | null {
+  return useContext(SnackbarContext);
+}

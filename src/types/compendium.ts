@@ -77,6 +77,10 @@ export interface ClassFeatureRef {
   readonly source: string;
   readonly level: number;
   readonly gainSubclassFeature: boolean;
+  /** SRD text explaining what the feature does; empty when 5etools has no entry. */
+  readonly description: readonly ContentBlock[];
+  /** Resource spent to use the feature, e.g. "Channel Divinity". */
+  readonly consumes: string | null;
 }
 
 export interface ClassTableGroup {
