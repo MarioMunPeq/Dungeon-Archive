@@ -65,4 +65,3 @@ New readers should start with the product story, then the architecture, then the
 - **Keep names in sync** with code: tabs, routes, store actions, file paths.
 - **Run `pnpm build:compendium` changes through the compendium docs** (`compendium-architecture.md`).
 - **ADR changes** are recorded in `architecture-decisions/`; the index table stays updated.
-- **Screenshots** live in `screenshots/` and are referenced from the README.

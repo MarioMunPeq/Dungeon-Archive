@@ -204,7 +204,6 @@ docs/
 ├── coding-guidelines.md     # Code standards
 ├── design-principles.md     # Design principles
 ├── cloud-backup.md          # Cloud Backup feature (Firebase)
-├── screenshots/             # Product screenshots (used by README)
 ├── architecture-decisions/  # ADRs (README + ADR-001..005)
 └── history/                 # Archived historical reports
 ```

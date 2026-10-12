@@ -9,32 +9,13 @@
   <img src="https://img.shields.io/badge/PWA-installable-3AB492?style=flat-square&logo=pwa&logoColor=white" alt="PWA installable" />
 </p>
 
-A fast, mobile-first, offline-first companion for D&D 5e sessions. It puts the entire game reference — spells, monsters, equipment, conditions, actions, magic items, and feats — on the phone that is already on the table, and keeps the lightweight context of the game (your party, your current session, combat state) a tap away.
+A fast, mobile-first, offline-first companion for D&D 5e sessions. It puts the entire game reference — spells, monsters, equipment, conditions, actions, magic items, feats, and classes — on the phone that is already on the table, and keeps the lightweight context of the game (your party, your current session, combat state) a tap away.
 
 Its only purpose is reducing the dead time at the table: the gap between a question coming up and its answer being found. Everything in the app is built around closing that gap.
 
 > **Try it live:** [Dungeon Archive](https://MarioMunPeq.github.io/Dungeon-Archive/) — installable PWA, works fully offline, no account needed. Hit **View Demo** on the Home screen to see the app pre-populated with a realistic character.
 
-> **Version 0.1.0**
-
----
-
-## Screenshots
-
-_Images live in [`docs/screenshots/`](docs/screenshots/) and are linked below. (Placeholders until capture — the Home, Combat, Character, and Theme Picker screens are the most portfolio-relevant.)_
-
-| Screen | File |
-| ------ | ---- |
-| Home | [`docs/screenshots/home.png`](docs/screenshots/home.png) |
-| Theme picker (7 accent themes) | [`docs/screenshots/theme-picker.png`](docs/screenshots/theme-picker.png) |
-| Search (Archive tab) | [`docs/screenshots/search.png`](docs/screenshots/search.png) |
-| Compendium (entity list) | [`docs/screenshots/compendium.png`](docs/screenshots/compendium.png) |
-| Entity detail | [`docs/screenshots/entity-detail.png`](docs/screenshots/entity-detail.png) |
-| Character | [`docs/screenshots/party.png`](docs/screenshots/party.png) |
-| Combat | [`docs/screenshots/combat.png`](docs/screenshots/combat.png) |
-| Session | [`docs/screenshots/session.png`](docs/screenshots/session.png) |
-| Rules (Archive tab) | [`docs/screenshots/rules.png`](docs/screenshots/rules.png) |
-| Cloud Backup | [`docs/screenshots/backup.png`](docs/screenshots/backup.png) |
+> **Version 1.0.0** · English and Spanish · MIT licensed
 
 ---
 
@@ -43,15 +24,19 @@ _Images live in [`docs/screenshots/`](docs/screenshots/) and are linked below. (
 | Feature | What it does |
 | ------- | ------------ |
 | **Instant Search** | One search across the whole Compendium. As-you-type results from a prebuilt in-memory index; no network, no server. |
-| **Offline Compendium** | The complete SRD reference for D&D 5e — spells, monsters, equipment, conditions, actions, magic items, and feats — compiled into the app at build time and available offline. |
+| **Offline Compendium** | The complete SRD reference for D&D 5e — spells, monsters, equipment, conditions, actions, magic items, feats, and classes — compiled into the app at build time and available offline. |
 | **Entity Relationships** | Entities link to each other. A spell shows its related conditions and spells; a monster shows the spells and equipment it references. |
+| **Class reference** | Every class (25 in all) broken down level by level, 1 to 20, with each feature as an expandable section and a one-tap copy button for the raw text. |
 | **Character Manager** | Lightweight player reference sheets: name, class, level, subclass, ability scores, AC / passive perception / spell DC, and references to known spells, weapons, and magic items. References point into the Compendium — nothing is duplicated. |
 | **Combat tracker** | Per-character hit points with quick damage/heal deltas, a tap-to-toggle condition tray (13 conditions), a "what can I do on my turn" checklist, and the combat stats you consult most. |
-| **Dice Roller** | Roll any die (d4–d100) any number of times, with an optional modifier. Spell damage rolls inline on tap from the Character sheet and Compendium. |
+| **Dice Roller** | Roll any die (d4–d100) any number of times, with an optional modifier. Real 3D physics dice, lazy-loaded so they never touch the main bundle. Spell damage rolls inline on tap from the Character sheet and Compendium. |
 | **Session pins** | Pin monsters, spells, and items to the current session with one tap, and clear them all with **End Session**. |
 | **Favorites & recents** | Mark entities as favorites and let the app remember what you recently viewed and searched. |
 | **Beginner Mode** | New to the game? Toggle beginner tips that explain the d20, ability checks, and your turn in combat as you go. |
 | **Rules reference** | A built-in reference for the d20, ability checks, saving throws, combat turns, attacks & damage, hit points & resting, and spellcasting — plus a plain-language glossary, all inside the Archive. |
+| **Help & glossary** | A dedicated screen explaining how the app works, what each stat means, and how to get the most out of it. |
+| **English & Spanish** | The whole interface in both languages, including ability names, contextual help, and the glossary. |
+| **Seven accent themes** | Switch the accent with a short cross-fade. Backgrounds, surfaces, and typography never change, and every accent is contrast-checked. |
 | **Cloud Backup (optional)** | Optional Google Sign-In with manual upload/restore of your local data to Firestore. Everything else works with zero internet. |
 | **Progressive Web App** | Installable, with offline caching via a service worker. |
 
@@ -79,9 +64,9 @@ The interface follows a documented design system — [`docs/design-dna.md`](docs
 
 A few examples of how the system evolved:
 
-- **Palette exploration.** The accent color went through several identities before landing on a themeable system: seven accent themes (Jade, Amber, Arcane Teal, Gold Sovereign, Wine Grimoire, Void Plum, Storm Steel) that swap via a signature ~600ms "wave" reveal, while the warm near-black background, surfaces, typography, and motion stay fixed. The rules forbid using the accent decoratively — it is reserved for interactive elements.
+- **Palette exploration.** The accent color went through several identities before landing on a themeable system: seven accent themes (Jade, Amber, Arcane Teal, Gold Sovereign, Wine Grimoire, Void Plum, Storm Steel) that swap via a short cross-fade, while the warm near-black background, surfaces, and typography stay fixed. The rules forbid using the accent decoratively — it is reserved for interactive elements.
 - **Consistency passes.** Dedicated passes swept the app for drift: radius tiers (stat/card/control), the spacing grid, icon treatments, metadata typography, and empty-state guidance. Each pass is documented under [`docs/history/`](docs/history/), including the root-cause write-ups.
-- **Motion system.** One shared set of durations and easings (primary interactions ~200ms, screen transitions ~250ms) keeps every animation on the same rhythm, with exactly one signature exception.
+- **Motion system.** One shared set of durations and easings (primary interactions ~200ms, screen transitions ~250ms) keeps every animation on the same rhythm. The dice roll is the only exception. Theme and language switches use proportionally-sized cross-fades — 240ms and 160ms, neither watchable on purpose — and a test fails if they ever become the same length again.
 - **Accessibility as a rule.** Text tiers are pinned to WCAG AA contrast on every surface, focus states are visible on all interactive elements, icon-only buttons carry labels, and dialogs trap focus and restore it on close.
 
 The rules are the point: they make a small screen feel coherent and give the app a personality a generic template never would.
@@ -96,7 +81,7 @@ Dungeon Archive is a single-page client application with three layers:
 
 Official D&D 5e data is pulled from the [5etools](https://github.com/5etools-mirror-1/5etools-mirror-1.github.io) dataset, transformed and validated at **build time**, and emitted as static JSON under `src/generated/compendium/`.
 
-- **7 categories:** spells, monsters, equipment, conditions, actions, magic items, feats.
+- **8 categories:** spells, monsters, equipment, conditions, actions, magic items, feats, classes.
 - Each entity has a stable **canonical ID** (e.g. `spell.fireball`).
 - A **related-entities index** links entities to each other at build time.
 - The generated data is the single source of truth. User data stores **references** to it, never copies.
@@ -125,6 +110,7 @@ A set of feature pages built on the design system, orchestrated by React Router.
 | `/character` | Player reference sheets |
 | `/session` | The pinned session list (End Session) |
 | `/backup` | Cloud Backup (shows a "not available" state when the feature is disabled) |
+| `/help` | How the app works, what each stat means |
 | `/:category/:canonicalId` | Entity detail pages (e.g. `/spell/fireball`) |
 | `/search` | Redirects to `/archive` |
 | `/rules` | Redirects to `/archive?tab=rules` |
@@ -162,17 +148,23 @@ Dungeon Archive/
 │   ├── components/        # Design-system primitives (ui/, layout/, entity/)
 │   ├── config/            # App constants (name, version)
 │   ├── features/          # Feature pages and components
+│   │   ├── archive/       #   Archive shell (Search, How to Play, Rules, Glossary tabs)
 │   │   ├── auth/          #   Firebase auth provider
 │   │   ├── backup/        #   Cloud Backup page
+│   │   ├── character/     #   Player reference sheets
 │   │   ├── combat/        #   Combat tracker
 │   │   ├── compendium/    #   Entity list + detail pages
 │   │   ├── debug/         #   Dev-only routes
+│   │   ├── demo/          #   "View Demo" sample data
+│   │   ├── dice/          #   Dice Roller (3D stage lazy-loaded)
+│   │   ├── help/          #   Help screen
 │   │   ├── home/          #   Landing screen
+│   │   ├── language/      #   Language definitions and <html lang> sync
+│   │   ├── motion/        #   Shared cross-fade transition
 │   │   ├── onboarding/    #   First-run overlay
-│   │   ├── party/         #   Player reference sheets
-│   │   ├── rules/         #   Quick Rules
 │   │   ├── search/        #   Global search
-│   │   └── session/       #   Session pins
+│   │   ├── session/       #   Session pins
+│   │   └── theme/         #   Accent theme picker and <html data-theme> sync
 │   ├── generated/         # Build-time generated data (compendium JSON, related index)
 │   ├── hooks/             # Shared hooks
 │   ├── lib/               # Utilities, Firebase wiring
@@ -231,12 +223,14 @@ pnpm dev          # start the Vite dev server
 | Script | Purpose |
 | ------ | ------- |
 | `pnpm dev` | Vite dev server with HMR |
-| `pnpm build` | Type-check, build-time compendium processing, and production build |
+| `pnpm build` | Type-check and produce the production build |
+| `pnpm build:compendium` | Rebuild the Compendium JSON from the 5etools dataset |
 | `pnpm preview` | Preview the production build locally |
 | `pnpm typecheck` | Type-check the app and scripts |
 | `pnpm lint` | ESLint over the project |
-| `pnpm test` | Run the test suite |
-| `pnpm check` / `pnpm verify` | Aggregate checks used in CI |
+| `pnpm test` | Run the test suite (~30 files) |
+| `pnpm check` | Type-check and lint only |
+| `pnpm verify` | The full chain CI runs: typecheck, lint, format check, tests, build |
 
 Local development runs with no Firebase configuration by default. In development the Cloud Backup UI is exercised against a fake in-memory gateway; in a production build with no configuration the feature is disabled and hidden. Add a `.env` file (see `.env.example`) to enable it for real.
 
@@ -258,7 +252,7 @@ The engineering rules that keep this codebase consistent live in [`docs/engineer
 pnpm build          # produces dist/
 ```
 
-Deployment is GitHub Pages via GitHub Actions (`.github/workflows/deploy.yml`). The app is served from the repository's Pages URL with a base path of `/Dungeon-Archive/`. CI (`.github/workflows/ci.yml`) runs typecheck, lint, format check, and the production build on every push.
+Deployment is GitHub Pages via GitHub Actions (`.github/workflows/deploy.yml`). The app is served from the repository's Pages URL with a base path of `/Dungeon-Archive/`. CI (`.github/workflows/ci.yml`) runs typecheck, lint, format check, the test suite, and the production build on every push and pull request.
 
 ---
 
@@ -312,7 +306,6 @@ Not commitments — directions the project could grow, in order of current think
 | [`docs/roadmap.md`](docs/roadmap.md) | Current state and future direction |
 | [`docs/cloud-backup.md`](docs/cloud-backup.md) | Firebase setup and security |
 | [`docs/architecture-decisions/`](docs/architecture-decisions/) | Architecture Decision Records |
-| [`docs/screenshots/`](docs/screenshots/) | Product screenshots |
 
 ---
 
