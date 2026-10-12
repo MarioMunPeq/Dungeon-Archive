@@ -86,18 +86,26 @@
 42. Duration ceiling: nothing above 300ms for ordinary motion. Primary
     interactions ~180-220ms; secondary micro-interactions ~120-180ms; route/tab
     transitions ~250-300ms (raised from the previous 220-260ms to accommodate a
-    slightly richer transition). **Signature moments** (currently: the theme-switch
-    wave, the language-switch wave, and the Dice Roller's 3D physics dice roll) may
-    exceed the 300ms ceiling, capped at ~600-700ms (the dice roll runs on a physics
-    simulation, so its exact duration is not CSS-controlled; it stays short enough
-    to not stall the table). This is an explicit, limited exception — not a
-    general loosening. Any future addition to the signature-moments list must be
-    added here deliberately, never assumed.
+    slightly richer transition). **Signature moments** (currently: only the Dice
+    Roller's 3D physics dice roll) may exceed the 300ms ceiling, capped at
+    ~600-700ms (the dice roll runs on a physics simulation, so its exact duration
+    is not CSS-controlled; it stays short enough to not stall the table). This is
+    an explicit, limited exception — not a general loosening. Any future addition
+    to the signature-moments list must be added here deliberately, never assumed.
+    **Removed from the list (motion recalibration pass):** the theme-switch wave
+    and the language-switch wave. Both are settings toggles, not table moments;
+    giving them a signature budget was the reason they read as aggressive, which
+    rule 41 forbids. They are now ordinary cross-fades (rule 52).
 43. Prefer subtle easing (soft/spring-like), never cartoonish bounce.
 44. State changes animate opacity + translate together, never opacity alone or
-    scale alone. Two deliberate exceptions, both inside signature moments: the
-    wave reveal animates clip-path (its defining circular shape) and filter
-    drop-shadow (its ring), and the Dice Roller runs a physics simulation.
+    scale alone. **Two documented exceptions.** (a) The theme and language
+    cross-fades animate opacity alone — they are whole-tree swaps, where a
+    translate would mean physically moving the entire viewport for a settings
+    toggle, which is exactly what the previous circular reveal did. (b) The Dice
+    Roller runs a physics simulation. (Motion recalibration pass also retired the
+    wave reveal's clip-path circle and its accent-tinted drop-shadow ring: a
+    full-viewport circle with a glowing edge is the most attention-grabbing thing
+    the app could do, and it was guarding a language toggle.)
 45. Hover-only interactions are not implemented — this app has no mouse users in
     practice; motion budget goes to touch feedback (press/release/toggle) instead.
     **This rule is unchanged by the "Alive Interactions" pass**: the expanded
@@ -113,7 +121,7 @@
 
 ## Constraints (apply to every future prompt)
 
-48. No new dependencies unless a specific need can't be met with what's already in the project. **Exception ("Alive Interactions" pass): a single lightweight animation library is approved — Framer Motion is the designated choice.** It was not installed during the approving pass: the theme wave, route transitions, and micro-interactions were all implemented with native CSS + the View Transitions API, which is cheaper and lower-jank on the target mid-tier mobile hardware (rule 3). If richer multi-property animation is ever needed, Framer Motion is the one approved library — do not introduce a second animation library without amending this rule first. **Exception (Dice Roller pass): `@3d-dice/dice-box` is approved for real 3D physics dice on the Dice Roller screen only** — the one interaction the design system cannot express with native CSS (rule 47's "when in doubt, don't animate" falls away for this deliberate signature moment). It must remain lazy-loaded to `/dice` so it never enters the main bundle, and users on reduced motion (or without WebGL) get the instant numeric result instead of the physics simulation. Do not reuse it for other surfaces without amending this rule first.
+48. No new dependencies unless a specific need can't be met with what's already in the project. **Exception ("Alive Interactions" pass): a single lightweight animation library is approved — Framer Motion is the designated choice.** It was not installed during the approving pass: the cross-fades, route transitions, and micro-interactions were all implemented with native CSS + the View Transitions API, which is cheaper and lower-jank on the target mid-tier mobile hardware (rule 3). If richer multi-property animation is ever needed, Framer Motion is the one approved library — do not introduce a second animation library without amending this rule first. **Exception (Dice Roller pass): `@3d-dice/dice-box` is approved for real 3D physics dice on the Dice Roller screen only** — the one interaction the design system cannot express with native CSS (rule 47's "when in doubt, don't animate" falls away for this deliberate signature moment). It must remain lazy-loaded to `/dice` so it never enters the main bundle, and users on reduced motion (or without WebGL) get the instant numeric result instead of the physics simulation. Do not reuse it for other surfaces without amending this rule first.
 49. No gradients/decoration beyond what's explicitly defined in this document (the protagonist-card gradient, the app-shell vignette+grain, the section-header left border) — don't add a fourth decorative pattern without updating this document first.
 50. Every future visual prompt should be checked against this document before being written — if a new decision contradicts a rule here, update this document explicitly rather than silently diverging.
 51. This document should be revised (not silently ignored) whenever a genuinely new pattern is needed — treat additions as deliberate amendments, not exceptions.
@@ -131,4 +139,6 @@
 
     Arcane Teal remains the default for new users and the fallback for any existing user without a persisted theme; every other theme is a selectable override, never a default change. Backgrounds, surfaces, typography, radius, and the fixed success/danger/neutral modifier colors never change. **Every accent must clear WCAG AA 4.5:1 against `--color-background` (#12100E)**, because the bottom nav renders the active tab in the accent at 12px — the original Wine/Plum/Steel accents measured 3.45/4.06/4.33 and were raised on an accessibility pass (all seven now measure ≥5.0:1). Re-check with a contrast tool before changing any accent; a theme that "looks right" but fails 4.5:1 is not acceptable.
 
-    **The wave reveal** is the app's single shared signature moment (`src/features/motion/wave-reveal.ts`), used by both the theme picker and the language toggle so every state change transitions the same way. A circular reveal opens from the exact point the user touched (the tapped swatch, the tapped toggle), carrying a shockwave ring of light tinted with the active accent, while the incoming content settles in with a slight rise. 550ms. It is driven from JS with the Web Animations API on `::view-transition-new(root)`, animating `clip-path` (the circle), `filter: drop-shadow()` (the ring — a drop-shadow follows the clipped silhouette, which is what makes it read as a ring on the wave's edge) and `transform` + `opacity` (the content settle) in a single pass over one pseudo-element. No extra DOM is added; the accent is published as `--wave-accent` on the root for the duration. Browsers without the View Transitions API, and users on `prefers-reduced-motion`, get an instant swap — the reduced-motion check happens in JS *before* the transition starts, because the global `* { animation: none }` rule cannot reach the `::view-transition-*` pseudo-elements. The stored theme applies instantly on first load. The theme picker renders the 7 themes as accent-tinted preview cards in a 4+3 grid (per rule 26's protagonist-card gradient treatment, tinted with each theme's own accent); the currently active card is ringed in its own accent and carries `aria-pressed`. The popover remains viewport-clamped (rule 30) at its larger size.
+    **The cross-fade** (`src/features/motion/cross-fade.ts`) is the app's only whole-screen transition, shared by the theme picker and the language toggle so every global state change transitions the same way. Opacity only: no transform, no scale, no clip-path circle, no glow. Duration is published as `--cross-fade-duration` on the root and consumed by the `::view-transition-old/new(root)` rules in `index.css`, which otherwise leave the UA's default cross-fade alone. The two budgets are deliberately unequal: the theme recolours every surface so it gets **240ms**, while the language only swaps words so it gets **160ms** — a gesture proportional to what it changes. Browsers without the View Transitions API, and users on `prefers-reduced-motion`, get an instant swap; the reduced-motion check happens in JS *before* the transition starts, because the global `* { animation: none }` rule cannot reach the `::view-transition-*` pseudo-elements. The stored theme applies instantly on first load. The theme picker renders the 7 themes as accent-tinted preview cards in a 4+3 grid (per rule 26's protagonist-card gradient treatment, tinted with each theme's own accent); the currently active card is ringed in its own accent and carries `aria-pressed`. The popover remains viewport-clamped (rule 30) at its larger size.
+
+    **Replaced (motion recalibration pass):** this was previously a 550ms circular reveal with a `drop-shadow` shockwave ring tinted in the active accent, opening from the tapped point — a "signature moment" shared by both controls. It was reported as aggressive, and correctly so: the ring is a moving bright edge across the entire viewport, which is the opposite of rule 41, and neither control is a signature moment (rule 42). The reveal's *purpose* — signalling a global change that just happened — is preserved by the fade.

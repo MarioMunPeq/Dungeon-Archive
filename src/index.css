@@ -110,7 +110,6 @@
   --animate-page-enter: page-enter 240ms cubic-bezier(0.16, 1, 0.3, 1) both;
   --animate-overlay-in: overlay-in 200ms cubic-bezier(0.16, 1, 0.3, 1);
   --animate-dice-active: dice-active 260ms cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
-  --animate-lang-spin: lang-spin 240ms cubic-bezier(0.16, 1, 0.3, 1);
 
   /* Spacing — 4px grid (spec 07). Semantic scale: xs=4px, sm=8px, md=12px,
      lg=16px, xl=24px, 2xl=32px, 3xl=48px. Numeric utilities map 1:1
@@ -237,31 +236,17 @@
   }
 }
 
-/* Language switch — the globe flips half a turn and settles on the new language,
-   so the control reads as physically turned rather than merely re-labelled.
-   opacity + transform only (Design DNA rule 44). */
-@keyframes lang-spin {
-  from {
-    opacity: 0.25;
-    transform: rotateY(0deg);
-  }
-  to {
-    opacity: 1;
-    transform: rotateY(180deg);
-  }
-}
-
-/* The wave reveal (theme switch + language switch) is driven from JS with the Web
-   Animations API on ::view-transition-new(root) — see features/motion/wave-reveal.
-   It animates clip-path (the circle), filter drop-shadow (the shockwave ring, tinted
-   by --wave-accent, which runWaveReveal publishes on the root for the duration) and
-   transform+opacity (the content settle). Nothing here needs to declare it; the
-   rules below only pin the snapshots still so the reveal reads as a wave opening
-   over the old state rather than a cross-fade. */
+/* Theme switch + language switch — a plain cross-fade (Design DNA rule 41).
+   The browser cross-fades view-transition snapshots by default; these rules only
+   set the duration and the easing, and take the duration from a custom property
+   that runCrossFade publishes on the root for the length of the transition
+   (see features/motion/cross-fade.ts). Opacity only, no transform, no clip-path
+   and no glow: the change should not be watchable. */
 ::view-transition-old(root),
 ::view-transition-new(root) {
   pointer-events: none;
-  animation-name: none;
+  animation-duration: var(--cross-fade-duration, 200ms);
+  animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 /* Dice Roller chip feedback — a soft accent ring that scales in and fades out
@@ -298,24 +283,6 @@
 
 .route-transition {
   animation: route-in 280ms cubic-bezier(0.16, 1, 0.3, 1) both;
-}
-
-/* Signature moment — theme-switch wave (Design DNA rules 42/44/52).
-   An expanding circular clip-path reveal on the incoming page snapshot,
-   originating from the tapped swatch's screen position. Driven from JS with
-   the Web Animations API: theme-picker.tsx calls root.animate() with a
-   clip-path circle() keyframe pair targeting ::view-transition-new(root)
-   (see theme-picker.tsx select()). ~600ms sits inside the signature-moment
-   budget (600-700ms) — the only motion allowed to exceed the 300ms ceiling.
-   Both root snapshots run with their UA cross-fade disabled (animation-name:
-   none), so the old theme stays fully visible outside the circle while the JS
-   clip-path reveal replaces the UA fade-in on the new snapshot. pointer-events
-   are off so nothing blocks interaction while it plays. Browsers without View
-   Transitions fall back to the .theme-switching cross-fade below. */
-::view-transition-old(root),
-::view-transition-new(root) {
-  pointer-events: none;
-  animation-name: none;
 }
 
 @layer base {
@@ -485,10 +452,10 @@
   }
 
   /* Reduced motion — zero out ordinary animations, transitions, and smooth
-     scrolling. The wave reveal runs on ::view-transition-* pseudo-elements, which
+     scrolling. The cross-fade runs on ::view-transition-* pseudo-elements, which
      `*` does not match, so it is suppressed explicitly here *and* skipped in JS:
-     runWaveReveal checks matchMedia before starting the transition at all (see
-     features/motion/wave-reveal.ts). Belt and braces: the CSS below also kills
+     runCrossFade checks matchMedia before starting the transition at all (see
+     features/motion/cross-fade.ts). Belt and braces: the CSS below also kills
      the pseudo-element animations in case the transition is started anyway. */
   @media (prefers-reduced-motion: reduce) {
     *,

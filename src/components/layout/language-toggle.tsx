@@ -1,71 +1,55 @@
-import { useCallback, useEffect, useRef, useState } from "react";
-import type { MouseEvent } from "react";
+import { useCallback } from "react";
 import { userStore, useLanguage } from "@/user-state";
-import { Button, LanguagesIcon } from "@/components/ui";
-import { cn } from "@/lib/utils";
+import { Button } from "@/components/ui";
 import { t } from "@/i18n";
 import { LANGUAGES, languageCode, nextLanguage } from "@/features/language/language";
-import { runWaveReveal } from "@/features/motion/wave-reveal";
+import { CROSS_FADE_LANGUAGE_MS, runCrossFade } from "@/features/motion/cross-fade";
 
 /**
  * One-tap language switch.
  *
- * The globe spins a half turn while the wave reveal opens from the button and
- * carries the new language in. No toast and no confirmation dialog: the wave
- * *is* the confirmation — a full-screen change of language cannot read as
- * accidental, and anything on top of it only delays the result.
+ * The control is just the two codes with the current one lit; there is no icon.
+ * A globe was tried here and removed — it carried no information the codes did
+ * not already carry, and it needed its own spin animation to justify its width.
+ * The cross-fade plus the lit code is the whole feedback: a language change is
+ * unmistakable once it has happened, and it cannot be read as accidental.
+ *
+ * No toast and no confirmation dialog for the same reason.
+ *
+ * The fade is shorter than the theme's (160ms vs 240ms) on purpose. Recolouring
+ * every surface is a large change; swapping words is a small one, and the
+ * gesture should be proportional to what it does — Design DNA rule 41.
  */
 export function LanguageToggle() {
   const language = useLanguage();
-  const [spinning, setSpinning] = useState(false);
-  const spinTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const target = nextLanguage(language);
 
-  // The spin lasts 240ms; clearing the timer on unmount avoids setting state
-  // on a component that is already gone.
-  useEffect(() => {
-    return () => {
-      if (spinTimer.current !== null) clearTimeout(spinTimer.current);
-    };
-  }, []);
+  const handleClick = useCallback(() => {
+    void runCrossFade(() => userStore.getState().setLanguage(target), CROSS_FADE_LANGUAGE_MS);
+  }, [target]);
 
-  const handleClick = useCallback(
-    (event: MouseEvent<HTMLButtonElement>) => {
-      setSpinning(true);
-      if (spinTimer.current !== null) clearTimeout(spinTimer.current);
-      spinTimer.current = setTimeout(() => setSpinning(false), 260);
-
-      // Same wave as the theme switch, originating from the button that was
-      // tapped — the app transitions the same way wherever the state changes.
-      void runWaveReveal(() => userStore.getState().setLanguage(target), {
-        x: event.clientX,
-        y: event.clientY,
-      });
-    },
-    [target],
-  );
+  const switchLabel = target === "es" ? t("a11y.switchToSpanish") : t("a11y.switchToEnglish");
 
   return (
     <Button
       variant="ghost"
       size="md"
-      className="gap-1.5 px-2"
-      aria-label={target === "es" ? t("a11y.switchToSpanish") : t("a11y.switchToEnglish")}
-      title={target === "es" ? t("a11y.switchToSpanish") : t("a11y.switchToEnglish")}
+      className="px-2"
+      aria-label={switchLabel}
+      title={switchLabel}
       onClick={handleClick}
     >
-      <LanguagesIcon size="md" className={cn(spinning && "animate-lang-spin")} />
       <span aria-hidden="true" className="flex items-center text-xs font-semibold tracking-wide">
         {LANGUAGES.map((code, index) => {
           const active = code === language;
           return (
             <span key={code} className="flex items-center">
               {index > 0 && (
-                <span aria-hidden="true" className="mx-0.5 text-muted-foreground/50">
+                <span aria-hidden="true" className="mx-1 text-muted-foreground/40">
                   |
                 </span>
               )}
-              <span className={active ? "text-foreground" : "text-muted-foreground/60"}>
+              <span className={active ? "text-foreground" : "text-muted-foreground/50"}>
                 {languageCode(code)}
               </span>
             </span>

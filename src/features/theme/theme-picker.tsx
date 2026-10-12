@@ -1,11 +1,11 @@
-import type { CSSProperties, MouseEvent } from "react";
+import type { CSSProperties } from "react";
 import { flushSync } from "react-dom";
 import type { Theme } from "@/user-state";
 import { useTheme, userStore, THEMES } from "@/user-state";
 import { cn } from "@/lib/utils";
 import { Button, PaletteIcon, Caption } from "@/components/ui";
 import { useConstrainedPopover } from "@/components/ui/use-constrained-popover";
-import { runWaveReveal } from "@/features/motion/wave-reveal";
+import { CROSS_FADE_THEME_MS, runCrossFade } from "@/features/motion/cross-fade";
 import { t } from "@/i18n";
 
 const LABELS: Record<Theme, string> = {
@@ -38,21 +38,19 @@ export function ThemePicker() {
   const { open, setOpen, placement, shiftX, containerRef, popoverRef } =
     useConstrainedPopover<HTMLDivElement>();
 
-  const select = (id: Theme, event: MouseEvent<HTMLButtonElement>) => {
+  const select = (id: Theme) => {
     setOpen(false);
-    // The wave originates from the tapped swatch's real screen position, so
-    // tapping the bottom-right card opens the reveal from the bottom-right.
-    void runWaveReveal(
-      () => {
-        flushSync(() => {
-          // Swap data-theme synchronously so the incoming snapshot — captured
-          // right after this callback returns — already shows the new colours.
-          document.documentElement.dataset.theme = id;
-          userStore.getState().setTheme(id);
-        });
-      },
-      { x: event.clientX, y: event.clientY },
-    );
+    // A short cross-fade: swapping the accent recolours the whole screen, and a
+    // 240ms dissolve is enough to make it read as one continuous change without
+    // anything sweeping across the viewport.
+    void runCrossFade(() => {
+      flushSync(() => {
+        // Swap data-theme synchronously so the incoming snapshot — captured
+        // right after this callback returns — already shows the new colours.
+        document.documentElement.dataset.theme = id;
+        userStore.getState().setTheme(id);
+      });
+    }, CROSS_FADE_THEME_MS);
   };
 
   return (
@@ -88,7 +86,7 @@ export function ThemePicker() {
                     key={id}
                     type="button"
                     aria-pressed={active}
-                    onClick={(event) => select(id, event)}
+                    onClick={() => select(id)}
                     className={cn(
                       "flex min-w-0 flex-col items-center gap-1 rounded-card border px-1 pb-1 pt-1.5 text-center transition-all duration-150 active:scale-95",
                       active

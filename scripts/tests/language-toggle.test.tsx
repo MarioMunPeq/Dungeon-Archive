@@ -16,7 +16,11 @@ function test(description: string, fn: () => void): void {
 }
 
 import { LANGUAGES, languageCode, nextLanguage } from "../../src/features/language/language";
-import { WAVE_DURATION_MS, prefersReducedMotion } from "../../src/features/motion/wave-reveal";
+import {
+  CROSS_FADE_LANGUAGE_MS,
+  CROSS_FADE_THEME_MS,
+  prefersReducedMotion,
+} from "../../src/features/motion/cross-fade";
 import { LanguageToggle } from "../../src/components/layout/language-toggle";
 
 console.log("language switch\n");
@@ -55,10 +59,26 @@ test("reduced motion is read defensively when matchMedia is missing", () => {
   }
 });
 
-test("the wave stays inside the Design DNA signature-moment budget", () => {
-  // Rule 42 caps signature moments at ~600-700ms.
-  ok(WAVE_DURATION_MS <= 700, `wave runs ${WAVE_DURATION_MS}ms, over the 700ms ceiling`);
-  ok(WAVE_DURATION_MS >= 300, "long enough to read as intentional motion");
+test("both cross-fades stay inside the ordinary interaction budget", () => {
+  // Rule 42 caps ordinary interactions at 300ms and only allows longer for the
+  // dice roll. A settings toggle is not a signature moment.
+  ok(
+    CROSS_FADE_LANGUAGE_MS <= 300,
+    `language cross-fade runs ${CROSS_FADE_LANGUAGE_MS}ms, over the 300ms ceiling`,
+  );
+  ok(
+    CROSS_FADE_THEME_MS <= 300,
+    `theme cross-fade runs ${CROSS_FADE_THEME_MS}ms, over the 300ms ceiling`,
+  );
+});
+
+test("the language switch gets a shorter fade than the theme", () => {
+  // Recolouring every surface is a bigger change than swapping words, so the two
+  // should not feel identical.
+  ok(
+    CROSS_FADE_LANGUAGE_MS < CROSS_FADE_THEME_MS,
+    "the two changes must be proportional to what they actually change",
+  );
 });
 
 test("toggle shows both codes so the current one is visible without tapping", () => {
@@ -70,15 +90,24 @@ test("toggle shows both codes so the current one is visible without tapping", ()
   strictEqual(html.includes('aria-label="Switch to Spanish"'), true);
 });
 
-test("the globe glyph carries no baked-in language text", () => {
+test("the toggle is the two codes and nothing else", () => {
+  // The globe was removed: it carried no information the codes did not, and it
+  // needed a spin animation to justify its width. Guard it so an icon does not
+  // quietly creep back in.
   const html = renderToString(createElement(LanguageToggle));
-  ok(!html.includes("currentLanguage"), "icon no longer needs a language prop");
-  strictEqual(html.includes("<text"), false, "no <text> node left inside the icon");
+  strictEqual(html.includes("<svg"), false, "no icon is rendered in the toggle");
+});
+
+test("only the active code is lit, and the inactive one is dimmed", () => {
+  const html = renderToString(createElement(LanguageToggle));
+  // Default language is English: EN carries the foreground tone, ES the muted one.
+  ok(html.includes('text-foreground">EN<'), "the active code is the lit one");
+  ok(html.includes('text-muted-foreground/50">ES<'), "the inactive code is dimmed");
 });
 
 test("the switch shows no toast, so no notification copy is left behind", () => {
-  // The wave reveal is the confirmation; a snackbar was removed as redundant.
-  // Guard it so the strings (and the toast) don't quietly come back.
+  // The cross-fade plus the lit code is the confirmation; a snackbar was removed
+  // as redundant. Guard it so the strings (and the toast) don't quietly return.
   const html = renderToString(createElement(LanguageToggle));
   ok(!html.includes('role="status"'), "no live region in the toggle");
 });

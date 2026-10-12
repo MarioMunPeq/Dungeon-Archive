@@ -4,7 +4,7 @@ import { useTheme } from "@/user-state";
 /**
  * Applies the persisted accent theme.
  *
- * The theme swap itself is animated by `runWaveReveal` (see features/motion),
+ * The theme swap itself is animated by `runCrossFade` (see features/motion),
  * which owns the View Transition and the reduced-motion decision — it sets
  * `data-theme` synchronously inside the transition callback so the incoming
  * snapshot already carries the new colours. This hook only guarantees the

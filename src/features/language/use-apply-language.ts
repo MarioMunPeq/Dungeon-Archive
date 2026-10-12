@@ -7,7 +7,7 @@ import { useLanguage } from "@/user-state";
  * and spell-checking rules. index.html ships `lang="en"` to match the default;
  * this keeps it truthful once the user switches.
  *
- * The switch itself is animated by `runWaveReveal` (see features/motion), which
+ * The switch itself is animated by `runCrossFade` (see features/motion), which
  * owns both the transition and the reduced-motion decision — this hook only
  * mirrors the attribute onto `<html>`.
  */
