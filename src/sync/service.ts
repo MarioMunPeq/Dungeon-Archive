@@ -35,8 +35,13 @@ function serializeState(state: UserState): string {
   return JSON.stringify(toUserState(state));
 }
 
-export function currentStateHash(): string {
-  return hashString(serializeState(userStore.getState()));
+/**
+ * `state` is injectable so a caller that already has a snapshot (the Backup
+ * page, which re-renders on exactly these fields) does not have to re-read the
+ * store and serialize it again.
+ */
+export function currentStateHash(state: UserState = userStore.getState()): string {
+  return hashString(serializeState(state));
 }
 
 /**
@@ -102,14 +107,11 @@ function writeLastUpload(record: LastUploadRecord): void {
 }
 
 export function computeMetadata(state: UserState, now: number): CloudMetadata {
-  const active = state.adventures.find((a) => a.id === state.activeAdventureId) ?? null;
   return {
     createdAt: now,
-    adventureCount: state.adventures.length,
     characterCount: state.characters.length,
     favoriteCount: state.favorites.length,
     sessionCount: state.session.length,
-    activeAdventureTitle: active ? active.title : null,
   };
 }
 
@@ -128,10 +130,13 @@ function buildSnapshot(now: number): CloudSnapshot {
  * Powers the current/outdated badge and the "already up to date" guard
  * without downloading anything.
  */
-export function getBackupStatus(user: CloudUser): BackupStatus {
+export function getBackupStatus(
+  user: CloudUser,
+  state: UserState = userStore.getState(),
+): BackupStatus {
   const lastUpload = readLastUpload(user.uid);
   if (lastUpload === null) return { upToDate: false, lastUpload: null };
-  return { upToDate: currentStateHash() === lastUpload.hash, lastUpload };
+  return { upToDate: currentStateHash(state) === lastUpload.hash, lastUpload };
 }
 
 /**

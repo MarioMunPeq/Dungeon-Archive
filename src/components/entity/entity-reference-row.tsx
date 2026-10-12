@@ -10,8 +10,6 @@ interface EntityReferenceRowProps {
   readonly canonicalId: string;
   readonly subtitle?: string;
   readonly showBadge?: boolean;
-  readonly expanded?: boolean;
-  readonly onToggle?: () => void;
   readonly trailing?: ReactNode;
   readonly action?: ReactNode;
   readonly className?: string;
@@ -21,8 +19,6 @@ export function EntityReferenceRow({
   canonicalId,
   subtitle,
   showBadge = true,
-  expanded,
-  onToggle,
   trailing,
   action,
   className = "",
@@ -40,38 +36,12 @@ export function EntityReferenceRow({
     />
   );
 
-  if (typeof onToggle === "function") {
-    return (
-      <div
-        role="button"
-        tabIndex={0}
-        aria-expanded={expanded}
-        onClick={onToggle}
-        onKeyDown={(e) => {
-          if (e.key === "Enter" || e.key === " ") {
-            e.preventDefault();
-            onToggle();
-          }
-        }}
-        className={cn(
-          base,
-          "cursor-pointer transition-all duration-150 hover:bg-accent/50 active:bg-accent/80",
-          expanded && "bg-accent/40",
-        )}
-      >
-        {identity}
-        {trailing}
-        {action}
-        <ChevronRightIcon
-          className={cn(
-            "text-foreground-subtle transition-transform duration-150 ease-out",
-            expanded === true && "rotate-90",
-          )}
-        />
-      </div>
-    );
-  }
-
+  // The expandable branch was removed: nothing renders with `onToggle`, and it
+  // put the `action` button (a real <button>) inside a div carrying
+  // role="button" — nested interactive controls, which screen readers announce
+  // as one control inside another and keyboards handle inconsistently. The
+  // character sheet's expandable rows are plain <button> siblings instead
+  // (see character-page.tsx ReferenceCell).
   return (
     <Link
       to={ref.href}

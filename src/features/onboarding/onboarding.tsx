@@ -1,6 +1,7 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { useOnboardingComplete, userStore } from "@/user-state";
 import { Button } from "@/components/ui/Button";
+import { useDialog } from "@/components/ui/use-dialog";
 import type { TranslationKey } from "@/i18n";
 import { t } from "@/i18n";
 
@@ -32,6 +33,19 @@ export function Onboarding() {
   const hydrated = userStore((s) => s._hasHydrated);
   const complete = useOnboardingComplete();
   const [step, setStep] = useState(0);
+  const panelRef = useRef<HTMLDivElement>(null);
+
+  const close = useCallback(() => userStore.getState().completeOnboarding(), []);
+
+  // Reuses the shared dialog hook, which traps Tab inside the overlay and
+  // restores focus to whatever had it before. The hand-rolled version let Tab
+  // escape to the page behind the modal.
+  useDialog({
+    onClose: close,
+    open: hydrated && !complete,
+    containerRef: panelRef,
+    focusFirst: false,
+  });
 
   useEffect(() => {
     if (!hydrated || complete) return;
@@ -39,26 +53,14 @@ export function Onboarding() {
     primary?.focus();
   }, [hydrated, complete, step]);
 
-  useEffect(() => {
-    if (!hydrated || complete) return;
-    const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") {
-        e.preventDefault();
-        userStore.getState().completeOnboarding();
-      }
-    };
-    window.addEventListener("keydown", onKey);
-    return () => window.removeEventListener("keydown", onKey);
-  }, [hydrated, complete]);
-
   if (!hydrated || complete) return null;
 
   const isLast = step === STEPS.length - 1;
-  const finish = () => userStore.getState().completeOnboarding();
   const next = () => setStep((s) => (isLast ? s : s + 1));
 
   return (
     <div
+      ref={panelRef}
       role="dialog"
       aria-modal="true"
       aria-label={t("onboarding.welcome")}
@@ -82,10 +84,10 @@ export function Onboarding() {
           ))}
         </div>
         <div className="flex items-center justify-between gap-3">
-          <Button variant="ghost" onClick={finish}>
+          <Button variant="ghost" onClick={close}>
             {t("onboarding.skip")}
           </Button>
-          <Button data-onboarding-primary onClick={isLast ? finish : next}>
+          <Button data-onboarding-primary onClick={isLast ? close : next}>
             {isLast ? t("onboarding.start") : t("onboarding.next")}
           </Button>
         </div>

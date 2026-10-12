@@ -439,15 +439,18 @@ export const es: Record<keyof typeof en, string> = {
     "Con teclado, tabula hasta cualquier estadística, característica o condición para abrir la misma explicación.",
   "helpPage.navigationTitle": "Qué hace cada pestaña",
   "helpPage.nav.homeBody": "Tu personaje actual de un vistazo y lo último que has consultado.",
-  "helpPage.nav.archiveBody": "Busca en todo el compendio, lee las reglas y recorre cada categoría.",
-  "helpPage.nav.combatBody": "Controla los puntos de vida, las estadísticas, las condiciones y lo que has usado este turno.",
+  "helpPage.nav.archiveBody":
+    "Busca en todo el compendio, lee las reglas y recorre cada categoría.",
+  "helpPage.nav.combatBody":
+    "Controla los puntos de vida, las estadísticas, las condiciones y lo que has usado este turno.",
   "helpPage.nav.diceBody": "Tira cualquier dado, añade un modificador y míralo girar en 3D.",
   "helpPage.nav.characterBody": "Tu ficha: características, conjuros, armas y objetos mágicos.",
   "helpPage.topBarTitle": "Los iconos de arriba",
   "helpPage.topBar.help": "Ayuda",
   "helpPage.topBar.helpBody": "Abre esta página.",
   "helpPage.topBar.theme": "Tema de acento",
-  "helpPage.topBar.themeBody": "Repinta la app con uno de los siete colores de acento. Tu elección se recuerda.",
+  "helpPage.topBar.themeBody":
+    "Repinta la app con uno de los siete colores de acento. Tu elección se recuerda.",
   "helpPage.topBar.language": "Idioma",
   "helpPage.topBar.languageBody":
     "Cambia la interfaz entre inglés y español. Las reglas se mantienen en el idioma del libro original.",
@@ -814,16 +817,30 @@ export const es: Record<keyof typeof en, string> = {
   "ability.strength.name": "Fuerza",
   "ability.strength.help": "Poder físico. Sirve para levantar, empujar y golpes cuerpo a cuerpo.",
   "ability.dexterity.name": "Destreza",
-  "ability.dexterity.help": "Agilidad y reflejos. Sirve para furtarse, esquivar y ataques de precisión.",
+  "ability.dexterity.help":
+    "Agilidad y reflejos. Sirve para furtarse, esquivar y ataques de precisión.",
   "ability.constitution.name": "Constitución",
   "ability.constitution.help": "Resistencia y aguante. Aumenta tus puntos de vida.",
   "ability.intelligence.name": "Inteligencia",
-  "ability.intelligence.help": "Razonamiento y memoria. La usan los magos y para pruebas de conocimiento.",
+  "ability.intelligence.help":
+    "Razonamiento y memoria. La usan los magos y para pruebas de conocimiento.",
   "ability.wisdom.name": "Sabiduría",
   "ability.wisdom.help": "Percepción e intuición. La usan los clérigos y para la Percepción.",
   "ability.charisma.name": "Carisma",
   "ability.charisma.help": "Fuerza de personalidad. Sirve para convencer, actuar y engañar.",
   "entity.notFound": "no encontrado",
+  "entity.related": "Relacionado",
+  "boot.loading": "Cargando Dungeon Archive…",
+  "search.resultsLabel": "Resultados de la búsqueda",
+  "filter.requiredWithReason": "Requerido ({reason})",
+  "help.armorClass.title": "¿Qué es la Clase de Armadura?",
+  "help.armorClass.monsterBody":
+    "La Clase de Armadura es la cifra que un ataque debe superar para acertar a esta criatura.",
+  "help.hitPoints.monsterBody":
+    "Los Puntos de Vida miden cuánto daño puede recibir la criatura antes de caer.",
+  "help.challengeRating.title": "¿Qué es el Nivel de Desafío?",
+  "help.challengeRating.body":
+    "Una estimación aproximada del peligro. Un ND 3 es adecuado para un grupo de cuatro aventureros de nivel 3.",
   "entity.versionCount": "{count} versiones",
   "theme.pickerLabel": "Tema de acento",
   "error.title": "Algo ha salido mal",

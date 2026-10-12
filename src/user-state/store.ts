@@ -2,7 +2,6 @@ import { create } from "zustand";
 import { useMemo } from "react";
 import type {
   AbilityScores,
-  Adventure,
   CombatValues,
   HitPoints,
   CharacterReference,
@@ -22,21 +21,6 @@ import { read, write } from "./persistence";
 import { migrate } from "./migrations";
 import { normalize, validateIds } from "./normalize";
 import { toUserState } from "./serialization";
-
-interface AdventureActions {
-  createAdventure: (data?: { title?: string; description?: string }) => void;
-  updateAdventure: (
-    id: string,
-    data: { title?: string; description?: string; notes?: string },
-  ) => void;
-  addObjective: (adventureId: string, objective: string) => void;
-  removeObjective: (adventureId: string, index: number) => void;
-  toggleAdventureEntity: (canonicalId: string) => void;
-  clearAdventureEntities: () => void;
-  archiveAdventure: (id: string) => void;
-  restoreAdventure: (id: string) => void;
-  setActiveAdventure: (id: string | null) => void;
-}
 
 export type CharacterReferenceUpdate = Partial<
   Omit<CharacterReference, "id" | "abilityScores" | "combatValues" | "hitPoints">
@@ -71,11 +55,9 @@ interface UserActions {
 
 export type UserStore = UserState &
   UserActions &
-  AdventureActions &
   CharacterActions & {
     favoritesSet: Set<string>;
     sessionSet: Set<string>;
-    adventureEntitySet: Set<string>;
     _hasHydrated: boolean;
   };
 
@@ -103,10 +85,7 @@ function clampAbilityScores(scores: AbilityScores): AbilityScores {
 
 function clampHitPoints(hp: HitPoints): HitPoints {
   const max = clampHpMax(hp.max);
-  return {
-    max,
-    current: Math.min(clampHp(hp.current), max),
-  };
+  return { max, current: Math.min(clampHp(hp.current), max) };
 }
 
 function clampCombatValues(values: CombatValues): CombatValues {
@@ -140,18 +119,6 @@ function toggleItem(arr: string[], item: string): string[] {
   return [...arr, item];
 }
 
-function mapAdventure(
-  adventures: readonly Adventure[],
-  id: string,
-  update: (adventure: Adventure) => Adventure,
-): Adventure[] | null {
-  const idx = adventures.findIndex((a) => a.id === id);
-  if (idx === -1) return null;
-  const next = [...adventures];
-  next[idx] = update(adventures[idx]!);
-  return next;
-}
-
 let debounceTimer: ReturnType<typeof setTimeout> | null = null;
 
 function schedulePersist(getState: () => UserStore): void {
@@ -174,14 +141,6 @@ function generateId(): string {
   return Date.now().toString(36) + Math.random().toString(36).slice(2, 8);
 }
 
-function updateActiveAdventureSet(
-  adventures: Adventure[],
-  activeAdventureId: string | null,
-): Set<string> {
-  const active = activeAdventureId ? adventures.find((a) => a.id === activeAdventureId) : undefined;
-  return new Set(active?.entities ?? []);
-}
-
 export const userStore = create<UserStore>((set, get) => ({
   version: CURRENT_VERSION,
   favorites: [],
@@ -190,9 +149,6 @@ export const userStore = create<UserStore>((set, get) => ({
   recentSearches: [],
   session: [],
   sessionSet: new Set<string>(),
-  adventures: [],
-  activeAdventureId: null,
-  adventureEntitySet: new Set<string>(),
   characters: [],
   activeCharacterId: null,
   beginnerMode: true,
@@ -269,170 +225,6 @@ export const userStore = create<UserStore>((set, get) => ({
   setLanguage: (language) => {
     if (!isLanguage(language)) return;
     set({ language });
-    schedulePersist(get);
-  },
-
-  createAdventure: (data) => {
-    set((s) => {
-      const id = generateId();
-      const adventure: Adventure = {
-        id,
-        title: data?.title?.trim() || "New Adventure",
-        description: data?.description?.trim() || "",
-        objectives: [],
-        notes: "",
-        entities: [],
-        createdAt: Date.now(),
-        updatedAt: Date.now(),
-        archived: false,
-      };
-      return {
-        adventures: [...s.adventures, adventure],
-        activeAdventureId: id,
-        adventureEntitySet: new Set<string>(),
-      };
-    });
-    schedulePersist(get);
-  },
-
-  updateAdventure: (id, data) => {
-    set((s) => {
-      const adventures = mapAdventure(s.adventures, id, (a) => ({
-        ...a,
-        title: data.title !== undefined ? data.title.trim() || a.title : a.title,
-        description: data.description !== undefined ? data.description.trim() : a.description,
-        notes: data.notes !== undefined ? data.notes.trim() : a.notes,
-        updatedAt: Date.now(),
-      }));
-      if (!adventures) return s;
-      return {
-        adventures,
-        adventureEntitySet: updateActiveAdventureSet(adventures, s.activeAdventureId),
-      };
-    });
-    schedulePersist(get);
-  },
-
-  addObjective: (adventureId, objective) => {
-    const trimmed = objective.trim();
-    if (!trimmed) return;
-    set((s) => {
-      const adventures = mapAdventure(s.adventures, adventureId, (a) => ({
-        ...a,
-        objectives: [...a.objectives, trimmed],
-        updatedAt: Date.now(),
-      }));
-      if (!adventures) return s;
-      return { adventures };
-    });
-    schedulePersist(get);
-  },
-
-  removeObjective: (adventureId, index) => {
-    set((s) => {
-      const adventures = mapAdventure(s.adventures, adventureId, (a) => {
-        const copy = [...a.objectives];
-        if (index < 0 || index >= copy.length) return a;
-        copy.splice(index, 1);
-        return { ...a, objectives: copy, updatedAt: Date.now() };
-      });
-      if (!adventures) return s;
-      return { adventures };
-    });
-    schedulePersist(get);
-  },
-
-  toggleAdventureEntity: (canonicalId) => {
-    set((s) => {
-      const { adventures, activeAdventureId } = s;
-
-      if (!activeAdventureId) {
-        const id = generateId();
-        const adventure: Adventure = {
-          id,
-          title: "New Adventure",
-          description: "",
-          objectives: [],
-          notes: "",
-          entities: [canonicalId],
-          createdAt: Date.now(),
-          updatedAt: Date.now(),
-          archived: false,
-        };
-        return {
-          adventures: [...adventures, adventure],
-          activeAdventureId: id,
-          adventureEntitySet: new Set([canonicalId]),
-        };
-      }
-
-      const next = mapAdventure(adventures, activeAdventureId, (a) => {
-        const entityIdx = a.entities.indexOf(canonicalId);
-        const entities =
-          entityIdx !== -1
-            ? a.entities.filter((_, i) => i !== entityIdx)
-            : [...a.entities, canonicalId];
-        return { ...a, entities, updatedAt: Date.now() };
-      });
-      if (!next) return s;
-      const active = next.find((a) => a.id === activeAdventureId)!;
-      return {
-        adventures: next,
-        adventureEntitySet: new Set(active.entities),
-      };
-    });
-    schedulePersist(get);
-  },
-
-  clearAdventureEntities: () => {
-    set((s) => {
-      if (!s.activeAdventureId) return s;
-      const adventures = mapAdventure(s.adventures, s.activeAdventureId, (a) => ({
-        ...a,
-        entities: [],
-        updatedAt: Date.now(),
-      }));
-      if (!adventures) return s;
-      return { adventures, adventureEntitySet: new Set<string>() };
-    });
-    schedulePersist(get);
-  },
-
-  archiveAdventure: (id) => {
-    set((s) => {
-      const adventures = mapAdventure(s.adventures, id, (a) => ({
-        ...a,
-        archived: true,
-        updatedAt: Date.now(),
-      }));
-      if (!adventures) return s;
-      return {
-        adventures,
-        activeAdventureId: s.activeAdventureId === id ? null : s.activeAdventureId,
-        adventureEntitySet: s.activeAdventureId === id ? new Set<string>() : s.adventureEntitySet,
-      };
-    });
-    schedulePersist(get);
-  },
-
-  restoreAdventure: (id) => {
-    set((s) => {
-      const adventures = mapAdventure(s.adventures, id, (a) => ({
-        ...a,
-        archived: false,
-        updatedAt: Date.now(),
-      }));
-      if (!adventures) return s;
-      return { adventures };
-    });
-    schedulePersist(get);
-  },
-
-  setActiveAdventure: (id) => {
-    set((s) => ({
-      activeAdventureId: id,
-      adventureEntitySet: updateActiveAdventureSet(s.adventures, id),
-    }));
     schedulePersist(get);
   },
 
@@ -532,9 +324,6 @@ export const userStore = create<UserStore>((set, get) => ({
       recentSearches: state.recentSearches,
       session: state.session,
       sessionSet: new Set(state.session),
-      adventures: state.adventures,
-      activeAdventureId: state.activeAdventureId,
-      adventureEntitySet: updateActiveAdventureSet(state.adventures, state.activeAdventureId),
       characters: state.characters,
       activeCharacterId: state.activeCharacterId,
       beginnerMode: state.beginnerMode,
@@ -553,9 +342,6 @@ export const userStore = create<UserStore>((set, get) => ({
       recentSearches: [],
       session: [],
       sessionSet: new Set<string>(),
-      adventures: [],
-      activeAdventureId: null,
-      adventureEntitySet: new Set<string>(),
       characters: [],
       activeCharacterId: null,
       beginnerMode: true,
@@ -573,17 +359,6 @@ export function useIsFavorite(canonicalId: string): boolean {
 
 export function useIsInSession(canonicalId: string): boolean {
   return userStore((s) => s.sessionSet.has(canonicalId));
-}
-
-export function useIsInAdventure(canonicalId: string): boolean {
-  return userStore((s) => s.adventureEntitySet.has(canonicalId));
-}
-
-export function useActiveAdventure(): Adventure | null {
-  return userStore((s) => {
-    if (!s.activeAdventureId) return null;
-    return s.adventures.find((a) => a.id === s.activeAdventureId) ?? null;
-  });
 }
 
 export function useActiveCharacter(): CharacterReference | null {
@@ -606,16 +381,6 @@ export function usePrimaryCharacter(): CharacterReference | null {
     }
     return s.characters[0] ?? null;
   });
-}
-
-export function useAdventureEntityIds(): string[] {
-  const activeAdventureId = userStore((s) => s.activeAdventureId);
-  const adventures = userStore((s) => s.adventures);
-  return useMemo(() => {
-    if (!activeAdventureId) return [];
-    const active = adventures.find((a) => a.id === activeAdventureId);
-    return active?.entities ?? [];
-  }, [activeAdventureId, adventures]);
 }
 
 export function useFavoriteIds(limit = 10): string[] {
@@ -665,8 +430,6 @@ function processPersistedState(state: UserState): UserState {
     recentEntities: validateIds(state.recentEntities),
     recentSearches: state.recentSearches,
     session: validateIds(state.session),
-    adventures: state.adventures,
-    activeAdventureId: state.activeAdventureId,
     characters: state.characters,
     activeCharacterId: state.activeCharacterId,
     beginnerMode: state.beginnerMode === true,
@@ -675,23 +438,6 @@ function processPersistedState(state: UserState): UserState {
     language: isLanguage(state.language) ? state.language : DEFAULT_LANGUAGE,
   };
   return normalize(validated);
-}
-
-function adventuresEqual(a: Adventure[], b: Adventure[]): boolean {
-  if (a.length !== b.length) return false;
-  for (let i = 0; i < a.length; i++) {
-    const aa = a[i]!;
-    const bb = b[i]!;
-    if (
-      aa.id !== bb.id ||
-      aa.title !== bb.title ||
-      aa.updatedAt !== bb.updatedAt ||
-      aa.entities.length !== bb.entities.length
-    ) {
-      return false;
-    }
-  }
-  return true;
 }
 
 function charactersEqual(a: CharacterReference[], b: CharacterReference[]): boolean {
@@ -711,8 +457,6 @@ function replaceState(state: UserState): void {
     arraysEqual(current.recentEntities, state.recentEntities) &&
     arraysEqual(current.recentSearches, state.recentSearches) &&
     arraysEqual(current.session, state.session) &&
-    current.activeAdventureId === state.activeAdventureId &&
-    adventuresEqual(current.adventures, state.adventures) &&
     charactersEqual(current.characters, state.characters) &&
     current.activeCharacterId === state.activeCharacterId &&
     current.beginnerMode === state.beginnerMode &&

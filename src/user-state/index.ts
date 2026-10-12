@@ -10,11 +10,8 @@ export {
   userStore,
   useIsFavorite,
   useIsInSession,
-  useIsInAdventure,
-  useActiveAdventure,
   useActiveCharacter,
   usePrimaryCharacter,
-  useAdventureEntityIds,
   useFavoriteIds,
   useSessionIds,
   useRecentEntities,
@@ -28,7 +25,6 @@ export {
 export type { UserStore, CharacterReferenceUpdate } from "./store";
 export type {
   UserState,
-  Adventure,
   CharacterReference,
   AbilityScores,
   HitPoints,

@@ -39,9 +39,7 @@ function DefinitionList({ items }: { readonly items: readonly Explanation[] }) {
       {items.map(({ term, description }) => (
         <div key={term} className="space-y-0.5">
           <dt className="text-sm font-semibold text-foreground">{t(term)}</dt>
-          <dd className="text-xs leading-relaxed text-muted-foreground">
-            {t(description)}
-          </dd>
+          <dd className="text-xs leading-relaxed text-muted-foreground">{t(description)}</dd>
         </div>
       ))}
     </dl>

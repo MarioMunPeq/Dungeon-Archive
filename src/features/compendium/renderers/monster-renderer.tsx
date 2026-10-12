@@ -64,16 +64,16 @@ export function MonsterRenderer({ entity }: MonsterRendererProps) {
           label={t("character.armorClass")}
           value={entity.armorClass}
           help={{
-            title: "What is Armor Class?",
-            text: "Armor Class is what attackers must beat to hit this creature.",
+            title: t("help.armorClass.title"),
+            text: t("help.armorClass.monsterBody"),
           }}
         />
         <StatCard
           label={t("combat.hitPoints")}
           value={entity.hitPoints}
           help={{
-            title: "What are Hit Points?",
-            text: "Hit Points measure how much damage the creature can take before dropping.",
+            title: t("help.hitPoints.title"),
+            text: t("help.hitPoints.monsterBody"),
           }}
         />
         <StatCard label={t("monster.speed")} value={<SpeedValue value={entity.speed} />} />
@@ -81,8 +81,8 @@ export function MonsterRenderer({ entity }: MonsterRendererProps) {
           label={t("term.cr")}
           value={entity.challengeRating}
           help={{
-            title: "What is Challenge Rating?",
-            text: "A rough estimate of danger. CR 3 suits a group of four 3rd-level adventurers.",
+            title: t("help.challengeRating.title"),
+            text: t("help.challengeRating.body"),
           }}
         />
       </div>

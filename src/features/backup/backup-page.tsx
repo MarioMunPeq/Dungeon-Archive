@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useReducer, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import {
   Button,
   ConfirmDialog,
@@ -19,6 +19,7 @@ import {
 import type { CloudSnapshot } from "@/sync";
 import { t } from "@/i18n";
 import { useLanguage, userStore } from "@/user-state";
+import type { UserState } from "@/user-state";
 import { InstallAppSection } from "./install-app";
 
 type Operation = "signIn" | "signOut" | "upload" | "restore";
@@ -73,12 +74,35 @@ function useOnline(): boolean {
 }
 
 /**
- * Re-renders whenever the persisted user state changes so the current/outdated
- * badge updates automatically (no polling).
+ * The snapshot of state fields that affect the cloud comparison.
+ *
+ * The badge used to subscribe to the whole store and re-hash the entire
+ * serialized state on *every* write — including unrelated ones like marking a
+ * favourite or viewing an entity — which meant a full `JSON.stringify` plus an
+ * FNV pass per write while this page was open. Subscribing to the fields that
+ * actually feed the hash keeps the badge live without that cost.
  */
-function useUserStateVersion(): void {
-  const [, bump] = useReducer((n: number) => n + 1, 0);
-  useEffect(() => userStore.subscribe(bump), []);
+function useBackupRelevantState(): UserState {
+  const [snapshot, setSnapshot] = useState<UserState>(() => userStore.getState());
+  useEffect(() =>
+    userStore.subscribe((state: UserState) => {
+      setSnapshot((prev: UserState) =>
+        prev.characters === state.characters &&
+        prev.favorites === state.favorites &&
+        prev.recentEntities === state.recentEntities &&
+        prev.recentSearches === state.recentSearches &&
+        prev.session === state.session &&
+        prev.beginnerMode === state.beginnerMode &&
+        prev.onboardingComplete === state.onboardingComplete &&
+        prev.theme === state.theme &&
+        prev.language === state.language &&
+        prev.activeCharacterId === state.activeCharacterId
+          ? prev
+          : state,
+      );
+    }),
+  );
+  return snapshot;
 }
 
 export function BackupPage() {
@@ -87,7 +111,7 @@ export function BackupPage() {
   const markFailed = useCloudSync((s) => s.markFailed);
   const markIdle = useCloudSync((s) => s.markIdle);
   const online = useOnline();
-  useUserStateVersion();
+  const backupRelevantState = useBackupRelevantState();
   const language = useLanguage();
   const { show } = useSnackbar();
   const [busy, setBusy] = useState<Operation | null>(null);
@@ -162,7 +186,7 @@ export function BackupPage() {
   const signedIn = user !== null;
   const busyAny = busy !== null || previewLoading;
   const canAct = !busyAny;
-  const status = signedIn && user !== null ? getBackupStatus(user) : null;
+  const status = signedIn && user !== null ? getBackupStatus(user, backupRelevantState) : null;
   const upToDate = status?.upToDate === true;
   const lastCloudBackupAt = status?.lastUpload?.at ?? null;
 

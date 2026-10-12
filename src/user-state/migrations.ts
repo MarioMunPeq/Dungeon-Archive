@@ -1,4 +1,4 @@
-import type { Adventure, CharacterReference, Language, Theme, UserState } from "./types";
+import type { CharacterReference, Language, Theme, UserState } from "./types";
 import {
   CURRENT_VERSION,
   DEFAULT_LANGUAGE,
@@ -193,6 +193,12 @@ const migrations: Record<number, (state: Record<string, unknown>) => Record<stri
     version: 14,
     language: isLanguage(raw.language) ? raw.language : DEFAULT_LANGUAGE,
   }),
+  // Drops the retired multi-campaign model. The fields are deleted rather than
+  // ignored so they stop occupying localStorage and the cloud snapshot payload.
+  15: (raw) => {
+    const { adventures: _adventures, activeAdventureId: _active, ...rest } = raw;
+    return { ...rest, version: 15 };
+  },
 };
 
 export function migrate(raw: unknown): UserState {
@@ -238,6 +244,9 @@ export function migrate(raw: unknown): UserState {
   if (version < 14) {
     migrated = migrations[14]!(migrated);
   }
+  if (version < 15) {
+    migrated = migrations[15]!(migrated);
+  }
 
   const result = migrated as unknown as Record<string, unknown>;
   if (
@@ -255,9 +264,6 @@ export function migrate(raw: unknown): UserState {
     recentEntities: result.recentEntities as string[],
     recentSearches: result.recentSearches as string[],
     session: result.session as string[],
-    adventures: Array.isArray(result.adventures) ? (result.adventures as Adventure[]) : [],
-    activeAdventureId:
-      typeof result.activeAdventureId === "string" ? result.activeAdventureId : null,
     characters: Array.isArray(result.characters) ? (result.characters as CharacterReference[]) : [],
     activeCharacterId:
       typeof result.activeCharacterId === "string" ? result.activeCharacterId : null,

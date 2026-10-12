@@ -35,6 +35,13 @@ jobs:
       - name: Format check
         run: pnpm format:check
 
+      # The suite used to be missing from this workflow, so nothing caught
+      # regressions in the store, migrations, i18n parity or the renderers. It
+      # needs no secrets: the Firebase config degrades to "not configured" outside
+      # Vite, and the cloud tests run against the fake adapter.
+      - name: Test
+        run: pnpm test
+
       - name: Build
         run: pnpm build
         env:

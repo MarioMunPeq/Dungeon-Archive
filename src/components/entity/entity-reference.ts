@@ -31,12 +31,31 @@ export interface EntityRef {
  * stable for the lifetime of the app. Caching avoids re-resolving on every
  * call (which walks category + version maps) and keeps object references
  * stable across renders, making memoized consumers effective.
+ *
+ * Bounded on purpose: without a cap the map grew with every entity the user
+ * ever opened. Insertion order is the access order, so evicting the oldest key
+ * is a cheap approximation of LRU — and the entities that get re-resolved are
+ * the recently-viewed ones, which the next call re-resolves in a lookup.
  */
+const MAX_CACHED_REFS = 600;
+
 const entityRefCache = new Map<string, EntityRef>();
+
+function cacheRef(canonicalId: string, ref: EntityRef): void {
+  // Re-inserting moves the key to the end, refreshing its recency.
+  entityRefCache.delete(canonicalId);
+  entityRefCache.set(canonicalId, ref);
+  if (entityRefCache.size <= MAX_CACHED_REFS) return;
+  const oldest = entityRefCache.keys().next();
+  if (oldest.done !== true) entityRefCache.delete(oldest.value);
+}
 
 export function entityRefFromCanonicalId(canonicalId: string): EntityRef | null {
   const cached = entityRefCache.get(canonicalId);
-  if (cached) return cached;
+  if (cached) {
+    cacheRef(canonicalId, cached);
+    return cached;
+  }
   const resolved = resolveEntity(canonicalId);
   if (!resolved) return null;
   const entity = resolved.selected;
@@ -50,6 +69,6 @@ export function entityRefFromCanonicalId(canonicalId: string): EntityRef | null 
     href: referenceToUrl(canonicalId),
     stat: entityCardStat(entity),
   };
-  entityRefCache.set(canonicalId, ref);
+  cacheRef(canonicalId, ref);
   return ref;
 }

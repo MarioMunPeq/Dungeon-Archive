@@ -1,6 +1,5 @@
 import type {
   AbilityScores,
-  Adventure,
   CharacterReference,
   CombatValues,
   HitPoints,
@@ -50,46 +49,6 @@ function normalizeSession(raw: unknown): string[] {
 
 export function validateIds(ids: string[]): string[] {
   return ids.filter((id) => isRegistered(id));
-}
-
-const MAX_ADVENTURES = 20;
-const MAX_ENTITIES_PER_ADVENTURE = 100;
-const MAX_OBJECTIVES_PER_ADVENTURE = 20;
-
-function normalizeAdventure(raw: unknown): Adventure | null {
-  if (!raw || typeof raw !== "object") return null;
-  const a = raw as Record<string, unknown>;
-  if (typeof a.id !== "string" || !a.id) return null;
-
-  const objectives = uniqueStrings(a.objectives, true);
-  if (objectives.length > MAX_OBJECTIVES_PER_ADVENTURE)
-    objectives.length = MAX_OBJECTIVES_PER_ADVENTURE;
-
-  const entities = validateIds(uniqueStrings(a.entities, true));
-  if (entities.length > MAX_ENTITIES_PER_ADVENTURE) entities.length = MAX_ENTITIES_PER_ADVENTURE;
-
-  return {
-    id: a.id,
-    title: typeof a.title === "string" ? a.title.trim() : "",
-    description: typeof a.description === "string" ? a.description.trim() : "",
-    objectives,
-    notes: typeof a.notes === "string" ? a.notes.trim() : "",
-    entities,
-    createdAt: typeof a.createdAt === "number" ? a.createdAt : Date.now(),
-    updatedAt: typeof a.updatedAt === "number" ? a.updatedAt : Date.now(),
-    archived: typeof a.archived === "boolean" ? a.archived : false,
-  };
-}
-
-function normalizeAdventures(raw: unknown): Adventure[] {
-  if (!Array.isArray(raw)) return [];
-  const valid: Adventure[] = [];
-  for (const item of raw) {
-    const adventure = normalizeAdventure(item);
-    if (adventure) valid.push(adventure);
-  }
-  if (valid.length > MAX_ADVENTURES) valid.length = MAX_ADVENTURES;
-  return valid;
 }
 
 const MAX_CHARACTER_REFERENCES = 12;
@@ -234,8 +193,6 @@ function normalizeCharacters(raw: unknown): CharacterReference[] {
 export function normalize(
   state: Omit<
     UserState,
-    | "adventures"
-    | "activeAdventureId"
     | "characters"
     | "activeCharacterId"
     | "beginnerMode"
@@ -243,8 +200,6 @@ export function normalize(
     | "theme"
     | "language"
   > & {
-    adventures?: Adventure[];
-    activeAdventureId?: string | null;
     characters?: CharacterReference[];
     activeCharacterId?: string | null;
     beginnerMode?: boolean;
@@ -253,11 +208,6 @@ export function normalize(
     language?: Language;
   },
 ): UserState {
-  const adventures = normalizeAdventures(state.adventures ?? []);
-  const activeAdventureId =
-    state.activeAdventureId && adventures.some((a) => a.id === state.activeAdventureId)
-      ? state.activeAdventureId
-      : null;
   const characters = normalizeCharacters(state.characters ?? []);
   const activeCharacterId =
     state.activeCharacterId && characters.some((c) => c.id === state.activeCharacterId)
@@ -270,8 +220,6 @@ export function normalize(
     recentEntities: normalizeRecentEntities(state.recentEntities),
     recentSearches: normalizeRecentSearches(state.recentSearches),
     session: normalizeSession(state.session),
-    adventures,
-    activeAdventureId,
     characters,
     activeCharacterId,
     beginnerMode: state.beginnerMode === true,

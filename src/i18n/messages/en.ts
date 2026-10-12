@@ -445,17 +445,21 @@ export const en = {
     "On a keyboard, tab to any stat, ability score, or condition to open the same explanation.",
   "helpPage.navigationTitle": "What each tab does",
   "helpPage.nav.homeBody": "Your current character at a glance, plus what you viewed recently.",
-  "helpPage.nav.archiveBody": "Search the whole compendium, read the rules, and browse every category.",
-  "helpPage.nav.combatBody": "Track hit points, stats, conditions, and what you have used this turn.",
+  "helpPage.nav.archiveBody":
+    "Search the whole compendium, read the rules, and browse every category.",
+  "helpPage.nav.combatBody":
+    "Track hit points, stats, conditions, and what you have used this turn.",
   "helpPage.nav.diceBody": "Roll any die, add a modifier, and watch it tumble in 3D.",
   "helpPage.nav.characterBody": "Your sheet: ability scores, spells, weapons, and magic items.",
   "helpPage.topBarTitle": "The icons up top",
   "helpPage.topBar.help": "Help",
   "helpPage.topBar.helpBody": "Opens this page.",
   "helpPage.topBar.theme": "Accent theme",
-  "helpPage.topBar.themeBody": "Repaints the app in one of seven accent colours. Your pick is remembered.",
+  "helpPage.topBar.themeBody":
+    "Repaints the app in one of seven accent colours. Your pick is remembered.",
   "helpPage.topBar.language": "Language",
-  "helpPage.topBar.languageBody": "Switches the interface between English and Spanish. Rules stay in the language of the source book.",
+  "helpPage.topBar.languageBody":
+    "Switches the interface between English and Spanish. Rules stay in the language of the source book.",
   "helpPage.topBar.cloud": "Cloud backup",
   "helpPage.topBar.cloudBody": "Signs in to Google to back up and restore your characters.",
   "helpPage.numbersTitle": "Reading the numbers",
@@ -810,7 +814,8 @@ export const en = {
   "ability.strength.name": "Strength",
   "ability.strength.help": "Physical power. Used for lifting, pushing, and melee attacks.",
   "ability.dexterity.name": "Dexterity",
-  "ability.dexterity.help": "Agility and reflexes. Used for sneaking, dodging, and finesse attacks.",
+  "ability.dexterity.help":
+    "Agility and reflexes. Used for sneaking, dodging, and finesse attacks.",
   "ability.constitution.name": "Constitution",
   "ability.constitution.help": "Toughness and stamina. Raises your hit points.",
   "ability.intelligence.name": "Intelligence",
@@ -820,6 +825,17 @@ export const en = {
   "ability.charisma.name": "Charisma",
   "ability.charisma.help": "Force of personality. Used for persuasion, performance, and deception.",
   "entity.notFound": "not found",
+  "entity.related": "Related",
+  "boot.loading": "Loading Dungeon Archive…",
+  "search.resultsLabel": "Search results",
+  "filter.requiredWithReason": "Required ({reason})",
+  "help.armorClass.title": "What is Armor Class?",
+  "help.armorClass.monsterBody": "Armor Class is what attackers must beat to hit this creature.",
+  "help.hitPoints.monsterBody":
+    "Hit Points measure how much damage the creature can take before it falls.",
+  "help.challengeRating.title": "What is Challenge Rating?",
+  "help.challengeRating.body":
+    "A rough estimate of danger. CR 3 suits a group of four 3rd-level adventurers.",
   "entity.versionCount": "{count} versions",
   "theme.pickerLabel": "Accent theme",
   "error.title": "Something went wrong",

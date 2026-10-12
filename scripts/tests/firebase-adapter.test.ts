@@ -1,4 +1,4 @@
-﻿import { strictEqual, ok, deepStrictEqual } from "node:assert";
+import { strictEqual, ok, deepStrictEqual } from "node:assert";
 import { registerHooks } from "node:module";
 
 async function test(description: string, fn: () => Promise<void> | void): Promise<void> {
@@ -161,11 +161,9 @@ await test("saveSnapshot then fetchSnapshot round-trips a CloudSnapshot", async 
     state: { favorites: ["a"], recentSearches: ["b"] },
     metadata: {
       createdAt: 1,
-      adventureCount: 0,
       characterCount: 0,
       favoriteCount: 1,
       sessionCount: 0,
-      activeAdventureTitle: null,
     },
     updatedAt: 2,
     appVersion: "0.1.0",
@@ -182,11 +180,9 @@ await test("saveSnapshot writes under users/{uid}/backup/current", async () => {
     state: { favorites: ["x"] },
     metadata: {
       createdAt: 1,
-      adventureCount: 0,
       characterCount: 0,
       favoriteCount: 1,
       sessionCount: 0,
-      activeAdventureTitle: null,
     },
     updatedAt: 2,
     appVersion: "0.1.0",
@@ -204,11 +200,9 @@ await test("saveSnapshot rejects when signed out (UID never trusted)", async () 
         state: { favorites: [] },
         metadata: {
           createdAt: 1,
-          adventureCount: 0,
           characterCount: 0,
           favoriteCount: 0,
           sessionCount: 0,
-          activeAdventureTitle: null,
         },
         updatedAt: 2,
         appVersion: "0.1.0",
@@ -300,7 +294,7 @@ await test("service upload stores metadata, updatedAt and appVersion in the doc"
   ok(stored !== undefined, "backup doc exists");
   deepStrictEqual(stored.state.favorites, ["meta-adapter"]);
   strictEqual(stored.metadata.favoriteCount, 1);
-  strictEqual(stored.metadata.adventureCount, 0);
+  strictEqual("adventureCount" in stored.metadata, false, "retired metadata not written");
   strictEqual(typeof stored.updatedAt, "number");
   ok(stored.appVersion.length > 0, "appVersion is stored");
 });

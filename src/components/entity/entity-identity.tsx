@@ -24,9 +24,14 @@ export function EntityIdentity({
           {categoryLabelSingular(category)}
         </Badge>
       )}
+      {/* line-clamp rather than truncate: Design DNA rule 40 forbids cutting a label
+          with an ellipsis. Entity names like "Barbaric" or "Mordenkainen's Faithful
+          Sword" have to stay readable, so they wrap to a second line instead. */}
       <div className="min-w-0 flex-1 space-y-1">
-        <p className="truncate text-base font-medium text-foreground">{name}</p>
-        {subtitle != null && <p className="truncate text-xs text-muted-foreground">{subtitle}</p>}
+        <p className="line-clamp-2 text-base font-medium text-foreground">{name}</p>
+        {subtitle != null && (
+          <p className="line-clamp-2 text-xs text-muted-foreground">{subtitle}</p>
+        )}
       </div>
     </>
   );

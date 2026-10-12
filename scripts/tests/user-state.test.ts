@@ -56,7 +56,7 @@ const { migrate } = await import("../../src/user-state/migrations");
 const { read, write } = await import("../../src/user-state/persistence");
 const { loadCompendium } = await import("../../src/compendium/loader");
 const { hydrate, userStore } = await import("../../src/user-state/store");
-import type { Adventure, CharacterReference, UserState } from "../../src/user-state/types";
+import type { CharacterReference } from "../../src/user-state/types";
 const { normalize, validateIds } = await import("../../src/user-state/normalize");
 const { getEntity, getSpells, getEquipmentList, getMagicItems } =
   await import("../../src/compendium/repository");
@@ -77,19 +77,17 @@ test("STORAGE_KEY equals dungeon:userState:v1", () => {
   strictEqual(STORAGE_KEY, "dungeon:userState:v1");
 });
 
-test("CURRENT_VERSION equals 14", () => {
-  strictEqual(CURRENT_VERSION, 14);
+test("CURRENT_VERSION equals 15", () => {
+  strictEqual(CURRENT_VERSION, 15);
 });
 
-test("createDefaultState returns valid v13 state", () => {
+test("createDefaultState returns a valid state without adventure fields", () => {
   const def = createDefaultState();
   strictEqual(def.version, CURRENT_VERSION);
   deepStrictEqual(def.favorites, []);
   deepStrictEqual(def.recentEntities, []);
   deepStrictEqual(def.recentSearches, []);
   deepStrictEqual(def.session, []);
-  deepStrictEqual(def.adventures, []);
-  strictEqual(def.activeAdventureId, null);
   deepStrictEqual(def.characters, []);
   strictEqual(def.activeCharacterId, null);
   strictEqual(def.beginnerMode, true);
@@ -197,13 +195,17 @@ test("migrations.migrate() converts legacy (no version) to current version", () 
   deepStrictEqual(result.favorites, ["x"]);
 });
 
-test("migrations.migrate() upgrades v4 adventures without a scenes field", () => {
+// The v4/v5 adventure shapes (including the obsolete `scenes` field) no longer
+// survive to the output, because v15 drops the whole domain. What still has to
+// hold is that those legacy payloads are readable without throwing and that the
+// characters/session they carry come through.
+test("migrations.migrate() reads a v4 adventure payload and drops the domain", () => {
   const input = {
     version: 4,
     favorites: [],
     recentEntities: [],
     recentSearches: [],
-    session: [],
+    session: ["monster.goblin"],
     adventures: [
       {
         id: "adv-1",
@@ -212,6 +214,7 @@ test("migrations.migrate() upgrades v4 adventures without a scenes field", () =>
         objectives: [],
         notes: "",
         entities: [],
+        scenes: [{ id: "sc-1", title: "Tavern" }],
         createdAt: 1000,
         updatedAt: 2000,
         archived: false,
@@ -222,13 +225,13 @@ test("migrations.migrate() upgrades v4 adventures without a scenes field", () =>
   };
   const result = migrate(input);
   strictEqual(result.version, CURRENT_VERSION);
-  strictEqual(result.adventures.length, 1);
-  strictEqual(result.adventures[0]!.title, "Legacy");
-  ok(!("scenes" in result.adventures[0]!));
+  strictEqual("adventures" in result, false, "v15 migration removed the domain");
+  strictEqual("activeAdventureId" in result, false);
   deepStrictEqual(result.characters, []);
+  deepStrictEqual(result.session, ["monster.goblin"], "the session survived");
 });
 
-test("migrations.migrate() silently discards obsolete scenes at v6", () => {
+test("migrations.migrate() reads a v5 payload with a scenes field", () => {
   const input = {
     version: 5,
     favorites: [],
@@ -240,18 +243,10 @@ test("migrations.migrate() silently discards obsolete scenes at v6", () => {
         id: "adv-1",
         title: "Current",
         description: "Desc",
-        objectives: [],
+        objectives: ["a"],
         notes: "Notes",
         entities: ["spell.fireball"],
-        scenes: [
-          {
-            id: "sc-1",
-            title: "Tavern",
-            description: "Intro",
-            note: "Hook",
-            entities: ["monster.goblin"],
-          },
-        ],
+        scenes: [{ id: "sc-1", title: "Tavern", description: "Intro", note: "Hook" }],
         createdAt: 1000,
         updatedAt: 2000,
         archived: false,
@@ -262,13 +257,8 @@ test("migrations.migrate() silently discards obsolete scenes at v6", () => {
   };
   const result = migrate(input);
   strictEqual(result.version, CURRENT_VERSION);
-  strictEqual(result.adventures.length, 1);
-  const adventure = result.adventures[0]!;
-  ok(!("scenes" in adventure), "scenes field removed during migration");
-  strictEqual(adventure.title, "Current");
-  strictEqual(adventure.description, "Desc");
-  strictEqual(adventure.notes, "Notes");
-  deepStrictEqual(adventure.entities, ["spell.fireball"]);
+  strictEqual("adventures" in result, false);
+  strictEqual("activeAdventureId" in result, false);
 });
 
 test("migrations.migrate() maps legacy party members to character references at v7", () => {
@@ -278,8 +268,6 @@ test("migrations.migrate() maps legacy party members to character references at 
     recentEntities: [],
     recentSearches: [],
     session: [],
-    adventures: [],
-    activeAdventureId: null,
     party: [
       {
         id: "m1",
@@ -333,8 +321,6 @@ test("migrations.migrate() drops legacy party members without a name", () => {
     recentEntities: [],
     recentSearches: [],
     session: [],
-    adventures: [],
-    activeAdventureId: null,
     party: [
       { id: "m1", name: "  ", class: "Fighter", level: 3 },
       { id: "m2", name: "Lyra", class: "Wizard", level: 5 },
@@ -352,8 +338,6 @@ test("migrations.migrate() leaves onboarding open for an empty v7 state", () => 
     recentEntities: [],
     recentSearches: [],
     session: [],
-    adventures: [],
-    activeAdventureId: null,
     players: [],
   };
   const result = migrate(input);
@@ -368,8 +352,6 @@ test("migrations.migrate() skips onboarding for existing users with data", () =>
     recentEntities: [],
     recentSearches: [],
     session: [],
-    adventures: [],
-    activeAdventureId: null,
     players: [],
   };
   const result = migrate(input);
@@ -384,8 +366,6 @@ test("migrations.migrate() preserves an explicit onboardingComplete flag", () =>
     recentEntities: [],
     recentSearches: [],
     session: [],
-    adventures: [],
-    activeAdventureId: null,
     players: [],
     onboardingComplete: true,
   };
@@ -400,8 +380,6 @@ test("migrations.migrate() adds activeCharacterId null to a v8 state", () => {
     recentEntities: [],
     recentSearches: [],
     session: [],
-    adventures: [],
-    activeAdventureId: null,
     players: [{ id: "p1", name: "Lyra", class: "Wizard", level: 5 }],
     onboardingComplete: true,
   };
@@ -418,8 +396,6 @@ test("migrations.migrate() preserves an existing activeCharacterId", () => {
     recentEntities: [],
     recentSearches: [],
     session: [],
-    adventures: [],
-    activeAdventureId: null,
     players: [{ id: "p1", name: "Lyra", class: "Wizard", level: 5 }],
     activePlayerId: "p1",
     onboardingComplete: true,
@@ -436,8 +412,6 @@ test("migrations.migrate() defaults beginnerMode to true", () => {
     recentEntities: [],
     recentSearches: [],
     session: [],
-    adventures: [],
-    activeAdventureId: null,
     players: [],
     activePlayerId: null,
     onboardingComplete: true,
@@ -454,8 +428,6 @@ test("migrations.migrate() preserves an explicit beginnerMode", () => {
     recentEntities: [],
     recentSearches: [],
     session: [],
-    adventures: [],
-    activeAdventureId: null,
     players: [],
     activePlayerId: null,
     beginnerMode: false,
@@ -473,8 +445,6 @@ test("migrations.migrate() derives abilityScores from legacy abilityModifiers at
     recentEntities: [],
     recentSearches: [],
     session: [],
-    adventures: [],
-    activeAdventureId: null,
     players: [
       {
         id: "p1",
@@ -519,8 +489,6 @@ test("migrations.migrate() preserves explicit abilityScores and hitPoints", () =
     recentEntities: [],
     recentSearches: [],
     session: [],
-    adventures: [],
-    activeAdventureId: null,
     players: [
       {
         id: "p1",
@@ -567,8 +535,6 @@ test("migrations.migrate() renames players/activePlayerId to characters/activeCh
     recentEntities: [],
     recentSearches: [],
     session: [],
-    adventures: [],
-    activeAdventureId: null,
     players: [{ id: "p1", name: "Lyra", class: "Wizard", level: 5 }],
     activePlayerId: "p1",
     beginnerMode: true,
@@ -818,8 +784,6 @@ test("favoritesSet rebuilt on _replace", () => {
     recentEntities: [],
     recentSearches: [],
     session: [],
-    adventures: [],
-    activeAdventureId: null,
     characters: [],
     activeCharacterId: null,
     beginnerMode: true,
@@ -892,8 +856,6 @@ test("hydrate() loads persisted beginnerMode", () => {
     recentEntities: [],
     recentSearches: [],
     session: [],
-    adventures: [],
-    activeAdventureId: null,
     characters: [],
     activeCharacterId: null,
     beginnerMode: false,
@@ -935,8 +897,6 @@ test("migrate defaults theme to teal for a v11 state", () => {
     recentEntities: [],
     recentSearches: [],
     session: [],
-    adventures: [],
-    activeAdventureId: null,
     characters: [],
     activeCharacterId: null,
     beginnerMode: true,
@@ -954,8 +914,6 @@ test("migrate preserves a persisted theme", () => {
     recentEntities: [],
     recentSearches: [],
     session: [],
-    adventures: [],
-    activeAdventureId: null,
     characters: [],
     activeCharacterId: null,
     beginnerMode: true,
@@ -973,8 +931,6 @@ test("migrate rejects an invalid theme value", () => {
     recentEntities: [],
     recentSearches: [],
     session: [],
-    adventures: [],
-    activeAdventureId: null,
     characters: [],
     activeCharacterId: null,
     beginnerMode: true,
@@ -1023,8 +979,6 @@ test("hydrate() loads persisted theme", () => {
     recentEntities: [],
     recentSearches: [],
     session: [],
-    adventures: [],
-    activeAdventureId: null,
     characters: [],
     activeCharacterId: null,
     beginnerMode: true,
@@ -1045,8 +999,6 @@ test("hydrate() falls back to teal for an invalid persisted theme", () => {
     recentEntities: [],
     recentSearches: [],
     session: [],
-    adventures: [],
-    activeAdventureId: null,
     characters: [],
     activeCharacterId: null,
     beginnerMode: true,
@@ -1075,8 +1027,6 @@ test("_replace carries the theme field", () => {
     recentEntities: [],
     recentSearches: [],
     session: [],
-    adventures: [],
-    activeAdventureId: null,
     characters: [],
     activeCharacterId: null,
     beginnerMode: true,
@@ -1439,8 +1389,6 @@ test("safe replace does nothing when state is identical", () => {
     recentEntities: ["x"],
     recentSearches: ["q"],
     session: [],
-    adventures: [],
-    activeAdventureId: null,
     characters: [],
     activeCharacterId: null,
     beginnerMode: true,
@@ -1454,8 +1402,6 @@ test("safe replace does nothing when state is identical", () => {
     recentEntities: ["x"],
     recentSearches: ["q"],
     session: [],
-    adventures: [],
-    activeAdventureId: null,
     characters: [],
     activeCharacterId: null,
     beginnerMode: true,
@@ -1670,8 +1616,6 @@ test("sessionSet stays in sync after _replace", () => {
     recentEntities: [],
     recentSearches: [],
     session: ["x", "y"],
-    adventures: [],
-    activeAdventureId: null,
     characters: [],
     activeCharacterId: null,
     beginnerMode: true,
@@ -1927,8 +1871,6 @@ test("_replace updates session when content differs", () => {
     recentEntities: [],
     recentSearches: [],
     session: ["a", "b"],
-    adventures: [],
-    activeAdventureId: null,
     characters: [],
     activeCharacterId: null,
     beginnerMode: true,
@@ -2000,598 +1942,25 @@ test("useSessionIds respects limit", () => {
 });
 
 // ---------------------------------------------------------------------------
-// Adventure
+// Adventure migration (v15 removed the domain)
 // ---------------------------------------------------------------------------
-console.log("\nuser-state \u2014 adventure\n");
+console.log("\nuser-state \u2014 adventure removal\n");
 
-test("adventure initial state is empty", () => {
+test("migration drops adventures from a pre-v15 payload", () => {
   resetMock();
   resetStore();
-  deepStrictEqual(userStore.getState().adventures, []);
-  strictEqual(userStore.getState().activeAdventureId, null);
-  ok(userStore.getState().adventureEntitySet instanceof Set);
-  strictEqual(userStore.getState().adventureEntitySet.size, 0);
-});
-
-test("createAdventure creates a new adventure and sets it active", () => {
-  resetMock();
-  resetStore();
-  userStore.getState().createAdventure({ title: "My Quest" });
-  const state = userStore.getState();
-  strictEqual(state.adventures.length, 1);
-  strictEqual(state.adventures[0]!.title, "My Quest");
-  strictEqual(state.activeAdventureId, state.adventures[0]!.id);
-  ok(state.adventureEntitySet instanceof Set);
-});
-
-test("createAdventure with no title uses default", () => {
-  resetMock();
-  resetStore();
-  userStore.getState().createAdventure();
-  const state = userStore.getState();
-  strictEqual(state.adventures.length, 1);
-  strictEqual(state.adventures[0]!.title, "New Adventure");
-});
-
-test("toggleAdventureEntity auto-creates adventure when none active", () => {
-  resetMock();
-  resetStore();
-  userStore.getState().toggleAdventureEntity("spell.fireball");
-  const state = userStore.getState();
-  strictEqual(state.adventures.length, 1);
-  strictEqual(state.activeAdventureId, state.adventures[0]!.id);
-  deepStrictEqual(state.adventures[0]!.entities, ["spell.fireball"]);
-  ok(state.adventureEntitySet.has("spell.fireball"));
-});
-
-test("toggleAdventureEntity adds entity to active adventure", () => {
-  resetMock();
-  resetStore();
-  const s = userStore.getState();
-  s.createAdventure({ title: "Test" });
-  s.toggleAdventureEntity("spell.fireball");
-  const state = userStore.getState();
-  deepStrictEqual(state.adventures[0]!.entities, ["spell.fireball"]);
-  ok(state.adventureEntitySet.has("spell.fireball"));
-});
-
-test("toggleAdventureEntity removes entity from active adventure", () => {
-  resetMock();
-  resetStore();
-  const s = userStore.getState();
-  s.createAdventure({ title: "Test" });
-  s.toggleAdventureEntity("spell.fireball");
-  s.toggleAdventureEntity("spell.fireball");
-  const state = userStore.getState();
-  deepStrictEqual(state.adventures[0]!.entities, []);
-  strictEqual(state.adventureEntitySet.size, 0);
-});
-
-test("toggleAdventureEntity adds multiple entities", () => {
-  resetMock();
-  resetStore();
-  const s = userStore.getState();
-  s.createAdventure({ title: "Test" });
-  s.toggleAdventureEntity("spell.fireball");
-  s.toggleAdventureEntity("monster.goblin");
-  const state = userStore.getState();
-  deepStrictEqual(state.adventures[0]!.entities, ["spell.fireball", "monster.goblin"]);
-  strictEqual(state.adventureEntitySet.size, 2);
-});
-
-test("adventureEntitySet O(1) lookup", () => {
-  resetMock();
-  resetStore();
-  const s = userStore.getState();
-  s.createAdventure({ title: "Test" });
-  s.toggleAdventureEntity("spell.fireball");
-  const state = userStore.getState();
-  strictEqual(state.adventureEntitySet.has("spell.fireball"), true);
-  strictEqual(state.adventureEntitySet.has("nonexistent"), false);
-});
-
-test("clearAdventureEntities removes all entities from active adventure", () => {
-  resetMock();
-  resetStore();
-  const s = userStore.getState();
-  s.createAdventure({ title: "Test" });
-  s.toggleAdventureEntity("spell.fireball");
-  s.toggleAdventureEntity("monster.goblin");
-  s.clearAdventureEntities();
-  const state = userStore.getState();
-  deepStrictEqual(state.adventures[0]!.entities, []);
-  strictEqual(state.adventureEntitySet.size, 0);
-});
-
-test("updateAdventure updates title, description, notes", () => {
-  resetMock();
-  resetStore();
-  const s = userStore.getState();
-  s.createAdventure({ title: "Old Title" });
-  const id = userStore.getState().adventures[0]!.id;
-  s.updateAdventure(id, { title: "New Title", description: "A description", notes: "Some notes" });
-  const state = userStore.getState();
-  strictEqual(state.adventures[0]!.title, "New Title");
-  strictEqual(state.adventures[0]!.description, "A description");
-  strictEqual(state.adventures[0]!.notes, "Some notes");
-});
-
-test("addObjective adds objective to adventure", () => {
-  resetMock();
-  resetStore();
-  const s = userStore.getState();
-  s.createAdventure({ title: "Test" });
-  const id = userStore.getState().adventures[0]!.id;
-  s.addObjective(id, "Find the treasure");
-  deepStrictEqual(userStore.getState().adventures[0]!.objectives, ["Find the treasure"]);
-});
-
-test("addObjective ignores empty string", () => {
-  resetMock();
-  resetStore();
-  const s = userStore.getState();
-  s.createAdventure({ title: "Test" });
-  const id = userStore.getState().adventures[0]!.id;
-  s.addObjective(id, "");
-  s.addObjective(id, "  ");
-  deepStrictEqual(userStore.getState().adventures[0]!.objectives, []);
-});
-
-test("removeObjective removes objective at index", () => {
-  resetMock();
-  resetStore();
-  const s = userStore.getState();
-  s.createAdventure({ title: "Test" });
-  const id = userStore.getState().adventures[0]!.id;
-  s.addObjective(id, "A");
-  s.addObjective(id, "B");
-  s.addObjective(id, "C");
-  s.removeObjective(id, 1);
-  deepStrictEqual(userStore.getState().adventures[0]!.objectives, ["A", "C"]);
-});
-
-test("archiveAdventure marks adventure as archived and clears active", () => {
-  resetMock();
-  resetStore();
-  const s = userStore.getState();
-  s.createAdventure({ title: "Test" });
-  const id = userStore.getState().adventures[0]!.id;
-  s.archiveAdventure(id);
-  const state = userStore.getState();
-  strictEqual(state.adventures[0]!.archived, true);
-  strictEqual(state.activeAdventureId, null);
-  strictEqual(state.adventureEntitySet.size, 0);
-});
-
-test("restoreAdventure restores archived adventure", () => {
-  resetMock();
-  resetStore();
-  const s = userStore.getState();
-  s.createAdventure({ title: "Test" });
-  const id = userStore.getState().adventures[0]!.id;
-  s.archiveAdventure(id);
-  s.restoreAdventure(id);
-  strictEqual(userStore.getState().adventures[0]!.archived, false);
-  strictEqual(userStore.getState().activeAdventureId, null);
-});
-
-test("setActiveAdventure switches active adventure", () => {
-  resetMock();
-  resetStore();
-  const s = userStore.getState();
-  s.createAdventure({ title: "First" });
-  const firstId = userStore.getState().adventures[0]!.id;
-  s.toggleAdventureEntity("spell.fireball");
-  s.createAdventure({ title: "Second" });
-  s.setActiveAdventure(firstId);
-  const state = userStore.getState();
-  strictEqual(state.activeAdventureId, firstId);
-  ok(state.adventureEntitySet.has("spell.fireball"));
-});
-
-test("setActiveAdventure with null clears active", () => {
-  resetMock();
-  resetStore();
-  const s = userStore.getState();
-  s.createAdventure({ title: "Test" });
-  s.setActiveAdventure(null);
-  strictEqual(userStore.getState().activeAdventureId, null);
-  strictEqual(userStore.getState().adventureEntitySet.size, 0);
-});
-
-test("createAdventure persists to localStorage", () => {
-  resetMock();
-  resetStore();
-  userStore.getState().createAdventure({ title: "Persisted" });
-  const stored = localStorage.getItem(STORAGE_KEY);
-  if (stored) {
-    const parsed = JSON.parse(stored);
-    strictEqual(parsed.adventures.length, 1);
-    strictEqual(parsed.adventures[0]!.title, "Persisted");
-    ok(typeof parsed.activeAdventureId === "string");
-  }
-});
-
-test("adventureSet rebuilt on _replace", () => {
-  resetMock();
-  resetStore();
-  userStore.getState()._replace({
-    version: CURRENT_VERSION,
-    favorites: [],
+  const legacy = {
+    version: 14,
+    favorites: ["spell.fireball"],
     recentEntities: [],
     recentSearches: [],
-    session: [],
+    session: ["monster.goblin"],
     adventures: [
       {
         id: "adv-1",
-        title: "Test",
+        title: "Legacy",
         description: "",
-        objectives: [],
-        notes: "",
-        entities: ["x", "y"],
-        createdAt: Date.now(),
-        updatedAt: Date.now(),
-        archived: false,
-      },
-    ],
-    activeAdventureId: "adv-1",
-    characters: [],
-    activeCharacterId: null,
-    beginnerMode: true,
-    onboardingComplete: false,
-    theme: "jade",
-    language: "en",
-  });
-  const state = userStore.getState();
-  strictEqual(state.adventures.length, 1);
-  strictEqual(state.activeAdventureId, "adv-1");
-  ok(state.adventureEntitySet.has("x"));
-  ok(state.adventureEntitySet.has("y"));
-  strictEqual(state.adventureEntitySet.size, 2);
-});
-
-test("adventureSet cleared on _reset", () => {
-  resetMock();
-  resetStore();
-  const s = userStore.getState();
-  s.createAdventure({ title: "Test" });
-  s.toggleAdventureEntity("spell.fireball");
-  userStore.getState()._reset();
-  const state = userStore.getState();
-  deepStrictEqual(state.adventures, []);
-  strictEqual(state.activeAdventureId, null);
-  strictEqual(state.adventureEntitySet.size, 0);
-});
-
-// ---------------------------------------------------------------------------
-// Adventure normalization
-// ---------------------------------------------------------------------------
-console.log("\nuser-state \u2014 adventure normalization\n");
-
-test("normalize removes invalid adventure entries", () => {
-  const result = normalize({
-    version: CURRENT_VERSION,
-    favorites: [],
-    recentEntities: [],
-    recentSearches: [],
-    session: [],
-    adventures: [null, { no_id: true }, { id: "" }] as unknown as Adventure[],
-    activeAdventureId: null,
-  });
-  strictEqual(result.adventures.length, 0);
-});
-
-test("normalize trims adventure title and description", () => {
-  const result = normalize({
-    version: CURRENT_VERSION,
-    favorites: [],
-    recentEntities: [],
-    recentSearches: [],
-    session: [],
-    adventures: [
-      {
-        id: "adv-1",
-        title: "  My Quest  ",
-        description: "  Desc  ",
-        objectives: [],
-        notes: "  Notes  ",
-        entities: [],
-        createdAt: 1000,
-        updatedAt: 2000,
-        archived: false,
-      },
-    ],
-    activeAdventureId: null,
-  });
-  strictEqual(result.adventures[0]!.title, "My Quest");
-  strictEqual(result.adventures[0]!.description, "Desc");
-  strictEqual(result.adventures[0]!.notes, "Notes");
-});
-
-test("normalize deduplicates adventure objectives", () => {
-  const result = normalize({
-    version: CURRENT_VERSION,
-    favorites: [],
-    recentEntities: [],
-    recentSearches: [],
-    session: [],
-    adventures: [
-      {
-        id: "adv-1",
-        title: "Test",
-        description: "",
-        objectives: ["a", "a", "b", "c", "b"],
-        notes: "",
-        entities: [],
-        createdAt: 1000,
-        updatedAt: 2000,
-        archived: false,
-      },
-    ],
-    activeAdventureId: null,
-  });
-  deepStrictEqual(result.adventures[0]!.objectives, ["a", "b", "c"]);
-});
-
-test("normalize removes empty objective strings", () => {
-  const result = normalize({
-    version: CURRENT_VERSION,
-    favorites: [],
-    recentEntities: [],
-    recentSearches: [],
-    session: [],
-    adventures: [
-      {
-        id: "adv-1",
-        title: "Test",
-        description: "",
-        objectives: ["a", "", "b", "  "],
-        notes: "",
-        entities: [],
-        createdAt: 1000,
-        updatedAt: 2000,
-        archived: false,
-      },
-    ],
-    activeAdventureId: null,
-  });
-  deepStrictEqual(result.adventures[0]!.objectives, ["a", "b"]);
-});
-
-test("normalize removes stale entity IDs from adventures", () => {
-  const raw = {
-    version: CURRENT_VERSION,
-    favorites: [],
-    recentEntities: [],
-    recentSearches: [],
-    session: [],
-    adventures: [
-      {
-        id: "adv-1",
-        title: "Test",
-        description: "",
-        objectives: [],
-        notes: "",
-        entities: ["spell.fireball", "nonexistent.entity"],
-        createdAt: 1000,
-        updatedAt: 2000,
-        archived: false,
-      },
-    ],
-    activeAdventureId: null,
-  };
-  const result = normalize(raw);
-  deepStrictEqual(result.adventures[0]!.entities, ["spell.fireball"]);
-});
-
-test("normalize clears activeAdventureId if adventure was removed", () => {
-  const result = normalize({
-    version: CURRENT_VERSION,
-    favorites: [],
-    recentEntities: [],
-    recentSearches: [],
-    session: [],
-    adventures: [],
-    activeAdventureId: "nonexistent",
-  });
-  strictEqual(result.activeAdventureId, null);
-});
-
-test("normalize clears activeCharacterId if character was removed", () => {
-  const result = normalize({
-    version: CURRENT_VERSION,
-    favorites: [],
-    recentEntities: [],
-    recentSearches: [],
-    session: [],
-    activeCharacterId: "nonexistent",
-  });
-  strictEqual(result.activeCharacterId, null);
-});
-
-test("normalize preserves activeCharacterId when the character exists", () => {
-  const result = normalize({
-    version: CURRENT_VERSION,
-    favorites: [],
-    recentEntities: [],
-    recentSearches: [],
-    session: [],
-    characters: [
-      {
-        id: "p1",
-        name: "Lyra",
-        class: "Wizard",
-        level: 5,
-        abilityScores: {
-          strength: 10,
-          dexterity: 10,
-          constitution: 10,
-          intelligence: 10,
-          wisdom: 10,
-          charisma: 10,
-        },
-        hitPoints: { current: 10, max: 10 },
-        combatValues: { armorClass: 10, initiativeModifier: 0, passivePerception: 10 },
-        knownSpellCanonicalIds: [],
-        weaponCanonicalIds: [],
-        magicItemCanonicalIds: [],
-        activeConditions: [],
-      },
-    ],
-    activeCharacterId: "p1",
-  });
-  strictEqual(result.activeCharacterId, "p1");
-});
-
-test("normalize enforces max 20 adventures", () => {
-  const many = [];
-  for (let i = 0; i < 25; i++) {
-    many.push({
-      id: `adv-${i}`,
-      title: `Adventure ${i}`,
-      description: "",
-      objectives: [],
-      notes: "",
-      entities: [],
-      createdAt: 1000,
-      updatedAt: 1000 + i,
-      archived: false,
-    });
-  }
-  const result = normalize({
-    version: CURRENT_VERSION,
-    favorites: [],
-    recentEntities: [],
-    recentSearches: [],
-    session: [],
-    adventures: many,
-    activeAdventureId: null,
-  });
-  strictEqual(result.adventures.length, 20);
-  strictEqual(result.adventures[0]!.id, "adv-0");
-  strictEqual(result.adventures[19]!.id, "adv-19");
-});
-
-// ---------------------------------------------------------------------------
-// Adventure hydration
-// ---------------------------------------------------------------------------
-console.log("\nuser-state \u2014 adventure hydration\n");
-
-test("hydrate() loads adventures from persisted state", () => {
-  resetMock();
-  resetStore();
-  const data = {
-    version: CURRENT_VERSION,
-    favorites: [],
-    recentEntities: [],
-    recentSearches: [],
-    session: [],
-    adventures: [
-      {
-        id: "adv-1",
-        title: "Saved Adventure",
-        description: "Desc",
-        objectives: ["Goal 1"],
-        notes: "Notes here",
-        entities: ["spell.fireball"],
-        createdAt: 1000,
-        updatedAt: 2000,
-        archived: false,
-      },
-    ],
-    activeAdventureId: "adv-1",
-  };
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
-  hydrate();
-  const state = userStore.getState();
-  strictEqual(state.adventures.length, 1);
-  strictEqual(state.adventures[0]!.title, "Saved Adventure");
-  strictEqual(state.activeAdventureId, "adv-1");
-  strictEqual(state.adventureEntitySet.has("spell.fireball"), true);
-});
-
-test("hydrate() removes stale entity IDs from persisted adventures", () => {
-  resetMock();
-  resetStore();
-  const data = {
-    version: CURRENT_VERSION,
-    favorites: [],
-    recentEntities: [],
-    recentSearches: [],
-    session: [],
-    adventures: [
-      {
-        id: "adv-1",
-        title: "Test",
-        description: "",
-        objectives: [],
-        notes: "",
-        entities: ["nonexistent.entity"],
-        createdAt: 1000,
-        updatedAt: 2000,
-        archived: false,
-      },
-    ],
-    activeAdventureId: "adv-1",
-  };
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
-  hydrate();
-  const state = userStore.getState();
-  deepStrictEqual(state.adventures[0]!.entities, []);
-  strictEqual(state.adventureEntitySet.size, 0);
-});
-
-test("hydrate() with duplicate adventures removes duplicates via normalize", () => {
-  resetMock();
-  resetStore();
-  const data = {
-    version: CURRENT_VERSION,
-    favorites: [],
-    recentEntities: [],
-    recentSearches: [],
-    session: [],
-    adventures: [
-      {
-        id: "adv-1",
-        title: "Test",
-        description: "",
-        objectives: ["a", "a", "b"],
-        notes: "",
-        entities: ["spell.fireball", "spell.fireball"],
-        createdAt: 1000,
-        updatedAt: 2000,
-        archived: false,
-      },
-    ],
-    activeAdventureId: "adv-1",
-  };
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
-  hydrate();
-  const state = userStore.getState();
-  deepStrictEqual(state.adventures[0]!.objectives, ["a", "b"], "duplicate objectives removed");
-  deepStrictEqual(state.adventures[0]!.entities, ["spell.fireball"], "duplicate entities removed");
-});
-
-// ---------------------------------------------------------------------------
-// Adventure cross-tab
-// ---------------------------------------------------------------------------
-console.log("\nuser-state \u2014 adventure cross-tab\n");
-
-test("_replace updates adventures when content differs", () => {
-  resetMock();
-  resetStore();
-  userStore.getState()._replace({
-    version: CURRENT_VERSION,
-    favorites: [],
-    recentEntities: [],
-    recentSearches: [],
-    session: [],
-    adventures: [
-      {
-        id: "adv-1",
-        title: "Cross Tab",
-        description: "",
-        objectives: [],
+        objectives: ["a"],
         notes: "",
         entities: ["spell.fireball"],
         createdAt: 1000,
@@ -2606,177 +1975,27 @@ test("_replace updates adventures when content differs", () => {
     onboardingComplete: false,
     theme: "jade",
     language: "en",
-  });
-  const state = userStore.getState();
-  strictEqual(state.adventures.length, 1);
-  strictEqual(state.activeAdventureId, "adv-1");
-  ok(state.adventureEntitySet.has("spell.fireball"));
-});
-
-test("adventuresEqual prevents unnecessary _replace on identical state", () => {
-  resetMock();
-  resetStore();
-  const state: UserState = {
-    version: CURRENT_VERSION,
-    favorites: [],
-    recentEntities: [],
-    recentSearches: [],
-    session: [],
-    adventures: [
-      {
-        id: "adv-1",
-        title: "Same",
-        description: "",
-        objectives: [],
-        notes: "",
-        entities: ["x"],
-        createdAt: 1000,
-        updatedAt: 2000,
-        archived: false,
-      },
-    ],
-    activeAdventureId: "adv-1",
-    characters: [],
-    activeCharacterId: null,
-    beginnerMode: true,
-    onboardingComplete: false,
-    theme: "jade",
-    language: "en",
   };
-  userStore.getState()._replace(state);
-  userStore.getState()._replace(state);
-  strictEqual(userStore.getState().adventures.length, 1);
-});
-
-// ---------------------------------------------------------------------------
-// Adventure selectors
-// ---------------------------------------------------------------------------
-console.log("\nuser-state \u2014 adventure selectors\n");
-
-test("useIsInAdventure returns true for entity in active adventure", () => {
-  resetMock();
-  resetStore();
-  const s = userStore.getState();
-  s.createAdventure({ title: "Test" });
-  s.toggleAdventureEntity("spell.fireball");
-  strictEqual(userStore.getState().adventureEntitySet.has("spell.fireball"), true);
-  strictEqual(userStore.getState().adventureEntitySet.has("nonexistent"), false);
-});
-
-test("useActiveAdventure returns the active adventure", () => {
-  resetMock();
-  resetStore();
-  const s = userStore.getState();
-  s.createAdventure({ title: "Active One" });
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(legacy));
+  hydrate();
   const state = userStore.getState();
-  const active = state.adventures.find((a) => a.id === state.activeAdventureId);
-  ok(active);
-  strictEqual(active?.title, "Active One");
+  strictEqual(state.version, CURRENT_VERSION, "upgraded to the current version");
+  strictEqual("adventures" in state, false, "adventures is gone from the store");
+  strictEqual("activeAdventureId" in state, false, "activeAdventureId is gone from the store");
+  strictEqual("adventureEntitySet" in state, false, "adventureEntitySet is gone from the store");
+  strictEqual(state.session.length, 1, "the session survived the migration");
+  strictEqual(state.favorites.length, 1, "favorites survived the migration");
 });
 
-test("useActiveAdventure returns null when none active", () => {
+test("a persisted v15 payload keeps no adventure fields on disk either", async () => {
   resetMock();
   resetStore();
-  strictEqual(userStore.getState().activeAdventureId, null);
-});
-
-test("setActiveCharacter sets and clears the active character", () => {
-  resetMock();
-  resetStore();
-  const id = userStore.getState().addCharacter({
-    name: "Lyra",
-    class: "Wizard",
-    level: 5,
-    abilityScores: {
-      strength: 10,
-      dexterity: 10,
-      constitution: 10,
-      intelligence: 10,
-      wisdom: 10,
-      charisma: 10,
-    },
-    hitPoints: { current: 10, max: 10 },
-    combatValues: { armorClass: 10, initiativeModifier: 0, passivePerception: 10 },
-    knownSpellCanonicalIds: [],
-    weaponCanonicalIds: [],
-    magicItemCanonicalIds: [],
-    activeConditions: [],
-  });
-  userStore.getState().setActiveCharacter(id);
-  strictEqual(userStore.getState().activeCharacterId, id);
-  userStore.getState().setActiveCharacter(null);
-  strictEqual(userStore.getState().activeCharacterId, null);
-});
-
-test("setActiveCharacter persists to localStorage", () => {
-  resetMock();
-  resetStore();
-  const id = userStore.getState().addCharacter({
-    name: "Lyra",
-    class: "Wizard",
-    level: 5,
-    abilityScores: {
-      strength: 10,
-      dexterity: 10,
-      constitution: 10,
-      intelligence: 10,
-      wisdom: 10,
-      charisma: 10,
-    },
-    hitPoints: { current: 10, max: 10 },
-    combatValues: { armorClass: 10, initiativeModifier: 0, passivePerception: 10 },
-    knownSpellCanonicalIds: [],
-    weaponCanonicalIds: [],
-    magicItemCanonicalIds: [],
-    activeConditions: [],
-  });
-  userStore.getState().setActiveCharacter(id);
-  const stored = localStorage.getItem(STORAGE_KEY);
-  if (stored) {
-    const parsed = JSON.parse(stored);
-    strictEqual(parsed.activeCharacterId, id);
-  } else {
-    strictEqual(userStore.getState().activeCharacterId, id);
-  }
-});
-
-test("useActiveCharacter returns the active character", () => {
-  resetMock();
-  resetStore();
-  const id = userStore.getState().addCharacter({
-    name: "Lyra",
-    class: "Wizard",
-    level: 5,
-    abilityScores: {
-      strength: 10,
-      dexterity: 10,
-      constitution: 10,
-      intelligence: 10,
-      wisdom: 10,
-      charisma: 10,
-    },
-    hitPoints: { current: 10, max: 10 },
-    combatValues: { armorClass: 10, initiativeModifier: 0, passivePerception: 10 },
-    knownSpellCanonicalIds: [],
-    weaponCanonicalIds: [],
-    magicItemCanonicalIds: [],
-    activeConditions: [],
-  });
-  userStore.getState().setActiveCharacter(id);
-  strictEqual(userStore.getState().activeCharacterId, id);
-});
-
-test("useAdventureEntityIds returns entities for active adventure", () => {
-  resetMock();
-  resetStore();
-  const s = userStore.getState();
-  s.createAdventure({ title: "Test" });
-  s.toggleAdventureEntity("spell.fireball");
-  s.toggleAdventureEntity("monster.goblin");
-  const state = userStore.getState();
-  const active = state.adventures.find((a) => a.id === state.activeAdventureId);
-  ok(active);
-  deepStrictEqual(active?.entities, ["spell.fireball", "monster.goblin"]);
+  hydrate();
+  // Round-tripping through toUserState must not reintroduce the removed keys.
+  const { toUserState } = await import("../../src/user-state/serialization");
+  const persisted = toUserState(userStore.getState()) as unknown as Record<string, unknown>;
+  strictEqual("adventures" in persisted, false);
+  strictEqual("activeAdventureId" in persisted, false);
 });
 
 // ---------------------------------------------------------------------------
@@ -3240,8 +2459,6 @@ test("_replace updates characters when content differs", () => {
     recentEntities: [],
     recentSearches: [],
     session: [],
-    adventures: [],
-    activeAdventureId: null,
     characters: [
       {
         id: "p1",

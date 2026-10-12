@@ -6,13 +6,16 @@ export interface CloudUser {
   readonly email: string | null;
 }
 
+/**
+ * Snapshot metadata is informational only — nothing reads these back to drive
+ * behaviour, so the retired adventure fields were dropped rather than migrated.
+ * Older snapshots carrying them still restore fine; the extra keys are ignored.
+ */
 export interface CloudMetadata {
   readonly createdAt: number;
-  readonly adventureCount: number;
   readonly characterCount: number;
   readonly favoriteCount: number;
   readonly sessionCount: number;
-  readonly activeAdventureTitle: string | null;
 }
 
 export interface CloudSnapshot {

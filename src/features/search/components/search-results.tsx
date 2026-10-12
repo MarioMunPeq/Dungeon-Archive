@@ -1,6 +1,7 @@
 import type { SearchResultItem } from "@/components/entity";
 import { VirtualList } from "@/components/virtual";
 import { SearchResultRow } from "./search-result-row";
+import { t } from "@/i18n";
 
 interface SearchResultsProps {
   readonly results: readonly SearchResultItem[];
@@ -12,8 +13,7 @@ export function SearchResults({ results, query, selectedIndex }: SearchResultsPr
   return (
     <VirtualList
       id="search-results-listbox"
-      role="listbox"
-      ariaLabel="Search results"
+      ariaLabel={t("search.resultsLabel")}
       items={results}
       getItemKey={(result) => result.id}
       estimateRowHeight={56}

@@ -49,18 +49,6 @@ export interface CharacterReference {
   readonly note?: string;
 }
 
-export interface Adventure {
-  readonly id: string;
-  readonly title: string;
-  readonly description: string;
-  readonly objectives: string[];
-  readonly notes: string;
-  readonly entities: string[];
-  readonly createdAt: number;
-  readonly updatedAt: number;
-  readonly archived: boolean;
-}
-
 export type Theme = "jade" | "amber" | "teal" | "gold" | "wine" | "plum" | "steel";
 
 /**
@@ -75,8 +63,6 @@ export interface UserState {
   readonly recentEntities: string[];
   readonly recentSearches: string[];
   readonly session: string[];
-  readonly adventures: Adventure[];
-  readonly activeAdventureId: string | null;
   readonly characters: CharacterReference[];
   readonly activeCharacterId: string | null;
   readonly beginnerMode: boolean;
@@ -86,7 +72,12 @@ export interface UserState {
 }
 
 export const STORAGE_KEY = "dungeon:userState:v1";
-export const CURRENT_VERSION = 14;
+/**
+ * v15 dropped the multi-campaign "adventures" model (replaced by the single
+ * session, ADR-004). Migration 15 strips the fields; older migrations above are
+ * left intact because they still have to read pre-v15 payloads.
+ */
+export const CURRENT_VERSION = 15;
 export const DEFAULT_THEME: Theme = "teal";
 export const THEMES: readonly Theme[] = ["jade", "amber", "teal", "gold", "wine", "plum", "steel"];
 export const DEFAULT_LANGUAGE: Language = "en";
@@ -115,8 +106,6 @@ export function createDefaultState(): UserState {
     recentEntities: [],
     recentSearches: [],
     session: [],
-    adventures: [],
-    activeAdventureId: null,
     characters: [],
     activeCharacterId: null,
     beginnerMode: true,

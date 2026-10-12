@@ -19,6 +19,10 @@ import { SectionHeader } from "./section-header";
  * The category label and stat are localized, so the language is part of the
  * key: switching language must not serve cards built in the previous one.
  */
+/** Bounded: the key includes the language, so every switch would otherwise
+ *  double the cache. Only the home screen's handful of rails need it. */
+const MAX_CACHED_CARDS = 120;
+
 const cardCache = new Map<string, EntityCardData>();
 
 function entityCardFromCanonicalId(canonicalId: string, language: string): EntityCardData | null {
@@ -37,7 +41,13 @@ function entityCardFromCanonicalId(canonicalId: string, language: string): Entit
     canonicalId: ref.canonicalId,
     stat: ref.stat,
   };
+  // Re-insert so the newest entry is last, then drop the oldest.
+  cardCache.delete(key);
   cardCache.set(key, card);
+  if (cardCache.size > MAX_CACHED_CARDS) {
+    const oldest = cardCache.keys().next();
+    if (oldest.done !== true) cardCache.delete(oldest.value);
+  }
   return card;
 }
 

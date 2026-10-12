@@ -127,32 +127,16 @@ await test("upload stores metadata, updatedAt and appVersion", async () => {
   ok(snapshot !== null, "snapshot should exist after upload");
   ok(snapshot.updatedAt >= now, "updatedAt is set");
   ok(snapshot.appVersion.length > 0, "appVersion is set");
-  strictEqual(snapshot.metadata.adventureCount, state.adventures.length);
   strictEqual(snapshot.metadata.characterCount, state.characters.length);
   strictEqual(snapshot.metadata.favoriteCount, 1);
   strictEqual(snapshot.metadata.sessionCount, 1);
-  strictEqual(snapshot.metadata.activeAdventureTitle, null);
 });
 
-await test("computeMetadata counts adventures, characters, favorites and sessions", () => {
+await test("computeMetadata counts characters, favorites and sessions", () => {
   const base = userStore.getState();
   const meta = computeMetadata(
     {
       ...base,
-      adventures: [
-        {
-          id: "adv-1",
-          title: "Curse of Strahd",
-          description: "",
-          objectives: [],
-          notes: "",
-          entities: [],
-          createdAt: 0,
-          updatedAt: 0,
-          archived: false,
-        },
-      ],
-      activeAdventureId: "adv-1",
       characters: [
         {
           id: "p-1",
@@ -184,12 +168,11 @@ await test("computeMetadata counts adventures, characters, favorites and session
     },
     1234,
   );
-  strictEqual(meta.adventureCount, 1);
   strictEqual(meta.characterCount, 1);
   strictEqual(meta.favoriteCount, 3);
   strictEqual(meta.sessionCount, 2);
-  strictEqual(meta.activeAdventureTitle, "Curse of Strahd");
   strictEqual(meta.createdAt, 1234);
+  strictEqual("adventureCount" in meta, false, "retired adventure metadata is gone");
 });
 
 await test("last upload is persisted and reported as up to date", async () => {

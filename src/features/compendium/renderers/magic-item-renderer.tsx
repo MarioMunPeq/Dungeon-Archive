@@ -13,8 +13,8 @@ interface MagicItemRendererProps {
 
 function attunementLabel(req: string): string {
   if (!req) return "";
-  if (req === "true") return "Required";
-  return `Required (${req})`;
+  if (req === "true") return t("filter.required");
+  return t("filter.requiredWithReason", { reason: req });
 }
 
 export function MagicItemRenderer({ entity }: MagicItemRendererProps) {
@@ -29,10 +29,7 @@ export function MagicItemRenderer({ entity }: MagicItemRendererProps) {
             value={
               <span className="inline-flex items-center gap-1">
                 {attunementLabel(entity.requiresAttunement)}
-                <HelpTip label={t("help.attunement.title")}>
-                  Powerful items bond to one character during a short rest. Most characters can
-                  attune to three items at once.
-                </HelpTip>
+                <HelpTip label={t("help.attunement.title")}>{t("help.attunement.body")}</HelpTip>
               </span>
             }
           />
