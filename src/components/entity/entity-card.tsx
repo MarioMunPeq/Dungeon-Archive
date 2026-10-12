@@ -5,6 +5,8 @@ import type { EntityCardData } from "@/compendium";
 import { Badge } from "@/components/ui/Badge";
 import { badgeVariantForCategory } from "./entity-reference";
 import { EntityCardStat } from "./entity-card-stat";
+import { t } from "@/i18n";
+import { useLanguage } from "@/user-state";
 
 export const EntityCard = memo(function EntityCard({
   name,
@@ -16,6 +18,10 @@ export const EntityCard = memo(function EntityCard({
   versionCount,
   stat,
 }: EntityCardData) {
+  // The version badge is translated. `memo` guards props only, and a language
+  // switch changes none of them, so without this subscription every card in a
+  // list kept its previous-language badge.
+  useLanguage();
   return (
     <Link
       to={href}
@@ -33,7 +39,9 @@ export const EntityCard = memo(function EntityCard({
         <Badge variant={badgeVariantForCategory(category)}>{categoryLabel}</Badge>
         {stat && <EntityCardStat stat={stat} />}
         {versionCount != null && versionCount > 1 && (
-          <span className="shrink-0 text-xs text-foreground-subtle">{versionCount} versions</span>
+          <span className="shrink-0 text-xs text-foreground-subtle">
+            {t("entity.versionCount", { count: versionCount })}
+          </span>
         )}
       </span>
       <span className="flex flex-wrap items-center gap-x-1.5 text-xs leading-snug text-foreground-subtle">

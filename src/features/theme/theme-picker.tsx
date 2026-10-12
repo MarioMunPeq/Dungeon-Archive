@@ -6,6 +6,7 @@ import { cn } from "@/lib/utils";
 import { Button, PaletteIcon, Caption } from "@/components/ui";
 import { useConstrainedPopover } from "@/components/ui/use-constrained-popover";
 import { runWaveReveal } from "@/features/motion/wave-reveal";
+import { t } from "@/i18n";
 
 const LABELS: Record<Theme, string> = {
   jade: "Jade",
@@ -60,7 +61,7 @@ export function ThemePicker() {
         variant="ghost"
         size="md"
         className="px-2"
-        aria-label="Accent theme"
+        aria-label={t("theme.pickerLabel")}
         aria-expanded={open}
         onClick={() => setOpen((v) => !v)}
       >
@@ -70,7 +71,7 @@ export function ThemePicker() {
         <div
           ref={popoverRef}
           role="dialog"
-          aria-label="Accent theme"
+          aria-label={t("theme.pickerLabel")}
           className={cn(
             "absolute right-0 z-20 transition-transform duration-150",
             placement === "below" ? "top-full mt-2" : "bottom-full mb-2",
@@ -78,7 +79,7 @@ export function ThemePicker() {
           style={{ transform: shiftX !== 0 ? `translateX(${shiftX}px)` : undefined }}
         >
           <div className="w-72 rounded-card border border-border bg-elevated p-2 shadow-lg animate-pop">
-            <Caption className="px-1 pb-1.5 pt-0.5">Accent theme</Caption>
+            <Caption className="px-1 pb-1.5 pt-0.5">{t("theme.pickerLabel")}</Caption>
             <div className="grid grid-cols-4 gap-1.5">
               {THEMES.map((id) => {
                 const active = id === theme;

@@ -4,6 +4,8 @@ import { cn } from "@/lib/utils";
 import { InfoPopover } from "./InfoPopover";
 import { InlineNumberEditor } from "./InlineNumberEditor";
 import { useLongPressInfo } from "./use-long-press";
+import { t } from "@/i18n";
+import type { TranslationKey } from "@/i18n";
 
 export type AbilityKey =
   "strength" | "dexterity" | "constitution" | "intelligence" | "wisdom" | "charisma";
@@ -26,22 +28,26 @@ const ABILITY_LABELS: Record<AbilityKey, string> = {
   charisma: "CHA",
 };
 
-const ABILITY_FULL_NAMES: Record<AbilityKey, string> = {
-  strength: "Strength",
-  dexterity: "Dexterity",
-  constitution: "Constitution",
-  intelligence: "Intelligence",
-  wisdom: "Wisdom",
-  charisma: "Charisma",
+/**
+ * These were plain English strings, so the popover stayed English inside a
+ * Spanish sheet. Keys instead of literals, resolved through `t()` at render.
+ */
+const ABILITY_FULL_NAME_KEYS: Record<AbilityKey, TranslationKey> = {
+  strength: "ability.strength.name",
+  dexterity: "ability.dexterity.name",
+  constitution: "ability.constitution.name",
+  intelligence: "ability.intelligence.name",
+  wisdom: "ability.wisdom.name",
+  charisma: "ability.charisma.name",
 };
 
-const ABILITY_HELP: Record<AbilityKey, string> = {
-  strength: "Physical power. Used for lifting, pushing, and melee attacks.",
-  dexterity: "Agility and reflexes. Used for sneaking, dodging, and finesse attacks.",
-  constitution: "Toughness and stamina. Raises your hit points.",
-  intelligence: "Reasoning and memory. Used by wizards and for knowledge checks.",
-  wisdom: "Awareness and intuition. Used by clerics and for perception.",
-  charisma: "Force of personality. Used for persuasion, performance, and deception.",
+const ABILITY_HELP_KEYS: Record<AbilityKey, TranslationKey> = {
+  strength: "ability.strength.help",
+  dexterity: "ability.dexterity.help",
+  constitution: "ability.constitution.help",
+  intelligence: "ability.intelligence.help",
+  wisdom: "ability.wisdom.help",
+  charisma: "ability.charisma.help",
 };
 
 /**
@@ -237,9 +243,9 @@ function AbilityScoreRow({
           placement={placement}
           shiftX={shiftX}
           popoverRef={popoverRef}
-          title={ABILITY_FULL_NAMES[abilityKey]}
+          title={t(ABILITY_FULL_NAME_KEYS[abilityKey])}
         >
-          {ABILITY_HELP[abilityKey]}
+          {t(ABILITY_HELP_KEYS[abilityKey])}
         </InfoPopover>
       )}
     </div>

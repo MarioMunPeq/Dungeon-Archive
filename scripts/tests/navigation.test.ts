@@ -27,7 +27,9 @@ function topBar(pathname: string, language: Language) {
 }
 
 const TITLES: readonly { path: string; en: string; es: string; backTo?: string }[] = [
-  { path: "/", en: "Dungeon Archive", es: "Dungeon Archive" },
+  // Home has no title on purpose: the bottom nav already shows "Home", and the app
+  // name was truncating the row that entity names need.
+  { path: "/", en: "", es: "" },
   { path: "/archive", en: "Archive", es: "Archivo" },
   { path: "/combat", en: "Combat", es: "Combate" },
   { path: "/character", en: "Character", es: "Personaje" },
@@ -62,9 +64,9 @@ async function main() {
     }
   }
 
-  test("home shows app name with no back button", () => {
+  test("home shows no title and no back button", () => {
     const state = topBar("/", "en");
-    strictEqual(state.title, "Dungeon Archive");
+    strictEqual(state.title, "");
     strictEqual(state.backTo, undefined);
   });
 

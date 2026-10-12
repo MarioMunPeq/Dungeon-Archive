@@ -1,6 +1,6 @@
 import { memo, useCallback, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
-import { useCharacters, usePrimaryCharacter, userStore } from "@/user-state";
+import { useCharacters, useLanguage, usePrimaryCharacter, userStore } from "@/user-state";
 import type { CharacterReference, CharacterReferenceUpdate } from "@/user-state";
 import {
   Button,
@@ -145,6 +145,11 @@ const ConditionChip = memo(function ConditionChip({
     clearTimer,
   } = useLongPressInfo<HTMLSpanElement>();
 
+  // `memo` only guards *props*, and a language switch changes none of this chip's
+  // props — so the memo bailed out and the condition kept the previous language
+  // until the user tapped it (which flipped `active` and forced a re-render).
+  // A store subscription is not prop-based, so it invalidates the memo properly.
+  useLanguage();
   const name = conditionName(id);
 
   return (
@@ -221,6 +226,9 @@ const TurnItemRow = memo(function TurnItemRow({
   readonly isUsed: boolean;
   readonly onToggle: () => void;
 }) {
+  // Same reason as ConditionChip: memo guards props, not store subscriptions, so
+  // without this the turn checklist stayed in the old language until touched.
+  useLanguage();
   const {
     open,
     placement,
@@ -231,6 +239,8 @@ const TurnItemRow = memo(function TurnItemRow({
     clearLongPress,
     startPress,
     clearTimer,
+    onFocus,
+    onBlur,
   } = useLongPressInfo<HTMLDivElement>();
 
   return (
@@ -245,8 +255,12 @@ const TurnItemRow = memo(function TurnItemRow({
         isUsed && "border-primary/40",
       )}
     >
+      {/* Keyboard opens the same info popover as a long press; `:focus-visible`
+          keeps a tap from opening it (see isKeyboardFocus in use-long-press). */}
       <button
         type="button"
+        onFocus={onFocus}
+        onBlur={onBlur}
         onClick={() => {
           if (longPress) {
             clearLongPress();

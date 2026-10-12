@@ -2,7 +2,6 @@ import { METADATA_SEPARATOR, extractSpellRoll, formatSchool, spellLevelLabel } f
 import type { Spell } from "@/compendium";
 import { Section } from "@/components/ui/Section";
 import { ContentRenderer } from "@/components/content";
-import { Subtitle } from "@/components/ui/Typography";
 import { Stack } from "@/components/ui/Stack";
 import { EntityProperty, EntityMetadataGrid } from "@/components/ui/entity-property";
 import { HelpTip } from "@/components/ui/HelpTip";
@@ -35,20 +34,26 @@ export function componentsDisplay(components: readonly string[], beginnerMode: b
   return beginnerMode ? expandComponents(components).join(", ") : components.join(", ");
 }
 
+/**
+ * The spell-specific lead for the page subtitle ("Level 3 · Evocation").
+ *
+ * It lives here rather than in the entity page so the spell knowledge stays in
+ * the spell module; `entity-page.tsx` picks it up per category and appends the
+ * category + source. Previously the renderer emitted its own `<Subtitle>`, which
+ * stacked a second subtitle under the layout's.
+ */
+export function spellLeadSubtitle(entity: Spell): string {
+  return `${spellLevelLabel(entity.level)} ${METADATA_SEPARATOR} ${formatSchool(entity.school)}`;
+}
+
 export function SpellRenderer({ entity }: SpellRendererProps) {
   const beginnerMode = useBeginnerMode();
-  const levelText = spellLevelLabel(entity.level);
-  const schoolName = formatSchool(entity.school);
   const roll = extractSpellRoll(entity.description);
   const spellRoll = roll ? splitSpellRoll(roll) : null;
   const componentsText = componentsDisplay(entity.components, beginnerMode);
 
   return (
     <Stack gap="md">
-      <Subtitle>
-        {levelText} {METADATA_SEPARATOR} {schoolName}
-      </Subtitle>
-
       <EntityMetadataGrid>
         {spellRoll && (
           <EntityProperty

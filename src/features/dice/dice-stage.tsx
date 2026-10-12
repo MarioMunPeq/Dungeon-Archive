@@ -4,11 +4,18 @@ import { rollDice } from "@/lib/dice";
 
 const FALLBACK_ACCENT = "#3ab492";
 
-/** Single-die size in world units. The library default is 5; 25 is ~5x larger
- *  so one die dominates the stage. */
-const BASE_DICE_SCALE = 25;
+/**
+ * Single-die size in world units (the library default is 5).
+ *
+ * This was 25, sized for a much taller stage. At that scale the dice are wider
+ * than the 144px-tall stage, so they spill past the edges and keep bouncing long
+ * enough that a roll feels stalled. Halving it keeps a single die prominent while
+ * making it fit — and smaller dice settle sooner, which is the same fix for both
+ * complaints. Tune here if the framing ever looks off on another screen.
+ */
+const BASE_DICE_SCALE = 13;
 /** Floor for the per-die scale so many dice never shrink to tiny. */
-const MIN_DICE_SCALE = 5;
+const MIN_DICE_SCALE = 4;
 
 /** Per-die scale for a roll of `count` dice. A die's footprint grows with the
  *  square of its size, so total area scales as count * scale^2; shrinking the

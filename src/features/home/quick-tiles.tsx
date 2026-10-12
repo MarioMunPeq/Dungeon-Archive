@@ -3,6 +3,7 @@ import type { ReactNode } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui";
 import { t } from "@/i18n";
+import { useLanguage } from "@/user-state";
 
 interface QuickTilesProps {
   readonly sessionCount: number;
@@ -50,6 +51,9 @@ function BookIcon() {
 }
 
 export const QuickTiles = memo(function QuickTiles({ sessionCount }: QuickTilesProps) {
+  // `memo` guards props, not store subscriptions; without this the tile labels
+  // would stay in the previous language after a switch.
+  useLanguage();
   const navigate = useNavigate();
 
   return (

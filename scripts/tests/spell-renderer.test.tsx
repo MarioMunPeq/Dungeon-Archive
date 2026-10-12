@@ -19,9 +19,11 @@ function test(description: string, fn: () => void): void {
 import {
   componentsDisplay,
   expandComponents,
+  spellLeadSubtitle,
   SpellRenderer,
 } from "../../src/features/compendium/renderers/spell-renderer";
 import type { Spell } from "../../src/compendium";
+import { METADATA_SEPARATOR } from "../../src/compendium";
 
 console.log("spell renderer beginner support\n");
 
@@ -58,8 +60,8 @@ function spellFixture(opts?: { concentration?: boolean; ritual?: boolean }): Spe
     name: "Fire Bolt",
     category: "spell",
     source: "PHB",
-    level: 0,
-    school: "evocation",
+    level: 3,
+    school: "V",
     castingTime: "1 action",
     range: "120 feet",
     duration: "Instantaneous",
@@ -82,4 +84,23 @@ test("default render expands components and offers help buttons", () => {
     "concentration tip button",
   );
   strictEqual(html.includes('aria-label="What is ritual casting?"'), true, "ritual tip button");
+});
+
+test("the renderer emits no subtitle of its own", () => {
+  // EntityDetailLayout already renders the page subtitle, so a <Subtitle> here
+  // stacked a second one under it ("Spell · SRD" then "Level 3 • Evocation").
+  // The spell's lead is exposed as a pure function instead.
+  const html = renderToString(createElement(SpellRenderer, { entity: spellFixture() }));
+  strictEqual(
+    html.includes(spellLeadSubtitle(spellFixture())),
+    false,
+    "the lead subtitle text is not rendered inside the renderer body",
+  );
+  strictEqual(html.includes("Evocation"), false, "no duplicate level/school line");
+});
+
+test("spellLeadSubtitle carries level and school for the page subtitle", () => {
+  // Schools are stored as single SRD letters; formatSchool maps them to a
+  // translated name and METADATA_SEPARATOR is a single bullet.
+  strictEqual(spellLeadSubtitle(spellFixture()), `Level 3 ${METADATA_SEPARATOR} Evocation`);
 });

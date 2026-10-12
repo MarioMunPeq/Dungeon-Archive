@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { Button, ConfirmDialog } from "@/components/ui";
 import { t } from "@/i18n";
 import { classLine } from "@/features/character/class-labels";
-import { userStore } from "@/user-state";
+import { useLanguage, userStore } from "@/user-state";
 import type { CharacterReference } from "@/user-state";
 import { seedDemoData } from "@/features/demo/demo-data";
 
@@ -12,6 +12,9 @@ interface CharacterCardProps {
 }
 
 export const CharacterCard = memo(function CharacterCard({ character }: CharacterCardProps) {
+  // A language switch changes no props, so `memo` alone would keep the labels in
+  // the previous language. Subscribing to the store bypasses the prop check.
+  useLanguage();
   const [confirmingRemove, setConfirmingRemove] = useState(false);
 
   if (character === null) {

@@ -33,9 +33,16 @@ const FIXED_BACK: Record<string, string> = {
 /**
  * `t` is injected rather than read from the store so this stays a pure function
  * and both languages stay assertable from tests.
+ *
+ * The home route returns an empty title: the bottom nav already shows "Home", and
+ * the app name was truncating the row that entity names need.
  */
 export function getTopBarState(pathname: string, t: Translate): TopBarState {
   const segments = pathname.split("/").filter(Boolean);
+
+  if (pathname === ROUTES.HOME) {
+    return { title: "" };
+  }
 
   if (segments.length === 1 && CATEGORY_REGISTRY[segments[0] as EntityCategory]) {
     return { title: categoryLabel(segments[0]!), backTo: ROUTES.ARCHIVE };

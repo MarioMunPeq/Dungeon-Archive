@@ -1,5 +1,4 @@
 import { strictEqual, ok, deepStrictEqual } from "node:assert";
-import { getTopBarState } from "../../src/components/layout/top-bar-route";
 import { APP_NAME } from "../../src/config/constants";
 import { en } from "../../src/i18n/messages/en";
 import { es } from "../../src/i18n/messages/es";
@@ -159,9 +158,11 @@ test("Spanish uses the official D&D terms, not literal translations", () => {
 });
 
 test("the product name is not a translatable string", () => {
-  // The home route falls back to the app name in both languages.
-  strictEqual(getTopBarState("/", translateFor("es")).title, APP_NAME);
-  strictEqual(getTopBarState("/", translateFor("en")).title, APP_NAME);
+  // The home route now shows no title at all: the bottom nav already says "Home",
+  // and the app name was truncating the row that entity names need. The invariant
+  // that still matters is that the name is never routed through the dictionaries.
+  strictEqual(APP_NAME, "Dungeon Archive");
+  strictEqual(translateFor("es")(APP_NAME as never), APP_NAME);
 });
 
 console.log(

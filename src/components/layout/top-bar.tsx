@@ -45,9 +45,16 @@ function TopBarContent({ state }: { state: TopBarState }) {
             <ChevronLeftIcon />
           </Button>
         )}
-        <Display className="truncate text-lg font-semibold">{state.title}</Display>
+        {/* Empty on Home on purpose: the bottom nav already says where you are,
+            and the app name wasted the row it needed for entity names like
+            "Barbarian", which were truncating to "Barba...". */}
+        {state.title.length > 0 && (
+          <Display className="truncate text-base font-semibold sm:text-lg">{state.title}</Display>
+        )}
       </div>
-      <div className="flex shrink-0 items-center gap-1">
+      {/* `min-w-0` on the title side plus slightly tighter icon padding gives the
+          name measurably more room without changing the structure. */}
+      <div className="flex shrink-0 items-center gap-0.5">
         <HelpButton />
         <ThemePicker />
         <LanguageToggle />
